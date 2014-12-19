@@ -3,6 +3,7 @@ export(
         argfix,
         gsw_CT_from_t,
         gsw_Nsquared,
+        gsw_rho,
         gsw_SA_from_SP,
         gsw_SP_from_C)
 

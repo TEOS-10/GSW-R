@@ -21,6 +21,13 @@ void wrap_gsw_Nsquared(double *SA, double *CT, double *p, double *latitude, int 
     gsw_nsquared(SA, CT, p, latitude, *n, n2, p_mid);
 }
 
+void wrap_gsw_rho(double *SA, double *CT, double *p, int *n, double *rval)
+{
+    extern double gsw_rho(double SA, double CT, double p);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_rho(SA[i], CT[i], p[i]);
+}
+
 void wrap_gsw_SP_from_C(double *C, double *t, double *p, int *n, double *rval)
 {
     extern double gsw_SP_from_c(double C, double t, double p);

@@ -103,6 +103,28 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
     rval
 }
 
+#' in-situ density (48-term equation)
+#' 
+#' @param SA Absolute salinity
+#' @param CT Conservative temperature
+#' @param p Pressure in decibars.
+#' @return in-situ density (kg m^-3).
+#' @examples
+#' gsw_rho(34.7118, 28.8099, 10) # 1021.8404465661
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
+gsw_rho <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_rho",
+               SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Convert from practical salinity to absolute salinity
 #' 
 #' @param SP Practical salinity
