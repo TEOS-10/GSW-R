@@ -5,8 +5,8 @@ Title: Gibbs Sea Water functions
 Authors@R: c(person("Dan", "Kelley", role=c("aut", "cre"), email="Dan.Kelley@Dal.Ca"), person("Clark", "Richards", role=c("aut"), email="clark.richards@gmail.com"))
 Author: Dan Kelley [aut, cre], Clark Richards [aut]
 Maintainer: Dan Kelley <Dan.Kelley@Dal.Ca>
-Depends:
-    R (>= 2.15)
+Depends: R (>= 2.15)
+Suggets: oce
 BugReports: https://github.com/TEOS-10/GSW-R/issues
 Description: Provides an interface to the Gibbs Sea Water (TEOS-10) C library.
 URL: https://github.com/TEOS-10/GSW-R
