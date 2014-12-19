@@ -27,7 +27,7 @@ SA <- c(34.7118, 34.8915)
 CT <- c(28.8099, 28.4392)
 p <- c(      10,      50)
 latitude <- 4
-gsw_Nsquared(SA, CT, p, latitude) # 6.0846990523477e-5
+gsw_Nsquared(SA, CT, p, latitude) # 6.0847042791371e-5
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_Nsquared.html}

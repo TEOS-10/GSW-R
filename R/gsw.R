@@ -1,7 +1,27 @@
 ## Please see ../README_developer.md for the scheme used in adding functions
-## here. Generally the functions will be added to Part 2.
+## here. Generally the functions will be added to Part 3.
 
-## PART 1: utility functions
+## PART 1: document the package
+
+#' R implementation of the Thermodynamic Equation Of Seawater - 2010 (TEOS-10)
+#'
+#' Provides an R interface to the TEOS-10 / GSW (Gibbs Sea Water) library.
+#' The functions are designed to match the Matlab implementation, so the
+#' function names match and the documentation for each function in the 
+#' present package contains a link to the official TEOS-10 documentation
+#' of the paired Matlab function.
+#'
+#' As of late 2014, the package is still in an early stage of development,
+#' with only a handful of (important) functions working.
+#'
+#' @docType package
+#' @name gsw
+NULL
+
+
+
+
+## PART 2: utility functions
 
 #' Reshape list elements to match the shape of the first element.
 #'
@@ -27,7 +47,7 @@ argfix <- function(l)
 }
 
 
-## PART 2: gsw (Gibbs SeaWater) functions, in alphabetical order (ignoring case)
+## PART 3: gsw (Gibbs SeaWater) functions, in alphabetical order (ignoring case)
 
 #' Convert from temperature to conservative temperature
 #' 
