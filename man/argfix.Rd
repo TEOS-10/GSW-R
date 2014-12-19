@@ -4,10 +4,10 @@
 \alias{argfix}
 \title{Reshape list elements to match the shape of the first element.}
 \usage{
-argfix(l)
+argfix(list)
 }
 \arguments{
-\item{l}{A list of elements, typically arguments that will be used in GSW functions.}
+\item{list}{A list of elements, typically arguments that will be used in GSW functions.}
 }
 \value{
 A list with all elements of same shape (length or dimension).

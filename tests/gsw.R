@@ -13,8 +13,8 @@ stopifnot(all.equal(N2, 1e-3*c(0.060847042791371, 0.235730438897447,
                                0.216590355253073, 0.012935081031687,
                                0.008430222212653)))
 
-## rho <- gsw_rho(34.7118, 28.8099, 10) # 1021.8404465661 from http://www.teos-10.org/pubs/gsw/html/gsw_rho.html
-## stopifnot(all.equal(rho, 1021.8404465661)) #FIXME: giving 996.44634237827 which is very wrong
+rho <- gsw_rho(34.7118, 28.8099, 10)
+stopifnot(all.equal(rho, 1021.8404465661))
 
 SA <- gsw_SA_from_SP(34.5487, 10, 188, 4)
 stopifnot(all.equal(SA, 34.711778344814114))

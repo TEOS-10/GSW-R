@@ -7,14 +7,14 @@
 gsw_rho(SA, CT, p)
 }
 \arguments{
-\item{SA}{Absolute salinity}
+\item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative temperature}
+\item{CT}{Conservative Temperature [ deg C ]}
 
-\item{p}{Pressure in decibars.}
+\item{p}{sea pressure [ dbar ]}
 }
 \value{
-in-situ density (kg m^-3).
+in-situ density [ kg/m^3 ]
 }
 \description{
 in-situ density (48-term equation)

@@ -1,6 +1,7 @@
 ## Please see ../README_developer.md for the scheme used in adding functions
 ## here. Generally the functions will be added to Part 4.
 
+
 ## PART 1: document the package
 
 #' R implementation of the Thermodynamic Equation Of Seawater - 2010 (TEOS-10)
@@ -18,53 +19,41 @@
 #' @name gsw
 NULL
 
-## PART 2: document standard arguments here, saving retyping
-##         and yielding flexibility for updates.
 
-#' Uniform descriptions of parameters.
-#'
-#' @param C conductivity [ mS/cm ]
-#' @param CT Conservative Temperature [ deg C ]
-#' @param latitude latitude in decimal degrees [ -90 to 90 ]
-#' @param longitude longitude in decimal degrees [ 0 to 360 or -180 to 180]
-#' @param p sea pressure [ dbar ]
-#' @param t in-situ temperature (ITS-90) [ deg C ]
-#' @param SA Absolute Salinity [ g/kg ]
-#' @param SP Practical Salinity (PSS-78) [ unitless ]
-#' @name variables
-NULL
-
-## PART 3: utility functions
+## PART 2: utility functions
 
 #' Reshape list elements to match the shape of the first element.
 #'
-#' @param l A list of elements, typically arguments that will be used in GSW functions.
+#' @param list A list of elements, typically arguments that will be used in GSW functions.
 #' @return A list with all elements of same shape (length or dimension).
-argfix <- function(l)
+argfix <- function(list)
 {
-    n <- length(l)
+    n <- length(list)
     if (n > 0) {
-        length1 <- length(l[[1]])
+        length1 <- length(list[[1]])
         for (i in 2:n) {
-            if (length(l[[i]]) != length1) {
-                l[[i]] <- rep(l[[i]], length.out=length1)
+            if (length(list[[i]]) != length1) {
+                list[[i]] <- rep(list[[i]], length.out=length1)
             }
         }
-        if (is.matrix(l[[1]])) {
+        if (is.matrix(list[[1]])) {
             for (i in 2:n) {
-                dim(l[[i]]) <- dim(l[[1]])
+                dim(list[[i]]) <- dim(list[[1]])
             }
         }
     }
-    l
+    list
 }
+
 
 
 ## PART 3: gsw (Gibbs SeaWater) functions, in alphabetical order (ignoring case)
 
 #' Convert from temperature to conservative temperature
 #' 
-#' @rdname variables
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param t in-situ temperature (ITS-90) [ deg C ]
+#' @param p sea pressure [ dbar ]
 #' @examples 
 #' gsw_CT_from_t(34.7118, 28.7856, 10) # 28.809919826700281
 #' @references
@@ -83,7 +72,10 @@ gsw_CT_from_t <- function(SA, t, p)
 
 #' Calculate Brunt Vaisala Frequency squared
 #'
-#' @rdname variables
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @param latitude latitude in decimal degrees [ -90 to 90 ]
 #' @return Brunt-Vaisala Frequency squared [ s^(-2) ]
 #' @examples 
 #' SA <- c(34.7118, 34.8915)
@@ -110,10 +102,10 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
 
 #' in-situ density (48-term equation)
 #' 
-#' @param SA Absolute salinity
-#' @param CT Conservative temperature
-#' @param p Pressure in decibars.
-#' @return in-situ density (kg m^-3).
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return in-situ density [ kg/m^3 ]
 #' @examples
 #' gsw_rho(34.7118, 28.8099, 10) # 1021.8404465661
 #' @references
@@ -132,7 +124,10 @@ gsw_rho <- function(SA, CT, p)
 
 #' Convert from practical salinity to absolute salinity
 #' 
-#' @rdname variables
+#' @param SP Practical Salinity (PSS-78) [ unitless ]
+#' @param p sea pressure [ dbar ]
+#' @param longitude longitude in decimal degrees [ 0 to 360 or -180 to 180]
+#' @param latitude latitude in decimal degrees [ -90 to 90 ]
 #' @examples
 #' gsw_SA_from_SP(34.5487, 10, 188, 4) # 34.711778344814114 
 #' @references
@@ -151,7 +146,9 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
 
 #' Convert from conductivity to practical salinity
 #' 
-#' @rdname variables
+#' @param C conductivity [ mS/cm ]
+#' @param t in-situ temperature (ITS-90) [ deg C ]
+#' @param p sea pressure [ dbar ]
 #' @return Practical salinity.
 #' @examples 
 #' gsw_SP_from_C(34.5487, 28.7856, 10) # 20.009869599086951
