@@ -1,21 +1,5 @@
-# AUTHOR NOTES: HOW TO ADD A NEW FUNCTION.
-#
-# 1. One must to write wrappers (in ../src/wrappers.c) for any GSW function that
-#    returns a value. This is because .C() can only handle functions that return void. 
-#    The name of the wrapper function should be case matching the R function, which
-#    in turn should match that of the TEOS-10 Matlab names as listed at
-#        http://www.teos-10.org/pubs/gsw/html/gsw_contents.html
-# 2. Once a wrapper exists, create an R function by mimicking e.g. gsw_CT_from_t(). Be sure
-#    to document the function as is done here. And be sure to use the capitalization 
-#    used on the TEOS-10 website for matlab code, because that is what users will
-#    probably expect. Place the function in its correct alphabetical position.
-# 3. Add an entry for the function in ../NAMESPACE.
-# 4. Enter the .. directory and type
-#        Rscript -e "roxygen2::roxygenise()
-#    to create new manpages.
-# 5. Add a test to ../tests/teso10.R, using a test value from the TEOS-10 website.
-# 6. Build the package to see that code matches docs, etc.
-
+## Please see ../README_developer.md for the scheme used in adding functions
+## here. Generally the functions will be added to Part 2.
 
 ## PART 1: utility functions
 
