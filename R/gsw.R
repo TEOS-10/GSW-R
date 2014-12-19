@@ -1,5 +1,5 @@
 ## Please see ../README_developer.md for the scheme used in adding functions
-## here. Generally the functions will be added to Part 3.
+## here. Generally the functions will be added to Part 4.
 
 ## PART 1: document the package
 
@@ -18,10 +18,23 @@
 #' @name gsw
 NULL
 
+## PART 2: document standard arguments here, saving retyping
+##         and yielding flexibility for updates.
 
+#' Uniform descriptions of parameters.
+#'
+#' @param C conductivity [ mS/cm ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param latitude latitude in decimal degrees [ -90 to 90 ]
+#' @param longitude longitude in decimal degrees [ 0 to 360 or -180 to 180]
+#' @param p sea pressure [ dbar ]
+#' @param t in-situ temperature (ITS-90) [ deg C ]
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param SP Practical Salinity (PSS-78) [ unitless ]
+#' @name variables
+NULL
 
-
-## PART 2: utility functions
+## PART 3: utility functions
 
 #' Reshape list elements to match the shape of the first element.
 #'
@@ -51,9 +64,7 @@ argfix <- function(l)
 
 #' Convert from temperature to conservative temperature
 #' 
-#' @param SA Absolute salinity
-#' @param t In-situ temperature (ITS-90) in degrees C.
-#' @param p Sea pressure in decibars.
+#' @rdname variables
 #' @examples 
 #' gsw_CT_from_t(34.7118, 28.7856, 10) # 28.809919826700281
 #' @references
@@ -70,16 +81,10 @@ gsw_CT_from_t <- function(SA, t, p)
     rval
 }
 
-#' Calculate square of buoyancy frequency
+#' Calculate Brunt Vaisala Frequency squared
 #'
-#' BUG: the values seem to be off by about 1 part in 1e6, which
-#' is too high to be explained by numerical precision (I think).
-#' 
-#' @param SA Absolute salinity.
-#' @param CT Conservative temperature.
-#' @param p Sea pressure in decibars.
-#' @param latitude The latitude in deg North.
-#' @return Square of buoyancy frequency in 1/s^2, a vector of length 1 less than SA.
+#' @rdname variables
+#' @return Brunt-Vaisala Frequency squared [ s^(-2) ]
 #' @examples 
 #' SA <- c(34.7118, 34.8915)
 #' CT <- c(28.8099, 28.4392)
@@ -127,11 +132,7 @@ gsw_rho <- function(SA, CT, p)
 
 #' Convert from practical salinity to absolute salinity
 #' 
-#' @param SP Practical salinity
-#' @param p Pressure in decibars. FIXME: check press unit
-#' @param longitude Longitude in degrees east. FIXME: check on whether cut point matters
-#' @param latitude Latitude in degrees north. FIXME: check on whether cut point matters.
-#' @return Absolute salinity.
+#' @rdname variables
 #' @examples
 #' gsw_SA_from_SP(34.5487, 10, 188, 4) # 34.711778344814114 
 #' @references
@@ -150,9 +151,7 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
 
 #' Convert from conductivity to practical salinity
 #' 
-#' @param C Conductivity in mS/cm.
-#' @param t In-situ temperature (ITS-90) in degrees C.
-#' @param p Sea pressure in decibars.
+#' @rdname variables
 #' @return Practical salinity.
 #' @examples 
 #' gsw_SP_from_C(34.5487, 28.7856, 10) # 20.009869599086951
