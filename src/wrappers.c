@@ -49,6 +49,13 @@ void wrap_gsw_Nsquared(double *SA, double *CT, double *p, double *latitude, int 
     gsw_nsquared(SA, CT, p, latitude, *n, n2, p_mid);
 }
 
+void wrap_gsw_pot_rho_t_exact(double *SA, double *t, double *p, double *p_ref, int *n, double *rval)
+{
+    extern double gsw_pot_rho_t_exact(double sa, double t, double p, double p_ref);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_pot_rho_t_exact(SA[i], t[i], p[i], p_ref[i]);
+}
+
 void wrap_gsw_rho(double *SA, double *CT, double *p, int *n, double *rval)
 {
     extern double gsw_rho(double SA, double CT, double p);

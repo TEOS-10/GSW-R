@@ -141,6 +141,27 @@ gsw_CT_from_t <- function(SA, t, p)
     rval
 }
 
+#' Gravitational acceleration
+#' 
+#' @param latitude latitude in decimal degress north [ -90 ... +90 ]
+#' @param p sea pressure [ dbar ]
+#' @return gravitational acceleration [ m/s^2 ]
+#' @examples
+#' gsw_grav(c(-90, -60), 0) # 9.832186205884799, 9.819178859991149
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_grav.html}
+gsw_grav <- function(latitude, p)
+{
+    l <- argfix(list(latitude=latitude, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_grav",
+               latitude=as.double(l$latitude), p=as.double(l$p),
+               n=n, rval=double(n))$rval
+    if (is.matrix(latitude))
+        dim(rval) <- dim(latitude)
+    rval
+}
+
 #' Calculate Brunt Vaisala Frequency squared
 #'
 #' @param SA Absolute Salinity [ g/kg ]
@@ -172,24 +193,26 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
     list(N2=N2, p_mid=p_mid)
 }
 
-#' Gravitational acceleration
+#' potential density
 #' 
-#' @param latitude latitude in decimal degress north [ -90 ... +90 ]
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param t in-situ temperature (ITS-90) [ deg C ]
 #' @param p sea pressure [ dbar ]
-#' @return gravitational acceleration [ m/s^2 ]
+#' @param p_ref reference pressure [ dbar ]
+#' @return potential density [ kg/m^3 ]
 #' @examples
-#' gsw_grav(c(-90, -60), 0) # 9.832186205884799, 9.819178859991149
+#' gsw_pot_rho_t_exact(34.7118, 28.7856, 10, 0) # 1021.798145811089
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_grav.html}
-gsw_grav <- function(latitude, p)
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_rho_t_exact.html}
+gsw_pot_rho_t_exact <- function(SA, t, p, p_ref)
 {
-    l <- argfix(list(latitude=latitude, p=p))
+    l <- argfix(list(SA=SA, t=t, p=p, p_ref=p_ref))
     n <- length(l[[1]])
-    rval <- .C("wrap_gsw_grav",
-               latitude=as.double(l$latitude), p=as.double(l$p),
+    rval <- .C("wrap_gsw_pot_rho_t_exact",
+               SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p), pref=as.double(l$p_ref),
                n=n, rval=double(n))$rval
-    if (is.matrix(latitude))
-        dim(rval) <- dim(latitude)
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
     rval
 }
 
