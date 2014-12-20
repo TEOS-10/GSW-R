@@ -8,6 +8,12 @@ export(
         gsw_Nsquared,
         gsw_rho,
         gsw_SA_from_SP,
+        gsw_sigma0,
+        gsw_sigma1,
+        gsw_sigma2,
+        gsw_sigma3,
+        gsw_sigma4,
         gsw_SP_from_C,
+        gsw_Turner_Rsubrho,
         gsw_z_from_p)
 

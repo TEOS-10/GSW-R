@@ -21,6 +21,6 @@ height from pressure (48-term equation)
 gsw_z_from_p(10, 4) # -9.9445831334188
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_z_from_p.html}
 }
 

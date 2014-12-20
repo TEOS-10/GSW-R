@@ -64,6 +64,52 @@ void wrap_gsw_SA_from_SP(double *SA, double *p, double *longitude, double *latit
         rval[i] = gsw_sa_from_sp(SA[i], p[i], longitude[i], latitude[i]);
 }
 
+void wrap_gsw_sigma0(double *SA, double *CT,
+        int *n, double *rval)
+{
+    extern double gsw_sigma0(double SA, double CT);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_sigma0(SA[i], CT[i]);
+}
+
+void wrap_gsw_sigma1(double *SA, double *CT,
+        int *n, double *rval)
+{
+    extern double gsw_sigma1(double SA, double CT);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_sigma1(SA[i], CT[i]);
+}
+
+void wrap_gsw_sigma2(double *SA, double *CT,
+        int *n, double *rval)
+{
+    extern double gsw_sigma2(double SA, double CT);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_sigma2(SA[i], CT[i]);
+}
+
+void wrap_gsw_sigma3(double *SA, double *CT,
+        int *n, double *rval)
+{
+    extern double gsw_sigma3(double SA, double CT);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_sigma3(SA[i], CT[i]);
+}
+
+void wrap_gsw_sigma4(double *SA, double *CT,
+        int *n, double *rval)
+{
+    extern double gsw_sigma4(double SA, double CT);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_sigma4(SA[i], CT[i]);
+}
+
+void wrap_gsw_Turner_Rsubrho(double *SA, double *CT, double *p, int *n, double *Tu, double *Rsubrho, double *p_mid)
+{
+    extern void gsw_turner_rsubrho(double *sa, double *ct, double *p, int nz, double *Tu, double *Rsubrho, double *p_mid);
+    gsw_turner_rsubrho(SA, CT, p, *n, Tu, Rsubrho, p_mid);
+}
+
 void wrap_gsw_z_from_p(double *p, double *latitude, int *n, double *rval)
 {
     extern double gsw_z_from_p(double p, double latitude);

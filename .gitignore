@@ -1,6 +1,7 @@
+GSW-R.Rproj
 *.swp
 *~
-
 src/*.o
 src/*.so
 src/*.rds
+.Rproj.user

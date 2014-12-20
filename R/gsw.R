@@ -156,7 +156,7 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
 #' @param p sea pressure [ dbar ]
 #' @return gravitational acceleration [ m/s^2 ]
 #' @examples
-#' gsw_grav(c(-90, -60, -30, 0), 0) # 9.832186205884799, 9.819178859991149, 9.793249257048750, 9.780327000000000
+#' gsw_grav(c(-90, -60), 0) # 9.832186205884799, 9.819178859991149
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_grav.html}
 gsw_grav <- function(latitude, p)
@@ -215,6 +215,131 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
     rval
 }
 
+#' potential density anomaly referenced to 0 dbar
+#'
+#' This uses the 48-term density equation, and returns
+#' potential density referenced to a pressure of 0 dbar,
+#' minus 1000 kg/m^3.
+#'
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @return potential density anomaly [ kg / m^3 ]
+#' @examples
+#' gsw_sigma0(34.7118, 28.8099) # 21.798411276610750
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma0.html}
+gsw_sigma0 <- function(SA, CT)
+{
+    l <- argfix(list(SA=SA, CT=CT))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_sigma0",
+               SA=as.double(l$SA), CT=as.double(l$CT),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' potential density anomaly referenced to 1000 dbar
+#'
+#' This uses the 48-term density equation, and returns
+#' potential density referenced to a pressure of 1000 dbar,
+#' minus 1000 kg/m^3.
+#'
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @return potential density anomaly [ kg / m^3 ]
+#' @examples
+#' gsw_sigma1(34.7118, 28.8099) # 25.955891533636986
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma1.html}
+gsw_sigma1 <- function(SA, CT)
+{
+    l <- argfix(list(SA=SA, CT=CT))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_sigma1",
+               SA=as.double(l$SA), CT=as.double(l$CT),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' potential density anomaly referenced to 2000 dbar
+#'
+#' This uses the 48-term density equation, and returns
+#' potential density referenced to a pressure of 2000 dbar,
+#' minus 1000 kg/m^3.
+#'
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @return potential density anomaly [ kg / m^3 ]
+#' @examples
+#' gsw_sigma2(34.7118, 28.8099) # 30.022796416066058
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma2.html}
+gsw_sigma2 <- function(SA, CT)
+{
+    l <- argfix(list(SA=SA, CT=CT))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_sigma2",
+               SA=as.double(l$SA), CT=as.double(l$CT),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' potential density anomaly referenced to 3000 dbar
+#'
+#' This uses the 48-term density equation, and returns
+#' potential density referenced to a pressure of 3000 dbar,
+#' minus 1000 kg/m^3.
+#'
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @return potential density anomaly with reference pressure 3000 dbar [ kg / m^3 ]
+#' @examples
+#' gsw_sigma3(34.7118, 28.8099) # 34.002600253012133
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma3.html}
+gsw_sigma3 <- function(SA, CT)
+{
+    l <- argfix(list(SA=SA, CT=CT))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_sigma3",
+               SA=as.double(l$SA), CT=as.double(l$CT),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' potential density anomaly referenced to 4000 dbar
+#'
+#' This uses the 48-term density equation, and returns
+#' potential density referenced to a pressure of 4000 dbar,
+#' minus 1000 kg/m^3.
+#'
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @return potential density anomaly with reference pressure 4000 dbar [ kg / m^3 ]
+#' @examples
+#' gsw_sigma3(34.7118, 28.8099) # 37.898467323406976
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma4.html}
+gsw_sigma4 <- function(SA, CT)
+{
+    l <- argfix(list(SA=SA, CT=CT))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_sigma4",
+               SA=as.double(l$SA), CT=as.double(l$CT),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Convert from conductivity to practical salinity
 #' 
 #' @param C conductivity [ mS/cm ]
@@ -236,6 +361,47 @@ gsw_SP_from_C <- function(C, t, p)
         dim(rval) <- dim(C)
     rval
 }
+
+
+#' Turner angle and density ratio
+#'
+#' This uses the 48-term density equation. The values of Turner Angle
+#' Tu and density ratio Rrho are calculated at mid-point pressures, p_mid.
+#'
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return a list containing Tu, Rrho, and p_mid
+#' @examples
+#' SA = c(34.7118, 34.8915)
+#' CT = c(28.8099, 28.4392)
+#' p =  c(     10,      50)
+#' r <- gsw_Turner_Rsubrho(SA, CT, p) # -2.064830032393999, -0.9304018848608, 30
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_Turner_Rsubrho.html}
+gsw_Turner_Rsubrho <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_Turner_Rsubrho",
+            SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+            n=n, Tu=double(n-1), Rsubrho=double(n-1), p_mid=double(n-1))
+    Tu <- r$Tu
+    Rsubrho <- r$Rsubrho
+    p_mid <- r$p_mid
+    if (is.matrix(SA)) {
+        stop("gsw_Turner_Rsubrho() cannot handle matix SA")
+        ## dim(Tu) <- dim(SA)
+        ## dim(Rsubrho) <- dim(SA)
+        ## dim(p_mid) <- dim(SA)
+    }
+    list(Tu=Tu, Rsubrho=Rsubrho, p_mid=p_mid)
+}
+
+
+
+
+
 
 #' height from pressure (48-term equation)
 #' 

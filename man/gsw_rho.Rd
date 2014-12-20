@@ -23,6 +23,6 @@ in-situ density (48-term equation)
 gsw_rho(34.7118, 28.8099, 10) # 1021.8404465661
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_rho.html}
 }
 

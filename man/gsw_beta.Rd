@@ -26,6 +26,6 @@ p =  c(     10,      50,     125,     250,     600,    1000)
 beta <- gsw_beta(SA,CT,p)
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_beta.html}
 }
 
