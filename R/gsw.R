@@ -100,6 +100,27 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
     rval
 }
 
+#' Gravitational acceleration
+#' 
+#' @param latitude latitude in decimal degress north [ -90 ... +90 ]
+#' @param p sea pressure [ dbar ]
+#' @return gravitational acceleration [ m/s^2 ]
+#' @examples
+#' gsw_grav(c(-90, -60, -30, 0), 0) # 9.832186205884799, 9.819178859991149, 9.793249257048750, 9.780327000000000
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
+gsw_grav <- function(latitude, p)
+{
+    l <- argfix(list(latitude=latitude, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_grav",
+               latitude=as.double(l$latitude), p=as.double(l$p),
+               n=n, rval=double(n))$rval
+    if (is.matrix(latitude))
+        dim(rval) <- dim(latitude)
+    rval
+}
+
 #' in-situ density (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
