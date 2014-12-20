@@ -8,6 +8,13 @@
 // but note that the gsw_ functions we are calling all have lower-case names.
 // Please put functions into alphabetical order here, ignoring case.
 
+void wrap_gsw_alpha(double *SA, double *CT, double *p, int *n, double *rval)
+{
+    extern double gsw_alpha(double SA, double CT, double p);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_alpha(SA[i], CT[i], p[i]);
+}
+
 void wrap_gsw_CT_from_t(double *SA, double *t, double *p, int *n, double *rval)
 {
     extern double gsw_ct_from_t(double SA, double t, double p);
