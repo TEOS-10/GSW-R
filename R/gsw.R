@@ -147,28 +147,29 @@ gsw_CT_from_t <- function(SA, t, p)
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
 #' @param latitude latitude in decimal degrees [ -90 to 90 ]
-#' @return Brunt-Vaisala Frequency squared [ s^(-2) ]
+#' @return a list containing N2 [ s^(-2) ] and mid-point pressure p_mid [ dbar ]
 #' @examples 
 #' SA <- c(34.7118, 34.8915)
 #' CT <- c(28.8099, 28.4392)
 #' p <- c(      10,      50)
 #' latitude <- 4
-#' gsw_Nsquared(SA, CT, p, latitude) # 6.0847042791371e-5
+#' gsw_Nsquared(SA, CT, p, latitude)$N2 # 6.0847042791371e-5
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_Nsquared.html}
 gsw_Nsquared <- function(SA, CT, p, latitude=0)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p, latitude=latitude))
     n <- length(l[[1]])
-    rval <- .C("wrap_gsw_Nsquared",
-               SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), latitude=as.double(l$latitude),
-               n=n, n2=double(n), p_mid=double(n))$n2
+    r <- .C("wrap_gsw_Nsquared",
+            SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), latitude=as.double(l$latitude),
+            n=n, n2=double(n-1), p_mid=double(n-1))
+    N2 <- r$n2
+    p_mid <- r$p_mid
     ## How to handle the reduction in length for a matrix??
-    if (is.matrix(SA))
-        dim(rval) <- dim(SA)
-    else
-        rval <- head(rval, -1)
-    rval
+    if (is.matrix(SA)) {
+        stop("gsw_Turner_Rsubrho() cannot handle matix SA")
+    }
+    list(N2=N2, p_mid=p_mid)
 }
 
 #' Gravitational acceleration
