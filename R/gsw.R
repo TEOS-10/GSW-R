@@ -193,6 +193,28 @@ gsw_rho <- function(SA, CT, p)
     rval
 }
 
+#' in-situ density
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param t in-situ temperature (ITS-90) [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return in-situ density [ kg/m^3 ]
+#' @examples
+#' gsw_rho_t_exact(34.7118, 28.7856, 10) # 1021.840173185531
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_t_exact.html}
+gsw_rho_t_exact <- function(SA, t, p)
+{
+    l <- argfix(list(SA=SA, t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_rho_t_exact",
+               SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Convert from practical salinity to absolute salinity
 #' 
 #' @param SP Practical Salinity (PSS-78) [ unitless ]

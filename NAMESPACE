@@ -7,6 +7,7 @@ export(
         gsw_grav,
         gsw_Nsquared,
         gsw_rho,
+        gsw_rho_t_exact,
         gsw_SA_from_SP,
         gsw_sigma0,
         gsw_sigma1,

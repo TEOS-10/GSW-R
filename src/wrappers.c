@@ -49,6 +49,13 @@ void wrap_gsw_rho(double *SA, double *CT, double *p, int *n, double *rval)
         rval[i] = gsw_rho(SA[i], CT[i], p[i]);
 }
 
+void wrap_gsw_rho_t_exact(double *SA, double *t, double *p, int *n, double *rval)
+{
+    extern double gsw_rho_t_exact(double SA, double t, double p);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_rho_t_exact(SA[i], t[i], p[i]);
+}
+
 void wrap_gsw_SP_from_C(double *C, double *t, double *p, int *n, double *rval)
 {
     extern double gsw_SP_from_c(double C, double t, double p);
