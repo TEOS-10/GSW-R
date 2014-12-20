@@ -61,7 +61,7 @@ argfix <- function(list)
 #' p =  c(     10,      50,     125,     250,     600,    1000)
 #' alpha <- gsw_alpha(SA,CT,p)
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha.html}
 gsw_alpha <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -86,7 +86,7 @@ gsw_alpha <- function(SA, CT, p)
 #' p =  c(     10,      50,     125,     250,     600,    1000)
 #' beta <- gsw_beta(SA,CT,p)
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta.html}
 gsw_beta <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -158,7 +158,7 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
 #' @examples
 #' gsw_grav(c(-90, -60, -30, 0), 0) # 9.832186205884799, 9.819178859991149, 9.793249257048750, 9.780327000000000
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_grav.html}
 gsw_grav <- function(latitude, p)
 {
     l <- argfix(list(latitude=latitude, p=p))
@@ -180,7 +180,7 @@ gsw_grav <- function(latitude, p)
 #' @examples
 #' gsw_rho(34.7118, 28.8099, 10) # 1021.8404465661
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho.html}
 gsw_rho <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -246,7 +246,7 @@ gsw_SP_from_C <- function(C, t, p)
 #' @examples
 #' gsw_z_from_p(10, 4) # -9.9445831334188
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_z_from_p.html}
 gsw_z_from_p<- function(p, lat)
 {
     l <- argfix(list(p=p, lat=lat))
