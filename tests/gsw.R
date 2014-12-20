@@ -22,3 +22,5 @@ stopifnot(all.equal(SA, 34.711778344814114))
 SP <- gsw_SP_from_C(34.5487, 28.7856, 10)
 stopifnot(all.equal(SP, 20.009869599086951))
 
+z <- gsw_z_from_p(10, 4)
+stopifnot(all.equal(z, -9.9445831334188))

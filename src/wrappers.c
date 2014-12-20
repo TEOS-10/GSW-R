@@ -43,4 +43,10 @@ void wrap_gsw_SA_from_SP(double *SA, double *p, double *longitude, double *latit
         rval[i] = gsw_sa_from_sp(SA[i], p[i], longitude[i], latitude[i]);
 }
 
+void wrap_gsw_z_from_p(double *p, double *lat, int *n, double *rval)
+{
+    extern double gsw_z_from_p(double p, double lat);
+    for (int i=0; i < *n; i++)
+      rval[i] = gsw_z_from_p(p[i], lat[i]);
+}
 

@@ -1,1 +1,6 @@
 *.swp
+*~
+
+src/*.o
+src/*.so
+src/*.rds

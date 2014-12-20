@@ -166,4 +166,25 @@ gsw_SP_from_C <- function(C, t, p)
     rval
 }
 
+#' height from pressure (48-term equation)
+#' 
+#' @param p sea pressure [ dbar ]
+#' @param lat latitude in decimal degrees north [ -90 ... +90 ]
+#' 
+#' @return height [ m ]
+#' @examples
+#' gsw_z_from_p(10, 4) # -9.9445831334188
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
+gsw_z_from_p<- function(p, lat)
+{
+    l <- argfix(list(p=p, lat=lat))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_z_from_p",
+               p=as.double(l$p), lat=as.double(l$lat),
+               n=n, rval=double(n))$rval
+    if (is.matrix(p))
+        dim(rval) <- dim(p)
+    rval
+}
 
