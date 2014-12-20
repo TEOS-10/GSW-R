@@ -74,6 +74,27 @@ gsw_alpha <- function(SA, CT, p)
     rval
 }
 
+#' Conductivity from Practical Salinity
+#' 
+#' @param SP Practical Salinity (PSS-78) [ unitless ]
+#' @param t in-situ temperature (ITS-90) [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @examples 
+#' gsw_C_from_SP(34.5487, 28.7856, 10) # 56.412599581571186
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_C_from_SP.html}
+gsw_C_from_SP <- function(SP, t, p)
+{
+    l <- argfix(list(SP=SP, t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_C_from_SP",
+               SP=as.double(l$SP), t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SP))
+        dim(rval) <- dim(SP)
+    rval
+}
+
 #' saline contraction coefficient at constant Conservative Temperature. (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
