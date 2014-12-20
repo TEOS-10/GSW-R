@@ -2,6 +2,7 @@ useDynLib(gsw)
 export(
         argfix,
         gsw_alpha,
+        gsw_beta,
         gsw_CT_from_t,
         gsw_grav,
         gsw_Nsquared,

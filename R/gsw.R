@@ -74,6 +74,31 @@ gsw_alpha <- function(SA, CT, p)
     rval
 }
 
+#' saline contraction coefficient at constant Conservative Temperature. (48-term equation)
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return saline contraction coefficient at constant Conservative Temperature [ kg/g ]
+#' @examples
+#' SA = c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT = c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+#' p =  c(     10,      50,     125,     250,     600,    1000)
+#' beta <- gsw_beta(SA,CT,p)
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
+gsw_beta <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_beta",
+               SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Convert from temperature to conservative temperature
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
