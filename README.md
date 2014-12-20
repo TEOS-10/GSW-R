@@ -7,7 +7,8 @@ All the functions provided here reproduce [teos-10.org](http://www.teos-10.org)
 test values to within about 13 digits. (The tests are part of the
 package-building process, as is usual in R.)
 
-Function names are identical to those used in the Matlab version of TEOS-10.
+Function names match those used specified in the TEOS-10
+[documentation](http://www.teos-10.org/pubs/gsw/html/gsw_contents.html).
 
 The plan is to update this package to match publicised changes to TEOS-10.
 Users should be aware that this may involve changes to function names or
