@@ -144,6 +144,27 @@ gsw_beta <- function(SA, CT, p)
     rval
 }
 
+#' Isobaric heat capacity
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param t in-situ temperature (ITS-90) [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @examples 
+#' gsw_cp_t_exact(34.7118, 28.7856, 10) # 4002.888003958537
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_cp_t_exact.html}
+gsw_cp_t_exact <- function(SA, t, p)
+{
+    l <- argfix(list(SA=SA, t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_cp_t_exact",
+               SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Convert from temperature to conservative temperature
 #' 
 #' @param SA Absolute Salinity [ g/kg ]

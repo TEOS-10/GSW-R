@@ -5,6 +5,7 @@ export(
         gsw_alpha,
         gsw_beta,
         gsw_C_from_SP,
+        gsw_cp_t_exact,
         gsw_CT_from_t,
         gsw_grav,
         gsw_Nsquared,
