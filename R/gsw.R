@@ -188,7 +188,7 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
     p_mid <- r$p_mid
     ## How to handle the reduction in length for a matrix??
     if (is.matrix(SA)) {
-        stop("gsw_Turner_Rsubrho() cannot handle matix SA")
+        stop("gsw_Nsquared() cannot handle matix SA")
     }
     list(N2=N2, p_mid=p_mid)
 }
