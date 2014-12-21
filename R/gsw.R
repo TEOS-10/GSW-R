@@ -475,6 +475,27 @@ gsw_SP_from_C <- function(C, t, p)
     rval
 }
 
+#' Freezing temperature
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param p sea pressure [ dbar ]
+#' @param saturation_fraction saturation fraction of dissolved air in seawater
+#' @return in-situ freezing temperature (ITS-90) [ deg C ]
+#' @examples 
+#' gsw_t_freezing(34.7118, 10) # -1.902730710149803
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing.html}
+gsw_t_freezing <- function(SA, p, saturation_fraction=1)
+{
+    l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_t_freezing",
+               SA=as.double(l$SA), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
 
 #' Turner angle and density ratio
 #'

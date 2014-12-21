@@ -70,13 +70,6 @@ void wrap_gsw_rho_t_exact(double *SA, double *t, double *p, int *n, double *rval
         rval[i] = gsw_rho_t_exact(SA[i], t[i], p[i]);
 }
 
-void wrap_gsw_SP_from_C(double *C, double *t, double *p, int *n, double *rval)
-{
-    extern double gsw_SP_from_c(double C, double t, double p);
-    for (int i=0; i < *n; i++)
-        rval[i] = gsw_sp_from_c(C[i], t[i], p[i]);
-}
-
 void wrap_gsw_SA_from_SP(double *SA, double *p, double *longitude, double *latitude,
         int *n, double *rval)
 {
@@ -139,6 +132,20 @@ void wrap_gsw_sound_speed_t_exact(double *SA, double *t, double *p,
     extern double gsw_sound_speed_t_exact(double SA, double t, double p);
     for (int i=0; i < *n; i++)
         rval[i] = gsw_sound_speed_t_exact(SA[i], t[i], p[i]);
+}
+
+void wrap_gsw_SP_from_C(double *C, double *t, double *p, int *n, double *rval)
+{
+    extern double gsw_SP_from_c(double C, double t, double p);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_sp_from_c(C[i], t[i], p[i]);
+}
+
+void wrap_gsw_t_freezing(double *SA, double *p, double *saturation_fraction, int *n, double *rval)
+{
+    extern double gsw_t_freezing(double SA, double p, double saturation_fraction);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_t_freezing(SA[i], p[i], saturation_fraction[i]);
 }
 
 void wrap_gsw_Turner_Rsubrho(double *SA, double *CT, double *p, int *n, double *Tu, double *Rsubrho, double *p_mid)
