@@ -12,7 +12,7 @@ gsw_sigma0(SA, CT)
 \item{CT}{Conservative Temperature [ deg C ]}
 }
 \value{
-potential density anomaly [ kg / m^3 ]
+potential density anomaly [ kg/m^3 ]
 }
 \description{
 This uses the 48-term density equation, and returns

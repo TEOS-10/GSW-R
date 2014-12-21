@@ -12,7 +12,7 @@ gsw_sigma3(SA, CT)
 \item{CT}{Conservative Temperature [ deg C ]}
 }
 \value{
-potential density anomaly with reference pressure 3000 dbar [ kg / m^3 ]
+potential density anomaly with reference pressure 3000 dbar [ kg/m^3 ]
 }
 \description{
 This uses the 48-term density equation, and returns

@@ -290,7 +290,7 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
 #'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
-#' @return potential density anomaly [ kg / m^3 ]
+#' @return potential density anomaly [ kg/m^3 ]
 #' @examples
 #' gsw_sigma0(34.7118, 28.8099) # 21.798411276610750
 #' @references
@@ -315,7 +315,7 @@ gsw_sigma0 <- function(SA, CT)
 #'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
-#' @return potential density anomaly [ kg / m^3 ]
+#' @return potential density anomaly [ kg/m^3 ]
 #' @examples
 #' gsw_sigma1(34.7118, 28.8099) # 25.955891533636986
 #' @references
@@ -340,7 +340,7 @@ gsw_sigma1 <- function(SA, CT)
 #'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
-#' @return potential density anomaly [ kg / m^3 ]
+#' @return potential density anomaly [ kg/m^3 ]
 #' @examples
 #' gsw_sigma2(34.7118, 28.8099) # 30.022796416066058
 #' @references
@@ -365,7 +365,7 @@ gsw_sigma2 <- function(SA, CT)
 #'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
-#' @return potential density anomaly with reference pressure 3000 dbar [ kg / m^3 ]
+#' @return potential density anomaly with reference pressure 3000 dbar [ kg/m^3 ]
 #' @examples
 #' gsw_sigma3(34.7118, 28.8099) # 34.002600253012133
 #' @references
@@ -390,7 +390,7 @@ gsw_sigma3 <- function(SA, CT)
 #'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
-#' @return potential density anomaly with reference pressure 4000 dbar [ kg / m^3 ]
+#' @return potential density anomaly with reference pressure 4000 dbar [ kg/m^3 ]
 #' @examples
 #' gsw_sigma3(34.7118, 28.8099) # 37.898467323406976
 #' @references
@@ -401,6 +401,52 @@ gsw_sigma4 <- function(SA, CT)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_sigma4",
                SA=as.double(l$SA), CT=as.double(l$CT),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' sound speed with 48-term density
+#'
+#' This uses the 48-term density equation.
+#'
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return sound speed [ m/s ]
+#' @examples
+#' gsw_sound_speed(34.7118, 28.7856, 10) # 1542.420534932182
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed.html}
+gsw_sound_speed<- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_sound_speed",
+               SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' sound speed
+#'
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param t in-situ temperature (ITS-90) [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return sound speed [ m/s ]
+#' @examples
+#' gsw_sound_speed_t_exact(34.7118, 28.7856, 10) # 1542.420534932182
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed_t_exact.html}
+gsw_sound_speed_t_exact <- function(SA, t, p)
+{
+    l <- argfix(list(SA=SA, t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_sound_speed_t_exact",
+               SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
                n=n, rval=double(n))$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)

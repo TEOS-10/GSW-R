@@ -125,6 +125,22 @@ void wrap_gsw_sigma4(double *SA, double *CT,
         rval[i] = gsw_sigma4(SA[i], CT[i]);
 }
 
+void wrap_gsw_sound_speed(double *SA, double *CT, double *p,
+        int *n, double *rval)
+{
+    extern double gsw_sound_speed(double SA, double CT, double p);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_sound_speed(SA[i], CT[i], p[i]);
+}
+
+void wrap_gsw_sound_speed_t_exact(double *SA, double *t, double *p,
+        int *n, double *rval)
+{
+    extern double gsw_sound_speed_t_exact(double SA, double t, double p);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_sound_speed_t_exact(SA[i], t[i], p[i]);
+}
+
 void wrap_gsw_Turner_Rsubrho(double *SA, double *CT, double *p, int *n, double *Tu, double *Rsubrho, double *p_mid)
 {
     extern void gsw_turner_rsubrho(double *sa, double *ct, double *p, int nz, double *Tu, double *Rsubrho, double *p_mid);
