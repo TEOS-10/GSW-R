@@ -49,6 +49,30 @@ argfix <- function(list)
 
 ## PART 3: gsw (Gibbs SeaWater) functions, in alphabetical order (ignoring case)
 
+#' adiabatic lapse rate from Conservative Temperature
+#'
+#' Note that the unit is K/Pa, i.e. 1e-4 times K/dbar.
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return adiabatic lapse rate (note unconventional unit) [ K/Pa ]
+#' @examples
+#' gsw_adiabatic_lapse_rate_from_CT(34.7118, 28.7856, 10) # 2.40199646230069e-8
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_from_CT.html}
+gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_adiabatic_lapse_rate_from_CT",
+               SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+                                        
 #' thermal expansion coefficient with respect to Conservative Temperature. (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]

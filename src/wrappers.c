@@ -6,7 +6,19 @@
 
 // Case in wrapper function names should match that in the TEOS-10 matlab functions,
 // but note that the gsw_ functions we are calling all have lower-case names.
+//
 // Please put functions into alphabetical order here, ignoring case.
+//
+// It is not necessary to put the "extern double" declarations in the wrapper
+// functions, but it has the advantage of showing the argument list to 
+// the programmer, avoiding a search through the gswteos-10.h file.
+
+void wrap_gsw_adiabatic_lapse_rate_from_CT(double *SA, double *CT, double *p, int *n, double *rval)
+{
+    extern double gsw_adiabatic_lapse_rate_from_ct(double SA, double CT, double p);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_adiabatic_lapse_rate_from_ct(SA[i], CT[i], p[i]);
+}
 
 void wrap_gsw_alpha(double *SA, double *CT, double *p, int *n, double *rval)
 {
