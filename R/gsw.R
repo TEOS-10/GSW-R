@@ -229,13 +229,9 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
     r <- .C("wrap_gsw_Nsquared",
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), latitude=as.double(l$latitude),
             n=n, n2=double(n-1), p_mid=double(n-1))
-    N2 <- r$n2
-    p_mid <- r$p_mid
-    ## How to handle the reduction in length for a matrix??
-    if (is.matrix(SA)) {
+    if (is.matrix(SA))
         stop("gsw_Nsquared() cannot handle matix SA")
-    }
-    list(N2=N2, p_mid=p_mid)
+    list(N2=r$n2, p_mid=r$p_mid)
 }
 
 #' potential density
@@ -520,6 +516,32 @@ gsw_SP_from_C <- function(C, t, p)
     rval
 }
 
+#' Convert from Absolute Salinity to Practical Salinity
+#'
+#' Note: unlike the corresponding Matlab function, this does not
+#' return a flag indicating whether the location is in the ocean.
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param p sea pressure [ dbar ]
+#' @param longitude longitude in decimal degrees [ 0 to 360 or -180 to 180]
+#' @param latitude latitude in decimal degrees [ -90 to 90 ]
+#' @return Practical salinity.
+#' @examples 
+#' gsw_SP_from_SA(34.7118, 10, 188, 4) # 34.548721553448317
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SA.html}
+gsw_SP_from_SA <- function(SA, p, longitude, latitude)
+{
+    l <- argfix(list(SA=SA, p=p, longitude=longitude, latitude=latitude))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_SP_from_SA",
+               SA=as.double(l$SA), p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
+               n=n, SP=double(n))$SP
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Freezing temperature
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
@@ -541,7 +563,6 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
         dim(rval) <- dim(SA)
     rval
 }
-
 
 #' in situ temperature from Conservative Temperature
 #' 

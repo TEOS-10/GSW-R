@@ -51,9 +51,8 @@ latitude <- 4
 r <- gsw_Nsquared(SA, CT, p, latitude)
 N2 <- r$N2
 p_mid <- r$p_mid
-stopifnot(all.equal(N2, 1e-3*c(0.060847042791371, 0.235730438897447,
-                               0.216590355253073, 0.012935081031687,
-                               0.008430222212653)))
+stopifnot(all.equal(N2, 1e-3*c(0.060847042791371, 0.235730438897447, 0.216590355253073,
+                               0.012935081031687, 0.008430222212653)))
 stopifnot(all.equal(p_mid, c(30, 87.5, 187.5, 425, 800)))
 
 ## gsw_pot_rho_t_exact
@@ -80,6 +79,15 @@ stopifnot(all.equal(rho, c(1021.840173185531, 1022.262689926782, 1024.4277159416
 ## gsw_SA_from_SP()
 SA <- gsw_SA_from_SP(34.5487, 10, 188, 4)
 stopifnot(all.equal(SA, 34.711778344814114))
+
+## gsw_SP_from_SA
+SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+p <- c(      10,      50,     125,     250,     600,    1000)
+latitude <- 4
+longitude <- 188
+SP <- gsw_SP_from_SA(SA, p, longitude, latitude) # SP, in_ocean
+stopifnot(all.equal(SP, c(34.548721553448317, 34.727477488096639, 34.860554877708005,
+                          34.680971112271791, 34.567971663653388, 34.560036751118204)))
 
 ## gsw_sigma0()
 sigma0 <- gsw_sigma0(34.7118, 28.8099)

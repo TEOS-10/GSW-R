@@ -160,6 +160,13 @@ void wrap_gsw_SP_from_C(double *C, double *t, double *p, int *n, double *rval)
         rval[i] = gsw_sp_from_c(C[i], t[i], p[i]);
 }
 
+void wrap_gsw_SP_from_SA(double *SA, double *p, double *longitude, double *latitude, int *n, double *rval)
+{
+    extern double gsw_SP_from_SA(double SA, double p, double longitude, double latitude);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_sp_from_sa(SA[i], p[i], longitude[i], latitude[i]);
+}
+
 void wrap_gsw_t_freezing(double *SA, double *p, double *saturation_fraction, int *n, double *rval)
 {
     extern double gsw_t_freezing(double SA, double p, double saturation_fraction);
