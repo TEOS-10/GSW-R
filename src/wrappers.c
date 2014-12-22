@@ -167,6 +167,13 @@ void wrap_gsw_t_freezing(double *SA, double *p, double *saturation_fraction, int
         rval[i] = gsw_t_freezing(SA[i], p[i], saturation_fraction[i]);
 }
 
+void wrap_gsw_t_from_CT(double *SA, double *CT, double *p, int *n, double *rval)
+{
+    extern double gsw_t_from_ct(double SA, double CT, double p);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_t_from_ct(SA[i], CT[i], p[i]);
+}
+
 void wrap_gsw_Turner_Rsubrho(double *SA, double *CT, double *p, int *n, double *Tu, double *Rsubrho, double *p_mid)
 {
     extern void gsw_turner_rsubrho(double *sa, double *ct, double *p, int nz, double *Tu, double *Rsubrho, double *p_mid);

@@ -542,6 +542,29 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
     rval
 }
 
+
+#' in situ temperature from Conservative Temperature
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return in-situ temperature (ITS-90) [ deg C ]
+#' @examples 
+#' gsw_t_from_CT(34.7118, 28.8099, 10) # 28.785580227725703
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_from_CT.html}
+gsw_t_from_CT <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_t_from_CT",
+               SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Turner angle and density ratio
 #'
 #' This uses the 48-term density equation. The values of Turner Angle
