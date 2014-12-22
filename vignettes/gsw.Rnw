@@ -1,0 +1,124 @@
+% vim: spell tw=80 shiftwidth=4 softtabstop=4 expandtab
+
+\documentclass{article}
+
+% \VignetteIndexEntry{Introduction to gsw}
+% \VignetteDepends{gsw}
+% \VignetteKeyword{oceanography}
+
+\usepackage{url}
+\usepackage{boxedminipage}
+\usepackage{hyperref}
+\usepackage{makeidx}
+\usepackage{titlesec}
+\usepackage{color}
+\makeindex
+
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+     
+
+\parskip=1.5ex plus 1.5ex minus 1.25ex
+
+\titleformat{\section}[block]{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titlespacing{\section}{0em}{2em plus 0.5em minus 2em}{0.15em plus 0.15em minus 0.125em}
+\titleformat{\subsection}[block]{\normalfont\itshape}{\thesubsection}{1em}{}
+\titlespacing{\subsection}{0em}{1em plus 0.25em minus 1em}{-0.15em plus 0.15em minus 0.125em}
+
+\newcommand{\di}[1]{#1\index{#1}}
+\newcommand{\fixme}[1]{\textbf{$<$ #1 $>$}}
+
+\newcommand{\workedexercise}[2]{
+	\vspace{2ex plus 2ex minus 1ex}
+	\begin{boxedminipage}[c]{0.95\linewidth}
+		{\textbf{Exercise #1}.\hspace{1em}#2}
+	\end{boxedminipage}
+	\vspace{2ex plus 2ex minus 1ex}
+}
+\newcommand{\workedanswer}[2]{
+\goodbreak
+\vskip 1.5ex plus 0.5ex minus 0.5ex
+\noindent\textbf{Exercise #1 -- #2.}
+}
+
+
+\begin{document}
+
+\title{The gsw package}
+\author{Dan E. Kelley and Clark Richards}
+\maketitle
+
+
+\begin{abstract}
+
+    The \verb@gsw@ package provides an implementation of the Thermodynamic
+    Equation Of Seawater - 2010 (TEOS-10)\fixme{reference here}. This vignette
+    outlines how to specify the use of this library within \verb@oce@ and
+    independently of that package.
+\end{abstract}
+
+\verb@gsw@ provides an R interface to the TEOS-10 / GSW (Gibbs Sea Water)
+library\fixme{citation}, for use by the "oce" package \fixme{citation and link}.
+
+The functions are linked with the C version of the TEOS-10 library, but the
+interface (i.e. the function names and the argument lists) match the Matlab
+implementation.  The documentation of the functions provided here focuses on the
+arguments and return value, with links to the TEOS-10 webpages yielding fuller
+details.
+ 
+See \url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html} for a list of
+the TEOS-10 functions, and links therein for more information on the functions
+(including references to more detailed software manuals and also to the related
+scientific literature).
+
+Each function provided here has a test suite that is used during the building of
+the package.  That means that results should match those of the equivalent
+Matlab functions to 8 or more significant digits. And, importantly, it means
+that the functions cannot drift from these tested values, for if they did, the
+package would fail to build and thus could not be hosted on CRAN.
+
+\fixme{The above is just from the help pages. It should be expanded and
+rewritten.}
+
+\section{Development status}
+ 
+As of late 2014, the package is still in an early stage of development, with
+only about a third of the common functions having been coded. All functions
+needed by the \verb@oce@ package are working, however, and the development
+version of \verb@oce@ now prefers to use the present package for calculations,
+if it is installed.
+
+\section{Using gsw independent of oce}
+
+<<echo=false,eval=true>>=
+options(keep.source=TRUE, width=60, prompt=' ', continue=' ')
+@
+
+Suppose a water sample is taken at 100\,dbar pressure, longitude 188 east,
+latitude 4 north, and that it has \di{Practical Salinity} 35 and \di{in-situ
+temperature} 10\,$^\circ$C on the (ITS-90) scale. To calculate its \di{Absolute
+Salinity}, do as follows
+<<>>=
+library(gsw)
+SA <- gsw_SA_from_SP(SP=35, p=100, longitude=188, latitude=4)
+SA
+@
+and from that, to calculate its \di{Conservative temperature} as follows.
+<<>>=
+library(gsw)
+CT <- gsw_CT_from_t(SA=SA, t=10, p=100)
+CT
+@
+
+\section{Using gsw within oce}
+
+\fixme{fill in, probably with graphs a bit like in OAR}
+
+\printindex
+\end{document}

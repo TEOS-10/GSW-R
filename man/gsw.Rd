@@ -6,14 +6,31 @@
 \alias{gsw-package}
 \title{R implementation of the Thermodynamic Equation Of Seawater - 2010 (TEOS-10)}
 \description{
-Provides an R interface to the TEOS-10 / GSW (Gibbs Sea Water) library.
-The functions are designed to match the Matlab implementation, so the
-function names match and the documentation for each function in the
-present package contains a link to the official TEOS-10 documentation
-of the paired Matlab function.
+Provides an R interface to the TEOS-10 / GSW (Gibbs Sea Water) library,
+for use by the "oce" package (see \url{http://dankelley.github.io/oce})
+and other uses.
 }
 \details{
+The functions are linked with the C version of the TEOS-10 library,
+which yields efficiency, but the interface (i.e. the function names
+and the argument lists) match the Matlab implementation.  The
+documentation of the functions provided here focuses on the
+arguments and return value, with links to the TEOS-10 webpages
+yielding fuller details.  See
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html}
+for a list of the TEOS-10 functions.
+
+Each function provided here has a test suite that is used during the
+building of the package.  That means that results should match those of
+the equivalent Matlab functions to 8 or more significant digits. And,
+importantly, it means that the functions cannot drift from these
+tested values, for if they did, the package would fail to build and
+thus could not be hosted on CRAN.
+
 As of late 2014, the package is still in an early stage of development,
-with only a handful of (important) functions working.
+with only about a third of the common functions having been coded. All
+functions needed by the "oce" package are working, however, and the
+development version of "oce" now prefers to use the present package
+for calculations, if it is installed.
 }
 
