@@ -20,10 +20,7 @@ thermal expansion coefficient with respect to Conservative Temperature [ 1/K ]
 thermal expansion coefficient with respect to Conservative Temperature. (48-term equation)
 }
 \examples{
-SA = c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
-CT = c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
-p =  c(     10,      50,     125,     250,     600,    1000)
-alpha <- gsw_alpha(SA,CT,p)
+gsw_alpha(34.7118, 28.7856, 10) # 3.24480399390879e-3
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha.html}

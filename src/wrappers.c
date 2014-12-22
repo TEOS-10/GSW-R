@@ -27,6 +27,13 @@ void wrap_gsw_alpha(double *SA, double *CT, double *p, int *n, double *rval)
         rval[i] = gsw_alpha(SA[i], CT[i], p[i]);
 }
 
+void wrap_gsw_alpha_on_beta(double *SA, double *CT, double *p, int *n, double *rval)
+{
+    extern double gsw_alpha_on_beta(double SA, double CT, double p);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_alpha_on_beta(SA[i], CT[i], p[i]);
+}
+
 void wrap_gsw_beta(double *SA, double *CT, double *p, int *n, double *rval)
 {
     extern double gsw_beta(double SA, double CT, double p);

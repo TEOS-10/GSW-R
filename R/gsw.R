@@ -80,10 +80,7 @@ gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
 #' @param p sea pressure [ dbar ]
 #' @return thermal expansion coefficient with respect to Conservative Temperature [ 1/K ]
 #' @examples
-#' SA = c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
-#' CT = c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
-#' p =  c(     10,      50,     125,     250,     600,    1000)
-#' alpha <- gsw_alpha(SA,CT,p)
+#' gsw_alpha(34.7118, 28.7856, 10) # 3.24480399390879e-3
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha.html}
 gsw_alpha <- function(SA, CT, p)
@@ -91,6 +88,28 @@ gsw_alpha <- function(SA, CT, p)
     l <- argfix(list(SA=SA, CT=CT, p=p))
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_alpha",
+               SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' thermal expansion coefficient over haline contraction coefficient (48-term equation)
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return thermal expansion coefficient with respect to Conservative Temperature [ 1/K ]
+#' @examples
+#' gsw_alpha_on_beta(34.7118, 28.8099, 10) # 0.452454540612631
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha_on_beta.html}
+gsw_alpha_on_beta <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_alpha_on_beta",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
                n=n, rval=double(n))$rval
     if (is.matrix(SA))
