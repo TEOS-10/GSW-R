@@ -14,7 +14,7 @@ gsw_alpha_on_beta(SA, CT, p)
 \item{p}{sea pressure [ dbar ]}
 }
 \value{
-thermal expansion coefficient with respect to Conservative Temperature [ 1/K ]
+ratio of thermal expansion coefficient to haline contraction coefficient [ (g/kg)/K ]
 }
 \description{
 thermal expansion coefficient over haline contraction coefficient (48-term equation)

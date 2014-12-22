@@ -100,7 +100,7 @@ gsw_alpha <- function(SA, CT, p)
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
-#' @return thermal expansion coefficient with respect to Conservative Temperature [ 1/K ]
+#' @return ratio of thermal expansion coefficient to haline contraction coefficient [ (g/kg)/K ]
 #' @examples
 #' gsw_alpha_on_beta(34.7118, 28.8099, 10) # 0.452454540612631
 #' @references
