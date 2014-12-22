@@ -21,6 +21,7 @@ export(
         gsw_sigma4,
         gsw_sound_speed,
         gsw_sound_speed_t_exact,
+        gsw_specvol,
         gsw_SP_from_C,
         gsw_SP_from_SA, #
         gsw_t_freezing,

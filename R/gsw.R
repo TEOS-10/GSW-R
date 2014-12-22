@@ -513,6 +513,21 @@ gsw_sound_speed_t_exact <- function(SA, t, p)
     rval
 }
 
+#' Specific volume
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return Specific volume (1/density)
+#' @examples 
+#' gsw_specvol(34.7118, 28.8099, 10) # 9.78626363206202e-4
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol.html}
+gsw_specvol  <- function(SA, CT, p)
+{
+    1 / gsw_rho(SA, CT, p)
+}
+
 #' Convert from conductivity to practical salinity
 #' 
 #' @param C conductivity [ mS/cm ]
