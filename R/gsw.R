@@ -206,6 +206,27 @@ gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
     rval
 }
 
+#' Conservative Temperature from potential temperature
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param pt potential temperature (ITS-90) [ deg C ]
+#' @return Conservative Temperature [ deg C ]
+#' @examples 
+#' gsw_CT_from_pt(34.7118, 28.7832) # 28.809923015982083
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_pt.html}
+gsw_CT_from_pt <- function(SA, pt)
+{
+    l <- argfix(list(SA=SA, pt=pt))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_CT_from_pt",
+               SA=as.double(l$SA), pt=as.double(l$pt),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Convert from temperature to conservative temperature
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
