@@ -25,7 +25,7 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(
 // the programmer, avoiding a search through the gswteos-10.h file.
 
 #if 1
-W31(wrap_gsw_adiabatic_lapse_rate_from_CT, gsw_adiabatic_lapse_rate_from_ct, SA, CT, p, n, rval);
+W31(wrap_gsw_adiabatic_lapse_rate_from_CT, gsw_adiabatic_lapse_rate_from_ct, SA, CT, p, n, rval)
 #else
 void wrap_gsw_adiabatic_lapse_rate_from_CT(double *SA, double *CT, double *p, int *n, double *rval)
 {
