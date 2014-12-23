@@ -184,6 +184,31 @@ gsw_cp_t_exact <- function(SA, t, p)
     rval
 }
 
+#' cabbeling coefficient (48-term equation)
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return cabbeling coefficient with respect to Conservative Temperature [ 1/(K^2) ]
+#' @examples
+#' SA = c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT = c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' p =  c(     10,      50,     125,     250,     600,    1000)
+#' cabbeling <- gsw_cabbeling(SA,CT,p)
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_cabbeling.html}
+gsw_cabbeling <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_cabbeling",
+               SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Conservative temperature freezing point
 #' 
 #' @param SA Absolute Salinity [ g/kg ]

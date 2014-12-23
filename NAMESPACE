@@ -7,6 +7,7 @@ export(
         gsw_beta,
         gsw_C_from_SP,
         gsw_cp_t_exact,
+        gsw_cabbeling,
         gsw_CT_freezing,
         gsw_CT_from_pt,
         gsw_CT_from_t,

@@ -48,6 +48,13 @@ void wrap_gsw_C_from_SP(double *SP, double *t, double *p, int *n, double *rval)
         rval[i] = gsw_c_from_sp(SP[i], t[i], p[i]);
 }
 
+void wrap_gsw_cabbeling(double *SA, double *CT, double *p, int *n, double *rval)
+{
+    extern double gsw_cabbeling(double SA, double CT, double p);
+    for (int i=0; i < *n; i++)
+        rval[i] = gsw_cabbeling(SA[i], CT[i], p[i]);
+}
+
 void wrap_gsw_CT_freezing(double *SA, double *p, double *saturation_fraction, int *n, double *rval)
 {
     extern double gsw_ct_freezing(double SA, double p, double saturation_fraction);
