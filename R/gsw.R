@@ -184,6 +184,28 @@ gsw_cp_t_exact <- function(SA, t, p)
     rval
 }
 
+#' Conservative temperature freezing point
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param p sea pressure [ dbar ]
+#' @param saturation_fraction saturation fraction of dissolved air in seawater
+#' @return Conservative Temperature at freezing of seawater [ deg C ]. That is, the freezing temperature expressed in terms of Conservative Temperature (ITS-90). 
+#' @examples 
+#' gsw_CT_freezing(34.7118, 10) # -1.899683776424096
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing.html}
+gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
+{
+    l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_CT_freezing",
+               SA=as.double(l$SA), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Convert from temperature to conservative temperature
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
