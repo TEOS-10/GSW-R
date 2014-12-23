@@ -4,6 +4,17 @@
 #include <errno.h>
 #include "gswteos-10.h"
 
+// wrap a 3-arg function that returns 1 value
+#define W31(wname, cname, arg1, arg2, arg3, n, rval) \
+void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(rval))\
+{\
+    extern double (cname)(double, double, double);\
+    for (int i=0; i < *(n); i++) {\
+        (rval)[i] = (cname)((arg1)[i], (arg2)[i], (arg3)[i]);\
+    }\
+}
+
+
 // Case in wrapper function names should match that in the TEOS-10 matlab functions,
 // but note that the gsw_ functions we are calling all have lower-case names.
 //
@@ -13,12 +24,16 @@
 // functions, but it has the advantage of showing the argument list to 
 // the programmer, avoiding a search through the gswteos-10.h file.
 
+#if 1
+W31(wrap_gsw_adiabatic_lapse_rate_from_CT, gsw_adiabatic_lapse_rate_from_ct, SA, CT, p, n, rval);
+#else
 void wrap_gsw_adiabatic_lapse_rate_from_CT(double *SA, double *CT, double *p, int *n, double *rval)
 {
     extern double gsw_adiabatic_lapse_rate_from_ct(double SA, double CT, double p);
     for (int i=0; i < *n; i++)
         rval[i] = gsw_adiabatic_lapse_rate_from_ct(SA[i], CT[i], p[i]);
 }
+#endif
 
 void wrap_gsw_alpha(double *SA, double *CT, double *p, int *n, double *rval)
 {
