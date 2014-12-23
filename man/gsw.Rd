@@ -12,13 +12,15 @@ and other uses.
 }
 \details{
 The functions are linked with the C version of the TEOS-10 library,
-which yields efficiency, but the interface (i.e. the function names
-and the argument lists) match the Matlab implementation.  The
-documentation of the functions provided here focuses on the
-arguments and return value, with links to the TEOS-10 webpages
-yielding fuller details.  See
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html}
-for a list of the TEOS-10 functions.
+but the interface (i.e. the function names and the argument lists)
+match the Matlab implementation.  The documentation of the functions
+provided here focuses on the arguments and return value, with links
+to the TEOS-10 webpages yielding fuller details.
+
+See \url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html}
+for a list of the TEOS-10 functions, and links therein for more
+information on the functions (including references to more detailed
+software manuals and also to the related scientific literature).
 
 Each function provided here has a test suite that is used during the
 building of the package.  That means that results should match those of

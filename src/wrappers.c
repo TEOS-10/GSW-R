@@ -49,6 +49,8 @@ void wrap_gsw_alpha_on_beta(double *SA, double *CT, double *p, int *n, double *r
         rval[i] = gsw_alpha_on_beta(SA[i], CT[i], p[i]);
 }
 
+W31(wrap_gsw_alpha_wrt_t_exact, gsw_alpha_wrt_t_exact, SA, t, p, n, rval)
+
 void wrap_gsw_beta(double *SA, double *CT, double *p, int *n, double *rval)
 {
     extern double gsw_beta(double SA, double CT, double p);

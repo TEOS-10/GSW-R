@@ -136,6 +136,28 @@ gsw_alpha_on_beta <- function(SA, CT, p)
     rval
 }
 
+#' thermal expansion coefficient with respect to in-situ temperature
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param t in-situ temperature (ITS-90)  [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return thermal expansion coefficient with respect to in-situ temperature [ 1/K ]
+#' @examples
+#' gsw_alpha_wrt_t_exact(34.7118, 28.7856, 10) # 1e-3*0.325601747227247
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha_wrt_t_exact.html}
+gsw_alpha_wrt_t_exact<- function(SA, t, p)
+{
+    l <- argfix(list(SA=SA, t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_alpha_wrt_t_exact",
+               SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Conductivity from Practical Salinity
 #' 
 #' @param SP Practical Salinity (PSS-78) [ unitless ]

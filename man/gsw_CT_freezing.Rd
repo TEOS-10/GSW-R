@@ -17,12 +17,15 @@ gsw_CT_freezing(SA, p, saturation_fraction = 1)
 Conservative Temperature at freezing of seawater [ deg C ]. That is, the freezing temperature expressed in terms of Conservative Temperature (ITS-90).
 }
 \description{
-Conservative temperature freezing point
+Note: as of 2014-12-23, this corresponds to the Matlab function
+called \code{gsw_t_freezing_poly}. (The confusion arises from a
+mismatch in release version between the Matlab and C libraries.)
 }
 \examples{
-gsw_CT_freezing(34.7118, 10) # -1.899683776424096
+gsw_CT_freezing(34.7118, 10) # -1.899657519404743
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing_poly.html}
 }
 

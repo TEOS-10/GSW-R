@@ -4,6 +4,7 @@ export(
         gsw_adiabatic_lapse_rate_from_CT,
         gsw_alpha,
         gsw_alpha_on_beta,
+        gsw_alpha_wrt_t_exact,
         gsw_beta,
         gsw_C_from_SP,
         gsw_cp_t_exact,

@@ -17,12 +17,15 @@ gsw_t_freezing(SA, p, saturation_fraction = 1)
 in-situ freezing temperature (ITS-90) [ deg C ]
 }
 \description{
-Freezing temperature
+Note: as of 2014-12-23, this corresponds to the Matlab function
+called \code{gsw_t_freezing_poly}. (The confusion arises from a
+mismatch in release version between the Matlab and C libraries.)
 }
 \examples{
-gsw_t_freezing(34.7118, 10) # -1.902730710149803
+gsw_t_freezing(34.7118, 10) # -1.902704434299200
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_poly.html}
 }
 
