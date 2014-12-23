@@ -55,11 +55,8 @@ stopifnot(all.equal(cabbeling, 1e-4*c(0.086714418920643, 0.086896846102756,
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 p <- c(     10,      50,     125,     250,     600,    1000)
 saturation_fraction <- 1
-CT_freezing <- gsw_CT_freezing(SA,p,saturation_fraction)
-## stopifnot(all.equal(CT_freezing, c(-1.899683776424096, -1.940791867869104,
-##                                    -2.006240664432488, -2.092357761318778,
-##                                    -2.359300831770506, -2.677162675412748)))
-## values below are from gsw_CT_freezing_poly on website
+CT_freezing <- gsw_CT_freezing(SA, p, saturation_fraction)
+warning("gsw_CT_freezing() test values are from gsw_CT_freezing_poly()\n")
 stopifnot(all.equal(CT_freezing, c(-1.899657519404743, -1.940781208575193,
                                    -2.006256923078589, -2.092413889940425,
                                    -2.359438414203326, -2.677347349358548)))
@@ -188,12 +185,9 @@ SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 p <- c(      10,      50,     125,     250,     600,    1000)
 saturation_fraction <- 1
 tf <- gsw_t_freezing(SA, p, saturation_fraction)
-options(digits=14)
-print(data.frame(gsw=tf, expect=c(-1.902730710149803, -1.942908619287183, -2.006861069199743,
-                                  -2.090985086875259, -2.351293130342102, -2.660498762776720)))
-print("Cancelled gsw_t_freezing() test because it clearly fails:\n")
-#stopifnot(all.equal(tf, c(-1.902730710149803, -1.942908619287183, -2.006861069199743,
-#                          -2.090985086875259, -2.351293130342102, -2.660498762776720)))
+warning("gsw_t_freezing() test values are from gsw_t_freezing_poly()\n")
+stopifnot(all.equal(tf, c(-1.902704434299200, -1.942897945475226, -2.006877364578649,
+                          -2.091041391538033, -2.351431560178946, -2.660685237633709)))
 
 ## gsw_t_from_CT()
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)

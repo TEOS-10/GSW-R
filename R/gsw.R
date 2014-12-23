@@ -229,15 +229,20 @@ gsw_cabbeling <- function(SA, CT, p)
 }
 
 #' Conservative temperature freezing point
+#'
+#' Note: as of 2014-12-23, this corresponds to the Matlab function
+#' called \code{gsw_t_freezing_poly}. (The confusion arises from a
+#' mismatch in release version between the Matlab and C libraries.)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param p sea pressure [ dbar ]
 #' @param saturation_fraction saturation fraction of dissolved air in seawater
 #' @return Conservative Temperature at freezing of seawater [ deg C ]. That is, the freezing temperature expressed in terms of Conservative Temperature (ITS-90). 
 #' @examples 
-#' gsw_CT_freezing(34.7118, 10) # -1.899683776424096
+#' gsw_CT_freezing(34.7118, 10) # -1.899657519404743
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing_poly.html}
 gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
 {
     l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
@@ -664,15 +669,20 @@ gsw_SP_from_SA <- function(SA, p, longitude, latitude)
 }
 
 #' Freezing temperature
+#'
+#' Note: as of 2014-12-23, this corresponds to the Matlab function
+#' called \code{gsw_t_freezing_poly}. (The confusion arises from a
+#' mismatch in release version between the Matlab and C libraries.)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param p sea pressure [ dbar ]
 #' @param saturation_fraction saturation fraction of dissolved air in seawater
 #' @return in-situ freezing temperature (ITS-90) [ deg C ]
 #' @examples 
-#' gsw_t_freezing(34.7118, 10) # -1.902730710149803
+#' gsw_t_freezing(34.7118, 10) # -1.902704434299200
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_poly.html}
 gsw_t_freezing <- function(SA, p, saturation_fraction=1)
 {
     l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
