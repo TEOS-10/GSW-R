@@ -86,7 +86,8 @@ W3(wrap_gsw_SP_from_C, gsw_sp_from_c, C, t, p, n, rval)
 W4(wrap_gsw_SP_from_SA, gsw_sp_from_sa, SA, p, longitude, latitude, n, rval)
 W3(wrap_gsw_t_freezing, gsw_t_freezing, SA, p, saturation_fraction, n, rval)
 W3(wrap_gsw_t_from_CT, gsw_t_from_ct, SA, CT, p, n, rval)
-W2(wrap_gsw_z_from_p, gsw_z_from_p, p, latitude, n, rval)
+W3(wrap_gsw_thermobaric, gsw_thermobaric, SA, CT, p, n, rval)
+W2(wrap_gsw_z_from_p, gsw_z_from_p, p, lat, n, rval)
 
 // PART 3
 //

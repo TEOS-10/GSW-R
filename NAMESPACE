@@ -34,6 +34,7 @@ export(
         gsw_SP_from_SA, #
         gsw_t_freezing,
         gsw_t_from_CT,
+        gsw_thermobaric,
         gsw_Turner_Rsubrho,
         gsw_z_from_p)
 
