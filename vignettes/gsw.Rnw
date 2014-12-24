@@ -13,6 +13,7 @@
 \usepackage{titlesec}
 \usepackage{color}
 \usepackage{natbib}
+\usepackage{xspace}
 \bibliographystyle{gsw}
 
 \makeindex
@@ -37,11 +38,12 @@
 \newcommand{\di}[1]{#1\index{#1}}
 \newcommand{\fixme}[1]{\textbf{$<$ #1 $>$}}
 
-\newcommand\code[1]{\texttt{#1}}
-\newcommand\oce{\texttt{oce}}
-\newcommand\gsw{\texttt{gsw}}
-\newcommand\UNESCO{\texttt{UNESCO-80}}
-\newcommand\TEOS{\texttt{TEOS-10}}
+
+\newcommand\code[1]{\texttt{#1}\xspace}
+\newcommand\oce{\texttt{oce}\xspace}
+\newcommand\gsw{\texttt{gsw}\xspace}
+\newcommand\UNESCO{\texttt{UNESCO-80}\xspace}
+\newcommand\TEOS{\texttt{TEOS-10}\xspace}
 
 \newcommand{\workedexercise}[2]{
 	\vspace{2ex plus 2ex minus 1ex}
@@ -73,32 +75,45 @@
 
 \end{abstract}
 
-\gsw\/ provides an R interface to Gibbs Seawater (GSW) portion of the TEOS-10
-library \cite[see
-e.g.][]{graham2013qtnp,ioc2010tite,mcdougall2011gswt,spall2013e,wright2011asds}
-for use by the \oce\/ package \cite[]{kelley2014oaoo}.  The functions are linked
-with the C version of the TEOS-10 library, but the interface (i.e. the function
-names and the argument lists) match the Matlab implementation.  The
-documentation of the functions provided here focuses on the arguments and return
-value, with links to the TEOS-10 webpages yielding fuller details.
- 
-See \url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html} for a list of
-the TEOS-10 functions, and links therein for more information on the functions,
-including references to more detailed software manuals and also to the growing
-scientific literature.
+\section{Introduction}
 
-Each function provided within \gsw\/ has a test suite that is used during the
-building of the package.  That means that results should match those of the
-equivalent Matlab functions to 8 or more significant digits. And, importantly,
-it means that the functions cannot drift from these tested values, for if they
-did, the package would fail to build and thus could not be hosted on CRAN.
+The \gsw package is an R interface to the Gibbs Seawater (GSW) portion of the
+TEOS-10 library \cite[see
+e.g.][]{graham2013qtnp,ioc2010tite,mcdougall2011gswt,spall2013e,wright2011asds}
+for use in calculations of the properties of seawater. Although it can be used
+by itself, it was first devised to support the \oce package for oceanographic
+analysis \cite[]{kelley2014oaoo}.  
+
+It is assumed that readers of this vignette are familiar with TEOS-10, and with
+oceanographic processing in general.  The general \TEOS
+website\footnote{\url{http://www.teos-10.org}} provides an entry to the growing
+literature on \TEOS, along with extensive manuals on the use of the Gibbs
+Seawater
+library\footnote{\url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html}}.
+
+The foundation of \gsw is a connection to the C version of the Gibbs Seawater
+library.  This has the advantage of yielding high processing speed, although an
+equally important factor in this choice was that it was judged less error-prone
+than rewriting the library directly in the R language.  Another measure taken to
+reduce coding errors is the incorporation into \gsw of the check values that are
+provided in the \TEOS documentation. These check values are examined during the
+process of building \gsw, and since no package that fails tests is permitted on
+CRAN\footnote{\url{http://cran.r-project.org}}, users can have a high assurance
+that the software is working as it should.
+
+The documentation provided in \gsw is minimal, amounting mainly to an
+explanation of function arguments and the return value, plus a link to the
+fuller documentation provided on the \TEOS website. Since R tests for
+code-documentation agreement on function arguments, and since a pointer is
+provided to the official documentation for details, users can have a high
+assurance that the documentation is correct.
 
 \section{Development status}
  
 As of late 2014, the package is still in development, with about half of the
-common functions having been coded. All functions needed by the \oce\/ package
-are working, however, and the development version of \oce\/ now prefers to use
-the present package for calculations, if it is installed.
+common functions having been coded. All functions needed by the \oce package are
+working, however, and the development version of \oce now prefers to use the
+present package for calculations, if it is installed.
 
 \section{Using gsw independent of oce}
 
@@ -124,6 +139,19 @@ CT
 
 \section{Using gsw within oce}
 
+\begin{figure}[t]
+    \begin{center}
+        \includegraphics[width=0.49\hsize]{TS_unesco}
+        \includegraphics[width=0.49\hsize]{TS_gsw}
+    \end{center}
+    \caption{\label{figure:TS}Hydrographic diagram of a CTD cast made in
+    roughly 4\,km of water, south of Cape Cod. Left: using the \UNESCO
+    formulation; right: using the \TEOS formulation.}
+\end{figure}
+
+The \gsw package is automatically loaded by \oce, so there is no need for a
+\code{library(gsw)} call.
+
 Many \oce plotting functions have an argument named \code{eos} that can be set
 to the string \code{"unesco"} to get the older seawater formulation, or to
 either \code{"gsw"} or \code{"teos"} to get the newer one. For example, the data
@@ -134,7 +162,7 @@ water) can be plotted as follows (yielding the left-hand panel of
 Figure~\ref{figure:TS}).
 
 <<echo=false, results=hide>>=
-pdf('TS_unesco.pdf', pointsize=13)
+pdf('TS_unesco.pdf', pointsize=18)
 @
 <<>>=
 library(oce)
@@ -144,7 +172,7 @@ plotTS(ctd)
 @
 <<echo=false, results=hide>>=
 dev.off()
-pdf('TS_gsw.pdf', pointsize=13)
+pdf('TS_gsw.pdf', pointsize=18)
 @
 To see the difference if TEOS-10 is used, simply supply the equation of state as
 \code{gsw} or \code{teos} (right-hand panel of Figure~\ref{figure:TS}):
@@ -155,54 +183,51 @@ plotTS(ctd, eos="teos")
 dev.off()
 @
 
-\begin{figure}[h!]
-    \begin{center}
-        \includegraphics[width=0.49\hsize]{TS_unesco}
-        \includegraphics[width=0.49\hsize]{TS_gsw}
-    \end{center}
-    \caption{\label{figure:TS}Hydrographic diagram of a CTD cast made in
-    roughly 4\,km of water, south of Cape Cod. Left: using the \UNESCO\/
-    formulation; right: using the \TEOS\/ formulation.}
-\end{figure}
-
-In addition to special plotting features, most of the objects within \oce\/ have
-accessors that can return temperature and salinity in either the \UNESCO\/ or
-\TEOS\/ scheme. For example, the ratio of the \TEOS\/ quantity called
-Conservative Temperature (``CT'' in the \TEOS\/ notation) to \UNESCO-formulated
-potential temperature ($\theta$ in \UNESCO\/ notation) for all the CTD profiles
-in the cross-Atlantic sampling stored in the \oce\/ object called \code{section}
-is constructed as follows (left panel of Figure~\ref{figure:comparision}).
-<<echo=false, results=hide>>=
-pdf('temperature_comparison.pdf', pointsize=17)
-@
-<<>>=
-hist(section[["theta"]]/section[["CT"]])
-@
-while the corresponding panel comparing \UNESCO\/ Practical Salinity to \TEOS\/
-Absolute Salinity is constructed with
-<<echo=false, results=hide>>=
-dev.off()
-pdf('salinity_comparison.pdf', pointsize=17)
-@
-<<>>=
-hist(section[["salinity"]]/section[["SA"]])
-@
-<<echo=false, results=hide>>=
-dev.off()
-@
-
-\begin{figure}[h!]
+\begin{figure}[t]
     \begin{center}
         \includegraphics[width=0.49\hsize]{temperature_comparison}
         \includegraphics[width=0.49\hsize]{salinity_comparison}
     \end{center}
-    \caption{\label{figure:comparison}Histograms comparing \UNESCO\/ and \TEOS\/
+    \caption{\label{figure:comparison}Histograms comparing \UNESCO and \TEOS
     formulations for a CTD section crossing the Atlantic at 36$^\circ$N.}
 \end{figure}
+In addition to special plotting features, most of the objects within \oce have
+accessors that can return temperature and salinity in either the \UNESCO or
+\TEOS scheme. For example, the ratio of the \TEOS quantity called
+Conservative Temperature (``CT'' in the \TEOS notation) to \UNESCO-formulated
+potential temperature ($\theta$ in \UNESCO notation) for all the CTD profiles
+in the cross-Atlantic sampling stored in the \oce object called \code{section}
+is constructed as follows (left panel of Figure~\ref{figure:comparison}).
+<<echo=false, results=hide>>=
+pdf('temperature_comparison.pdf', pointsize=18)
+@
+<<>>=
+hist(section[["theta"]] / section[["CT"]], main="Atlantic 36N")
+@
+while the corresponding panel comparing \UNESCO Practical Salinity to \TEOS
+Absolute Salinity is constructed with
+<<echo=false, results=hide>>=
+dev.off()
+pdf('salinity_comparison.pdf', pointsize=18)
+@
+<<>>=
+hist(section[["salinity"]] / section[["SA"]], main="Atlantic 36N")
+@
+<<echo=false, results=hide>>=
+dev.off()
+@
 
-\vfill\eject
+<<>>=
+library(oce)
+data("levitus", package="ocedata")
+SA <- gsw_SA_from_SP(levitus$SSS, 0, levitus$longitude, levitus$latitude)
+imagep(levitus$longitude, levitus$latitude, SA)
+imagep(levitus$longitude, levitus$latitude, SA-levitus$SSS)
+@
+
 \bibliography{gsw}
 
 \printindex
 
 \end{document}
+

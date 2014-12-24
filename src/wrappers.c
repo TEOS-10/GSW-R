@@ -2,7 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <R.h>
+#include <Rdefines.h>
 #include "gswteos-10.h"
+
+//GSW_INVALID_VALUE	
 
 // PART 1: macros for wrappers
 //
@@ -12,15 +16,36 @@
 // for the handling of C library functions that return void.
 #define W2(wname, cname, arg1, arg2, n, rval) \
 void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval))\
-{ for (int i=0; i < *(n); i++) (rval)[i] = (cname)((arg1)[i], (arg2)[i]); }
+{\
+    for (int i=0; i < *(n); i++) {\
+        (rval)[i] = (cname)((arg1)[i], (arg2)[i]);\
+        if ((rval)[i] == GSW_INVALID_VALUE) {\
+            (rval)[i] = NA_REAL;\
+        }\
+    }\
+}
 
 #define W3(wname, cname, arg1, arg2, arg3, n, rval) \
 void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(rval))\
-{ for (int i=0; i < *(n); i++) (rval)[i] = (cname)((arg1)[i], (arg2)[i], (arg3)[i]); }
+{\
+    for (int i=0; i < *(n); i++) {\
+        (rval)[i] = (cname)((arg1)[i], (arg2)[i], (arg3)[i]);\
+        if ((rval)[i] == GSW_INVALID_VALUE) {\
+            (rval)[i] = NA_REAL;\
+        }\
+    }\
+}
 
 #define W4(wname, cname, arg1, arg2, arg3, arg4, n, rval) \
 void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), int *(n), double *(rval))\
-{ for (int i=0; i < *(n); i++) (rval)[i] = (cname)((arg1)[i], (arg2)[i], (arg3)[i], (arg4)[i]); }
+{\
+    for (int i=0; i < *(n); i++) {\
+        (rval)[i] = (cname)((arg1)[i], (arg2)[i], (arg3)[i], (arg4)[i]);\
+        if ((rval)[i] == GSW_INVALID_VALUE) {\
+            (rval)[i] = NA_REAL;\
+        }\
+    }\
+}
 
 // PART 2: wrappers for functions that return a value. Wrapping is necessary 
 // because the R function .C() cannot handle return values.

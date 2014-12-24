@@ -1,4 +1,7 @@
 css
+Sweave.sty
+vignettes/gsw.bbl
+vignettes/gsw.blg
 _layouts
 _site
 src-i386
