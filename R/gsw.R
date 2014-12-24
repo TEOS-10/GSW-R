@@ -204,6 +204,28 @@ gsw_beta <- function(SA, CT, p)
     rval
 }
 
+#' saline contraction coefficient at constant in-situ temperature
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param t in-situ temperature (ITS-90) [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return saline contraction coefficient at constant in-situ temperature [ kg/g ]
+#' @examples
+#' gsw_beta_const_t_exact(34.7118, 28.7856, 10) # 7.31120837010429e-4
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta_const_t_exact.html}
+gsw_beta_const_t_exact <- function(SA, t, p)
+{
+    l <- argfix(list(SA=SA, t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_beta_const_t_exact",
+               SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Isobaric heat capacity
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
@@ -312,6 +334,48 @@ gsw_CT_from_t <- function(SA, t, p)
     l <- argfix(list(SA=SA, t=t, p=p))
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_CT_from_t",
+               SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' Specific enthalpy of seawater (48-term equation)
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @examples 
+#' gsw_enthalpy(34.7118, 28.8099, 10) # 1.1510318130700132e5
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
+gsw_enthalpy <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_enthalpy",
+               SA=as.double(l$SA), t=as.double(l$CT), p=as.double(l$p),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' Specific enthalpy of seawater
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param t in-situ temperature (ITS-90)  [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @examples 
+#' gsw_enthalpy_t_exact(34.7118, 28.7856, 10) # 1.151032604783763e5
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_t_exact.html}
+gsw_enthalpy_t_exact <- function(SA, t, p)
+{
+    l <- argfix(list(SA=SA, t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_enthalpy_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
                n=n, rval=double(n))$rval
     if (is.matrix(SA))
