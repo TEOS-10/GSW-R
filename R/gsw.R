@@ -510,6 +510,15 @@ gsw_rho_t_exact <- function(SA, t, p)
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
 gsw_SA_from_SP <- function(SP, p, longitude, latitude)
 {
+    ## check for special case that SP is a matrix defined on lon and lat
+    if (is.matrix(SP)) {
+        dim <- dim(SP)
+        if (length(longitude) == dim[1] && length(latitude) == dim[2]) {
+            ll <- expand.grid(longitude=as.vector(longitude), latitude=as.vector(latitude))
+            longitude <- ll$longitude
+            latitude <- ll$latitude
+        }
+    }
     l <- argfix(list(SP=SP, p=p, longitude=longitude, latitude=latitude))
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_SA_from_SP",
@@ -766,6 +775,15 @@ gsw_SP_from_C <- function(C, t, p)
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SA.html}
 gsw_SP_from_SA <- function(SA, p, longitude, latitude)
 {
+    ## check for special case that SP is a matrix defined on lon and lat
+    if (is.matrix(SP)) {
+        dim <- dim(SP)
+        if (length(longitude) == dim[1] && length(latitude) == dim[2]) {
+            ll <- expand.grid(longitude=as.vector(longitude), latitude=as.vector(latitude))
+            longitude <- ll$longitude
+            latitude <- ll$latitude
+        }
+    }
     l <- argfix(list(SA=SA, p=p, longitude=longitude, latitude=latitude))
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_SP_from_SA",
