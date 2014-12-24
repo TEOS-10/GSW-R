@@ -706,6 +706,28 @@ gsw_specvol  <- function(SA, CT, p)
     1 / gsw_rho(SA, CT, p)
 }
 
+#' Specific volume anomaly
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return Specific volume anomaly [ m^3/kg ]
+#' @examples 
+#' gsw_specvol_anom(34.7118, 28.8099, 10) # 6.01005694856401e-6
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_anom.html}
+gsw_specvol_anom  <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_specvol_anom",
+               SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+               n=n, rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Convert from conductivity to practical salinity
 #' 
 #' @param C conductivity [ mS/cm ]
