@@ -141,8 +141,8 @@ CT
 
 \begin{figure}[t]
     \begin{center}
-        \includegraphics[width=0.49\hsize]{TS_unesco}
-        \includegraphics[width=0.49\hsize]{TS_gsw}
+        \includegraphics[width=0.4\hsize]{TS_unesco}
+        \includegraphics[width=0.4\hsize]{TS_gsw}
     \end{center}
     \caption{\label{figure:TS}Hydrographic diagram of a CTD cast made in
     roughly 4\,km of water, south of Cape Cod. Left: using the \UNESCO
@@ -199,7 +199,7 @@ potential temperature ($\theta$ in \UNESCO notation) for all the CTD profiles
 in the cross-Atlantic sampling stored in the \oce object called \code{section}
 is constructed as follows (left panel of Figure~\ref{figure:comparison}).
 <<echo=false, results=hide>>=
-pdf('temperature_comparison.pdf', pointsize=18)
+pdf('temperature_comparison.pdf', height=5, pointsize=16)
 @
 <<>>=
 hist(section[["theta"]] / section[["CT"]], main="Atlantic 36N")
@@ -208,7 +208,7 @@ while the corresponding panel comparing \UNESCO Practical Salinity to \TEOS
 Absolute Salinity is constructed with
 <<echo=false, results=hide>>=
 dev.off()
-pdf('salinity_comparison.pdf', pointsize=18)
+pdf('salinity_comparison.pdf', height=5, pointsize=16)
 @
 <<>>=
 hist(section[["salinity"]] / section[["SA"]], main="Atlantic 36N")
@@ -217,12 +217,35 @@ hist(section[["salinity"]] / section[["SA"]], main="Atlantic 36N")
 dev.off()
 @
 
+\begin{figure}[t]
+    \begin{center}
+        \includegraphics[width=.7\hsize]{SSS_1}
+        \includegraphics[width=.7\hsize]{SSS_2}
+    \end{center}
+    \caption{\label{figure:SSS}Sea surface Absolute Salinity (top) and
+    difference between this an Practical Salinity (bottom).}
+\end{figure}
+
+
+Another way to compare \UNESCO and \TEOS values is with a map.
+Figure~\ref{figure:SSS} show an example, with the top panel being Absolute
+Salinity and the bottom one the difference between this and Practical Salinity.
+
+<<echo=false, results=hide>>=
+png('SSS_%d.pdf', width=7, height=4, unit="in", res=150, pointsize=9)
+@
 <<>>=
 library(oce)
 data("levitus", package="ocedata")
-SA <- gsw_SA_from_SP(levitus$SSS, 0, levitus$longitude, levitus$latitude)
+SSS <- levitus$SSS
+dim <- dim(SSS)
+ll <- expand.grid(lon=levitus$longitude, lat=levitus$latitude)
+SA <- gsw_SA_from_SP(levitus$SSS, 0, ll$lon, ll$lat)
 imagep(levitus$longitude, levitus$latitude, SA)
 imagep(levitus$longitude, levitus$latitude, SA-levitus$SSS)
+@
+<<echo=false, results=hide>>=
+dev.off()
 @
 
 \bibliography{gsw}
