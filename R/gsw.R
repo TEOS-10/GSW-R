@@ -397,6 +397,9 @@ gsw_enthalpy_t_exact <- function(SA, t, p)
 
 #' Specific entropy as a function of in-situ temperature and pressure
 #'
+#' Calculates specific entropy given Absolute Salinity, in-situ
+#' temperature and pressure.
+#'
 #' The related function gsw_entropy_from_CT() is not provided
 #' in the C library, although it is available in the (later-
 #' versioned) Matlab library.
