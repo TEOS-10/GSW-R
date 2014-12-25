@@ -756,6 +756,28 @@ gsw_specvol_anom  <- function(SA, CT, p)
     rval
 }
 
+#' Specific volume
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param t in-situ temperature (ITS-90)  [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return Specific volume [ m^3/kg ]
+#' @examples 
+#' gsw_specvol_t_exact(34.7118, 28.7856, 10) # 9.78626625025472e-4
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_t_exact.html}
+gsw_specvol_t_exact  <- function(SA, t, p)
+{
+    l <- argfix(list(SA=SA, t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_specvol_t_exact",
+               SA=as.double(l$SA), CT=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Convert from conductivity to practical salinity
 #' 
 #' @param C conductivity [ mS/cm ]

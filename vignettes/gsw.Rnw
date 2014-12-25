@@ -231,10 +231,12 @@ Another way to compare \UNESCO and \TEOS values is with a map.
 Figure~\ref{figure:SSS} show an example, with the top panel being Absolute
 Salinity and the bottom one the difference between this and Practical Salinity.
 
-<<echo=false, results=hide>>=
-png('SSS_%d.pdf', width=7, height=4, unit="in", res=150, pointsize=9)
-@
-<<>>=
+% Next causes build problems so just run it manually and
+% add the PNG to the package.
+% <<echo=false, results=hide>>=
+% png('SSS_%d.png', width=7, height=4, unit="in", res=150, pointsize=9)
+% @
+<<eval=false>>=
 library(oce)
 library(ocedata)
 data("levitus", package="ocedata")
@@ -245,9 +247,9 @@ SA <- gsw_SA_from_SP(levitus$SSS, 0, ll$lon, ll$lat)
 imagep(levitus$longitude, levitus$latitude, SA)
 imagep(levitus$longitude, levitus$latitude, SA-levitus$SSS)
 @
-<<echo=false, results=hide>>=
-dev.off()
-@
+%<<echo=false, results=hide>>=
+%dev.off()
+%@
 
 \bibliography{gsw}
 
