@@ -776,8 +776,8 @@ gsw_SP_from_C <- function(C, t, p)
 gsw_SP_from_SA <- function(SA, p, longitude, latitude)
 {
     ## check for special case that SP is a matrix defined on lon and lat
-    if (is.matrix(SP)) {
-        dim <- dim(SP)
+    if (is.matrix(SA)) {
+        dim <- dim(SA)
         if (length(longitude) == dim[1] && length(latitude) == dim[2]) {
             ll <- expand.grid(longitude=as.vector(longitude), latitude=as.vector(latitude))
             longitude <- ll$longitude
