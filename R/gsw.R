@@ -395,6 +395,32 @@ gsw_enthalpy_t_exact <- function(SA, t, p)
     rval
 }
 
+#' Specific entropy as a function of Conservative Temperature
+#'
+#' The related function gsw_entropy_from_CT() is not provided
+#' in the C library, although it is available in the (later-
+#' versioned) Matlab library.
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param t in-situ temperature (ITS-90) [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return specific entropy [ J/(kg*K) ]
+#' @examples
+#' gsw_entropy_from_t(34.7118, 28.7856, 10) # 400.3894252787245
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_from_t.html}
+gsw_entropy_from_t <- function(SA, t, p)
+{
+    l <- argfix(list(SA=SA, t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_entropy_from_t",
+               SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Gravitational acceleration
 #' 
 #' @param latitude latitude in decimal degress north [ -90 ... +90 ]

@@ -15,6 +15,7 @@ export(
         gsw_CT_from_t,
         gsw_enthalpy,
         gsw_enthalpy_t_exact,
+        gsw_entropy_from_t,
         gsw_grav,
         gsw_Nsquared,
         gsw_pot_rho_t_exact,
