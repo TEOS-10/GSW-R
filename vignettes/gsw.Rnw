@@ -244,8 +244,8 @@ SSS <- levitus$SSS
 dim <- dim(SSS)
 ll <- expand.grid(lon=levitus$longitude, lat=levitus$latitude)
 SA <- gsw_SA_from_SP(levitus$SSS, 0, ll$lon, ll$lat)
-imagep(levitus$longitude, levitus$latitude, SA)
-imagep(levitus$longitude, levitus$latitude, SA-levitus$SSS)
+imagep(levitus$longitude, levitus$latitude, SA, col=oceColorsJet)
+imagep(levitus$longitude, levitus$latitude, SA-levitus$SSS, col=oceColorsJet)
 @
 %<<echo=false, results=hide>>=
 %dev.off()
