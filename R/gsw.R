@@ -510,6 +510,27 @@ gsw_rho_t_exact <- function(SA, t, p)
     rval
 }
 
+#' Convert from density to absolute salinity
+#'
+#' @param rho seawater density [ kg/m^3 ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @examples
+#' gsw_SA_from_rho(1021.8482, 28.7856, 10) # 34.711382887931144
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_rho.html}
+gsw_SA_from_rho <- function(rho, CT, p)
+{
+    l <- argfix(list(rho=rho, CT=CT, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_SA_from_rho",
+               SA=as.double(l$rho), CT=as.double(l$CT), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(rho))
+        dim(rval) <- dim(rho)
+    rval
+}
+
 #' Convert from practical salinity to absolute salinity
 #'
 #' Calculate Absolute Salinity from Practical Salinity, pressure,
@@ -541,7 +562,7 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
     l <- argfix(list(SP=SP, p=p, longitude=longitude, latitude=latitude))
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_SA_from_SP",
-               SA=as.double(l$SP), p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
+               SP=as.double(l$SP), p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
                n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
     if (is.matrix(SP))
         dim(rval) <- dim(SP)

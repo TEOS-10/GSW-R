@@ -20,6 +20,7 @@ export(
         gsw_pot_rho_t_exact,
         gsw_rho,
         gsw_rho_t_exact,
+        gsw_SA_from_rho,
         gsw_SA_from_SP,
         gsw_sigma0,
         gsw_sigma1,
