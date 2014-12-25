@@ -16,7 +16,13 @@ gsw_SA_from_SP(SP, p, longitude, latitude)
 \item{latitude}{latitude in decimal degrees [ -90 to 90 ]}
 }
 \description{
-Convert from practical salinity to absolute salinity
+Calculate Absolute Salinity from Practical Salinity, pressure,
+longitude, and latitude.
+}
+\details{
+If SP is a matrix and if its dimensions correspond to the
+lengths of longitude and latitude, then the latter are
+converted to analogous matrices with \code{\link{expand.grid}}.
 }
 \examples{
 gsw_SA_from_SP(34.5487, 10, 188, 4) # 34.711778344814114

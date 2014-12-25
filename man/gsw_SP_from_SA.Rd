@@ -19,6 +19,14 @@ gsw_SP_from_SA(SA, p, longitude, latitude)
 Practical salinity.
 }
 \description{
+Calculate Practical Salinity from Absolute Salinity, pressure,
+longitude, and latitude.
+}
+\details{
+If SP is a matrix and if its dimensions correspond to the
+lengths of longitude and latitude, then the latter are
+converted to analogous matrices with \code{\link{expand.grid}}.
+
 Note: unlike the corresponding Matlab function, this does not
 return a flag indicating whether the location is in the ocean.
 }

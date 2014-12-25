@@ -22,11 +22,23 @@
 #' software manuals and also to the related scientific literature).
 #'
 #' Each function provided here has a test suite that is used during the
-#' building of the package.  That means that results should match those of
+#' building of the package. That means that results should match those of
 #' the equivalent Matlab functions to 8 or more significant digits. And,
 #' importantly, it means that the functions cannot drift from these
 #' tested values, for if they did, the package would fail to build and
 #' thus could not be hosted on CRAN.
+#'
+#' The underlying C code works on vectors, so each of the R functions
+#' in gsw starts by transforming its arguments accordingly.  Generally,
+#' this means first using \code{\link{rep}} on each argument to get something
+#' with length matching the first argument, and, after the computation
+#' is complete, converting the return value into a matrix, if the first
+#' argument was a matrix. There are some exceptions to this, however.
+#' For example, both \code{\link{gsw_SA_from_SP}} and 
+#' \code{\link{gsw_SP_from_SA}} can handle the case in which the first
+#' argument is a matrix and arguments \code{longitude} and \code{latitude}
+#' are vectors sized to match that matrix. This can be handy with 
+#' gridded datasets.
 #'
 #' As of late 2014, the package is still in an early stage of development,
 #' with only about a third of the common functions having been coded. All
@@ -499,6 +511,13 @@ gsw_rho_t_exact <- function(SA, t, p)
 }
 
 #' Convert from practical salinity to absolute salinity
+#'
+#' Calculate Absolute Salinity from Practical Salinity, pressure,
+#' longitude, and latitude.
+#'
+#' If SP is a matrix and if its dimensions correspond to the
+#' lengths of longitude and latitude, then the latter are
+#' converted to analogous matrices with \code{\link{expand.grid}}.
 #' 
 #' @param SP Practical Salinity (PSS-78) [ unitless ]
 #' @param p sea pressure [ dbar ]
@@ -760,6 +779,13 @@ gsw_SP_from_C <- function(C, t, p)
 }
 
 #' Convert from Absolute Salinity to Practical Salinity
+#'
+#' Calculate Practical Salinity from Absolute Salinity, pressure,
+#' longitude, and latitude.
+#'
+#' If SP is a matrix and if its dimensions correspond to the
+#' lengths of longitude and latitude, then the latter are
+#' converted to analogous matrices with \code{\link{expand.grid}}.
 #'
 #' Note: unlike the corresponding Matlab function, this does not
 #' return a flag indicating whether the location is in the ocean.

@@ -236,6 +236,7 @@ png('SSS_%d.pdf', width=7, height=4, unit="in", res=150, pointsize=9)
 @
 <<>>=
 library(oce)
+library(ocedata)
 data("levitus", package="ocedata")
 SSS <- levitus$SSS
 dim <- dim(SSS)
