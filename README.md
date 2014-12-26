@@ -1,7 +1,7 @@
 gsw is an R package that provides a connection to the thermodynamic equation of
 seawater version 3.03, downloaded from [teos-10.org](http://www.teos-10.org) on
-2014-08-25. This package is still in development, with about 2/3 of the TEOS-10
-functions being provided to date. 
+2014-08-25. This package is still in development, with about 70 percent of the
+TEOS-10 functions being provided to date. 
 
 All the functions provided here reproduce [teos-10.org](http://www.teos-10.org)
 test values to within about 13 digits. (The tests are part of the
