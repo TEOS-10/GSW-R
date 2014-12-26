@@ -1,9 +1,16 @@
 % vim: spell tw=80 shiftwidth=4 softtabstop=4 expandtab
 
+% NOTE: to avoid circular dependency in packages, this cannot use either 
+% the oce or ocedata package.  That's why the <<>>= blocks are not
+% evaluated.  However, there are still some commented-out blocks
+% before these, that set up and end PDF and PNG devices. The idea of
+% that is to provide a skeleton for creation of the various PDF and
+% PNG files used in this vignette.  These PDF and PNG files are
+% in the git repository and they get built into the package.
+
 \documentclass{article}
 
 % \VignetteIndexEntry{Introduction to gsw}
-% \VignetteDepends{gsw}
 % \VignetteKeyword{oceanography}
 
 \usepackage{url}
@@ -161,27 +168,27 @@ North Atlantic. Individual casts may be selected by index, so for example a
 water) can be plotted as follows (yielding the left-hand panel of
 Figure~\ref{figure:TS}).
 
-<<echo=false, results=hide>>=
-pdf('TS_unesco.pdf', pointsize=18)
-@
-<<>>=
+% <<echo=false, results=hide>>=
+% pdf('TS_unesco.pdf', pointsize=18)
+% @
+<<eval=false>>=
 library(oce)
 data(section)
 ctd <- section[["station", 100]]
 plotTS(ctd)
 @
-<<echo=false, results=hide>>=
-dev.off()
-pdf('TS_gsw.pdf', pointsize=18)
-@
+% <<echo=false, results=hide>>=
+% dev.off()
+% pdf('TS_gsw.pdf', pointsize=18)
+% @
 To see the difference if TEOS-10 is used, simply supply the equation of state as
 \code{gsw} or \code{teos} (right-hand panel of Figure~\ref{figure:TS}):
-<<>>=
+<<eval=false>>=
 plotTS(ctd, eos="teos")
 @
-<<echo=false, results=hide>>=
-dev.off()
-@
+% <<echo=false, results=hide>>=
+% dev.off()
+% @
 
 \begin{figure}[t]
     \begin{center}
@@ -198,24 +205,25 @@ Conservative Temperature (``CT'' in the \TEOS notation) to \UNESCO-formulated
 potential temperature ($\theta$ in \UNESCO notation) for all the CTD profiles
 in the cross-Atlantic sampling stored in the \oce object called \code{section}
 is constructed as follows (left panel of Figure~\ref{figure:comparison}).
-<<echo=false, results=hide>>=
-pdf('temperature_comparison.pdf', height=5, pointsize=16)
-@
-<<>>=
+% <<echo=false, results=hide>>=
+% pdf('temperature_comparison.pdf', height=5, pointsize=16)
+% @
+<<eval=false>>=
+data(section)
 hist(section[["theta"]] / section[["CT"]], main="Atlantic 36N")
 @
 while the corresponding panel comparing \UNESCO Practical Salinity to \TEOS
 Absolute Salinity is constructed with
-<<echo=false, results=hide>>=
-dev.off()
-pdf('salinity_comparison.pdf', height=5, pointsize=16)
-@
-<<>>=
+% <<echo=false, results=hide>>=
+% dev.off()
+% pdf('salinity_comparison.pdf', height=5, pointsize=16)
+% @
+<<eval=false>>=
 hist(section[["salinity"]] / section[["SA"]], main="Atlantic 36N")
 @
-<<echo=false, results=hide>>=
-dev.off()
-@
+% <<echo=false, results=hide>>=
+% dev.off()
+% @
 
 \begin{figure}[t]
     \begin{center}

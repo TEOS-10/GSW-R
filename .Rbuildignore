@@ -1,5 +1,5 @@
-css
 Sweave.sty
+vignettes/.build.timestamp
 vignettes/gsw.bbl
 vignettes/gsw.blg
 _layouts
@@ -10,7 +10,6 @@ README.rst
 .Rhistory
 .gitignore
 inst/doc/.gitignore
-vignettes/.build.timestamp
 ^.*\.Rproj$
 ^\.Rproj\.user$
 src/*.o$
