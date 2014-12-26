@@ -353,6 +353,29 @@ gsw_CT_from_t <- function(SA, t, p)
     rval
 }
 
+#' Absolute Salinity Anomaly from Practical Salinity
+#' 
+#' @param SP Practical Salinity  (PSS-78) [ unitless ]
+#' @param p sea pressure [ dbar ]
+#' @param longitude longitude in decimal degrees [ 0 ... +360 ] or [ -180 ... +180 ]
+#' @param latitude latitude in decimal degrees north [ -90 ... +90 ]
+#' @examples 
+#' gsw_deltaSA_from_SP(34.7118, 10, 188, 4) # 0.000167203365230
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_deltaSA_from_SP.html}
+gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
+{
+    l <- argfix(list(SP=SP, p=p, longitude=longitude, latitude=latitude))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_deltaSA_from_SP",
+               SP=as.double(l$SP), p=as.double(l$p),
+               longitude=as.double(l$longitude), latitude=as.double(l$latitude),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SP))
+        dim(rval) <- dim(SP)
+    rval
+}
+
 #' Specific enthalpy of seawater (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]

@@ -13,6 +13,7 @@ export(
         gsw_CT_freezing,
         gsw_CT_from_pt,
         gsw_CT_from_t,
+        gsw_deltaSA_from_SP,
         gsw_enthalpy,
         gsw_enthalpy_t_exact,
         gsw_entropy_from_t,

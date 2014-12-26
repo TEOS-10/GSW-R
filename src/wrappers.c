@@ -67,6 +67,7 @@ W3(wrap_gsw_CT_freezing, gsw_ct_freezing, SA, p, saturation_fraction, n, rval)
 W2(wrap_gsw_CT_from_pt, gsw_ct_from_pt, SA, pt, n, rval)
 W3(wrap_gsw_cp_t_exact, gsw_cp_t_exact, SA, t, p, n, rval)
 W3(wrap_gsw_CT_from_t, gsw_ct_from_t, SA, t, p, n, rval)
+W4(wrap_gsw_deltaSA_from_SP, gsw_deltasa_from_sp, SP, p, longitude, latitude, n, rval)
 W3(wrap_gsw_enthalpy, gsw_enthalpy, SA, CT, p, n, rval)
 W3(wrap_gsw_enthalpy_t_exact, gsw_enthalpy_t_exact, SA, t, p, n, rval)
 // gsw_entropy_from_CT is not in the C library.
