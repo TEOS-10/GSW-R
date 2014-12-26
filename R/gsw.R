@@ -495,6 +495,74 @@ gsw_pot_rho_t_exact <- function(SA, t, p, p_ref)
     rval
 }
 
+#' potential temperature referenced to the surface
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param t in-situ temperature (ITS-90) [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return potential temperature [ deg C ]
+#' @examples
+#' gsw_pt0_from_t(34.7118, 28.7856, 10) # 28.783196819670632
+#' @seealso \code{\link{gsw_pt_from_CT}} and \code{\link{gsw_pt_from_t}}
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt0_from_t.html}
+gsw_pt0_from_t <- function(SA, t, p)
+{
+    l <- argfix(list(SA=SA, t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_pt0_from_t",
+               SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' potential temperature from Conservative Temperature
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @return potential temperature [ deg C ]
+#' @examples
+#' gsw_pt_from_CT(34.7118, 28.8099) # 28.783177048624573 
+#' @seealso \code{\link{gsw_pt0_from_t}} and \code{\link{gsw_pt_from_t}}
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_CT.html}
+gsw_pt_from_CT <- function(SA, CT)
+{
+    l <- argfix(list(SA=SA, CT=CT))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_pt_from_CT",
+               SA=as.double(l$SA), t=as.double(l$CT),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' potential temperature from in-situ temperature
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param t in-situ temperature (ITS-90)  [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @param p_ref reference pressure [ dbar ]
+#' @examples
+#' gsw_pt_from_t(34.7118, 28.7856, 10, 0) # 28.783196819670632
+#' @seealso \code{\link{gsw_pt0_from_t}} and \code{\link{gsw_pt_from_CT}}
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_t.html}
+gsw_pt_from_t <- function(SA, t, p, p_ref)
+{
+    l <- argfix(list(SA=SA, t=t, p=p, p_ref=p_ref))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_pt_from_t",
+               SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p), p_ref=as.double(l$p_ref),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' in-situ density (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
