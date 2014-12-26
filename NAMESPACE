@@ -14,6 +14,7 @@ export(
         gsw_CT_from_pt,
         gsw_CT_from_t,
         gsw_deltaSA_from_SP,
+        gsw_dynamic_enthalpy,
         gsw_enthalpy,
         gsw_enthalpy_t_exact,
         gsw_entropy_from_t,

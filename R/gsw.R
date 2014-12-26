@@ -376,6 +376,27 @@ gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
     rval
 }
 
+#' dynamic enthalpy of seawater (48-term equation)
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @examples 
+#' gsw_dynamic_enthalpy(34.7118, 28.8099, 10) # 1e3*0.097864649180491
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
+gsw_dynamic_enthalpy <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_dynamic_enthalpy",
+               SA=as.double(l$SA), t=as.double(l$CT), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Specific enthalpy of seawater (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
