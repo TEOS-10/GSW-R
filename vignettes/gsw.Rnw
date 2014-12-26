@@ -79,7 +79,7 @@
 
 The \gsw package is an R interface to the Gibbs Seawater (GSW) portion of the
 TEOS-10 library \cite[see
-e.g.][]{graham2013qtnp,ioc2010tite,mcdougall2011gswt,spall2013e,wright2011asds}
+e.g.][]{graham2013qtnp,ioc2010tite,mcdougall2011gswt,mcdougall2012agaf,spall2013e,wright2011asds}
 for use in calculations of the properties of seawater. Although it can be used
 by itself, it was first devised to support the \oce package for oceanographic
 analysis \cite[]{kelley2014oaoo}.  
@@ -222,14 +222,22 @@ dev.off()
         \includegraphics[width=.7\hsize]{SSS_1}
         \includegraphics[width=.7\hsize]{SSS_2}
     \end{center}
-    \caption{\label{figure:SSS}Sea surface Absolute Salinity (top) and
-    difference between this an Practical Salinity (bottom).}
+    \caption{\label{figure:SSS}Sea surface Practical Salinity from the
+    \code{levitus} dataset (top) and
+    percent difference between this and Absolute Salinity (bottom). In the
+    bottom panel colours are limited to a quantile range, to avoid the
+    scale being set mainly by a contrast between the Baltic and the other salty
+    waters of the planet.}
 \end{figure}
 
 
-Another way to compare \UNESCO and \TEOS values is with a map.
-Figure~\ref{figure:SSS} show an example, with the top panel being Absolute
-Salinity and the bottom one the difference between this and Practical Salinity.
+A simple way to compare \UNESCO and \TEOS values is to represent them on a map.
+Figure~\ref{figure:SSS} show an example, with the top panel being sea surface
+Practical Salinity and the bottom one the percent difference between Absolute
+and Practical Salinity.  For more detailed displays of the differences between
+old and newer formulations of salinity and temperature, consult
+\cite{mcdougall2012agaf}, which also provides an interesting and practical
+introduction to recent work on seawater.
 
 % Next causes build problems so just run it manually and
 % add the PNG to the package.
@@ -244,8 +252,12 @@ SSS <- levitus$SSS
 dim <- dim(SSS)
 ll <- expand.grid(lon=levitus$longitude, lat=levitus$latitude)
 SA <- gsw_SA_from_SP(levitus$SSS, 0, ll$lon, ll$lat)
-imagep(levitus$longitude, levitus$latitude, SA, col=oceColorsJet)
-imagep(levitus$longitude, levitus$latitude, SA-levitus$SSS, col=oceColorsJet)
+imagep(levitus$longitude, levitus$latitude, levitus$SSS, col=oceColorsJet)
+title("Levitus surface Practical Salinity")
+per <- 100 * (1 - levitus$SSS / SA)
+imagep(levitus$longitude, levitus$latitude, per, col=oceColorsJet,
+       zlim=quantile(per, c(0.001, 0.999), na.rm=TRUE))
+title("Percent difference between surface Absolute and Practical Salinity")
 @
 %<<echo=false, results=hide>>=
 %dev.off()
