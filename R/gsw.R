@@ -489,6 +489,72 @@ gsw_grav <- function(latitude, p)
     rval
 }
 
+#' latent heat of evaporation
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @return latent heat of evaporation [ J/kg ]
+#' @examples
+#' gsw_latentheat_evap_t(34.7118, 28.7856) # 2.429947107462561e6
+#' @seealso \code{\link{gsw_latentheat_evap_t}} and \code{\link{gsw_latentheat_melting}}
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_evap_CT.html}
+gsw_latentheat_evap_CT <- function(SA, CT)
+{
+    l <- argfix(list(SA=SA, CT=CT))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_latentheat_evap_CT",
+               SA=as.double(l$SA), CT=as.double(l$CT),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' latent heat of evaporation
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param t in-situ temperature (ITS-90) [ deg C ]
+#' @return latent heat of evaporation [ J/kg ]
+#' @examples
+#' gsw_latentheat_evap_t(34.7118, 28.7856) # 2.429882982734836e6
+#' @seealso \code{\link{gsw_latentheat_evap_CT}} and \code{\link{gsw_latentheat_melting}}
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_evap_t.html}
+gsw_latentheat_evap_t <- function(SA, t)
+{
+    l <- argfix(list(SA=SA, t=t))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_latentheat_evap_t",
+               SA=as.double(l$SA), t=as.double(l$t),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' latent heat of melting
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param p sea pressure [ dbar ]
+#' @return latent heat of freezing [ J/kg ]
+#' @examples
+#' gsw_latentheat_melting(34.7118, 10) # 3.299495187300804e5
+#' @seealso \code{\link{gsw_latentheat_evap_CT}} and \code{\link{gsw_latentheat_evap_t}}
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_melting.html}
+gsw_latentheat_melting <- function(SA, p)
+{
+    l <- argfix(list(SA=SA, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_latentheat_melting",
+               SA=as.double(l$SA), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Calculate Brunt Vaisala Frequency squared
 #'
 #' @param SA Absolute Salinity [ g/kg ]
