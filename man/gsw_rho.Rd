@@ -26,6 +26,6 @@ gsw_rho(34.7118, 28.8099, 10) # 1021.8404465661
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho.html}
 }
 \seealso{
-\code{\link{gsw_SA_from_SP}} and \code{\link{gsw_CT_from_t}}
+\code{\link{gsw_rho_t_exact}} is simiar to this, but using in-situ temperature; SA and CT may be computed from UNESCO quantities using \code{\link{gsw_SA_from_SP}} and \code{\link{gsw_CT_from_t}}
 }
 

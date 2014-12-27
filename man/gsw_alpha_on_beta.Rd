@@ -25,4 +25,7 @@ gsw_alpha_on_beta(34.7118, 28.8099, 10) # 0.452454540612631
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha_on_beta.html}
 }
+\seealso{
+This yields the ratio of the return values from \code{\link{gsw_alpha}} and \code{\link{gsw_beta}}, to within computational precision.
+}
 

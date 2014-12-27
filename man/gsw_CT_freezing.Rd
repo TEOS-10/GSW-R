@@ -28,4 +28,7 @@ gsw_CT_freezing(34.7118, 10) # -1.899657519404743
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing.html}
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing_poly.html}
 }
+\seealso{
+\code{\link{gsw_t_freezing}} is the analogue for in-situ temperature.
+}
 

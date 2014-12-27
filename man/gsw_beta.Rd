@@ -28,4 +28,8 @@ beta <- gsw_beta(SA,CT,p)
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta.html}
 }
+\seealso{
+The temperature analogue to this is \code{\link{gsw_alpha}}; other related functions
+include \code{\link{gsw_alpha_wrt_t_exact}} and \code{\link{gsw_alpha_on_beta}}.
+}
 

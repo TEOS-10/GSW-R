@@ -25,4 +25,7 @@ gsw_sound_speed(34.7118, 28.7856, 10) # 1542.420534932182
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed.html}
 }
+\seealso{
+\code{\link{gsw_sound_speed_t_exact}} for a precise formula using t
+}
 

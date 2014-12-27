@@ -25,4 +25,7 @@ gsw_t_from_CT(34.7118, 28.8099, 10) # 28.785580227725703
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_from_CT.html}
 }
+\seealso{
+\code{\link{gsw_CT_from_t}} does the reverse.
+}
 

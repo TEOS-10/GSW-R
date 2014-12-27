@@ -112,6 +112,7 @@ gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
 #' @return thermal expansion coefficient with respect to Conservative Temperature [ 1/K ]
 #' @examples
 #' gsw_alpha(34.7118, 28.7856, 10) # 3.24480399390879e-3
+#' @seealso The salinity analogue to this is \code{\link{gsw_beta}}; other related functions include \code{\link{gsw_beta_const_t_exact}}, \code{\link{gsw_alpha_wrt_t_exact}} and \code{\link{gsw_alpha_on_beta}}.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha.html}
 gsw_alpha <- function(SA, CT, p)
@@ -134,6 +135,7 @@ gsw_alpha <- function(SA, CT, p)
 #' @return ratio of thermal expansion coefficient to haline contraction coefficient [ (g/kg)/K ]
 #' @examples
 #' gsw_alpha_on_beta(34.7118, 28.8099, 10) # 0.452454540612631
+#' @seealso This yields the ratio of the return values from \code{\link{gsw_alpha}} and \code{\link{gsw_beta}}, to within computational precision.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha_on_beta.html}
 gsw_alpha_on_beta <- function(SA, CT, p)
@@ -156,9 +158,10 @@ gsw_alpha_on_beta <- function(SA, CT, p)
 #' @return thermal expansion coefficient with respect to in-situ temperature [ 1/K ]
 #' @examples
 #' gsw_alpha_wrt_t_exact(34.7118, 28.7856, 10) # 1e-3*0.325601747227247
+#' @seealso \code{\link{gsw_alpha}}, \code{\link{gsw_beta}} and \code{\link{gsw_alpha_on_beta}}
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha_wrt_t_exact.html}
-gsw_alpha_wrt_t_exact<- function(SA, t, p)
+gsw_alpha_wrt_t_exact <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
     n <- length(l[[1]])
@@ -202,6 +205,9 @@ gsw_C_from_SP <- function(SP, t, p)
 #' CT = c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p =  c(     10,      50,     125,     250,     600,    1000)
 #' beta <- gsw_beta(SA,CT,p)
+#' @seealso
+#' The temperature analogue to this is \code{\link{gsw_alpha}}; other related functions
+#' include \code{\link{gsw_alpha_wrt_t_exact}} and \code{\link{gsw_alpha_on_beta}}.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta.html}
 gsw_beta <- function(SA, CT, p)
@@ -296,6 +302,7 @@ gsw_cabbeling <- function(SA, CT, p)
 #' @return Conservative Temperature at freezing of seawater [ deg C ]. That is, the freezing temperature expressed in terms of Conservative Temperature (ITS-90). 
 #' @examples 
 #' gsw_CT_freezing(34.7118, 10) # -1.899657519404743
+#' @seealso \code{\link{gsw_t_freezing}} is the analogue for in-situ temperature.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing.html}
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing_poly.html}
@@ -339,6 +346,7 @@ gsw_CT_from_pt <- function(SA, pt)
 #' @param p sea pressure [ dbar ]
 #' @examples 
 #' gsw_CT_from_t(34.7118, 28.7856, 10) # 28.809919826700281
+#' @seealso \code{\link{gsw_t_from_CT}} does the reverse.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_t.html}
 gsw_CT_from_t <- function(SA, t, p)
@@ -679,7 +687,7 @@ gsw_pt_from_t <- function(SA, t, p, p_ref)
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
 #' @return in-situ density [ kg/m^3 ]
-#' @seealso \code{\link{gsw_SA_from_SP}} and \code{\link{gsw_CT_from_t}}
+#' @seealso \code{\link{gsw_rho_t_exact}} is simiar to this, but using in-situ temperature; SA and CT may be computed from UNESCO quantities using \code{\link{gsw_SA_from_SP}} and \code{\link{gsw_CT_from_t}}
 #' @examples
 #' gsw_rho(34.7118, 28.8099, 10) # 1021.8404465661
 #' @references
@@ -727,6 +735,7 @@ gsw_rho_first_derivatives <- function(SA, CT, p)
 #' @return in-situ density [ kg/m^3 ]
 #' @examples
 #' gsw_rho_t_exact(34.7118, 28.7856, 10) # 1021.840173185531
+#' @seealso \code{\link{gsw_rho}} is simiar but uses SA and CT; SA may be computed from UNESCO quantities using \code{\link{gsw_SA_from_SP}}.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_t_exact.html}
 gsw_rho_t_exact <- function(SA, t, p)
@@ -777,6 +786,7 @@ gsw_SA_from_rho <- function(rho, CT, p)
 #' @param latitude latitude in decimal degrees [ -90 to 90 ]
 #' @examples
 #' gsw_SA_from_SP(34.5487, 10, 188, 4) # 34.711778344814114 
+#' @seealso \code{\link{gsw_SP_from_SA}} does the reverse.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
 gsw_SA_from_SP <- function(SP, p, longitude, latitude)
@@ -851,6 +861,7 @@ gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
 #' @return potential density anomaly [ kg/m^3 ]
 #' @examples
 #' gsw_sigma0(34.7118, 28.8099) # 21.798411276610750
+#' @seealso Use \code{\link{gsw_sigma1}} for 1000 dbar pressure, \code{\link{gsw_sigma2}} for 2000 dbar, \code{\link{gsw_sigma3}} for 3000 dbar, or \code{\link{gsw_sigma4}} for 4000 dbar.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma0.html}
 gsw_sigma0 <- function(SA, CT)
@@ -876,6 +887,7 @@ gsw_sigma0 <- function(SA, CT)
 #' @return potential density anomaly [ kg/m^3 ]
 #' @examples
 #' gsw_sigma1(34.7118, 28.8099) # 25.955891533636986
+#' @seealso Use \code{\link{gsw_sigma0}} for 0 dbar pressure, \code{\link{gsw_sigma2}} for 2000 dbar, \code{\link{gsw_sigma3}} for 3000 dbar, or \code{\link{gsw_sigma4}} for 4000 dbar.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma1.html}
 gsw_sigma1 <- function(SA, CT)
@@ -901,6 +913,7 @@ gsw_sigma1 <- function(SA, CT)
 #' @return potential density anomaly [ kg/m^3 ]
 #' @examples
 #' gsw_sigma2(34.7118, 28.8099) # 30.022796416066058
+#' @seealso Use \code{\link{gsw_sigma0}} for 0 dbar pressure, \code{\link{gsw_sigma1}} for 1000 dbar, \code{\link{gsw_sigma3}} for 3000 dbar, or \code{\link{gsw_sigma4}} for 4000 dbar.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma2.html}
 gsw_sigma2 <- function(SA, CT)
@@ -926,6 +939,7 @@ gsw_sigma2 <- function(SA, CT)
 #' @return potential density anomaly with reference pressure 3000 dbar [ kg/m^3 ]
 #' @examples
 #' gsw_sigma3(34.7118, 28.8099) # 34.002600253012133
+#' @seealso Use \code{\link{gsw_sigma0}} for 0 dbar pressure, \code{\link{gsw_sigma1}} for 1000 dbar, \code{\link{gsw_sigma2}} for 2000 dbar, or \code{\link{gsw_sigma4}} for 4000 dbar.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma3.html}
 gsw_sigma3 <- function(SA, CT)
@@ -951,6 +965,7 @@ gsw_sigma3 <- function(SA, CT)
 #' @return potential density anomaly with reference pressure 4000 dbar [ kg/m^3 ]
 #' @examples
 #' gsw_sigma3(34.7118, 28.8099) # 37.898467323406976
+#' @seealso Use \code{\link{gsw_sigma0}} for 0 dbar pressure, \code{\link{gsw_sigma1}} for 1000 dbar, \code{\link{gsw_sigma2}} for 2000 dbar, or \code{\link{gsw_sigma3}} for 3000 dbar.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma4.html}
 gsw_sigma4 <- function(SA, CT)
@@ -975,6 +990,7 @@ gsw_sigma4 <- function(SA, CT)
 #' @return sound speed [ m/s ]
 #' @examples
 #' gsw_sound_speed(34.7118, 28.7856, 10) # 1542.420534932182
+#' @seealso \code{\link{gsw_sound_speed_t_exact}} for a precise formula using t
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed.html}
 gsw_sound_speed<- function(SA, CT, p)
@@ -997,6 +1013,7 @@ gsw_sound_speed<- function(SA, CT, p)
 #' @return sound speed [ m/s ]
 #' @examples
 #' gsw_sound_speed_t_exact(34.7118, 28.7856, 10) # 1542.420534932182
+#' @seealso \code{\link{gsw_sound_speed}} for an approximate formula using CT
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed_t_exact.html}
 gsw_sound_speed_t_exact <- function(SA, t, p)
@@ -1019,6 +1036,7 @@ gsw_sound_speed_t_exact <- function(SA, t, p)
 #' @return Specific volume (1/density)
 #' @examples 
 #' gsw_specvol(34.7118, 28.8099, 10) # 9.78626363206202e-4
+#' @seealso With in-situ temperature, use \code{\link{gsw_specvol_t_exact}}; \code{\link{gsw_specvol_anom}} gives specific volume anomaly.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol.html}
 gsw_specvol  <- function(SA, CT, p)
@@ -1034,6 +1052,7 @@ gsw_specvol  <- function(SA, CT, p)
 #' @return Specific volume anomaly [ m^3/kg ]
 #' @examples 
 #' gsw_specvol_anom(34.7118, 28.8099, 10) # 6.01005694856401e-6
+#' @seealso Specific volume itself is given by \code{\link{gsw_specvol}} and \code{\link{gsw_specvol_t_exact}}.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_anom.html}
 gsw_specvol_anom  <- function(SA, CT, p)
@@ -1056,6 +1075,7 @@ gsw_specvol_anom  <- function(SA, CT, p)
 #' @return Specific volume [ m^3/kg ]
 #' @examples 
 #' gsw_specvol_t_exact(34.7118, 28.7856, 10) # 9.78626625025472e-4
+#' @seealso With Conservative Temperature, use \code{\link{gsw_specvol}}; \code{\link{gsw_specvol_anom}} gives specific volume anomaly.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_t_exact.html}
 gsw_specvol_t_exact  <- function(SA, t, p)
@@ -1111,6 +1131,7 @@ gsw_SP_from_C <- function(C, t, p)
 #' @return Practical salinity.
 #' @examples 
 #' gsw_SP_from_SA(34.7118, 10, 188, 4) # 34.548721553448317
+#' @seealso \code{\link{gsw_SA_from_SP}} does the reverse.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SA.html}
 gsw_SP_from_SA <- function(SA, p, longitude, latitude)
@@ -1146,6 +1167,7 @@ gsw_SP_from_SA <- function(SA, p, longitude, latitude)
 #' @return in-situ freezing temperature (ITS-90) [ deg C ]
 #' @examples 
 #' gsw_t_freezing(34.7118, 10) # -1.902704434299200
+#' @seealso \code{\link{gsw_CT_freezing}} is the analogue for Conservative Temperature.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing.html}
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_poly.html}
@@ -1169,6 +1191,7 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
 #' @return in-situ temperature (ITS-90) [ deg C ]
 #' @examples 
 #' gsw_t_from_CT(34.7118, 28.8099, 10) # 28.785580227725703
+#' @seealso \code{\link{gsw_CT_from_t}} does the reverse.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_from_CT.html}
 gsw_t_from_CT <- function(SA, CT, p)

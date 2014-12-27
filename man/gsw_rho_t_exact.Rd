@@ -25,4 +25,7 @@ gsw_rho_t_exact(34.7118, 28.7856, 10) # 1021.840173185531
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_t_exact.html}
 }
+\seealso{
+\code{\link{gsw_rho}} is simiar but uses SA and CT; SA may be computed from UNESCO quantities using \code{\link{gsw_SA_from_SP}}.
+}
 

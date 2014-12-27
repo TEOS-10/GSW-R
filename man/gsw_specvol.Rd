@@ -25,4 +25,7 @@ gsw_specvol(34.7118, 28.8099, 10) # 9.78626363206202e-4
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol.html}
 }
+\seealso{
+With in-situ temperature, use \code{\link{gsw_specvol_t_exact}}; \code{\link{gsw_specvol_anom}} gives specific volume anomaly.
+}
 

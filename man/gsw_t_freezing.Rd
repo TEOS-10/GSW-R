@@ -28,4 +28,7 @@ gsw_t_freezing(34.7118, 10) # -1.902704434299200
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing.html}
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_poly.html}
 }
+\seealso{
+\code{\link{gsw_CT_freezing}} is the analogue for Conservative Temperature.
+}
 

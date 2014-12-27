@@ -25,4 +25,7 @@ gsw_alpha(34.7118, 28.7856, 10) # 3.24480399390879e-3
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha.html}
 }
+\seealso{
+The salinity analogue to this is \code{\link{gsw_beta}}; other related functions include \code{\link{gsw_beta_const_t_exact}}, \code{\link{gsw_alpha_wrt_t_exact}} and \code{\link{gsw_alpha_on_beta}}.
+}
 

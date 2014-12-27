@@ -25,4 +25,7 @@ gsw_alpha_wrt_t_exact(34.7118, 28.7856, 10) # 1e-3*0.325601747227247
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha_wrt_t_exact.html}
 }
+\seealso{
+\code{\link{gsw_alpha}}, \code{\link{gsw_beta}} and \code{\link{gsw_alpha_on_beta}}
+}
 

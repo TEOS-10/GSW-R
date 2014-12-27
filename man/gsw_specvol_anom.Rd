@@ -25,4 +25,7 @@ gsw_specvol_anom(34.7118, 28.8099, 10) # 6.01005694856401e-6
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_anom.html}
 }
+\seealso{
+Specific volume itself is given by \code{\link{gsw_specvol}} and \code{\link{gsw_specvol_t_exact}}.
+}
 

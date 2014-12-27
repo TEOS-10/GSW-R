@@ -25,4 +25,7 @@ gsw_sigma0(34.7118, 28.8099) # 21.798411276610750
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma0.html}
 }
+\seealso{
+Use \code{\link{gsw_sigma1}} for 1000 dbar pressure, \code{\link{gsw_sigma2}} for 2000 dbar, \code{\link{gsw_sigma3}} for 3000 dbar, or \code{\link{gsw_sigma4}} for 4000 dbar.
+}
 
