@@ -726,10 +726,50 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
     l <- argfix(list(SP=SP, p=p, longitude=longitude, latitude=latitude))
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_SA_from_SP",
-               SP=as.double(l$SP), p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
+               SP=as.double(l$SP), p=as.double(l$p),
+               longitude=as.double(l$longitude), latitude=as.double(l$latitude),
                n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
     if (is.matrix(SP))
         dim(rval) <- dim(SP)
+    rval
+}
+
+#' Absolute Salinity from Preformed Salinity
+#'
+#' Calculate Absolute Salinity from Preformed Salinity, pressure,
+#' longitude, and latitude.
+#'
+#' If Sstar is a matrix and if its dimensions correspond to the
+#' lengths of longitude and latitude, then the latter are
+#' converted to analogous matrices with \code{\link{expand.grid}}.
+#' 
+#' @param Sstar Preformed Salinity [ g/kg ]
+#' @param p sea pressure [ dbar ]
+#' @param longitude longitude in decimal degrees [ 0 to 360 or -180 to 180]
+#' @param latitude latitude in decimal degrees [ -90 to 90 ]
+#' @examples
+#' gsw_SA_from_Sstar(34.7115, 10, 188, 4) # 34.711724663585905
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_Sstar.html}
+gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
+{
+    ## check for special case that Sstar is a matrix defined on lon and lat
+    if (is.matrix(Sstar)) {
+        dim <- dim(Sstar)
+        if (length(longitude) == dim[1] && length(latitude) == dim[2]) {
+            ll <- expand.grid(longitude=as.vector(longitude), latitude=as.vector(latitude))
+            longitude <- ll$longitude
+            latitude <- ll$latitude
+        }
+    }
+    l <- argfix(list(Sstar=Sstar, p=p, longitude=longitude, latitude=latitude))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_SA_from_Sstar",
+               Sstar=as.double(l$Sstar), p=as.double(l$p),
+               longitude=as.double(l$longitude), latitude=as.double(l$latitude),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(Sstar))
+        dim(rval) <- dim(Sstar)
     rval
 }
 
