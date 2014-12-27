@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_rho_t_exact}
 \alias{gsw_rho_t_exact}
-\title{SA, CT and p partial derivatives of density (48-term equation)}
+\title{in-situ density (48-term equation)}
 \usage{
 gsw_rho_t_exact(SA, t, p)
 }
@@ -17,7 +17,7 @@ gsw_rho_t_exact(SA, t, p)
 in-situ density [ kg/m^3 ]
 }
 \description{
-SA, CT and p partial derivatives of density (48-term equation)
+in-situ density (48-term equation)
 }
 \examples{
 gsw_rho_t_exact(34.7118, 28.7856, 10) # 1021.840173185531

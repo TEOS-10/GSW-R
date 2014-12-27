@@ -679,6 +679,7 @@ gsw_pt_from_t <- function(SA, t, p, p_ref)
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
 #' @return in-situ density [ kg/m^3 ]
+#' @seealso \code{\link{gsw_SA_from_SP}} and \code{\link{gsw_CT_from_t}}
 #' @examples
 #' gsw_rho(34.7118, 28.8099, 10) # 1021.8404465661
 #' @references
@@ -695,7 +696,7 @@ gsw_rho <- function(SA, CT, p)
     rval
 }
 
-#' in-situ density (48-term equation)
+#' SA, CT and p partial derivatives of density (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -718,7 +719,7 @@ gsw_rho_first_derivatives <- function(SA, CT, p)
     list(drho_dSA=rval$drho_dSA, drho_dCT=rval$drho_dCT, drho_dp=rval$drho_dp)
 }
 
-#' SA, CT and p partial derivatives of density (48-term equation)
+#' in-situ density (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
