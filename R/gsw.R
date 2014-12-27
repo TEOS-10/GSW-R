@@ -629,7 +629,30 @@ gsw_rho <- function(SA, CT, p)
     rval
 }
 
-#' in-situ density
+#' in-situ density (48-term equation)
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return a list containing drho_dSA [ kg^2/(g m^3) ], drho_dCT [ (kg/(K m^3) ] and drho_dp [ kg/(Pa m^3) ]
+#' @examples
+#' gsw_rho_first_derivatives(34.7118, 28.8099, 10) #' # 0.73321 -0.33174 4.20305e-7
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_first_derivatives.html}
+gsw_rho_first_derivatives <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_rho_first_derivatives",
+               SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+               n=n, drho_dSA=double(n), drho_dCT=double(n), drho_dp=double(n),
+               NAOK=TRUE, package="gsw")
+    if (is.matrix(SA))
+        stop("gsw_rho_first_derivatives() cannot handle matix SA")
+    list(drho_dSA=rval$drho_dSA, drho_dCT=rval$drho_dCT, drho_dp=rval$drho_dp)
+}
+
+#' SA, CT and p partial derivatives of density (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]

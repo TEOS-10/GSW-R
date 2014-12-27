@@ -103,6 +103,16 @@ W2(wrap_gsw_z_from_p, gsw_z_from_p, p, lat, n, rval)
 //
 // Functions returning void do not really need wrappers, but the R code
 // is simpler to read if we use them anyway.
+void wrap_gsw_rho_first_derivatives(double *SA, double *CT, double *p, int *n,
+        double *drho_dsa, double *drho_dct, double *drho_dp)
+{
+    extern void gsw_rho_first_derivatives(double sa, double ct, double p,
+            double *drho_dsa, double *drho_dct, double *drho_dp);
+    for (int i=0; i < *(n); i++) {
+        gsw_rho_first_derivatives(SA[i], CT[i], p[i], &drho_dsa[i], &drho_dct[i], &drho_dp[i]);
+    }
+}
+
 void wrap_gsw_Nsquared(double *SA, double *CT, double *p, double *latitude, int *n, double *n2, double *p_mid)
 {
     extern void gsw_nsquared(double *sa, double *ct, double *p, double *latitude, int nz, double *n2, double *p_mid);
