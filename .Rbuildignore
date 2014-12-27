@@ -15,5 +15,4 @@ inst/doc/.gitignore
 src/*.o$
 src/*.so$
 README_developer.md
-LICENSE
 
