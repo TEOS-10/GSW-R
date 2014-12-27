@@ -4,7 +4,7 @@ seawater version 3.03, downloaded from [teos-10.org](http://www.teos-10.org) on
 TEOS-10 functions being provided to date. 
 
 All the functions provided here reproduce [teos-10.org](http://www.teos-10.org)
-test values to within about 13 digits. (The tests are part of the
+test values to a tolerance of 1.5e-8. (The tests are part of the
 package-building process, as is usual in R.)
 
 Function names match those used specified in the TEOS-10
