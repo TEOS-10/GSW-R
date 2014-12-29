@@ -4,7 +4,7 @@
 \alias{gsw_pt_from_t}
 \title{potential temperature from in-situ temperature}
 \usage{
-gsw_pt_from_t(SA, t, p, p_ref)
+gsw_pt_from_t(SA, t, p, p_ref = 0)
 }
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}

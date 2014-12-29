@@ -671,7 +671,7 @@ gsw_pt_from_CT <- function(SA, CT)
 #' @seealso \code{\link{gsw_pt0_from_t}} and \code{\link{gsw_pt_from_CT}}
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_t.html}
-gsw_pt_from_t <- function(SA, t, p, p_ref)
+gsw_pt_from_t <- function(SA, t, p, p_ref=0)
 {
     l <- argfix(list(SA=SA, t=t, p=p, p_ref=p_ref))
     n <- length(l[[1]])
