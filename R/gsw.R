@@ -499,6 +499,28 @@ gsw_grav <- function(latitude, p)
     rval
 }
 
+#' specific internal energy of seawater (48-term equation)
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return specific internal energy [ J/kg ]
+#' @examples
+#' gsw_internal_energy(34.7118, 28.7856, 10) # 1.148091577452400e5
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_internal_energy.html}
+gsw_internal_energy <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_internal_energy",
+               SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' latent heat of evaporation
 #' 
 #' @param SA Absolute Salinity [ g/kg ]

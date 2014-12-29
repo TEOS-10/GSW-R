@@ -19,6 +19,7 @@ export(
         gsw_enthalpy_t_exact,
         gsw_entropy_from_t,
         gsw_grav,
+        gsw_internal_energy,
         gsw_latentheat_evap_CT,
         gsw_latentheat_evap_t,
         gsw_latentheat_melting,
