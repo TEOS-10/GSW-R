@@ -689,7 +689,7 @@ gsw_pt_from_t <- function(SA, t, p, p_ref)
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
 #' @return in-situ density [ kg/m^3 ]
-#' @seealso \code{\link{gsw_rho_t_exact}} is simiar to this, but using in-situ temperature; SA and CT may be computed from UNESCO quantities using \code{\link{gsw_SA_from_SP}} and \code{\link{gsw_CT_from_t}}
+#' @seealso \code{\link{gsw_rho_t_exact}} is similar to this, but using in-situ temperature. SA and CT may be computed from UNESCO quantities using \code{\link{gsw_SA_from_SP}} and \code{\link{gsw_CT_from_t}}. For potential density anomalies, use \code{\link{gsw_sigma0}} and related functions.
 #' @examples
 #' gsw_rho(34.7118, 28.8099, 10) # 1021.8404465661
 #' @references
