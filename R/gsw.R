@@ -373,6 +373,8 @@ gsw_CT_from_t <- function(SA, t, p)
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_deltaSA_from_SP.html}
 gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
 {
+    if (missing(longitude)) stop("must supply longitude")
+    if (missing(latitude)) stop("must supply latitude")
     l <- argfix(list(SP=SP, p=p, longitude=longitude, latitude=latitude))
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_deltaSA_from_SP",
@@ -791,6 +793,8 @@ gsw_SA_from_rho <- function(rho, CT, p)
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
 gsw_SA_from_SP <- function(SP, p, longitude, latitude)
 {
+    if (missing(longitude)) stop("must supply longitude")
+    if (missing(latitude)) stop("must supply latitude")
     ## check for special case that SP is a matrix defined on lon and lat
     if (is.matrix(SP)) {
         dim <- dim(SP)
@@ -830,6 +834,8 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_Sstar.html}
 gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
 {
+    if (missing(longitude)) stop("must supply longitude")
+    if (missing(latitude)) stop("must supply latitude")
     ## check for special case that Sstar is a matrix defined on lon and lat
     if (is.matrix(Sstar)) {
         dim <- dim(Sstar)
@@ -1136,6 +1142,8 @@ gsw_SP_from_C <- function(C, t, p)
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SA.html}
 gsw_SP_from_SA <- function(SA, p, longitude, latitude)
 {
+    if (missing(longitude)) stop("must supply longitude")
+    if (missing(latitude)) stop("must supply latitude")
     ## check for special case that SP is a matrix defined on lon and lat
     if (is.matrix(SA)) {
         dim <- dim(SA)
