@@ -554,6 +554,28 @@ gsw_kappa <- function(SA, CT, p)
     rval
 }
 
+#' isentropic compressibility of seawater
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param t in-situ temperature (ITS-90) [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return isentropic compressibility [ 1/Pa ] (not 1/dbar)
+#' @examples
+#' gsw_kappa_t_exact(34.7118, 28.7856, 10) # 4.11245799180373e-10
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_kappa_t_exact.html}
+gsw_kappa_t_exact <- function(SA, t, p)
+{
+    l <- argfix(list(SA=SA, t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_kappa_t_exact",
+               SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' latent heat of evaporation
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
