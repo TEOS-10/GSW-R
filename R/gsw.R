@@ -45,10 +45,14 @@
 #' As of early 2015, the package is still in development. The plan is to
 #' have all relevant functions coded (and tested) by mid-January 2015. That
 #' will be followed by few weeks of practical testing and the sort of code
-#' improvements that stem from such work, and then hopefully a CRAN release
-#' in February 2015. This is a large package, and therefore not suitable
-#' for a rapid succesion of CRAN releases ... the code should be working
-#' and useful before it is released.
+#' improvements that stem from such work.  The best guess is that the underlying
+#' C library will be updated in early 2015, and if that can be accomplished,
+#' then a few days should be enough to update gsw to match. This means there is
+#' a possibility of a CRAN submission in March 2015, a date that means something
+#' to DK. But this is a large package, and therefore not suitable
+#' for a rapid succesion of CRAN releases, and that means that a formal release
+#' to CRAN may not be possible until mid 2015. A decision on this will be made
+#' by the end of January 2015.
 #' 
 #' An important testbed for testing will be the incorpation of gsw within
 #' the oce package. This is proceeding in parallel with gsw development.
