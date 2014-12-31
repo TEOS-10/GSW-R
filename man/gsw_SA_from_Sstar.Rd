@@ -30,4 +30,7 @@ gsw_SA_from_Sstar(34.7115, 10, 188, 4) # 34.711724663585905
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_Sstar.html}
 }
+\seealso{
+\code{\link{gsw_Sstar_from_SA}} does the reverse.
+}
 

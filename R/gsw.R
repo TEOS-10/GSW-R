@@ -944,6 +944,7 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
 #' @param latitude latitude in decimal degrees [ -90 to 90 ]
 #' @examples
 #' gsw_SA_from_Sstar(34.7115, 10, 188, 4) # 34.711724663585905
+#' @seealso \code{\link{gsw_Sstar_from_SA}} does the reverse.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_Sstar.html}
 gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
@@ -1361,6 +1362,92 @@ gsw_SP_from_Sstar <- function(Sstar, p, longitude, latitude)
                n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
     if (is.matrix(Sstar))
         dim(rval) <- dim(Sstar)
+    rval
+}
+
+#' Convert from Absolute Salinity to Preformed Salinity
+#'
+#' Calculate Preformed Salinity from Absolute Salinity, pressure,
+#' longitude, and latitude.
+#'
+#' If SA is a matrix and if its dimensions correspond to the
+#' lengths of longitude and latitude, then the latter are
+#' converted to analogous matrices with \code{\link{expand.grid}}.
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param p sea pressure [ dbar ]
+#' @param longitude longitude in decimal degrees [ 0 to 360 or -180 to 180]
+#' @param latitude latitude in decimal degrees [ -90 to 90 ]
+#' @examples
+#' gsw_Sstar_from_SA(34.7118, 10, 188, 4) # 34.711575335926490
+#' @seealso \code{\link{gsw_SA_from_Sstar}} does the reverse; \code{\link{gsw_Sstar_from_SP}} is similar.
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_Sstar_from_SA.html}
+gsw_Sstar_from_SA <- function(SA, p, longitude, latitude)
+{
+    if (missing(SA)) stop("must supply SA")
+    if (missing(p)) stop("must supply p")
+    if (missing(longitude)) stop("must supply longitude")
+    if (missing(latitude)) stop("must supply latitude")
+    ## check for special case that SP is a matrix defined on lon and lat
+    if (is.matrix(SA)) {
+        dim <- dim(SA)
+        if (length(longitude) == dim[1] && length(latitude) == dim[2]) {
+            ll <- expand.grid(longitude=as.vector(longitude), latitude=as.vector(latitude))
+            longitude <- ll$longitude
+            latitude <- ll$latitude
+        }
+    }
+    l <- argfix(list(SA=SA, p=p, longitude=longitude, latitude=latitude))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_Sstar_from_SA",
+               SA=as.double(l$SA), p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' Convert from Practical Salinity to Preformed Salinity
+#'
+#' Calculate Preformed Salinity from Practical Salinity, pressure,
+#' longitude, and latitude.
+#'
+#' If SP is a matrix and if its dimensions correspond to the
+#' lengths of longitude and latitude, then the latter are
+#' converted to analogous matrices with \code{\link{expand.grid}}.
+#' 
+#' @param SP Practical Salinity (PSS-78) [ unitless ]
+#' @param p sea pressure [ dbar ]
+#' @param longitude longitude in decimal degrees [ 0 to 360 or -180 to 180]
+#' @param latitude latitude in decimal degrees [ -90 to 90 ]
+#' @examples
+#' gsw_Sstar_from_SP(34.5487, 10, 188, 4) # 34.711553680880769
+#' @seealso \code{\link{gsw_SP_from_Sstar}} does the reverse; \code{\link{gsw_Sstar_from_SA}} is similar.
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_Sstar_from_SP.html}
+gsw_Sstar_from_SP <- function(SP, p, longitude, latitude)
+{
+    if (missing(SP)) stop("must supply SP")
+    if (missing(p)) stop("must supply p")
+    if (missing(longitude)) stop("must supply longitude")
+    if (missing(latitude)) stop("must supply latitude")
+    ## check for special case that SP is a matrix defined on lon and lat
+    if (is.matrix(SP)) {
+        dim <- dim(SP)
+        if (length(longitude) == dim[1] && length(latitude) == dim[2]) {
+            ll <- expand.grid(longitude=as.vector(longitude), latitude=as.vector(latitude))
+            longitude <- ll$longitude
+            latitude <- ll$latitude
+        }
+    }
+    l <- argfix(list(SP=SP, p=p, longitude=longitude, latitude=latitude))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_Sstar_from_SP",
+               SP=as.double(l$SP), p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SP))
+        dim(rval) <- dim(SP)
     rval
 }
 
