@@ -19,7 +19,7 @@ gsw_IPV_vs_fNsquared_ratio(SA, CT, p, p_ref = 0)
 a list containing IPV_vs_fNsquared_ratio [ unitless ] and mid-point pressure p_mid [ dbar ]
 }
 \description{
-Ratio of vert. gradient of pot. density to vert grad of locally-referenced pot density
+Note that this just returns zeros, owing to a bug in the underlying C library.
 }
 \examples{
 SA <- c(34.7118, 34.8915)
@@ -27,7 +27,8 @@ CT <- c(28.8099, 28.4392)
 p <-  c(     10,      50)
 p_ref <- 0
 r <- gsw_IPV_vs_fNsquared_ratio(SA, CT, p, p_ref)
-r$IPV_vs_fNsquared_ratio # 0.999745283730840 0.996950635279959
+r$IPV_vs_fNsquared_ratio # 0.999745283730840
+r$p_mid                  # 30
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_IPV_vs_fNsquared_ratio.html}

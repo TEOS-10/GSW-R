@@ -55,7 +55,7 @@ extern double gsw_grav(double lat, double p);
 extern double gsw_hill_ratio_at_sp2(double t);
 extern int    gsw_indx(double *x, int n, double z);
 extern double gsw_internal_energy(double sa, double ct, double p);
-extern void   gsw_ipv_vs_fnsquared_ratio(double *sa, double *ct, double *p,
+extern void   gsw_ipv_vs_fnsquared_ratio(double *sa, double *ct, double *p, double *p_ref,
 			int nz, double *ipv_vs_fnsquared_ratio, double *p_mid);
 extern double gsw_kappa(double sa, double ct, double p);
 extern double gsw_kappa_t_exact(double sa, double t, double p);

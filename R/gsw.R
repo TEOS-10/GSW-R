@@ -547,19 +547,19 @@ gsw_internal_energy <- function(SA, CT, p)
 #' p <-  c(     10,      50)
 #' p_ref <- 0
 #' r <- gsw_IPV_vs_fNsquared_ratio(SA, CT, p, p_ref)
-#' r$IPV_vs_fNsquared_ratio # 0.999745283730840 0.996950635279959
+#' r$IPV_vs_fNsquared_ratio # 0.999745283730840
+#' r$p_mid                  # 30
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_IPV_vs_fNsquared_ratio.html}
 gsw_IPV_vs_fNsquared_ratio <- function(SA, CT, p, p_ref=0)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p, p_ref=p_ref))
     n <- length(l[[1]])
+    ## note: only use p_ref[1] since the C-library code says it must be constant
     r <- .C("wrap_gsw_IPV_vs_fNsquared_ratio",
-            SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), p_ref=as.double(l$p_ref),
+            SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), p_ref=as.double(l$p_ref[1]),
             n=as.integer(n),
             ratio=double(n-1), p_mid=double(n-1), NAOK=TRUE, package="gsw")
-    cat("later, r:\n")
-    print(r)
     if (is.matrix(SA))
         stop("gsw_IPV_vs_fNsquared_ratio() cannot handle matrix SA")
     list(IPV_vs_fNsquared_ratio=r$ratio, p_mid=r$p_mid)

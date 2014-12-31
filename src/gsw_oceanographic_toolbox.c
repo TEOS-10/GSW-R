@@ -2806,7 +2806,7 @@ gsw_turner_rsubrho(double *sa, double *ct, double *p, int nz,
 !--------------------------------------------------------------------------
 
 !==========================================================================
-subroutine gsw_ipv_vs_fnsquared_ratio(sa,ct,p,nz,ipv_vs_fnsquared_ratio,p_mid)
+subroutine gsw_ipv_vs_fnsquared_ratio(sa,ct,p,p_ref,nz,ipv_vs_fnsquared_ratio,p_ref)
 !==========================================================================
 
 !  Calculates the ratio of the vertical gradient of potential density to 
@@ -2837,15 +2837,15 @@ subroutine gsw_ipv_vs_fnsquared_ratio(sa,ct,p,nz,ipv_vs_fnsquared_ratio,p_mid)
 !           referenced potential density.  It is ouput on the same
 !           vertical (M-1)xN grid as p_mid. 
 !           IPV_vs_fNsquared_ratio is dimensionless.          [ unitless ]
-! p_mid   : Mid pressure between p grid  (length nz-1)           [dbar]
+! p_ref   : Reference pressure (length 1)                         [dbar]
 */
 void
-gsw_ipv_vs_fnsquared_ratio(double *sa, double *ct, double *p, int nz,
+gsw_ipv_vs_fnsquared_ratio(double *sa, double *ct, double *p, double *p_ref, int nz,
 	double *ipv_vs_fnsquared_ratio, double *p_mid)
 {
 	int	k;
 
-	double	dsa, sa_mid, dct, ct_mid, dp, p_ref;
+	double	dsa, sa_mid, dct, ct_mid, dp;
 	double	alpha_mid, beta_mid;
 	double	alpha_pref, beta_pref, numerator, denominator;
 
@@ -2859,8 +2859,8 @@ gsw_ipv_vs_fnsquared_ratio(double *sa, double *ct, double *p, int nz,
 
 	    alpha_mid = gsw_alpha(sa_mid,ct_mid,p_mid[k]);
 	    beta_mid = gsw_beta(sa_mid,ct_mid,p_mid[k]);
-	    alpha_pref = gsw_alpha(sa_mid,ct_mid,p_ref);
-	    beta_pref = gsw_beta(sa_mid,ct_mid,p_ref);
+	    alpha_pref = gsw_alpha(sa_mid,ct_mid,p_ref[0]);
+	    beta_pref = gsw_beta(sa_mid,ct_mid,p_ref[0]);
 
 	    numerator = dct*alpha_pref - dsa*beta_pref;
 	    denominator = dct*alpha_mid - dsa*beta_mid;
