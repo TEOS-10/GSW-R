@@ -22,6 +22,6 @@ gsw_SP_from_SR(34.5487) # 34.386552667080714
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SR.html}
 }
 \seealso{
-\code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SK}} and \code{\link{gsw_SP_from_Sstar}}.
+The reverse is \code{\link{gsw_SR_from_SP}}; also related are \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SK}} and \code{\link{gsw_SP_from_Sstar}}.
 }
 

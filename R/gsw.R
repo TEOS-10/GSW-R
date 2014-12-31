@@ -970,6 +970,26 @@ gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
     rval
 }
 
+#' Calculate Reference Salinity from Practical Salinity
+#'
+#' @param SP Practical Salinity (PSS-78) [ unitless ]
+#' @return Reference Salinity [ g/kg ]
+#' @examples 
+#' gsw_SR_from_SP(34.5487) # 34.711611927085727
+#' @seealso The reverse is \code{\link{gsw_SP_from_SR}}; also related are \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SK}} and \code{\link{gsw_SP_from_Sstar}}.
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SR_from_SP.html}
+gsw_SR_from_SP <- function(SP)
+{
+    if (missing(SP)) stop("must supply SP")
+    n <- length(SP)
+    rval <- .C("wrap_gsw_SR_from_SP",
+               SP=as.double(SP), n=as.integer(n), SR=double(n), NAOK=TRUE, package="gsw")$SR
+    if (is.matrix(SP))
+        dim(rval) <- dim(SP)
+    rval
+}
+
 #' potential density anomaly referenced to 0 dbar
 #'
 #' This uses the 48-term density equation, and returns
@@ -1303,7 +1323,7 @@ gsw_SP_from_SK <- function(SK)
 #' @return Practical Salinity (PSS-78) [ unitless ]
 #' @examples 
 #' gsw_SP_from_SR(34.5487) # 34.386552667080714
-#' @seealso \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SK}} and \code{\link{gsw_SP_from_Sstar}}.
+#' @seealso The reverse is \code{\link{gsw_SR_from_SP}}; also related are \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SK}} and \code{\link{gsw_SP_from_Sstar}}.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SR.html}
 gsw_SP_from_SR <- function(SR)

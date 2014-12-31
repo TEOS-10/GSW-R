@@ -37,6 +37,7 @@ export(
         gsw_SA_from_rho,
         gsw_SA_from_SP,
         gsw_SA_from_Sstar,
+        gsw_SR_from_SP,
         gsw_sigma0,
         gsw_sigma1,
         gsw_sigma2,
