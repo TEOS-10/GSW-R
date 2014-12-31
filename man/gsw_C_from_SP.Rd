@@ -14,11 +14,12 @@ gsw_C_from_SP(SP, t, p)
 \item{p}{sea pressure [ dbar ]}
 }
 \value{
-conductivity [ mS/cm ]
+electrical conductivity [ mS/cm ]
 }
 \description{
 Note: the return value is not conductivity ratio, but rather
-conductivity itself, in mS/cm.
+conductivity itself, in mS/cm.  To convert to conductivity
+ratio, divide by gsw_C_from_SP(35, 15, 0).
 }
 \examples{
 gsw_C_from_SP(34.5487, 28.7856, 10) # 56.412599581571186
