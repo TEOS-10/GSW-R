@@ -184,12 +184,16 @@ gsw_alpha_wrt_t_exact <- function(SA, t, p)
     rval
 }
 
-#' Conductivity from Practical Salinity
+#' Electrical conductivity from Practical Salinity
+#'
+#' Note: the return value is not conductivity ratio, but rather
+#' conductivity itself, in mS/cm.  To convert to conductivity
+#' ratio, divide by gsw_C_from_SP(35, 15, 0).
 #' 
 #' @param SP Practical Salinity (PSS-78) [ unitless ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
 #' @param p sea pressure [ dbar ]
-#' @return conductivity [ mS/cm ]
+#' @return electrical conductivity [ mS/cm ]
 #' @examples 
 #' gsw_C_from_SP(34.5487, 28.7856, 10) # 56.412599581571186
 #' @references

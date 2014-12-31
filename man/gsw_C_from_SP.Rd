@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_C_from_SP}
 \alias{gsw_C_from_SP}
-\title{Conductivity from Practical Salinity}
+\title{Electrical conductivity from Practical Salinity}
 \usage{
 gsw_C_from_SP(SP, t, p)
 }
@@ -13,8 +13,12 @@ gsw_C_from_SP(SP, t, p)
 
 \item{p}{sea pressure [ dbar ]}
 }
+\value{
+conductivity [ mS/cm ]
+}
 \description{
-Conductivity from Practical Salinity
+Note: the return value is not conductivity ratio, but rather
+conductivity itself, in mS/cm.
 }
 \examples{
 gsw_C_from_SP(34.5487, 28.7856, 10) # 56.412599581571186
