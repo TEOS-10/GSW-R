@@ -189,6 +189,7 @@ gsw_alpha_wrt_t_exact <- function(SA, t, p)
 #' @param SP Practical Salinity (PSS-78) [ unitless ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
 #' @param p sea pressure [ dbar ]
+#' @return conductivity [ mS/cm ]
 #' @examples 
 #' gsw_C_from_SP(34.5487, 28.7856, 10) # 56.412599581571186
 #' @references
