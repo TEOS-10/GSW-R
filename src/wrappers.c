@@ -110,6 +110,14 @@ W2(wrap_gsw_z_from_p, gsw_z_from_p, p, lat, n, rval)
 //
 // Functions returning void do not really need wrappers, but the R code
 // is simpler to read if we use them anyway.
+void wrap_gsw_IPV_vs_fNsquared_ratio(double *SA, double *CT, double *p, int *n,
+        double *IPV_vs_fNsquared_ratio, double *p_mid)
+{
+    extern void gsw_ipv_vs_fnsquared_ratio(double *sa, double *ct, double *p, int n,
+            double *ipv_vs_fnsquared_ratio, double *p_mid);
+    gsw_ipv_vs_fnsquared_ratio(SA, CT, p, *n, IPV_vs_fNsquared_ratio, p_mid);
+}
+
 void wrap_gsw_rho_first_derivatives(double *SA, double *CT, double *p, int *n,
         double *drho_dsa, double *drho_dct, double *drho_dp)
 {

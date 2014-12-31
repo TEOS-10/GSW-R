@@ -153,6 +153,19 @@ e <- gsw_internal_energy(SA, CT, p)
 stopifnot(all.equal.numeric(e, 1e5*c(1.148091577452400, 1.134013146037679, 0.909571141862217,
                                      0.408593071164669, 0.273985268520158, 0.175019387936133)))
 
+## gsw_IPV_vs_fNsquared_ratio
+SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+p <-  c(     10,      50,     125,     250,     600,    1000)
+p_ref <- 0
+r <- gsw_IPV_vs_fNsquared_ratio(SA, CT, p, p_ref)
+## do not try testing; the C library has an error (pointed out to PB on Dec 30, 2014).
+#print(r)
+#stopifnot(all.equal.numeric(r$IPV_vs_fNsquared_ratio,
+#                            c(0.999745283730840, 0.996950635279959, 0.986153962640181,
+#                              0.931618955820649, 0.861271753240207)))
+#stopifnot(all.equal.numeric(r$p_mid, c(30, 87, 187.5, 425, 800)))
+
 ## gsw_kappa()
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <-c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)

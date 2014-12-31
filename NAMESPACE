@@ -20,6 +20,7 @@ export(
         gsw_entropy_from_t,
         gsw_grav,
         gsw_internal_energy,
+        gsw_IPV_vs_fNsquared_ratio,
         gsw_kappa,
         gsw_kappa_t_exact,
         gsw_latentheat_evap_CT,

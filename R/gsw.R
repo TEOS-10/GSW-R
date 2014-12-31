@@ -532,6 +532,37 @@ gsw_internal_energy <- function(SA, CT, p)
     rval
 }
 
+#' Ratio of vert. gradient of pot. density to vert grad of locally-referenced pot density
+#'
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @param p_ref reference pressure [ dbar ]
+#' @return a list containing IPV_vs_fNsquared_ratio [ unitless ] and mid-point pressure p_mid [ dbar ]
+#' @examples 
+#' SA <- c(34.7118, 34.8915)
+#' CT <- c(28.8099, 28.4392)
+#' p <-  c(     10,      50)
+#' p_ref <- 0
+#' r <- gsw_IPV_vs_fNsquared_ratio(SA, CT, p, p_ref)
+#' r$IPV_vs_fNsquared_ratio # 0.999745283730840 0.996950635279959
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_IPV_vs_fNsquared_ratio.html}
+gsw_IPV_vs_fNsquared_ratio <- function(SA, CT, p, p_ref=0)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p, p_ref=p_ref))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_IPV_vs_fNsquared_ratio",
+            SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), p_ref=as.double(l$p_ref),
+            n=as.integer(n),
+            ratio=double(n-1), p_mid=double(n-1), NAOK=TRUE, package="gsw")
+    cat("later, r:\n")
+    print(r)
+    if (is.matrix(SA))
+        stop("gsw_IPV_vs_fNsquared_ratio() cannot handle matrix SA")
+    list(IPV_vs_fNsquared_ratio=r$ratio, p_mid=r$p_mid)
+}
+
 #' isentropic compressibility of seawater
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
@@ -663,9 +694,9 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
     n <- length(l[[1]])
     r <- .C("wrap_gsw_Nsquared",
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), latitude=as.double(l$latitude),
-            n=n, n2=double(n-1), p_mid=double(n-1), NAOK=TRUE, package="gsw")
+            n=as.integer(n), n2=double(n-1), p_mid=double(n-1), NAOK=TRUE, package="gsw")
     if (is.matrix(SA))
-        stop("gsw_Nsquared() cannot handle matix SA")
+        stop("gsw_Nsquared() cannot handle matrix SA")
     list(N2=r$n2, p_mid=r$p_mid)
 }
 
@@ -802,7 +833,7 @@ gsw_rho_first_derivatives <- function(SA, CT, p)
                n=n, drho_dSA=double(n), drho_dCT=double(n), drho_dp=double(n),
                NAOK=TRUE, package="gsw")
     if (is.matrix(SA))
-        stop("gsw_rho_first_derivatives() cannot handle matix SA")
+        stop("gsw_rho_first_derivatives() cannot handle matrix SA")
     list(drho_dSA=rval$drho_dSA, drho_dCT=rval$drho_dCT, drho_dp=rval$drho_dp)
 }
 
@@ -1340,7 +1371,7 @@ gsw_Turner_Rsubrho <- function(SA, CT, p)
     Rsubrho <- r$Rsubrho
     p_mid <- r$p_mid
     if (is.matrix(SA)) {
-        stop("gsw_Turner_Rsubrho() cannot handle matix SA")
+        stop("gsw_Turner_Rsubrho() cannot handle matrix SA")
         ## dim(Tu) <- dim(SA)
         ## dim(Rsubrho) <- dim(SA)
         ## dim(p_mid) <- dim(SA)
