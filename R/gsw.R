@@ -534,6 +534,8 @@ gsw_internal_energy <- function(SA, CT, p)
 
 #' Ratio of vert. gradient of pot. density to vert grad of locally-referenced pot density
 #'
+#' Note that this just returns zeros, owing to a bug in the underlying C library.
+#'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
