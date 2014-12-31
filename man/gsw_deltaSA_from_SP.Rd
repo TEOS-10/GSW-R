@@ -15,6 +15,9 @@ gsw_deltaSA_from_SP(SP, p, longitude, latitude)
 
 \item{latitude}{latitude in decimal degrees north [ -90 ... +90 ]}
 }
+\value{
+deltaSA Absolute Salinity Anomaly  [ g/kg ]
+}
 \description{
 Absolute Salinity Anomaly from Practical Salinity
 }

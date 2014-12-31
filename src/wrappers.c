@@ -111,9 +111,9 @@ W3(wrap_gsw_sound_speed_t_exact, gsw_sound_speed_t_exact, SA, t, p, n, rval)
 W3(wrap_gsw_specvol_anom, gsw_specvol_anom, SA, CT, p, n, rval)
 W3(wrap_gsw_specvol_t_exact, gsw_specvol_t_exact, SA, t, p, n, rval)
 W3(wrap_gsw_SP_from_C, gsw_sp_from_c, C, t, p, n, rval)
-W4(wrap_gsw_SP_from_SA, gsw_sp_from_sa, SA, p, longitude, latitude, n, rval) // FIXME: clean when done
-W1(wrap_gsw_SP_from_SK, gsw_sp_from_sk, SK, n, rval) // FIXME: clean when done
-W1(wrap_gsw_SP_from_SR, gsw_sp_from_sr, SR, n, rval) // FIXME: clean when done
+W4(wrap_gsw_SP_from_SA, gsw_sp_from_sa, SA, p, longitude, latitude, n, rval)
+W1(wrap_gsw_SP_from_SK, gsw_sp_from_sk, SK, n, rval)
+W1(wrap_gsw_SP_from_SR, gsw_sp_from_sr, SR, n, rval)
 W4(wrap_gsw_SP_from_Sstar, gsw_sp_from_sstar, Sstar, p, longitude, latitude, n, rval)
 W3(wrap_gsw_t_freezing, gsw_t_freezing, SA, p, saturation_fraction, n, rval)
 W3(wrap_gsw_t_from_CT, gsw_t_from_ct, SA, CT, p, n, rval)

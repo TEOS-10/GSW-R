@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_SP_from_SK}
 \alias{gsw_SP_from_SK}
-\title{Calculate Absolute Salinity from Knudsen Salinity}
+\title{Calculate Practical Salinity from Knudsen Salinity}
 \usage{
 gsw_SP_from_SK(SK)
 }
@@ -13,12 +13,15 @@ gsw_SP_from_SK(SK)
 Practical Salinity (PSS-78) [ unitless ]
 }
 \description{
-Calculate Absolute Salinity from Knudsen Salinity
+Calculate Practical Salinity from Knudsen Salinity
 }
 \examples{
 gsw_SP_from_SK(34.5487) # 34.548721553448317
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SK.html}
+}
+\seealso{
+\code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SR}} and \code{\link{gsw_SP_from_Sstar}}.
 }
 

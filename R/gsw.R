@@ -378,12 +378,15 @@ gsw_CT_from_t <- function(SA, t, p)
 #' @param p sea pressure [ dbar ]
 #' @param longitude longitude in decimal degrees [ 0 ... +360 ] or [ -180 ... +180 ]
 #' @param latitude latitude in decimal degrees north [ -90 ... +90 ]
+#' @return deltaSA Absolute Salinity Anomaly  [ g/kg ]
 #' @examples 
 #' gsw_deltaSA_from_SP(34.7118, 10, 188, 4) # 0.000167203365230
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_deltaSA_from_SP.html}
 gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
 {
+    if (missing(SP)) stop("must supply SP")
+    if (missing(p)) stop("must supply p")
     if (missing(longitude)) stop("must supply longitude")
     if (missing(latitude)) stop("must supply latitude")
     l <- argfix(list(SP=SP, p=p, longitude=longitude, latitude=latitude))
@@ -1248,7 +1251,7 @@ gsw_SP_from_C <- function(C, t, p)
 #' @return Practical salinity.
 #' @examples 
 #' gsw_SP_from_SA(34.7118, 10, 188, 4) # 34.548721553448317
-#' @seealso \code{\link{gsw_SA_from_SP}} does the reverse.
+#' @seealso \code{\link{gsw_SA_from_SP}} does the reverse, while \code{\link{gsw_SP_from_SK}}, \code{\link{gsw_SP_from_SR}} and \code{\link{gsw_SP_from_Sstar}} are similar to this.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SA.html}
 gsw_SP_from_SA <- function(SA, p, longitude, latitude)
@@ -1274,14 +1277,13 @@ gsw_SP_from_SA <- function(SA, p, longitude, latitude)
     rval
 }
 
-
-#' Calculate Absolute Salinity from Knudsen Salinity
+#' Calculate Practical Salinity from Knudsen Salinity
 #'
 #' @param SK Knudsen Salinity [ parts per thousand, ppt ]
 #' @return Practical Salinity (PSS-78) [ unitless ]
 #' @examples 
 #' gsw_SP_from_SK(34.5487) # 34.548721553448317
-# ' @seealso \code{\link{gsw_SP_from_SR}} and \code{\link{gsw_SP_from_Sstar}}.
+#' @seealso \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SR}} and \code{\link{gsw_SP_from_Sstar}}.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SK.html}
 gsw_SP_from_SK <- function(SK)
@@ -1295,16 +1297,52 @@ gsw_SP_from_SK <- function(SK)
     rval
 }
 
+#' Calculate Practical Salinity from Reference Salinity
+#'
+#' @param SR Reference Salinity [ g/kg ]
+#' @return Practical Salinity (PSS-78) [ unitless ]
+#' @examples 
+#' gsw_SP_from_SR(34.5487) # 34.386552667080714
+#' @seealso \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SK}} and \code{\link{gsw_SP_from_Sstar}}.
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SR.html}
+gsw_SP_from_SR <- function(SR)
+{
+    if (missing(SR)) stop("must supply SR")
+    n <- length(SR)
+    rval <- .C("wrap_gsw_SP_from_SR",
+               SA=as.double(SR), n=as.integer(n), SP=double(n), NAOK=TRUE, package="gsw")$SP
+    if (is.matrix(SR))
+        dim(rval) <- dim(SR)
+    rval
+}
 
-
-
-
-
-
-
-
-
-
+#' Absolute Salinity from Preformed Salinity
+#' 
+#' @param Sstar Preformed Salinity [ g/kg ]
+#' @param p sea pressure [ dbar ]
+#' @param longitude longitude in decimal degrees [ 0 ... +360 ] or [ -180 ... +180 ]
+#' @param latitude latitude in decimal degrees north [ -90 ... +90 ]
+#' @return Practical Salinity (PSS-78) [ unitless ]
+#' @examples 
+#' gsw_SP_from_Sstar(34.7115, 10, 188, 4) # 34.548646570969929
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_Sstar.html}
+gsw_SP_from_Sstar <- function(Sstar, p, longitude, latitude)
+{
+    if (missing(Sstar)) stop("must supply Sstar")
+    l <- argfix(list(Sstar=Sstar, p=p, longitude=longitude, latitude=latitude))
+    if (is.null(l$p)) stop("must supply p")
+    if (is.null(l$longitude)) stop("must supply longitude")
+    if (is.null(l$latitude)) stop("must supply latitude")
+    n <- length(Sstar)
+    rval <- .C("wrap_gsw_SP_from_Sstar",
+               Sstar=as.double(l$Sstar), p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(Sstar))
+        dim(rval) <- dim(Sstar)
+    rval
+}
 
 #' Freezing temperature
 #'
