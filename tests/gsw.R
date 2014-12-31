@@ -296,6 +296,26 @@ SA <- gsw_SA_from_SP(SP, p, long, lat)
 stopifnot(all.equal(SA, c(34.711778344814114, 34.891522618230098, 35.025544862476920,
                           34.847229026189588, 34.736628474576051, 34.732363065590846)))
 
+## gsw_sigma0()
+sigma0 <- gsw_sigma0(34.7118, 28.8099)
+stopifnot(all.equal(sigma0, 21.798411276610750))
+
+## gsw_sigma1()
+sigma1 <- gsw_sigma1(34.7118, 28.8099)
+stopifnot(all.equal(sigma1, 25.955891533636986))
+
+## gsw_sigma2()
+sigma2 <- gsw_sigma2(34.7118, 28.8099)
+stopifnot(all.equal(sigma2, 30.02279641606605))
+
+## gsw_sigma3()
+sigma3 <- gsw_sigma3(34.7118, 28.8099)
+stopifnot(all.equal(sigma3, 34.002600253012133))
+
+## gsw_sigma4()
+sigma4 <- gsw_sigma4(34.7118, 28.8099)
+stopifnot(all.equal(sigma4, 37.898467323406976))
+
 ## gsw_specvol()
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
@@ -325,29 +345,15 @@ SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 p <- c(      10,      50,     125,     250,     600,    1000)
 latitude <- 4
 longitude <- 188
-SP <- gsw_SP_from_SA(SA, p, longitude, latitude) # SP, in_ocean
+SP <- gsw_SP_from_SA(SA, p, longitude, latitude)
 stopifnot(all.equal(SP, c(34.548721553448317, 34.727477488096639, 34.860554877708005,
                           34.680971112271791, 34.567971663653388, 34.560036751118204)))
 
-## gsw_sigma0()
-sigma0 <- gsw_sigma0(34.7118, 28.8099)
-stopifnot(all.equal(sigma0, 21.798411276610750))
-
-## gsw_sigma1()
-sigma1 <- gsw_sigma1(34.7118, 28.8099)
-stopifnot(all.equal(sigma1, 25.955891533636986))
-
-## gsw_sigma2()
-sigma2 <- gsw_sigma2(34.7118, 28.8099)
-stopifnot(all.equal(sigma2, 30.02279641606605))
-
-## gsw_sigma3()
-sigma3 <- gsw_sigma3(34.7118, 28.8099)
-stopifnot(all.equal(sigma3, 34.002600253012133))
-
-## gsw_sigma4()
-sigma4 <- gsw_sigma4(34.7118, 28.8099)
-stopifnot(all.equal(sigma4, 37.898467323406976))
+## gsw_SP_from_SK
+SK <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
+SP <- gsw_SP_from_SK(SK)
+stopifnot(all.equal(SP, c(34.548342096952908, 34.727295637119113, 34.860409847645435,
+                          34.680755706371187, 34.567658670360110, 34.559651800554022)))
 
 ## gsw_sound_speed()
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)

@@ -14,6 +14,17 @@
 // in light of Part 2. The number in the macro name is the number of 
 // arguments sent to the C library function named 'cname'. See part 3
 // for the handling of C library functions that return void.
+#define W1(wname, cname, arg1, n, rval) \
+void (wname)(double *(arg1), int *(n), double *(rval))\
+{\
+    for (int i=0; i < *(n); i++) {\
+        (rval)[i] = (cname)((arg1)[i]);\
+        if ((rval)[i] == GSW_INVALID_VALUE) {\
+            (rval)[i] = NA_REAL;\
+        }\
+    }\
+}
+
 #define W2(wname, cname, arg1, arg2, n, rval) \
 void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval))\
 {\
@@ -100,7 +111,10 @@ W3(wrap_gsw_sound_speed_t_exact, gsw_sound_speed_t_exact, SA, t, p, n, rval)
 W3(wrap_gsw_specvol_anom, gsw_specvol_anom, SA, CT, p, n, rval)
 W3(wrap_gsw_specvol_t_exact, gsw_specvol_t_exact, SA, t, p, n, rval)
 W3(wrap_gsw_SP_from_C, gsw_sp_from_c, C, t, p, n, rval)
-W4(wrap_gsw_SP_from_SA, gsw_sp_from_sa, SA, p, longitude, latitude, n, rval)
+W4(wrap_gsw_SP_from_SA, gsw_sp_from_sa, SA, p, longitude, latitude, n, rval) // FIXME: clean when done
+W1(wrap_gsw_SP_from_SK, gsw_sp_from_sk, SK, n, rval) // FIXME: clean when done
+W1(wrap_gsw_SP_from_SR, gsw_sp_from_sr, SR, n, rval) // FIXME: clean when done
+W4(wrap_gsw_SP_from_Sstar, gsw_sp_from_sstar, Sstar, p, longitude, latitude, n, rval)
 W3(wrap_gsw_t_freezing, gsw_t_freezing, SA, p, saturation_fraction, n, rval)
 W3(wrap_gsw_t_from_CT, gsw_t_from_ct, SA, CT, p, n, rval)
 W3(wrap_gsw_thermobaric, gsw_thermobaric, SA, CT, p, n, rval)

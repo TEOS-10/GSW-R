@@ -19,7 +19,8 @@ gsw_IPV_vs_fNsquared_ratio(SA, CT, p, p_ref = 0)
 a list containing IPV_vs_fNsquared_ratio [ unitless ] and mid-point pressure p_mid [ dbar ]
 }
 \description{
-Note that this just returns zeros, owing to a bug in the underlying C library.
+Note that the C library had to be patched to get this working; a new
+version of the library will address the bug directly.
 }
 \examples{
 SA <- c(34.7118, 34.8915)

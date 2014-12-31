@@ -1274,6 +1274,38 @@ gsw_SP_from_SA <- function(SA, p, longitude, latitude)
     rval
 }
 
+
+#' Calculate Absolute Salinity from Knudsen Salinity
+#'
+#' @param SK Knudsen Salinity [ parts per thousand, ppt ]
+#' @return Practical Salinity (PSS-78) [ unitless ]
+#' @examples 
+#' gsw_SP_from_SK(34.5487) # 34.548721553448317
+# ' @seealso \code{\link{gsw_SP_from_SR}} and \code{\link{gsw_SP_from_Sstar}}.
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SK.html}
+gsw_SP_from_SK <- function(SK)
+{
+    if (missing(SK)) stop("must supply SK")
+    n <- length(SK)
+    rval <- .C("wrap_gsw_SP_from_SK",
+               SA=as.double(SK), n=as.integer(n), SP=double(n), NAOK=TRUE, package="gsw")$SP
+    if (is.matrix(SK))
+        dim(rval) <- dim(SK)
+    rval
+}
+
+
+
+
+
+
+
+
+
+
+
+
 #' Freezing temperature
 #'
 #' Note: as of 2014-12-23, this corresponds to the Matlab function

@@ -48,7 +48,10 @@ export(
         gsw_specvol_t_exact,
         gsw_specvol_anom,
         gsw_SP_from_C,
-        gsw_SP_from_SA, #
+        gsw_SP_from_SA,
+        gsw_SP_from_SK, # FIXME: clean when done
+        #gsw_SP_from_SR, # FIXME: clean when done
+        #gsw_SP_from_Sstar, # FIXME: clean when done
         gsw_t_freezing,
         gsw_t_from_CT,
         gsw_thermobaric,
