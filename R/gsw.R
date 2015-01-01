@@ -848,7 +848,7 @@ gsw_rho_first_derivatives <- function(SA, CT, p)
     list(drho_dSA=rval$drho_dSA, drho_dCT=rval$drho_dCT, drho_dp=rval$drho_dp)
 }
 
-#' in-situ density (48-term equation)
+#' in-situ density
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
