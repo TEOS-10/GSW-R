@@ -4,12 +4,12 @@
 \alias{gsw_z_from_p}
 \title{height from pressure (48-term equation)}
 \usage{
-gsw_z_from_p(p, lat)
+gsw_z_from_p(p, latitude)
 }
 \arguments{
 \item{p}{sea pressure [ dbar ]}
 
-\item{lat}{latitude in decimal degrees north [ -90 ... +90 ]}
+\item{latitude}{latitude in decimal degrees north [ -90 ... +90 ]}
 }
 \value{
 height [ m ]
