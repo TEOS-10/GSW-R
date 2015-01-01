@@ -184,32 +184,6 @@ gsw_alpha_wrt_t_exact <- function(SA, t, p)
     rval
 }
 
-#' Electrical conductivity from Practical Salinity
-#'
-#' Note: the return value is not conductivity ratio, but rather
-#' conductivity itself, in mS/cm.  To convert to conductivity
-#' ratio, divide by gsw_C_from_SP(35, 15, 0).
-#' 
-#' @param SP Practical Salinity (PSS-78) [ unitless ]
-#' @param t in-situ temperature (ITS-90) [ deg C ]
-#' @param p sea pressure [ dbar ]
-#' @return electrical conductivity [ mS/cm ]
-#' @examples 
-#' gsw_C_from_SP(34.5487, 28.7856, 10) # 56.412599581571186
-#' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_C_from_SP.html}
-gsw_C_from_SP <- function(SP, t, p)
-{
-    l <- argfix(list(SP=SP, t=t, p=p))
-    n <- length(l[[1]])
-    rval <- .C("wrap_gsw_C_from_SP",
-               SP=as.double(l$SP), t=as.double(l$t), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
-    if (is.matrix(SP))
-        dim(rval) <- dim(SP)
-    rval
-}
-
 #' saline contraction coefficient at constant Conservative Temperature. (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
@@ -260,27 +234,6 @@ gsw_beta_const_t_exact <- function(SA, t, p)
     rval
 }
 
-#' Isobaric heat capacity
-#' 
-#' @param SA Absolute Salinity [ g/kg ]
-#' @param t in-situ temperature (ITS-90) [ deg C ]
-#' @param p sea pressure [ dbar ]
-#' @examples 
-#' gsw_cp_t_exact(34.7118, 28.7856, 10) # 4002.888003958537
-#' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_cp_t_exact.html}
-gsw_cp_t_exact <- function(SA, t, p)
-{
-    l <- argfix(list(SA=SA, t=t, p=p))
-    n <- length(l[[1]])
-    rval <- .C("wrap_gsw_cp_t_exact",
-               SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
-    if (is.matrix(SA))
-        dim(rval) <- dim(SA)
-    rval
-}
-
 #' cabbeling coefficient (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
@@ -305,6 +258,53 @@ gsw_cabbeling <- function(SA, CT, p)
         dim(rval) <- dim(SA)
     rval
 }
+#' Electrical conductivity from Practical Salinity
+#'
+#' Note: the return value is not conductivity ratio, but rather
+#' conductivity itself, in mS/cm.  To convert to conductivity
+#' ratio, divide by gsw_C_from_SP(35, 15, 0).
+#' 
+#' @param SP Practical Salinity (PSS-78) [ unitless ]
+#' @param t in-situ temperature (ITS-90) [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @return electrical conductivity [ mS/cm ]
+#' @examples 
+#' gsw_C_from_SP(34.5487, 28.7856, 10) # 56.412599581571186
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_C_from_SP.html}
+gsw_C_from_SP <- function(SP, t, p)
+{
+    l <- argfix(list(SP=SP, t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_C_from_SP",
+               SP=as.double(l$SP), t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SP))
+        dim(rval) <- dim(SP)
+    rval
+}
+
+#' Isobaric heat capacity
+#' 
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param t in-situ temperature (ITS-90) [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @examples 
+#' gsw_cp_t_exact(34.7118, 28.7856, 10) # 4002.888003958537
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_cp_t_exact.html}
+gsw_cp_t_exact <- function(SA, t, p)
+{
+    l <- argfix(list(SA=SA, t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_cp_t_exact",
+               SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 
 #' Conservative temperature freezing point
 #'
@@ -976,26 +976,6 @@ gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
     rval
 }
 
-#' Calculate Reference Salinity from Practical Salinity
-#'
-#' @param SP Practical Salinity (PSS-78) [ unitless ]
-#' @return Reference Salinity [ g/kg ]
-#' @examples 
-#' gsw_SR_from_SP(34.5487) # 34.711611927085727
-#' @seealso The reverse is \code{\link{gsw_SP_from_SR}}; also related are \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SK}} and \code{\link{gsw_SP_from_Sstar}}.
-#' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SR_from_SP.html}
-gsw_SR_from_SP <- function(SP)
-{
-    if (missing(SP)) stop("must supply SP")
-    n <- length(SP)
-    rval <- .C("wrap_gsw_SR_from_SP",
-               SP=as.double(SP), n=as.integer(n), SR=double(n), NAOK=TRUE, package="gsw")$SR
-    if (is.matrix(SP))
-        dim(rval) <- dim(SP)
-    rval
-}
-
 #' potential density anomaly referenced to 0 dbar
 #'
 #' This uses the 48-term density equation, and returns
@@ -1367,6 +1347,26 @@ gsw_SP_from_Sstar <- function(Sstar, p, longitude, latitude)
                n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
     if (is.matrix(Sstar))
         dim(rval) <- dim(Sstar)
+    rval
+}
+
+#' Calculate Reference Salinity from Practical Salinity
+#'
+#' @param SP Practical Salinity (PSS-78) [ unitless ]
+#' @return Reference Salinity [ g/kg ]
+#' @examples 
+#' gsw_SR_from_SP(34.5487) # 34.711611927085727
+#' @seealso The reverse is \code{\link{gsw_SP_from_SR}}; also related are \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SK}} and \code{\link{gsw_SP_from_Sstar}}.
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SR_from_SP.html}
+gsw_SR_from_SP <- function(SP)
+{
+    if (missing(SP)) stop("must supply SP")
+    n <- length(SP)
+    rval <- .C("wrap_gsw_SR_from_SP",
+               SP=as.double(SP), n=as.integer(n), SR=double(n), NAOK=TRUE, package="gsw")$SR
+    if (is.matrix(SP))
+        dim(rval) <- dim(SP)
     rval
 }
 
