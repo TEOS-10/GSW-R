@@ -7,55 +7,53 @@
 \title{R implementation of the Thermodynamic Equation Of Seawater - 2010 (TEOS-10)}
 \description{
 Provides an R interface to the TEOS-10 / GSW (Gibbs Sea Water) library,
-for use by the "oce" package (see \url{http://dankelley.github.io/oce})
-and other uses.
+partly for use by the \code{oce} package (see \url{http://dankelley.github.io/oce})
+and partly for general use.
 }
 \details{
 The functions are linked with the C version of the TEOS-10 library,
-but the interface (i.e. the function names and the argument lists)
-match the Matlab implementation.  The documentation of the functions
-provided here focuses on the arguments and return value, with links
-to the TEOS-10 webpages yielding fuller details.
+but the interface (e.g. the case used in function names)
+matches the Matlab implementation, not the C version.
+
+The documentation provided here focuses on the arguments and return
+values, relying on links to the TEOS-10 webpages for details.
 
 See \url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html}
-for a list of the TEOS-10 functions, and links therein for more
-information on the functions (including references to more detailed
-software manuals and also to the related scientific literature).
+for a list of the TEOS-10 functions and
+\url{http://teos-10.github.io/GSW-R/documentation.html} for a list
+of the functions implemented in the present package.
 
-Each function provided here has a test suite that is used during the
-building of the package. That means that results should match those of
-the equivalent Matlab functions to 8 or more significant digits. And,
-importantly, it means that the functions cannot drift from these
-tested values, for if they did, the package would fail to build and
-thus could not be hosted on CRAN.
+Each function is tested during the building of the package,
+which means that results are guaranteed to match those of
+the equivalent Matlab functions to at least 8 digits.
 
-The underlying C code works on vectors, so each of the R functions
-in gsw starts by transforming its arguments accordingly.  Generally,
-this means first using \code{\link{rep}} on each argument to get something
+A significant difference from the Matlab case is in the inspection
+of the dimensions of arguments. The Matlab library has rules
+for expanding some arguments to match others. For example,
+if Practical Salinity is a matrix and pressure is a single value,
+then that single pressure is used throughout a calculation of
+Absolute Salinity. This convenience is only partly mimicked in the
+present package.  Since the underlying C code works on vectors,
+the R functions in \code{gsw} start by transforming the arguments accordingly.
+This involves using \code{\link{rep}} on each argument to get something
 with length matching the first argument, and, after the computation
 is complete, converting the return value into a matrix, if the first
 argument was a matrix. There are some exceptions to this, however.
-For example, both \code{\link{gsw_SA_from_SP}} and
-\code{\link{gsw_SP_from_SA}} can handle the case in which the first
-argument is a matrix and arguments \code{longitude} and \code{latitude}
-are vectors sized to match that matrix. This can be handy with
-gridded datasets. Still, given all of this, the best scheme involves
-the user deciding on how to set up the vectors so that longitude, etc.,
-are mapped appropriately to salinity, etc., for the dataset in hand.
+For example, \code{\link{gsw_SA_from_SP}} and similar functions
+can handle the case in which the \code{SA} argument is a matrix and
+\code{longitude} and \code{latitude} are vectors sized to match.
+This can be handy with gridded datasets. However, the careful
+analyst will probably prefer to avoid this and other conveniences,
+supplying properly-matched arguments from the outset.
 
-As of early 2015, the package is still in development. The plan is to
-have all relevant functions coded (and tested) by mid-January 2015. That
-will be followed by few weeks of practical testing and the sort of code
-improvements that stem from such work.  The best guess is that the underlying
-C library will be updated in early 2015, and if that can be accomplished,
-then a few days should be enough to update gsw to match. This means there is
-a possibility of a CRAN submission in March 2015, a date that means something
-to DK. But this is a large package, and therefore not suitable
-for a rapid succesion of CRAN releases, and that means that a formal release
-to CRAN may not be possible until mid 2015. A decision on this will be made
-by the end of January 2015.
+As of early 2015, the package is still in development (see
+\url{https://github.com/TEOS-10/GSW-R}), with a plan to
+have all relevant functions coded by early January, allowing
+for a month of testing before submission to CRAN.
 
-An important testbed for testing will be the incorpation of gsw within
-the oce package. This is proceeding in parallel with gsw development.
+There is a possibility that the underlying C library will be
+updated sometime in 2015, and if this is done early enough,
+the present package will be altered before its first
+submission to CRAN.
 }
 
