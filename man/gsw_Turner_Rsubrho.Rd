@@ -14,7 +14,7 @@ gsw_Turner_Rsubrho(SA, CT, p)
 \item{p}{sea pressure [ dbar ]}
 }
 \value{
-a list containing Tu, Rrho, and p_mid
+list containing Tu, Rrho, and p_mid
 }
 \description{
 This uses the 48-term density equation. The values of Turner Angle

@@ -1541,7 +1541,7 @@ gsw_thermobaric <- function(SA, CT, p)
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
-#' @return a list containing Tu, Rrho, and p_mid
+#' @return list containing Tu, Rrho, and p_mid
 #' @examples
 #' SA = c(34.7118, 34.8915)
 #' CT = c(28.8099, 28.4392)
