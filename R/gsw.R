@@ -14,7 +14,11 @@
 #' @details
 #' The functions are linked with the C version of the TEOS-10 library,
 #' but the interface (e.g. the case used in function names)
-#' matches the Matlab implementation, not the C version.
+#' matches the Matlab implementation, not the C version. One
+#' significant difference from Matlab arguments is that the Matlab
+#' abbreviations \code{long} and \code{lat} are written out in full
+#' in the present package. (Since R permits abbreviated argument
+#' names in function calls, users may use the Matlab names if desired.)
 #'
 #' The documentation provided here focuses on the arguments and return
 #' values, relying on links to the TEOS-10 webpages for details.
@@ -549,7 +553,7 @@ gsw_internal_energy <- function(SA, CT, p)
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
 #' @param p_ref reference pressure [ dbar ]
-#' @return a list containing IPV_vs_fNsquared_ratio [ unitless ] and mid-point pressure p_mid [ dbar ]
+#' @return list containing IPV_vs_fNsquared_ratio [ unitless ] and mid-point pressure p_mid [ dbar ]
 #' @examples 
 #' SA <- c(34.7118, 34.8915)
 #' CT <- c(28.8099, 28.4392)
@@ -690,7 +694,7 @@ gsw_latentheat_melting <- function(SA, p)
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
 #' @param latitude latitude in decimal degrees [ -90 to 90 ]
-#' @return a list containing N2 [ s^(-2) ] and mid-point pressure p_mid [ dbar ]
+#' @return list containing N2 [ 1/s^ ] and mid-point pressure p_mid [ dbar ]
 #' @examples 
 #' SA <- c(34.7118, 34.8915)
 #' CT <- c(28.8099, 28.4392)
@@ -830,7 +834,7 @@ gsw_rho <- function(SA, CT, p)
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
-#' @return a list containing drho_dSA [ kg^2/(g m^3) ], drho_dCT [ (kg/(K m^3) ] and drho_dp [ kg/(Pa m^3) ]
+#' @return list containing drho_dSA [ kg^2/(g m^3) ], drho_dCT [ kg/(K m^3) ] and drho_dp [ kg/(Pa m^3) ]
 #' @examples
 #' gsw_rho_first_derivatives(34.7118, 28.8099, 10) #' # 0.73321 -0.33174 4.20305e-7
 #' @references

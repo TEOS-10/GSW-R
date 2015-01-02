@@ -16,7 +16,7 @@ gsw_IPV_vs_fNsquared_ratio(SA, CT, p, p_ref = 0)
 \item{p_ref}{reference pressure [ dbar ]}
 }
 \value{
-a list containing IPV_vs_fNsquared_ratio [ unitless ] and mid-point pressure p_mid [ dbar ]
+list containing IPV_vs_fNsquared_ratio [ unitless ] and mid-point pressure p_mid [ dbar ]
 }
 \description{
 Note that the C library had to be patched to get this working; a new

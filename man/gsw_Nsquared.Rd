@@ -16,7 +16,7 @@ gsw_Nsquared(SA, CT, p, latitude = 0)
 \item{latitude}{latitude in decimal degrees [ -90 to 90 ]}
 }
 \value{
-a list containing N2 [ s^(-2) ] and mid-point pressure p_mid [ dbar ]
+list containing N2 [ 1/s^ ] and mid-point pressure p_mid [ dbar ]
 }
 \description{
 Calculate Brunt Vaisala Frequency squared

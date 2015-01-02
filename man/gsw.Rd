@@ -13,7 +13,11 @@ and partly for general use.
 \details{
 The functions are linked with the C version of the TEOS-10 library,
 but the interface (e.g. the case used in function names)
-matches the Matlab implementation, not the C version.
+matches the Matlab implementation, not the C version. One
+significant difference from Matlab arguments is that the Matlab
+abbreviations \code{long} and \code{lat} are written out in full
+in the present package. (Since R permits abbreviated argument
+names in function calls, users may use the Matlab names if desired.)
 
 The documentation provided here focuses on the arguments and return
 values, relying on links to the TEOS-10 webpages for details.

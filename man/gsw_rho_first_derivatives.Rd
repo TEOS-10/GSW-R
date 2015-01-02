@@ -14,7 +14,7 @@ gsw_rho_first_derivatives(SA, CT, p)
 \item{p}{sea pressure [ dbar ]}
 }
 \value{
-a list containing drho_dSA [ kg^2/(g m^3) ], drho_dCT [ (kg/(K m^3) ] and drho_dp [ kg/(Pa m^3) ]
+list containing drho_dSA [ kg^2/(g m^3) ], drho_dCT [ kg/(K m^3) ] and drho_dp [ kg/(Pa m^3) ]
 }
 \description{
 SA, CT and p partial derivatives of density (48-term equation)
