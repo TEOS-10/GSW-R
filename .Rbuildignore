@@ -1,7 +1,7 @@
 Sweave.sty
-vignettes/.build.timestamp
-vignettes/gsw.bbl
-vignettes/gsw.blg
+.build.timestamp
+gsw.bbl
+gsw.blg
 _layouts
 _site
 src-i386
@@ -15,4 +15,5 @@ inst/doc/.gitignore
 src/*.o$
 src/*.so$
 README_developer.md
+Sweave.sty
 

@@ -1,3 +1,4 @@
+.build.timestamp
 GSW-R.Rproj
 *.swp
 *~
@@ -5,3 +6,4 @@ src/*.o
 src/*.so
 src/*.rds
 .Rproj.user
+vignettes/gsw.R
