@@ -241,8 +241,8 @@ dev.off()
 
 \begin{figure}[t]
     \begin{center}
-        \includegraphics[width=.6\hsize]{SSS_1}
-        \includegraphics[width=.6\hsize]{SSS_2}
+        \includegraphics[width=.65\hsize]{SSS_1}
+        \includegraphics[width=.65\hsize]{SSS_2}
     \end{center}
     \caption{\label{figure:SSS}Sea surface Practical Salinity (SP) from the
     \code{levitus} dataset and percent difference between this and Absolute
@@ -277,11 +277,8 @@ dev.off()
 @
 Note the use of quantile-specified scales for the images, which otherwise have
 their colour mappings controlled by isolated low-saline waters, yielding little
-to see in the wider expanses of the world ocean.
-
-For more detailed displays of the differences between old and newer seawater
-formulations, readers might consult \cite{mcdougall2012agaf}, along with other
-materials provided on the \TEOS website (\url{http://www.teos-10.org}).
+to see in the wider expanses of the world ocean (see e.g.
+\cite{mcdougall2012agaf} more context).
 
 \newpage
 
