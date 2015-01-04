@@ -275,9 +275,9 @@ title("Surface SA-SP, percent")
 <<eval=false, echo=false, results=hide>>=
 dev.off()
 @
-Note the use of quantile-specified scales for the images, which otherwise have
-their colour mappings controlled by isolated low-saline waters, yielding little
-to see in the wider expanses of the world ocean (see e.g.
+Note the use of quantile-specified scales for the images, the colour mappings of
+which would otherwise be controlled by isolated low-saline waters, yielding
+little to see in the wider expanses of the world ocean (see e.g.
 \cite{mcdougall2012agaf} more context).
 
 \newpage
