@@ -8,7 +8,7 @@ gsw_p_from_z(z, latitude, geo_strf_dyn_height = 0,
   sea_surface_geopotential = 0)
 }
 \arguments{
-\item{z}{height, zero at surface (if last 2 args are zero) and positive upwards [ m ]}
+\item{z}{height, zero at surface (but note last 2 args) and positive upwards [ m ]}
 
 \item{latitude}{latitude in decimal degrees north [ -90 ... +90 ]}
 
@@ -23,7 +23,7 @@ sea pressure [ dbar ]
 pressure from z
 }
 \examples{
-gsw_p_from_z(10, 4) # -10.055235976847
+gsw_p_from_z(-10, 4) # 10.05572704136
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_p_from_z.html}

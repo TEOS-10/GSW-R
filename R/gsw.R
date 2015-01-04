@@ -729,13 +729,13 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
 
 #' pressure from z
 #' 
-#' @param z height, zero at surface (if last 2 args are zero) and positive upwards [ m ]
+#' @param z height, zero at surface (but note last 2 args) and positive upwards [ m ]
 #' @param latitude latitude in decimal degrees north [ -90 ... +90 ]
 #' @param geo_strf_dyn_height dynamic height anomaly [ m^2/s^2 ]
 #' @param sea_surface_geopotential geopotential at zero sea pressure [ m^2/s^2 ]
 #' @return sea pressure [ dbar ]
 #' @examples
-#' gsw_p_from_z(10, 4) # -10.055235976847
+#' gsw_p_from_z(-10, 4) # 10.05572704136
 #' @seealso
 #' This is (almost) the reverse of \code{\link{gsw_z_from_p}}, apart from the last two arguments.
 #' @references
