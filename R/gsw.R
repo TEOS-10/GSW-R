@@ -727,6 +727,35 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
     list(N2=r$n2, p_mid=r$p_mid)
 }
 
+#' pressure from z
+#' 
+#' @param z height, zero at surface (if last 2 args are zero) and positive upwards [ m ]
+#' @param latitude latitude in decimal degrees north [ -90 ... +90 ]
+#' @param geo_strf_dyn_height dynamic height anomaly [ m^2/s^2 ]
+#' @param sea_surface_geopotential geopotential at zero sea pressure [ m^2/s^2 ]
+#' @return sea pressure [ dbar ]
+#' @examples
+#' gsw_p_from_z(10, 4) # -10.055235976847
+#' @seealso
+#' This is (almost) the reverse of \code{\link{gsw_z_from_p}}, apart from the last two arguments.
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_p_from_z.html}
+gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height=0, sea_surface_geopotential=0)
+{
+    l <- argfix(list(z=z, latitude=latitude,
+                     geo_strf_dyn_height=geo_strf_dyn_height,
+                     sea_surface_geopotential=sea_surface_geopotential))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_p_from_z",
+               z=as.double(l$z), latitude=as.double(l$latitude),
+               geo_strf_dyn_height=as.double(l$geo_strf_dyn_height),
+               sea_surface_geopotential=as.double(l$geopotential),
+               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(z))
+        dim(rval) <- dim(z)
+    rval
+}
+
 #' potential density
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
@@ -1592,6 +1621,8 @@ gsw_Turner_Rsubrho <- function(SA, CT, p)
 #' @return height [ m ]
 #' @examples
 #' gsw_z_from_p(10, 4) # -9.9445831334188
+#' @seealso
+#' This is (almost) the reverse of \code{\link{gsw_p_from_z}}
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_z_from_p.html}
 gsw_z_from_p <- function(p, latitude)

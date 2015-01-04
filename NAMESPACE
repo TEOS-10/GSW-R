@@ -27,6 +27,7 @@ export(
         gsw_latentheat_evap_t,
         gsw_latentheat_melting,
         gsw_Nsquared,
+        gsw_p_from_z,
         gsw_pot_rho_t_exact,
         gsw_pt0_from_t,
         gsw_pt_from_CT,

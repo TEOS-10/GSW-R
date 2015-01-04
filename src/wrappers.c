@@ -93,6 +93,11 @@ W3(wrap_gsw_kappa_t_exact, gsw_kappa_t_exact, SA, t, p, n, rval)
 W2(wrap_gsw_latentheat_evap_CT, gsw_latentheat_evap_ct, SA, CT, n, rval)
 W2(wrap_gsw_latentheat_evap_t, gsw_latentheat_evap_t, SA, t, n, rval)
 W2(wrap_gsw_latentheat_melting, gsw_latentheat_melting, SA, p, n, rval)
+
+// declare since it's not in the TEOS-10 C library yet, and was coded separately.
+extern double gsw_p_from_z(double z, double latitude, double geo_strf_dyn_height, double sea_surface_geopotential);
+W4(wrap_gsw_p_from_z, gsw_p_from_z, z, latitude, geo_strf_dyn_height, sea_surface_geopotential, n, rval)
+
 W4(wrap_gsw_pot_rho_t_exact, gsw_pot_rho_t_exact, SA, t, p, p_ref, n, rval)
 W3(wrap_gsw_pt0_from_t, gsw_pt0_from_t, SA, t, p, n, rval)
 W2(wrap_gsw_pt_from_CT, gsw_pt_from_ct, SA, CT, n, rval)
