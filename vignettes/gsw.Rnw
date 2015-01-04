@@ -21,6 +21,8 @@
 \usepackage{color}
 \usepackage{natbib}
 \usepackage{xspace}
+\usepackage[font=small,skip=0pt]{caption}
+
 
 %\newcommand\CT{$\textTheta$\xspace} % conservative temperature
 \newcommand\CT{$\Theta$\xspace} % conservative temperature
@@ -41,7 +43,7 @@
 \textwidth 6.5in
      
 
-\parskip=1.5ex plus 1.5ex minus 1.25ex
+%\parskip=1.2ex plus 0.25ex minus 0.5ex
 
 \titleformat{\section}[block]{\normalfont\large\bfseries}{\thesection}{1em}{}
 \titlespacing{\section}{0em}{2em plus 0.5em minus 2em}{0.15em plus 0.15em minus 0.125em}
@@ -55,8 +57,9 @@
 \newcommand\code[1]{\texttt{#1}\xspace}
 \newcommand\oce{\texttt{oce}\xspace}
 \newcommand\gsw{\texttt{gsw}\xspace}
-\newcommand\UNESCO{\texttt{UNESCO-80}\xspace}
-\newcommand\TEOS{\texttt{TEOS-10}\xspace}
+\newcommand\UNESCO{\textsc{unesco-80}\xspace}
+\newcommand\TEOS{\textsc{teos-10}\xspace}
+\newcommand\GSW{\textsc{gsw}\xspace}
 
 \newcommand{\workedexercise}[2]{
 	\vspace{2ex plus 2ex minus 1ex}
@@ -81,45 +84,44 @@
 
 \begin{abstract}
 
-    The \verb@gsw@ package provides an implementation of TEOS-10, the
-    Thermodynamic Equation Of Seawater \cite[]{ioc2010tite}. This vignette
-    outlines how to specify the use of this library within \verb@oce@ and
-    independently of that package.
+    The \verb@gsw@ package provides an R implementation of \GSW, the Gibbs
+    Seawater toolbox of \TEOS, the Thermodynamic Equation Of Seawater
+    \cite[]{ioc2010tite}. This vignette outlines how to use \gsw as an
+    independent package, and also how to use it within the \oce package.
 
 \end{abstract}
 
 \section{Introduction}
 
-The \gsw package is an R interface to the Gibbs Seawater (GSW) portion of the
-TEOS-10 library \cite[see
-e.g.][]{graham2013qtnp,ioc2010tite,mcdougall2011gswt,mcdougall2012agaf,spall2013e,wright2011asds}
-for use in calculations of the properties of seawater. Although it can be used
-by itself, it was first devised to support the \oce package for oceanographic
-analysis \cite[]{kelley2014oaoo}.  
+The \gsw package is an R interface to the Gibbs SeaWater portion of the \TEOS
+system for calculating seawater properties and related quantities.  Although it
+can be used by itself, \gsw was first devised to support the \oce package, which
+provides tools for more general oceanographic analysis \cite[]{kelley2014oaoo}.  
 
-It is assumed that readers of this vignette are familiar with TEOS-10, and with
-oceanographic processing in general.  The general \TEOS
-website\footnote{\url{http://www.teos-10.org}} provides an entry to the growing
-literature on \TEOS, along with extensive manuals on the use of the Gibbs
-Seawater
-library\footnote{\url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html}}.
+It is assumed here that readers are familiar with \TEOS, and with oceanographic
+processing. A good learning resource is the \TEOS website
+(\url{http://www.teos-10.org}), which provides technical manuals for the Matlab
+version of the Gibbs Seawater library
+(\url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html}), along with
+scientific white papers and links to the growing literature on \TEOS.
 
-The foundation of \gsw is a connection to the C version of the Gibbs Seawater
-library.  This has the advantage of yielding high processing speed, although an
-equally important factor in this choice was that it was judged less error-prone
-than rewriting the library directly in the R language.  Another measure taken to
-reduce coding errors is the incorporation into \gsw of the check values that are
-provided in the \TEOS documentation. These check values are examined during the
-process of building \gsw, and since no package that fails tests is permitted on
-CRAN\footnote{\url{http://cran.r-project.org}}, users can have a high assurance
-that the software is working as it should.
+The heart of \gsw is a series of wrapper functions that connect R with the
+functions provided in the C version of the Gibbs Seawater library. This scheme
+has some advantages over transliterating the C (or Matlab) code into R.  The
+first is processing speed, for C tends to be orders of magnitude faster than R
+and Matlab. The second, probably more important to most users, is an increase in
+reliability that results from avoiding transliteration errors.  (To further
+increase reliability, the package-building process incorporates tests of the
+check values provided in the \TEOS documentation.)
 
-The documentation provided in \gsw is minimal, amounting mainly to an
-explanation of function arguments and the return value, plus a link to the
-fuller documentation provided on the \TEOS website. Since R tests for
-code-documentation agreement on function arguments, and since a pointer is
-provided to the official documentation for details, users can have a high
-assurance that the documentation is correct.
+The \gsw documentation is minimal, amounting mainly to an explanation of
+function arguments and return values, plus links to the reference documentation
+provided on the \TEOS website. This fits with the overall goal of \gsw, which is
+to provide an interface to \GSW algorithms, on the assumption that users will
+learn about the algorithms from the \TEOS website, and learn about their
+scientific basis and practical significance from the peer-reviewed literature
+\cite[see
+e.g.][]{graham2013qtnp,ioc2010tite,mcdougall2011gswt,mcdougall2012agaf,spall2013e,wright2011asds}.
 
 %\section{Development status}
 % 
@@ -134,21 +136,22 @@ assurance that the documentation is correct.
 options(keep.source=TRUE, width=60, prompt=' ', continue=' ', oceEOS="unesco")
 @
 
-Suppose a water sample is taken at 100\,dbar pressure, longitude 188 east,
-latitude 4 north, and that it has \di{Practical Salinity} 35 and \di{in-situ
-temperature} 10\,$^\circ$C on the (ITS-90) scale. To calculate its \di{Absolute
-Salinity}, do as follows
+Suppose a water sample taken at pressure 100\,dbar, longitude 188E and latitude
+4N, reveals \di{Practical Salinity} 35 and \di{in-situ temperature}
+10\,$^\circ$C (ITS-90). Then the \di{Absolute Salinity} may be calculated with
 <<>>=
 library(gsw)
 SA <- gsw_SA_from_SP(SP=35, p=100, longitude=188, latitude=4)
-SA
 @
-and from that, to calculate its \di{Conservative temperature} as follows.
+yielding \code{SA}=\Sexpr{sprintf("%.4f", SA)} [g/kg], which can then be used to 
+calculate \di{Conservative temperature} with
 <<>>=
-library(gsw)
 CT <- gsw_CT_from_t(SA=SA, t=10, p=100)
-CT
 @
+yielding \code{CT}=\Sexpr{sprintf("%.4f", CT)} [$^\circ$C]. Readers familiar
+with \GSW will recognize the function and argument names, and are likely to find
+the other functions needed for their work among the roughly 60 that 
+\gsw provides.
 
 \section{Using gsw within oce}
 
@@ -162,12 +165,10 @@ CT
     formulation; right: using the \code{gsw} formulation.}
 \end{figure}
 
-The \gsw package is automatically loaded by \oce, so there is no need for a
-\code{library(gsw)} call.
 
 Many \oce plotting functions have an argument named \code{eos} that can be set
 to the string \code{"unesco"} to get the older seawater formulation, or to
-\code{"gsw"} to get the newer one. For example, the data object \code{section}
+\code{"gsw"} to get the newer one. For example, the \code{section} dataset
 provided by \oce holds a sequence of \di{CTD} casts in the North Atlantic.
 Individual casts may be selected by index, so for example a \di{TS diagram} of
 the station at index 100 (south of Cape Cod in 4000\,m of water) can be plotted
@@ -188,9 +189,8 @@ plotTS(ctd, Slim=Slim, Tlim=Tlim, eos="unesco")
 dev.off()
 pdf('TS_gsw.pdf', pointsize=18)
 @
-Note that the limits of the plot have been specified so that they will agree
-with a plot using the \code{gsw} system (right-hand panel of
-Figure~\ref{figure:TS}):
+where plot limits are used to match axes for a plot using
+\code{gsw} (right-hand panel of Figure~\ref{figure:TS}):
 <<eval=false>>=
 plotTS(ctd, Slim=Slim, Tlim=Tlim, eos="gsw")
 @
@@ -198,90 +198,94 @@ plotTS(ctd, Slim=Slim, Tlim=Tlim, eos="gsw")
 dev.off()
 @
 
+
 \begin{figure}[t]
     \begin{center}
-        \includegraphics[width=0.49\hsize]{temperature_comparison}
-        \includegraphics[width=0.49\hsize]{salinity_comparison}
+        \includegraphics[width=0.4\hsize]{temperature_comparison}
+        \includegraphics[width=0.4\hsize]{salinity_comparison}
     \end{center}
-    \caption{\label{figure:comparison}Histograms comparing \UNESCO and \TEOS
+    \caption{\label{figure:comparison}Comparison of \UNESCO and \TEOS
     formulations for a CTD section crossing the Atlantic at 36$^\circ$N.}
 \end{figure}
-In addition to special plotting features, most of the objects within \oce have
-accessors that can return temperature and salinity in either the \UNESCO or
-\TEOS scheme. For example, the ratio of the \TEOS quantity called
-Conservative Temperature (\CT in \TEOS notation) to \UNESCO-formulated
-potential temperature ($\theta$ in \UNESCO notation) for all the CTD profiles
-in the cross-Atlantic sampling stored in the \oce object called \code{section}
-is constructed as follows (left panel of Figure~\ref{figure:comparison}).
-% <<echo=false, results=hide>>=
-% pdf('temperature_comparison.pdf', height=5, pointsize=16)
-% @
+
+Most hydrography-related functions of \oce provide this \code{eos} argument for
+selecting the seawater formulation. This includes functions for plotting and for
+calculating.  In addition, most of the objects within \oce have accessors that
+can return temperature and salinity in either the \UNESCO or \TEOS scheme. For
+example, the ratio of Conservative Temperature to \UNESCO-formulated
+potential temperature $\theta$ for all the CTD profiles in the cross-Atlantic
+sampling stored in the \oce object called \code{section} is constructed as
+follows (left panel of Figure~\ref{figure:comparison}).
+
+<<eval=false, echo=false, results=hide>>=
+pdf('temperature_comparison.pdf', height=5, pointsize=18)
+par(mgp=c(2, 0.85, 0))
+@
 <<eval=false>>=
 data(section)
 hist(section[["theta"]] / section[["CT"]], main="Atlantic 36N")
 @
-while the corresponding panel comparing \UNESCO Practical Salinity to \TEOS
-Absolute Salinity (\SA in \TEOS notation) is constructed with
-% <<echo=false, results=hide>>=
-% dev.off()
-% pdf('salinity_comparison.pdf', height=5, pointsize=16)
-% @
+while the corresponding panel comparing Practical Salinity to Absolute Salinity
+is constructed with
+<<eval=false, echo=false, results=hide>>=
+dev.off()
+pdf('salinity_comparison.pdf', height=5, pointsize=18)
+par(mgp=c(2, 0.85, 0))
+@
 <<eval=false>>=
 hist(section[["salinity"]] / section[["SA"]], main="Atlantic 36N")
 @
-% <<echo=false, results=hide>>=
-% dev.off()
-% @
+<<eval=false, echo=false, results=hide>>=
+dev.off()
+@
 
 \begin{figure}[t]
     \begin{center}
-        \includegraphics[width=.7\hsize]{SSS_1}
-        \includegraphics[width=.7\hsize]{SSS_2}
+        \includegraphics[width=.6\hsize]{SSS_1}
+        \includegraphics[width=.6\hsize]{SSS_2}
     \end{center}
-    \caption{\label{figure:SSS}Sea surface Practical Salinity from the
-    \code{levitus} dataset (top) and
-    percent difference between this and Absolute Salinity (bottom). In the
-    bottom panel colours are limited to a quantile range, to avoid the
-    scale being set mainly by a contrast between the Baltic and the other salty
-    waters of the planet.}
+    \caption{\label{figure:SSS}Sea surface Practical Salinity (SP) from the
+    \code{levitus} dataset and percent difference between this and Absolute
+    Salinity (SA). In the bottom panel colours are limited to a quantile range,
+    to avoid the scale being set mainly by a contrast between the Baltic and the
+    other salty waters of the planet.}
 \end{figure}
 
 
-A simple way to compare \UNESCO and \TEOS values is to represent them on a map.
-Figure~\ref{figure:SSS} show an example, with the top panel being sea surface
-Practical Salinity and the bottom one the percent difference between Absolute
-and Practical Salinity.  For more detailed displays of the differences between
-old and newer formulations of salinity and temperature, consult
-\cite{mcdougall2012agaf}, which also provides an interesting and practical
-introduction to recent work on seawater.
+Maps are another good way to compare \UNESCO and \TEOS values.
+Figure~\ref{figure:SSS} is an example, created with the following.
 
 % Next causes build problems so just run it manually and
-% add the PNG to the package.
-% <<echo=false, results=hide>>=
-% png('SSS_%d.png', width=7, height=4, unit="in", res=150, pointsize=9)
-% @
+<<eval=false, echo=false, results=hide>>=
+png('SSS_%d.png', width=7, height=4, unit="in", res=150, pointsize=14)
+@
 <<eval=false>>=
-library(oce)
-library(ocedata)
 data("levitus", package="ocedata")
 SSS <- levitus$SSS
 dim <- dim(SSS)
 ll <- expand.grid(lon=levitus$longitude, lat=levitus$latitude)
 SA <- gsw_SA_from_SP(levitus$SSS, 0, ll$lon, ll$lat)
 imagep(levitus$longitude, levitus$latitude, levitus$SSS, col=oceColorsJet)
-title("Levitus surface Practical Salinity")
+title("Surface SP")
 per <- 100 * (1 - levitus$SSS / SA)
 imagep(levitus$longitude, levitus$latitude, per, col=oceColorsJet,
        zlim=quantile(per, c(0.001, 0.999), na.rm=TRUE))
-title("Percent difference between surface Absolute and Practical Salinity")
+title("Surface SA-SP, percent")
 @
-%<<echo=false, results=hide>>=
-%dev.off()
-%@
+<<eval=false, echo=false, results=hide>>=
+dev.off()
+@
+Note the use of quantile-specified scales for the images, which otherwise have
+their colour mappings controlled by isolated low-saline waters, yielding little
+to see in the wider expanses of the world ocean.
+
+For more detailed displays of the differences between old and newer seawater
+formulations, readers might consult \cite{mcdougall2012agaf}, along with other
+materials provided on the \TEOS website (\url{http://www.teos-10.org}).
+
+\newpage
 
 \bibliography{gsw}
-
-\printindex
 
 \end{document}
 

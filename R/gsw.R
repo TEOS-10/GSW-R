@@ -749,7 +749,7 @@ gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height=0, sea_surface_geopote
     rval <- .C("wrap_gsw_p_from_z",
                z=as.double(l$z), latitude=as.double(l$latitude),
                geo_strf_dyn_height=as.double(l$geo_strf_dyn_height),
-               sea_surface_geopotential=as.double(l$geopotential),
+               sea_surface_geopotential=as.double(l$sea_surface_geopotential),
                n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
     if (is.matrix(z))
         dim(rval) <- dim(z)
