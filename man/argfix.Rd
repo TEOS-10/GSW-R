@@ -13,6 +13,14 @@ argfix(list)
 A list with all elements of same shape (length or dimension).
 }
 \description{
-Reshape list elements to match the shape of the first element.
+This is mainly used within gsw, to ensure that arguments sent
+to the C functions are of equal length.  This is a convenience,
+for processing data that often have this condition. For example, a
+CTD profile is likely to have many values for SP, t, and p,
+but just a single value for each of longitude and latitude.
+It is important to call argfix() to handle such cases, because
+otherwise the underlying C code will be looking past the end of
+the vectors storing longitude and latitude, which can yield odd
+results or even segmentation faults.
 }
 

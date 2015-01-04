@@ -28,6 +28,6 @@ gsw_pt_from_t(34.7118, 28.7856, 10, 0) # 28.783196819670632
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_t.html}
 }
 \seealso{
-\code{\link{gsw_pt0_from_t}} and \code{\link{gsw_pt_from_CT}}
+\code{\link{gsw_pt_from_CT}} is the analogue for Conservative Temperature
 }
 

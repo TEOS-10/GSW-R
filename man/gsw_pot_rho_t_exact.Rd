@@ -28,6 +28,6 @@ gsw_pot_rho_t_exact(34.7118, 28.7856, 10, 0) # 1021.798145811089
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_rho_t_exact.html}
 }
 \seealso{
-\code{\link{gsw_rho}} \code{\link{gsw_rho_t_exact}}
+\code{\link{gsw_rho}} and \code{\link{gsw_rho_t_exact}} compute density; \code{\link{gsw_sigma0}} and related functions compute potential density at particular pressures.
 }
 

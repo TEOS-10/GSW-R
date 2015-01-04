@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_SP_from_C}
 \alias{gsw_SP_from_C}
-\title{Convert from conductivity to practical salinity}
+\title{Convert from electrical conductivity to practical salinity}
 \usage{
 gsw_SP_from_C(C, t, p)
 }
@@ -17,12 +17,15 @@ gsw_SP_from_C(C, t, p)
 Practical Salinity (PSS-78) [ unitless ]
 }
 \description{
-Convert from conductivity to practical salinity
+Convert from electrical conductivity to practical salinity
 }
 \examples{
 gsw_SP_from_C(34.5487, 28.7856, 10) # 20.009869599086951
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_C.html}
+}
+\seealso{
+\code{\link{gsw_C_from_SP}} does the reverse.
 }
 

@@ -25,4 +25,7 @@ gsw_kappa(34.7118, 28.7856, 10) # 4.11346577902628e-10
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_kappa.html}
 }
+\seealso{
+\code{\link{gsw_kappa_t_exact}} is an analogue in terms of in-situ temperature
+}
 

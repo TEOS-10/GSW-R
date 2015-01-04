@@ -70,6 +70,16 @@ NULL
 
 #' Reshape list elements to match the shape of the first element.
 #'
+#' This is mainly used within gsw, to ensure that arguments sent
+#' to the C functions are of equal length.  This is a convenience, 
+#' for processing data that often have this condition. For example, a
+#' CTD profile is likely to have many values for SP, t, and p,
+#' but just a single value for each of longitude and latitude.
+#' It is important to call argfix() to handle such cases, because
+#' otherwise the underlying C code will be looking past the end of
+#' the vectors storing longitude and latitude, which can yield odd
+#' results or even segmentation faults.
+#'
 #' @param list A list of elements, typically arguments that will be used in GSW functions.
 #' @return A list with all elements of same shape (length or dimension).
 argfix <- function(list)
@@ -225,7 +235,7 @@ gsw_beta <- function(SA, CT, p)
 #' @examples
 #' gsw_beta_const_t_exact(34.7118, 28.7856, 10) # 7.31120837010429e-4
 #' @seealso
-#' \code{\link{gsw_alpha}} \code{\link{gsw_alpha_on_beta}} \code{\link{gsw_alpha_wrt_t_exact}} \code{\link{gsw_beta}}
+#' A related function is \code{\link{gsw_beta}}.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta_const_t_exact.html}
 gsw_beta_const_t_exact <- function(SA, t, p)
@@ -276,6 +286,7 @@ gsw_cabbeling <- function(SA, CT, p)
 #' @return electrical conductivity [ mS/cm ]
 #' @examples 
 #' gsw_C_from_SP(34.5487, 28.7856, 10) # 56.412599581571186
+#' @seealso \code{\link{gsw_SP_from_C}} does the reverse.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_C_from_SP.html}
 gsw_C_from_SP <- function(SP, t, p)
@@ -426,7 +437,7 @@ gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
 #' @examples 
 #' gsw_dynamic_enthalpy(34.7118, 28.8099, 10) # 1e3*0.097864649180491
 #' @seealso
-#' \code{\link{gsw_enthalpy}} \code{\link{gsw_enthalpy_t_exact}}
+#' \code{\link{gsw_enthalpy}} and \code{\link{gsw_enthalpy_t_exact}}
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
 gsw_dynamic_enthalpy <- function(SA, CT, p)
@@ -450,7 +461,7 @@ gsw_dynamic_enthalpy <- function(SA, CT, p)
 #' @examples 
 #' gsw_enthalpy(34.7118, 28.8099, 10) # 1.1510318130700132e5
 #' @seealso
-#' \code{\link{gsw_dynamic_enthalpy}} \code{\link{gsw_enthalpy_t_exact}}
+#' \code{\link{gsw_dynamic_enthalpy}} and \code{\link{gsw_enthalpy_t_exact}}
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
 gsw_enthalpy <- function(SA, CT, p)
@@ -474,7 +485,7 @@ gsw_enthalpy <- function(SA, CT, p)
 #' @examples 
 #' gsw_enthalpy_t_exact(34.7118, 28.7856, 10) # 1.151032604783763e5
 #' @seealso
-#' \code{\link{gsw_enthalpy}} \code{\link{gsw_dynamic_enthalpy}}
+#' \code{\link{gsw_enthalpy}} and \code{\link{gsw_dynamic_enthalpy}}
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_t_exact.html}
 gsw_enthalpy_t_exact <- function(SA, t, p)
@@ -603,6 +614,7 @@ gsw_IPV_vs_fNsquared_ratio <- function(SA, CT, p, p_ref=0)
 #' @return isentropic compressibility [ 1/Pa ] (not 1/dbar)
 #' @examples
 #' gsw_kappa(34.7118, 28.7856, 10) # 4.11346577902628e-10
+#' @seealso \code{\link{gsw_kappa_t_exact}} is an analogue in terms of in-situ temperature
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_kappa.html}
 gsw_kappa <- function(SA, CT, p)
@@ -625,6 +637,7 @@ gsw_kappa <- function(SA, CT, p)
 #' @return isentropic compressibility [ 1/Pa ] (not 1/dbar)
 #' @examples
 #' gsw_kappa_t_exact(34.7118, 28.7856, 10) # 4.11245799180373e-10
+#' @seealso \code{\link{gsw_kappa}} is an analogue in terms of Conservative Temperature
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_kappa_t_exact.html}
 gsw_kappa_t_exact <- function(SA, t, p)
@@ -646,7 +659,7 @@ gsw_kappa_t_exact <- function(SA, t, p)
 #' @return latent heat of evaporation [ J/kg ]
 #' @examples
 #' gsw_latentheat_evap_t(34.7118, 28.7856) # 2.429947107462561e6
-#' @seealso \code{\link{gsw_latentheat_evap_t}} and \code{\link{gsw_latentheat_melting}}
+#' @seealso \code{\link{gsw_latentheat_evap_t}} is an analouge in terms of in-situ temperature. For melting, see \code{\link{gsw_latentheat_melting}}.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_evap_CT.html}
 gsw_latentheat_evap_CT <- function(SA, CT)
@@ -668,7 +681,7 @@ gsw_latentheat_evap_CT <- function(SA, CT)
 #' @return latent heat of evaporation [ J/kg ]
 #' @examples
 #' gsw_latentheat_evap_t(34.7118, 28.7856) # 2.429882982734836e6
-#' @seealso \code{\link{gsw_latentheat_evap_CT}} and \code{\link{gsw_latentheat_melting}}
+#' @seealso \code{\link{gsw_latentheat_evap_CT}} is an analogue in terms of Conservative Temperature. For melting, see \code{\link{gsw_latentheat_melting}}.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_evap_t.html}
 gsw_latentheat_evap_t <- function(SA, t)
@@ -690,7 +703,7 @@ gsw_latentheat_evap_t <- function(SA, t)
 #' @return latent heat of freezing [ J/kg ]
 #' @examples
 #' gsw_latentheat_melting(34.7118, 10) # 3.299495187300804e5
-#' @seealso \code{\link{gsw_latentheat_evap_CT}} and \code{\link{gsw_latentheat_evap_t}}
+#' @seealso \code{\link{gsw_latentheat_evap_CT}} and \code{\link{gsw_latentheat_evap_t}} are analogues for evaporation.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_melting.html}
 gsw_latentheat_melting <- function(SA, p)
@@ -771,7 +784,7 @@ gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height=0, sea_surface_geopote
 #' @examples
 #' gsw_pot_rho_t_exact(34.7118, 28.7856, 10, 0) # 1021.798145811089
 #' @seealso
-#' \code{\link{gsw_rho}} \code{\link{gsw_rho_t_exact}}
+#' \code{\link{gsw_rho}} and \code{\link{gsw_rho_t_exact}} compute density; \code{\link{gsw_sigma0}} and related functions compute potential density at particular pressures.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_rho_t_exact.html}
 gsw_pot_rho_t_exact <- function(SA, t, p, p_ref)
@@ -816,7 +829,7 @@ gsw_pt0_from_t <- function(SA, t, p)
 #' @return potential temperature [ deg C ]
 #' @examples
 #' gsw_pt_from_CT(34.7118, 28.8099) # 28.783177048624573 
-#' @seealso \code{\link{gsw_pt0_from_t}} and \code{\link{gsw_pt_from_t}}
+#' @seealso \code{\link{gsw_pt0_from_t}} for the surface case and and \code{\link{gsw_pt_from_t}} for the general case.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_CT.html}
 gsw_pt_from_CT <- function(SA, CT)
@@ -840,7 +853,7 @@ gsw_pt_from_CT <- function(SA, CT)
 #' @return potential temperature [ deg C ]
 #' @examples
 #' gsw_pt_from_t(34.7118, 28.7856, 10, 0) # 28.783196819670632
-#' @seealso \code{\link{gsw_pt0_from_t}} and \code{\link{gsw_pt_from_CT}}
+#' @seealso \code{\link{gsw_pt_from_CT}} is the analogue for Conservative Temperature
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_t.html}
 gsw_pt_from_t <- function(SA, t, p, p_ref=0)
@@ -909,7 +922,7 @@ gsw_rho_first_derivatives <- function(SA, CT, p)
 #' @return in-situ density [ kg/m^3 ]
 #' @examples
 #' gsw_rho_t_exact(34.7118, 28.7856, 10) # 1021.840173185531
-#' @seealso \code{\link{gsw_rho}} is simiar but uses SA and CT; SA may be computed from UNESCO quantities using \code{\link{gsw_SA_from_SP}}.
+#' @seealso \code{\link{gsw_rho}} is similar but uses SA and CT; SA may be computed from UNESCO quantities using \code{\link{gsw_SA_from_SP}}.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_t_exact.html}
 gsw_rho_t_exact <- function(SA, t, p)
@@ -1172,7 +1185,7 @@ gsw_sigma4 <- function(SA, CT)
 #' @return sound speed [ m/s ]
 #' @examples
 #' gsw_sound_speed(34.7118, 28.7856, 10) # 1542.420534932182
-#' @seealso \code{\link{gsw_sound_speed_t_exact}} for a precise formula using t
+#' @seealso \code{\link{gsw_sound_speed_t_exact}} for a precise formula using in-situ temperature
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed.html}
 gsw_sound_speed<- function(SA, CT, p)
@@ -1272,7 +1285,7 @@ gsw_specvol_t_exact  <- function(SA, t, p)
     rval
 }
 
-#' Convert from conductivity to practical salinity
+#' Convert from electrical conductivity to practical salinity
 #' 
 #' @param C conductivity [ mS/cm ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
@@ -1280,6 +1293,7 @@ gsw_specvol_t_exact  <- function(SA, t, p)
 #' @return Practical Salinity (PSS-78) [ unitless ]
 #' @examples 
 #' gsw_SP_from_C(34.5487, 28.7856, 10) # 20.009869599086951
+#' @seealso \code{\link{gsw_C_from_SP}} does the reverse.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_C.html}
 gsw_SP_from_C <- function(C, t, p)

@@ -24,6 +24,6 @@ gsw_latentheat_evap_t(34.7118, 28.7856) # 2.429947107462561e6
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_evap_CT.html}
 }
 \seealso{
-\code{\link{gsw_latentheat_evap_t}} and \code{\link{gsw_latentheat_melting}}
+\code{\link{gsw_latentheat_evap_t}} is an analouge in terms of in-situ temperature. For melting, see \code{\link{gsw_latentheat_melting}}.
 }
 

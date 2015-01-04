@@ -24,6 +24,6 @@ gsw_pt_from_CT(34.7118, 28.8099) # 28.783177048624573
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_CT.html}
 }
 \seealso{
-\code{\link{gsw_pt0_from_t}} and \code{\link{gsw_pt_from_t}}
+\code{\link{gsw_pt0_from_t}} for the surface case and and \code{\link{gsw_pt_from_t}} for the general case.
 }
 

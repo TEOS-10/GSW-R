@@ -25,4 +25,7 @@ gsw_kappa_t_exact(34.7118, 28.7856, 10) # 4.11245799180373e-10
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_kappa_t_exact.html}
 }
+\seealso{
+\code{\link{gsw_kappa}} is an analogue in terms of Conservative Temperature
+}
 

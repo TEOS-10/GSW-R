@@ -24,6 +24,6 @@ gsw_latentheat_melting(34.7118, 10) # 3.299495187300804e5
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_melting.html}
 }
 \seealso{
-\code{\link{gsw_latentheat_evap_CT}} and \code{\link{gsw_latentheat_evap_t}}
+\code{\link{gsw_latentheat_evap_CT}} and \code{\link{gsw_latentheat_evap_t}} are analogues for evaporation.
 }
 

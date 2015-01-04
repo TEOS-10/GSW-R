@@ -27,4 +27,7 @@ gsw_C_from_SP(34.5487, 28.7856, 10) # 56.412599581571186
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_C_from_SP.html}
 }
+\seealso{
+\code{\link{gsw_SP_from_C}} does the reverse.
+}
 
