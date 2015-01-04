@@ -25,4 +25,7 @@ gsw_beta_const_t_exact(34.7118, 28.7856, 10) # 7.31120837010429e-4
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta_const_t_exact.html}
 }
+\seealso{
+\code{\link{gsw_alpha}} \code{\link{gsw_alpha_on_beta}} \code{\link{gsw_alpha_wrt_t_exact}} \code{\link{gsw_beta}}
+}
 

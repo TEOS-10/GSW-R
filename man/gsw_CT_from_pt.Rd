@@ -23,4 +23,7 @@ gsw_CT_from_pt(34.7118, 28.7832) # 28.809923015982083
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_pt.html}
 }
+\seealso{
+\code{\link{gsw_CT_from_t}} calculates Conservative Temperature from in-situ temperature
+}
 

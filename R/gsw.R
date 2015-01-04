@@ -224,6 +224,8 @@ gsw_beta <- function(SA, CT, p)
 #' @return saline contraction coefficient at constant in-situ temperature [ kg/g ]
 #' @examples
 #' gsw_beta_const_t_exact(34.7118, 28.7856, 10) # 7.31120837010429e-4
+#' @seealso
+#' \code{\link{gsw_alpha}} \code{\link{gsw_alpha_on_beta}} \code{\link{gsw_alpha_wrt_t_exact}} \code{\link{gsw_beta}}
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta_const_t_exact.html}
 gsw_beta_const_t_exact <- function(SA, t, p)
@@ -345,6 +347,8 @@ gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
 #' @return Conservative Temperature [ deg C ]
 #' @examples 
 #' gsw_CT_from_pt(34.7118, 28.7832) # 28.809923015982083
+#' @seealso
+#' \code{\link{gsw_CT_from_t}} calculates Conservative Temperature from in-situ temperature
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_pt.html}
 gsw_CT_from_pt <- function(SA, pt)
@@ -366,7 +370,7 @@ gsw_CT_from_pt <- function(SA, pt)
 #' @param p sea pressure [ dbar ]
 #' @examples 
 #' gsw_CT_from_t(34.7118, 28.7856, 10) # 28.809919826700281
-#' @seealso \code{\link{gsw_t_from_CT}} does the reverse.
+#' @seealso \code{\link{gsw_t_from_CT}} does the reverse
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_t.html}
 gsw_CT_from_t <- function(SA, t, p)
@@ -390,6 +394,8 @@ gsw_CT_from_t <- function(SA, t, p)
 #' @return deltaSA Absolute Salinity Anomaly  [ g/kg ]
 #' @examples 
 #' gsw_deltaSA_from_SP(34.7118, 10, 188, 4) # 0.000167203365230
+#' @seealso
+#' \code{\link{gsw_SA_from_SP}}
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_deltaSA_from_SP.html}
 gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
@@ -416,6 +422,8 @@ gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
 #' @param p sea pressure [ dbar ]
 #' @examples 
 #' gsw_dynamic_enthalpy(34.7118, 28.8099, 10) # 1e3*0.097864649180491
+#' @seealso
+#' \code{\link{gsw_enthalpy}} \code{\link{gsw_enthalpy_t_exact}}
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
 gsw_dynamic_enthalpy <- function(SA, CT, p)
@@ -437,6 +445,8 @@ gsw_dynamic_enthalpy <- function(SA, CT, p)
 #' @param p sea pressure [ dbar ]
 #' @examples 
 #' gsw_enthalpy(34.7118, 28.8099, 10) # 1.1510318130700132e5
+#' @seealso
+#' \code{\link{gsw_dynamic_enthalpy}} \code{\link{gsw_enthalpy_t_exact}}
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
 gsw_enthalpy <- function(SA, CT, p)
@@ -458,6 +468,8 @@ gsw_enthalpy <- function(SA, CT, p)
 #' @param p sea pressure [ dbar ]
 #' @examples 
 #' gsw_enthalpy_t_exact(34.7118, 28.7856, 10) # 1.151032604783763e5
+#' @seealso
+#' \code{\link{gsw_enthalpy}} \code{\link{gsw_dynamic_enthalpy}}
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_t_exact.html}
 gsw_enthalpy_t_exact <- function(SA, t, p)
@@ -724,6 +736,8 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
 #' @return potential density [ kg/m^3 ]
 #' @examples
 #' gsw_pot_rho_t_exact(34.7118, 28.7856, 10, 0) # 1021.798145811089
+#' @seealso
+#' \code{\link{gsw_rho}} \code{\link{gsw_rho_t_exact}}
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_rho_t_exact.html}
 gsw_pot_rho_t_exact <- function(SA, t, p, p_ref)
@@ -1327,7 +1341,7 @@ gsw_SP_from_SR <- function(SR)
     rval
 }
 
-#' Absolute Salinity from Preformed Salinity
+#' Practical Salinity from Preformed Salinity
 #' 
 #' @param Sstar Preformed Salinity [ g/kg ]
 #' @param p sea pressure [ dbar ]
@@ -1336,6 +1350,8 @@ gsw_SP_from_SR <- function(SR)
 #' @return Practical Salinity (PSS-78) [ unitless ]
 #' @examples 
 #' gsw_SP_from_Sstar(34.7115, 10, 188, 4) # 34.548646570969929
+#' @seealso
+#' \code{\link{gsw_Sstar_from_SP}} does the reverse; \code{\link{gsw_SA_from_Sstar}} is similar.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_Sstar.html}
 gsw_SP_from_Sstar <- function(Sstar, p, longitude, latitude)
@@ -1578,7 +1594,7 @@ gsw_Turner_Rsubrho <- function(SA, CT, p)
 #' gsw_z_from_p(10, 4) # -9.9445831334188
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_z_from_p.html}
-gsw_z_from_p<- function(p, latitude)
+gsw_z_from_p <- function(p, latitude)
 {
     l <- argfix(list(p=p, latitude=latitude))
     n <- length(l[[1]])

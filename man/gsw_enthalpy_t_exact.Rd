@@ -22,4 +22,7 @@ gsw_enthalpy_t_exact(34.7118, 28.7856, 10) # 1.151032604783763e5
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_t_exact.html}
 }
+\seealso{
+\code{\link{gsw_enthalpy}} \code{\link{gsw_dynamic_enthalpy}}
+}
 
