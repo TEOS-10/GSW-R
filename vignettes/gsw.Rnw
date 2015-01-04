@@ -223,7 +223,7 @@ par(mgp=c(2, 0.85, 0))
 @
 <<eval=false>>=
 data(section)
-hist(section[["theta"]] / section[["CT"]], main="Atlantic 36N")
+hist(section[["theta"]] / section[["CT"]], main="")
 @
 while the corresponding panel comparing Practical Salinity to Absolute Salinity
 is constructed with
@@ -233,7 +233,7 @@ pdf('salinity_comparison.pdf', height=5, pointsize=18)
 par(mgp=c(2, 0.85, 0))
 @
 <<eval=false>>=
-hist(section[["salinity"]] / section[["SA"]], main="Atlantic 36N")
+hist(section[["salinity"]] / section[["SA"]], main="")
 @
 <<eval=false, echo=false, results=hide>>=
 dev.off()
