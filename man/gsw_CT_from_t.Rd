@@ -13,6 +13,9 @@ gsw_CT_from_t(SA, t, p)
 
 \item{p}{sea pressure [ dbar ]}
 }
+\value{
+Conservative Temperature [ deg C ]
+}
 \description{
 Convert from temperature to conservative temperature
 }

@@ -295,6 +295,7 @@ gsw_C_from_SP <- function(SP, t, p)
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
 #' @param p sea pressure [ dbar ]
+#' @return heat capacity [ J/(kg*K) ]
 #' @examples 
 #' gsw_cp_t_exact(34.7118, 28.7856, 10) # 4002.888003958537
 #' @references
@@ -368,6 +369,7 @@ gsw_CT_from_pt <- function(SA, pt)
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
 #' @param p sea pressure [ dbar ]
+#' @return Conservative Temperature [ deg C ]
 #' @examples 
 #' gsw_CT_from_t(34.7118, 28.7856, 10) # 28.809919826700281
 #' @seealso \code{\link{gsw_t_from_CT}} does the reverse
@@ -420,6 +422,7 @@ gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
+#' @return dynamic enthalpy [ J/kg ]
 #' @examples 
 #' gsw_dynamic_enthalpy(34.7118, 28.8099, 10) # 1e3*0.097864649180491
 #' @seealso
@@ -443,6 +446,7 @@ gsw_dynamic_enthalpy <- function(SA, CT, p)
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
+#' @return specific enthalpy [ J/kg ]
 #' @examples 
 #' gsw_enthalpy(34.7118, 28.8099, 10) # 1.1510318130700132e5
 #' @seealso
@@ -466,6 +470,7 @@ gsw_enthalpy <- function(SA, CT, p)
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90)  [ deg C ]
 #' @param p sea pressure [ dbar ]
+#' @return specific enthalpy [ J/kg ]
 #' @examples 
 #' gsw_enthalpy_t_exact(34.7118, 28.7856, 10) # 1.151032604783763e5
 #' @seealso
@@ -832,6 +837,7 @@ gsw_pt_from_CT <- function(SA, CT)
 #' @param t in-situ temperature (ITS-90)  [ deg C ]
 #' @param p sea pressure [ dbar ]
 #' @param p_ref reference pressure [ dbar ]
+#' @return potential temperature [ deg C ]
 #' @examples
 #' gsw_pt_from_t(34.7118, 28.7856, 10, 0) # 28.783196819670632
 #' @seealso \code{\link{gsw_pt0_from_t}} and \code{\link{gsw_pt_from_CT}}
@@ -923,6 +929,7 @@ gsw_rho_t_exact <- function(SA, t, p)
 #' @param rho seawater density [ kg/m^3 ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
+#' @return Absolute Salinity [ g/kg ]
 #' @examples
 #' gsw_SA_from_rho(1021.8482, 28.7856, 10) # 34.711382887931144
 #' @references
@@ -952,6 +959,7 @@ gsw_SA_from_rho <- function(rho, CT, p)
 #' @param p sea pressure [ dbar ]
 #' @param longitude longitude in decimal degrees [ 0 to 360 or -180 to 180]
 #' @param latitude latitude in decimal degrees [ -90 to 90 ]
+#' @return Absolute Salinity [ g/kg ]
 #' @examples
 #' gsw_SA_from_SP(34.5487, 10, 188, 4) # 34.711778344814114 
 #' @seealso \code{\link{gsw_SP_from_SA}} does the reverse.
@@ -994,6 +1002,7 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
 #' @param p sea pressure [ dbar ]
 #' @param longitude longitude in decimal degrees [ 0 to 360 or -180 to 180]
 #' @param latitude latitude in decimal degrees [ -90 to 90 ]
+#' @return Absolute Salinity [ g/kg ]
 #' @examples
 #' gsw_SA_from_Sstar(34.7115, 10, 188, 4) # 34.711724663585905
 #' @seealso \code{\link{gsw_Sstar_from_SA}} does the reverse.
@@ -1268,7 +1277,7 @@ gsw_specvol_t_exact  <- function(SA, t, p)
 #' @param C conductivity [ mS/cm ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
 #' @param p sea pressure [ dbar ]
-#' @return Practical salinity.
+#' @return Practical Salinity (PSS-78) [ unitless ]
 #' @examples 
 #' gsw_SP_from_C(34.5487, 28.7856, 10) # 20.009869599086951
 #' @references
@@ -1301,7 +1310,7 @@ gsw_SP_from_C <- function(C, t, p)
 #' @param p sea pressure [ dbar ]
 #' @param longitude longitude in decimal degrees [ 0 to 360 or -180 to 180]
 #' @param latitude latitude in decimal degrees [ -90 to 90 ]
-#' @return Practical salinity.
+#' @return Practical Salinity (PSS-78) [ unitless ]
 #' @examples 
 #' gsw_SP_from_SA(34.7118, 10, 188, 4) # 34.548721553448317
 #' @seealso \code{\link{gsw_SA_from_SP}} does the reverse, while \code{\link{gsw_SP_from_SK}}, \code{\link{gsw_SP_from_SR}} and \code{\link{gsw_SP_from_Sstar}} are similar to this.
@@ -1432,6 +1441,7 @@ gsw_SR_from_SP <- function(SP)
 #' @param p sea pressure [ dbar ]
 #' @param longitude longitude in decimal degrees [ 0 to 360 or -180 to 180]
 #' @param latitude latitude in decimal degrees [ -90 to 90 ]
+#' @return Preformed Salinity [ g/kg ]
 #' @examples
 #' gsw_Sstar_from_SA(34.7118, 10, 188, 4) # 34.711575335926490
 #' @seealso \code{\link{gsw_SA_from_Sstar}} does the reverse; \code{\link{gsw_Sstar_from_SP}} is similar.
@@ -1475,6 +1485,7 @@ gsw_Sstar_from_SA <- function(SA, p, longitude, latitude)
 #' @param p sea pressure [ dbar ]
 #' @param longitude longitude in decimal degrees [ 0 to 360 or -180 to 180]
 #' @param latitude latitude in decimal degrees [ -90 to 90 ]
+#' @return Preformed Salinity [ g/kg ]
 #' @examples
 #' gsw_Sstar_from_SP(34.5487, 10, 188, 4) # 34.711553680880769
 #' @seealso \code{\link{gsw_SP_from_Sstar}} does the reverse; \code{\link{gsw_Sstar_from_SA}} is similar.
@@ -1586,7 +1597,7 @@ gsw_thermobaric <- function(SA, CT, p)
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
-#' @return list containing Tu, Rrho, and p_mid
+#' @return list containing Tu [ degrees ], Rrho [ unitless ], and p_mid [ dbar ]
 #' @examples
 #' SA = c(34.7118, 34.8915)
 #' CT = c(28.8099, 28.4392)
@@ -1617,7 +1628,6 @@ gsw_Turner_Rsubrho <- function(SA, CT, p)
 #' 
 #' @param p sea pressure [ dbar ]
 #' @param latitude latitude in decimal degrees north [ -90 ... +90 ]
-#' 
 #' @return height [ m ]
 #' @examples
 #' gsw_z_from_p(10, 4) # -9.9445831334188

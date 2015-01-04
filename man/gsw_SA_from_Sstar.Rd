@@ -15,6 +15,9 @@ gsw_SA_from_Sstar(Sstar, p, longitude, latitude)
 
 \item{latitude}{latitude in decimal degrees [ -90 to 90 ]}
 }
+\value{
+Absolute Salinity [ g/kg ]
+}
 \description{
 Calculate Absolute Salinity from Preformed Salinity, pressure,
 longitude, and latitude.

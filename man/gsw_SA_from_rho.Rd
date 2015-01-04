@@ -13,6 +13,9 @@ gsw_SA_from_rho(rho, CT, p)
 
 \item{p}{sea pressure [ dbar ]}
 }
+\value{
+Absolute Salinity [ g/kg ]
+}
 \description{
 Convert from density to absolute salinity
 }

@@ -15,6 +15,9 @@ gsw_pt_from_t(SA, t, p, p_ref = 0)
 
 \item{p_ref}{reference pressure [ dbar ]}
 }
+\value{
+potential temperature [ deg C ]
+}
 \description{
 potential temperature from in-situ temperature
 }

@@ -13,6 +13,9 @@ gsw_enthalpy_t_exact(SA, t, p)
 
 \item{p}{sea pressure [ dbar ]}
 }
+\value{
+specific enthalpy [ J/kg ]
+}
 \description{
 Specific enthalpy of seawater
 }

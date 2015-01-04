@@ -14,7 +14,7 @@ gsw_SP_from_C(C, t, p)
 \item{p}{sea pressure [ dbar ]}
 }
 \value{
-Practical salinity.
+Practical Salinity (PSS-78) [ unitless ]
 }
 \description{
 Convert from conductivity to practical salinity

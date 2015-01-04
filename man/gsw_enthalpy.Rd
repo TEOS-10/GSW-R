@@ -13,6 +13,9 @@ gsw_enthalpy(SA, CT, p)
 
 \item{p}{sea pressure [ dbar ]}
 }
+\value{
+specific enthalpy [ J/kg ]
+}
 \description{
 Specific enthalpy of seawater (48-term equation)
 }

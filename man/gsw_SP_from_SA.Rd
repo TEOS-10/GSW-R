@@ -16,7 +16,7 @@ gsw_SP_from_SA(SA, p, longitude, latitude)
 \item{latitude}{latitude in decimal degrees [ -90 to 90 ]}
 }
 \value{
-Practical salinity.
+Practical Salinity (PSS-78) [ unitless ]
 }
 \description{
 Calculate Practical Salinity from Absolute Salinity, pressure,

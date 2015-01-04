@@ -13,6 +13,9 @@ gsw_dynamic_enthalpy(SA, CT, p)
 
 \item{p}{sea pressure [ dbar ]}
 }
+\value{
+dynamic enthalpy [ J/kg ]
+}
 \description{
 dynamic enthalpy of seawater (48-term equation)
 }

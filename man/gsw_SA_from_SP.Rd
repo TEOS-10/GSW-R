@@ -15,6 +15,9 @@ gsw_SA_from_SP(SP, p, longitude, latitude)
 
 \item{latitude}{latitude in decimal degrees [ -90 to 90 ]}
 }
+\value{
+Absolute Salinity [ g/kg ]
+}
 \description{
 Calculate Absolute Salinity from Practical Salinity, pressure,
 longitude, and latitude.

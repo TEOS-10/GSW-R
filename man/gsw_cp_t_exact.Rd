@@ -13,6 +13,9 @@ gsw_cp_t_exact(SA, t, p)
 
 \item{p}{sea pressure [ dbar ]}
 }
+\value{
+heat capacity [ J/(kg*K) ]
+}
 \description{
 Isobaric heat capacity
 }
