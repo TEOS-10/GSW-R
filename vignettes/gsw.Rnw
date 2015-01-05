@@ -58,7 +58,7 @@
 \newcommand\oce{\texttt{oce}\xspace}
 \newcommand\gsw{\texttt{gsw}\xspace}
 \newcommand\UNESCO{\textsc{unesco-80}\xspace}
-\newcommand\TEOS{\textsc{teos-10}\xspace}
+%\newcommand\TEOS{\textsc{teos-10}\xspace}
 \newcommand\GSW{\textsc{gsw}\xspace}
 
 \newcommand{\workedexercise}[2]{
@@ -77,51 +77,49 @@
 
 \begin{document}
 
-\title{The gsw package}
+\title{The \gsw package}
 \author{Dan E. Kelley and Clark Richards}
 \maketitle
 
 
 \begin{abstract}
 
-    The \verb@gsw@ package provides an R implementation of \GSW, the Gibbs
-    Seawater toolbox of \TEOS, the Thermodynamic Equation Of Seawater
-    \cite[]{ioc2010tite}. This vignette outlines how to use \gsw as an
-    independent package, and also how to use it within the \oce package.
+    The \verb@gsw@ package provides an R implementation of the Gibbs SeaWater
+    toolbox for the calculation of seawater properties.  This vignette outlines
+    how to use \gsw alone or as part of the \oce package.
 
 \end{abstract}
 
 \section{Introduction}
 
-The \gsw package is an R interface to the Gibbs SeaWater portion of the \TEOS
-system for calculating seawater properties and related quantities.  Although it
-can be used by itself, \gsw was first devised to support the \oce package, which
-provides tools for more general oceanographic analysis \cite[]{kelley2014oaoo}.  
+Recently, new formulae for the calculation of seawater properties have been
+sanctioned by international advisory bodies
+\cite[]{ioc2010tite,millero2010hote}.  An important component is the Gibbs
+Seawater (\GSW) toolbox, which is available for Matlab, C, and Fortran
+\cite[]{mcdougall2011gswt,pawlowicz2012ahpo}. As of early 2015, versions were
+being coded for other languages, and \gsw, the result for R, may be used
+independently or within the more general \oce package \cite[]{kelley2014oaoo}.
 
-It is assumed here that readers are familiar with \TEOS, and with oceanographic
-processing. A good learning resource is the \TEOS website
-(\url{http://www.teos-10.org}), which provides technical manuals for the Matlab
-version of the Gibbs Seawater library
-(\url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html}), along with
-scientific white papers and links to the growing literature on \TEOS.
+Readers are assumed to be familiar with oceanographic processing, and at least
+somewhat familiar with \GSW.  A good resource for learning more about \GSW is
+the its website (\url{http://www.teos-10.org}), which provides technical manuals
+for the Matlab version of \GSW
+(\url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html}), along with white
+papers and links to the growing literature on the topic.
 
-The heart of \gsw is a series of wrapper functions that connect R with the
-functions provided in the C version of the Gibbs Seawater library. This scheme
-has some advantages over transliterating the C (or Matlab) code into R.  The
-first is processing speed, for C tends to be orders of magnitude faster than R
-and Matlab. The second, probably more important to most users, is an increase in
-reliability that results from avoiding transliteration errors.  (To further
-increase reliability, the package-building process incorporates tests of the
-check values provided in the \TEOS documentation.)
+The \gsw framework involves a series of wrappers that connect R with the C
+version of the Gibbs Seawater library. This scheme yields high processing speed.
+It also yields high reliability, by avoiding transliteration errors. (The
+incorporation of \GSW check values into the package-building process also
+enhances reliability.)
 
 The \gsw documentation is minimal, amounting mainly to an explanation of
 function arguments and return values, plus links to the reference documentation
-provided on the \TEOS website. This fits with the overall goal of \gsw, which is
+provided on the \GSW website. This fits with the overall goal of \gsw, which is
 to provide an interface to \GSW algorithms, on the assumption that users will
-learn about the algorithms from the \TEOS website, and learn about their
+learn about the algorithms from the \GSW website, and learn about their
 scientific basis and practical significance from the peer-reviewed literature
-\cite[see
-e.g.][]{graham2013qtnp,ioc2010tite,mcdougall2011gswt,mcdougall2012agaf,spall2013e,wright2011asds}.
+\cite[see e.g.][]{wright2011asds,mcdougall2012agaf}.
 
 %\section{Development status}
 % 
@@ -161,7 +159,7 @@ the other functions needed for their work among the roughly 60 that
         \includegraphics[width=0.4\hsize]{TS_gsw}
     \end{center}
     \caption{\label{figure:TS}Hydrographic diagram of a CTD cast made in
-    roughly 4\,km of water, south of Cape Cod. Left: using the \code{unesco}
+    4\,km of water, south of Cape Cod. Left: using the \code{unesco}
     formulation; right: using the \code{gsw} formulation.}
 \end{figure}
 
@@ -170,9 +168,9 @@ Many \oce plotting functions have an argument named \code{eos} that can be set
 to the string \code{"unesco"} to get the older seawater formulation, or to
 \code{"gsw"} to get the newer one. For example, the \code{section} dataset
 provided by \oce holds a sequence of \di{CTD} casts in the North Atlantic.
-Individual casts may be selected by index, so for example a \di{TS diagram} of
-the station at index 100 (south of Cape Cod in 4000\,m of water) can be plotted
-as follows (yielding the left-hand panel of Figure~\ref{figure:TS}).
+Individual casts may be selected by index, so a \di{TS diagram} of the station
+at index 100 (south of Cape Cod in 4000\,m of water) can be plotted as follows
+(yielding the left-hand panel of Figure~\ref{figure:TS}).
 
 <<eval=false, echo=false, results=hide>>=
 pdf('TS_unesco.pdf', pointsize=18)
@@ -204,18 +202,17 @@ dev.off()
         \includegraphics[width=0.4\hsize]{temperature_comparison}
         \includegraphics[width=0.4\hsize]{salinity_comparison}
     \end{center}
-    \caption{\label{figure:comparison}Comparison of \UNESCO and \TEOS
+    \caption{\label{figure:comparison}Comparison of \code{unesco} and \code{gsw}
     formulations for a CTD section crossing the Atlantic at 36$^\circ$N.}
 \end{figure}
 
 Most hydrography-related functions of \oce provide this \code{eos} argument for
 selecting the seawater formulation. This includes functions for plotting and for
 calculating.  In addition, most of the objects within \oce have accessors that
-can return temperature and salinity in either the \UNESCO or \TEOS scheme. For
-example, the ratio of Conservative Temperature to \UNESCO-formulated
-potential temperature $\theta$ for all the CTD profiles in the cross-Atlantic
-sampling stored in the \oce object called \code{section} is constructed as
-follows (left panel of Figure~\ref{figure:comparison}).
+can return temperature and salinity in either the \UNESCO or \GSW scheme. For
+example, the ratio of Conservative Temperature to \UNESCO-formulated potential
+temperature $\theta$ for all the CTD profiles in \code{section} is constructed
+as follows (left panel of Figure~\ref{figure:comparison}).
 
 <<eval=false, echo=false, results=hide>>=
 pdf('temperature_comparison.pdf', height=5, pointsize=18)
@@ -245,15 +242,15 @@ dev.off()
         \includegraphics[width=.65\hsize]{SSS_2}
     \end{center}
     \caption{\label{figure:SSS}Sea surface Practical Salinity (SP) from the
-    \code{levitus} dataset and percent difference between this and Absolute
+    \code{levitus} dataset and the percent difference between this and Absolute
     Salinity (SA). In the bottom panel colours are limited to a quantile range,
     to avoid the scale being set mainly by a contrast between the Baltic and the
     other salty waters of the planet.}
 \end{figure}
 
 
-Maps are another good way to compare \UNESCO and \TEOS values.
-Figure~\ref{figure:SSS} is an example, created with the following.
+Maps are another way to compare \UNESCO and \GSW values, e.g.
+for Figure~\ref{figure:SSS}
 
 % Next causes build problems so just run it manually and
 <<eval=false, echo=false, results=hide>>=
@@ -278,7 +275,9 @@ dev.off()
 Note the use of quantile-specified scales for the images, the colour mappings of
 which would otherwise be controlled by isolated low-saline waters, yielding
 little to see in the wider expanses of the world ocean (see e.g.
-\cite{mcdougall2012agaf} more context).
+\cite{mcdougall2012agaf} for a broader context).
+
+
 
 \newpage
 
