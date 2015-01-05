@@ -216,7 +216,7 @@ as follows (left panel of Figure~\ref{figure:comparison}).
 
 <<eval=false, echo=false, results=hide>>=
 pdf('temperature_comparison.pdf', height=5, pointsize=18)
-par(mgp=c(2, 0.85, 0))
+par(mar=c(3.2, 3, 1, 1/2), mgp=c(2, 0.85, 0))
 @
 <<eval=false>>=
 hist(section[["theta"]] / section[["CT"]], main="")
@@ -226,7 +226,7 @@ is constructed with
 <<eval=false, echo=false, results=hide>>=
 dev.off()
 pdf('salinity_comparison.pdf', height=5, pointsize=18)
-par(mgp=c(2, 0.85, 0))
+par(mar=c(3.2, 3, 1, 1/2), mgp=c(2, 0.85, 0))
 @
 <<eval=false>>=
 hist(section[["salinity"]] / section[["SA"]], main="")
