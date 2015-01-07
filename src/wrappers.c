@@ -135,9 +135,9 @@ W2(wrap_gsw_z_from_p, gsw_z_from_p, p, lat, n, rval)
 void wrap_gsw_IPV_vs_fNsquared_ratio(double *SA, double *CT, double *p, double *p_ref, int *n,
         double *IPV_vs_fNsquared_ratio, double *p_mid)
 {
-    extern void gsw_ipv_vs_fnsquared_ratio(double *sa, double *ct, double *p, double *p_ref, int n,
+    extern void gsw_ipv_vs_fnsquared_ratio(double *sa, double *ct, double *p, double p_ref, int n,
             double *ipv_vs_fnsquared_ratio, double *p_mid);
-    gsw_ipv_vs_fnsquared_ratio(SA, CT, p, p_ref, *n, IPV_vs_fNsquared_ratio, p_mid);
+    gsw_ipv_vs_fnsquared_ratio(SA, CT, p, *p_ref, *n, IPV_vs_fNsquared_ratio, p_mid);
 }
 
 void wrap_gsw_rho_first_derivatives(double *SA, double *CT, double *p, int *n,

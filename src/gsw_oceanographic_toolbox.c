@@ -117,7 +117,14 @@
 !==========================================================================
 **
 */
-#include <gswteos-10.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <R.h>
+#include <Rdefines.h>
+#include <Rinternals.h>
+#include "gswteos-10.h"
+
 
 /*
 !--------------------------------------------------------------------------
@@ -3916,10 +3923,10 @@ gsw_indx(double *x, int n, double z)
 	else if (z >= x[n-1])
 	    k	= n-2;
 	else {
-	    fprintf(stderr, "ERROR in function gsw_indx : out of range\n");
-	    fprintf(stderr,"z = %g, n = %d, x:\n", z, n);
+	    Rprintf("ERROR in function gsw_indx : out of range\n");
+	    Rprintf("z = %g, n = %d, x:\n", z, n);
 	    for (kl=0; kl<n; kl++)
-		fprintf(stderr,"x[%d] = %g\n", kl, x[kl]);
+		Rprintf("x[%d] = %g\n", kl, x[kl]);
 	    k	= 0;
 	}
 
