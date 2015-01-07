@@ -99,11 +99,10 @@ INTEGERS { output.state before.all mid.sentence after.sentence after.block }
 
 FUNCTION {format.url}
 {
-    %%% url empty$
-    %%% { "" }
-    %%% { "\urlprefix\url{" url * "\urlsuffix}" * }
-    %%% if$
-  ""
+    url empty$
+    { "" }
+    { "\urlprefix\url{" url * "\urlsuffix}" * }
+    if$
 }
 
 FUNCTION {init.state.consts}
@@ -1136,8 +1135,8 @@ FUNCTION {begin.bib}
   if$
   "\begin{thebibliography}{}" write$ newline$		% no labels in apalike
   "\providecommand{\url}[1]{{#1}}" write$ newline$
-  "\providecommand{\urlprefix}{[}" write$ newline$
-  "\providecommand{\urlsuffix}{]}" write$ newline$
+  "\providecommand{\urlprefix}{}" write$ newline$
+  "\providecommand{\urlsuffix}{}" write$ newline$
   "\expandafter\ifx\csname urlstyle\endcsname\relax" write$ newline$
   "  \providecommand{\doi}[1]{DOI \discretionary{}{}{}#1}\else" write$ newline$
   "  \providecommand{\doi}{DOI \discretionary{}{}{}\begingroup \urlstyle{rm}\Url}\fi" write$ newline$
