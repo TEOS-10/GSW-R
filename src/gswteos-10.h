@@ -1,8 +1,8 @@
 /*
-**  $Id: gswteos-10.h,v d7a5468a0b8c 2014/06/14 02:35:01 fmd $
-**  $Version: 3.03.0 $
+**  $Id: gswteos-10.h,v 237ec254b992 2015/01/02 02:28:24 fdelahoyde $
+**  $Version: 3.0.3 $
 **
-**  GSW TEOS-10 V3.02 definitions and prototypes.
+**  GSW TEOS-10 V3.0.3 definitions and prototypes.
 */
 #ifndef GSWTEOS_10_H
 #define GSWTEOS_10_H
@@ -55,8 +55,9 @@ extern double gsw_grav(double lat, double p);
 extern double gsw_hill_ratio_at_sp2(double t);
 extern int    gsw_indx(double *x, int n, double z);
 extern double gsw_internal_energy(double sa, double ct, double p);
-extern void   gsw_ipv_vs_fnsquared_ratio(double *sa, double *ct, double *p, double *p_ref,
-			int nz, double *ipv_vs_fnsquared_ratio, double *p_mid);
+extern void   gsw_ipv_vs_fnsquared_ratio(double *sa, double *ct, double *p,
+			double p_ref, int nz, double *ipv_vs_fnsquared_ratio,
+			double *p_mid);
 extern double gsw_kappa(double sa, double ct, double p);
 extern double gsw_kappa_t_exact(double sa, double t, double p);
 extern double gsw_latentheat_evap_ct(double sa, double ct);

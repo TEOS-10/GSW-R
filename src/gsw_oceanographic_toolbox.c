@@ -1,6 +1,6 @@
 /*
-**  $Id: gsw_oceanographic_toolbox.c,v d7a5468a0b8c 2014/06/14 02:35:01 fmd $
-**  $Version: 3.03.0 $
+**  $Id: gsw_oceanographic_toolbox.c,v dcf5ff4a0411 2015/01/07 05:33:27 fdelahoyde $
+**  $Version: 3.0.3 $
 **
 **  This is a translation of the original f90 source code into C
 **  by the Shipboard Technical Support Computing Resources group
@@ -117,21 +117,13 @@
 !==========================================================================
 **
 */
-//#include <gswteos-10.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <R.h>
-#include <Rdefines.h>
-#include <Rinternals.h>
-#include "gswteos-10.h"
+#include <gswteos-10.h>
 
 /*
 !--------------------------------------------------------------------------
 ! Practical Salinity (SP), PSS-78
 !--------------------------------------------------------------------------
-*/
-/*
+
 !==========================================================================
 function gsw_sp_from_c(c,t,p)
 !==========================================================================
@@ -2639,7 +2631,7 @@ gsw_sa_from_rho(double rho, double ct, double p)
 	int	no_iter;
 
 	double	sa, v_lab, v_0, v_50, v_sa,
-		sa_old, delta_v, sa_mean, alpha, beta;
+		sa_old, delta_v, sa_mean, beta_mean, rho_mean;
 
 	v_lab	= 1e0/rho;
 	v_0	= gsw_specvol(0e0,ct,p);
@@ -2656,9 +2648,9 @@ gsw_sa_from_rho(double rho, double ct, double p)
 	    delta_v	= gsw_specvol(sa_old,ct,p) - v_lab;
 	    sa		= sa_old - delta_v/v_sa;
 	    sa_mean	= 0.5e0*(sa + sa_old);
-	    alpha	= gsw_alpha(sa_mean,ct,p);
-	    beta	= gsw_beta(sa_mean,ct,p);
-	    v_sa	= - beta/rho;
+	    rho_mean	= gsw_rho(sa_mean,ct,p);
+	    beta_mean	= gsw_beta(sa_mean,ct,p);
+	    v_sa	= -beta_mean/rho_mean;
 	    sa		= sa_old - delta_v/v_sa;
 	    if (sa < 0e0 || sa > 50e0)
 	 	sa	= GSW_INVALID_VALUE;
@@ -2806,7 +2798,7 @@ gsw_turner_rsubrho(double *sa, double *ct, double *p, int nz,
 !--------------------------------------------------------------------------
 
 !==========================================================================
-subroutine gsw_ipv_vs_fnsquared_ratio(sa,ct,p,p_ref,nz,ipv_vs_fnsquared_ratio,p_ref)
+subroutine gsw_ipv_vs_fnsquared_ratio(sa,ct,p,nz,ipv_vs_fnsquared_ratio,p_mid)
 !==========================================================================
 
 !  Calculates the ratio of the vertical gradient of potential density to 
@@ -2837,30 +2829,29 @@ subroutine gsw_ipv_vs_fnsquared_ratio(sa,ct,p,p_ref,nz,ipv_vs_fnsquared_ratio,p_
 !           referenced potential density.  It is ouput on the same
 !           vertical (M-1)xN grid as p_mid. 
 !           IPV_vs_fNsquared_ratio is dimensionless.          [ unitless ]
-! p_ref   : Reference pressure (length 1)                         [dbar]
+! p_mid   : Mid pressure between p grid  (length nz-1)           [dbar]
 */
 void
-gsw_ipv_vs_fnsquared_ratio(double *sa, double *ct, double *p, double *p_ref, int nz,
-	double *ipv_vs_fnsquared_ratio, double *p_mid)
+gsw_ipv_vs_fnsquared_ratio(double *sa, double *ct, double *p, double p_ref,
+	int nz, double *ipv_vs_fnsquared_ratio, double *p_mid)
 {
 	int	k;
 
-	double	dsa, sa_mid, dct, ct_mid, dp;
+	double	dsa, sa_mid, dct, ct_mid;
 	double	alpha_mid, beta_mid;
 	double	alpha_pref, beta_pref, numerator, denominator;
 
 	for (k = 0; k < nz-1; k++) {
-	    dsa = (sa[k+1] - sa[k]);
+	    dsa = (sa[k] - sa[k+1]);
 	    sa_mid = 0.5*(sa[k] + sa[k+1]);
-	    dct = (ct[k+1] - ct[k]);
+	    dct = (ct[k] - ct[k+1]);
 	    ct_mid = 0.5*(ct[k] + ct[k+1]);
-	    dp = (p[k+1] - p[k]);
 	    p_mid[k] = 0.5*(p[k] + p[k+1]);
 
 	    alpha_mid = gsw_alpha(sa_mid,ct_mid,p_mid[k]);
 	    beta_mid = gsw_beta(sa_mid,ct_mid,p_mid[k]);
-	    alpha_pref = gsw_alpha(sa_mid,ct_mid,p_ref[0]);
-	    beta_pref = gsw_beta(sa_mid,ct_mid,p_ref[0]);
+	    alpha_pref = gsw_alpha(sa_mid,ct_mid,p_ref);
+	    beta_pref = gsw_beta(sa_mid,ct_mid,p_ref);
 
 	    numerator = dct*alpha_pref - dsa*beta_pref;
 	    denominator = dct*alpha_mid - dsa*beta_mid;
@@ -3925,10 +3916,10 @@ gsw_indx(double *x, int n, double z)
 	else if (z >= x[n-1])
 	    k	= n-2;
 	else {
-	    Rprintf("ERROR in function gsw_indx : out of range\n");
-	    Rprintf("z = %g, n = %d, x:\n", z, n);
+	    fprintf(stderr, "ERROR in function gsw_indx : out of range\n");
+	    fprintf(stderr,"z = %g, n = %d, x:\n", z, n);
 	    for (kl=0; kl<n; kl++)
-		Rprintf("x[%d] = %g\n", kl, x[kl]);
+		fprintf(stderr,"x[%d] = %g\n", kl, x[kl]);
 	    k	= 0;
 	}
 
