@@ -8,19 +8,29 @@
 \description{
 Provides an R interface to the TEOS-10 / GSW (Gibbs Sea Water) library,
 partly for use by the \code{oce} package (see \url{http://dankelley.github.io/oce})
-and partly for general use.
+and partly for general use. It is assumed that users are familiar with
+the science and methodology of GSW, and that the package vignette
+(obtained by typing \code{vignette("gsw")} in an R window) provides
+enough orientation to get users started with the \code{gsw} functions.
 }
 \details{
-The functions are linked with the C version of the TEOS-10 library,
-but the interface (e.g. the case used in function names)
-matches the Matlab implementation, not the C version. One
-significant difference from Matlab arguments is that the Matlab
-abbreviations \code{long} and \code{lat} are written out in full
-in the present package. (Since R permits abbreviated argument
-names in function calls, users may use the Matlab names if desired.)
+\code{gsw} was developed using open-source methodologies, on
+the GitHub site (\url{https://github.com/TEOS-10/GSW-R}), which
+is part of a set of sites dedicated to GSW formulations in
+various languages.
 
-The documentation provided here focuses on the arguments and return
-values, relying on links to the TEOS-10 webpages for details.
+The \code{gsw} system is to link R functions with the C version of
+the TEOS-10 library.  The R function names are chosen to match
+those of the Matlab version of GSW, and the function arguments
+also match with one exception: in \code{gsw}, longitude
+and latitude are indicated with their full names, whereas in
+Matlab they are indicated with \code{long} and \code{lat};
+since R permits abbreviated function arguments, the shortened
+names can be used in \code{gsw} as well.
+
+The documentation for the \code{gsw} functions focuses mainly
+on the arguments and return values, relying on links to the
+TEOS-10 webpages for details.
 
 See \url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html}
 for a list of the TEOS-10 functions and
@@ -49,15 +59,5 @@ can handle the case in which the \code{SA} argument is a matrix and
 This can be handy with gridded datasets. However, the careful
 analyst will probably prefer to avoid this and other conveniences,
 supplying properly-matched arguments from the outset.
-
-As of early 2015, the package is still in development (see
-\url{https://github.com/TEOS-10/GSW-R}), with a plan to
-have all relevant functions coded by early January, allowing
-for a month of testing before submission to CRAN.
-
-There is a possibility that the underlying C library will be
-updated sometime in 2015, and if this is done early enough,
-the present package will be altered before its first
-submission to CRAN.
 }
 
