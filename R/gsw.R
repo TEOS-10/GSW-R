@@ -1159,7 +1159,7 @@ gsw_sigma3 <- function(SA, CT)
 #' @param CT Conservative Temperature [ deg C ]
 #' @return potential density anomaly with reference pressure 4000 dbar [ kg/m^3 ]
 #' @examples
-#' gsw_sigma3(34.7118, 28.8099) # 37.898467323406976
+#' gsw_sigma4(34.7118, 28.8099) # 37.898467323406976
 #' @seealso Use \code{\link{gsw_sigma0}} for 0 dbar pressure, \code{\link{gsw_sigma1}} for 1000 dbar, \code{\link{gsw_sigma2}} for 2000 dbar, or \code{\link{gsw_sigma3}} for 3000 dbar.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma4.html}
