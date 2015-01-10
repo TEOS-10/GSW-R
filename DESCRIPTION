@@ -2,13 +2,13 @@ Package: gsw
 Version: 1.0-2
 Date: 2015-01-10
 Title: Gibbs Sea Water functions
-Authors@R: c(person("Dan", "Kelley", role=c("aut","cre","cph"), email="dan.kelley@dal.ca", comment="C wrapper code, R code"), person("Clark", "Richards", role=c("aut","cph"), email="clark.richards@gmail.com", comment="C wrapper code, R code"), person(family="SCOR/IAPSO WG127", role=c("aut","cph"), comment="Original C code"), person("Frank", "Delahoyde", role=c("aut", "cph"), email="mailto:fdelahoyde@ucsd.edu", comment="Present maintainer of C code"))
-Author: Dan Kelley [aut,cre,cph], Clark Richards [aut,cph], SCOR/IAPSO WG127 [aut,cph], Frank Delahoyde [aut,cph]
-Copyright: Original algorithms and Matlab/C library (c) 2014 SCOR/IAPSO WG127 (Scientific Committee on Oceanic Research / International Association for the Physical Sciences of the Oceans, Working Group 127); present-day C library (c) 2015 Frank Delahoyde; C wrapper code and R code (c) 2015 Dan Kelley and Clark Richards.
+Authors@R: c(person("Dan", "Kelley", role=c("aut","cre","cph"), email="dan.kelley@dal.ca"), person("Clark", "Richards", role=c("aut","cph"), email="clark.richards@gmail.com"), person("WG127", "SCOR/IAPSO", role=c("aut","cph")))
+Author: Dan Kelley [aut,cre,cph], Clark Richards [aut,cph], WG127 SCOR/IAPSO [aut,cph]
+Copyright: Original algorithms and Matlab/C library (c) 2014 WG127 SCOR/IAPSO (Scientific Committee on Oceanic Research / International Association for the Physical Sciences of the Oceans, Working Group 127); C wrapper code and R code (c) 2015 Dan Kelley and Clark Richards
 Maintainer: Dan Kelley <dan.kelley@dal.ca>
 Depends: R (>= 2.15)
 BugReports: https://github.com/TEOS-10/GSW-R/issues
-Description: Provides an interface to the Gibbs Sea Water (TEOS-10) C library, which derives from Matlab and other code written by Trevor McDougall and Paul Barker.
+Description: Provides an interface to the Gibbs Sea Water (TEOS-10) C library, which derives from Matlab and other code written by WG127 (Working Group 127) of SCOR/IAPSO (Scientific Committee on Oceanic Research / International Association for the Physical Sciences of the Oceans).
 URL: http://teos-10.github.io/GSW-R/index.html
 License: GPL (>= 2) | file LICENSE
 LazyLoad: yes
