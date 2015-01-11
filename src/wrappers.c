@@ -6,7 +6,31 @@
 #include <Rdefines.h>
 #include "gswteos-10.h"
 
-//GSW_INVALID_VALUE	
+void set_gsw_dimensions(int *gsw_nx_val,
+        int *gsw_ny_val,
+        int *gsw_nz_val,
+        double *longs_ref_val,
+        double *lats_ref_val,
+        double *p_ref_val,
+        double *ndepth_ref_val,
+        double *saar_ref_val,
+        double *delta_sa_ref_val)
+{
+    extern int gsw_nx, gsw_ny, gsw_nz;
+    extern double *longs_ref, *lats_ref, *p_ref, *ndepth_ref, *saar_ref, *delta_sa_ref;
+    //Rprintf("about to set up sarr globals\n");
+    gsw_nx = *gsw_nx_val;
+    gsw_ny = *gsw_ny_val;
+    gsw_nz = *gsw_nz_val;
+    longs_ref = longs_ref_val;
+    lats_ref = lats_ref_val;
+    p_ref = p_ref_val;
+    ndepth_ref = ndepth_ref_val;
+    saar_ref = saar_ref_val;
+    delta_sa_ref = delta_sa_ref_val;
+    //Rprintf(" ... done setting up globals\n");
+}
+
 
 // PART 1: macros for wrappers
 //
@@ -25,10 +49,19 @@ void (wname)(double *(arg1), int *(n), double *(rval))\
     }\
 }
 
+// extern int gsw_nx, gsw_ny, gsw_nz;
+// extern double *longs_ref, *lats_ref, *p_ref, *ndepth_ref, *saar_ref, *delta_sa_ref;
+// Rprintf("TEST: gsw dimensions: %d %d %d\n", gsw_nx, gsw_ny, gsw_nz);
+// Rprintf("TEST: lats: %g %g ... %g\n", lats_ref[0], lats_ref[1], lats_ref[gsw_nx-1]);
+// Rprintf("TEST: longs: %g %g ... %g\n", longs_ref[0], longs_ref[1], longs_ref[gsw_nx-1]);
+// Rprintf("TEST: ndepth: %g %g ...\n", ndepth_ref[0], ndepth_ref[1]);
+// Rprintf("TEST: saar: %g %g ...\n", saar_ref[0], saar_ref[1]);
+// Rprintf("TEST: delta_sa: %g %g ...\n", delta_sa_ref[0], delta_sa_ref[1]);
+
 #define W2(wname, cname, arg1, arg2, n, rval) \
 void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval))\
 {\
-    for (int i=0; i < *(n); i++) {\
+   for (int i=0; i < *(n); i++) {\
         (rval)[i] = (cname)((arg1)[i], (arg2)[i]);\
         if ((rval)[i] == GSW_INVALID_VALUE) {\
             (rval)[i] = NA_REAL;\

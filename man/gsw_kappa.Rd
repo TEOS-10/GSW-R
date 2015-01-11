@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_kappa}
 \alias{gsw_kappa}
-\title{isentropic compressibility of seawater}
+\title{Isentropic compressibility of seawater}
 \usage{
 gsw_kappa(SA, CT, p)
 }
@@ -17,7 +17,7 @@ gsw_kappa(SA, CT, p)
 isentropic compressibility [ 1/Pa ] (not 1/dbar)
 }
 \description{
-isentropic compressibility of seawater
+Isentropic compressibility of seawater
 }
 \examples{
 gsw_kappa(34.7118, 28.7856, 10) # 4.11346577902628e-10

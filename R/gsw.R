@@ -2,7 +2,7 @@
 ## here. Generally the functions will be added to Part 4.
 
 
-## PART 1: document the package
+## PART 1: document the package and the 'gsw' dataset
 
 #' R implementation of the Thermodynamic Equation Of Seawater - 2010 (TEOS-10)
 #'
@@ -65,6 +65,61 @@
 #' @name gsw
 NULL
 
+#' Global SA lookup file
+#'
+#' @description
+#' This dataset is not intended for users, but rather for internal use
+#' within the \code{gsw} package. The dataset stores the 1.4M lookup
+#' table defined in the 8.3M file \code{src/gsw_saar_data.c} in the C
+#' library. (The .c file exceeds CRAN limitations on size.)
+#'
+#' @details
+#' The data are designed to replace C elements defined as below
+#' in \code{src/gsw_saar_data.c}:
+#' \preformatted{
+#'     static int	gsw_nx=91, gsw_ny=45, gsw_nz=45;
+#'     static double	longs_ref[91];
+#'     static double	lats_ref[45];
+#'     static double	p_ref[45];
+#'     static double	ndepth_ref[4095];
+#'     static double	saar_ref[184275];
+#'     static double	delta_sa_ref[184275];
+#' }
+#' 
+#' R storage is in a list named \code{saar}, with elements named
+#' as in the C code, i.e. \code{gsw_nx} etc.
+#'
+#' C storage for these variables is allocated as needed,
+#' and the data are inserted, when \code{gsw} is launched.
+#' Thus, the existing C library code "knows" about the data
+#' as local storage, which keeps alterations to the C library to 
+#' a minimum.
+#'
+#' The code used to create the RDA file (using the Fortran data
+#' file, version 3.0.3) is given below.
+#' \preformatted{
+#'     gsw_nx <- 91
+#'     gsw_ny <- 45
+#'     gsw_nz <- 45
+#'     f <- file("~/src/gsw_fortran_v3_03/gsw_data_v3_0.dat", "r")
+#'     longs_ref <- scan(f, double(), n=gsw_nx)
+#'     lats_ref <- scan(f, double(), n=gsw_ny)
+#'     p_ref <- scan(f, double(), n=gsw_nz)
+#'     ndepth_ref <- scan(f, double(), n=gsw_nx*gsw_ny)
+#'     saar_ref <- scan(f, double(), n=gsw_nx*gsw_ny*gsw_nz)
+#'     delta_sa_ref <- scan(f, double(), n=gsw_nx*gsw_ny*gsw_nz)
+#'     saar <- list(gsw_nx=gsw_nx, gsw_ny=gsw_ny, gsw_nz=gsw_nz,
+#'                  longs_ref=longs_ref, lats_ref=lats_ref, p_ref=p_ref, ndepth_ref=ndepth_ref,
+#'                  saar_ref=saar_ref, delta_sa_ref=delta_sa_ref)
+#'     save(saar, file="saar.rda")
+#'     tools::resaveRdaFiles("saar.rda")
+#'     close(f)
+#'}
+#'
+#' @docType data
+#' @name saar
+NULL
+
 
 ## PART 2: utility functions
 
@@ -105,7 +160,7 @@ argfix <- function(list)
 
 ## PART 3: gsw (Gibbs SeaWater) functions, in alphabetical order (ignoring case)
 
-#' adiabatic lapse rate from Conservative Temperature
+#' Adiabatic lapse rate from Conservative Temperature
 #'
 #' Note that the unit is K/Pa, i.e. 1e-4 times K/dbar.
 #' 
@@ -129,7 +184,7 @@ gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
     rval
 }
                                         
-#' thermal expansion coefficient with respect to Conservative Temperature. (48-term equation)
+#' Thermal expansion coefficient with respect to Conservative Temperature. (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -152,7 +207,7 @@ gsw_alpha <- function(SA, CT, p)
     rval
 }
 
-#' thermal expansion coefficient over haline contraction coefficient (48-term equation)
+#' Thermal expansion coefficient over haline contraction coefficient (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -175,7 +230,7 @@ gsw_alpha_on_beta <- function(SA, CT, p)
     rval
 }
 
-#' thermal expansion coefficient with respect to in-situ temperature
+#' Thermal expansion coefficient with respect to in-situ temperature
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90)  [ deg C ]
@@ -198,7 +253,7 @@ gsw_alpha_wrt_t_exact <- function(SA, t, p)
     rval
 }
 
-#' saline contraction coefficient at constant Conservative Temperature. (48-term equation)
+#' Saline contraction coefficient at constant Conservative Temperature. (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -226,7 +281,7 @@ gsw_beta <- function(SA, CT, p)
     rval
 }
 
-#' saline contraction coefficient at constant in-situ temperature
+#' Saline contraction coefficient at constant in-situ temperature
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
@@ -250,7 +305,7 @@ gsw_beta_const_t_exact <- function(SA, t, p)
     rval
 }
 
-#' cabbeling coefficient (48-term equation)
+#' Cabbeling coefficient (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -428,7 +483,7 @@ gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
     rval
 }
 
-#' dynamic enthalpy of seawater (48-term equation)
+#' Dynamic enthalpy of seawater (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -538,7 +593,7 @@ gsw_entropy_from_t <- function(SA, t, p)
 #' gsw_grav(c(-90, -60), 0) # 9.832186205884799, 9.819178859991149
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_grav.html}
-gsw_grav <- function(latitude, p)
+gsw_grav <- function(latitude, p=0)
 {
     l <- argfix(list(latitude=latitude, p=p))
     n <- length(l[[1]])
@@ -550,7 +605,7 @@ gsw_grav <- function(latitude, p)
     rval
 }
 
-#' specific internal energy of seawater (48-term equation)
+#' Specific internal energy of seawater (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -606,7 +661,7 @@ gsw_IPV_vs_fNsquared_ratio <- function(SA, CT, p, p_ref=0)
     list(IPV_vs_fNsquared_ratio=r$ratio, p_mid=r$p_mid)
 }
 
-#' isentropic compressibility of seawater
+#' Isentropic compressibility of seawater
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -629,7 +684,7 @@ gsw_kappa <- function(SA, CT, p)
     rval
 }
 
-#' isentropic compressibility of seawater
+#' Isentropic compressibility of seawater
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
@@ -652,7 +707,7 @@ gsw_kappa_t_exact <- function(SA, t, p)
     rval
 }
 
-#' latent heat of evaporation
+#' Latent heat of evaporation
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -674,7 +729,7 @@ gsw_latentheat_evap_CT <- function(SA, CT)
     rval
 }
 
-#' latent heat of evaporation
+#' Latent heat of evaporation
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
@@ -696,7 +751,7 @@ gsw_latentheat_evap_t <- function(SA, t)
     rval
 }
 
-#' latent heat of melting
+#' Latent heat of melting
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param p sea pressure [ dbar ]
@@ -745,7 +800,7 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
     list(N2=r$n2, p_mid=r$p_mid)
 }
 
-#' pressure from z
+#' Pressure from z
 #' 
 #' @param z height, zero at surface (but note last 2 args) and positive upwards [ m ]
 #' @param latitude latitude in decimal degrees north [ -90 ... +90 ]
@@ -774,7 +829,7 @@ gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height=0, sea_surface_geopote
     rval
 }
 
-#' potential density
+#' Potential density
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
@@ -799,7 +854,7 @@ gsw_pot_rho_t_exact <- function(SA, t, p, p_ref)
     rval
 }
 
-#' potential temperature referenced to the surface
+#' Potential temperature referenced to the surface
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
@@ -822,7 +877,7 @@ gsw_pt0_from_t <- function(SA, t, p)
     rval
 }
 
-#' potential temperature from Conservative Temperature
+#' Potential temperature from Conservative Temperature
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -844,7 +899,7 @@ gsw_pt_from_CT <- function(SA, CT)
     rval
 }
 
-#' potential temperature from in-situ temperature
+#' Potential temperature from in-situ temperature
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90)  [ deg C ]
@@ -868,7 +923,7 @@ gsw_pt_from_t <- function(SA, t, p, p_ref=0)
     rval
 }
 
-#' in-situ density (48-term equation)
+#' In-situ density (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -914,7 +969,7 @@ gsw_rho_first_derivatives <- function(SA, CT, p)
     list(drho_dSA=rval$drho_dSA, drho_dCT=rval$drho_dCT, drho_dp=rval$drho_dp)
 }
 
-#' in-situ density
+#' In-situ density
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
@@ -1045,7 +1100,7 @@ gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
     rval
 }
 
-#' potential density anomaly referenced to 0 dbar
+#' Potential density anomaly referenced to 0 dbar
 #'
 #' This uses the 48-term density equation, and returns
 #' potential density referenced to a pressure of 0 dbar,
@@ -1071,7 +1126,7 @@ gsw_sigma0 <- function(SA, CT)
     rval
 }
 
-#' potential density anomaly referenced to 1000 dbar
+#' Potential density anomaly referenced to 1000 dbar
 #'
 #' This uses the 48-term density equation, and returns
 #' potential density referenced to a pressure of 1000 dbar,
@@ -1097,7 +1152,7 @@ gsw_sigma1 <- function(SA, CT)
     rval
 }
 
-#' potential density anomaly referenced to 2000 dbar
+#' Potential density anomaly referenced to 2000 dbar
 #'
 #' This uses the 48-term density equation, and returns
 #' potential density referenced to a pressure of 2000 dbar,
@@ -1123,7 +1178,7 @@ gsw_sigma2 <- function(SA, CT)
     rval
 }
 
-#' potential density anomaly referenced to 3000 dbar
+#' Potential density anomaly referenced to 3000 dbar
 #'
 #' This uses the 48-term density equation, and returns
 #' potential density referenced to a pressure of 3000 dbar,
@@ -1149,7 +1204,7 @@ gsw_sigma3 <- function(SA, CT)
     rval
 }
 
-#' potential density anomaly referenced to 4000 dbar
+#' Potential density anomaly referenced to 4000 dbar
 #'
 #' This uses the 48-term density equation, and returns
 #' potential density referenced to a pressure of 4000 dbar,
@@ -1175,7 +1230,7 @@ gsw_sigma4 <- function(SA, CT)
     rval
 }
 
-#' sound speed with 48-term density
+#' Sound speed with 48-term density
 #'
 #' This uses the 48-term density equation.
 #'
@@ -1200,7 +1255,7 @@ gsw_sound_speed<- function(SA, CT, p)
     rval
 }
 
-#' sound speed
+#' Sound speed
 #'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
@@ -1558,7 +1613,7 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
     rval
 }
 
-#' in situ temperature from Conservative Temperature
+#' In situ temperature from Conservative Temperature
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -1581,7 +1636,7 @@ gsw_t_from_CT <- function(SA, CT, p)
     rval
 }
 
-#' thermobaric coefficient (48-term equation)
+#' Thermobaric coefficient (48-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -1638,7 +1693,7 @@ gsw_Turner_Rsubrho <- function(SA, CT, p)
     list(Tu=Tu, Rsubrho=Rsubrho, p_mid=p_mid)
 }
 
-#' height from pressure (48-term equation)
+#' Height from pressure (48-term equation)
 #' 
 #' @param p sea pressure [ dbar ]
 #' @param latitude latitude in decimal degrees north [ -90 ... +90 ]

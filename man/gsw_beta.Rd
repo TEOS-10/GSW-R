@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_beta}
 \alias{gsw_beta}
-\title{saline contraction coefficient at constant Conservative Temperature. (48-term equation)}
+\title{Saline contraction coefficient at constant Conservative Temperature. (48-term equation)}
 \usage{
 gsw_beta(SA, CT, p)
 }
@@ -17,7 +17,7 @@ gsw_beta(SA, CT, p)
 saline contraction coefficient at constant Conservative Temperature [ kg/g ]
 }
 \description{
-saline contraction coefficient at constant Conservative Temperature. (48-term equation)
+Saline contraction coefficient at constant Conservative Temperature. (48-term equation)
 }
 \examples{
 SA = c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)

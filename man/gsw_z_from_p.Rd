@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_z_from_p}
 \alias{gsw_z_from_p}
-\title{height from pressure (48-term equation)}
+\title{Height from pressure (48-term equation)}
 \usage{
 gsw_z_from_p(p, latitude)
 }
@@ -15,7 +15,7 @@ gsw_z_from_p(p, latitude)
 height [ m ]
 }
 \description{
-height from pressure (48-term equation)
+Height from pressure (48-term equation)
 }
 \examples{
 gsw_z_from_p(10, 4) # -9.9445831334188

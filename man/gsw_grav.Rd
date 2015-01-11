@@ -4,7 +4,7 @@
 \alias{gsw_grav}
 \title{Gravitational acceleration}
 \usage{
-gsw_grav(latitude, p)
+gsw_grav(latitude, p = 0)
 }
 \arguments{
 \item{latitude}{latitude in decimal degress north [ -90 ... +90 ]}

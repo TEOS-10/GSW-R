@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_sound_speed_t_exact}
 \alias{gsw_sound_speed_t_exact}
-\title{sound speed}
+\title{Sound speed}
 \usage{
 gsw_sound_speed_t_exact(SA, t, p)
 }
@@ -17,7 +17,7 @@ gsw_sound_speed_t_exact(SA, t, p)
 sound speed [ m/s ]
 }
 \description{
-sound speed
+Sound speed
 }
 \examples{
 gsw_sound_speed_t_exact(34.7118, 28.7856, 10) # 1542.420534932182

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_sigma0}
 \alias{gsw_sigma0}
-\title{potential density anomaly referenced to 0 dbar}
+\title{Potential density anomaly referenced to 0 dbar}
 \usage{
 gsw_sigma0(SA, CT)
 }

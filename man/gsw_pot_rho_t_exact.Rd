@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_pot_rho_t_exact}
 \alias{gsw_pot_rho_t_exact}
-\title{potential density}
+\title{Potential density}
 \usage{
 gsw_pot_rho_t_exact(SA, t, p, p_ref)
 }
@@ -19,7 +19,7 @@ gsw_pot_rho_t_exact(SA, t, p, p_ref)
 potential density [ kg/m^3 ]
 }
 \description{
-potential density
+Potential density
 }
 \examples{
 gsw_pot_rho_t_exact(34.7118, 28.7856, 10, 0) # 1021.798145811089

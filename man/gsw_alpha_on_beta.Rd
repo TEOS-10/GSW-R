@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_alpha_on_beta}
 \alias{gsw_alpha_on_beta}
-\title{thermal expansion coefficient over haline contraction coefficient (48-term equation)}
+\title{Thermal expansion coefficient over haline contraction coefficient (48-term equation)}
 \usage{
 gsw_alpha_on_beta(SA, CT, p)
 }
@@ -17,7 +17,7 @@ gsw_alpha_on_beta(SA, CT, p)
 ratio of thermal expansion coefficient to haline contraction coefficient [ (g/kg)/K ]
 }
 \description{
-thermal expansion coefficient over haline contraction coefficient (48-term equation)
+Thermal expansion coefficient over haline contraction coefficient (48-term equation)
 }
 \examples{
 gsw_alpha_on_beta(34.7118, 28.8099, 10) # 0.452454540612631

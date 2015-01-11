@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_pt_from_CT}
 \alias{gsw_pt_from_CT}
-\title{potential temperature from Conservative Temperature}
+\title{Potential temperature from Conservative Temperature}
 \usage{
 gsw_pt_from_CT(SA, CT)
 }
@@ -15,7 +15,7 @@ gsw_pt_from_CT(SA, CT)
 potential temperature [ deg C ]
 }
 \description{
-potential temperature from Conservative Temperature
+Potential temperature from Conservative Temperature
 }
 \examples{
 gsw_pt_from_CT(34.7118, 28.8099) # 28.783177048624573

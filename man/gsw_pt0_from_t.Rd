@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_pt0_from_t}
 \alias{gsw_pt0_from_t}
-\title{potential temperature referenced to the surface}
+\title{Potential temperature referenced to the surface}
 \usage{
 gsw_pt0_from_t(SA, t, p)
 }
@@ -17,7 +17,7 @@ gsw_pt0_from_t(SA, t, p)
 potential temperature [ deg C ]
 }
 \description{
-potential temperature referenced to the surface
+Potential temperature referenced to the surface
 }
 \examples{
 gsw_pt0_from_t(34.7118, 28.7856, 10) # 28.783196819670632

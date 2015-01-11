@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_adiabatic_lapse_rate_from_CT}
 \alias{gsw_adiabatic_lapse_rate_from_CT}
-\title{adiabatic lapse rate from Conservative Temperature}
+\title{Adiabatic lapse rate from Conservative Temperature}
 \usage{
 gsw_adiabatic_lapse_rate_from_CT(SA, CT, p)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_t_from_CT}
 \alias{gsw_t_from_CT}
-\title{in situ temperature from Conservative Temperature}
+\title{In situ temperature from Conservative Temperature}
 \usage{
 gsw_t_from_CT(SA, CT, p)
 }
@@ -17,7 +17,7 @@ gsw_t_from_CT(SA, CT, p)
 in-situ temperature (ITS-90) [ deg C ]
 }
 \description{
-in situ temperature from Conservative Temperature
+In situ temperature from Conservative Temperature
 }
 \examples{
 gsw_t_from_CT(34.7118, 28.8099, 10) # 28.785580227725703

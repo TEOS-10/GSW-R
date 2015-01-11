@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_beta_const_t_exact}
 \alias{gsw_beta_const_t_exact}
-\title{saline contraction coefficient at constant in-situ temperature}
+\title{Saline contraction coefficient at constant in-situ temperature}
 \usage{
 gsw_beta_const_t_exact(SA, t, p)
 }
@@ -17,7 +17,7 @@ gsw_beta_const_t_exact(SA, t, p)
 saline contraction coefficient at constant in-situ temperature [ kg/g ]
 }
 \description{
-saline contraction coefficient at constant in-situ temperature
+Saline contraction coefficient at constant in-situ temperature
 }
 \examples{
 gsw_beta_const_t_exact(34.7118, 28.7856, 10) # 7.31120837010429e-4

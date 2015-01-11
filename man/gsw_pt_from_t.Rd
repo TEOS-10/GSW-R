@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_pt_from_t}
 \alias{gsw_pt_from_t}
-\title{potential temperature from in-situ temperature}
+\title{Potential temperature from in-situ temperature}
 \usage{
 gsw_pt_from_t(SA, t, p, p_ref = 0)
 }
@@ -19,7 +19,7 @@ gsw_pt_from_t(SA, t, p, p_ref = 0)
 potential temperature [ deg C ]
 }
 \description{
-potential temperature from in-situ temperature
+Potential temperature from in-situ temperature
 }
 \examples{
 gsw_pt_from_t(34.7118, 28.7856, 10, 0) # 28.783196819670632

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_alpha}
 \alias{gsw_alpha}
-\title{thermal expansion coefficient with respect to Conservative Temperature. (48-term equation)}
+\title{Thermal expansion coefficient with respect to Conservative Temperature. (48-term equation)}
 \usage{
 gsw_alpha(SA, CT, p)
 }
@@ -17,7 +17,7 @@ gsw_alpha(SA, CT, p)
 thermal expansion coefficient with respect to Conservative Temperature [ 1/K ]
 }
 \description{
-thermal expansion coefficient with respect to Conservative Temperature. (48-term equation)
+Thermal expansion coefficient with respect to Conservative Temperature. (48-term equation)
 }
 \examples{
 gsw_alpha(34.7118, 28.7856, 10) # 3.24480399390879e-3

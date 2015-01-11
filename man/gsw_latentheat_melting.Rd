@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_latentheat_melting}
 \alias{gsw_latentheat_melting}
-\title{latent heat of melting}
+\title{Latent heat of melting}
 \usage{
 gsw_latentheat_melting(SA, p)
 }
@@ -15,7 +15,7 @@ gsw_latentheat_melting(SA, p)
 latent heat of freezing [ J/kg ]
 }
 \description{
-latent heat of melting
+Latent heat of melting
 }
 \examples{
 gsw_latentheat_melting(34.7118, 10) # 3.299495187300804e5

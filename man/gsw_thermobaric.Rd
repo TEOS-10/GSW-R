@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_thermobaric}
 \alias{gsw_thermobaric}
-\title{thermobaric coefficient (48-term equation)}
+\title{Thermobaric coefficient (48-term equation)}
 \usage{
 gsw_thermobaric(SA, CT, p)
 }
@@ -17,7 +17,7 @@ gsw_thermobaric(SA, CT, p)
 thermobaric coefficient wrt Conservative Temperature [ 1/(K Pa) ]
 }
 \description{
-thermobaric coefficient (48-term equation)
+Thermobaric coefficient (48-term equation)
 }
 \examples{
 gsw_thermobaric(34.7118, 28.8099, 10) # 1.40572143831373e-12
