@@ -1,4 +1,5 @@
 useDynLib(gsw)
+importFrom(utils, data)
 export(
         argfix,
         gsw_adiabatic_lapse_rate_from_CT,

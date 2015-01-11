@@ -7,7 +7,9 @@
 //#include <gswteos-10.h>
 #include "gswteos-10.h"
 //#include <gsw_saar_data.c>
-#include "gsw_saar_data.c"
+//#include "gsw_saar_data.c"
+int gsw_nx, gsw_ny, gsw_nz;
+double *longs_ref, *lats_ref, *p_ref, *ndepth_ref, *saar_ref, *delta_sa_ref;
 
 static double
 gsw_sum(double *x, int n)

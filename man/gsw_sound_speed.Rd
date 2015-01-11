@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_sound_speed}
 \alias{gsw_sound_speed}
-\title{sound speed with 48-term density}
+\title{Sound speed with 48-term density}
 \usage{
 gsw_sound_speed(SA, CT, p)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_alpha_wrt_t_exact}
 \alias{gsw_alpha_wrt_t_exact}
-\title{thermal expansion coefficient with respect to in-situ temperature}
+\title{Thermal expansion coefficient with respect to in-situ temperature}
 \usage{
 gsw_alpha_wrt_t_exact(SA, t, p)
 }
@@ -17,7 +17,7 @@ gsw_alpha_wrt_t_exact(SA, t, p)
 thermal expansion coefficient with respect to in-situ temperature [ 1/K ]
 }
 \description{
-thermal expansion coefficient with respect to in-situ temperature
+Thermal expansion coefficient with respect to in-situ temperature
 }
 \examples{
 gsw_alpha_wrt_t_exact(34.7118, 28.7856, 10) # 1e-3*0.325601747227247

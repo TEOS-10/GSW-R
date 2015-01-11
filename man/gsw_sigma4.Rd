@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_sigma4}
 \alias{gsw_sigma4}
-\title{potential density anomaly referenced to 4000 dbar}
+\title{Potential density anomaly referenced to 4000 dbar}
 \usage{
 gsw_sigma4(SA, CT)
 }

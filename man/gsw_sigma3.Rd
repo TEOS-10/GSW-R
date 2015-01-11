@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_sigma3}
 \alias{gsw_sigma3}
-\title{potential density anomaly referenced to 3000 dbar}
+\title{Potential density anomaly referenced to 3000 dbar}
 \usage{
 gsw_sigma3(SA, CT)
 }

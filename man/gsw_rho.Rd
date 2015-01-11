@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_rho}
 \alias{gsw_rho}
-\title{in-situ density (48-term equation)}
+\title{In-situ density (48-term equation)}
 \usage{
 gsw_rho(SA, CT, p)
 }
@@ -17,7 +17,7 @@ gsw_rho(SA, CT, p)
 in-situ density [ kg/m^3 ]
 }
 \description{
-in-situ density (48-term equation)
+In-situ density (48-term equation)
 }
 \examples{
 gsw_rho(34.7118, 28.8099, 10) # 1021.8404465661

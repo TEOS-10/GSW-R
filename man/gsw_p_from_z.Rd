@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_p_from_z}
 \alias{gsw_p_from_z}
-\title{pressure from z}
+\title{Pressure from z}
 \usage{
 gsw_p_from_z(z, latitude, geo_strf_dyn_height = 0,
   sea_surface_geopotential = 0)
@@ -20,7 +20,7 @@ gsw_p_from_z(z, latitude, geo_strf_dyn_height = 0,
 sea pressure [ dbar ]
 }
 \description{
-pressure from z
+Pressure from z
 }
 \examples{
 gsw_p_from_z(-10, 4) # 10.05572704136

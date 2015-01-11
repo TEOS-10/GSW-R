@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_latentheat_evap_CT}
 \alias{gsw_latentheat_evap_CT}
-\title{latent heat of evaporation}
+\title{Latent heat of evaporation}
 \usage{
 gsw_latentheat_evap_CT(SA, CT)
 }
@@ -15,7 +15,7 @@ gsw_latentheat_evap_CT(SA, CT)
 latent heat of evaporation [ J/kg ]
 }
 \description{
-latent heat of evaporation
+Latent heat of evaporation
 }
 \examples{
 gsw_latentheat_evap_t(34.7118, 28.7856) # 2.429947107462561e6
