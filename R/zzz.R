@@ -20,3 +20,8 @@
        as.double(saar$saar_ref),
        as.double(saar$delta_sa_ref))
 }
+
+.onUnload <- function(libpath)
+{
+    .C("clear_gsw_data")
+}

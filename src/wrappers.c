@@ -63,6 +63,26 @@ void set_up_gsw_data(int *gsw_nx_val,
     }
 }
 
+void clear_gsw_data()
+{
+    extern int gsw_nx, gsw_ny, gsw_nz;
+    extern double *longs_ref, *lats_ref, *p_ref, *ndepth_ref, *saar_ref, *delta_sa_ref;
+    gsw_nx = 0;
+    gsw_ny = 0;
+    gsw_nz = 0;
+    Free(longs_ref);
+    longs_ref = NULL;
+    Free(lats_ref);
+    lats_ref = NULL;
+    Free(p_ref);
+    p_ref = NULL;
+    Free(ndepth_ref);
+    ndepth_ref = NULL;
+    Free(saar_ref);
+    saar_ref = NULL;
+    Free(delta_sa_ref);
+    delta_sa_ref = NULL;
+}
 
 // PART 1: macros for wrappers
 //
