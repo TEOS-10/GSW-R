@@ -7,6 +7,7 @@
     ## in DESCRIPTION and
     ##     importFrom(utils, data)
     ## in NAMESPACE.
+    saar <- NULL
     data("saar", package=pkgname, envir=environment())
     .C("set_gsw_dimensions",
        as.integer(saar$gsw_nx),
