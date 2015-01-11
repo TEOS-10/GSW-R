@@ -6,7 +6,7 @@
 #include <Rdefines.h>
 #include "gswteos-10.h"
 
-void set_gsw_dimensions(int *gsw_nx_val,
+void set_up_gsw_data(int *gsw_nx_val,
         int *gsw_ny_val,
         int *gsw_nz_val,
         double *longs_ref_val,
@@ -18,17 +18,49 @@ void set_gsw_dimensions(int *gsw_nx_val,
 {
     extern int gsw_nx, gsw_ny, gsw_nz;
     extern double *longs_ref, *lats_ref, *p_ref, *ndepth_ref, *saar_ref, *delta_sa_ref;
-    //Rprintf("about to set up sarr globals\n");
-    gsw_nx = *gsw_nx_val;
-    gsw_ny = *gsw_ny_val;
-    gsw_nz = *gsw_nz_val;
-    longs_ref = longs_ref_val;
-    lats_ref = lats_ref_val;
-    p_ref = p_ref_val;
-    ndepth_ref = ndepth_ref_val;
-    saar_ref = saar_ref_val;
-    delta_sa_ref = delta_sa_ref_val;
-    //Rprintf(" ... done setting up globals\n");
+    if (!gsw_nx) {
+        //Rprintf("about to set up sarr globals\n");
+        gsw_nx = *gsw_nx_val;
+        gsw_ny = *gsw_ny_val;
+        gsw_nz = *gsw_nz_val;
+        if (!gsw_nx) error("something is wrong with gsw_nx\n");
+        if (!gsw_ny) error("something is wrong with gsw_ny\n");
+        if (!gsw_nz) error("something is wrong with gsw_nz\n");
+
+        longs_ref = Calloc(gsw_nx, double);
+        if (!longs_ref) error("cannot allocate memory for GSW internal data item \"longs_ref\"\n");
+        for (int i = 0; i < gsw_nx; i++) longs_ref[i] = longs_ref_val[i];;
+
+        lats_ref = Calloc(gsw_ny, double);
+        if (!lats_ref) error("cannot allocate memory for GSW internal data item \"lats_ref\"\n");
+        for (int i = 0; i < gsw_ny; i++) lats_ref[i] = lats_ref_val[i];;
+
+        p_ref = Calloc(gsw_nz, double);
+        if (!p_ref) error("cannot allocate memory for GSW internal data item \"p_ref\"\n");
+        for (int i = 0; i < gsw_nz; i++) p_ref[i] = p_ref_val[i];;
+
+        ndepth_ref = Calloc(gsw_nz, double);
+        if (!ndepth_ref) error("cannot allocate memory for GSW internal data item \"ndepth_ref\"\n");
+        for (int i = 0; i < gsw_nz; i++) ndepth_ref[i] = ndepth_ref_val[i];;
+
+        int nxy = gsw_nx * gsw_ny;
+        ndepth_ref = Calloc(nxy, double);
+        if (!ndepth_ref) error("cannot allocate memory for GSW internal data item \"ndepth_ref\"\n");
+        for (int i = 0; i < nxy; i++) ndepth_ref[i] = ndepth_ref_val[i];;
+
+        int nxyz = gsw_nx * gsw_ny * gsw_nz;
+        saar_ref = Calloc(nxyz, double);
+        if (!saar_ref) error("cannot allocate memory for GSW internal data item \"saar_ref\"\n");
+        for (int i = 0; i < nxyz; i++) saar_ref[i] = saar_ref_val[i];;
+
+        delta_sa_ref = Calloc(nxyz, double);
+        if (!delta_sa_ref) error("cannot allocate memory for GSW internal data item \"delta_sa_ref\"\n");
+        for (int i = 0; i < nxyz; i++) delta_sa_ref[i] = delta_sa_ref_val[i];;
+
+        //Rprintf(" ... done setting up globals\n");
+    } else {
+        Rprintf("sarr globals -- already set up\n");
+    }
 }
 
 

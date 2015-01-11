@@ -9,7 +9,7 @@
     ## in NAMESPACE.
     saar <- NULL
     data("saar", package=pkgname, envir=environment())
-    .C("set_gsw_dimensions",
+    .C("set_up_gsw_data",
        as.integer(saar$gsw_nx),
        as.integer(saar$gsw_ny),
        as.integer(saar$gsw_nz),
