@@ -8,8 +8,17 @@
 #include "gswteos-10.h"
 //#include <gsw_saar_data.c>
 //#include "gsw_saar_data.c"
-int gsw_nx, gsw_ny, gsw_nz;
-double *longs_ref, *lats_ref, *p_ref, *ndepth_ref, *saar_ref, *delta_sa_ref;
+
+// Set to zeros initially so we can check against reallocation.
+int gsw_nx=0;
+int gsw_ny=0;
+int gsw_nz=0;
+double *longs_ref=NULL;
+double *lats_ref=NULL;
+double *p_ref=NULL;
+double *ndepth_ref=NULL;
+double *saar_ref=NULL;
+double *delta_sa_ref=NULL;
 
 static double
 gsw_sum(double *x, int n)
