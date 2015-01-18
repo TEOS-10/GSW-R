@@ -932,11 +932,11 @@ function gsw_pt0_from_t(sa,t,p)
 double
 gsw_pt0_from_t(double sa, double t, double p)
 {
-	int	n0, no_iter; //int	n0, n2, no_iter;
+	int	no_iter; //int	n0, n2, no_iter;
 	double	pt0, pt0_old, dentropy, dentropy_dt, sso, cp0;
 	double	s1, true_entropy_part, pt0m;
 
-	n0	= 0;
+	//n0	= 0;
 	//n2	= 2;
 
 	cp0	= 3991.86795711963e0;
