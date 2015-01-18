@@ -50,14 +50,14 @@ double
 gsw_saar(double p, double lon, double lat)
 {
 	int	nx=gsw_nx, ny=gsw_ny, nz=gsw_nz;
-	int	indx0, indy0, indz0, i, j, k;
-	int	nmean, flag_saar, ndepth_index;
+	int	indx0, indy0, indz0, k; //int	indx0, indy0, indz0, i, j, k;
+	int	ndepth_index; //int	nmean, flag_saar, ndepth_index;
 	int	deli[4] = {0,1,1,0}, delj[4] = {0,0,1,1};
 	double	saar[4], saar_old[4];
 
 	double	dlong, dlat;
-	double	lon0_in, sa_upper, sa_lower;
-	double	r1, s1, t1, saar_mean, ndepth_max, return_value;
+	double	sa_upper, sa_lower; //double	lon0_in, sa_upper, sa_lower;
+	double	r1, s1, t1, ndepth_max, return_value; //double	r1, s1, t1, saar_mean, ndepth_max, return_value;
 
 
 	return_value	 = GSW_INVALID_VALUE;
@@ -159,14 +159,14 @@ gsw_deltasa_atlas(double p, double lon, double lat)
 {
 	int	nx=gsw_nx, ny=gsw_ny, nz=gsw_nz;
 
-	int	indx0, indy0, indz0, i, j, k, ndepth_index;
-	int	nmean, flag_dsar;
+	int	indx0, indy0, indz0, k, ndepth_index; //int	indx0, indy0, indz0, i, j, k, ndepth_index;
+	//int	nmean, flag_dsar;
 	int	deli[4]={0,1,1,0}, delj[4]={0,0,1,1};
 
 	double	dsar[4], dsar_old[4];
 	double	dlong, dlat;
-	double	return_value, lon0_in, sa_upper, sa_lower;
-	double	r1, s1, t1, dsar_mean, ndepth_max;
+	double	return_value, sa_upper, sa_lower; //double	return_value, lon0_in, sa_upper, sa_lower;
+	double	r1, s1, t1, ndepth_max; //double	r1, s1, t1, dsar_mean, ndepth_max;
 
 	return_value	= GSW_INVALID_VALUE;
 
