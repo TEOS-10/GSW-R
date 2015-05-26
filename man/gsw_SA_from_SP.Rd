@@ -31,7 +31,7 @@ converted to analogous matrices with \code{\link{expand.grid}}.
 gsw_SA_from_SP(34.5487, 10, 188, 4) # 34.711778344814114
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SA_from_SP.html}
 }
 \seealso{
 \code{\link{gsw_SP_from_SA}} does the reverse.

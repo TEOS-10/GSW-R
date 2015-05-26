@@ -25,8 +25,8 @@ mismatch in release version between the Matlab and C libraries.)
 gsw_t_freezing(34.7118, 10) # -1.902704434299200
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing.html}
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_poly.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_t_freezing.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_t_freezing_poly.html}
 }
 \seealso{
 \code{\link{gsw_CT_freezing}} is the analogue for Conservative Temperature.

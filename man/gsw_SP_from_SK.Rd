@@ -19,7 +19,7 @@ Calculate Practical Salinity from Knudsen Salinity
 gsw_SP_from_SK(34.5487) # 34.548721553448317
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SK.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SP_from_SK.html}
 }
 \seealso{
 \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SR}} and \code{\link{gsw_SP_from_Sstar}}.

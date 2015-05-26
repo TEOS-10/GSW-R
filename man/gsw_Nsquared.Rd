@@ -29,6 +29,6 @@ latitude <- 4
 gsw_Nsquared(SA, CT, p, latitude)$N2 # 6.0847042791371e-5
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_Nsquared.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_Nsquared.html}
 }
 

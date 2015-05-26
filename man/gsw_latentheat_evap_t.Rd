@@ -21,7 +21,7 @@ Latent heat of evaporation
 gsw_latentheat_evap_t(34.7118, 28.7856) # 2.429882982734836e6
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_evap_t.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_latentheat_evap_t.html}
 }
 \seealso{
 \code{\link{gsw_latentheat_evap_CT}} is an analogue in terms of Conservative Temperature. For melting, see \code{\link{gsw_latentheat_melting}}.

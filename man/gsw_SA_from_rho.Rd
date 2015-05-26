@@ -23,6 +23,6 @@ Convert from density to absolute salinity
 gsw_SA_from_rho(1021.8482, 28.7856, 10) # 34.711382887931144
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_rho.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SA_from_rho.html}
 }
 

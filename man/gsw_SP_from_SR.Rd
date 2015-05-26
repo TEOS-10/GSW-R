@@ -19,7 +19,7 @@ Calculate Practical Salinity from Reference Salinity
 gsw_SP_from_SR(34.5487) # 34.386552667080714
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SR.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SP_from_SR.html}
 }
 \seealso{
 The reverse is \code{\link{gsw_SR_from_SP}}; also related are \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SK}} and \code{\link{gsw_SP_from_Sstar}}.

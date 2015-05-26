@@ -27,6 +27,6 @@ p =  c(     10,      50)
 r <- gsw_Turner_Rsubrho(SA, CT, p) # -2.064830032393999, -0.9304018848608, 30
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_Turner_Rsubrho.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_Turner_Rsubrho.html}
 }
 

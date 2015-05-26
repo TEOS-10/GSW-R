@@ -23,7 +23,7 @@ Specific volume
 gsw_specvol_t_exact(34.7118, 28.7856, 10) # 9.78626625025472e-4
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_t_exact.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_specvol_t_exact.html}
 }
 \seealso{
 With Conservative Temperature, use \code{\link{gsw_specvol}}; \code{\link{gsw_specvol_anom}} gives specific volume anomaly.

@@ -23,7 +23,7 @@ Potential temperature referenced to the surface
 gsw_pt0_from_t(34.7118, 28.7856, 10) # 28.783196819670632
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_pt0_from_t.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_pt0_from_t.html}
 }
 \seealso{
 \code{\link{gsw_pt_from_CT}} and \code{\link{gsw_pt_from_t}}

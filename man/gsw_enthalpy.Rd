@@ -23,7 +23,7 @@ Specific enthalpy of seawater (48-term equation)
 gsw_enthalpy(34.7118, 28.8099, 10) # 1.1510318130700132e5
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_enthalpy.html}
 }
 \seealso{
 \code{\link{gsw_dynamic_enthalpy}} and \code{\link{gsw_enthalpy_t_exact}}

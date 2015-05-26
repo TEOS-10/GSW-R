@@ -26,7 +26,7 @@ p =  c(     10,      50,     125,     250,     600,    1000)
 beta <- gsw_beta(SA,CT,p)
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_beta.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_beta.html}
 }
 \seealso{
 The temperature analogue to this is \code{\link{gsw_alpha}}; other related functions

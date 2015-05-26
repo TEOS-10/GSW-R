@@ -25,8 +25,8 @@ mismatch in release version between the Matlab and C libraries.)
 gsw_CT_freezing(34.7118, 10) # -1.899657519404743
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing.html}
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing_poly.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_CT_freezing.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_CT_freezing_poly.html}
 }
 \seealso{
 \code{\link{gsw_t_freezing}} is the analogue for in-situ temperature.

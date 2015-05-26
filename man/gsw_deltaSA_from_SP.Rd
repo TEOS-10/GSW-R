@@ -25,7 +25,7 @@ Absolute Salinity Anomaly from Practical Salinity
 gsw_deltaSA_from_SP(34.7118, 10, 188, 4) # 0.000167203365230
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_deltaSA_from_SP.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_deltaSA_from_SP.html}
 }
 \seealso{
 \code{\link{gsw_SA_from_SP}}

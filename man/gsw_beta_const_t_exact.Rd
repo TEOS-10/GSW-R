@@ -23,7 +23,7 @@ Saline contraction coefficient at constant in-situ temperature
 gsw_beta_const_t_exact(34.7118, 28.7856, 10) # 7.31120837010429e-4
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_beta_const_t_exact.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_beta_const_t_exact.html}
 }
 \seealso{
 A related function is \code{\link{gsw_beta}}.

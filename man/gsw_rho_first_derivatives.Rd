@@ -23,6 +23,6 @@ SA, CT and p partial derivatives of density (48-term equation)
 gsw_rho_first_derivatives(34.7118, 28.8099, 10) #' # 0.73321 -0.33174 4.20305e-7
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_first_derivatives.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_rho_first_derivatives.html}
 }
 

@@ -25,7 +25,7 @@ ratio, divide by gsw_C_from_SP(35, 15, 0).
 gsw_C_from_SP(34.5487, 28.7856, 10) # 56.412599581571186
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_C_from_SP.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_C_from_SP.html}
 }
 \seealso{
 \code{\link{gsw_SP_from_C}} does the reverse.

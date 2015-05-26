@@ -23,6 +23,6 @@ Note that the unit is K/Pa, i.e. 1e-4 times K/dbar.
 gsw_adiabatic_lapse_rate_from_CT(34.7118, 28.7856, 10) # 2.40199646230069e-8
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_from_CT.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_adiabatic_lapse_rate_from_CT.html}
 }
 

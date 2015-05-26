@@ -23,6 +23,6 @@ Thermobaric coefficient (48-term equation)
 gsw_thermobaric(34.7118, 28.8099, 10) # 1.40572143831373e-12
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_thermobaric.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_thermobaric.html}
 }
 

@@ -23,6 +23,6 @@ Isobaric heat capacity
 gsw_cp_t_exact(34.7118, 28.7856, 10) # 4002.888003958537
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_cp_t_exact.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_cp_t_exact.html}
 }
 

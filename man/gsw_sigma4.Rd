@@ -23,7 +23,7 @@ minus 1000 kg/m^3.
 gsw_sigma4(34.7118, 28.8099) # 37.898467323406976
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma4.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_sigma4.html}
 }
 \seealso{
 Use \code{\link{gsw_sigma0}} for 0 dbar pressure, \code{\link{gsw_sigma1}} for 1000 dbar, \code{\link{gsw_sigma2}} for 2000 dbar, or \code{\link{gsw_sigma3}} for 3000 dbar.

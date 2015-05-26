@@ -32,7 +32,7 @@ The documentation for the \code{gsw} functions focuses mainly
 on the arguments and return values, relying on links to the
 TEOS-10 webpages for details.
 
-See \url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html}
+See \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_contents.html}
 for a list of the TEOS-10 functions and
 \url{http://teos-10.github.io/GSW-R/documentation.html} for a list
 of the functions implemented in the present package.

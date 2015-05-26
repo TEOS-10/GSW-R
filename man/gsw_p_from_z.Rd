@@ -26,7 +26,7 @@ Pressure from z
 gsw_p_from_z(-10, 4) # 10.05572704136
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_p_from_z.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_p_from_z.html}
 }
 \seealso{
 This is (almost) the reverse of \code{\link{gsw_z_from_p}}, apart from the last two arguments.

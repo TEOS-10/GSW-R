@@ -25,7 +25,7 @@ Practical Salinity from Preformed Salinity
 gsw_SP_from_Sstar(34.7115, 10, 188, 4) # 34.548646570969929
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_Sstar.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SP_from_Sstar.html}
 }
 \seealso{
 \code{\link{gsw_Sstar_from_SP}} does the reverse; \code{\link{gsw_SA_from_Sstar}} is similar.

@@ -23,6 +23,6 @@ Specific internal energy of seawater (48-term equation)
 gsw_internal_energy(34.7118, 28.7856, 10) # 1.148091577452400e5
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_internal_energy.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_internal_energy.html}
 }
 

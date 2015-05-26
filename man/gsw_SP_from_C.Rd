@@ -23,7 +23,7 @@ Convert from electrical conductivity to practical salinity
 gsw_SP_from_C(34.5487, 28.7856, 10) # 20.009869599086951
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_C.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SP_from_C.html}
 }
 \seealso{
 \code{\link{gsw_C_from_SP}} does the reverse.

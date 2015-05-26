@@ -29,6 +29,6 @@ versioned) Matlab library.
 gsw_entropy_from_t(34.7118, 28.7856, 10) # 400.3894252787245
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_from_t.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_entropy_from_t.html}
 }
 

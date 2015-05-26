@@ -34,7 +34,7 @@ return a flag indicating whether the location is in the ocean.
 gsw_SP_from_SA(34.7118, 10, 188, 4) # 34.548721553448317
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SA.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SP_from_SA.html}
 }
 \seealso{
 \code{\link{gsw_SA_from_SP}} does the reverse, while \code{\link{gsw_SP_from_SK}}, \code{\link{gsw_SP_from_SR}} and \code{\link{gsw_SP_from_Sstar}} are similar to this.

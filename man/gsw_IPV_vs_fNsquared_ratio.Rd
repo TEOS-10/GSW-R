@@ -32,6 +32,6 @@ r$IPV_vs_fNsquared_ratio # 0.999745283730840
 r$p_mid                  # 30
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_IPV_vs_fNsquared_ratio.html}
+\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_IPV_vs_fNsquared_ratio.html}
 }
 
