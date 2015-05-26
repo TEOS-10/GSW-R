@@ -33,7 +33,7 @@
 #' on the arguments and return values, relying on links to the
 #' TEOS-10 webpages for details.
 #' 
-#' See \url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html}
+#' See \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_contents.html}
 #' for a list of the TEOS-10 functions and 
 #' \url{http://teos-10.github.io/GSW-R/documentation.html} for a list
 #' of the functions implemented in the present package.
@@ -171,7 +171,7 @@ argfix <- function(list)
 #' @examples
 #' gsw_adiabatic_lapse_rate_from_CT(34.7118, 28.7856, 10) # 2.40199646230069e-8
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_from_CT.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_adiabatic_lapse_rate_from_CT.html}
 gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -194,7 +194,7 @@ gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
 #' gsw_alpha(34.7118, 28.7856, 10) # 3.24480399390879e-3
 #' @seealso The salinity analogue to this is \code{\link{gsw_beta}}; other related functions include \code{\link{gsw_beta_const_t_exact}}, \code{\link{gsw_alpha_wrt_t_exact}} and \code{\link{gsw_alpha_on_beta}}.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_alpha.html}
 gsw_alpha <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -217,7 +217,7 @@ gsw_alpha <- function(SA, CT, p)
 #' gsw_alpha_on_beta(34.7118, 28.8099, 10) # 0.452454540612631
 #' @seealso This yields the ratio of the return values from \code{\link{gsw_alpha}} and \code{\link{gsw_beta}}, to within computational precision.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha_on_beta.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_alpha_on_beta.html}
 gsw_alpha_on_beta <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -240,7 +240,7 @@ gsw_alpha_on_beta <- function(SA, CT, p)
 #' gsw_alpha_wrt_t_exact(34.7118, 28.7856, 10) # 1e-3*0.325601747227247
 #' @seealso \code{\link{gsw_alpha}}, \code{\link{gsw_beta}} and \code{\link{gsw_alpha_on_beta}}
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha_wrt_t_exact.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_alpha_wrt_t_exact.html}
 gsw_alpha_wrt_t_exact <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
@@ -268,7 +268,7 @@ gsw_alpha_wrt_t_exact <- function(SA, t, p)
 #' The temperature analogue to this is \code{\link{gsw_alpha}}; other related functions
 #' include \code{\link{gsw_alpha_wrt_t_exact}} and \code{\link{gsw_alpha_on_beta}}.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_beta.html}
 gsw_beta <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -292,7 +292,7 @@ gsw_beta <- function(SA, CT, p)
 #' @seealso
 #' A related function is \code{\link{gsw_beta}}.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta_const_t_exact.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_beta_const_t_exact.html}
 gsw_beta_const_t_exact <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
@@ -317,7 +317,7 @@ gsw_beta_const_t_exact <- function(SA, t, p)
 #' p =  c(     10,      50,     125,     250,     600,    1000)
 #' cabbeling <- gsw_cabbeling(SA,CT,p)
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_cabbeling.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_cabbeling.html}
 gsw_cabbeling <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -343,7 +343,7 @@ gsw_cabbeling <- function(SA, CT, p)
 #' gsw_C_from_SP(34.5487, 28.7856, 10) # 56.412599581571186
 #' @seealso \code{\link{gsw_SP_from_C}} does the reverse.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_C_from_SP.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_C_from_SP.html}
 gsw_C_from_SP <- function(SP, t, p)
 {
     l <- argfix(list(SP=SP, t=t, p=p))
@@ -365,7 +365,7 @@ gsw_C_from_SP <- function(SP, t, p)
 #' @examples 
 #' gsw_cp_t_exact(34.7118, 28.7856, 10) # 4002.888003958537
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_cp_t_exact.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_cp_t_exact.html}
 gsw_cp_t_exact <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
@@ -393,8 +393,8 @@ gsw_cp_t_exact <- function(SA, t, p)
 #' gsw_CT_freezing(34.7118, 10) # -1.899657519404743
 #' @seealso \code{\link{gsw_t_freezing}} is the analogue for in-situ temperature.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing.html}
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing_poly.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_CT_freezing.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_CT_freezing_poly.html}
 gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
 {
     l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
@@ -417,7 +417,7 @@ gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
 #' @seealso
 #' \code{\link{gsw_CT_from_t}} calculates Conservative Temperature from in-situ temperature
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_pt.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_CT_from_pt.html}
 gsw_CT_from_pt <- function(SA, pt)
 {
     l <- argfix(list(SA=SA, pt=pt))
@@ -440,7 +440,7 @@ gsw_CT_from_pt <- function(SA, pt)
 #' gsw_CT_from_t(34.7118, 28.7856, 10) # 28.809919826700281
 #' @seealso \code{\link{gsw_t_from_CT}} does the reverse
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_t.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_CT_from_t.html}
 gsw_CT_from_t <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
@@ -465,7 +465,7 @@ gsw_CT_from_t <- function(SA, t, p)
 #' @seealso
 #' \code{\link{gsw_SA_from_SP}}
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_deltaSA_from_SP.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_deltaSA_from_SP.html}
 gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
 {
     if (missing(SP)) stop("must supply SP")
@@ -494,7 +494,7 @@ gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
 #' @seealso
 #' \code{\link{gsw_enthalpy}} and \code{\link{gsw_enthalpy_t_exact}}
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_enthalpy.html}
 gsw_dynamic_enthalpy <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -518,7 +518,7 @@ gsw_dynamic_enthalpy <- function(SA, CT, p)
 #' @seealso
 #' \code{\link{gsw_dynamic_enthalpy}} and \code{\link{gsw_enthalpy_t_exact}}
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_enthalpy.html}
 gsw_enthalpy <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -542,7 +542,7 @@ gsw_enthalpy <- function(SA, CT, p)
 #' @seealso
 #' \code{\link{gsw_enthalpy}} and \code{\link{gsw_dynamic_enthalpy}}
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_t_exact.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_enthalpy_t_exact.html}
 gsw_enthalpy_t_exact <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
@@ -571,7 +571,7 @@ gsw_enthalpy_t_exact <- function(SA, t, p)
 #' @examples
 #' gsw_entropy_from_t(34.7118, 28.7856, 10) # 400.3894252787245
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_from_t.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_entropy_from_t.html}
 gsw_entropy_from_t <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
@@ -592,7 +592,7 @@ gsw_entropy_from_t <- function(SA, t, p)
 #' @examples
 #' gsw_grav(c(-90, -60), 0) # 9.832186205884799, 9.819178859991149
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_grav.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_grav.html}
 gsw_grav <- function(latitude, p=0)
 {
     l <- argfix(list(latitude=latitude, p=p))
@@ -614,7 +614,7 @@ gsw_grav <- function(latitude, p=0)
 #' @examples
 #' gsw_internal_energy(34.7118, 28.7856, 10) # 1.148091577452400e5
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_internal_energy.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_internal_energy.html}
 gsw_internal_energy <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -646,7 +646,7 @@ gsw_internal_energy <- function(SA, CT, p)
 #' r$IPV_vs_fNsquared_ratio # 0.999745283730840
 #' r$p_mid                  # 30
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_IPV_vs_fNsquared_ratio.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_IPV_vs_fNsquared_ratio.html}
 gsw_IPV_vs_fNsquared_ratio <- function(SA, CT, p, p_ref=0)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p, p_ref=p_ref))
@@ -671,7 +671,7 @@ gsw_IPV_vs_fNsquared_ratio <- function(SA, CT, p, p_ref=0)
 #' gsw_kappa(34.7118, 28.7856, 10) # 4.11346577902628e-10
 #' @seealso \code{\link{gsw_kappa_t_exact}} is an analogue in terms of in-situ temperature
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_kappa.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_kappa.html}
 gsw_kappa <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -694,7 +694,7 @@ gsw_kappa <- function(SA, CT, p)
 #' gsw_kappa_t_exact(34.7118, 28.7856, 10) # 4.11245799180373e-10
 #' @seealso \code{\link{gsw_kappa}} is an analogue in terms of Conservative Temperature
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_kappa_t_exact.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_kappa_t_exact.html}
 gsw_kappa_t_exact <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
@@ -716,7 +716,7 @@ gsw_kappa_t_exact <- function(SA, t, p)
 #' gsw_latentheat_evap_t(34.7118, 28.7856) # 2.429947107462561e6
 #' @seealso \code{\link{gsw_latentheat_evap_t}} is an analouge in terms of in-situ temperature. For melting, see \code{\link{gsw_latentheat_melting}}.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_evap_CT.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_latentheat_evap_CT.html}
 gsw_latentheat_evap_CT <- function(SA, CT)
 {
     l <- argfix(list(SA=SA, CT=CT))
@@ -738,7 +738,7 @@ gsw_latentheat_evap_CT <- function(SA, CT)
 #' gsw_latentheat_evap_t(34.7118, 28.7856) # 2.429882982734836e6
 #' @seealso \code{\link{gsw_latentheat_evap_CT}} is an analogue in terms of Conservative Temperature. For melting, see \code{\link{gsw_latentheat_melting}}.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_evap_t.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_latentheat_evap_t.html}
 gsw_latentheat_evap_t <- function(SA, t)
 {
     l <- argfix(list(SA=SA, t=t))
@@ -760,7 +760,7 @@ gsw_latentheat_evap_t <- function(SA, t)
 #' gsw_latentheat_melting(34.7118, 10) # 3.299495187300804e5
 #' @seealso \code{\link{gsw_latentheat_evap_CT}} and \code{\link{gsw_latentheat_evap_t}} are analogues for evaporation.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_melting.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_latentheat_melting.html}
 gsw_latentheat_melting <- function(SA, p)
 {
     l <- argfix(list(SA=SA, p=p))
@@ -787,7 +787,7 @@ gsw_latentheat_melting <- function(SA, p)
 #' latitude <- 4
 #' gsw_Nsquared(SA, CT, p, latitude)$N2 # 6.0847042791371e-5
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_Nsquared.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_Nsquared.html}
 gsw_Nsquared <- function(SA, CT, p, latitude=0)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p, latitude=latitude))
@@ -812,7 +812,7 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
 #' @seealso
 #' This is (almost) the reverse of \code{\link{gsw_z_from_p}}, apart from the last two arguments.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_p_from_z.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_p_from_z.html}
 gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height=0, sea_surface_geopotential=0)
 {
     l <- argfix(list(z=z, latitude=latitude,
@@ -841,7 +841,7 @@ gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height=0, sea_surface_geopote
 #' @seealso
 #' \code{\link{gsw_rho}} and \code{\link{gsw_rho_t_exact}} compute density; \code{\link{gsw_sigma0}} and related functions compute potential density at particular pressures.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_rho_t_exact.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_pot_rho_t_exact.html}
 gsw_pot_rho_t_exact <- function(SA, t, p, p_ref)
 {
     l <- argfix(list(SA=SA, t=t, p=p, p_ref=p_ref))
@@ -864,7 +864,7 @@ gsw_pot_rho_t_exact <- function(SA, t, p, p_ref)
 #' gsw_pt0_from_t(34.7118, 28.7856, 10) # 28.783196819670632
 #' @seealso \code{\link{gsw_pt_from_CT}} and \code{\link{gsw_pt_from_t}}
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt0_from_t.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_pt0_from_t.html}
 gsw_pt0_from_t <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
@@ -886,7 +886,7 @@ gsw_pt0_from_t <- function(SA, t, p)
 #' gsw_pt_from_CT(34.7118, 28.8099) # 28.783177048624573 
 #' @seealso \code{\link{gsw_pt0_from_t}} for the surface case and and \code{\link{gsw_pt_from_t}} for the general case.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_CT.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_pt_from_CT.html}
 gsw_pt_from_CT <- function(SA, CT)
 {
     l <- argfix(list(SA=SA, CT=CT))
@@ -910,7 +910,7 @@ gsw_pt_from_CT <- function(SA, CT)
 #' gsw_pt_from_t(34.7118, 28.7856, 10, 0) # 28.783196819670632
 #' @seealso \code{\link{gsw_pt_from_CT}} is the analogue for Conservative Temperature
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_t.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_pt_from_t.html}
 gsw_pt_from_t <- function(SA, t, p, p_ref=0)
 {
     l <- argfix(list(SA=SA, t=t, p=p, p_ref=p_ref))
@@ -933,7 +933,7 @@ gsw_pt_from_t <- function(SA, t, p, p_ref=0)
 #' @examples
 #' gsw_rho(34.7118, 28.8099, 10) # 1021.8404465661
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_rho.html}
 gsw_rho <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -955,7 +955,7 @@ gsw_rho <- function(SA, CT, p)
 #' @examples
 #' gsw_rho_first_derivatives(34.7118, 28.8099, 10) #' # 0.73321 -0.33174 4.20305e-7
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_first_derivatives.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_rho_first_derivatives.html}
 gsw_rho_first_derivatives <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -979,7 +979,7 @@ gsw_rho_first_derivatives <- function(SA, CT, p)
 #' gsw_rho_t_exact(34.7118, 28.7856, 10) # 1021.840173185531
 #' @seealso \code{\link{gsw_rho}} is similar but uses SA and CT; SA may be computed from UNESCO quantities using \code{\link{gsw_SA_from_SP}}.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_t_exact.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_rho_t_exact.html}
 gsw_rho_t_exact <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
@@ -1001,7 +1001,7 @@ gsw_rho_t_exact <- function(SA, t, p)
 #' @examples
 #' gsw_SA_from_rho(1021.8482, 28.7856, 10) # 34.711382887931144
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_rho.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SA_from_rho.html}
 gsw_SA_from_rho <- function(rho, CT, p)
 {
     l <- argfix(list(rho=rho, CT=CT, p=p))
@@ -1032,7 +1032,7 @@ gsw_SA_from_rho <- function(rho, CT, p)
 #' gsw_SA_from_SP(34.5487, 10, 188, 4) # 34.711778344814114 
 #' @seealso \code{\link{gsw_SP_from_SA}} does the reverse.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SA_from_SP.html}
 gsw_SA_from_SP <- function(SP, p, longitude, latitude)
 {
     if (missing(longitude)) stop("must supply longitude")
@@ -1075,7 +1075,7 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
 #' gsw_SA_from_Sstar(34.7115, 10, 188, 4) # 34.711724663585905
 #' @seealso \code{\link{gsw_Sstar_from_SA}} does the reverse.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_Sstar.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SA_from_Sstar.html}
 gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
 {
     if (missing(longitude)) stop("must supply longitude")
@@ -1113,7 +1113,7 @@ gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
 #' gsw_sigma0(34.7118, 28.8099) # 21.798411276610750
 #' @seealso Use \code{\link{gsw_sigma1}} for 1000 dbar pressure, \code{\link{gsw_sigma2}} for 2000 dbar, \code{\link{gsw_sigma3}} for 3000 dbar, or \code{\link{gsw_sigma4}} for 4000 dbar.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma0.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_sigma0.html}
 gsw_sigma0 <- function(SA, CT)
 {
     l <- argfix(list(SA=SA, CT=CT))
@@ -1139,7 +1139,7 @@ gsw_sigma0 <- function(SA, CT)
 #' gsw_sigma1(34.7118, 28.8099) # 25.955891533636986
 #' @seealso Use \code{\link{gsw_sigma0}} for 0 dbar pressure, \code{\link{gsw_sigma2}} for 2000 dbar, \code{\link{gsw_sigma3}} for 3000 dbar, or \code{\link{gsw_sigma4}} for 4000 dbar.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma1.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_sigma1.html}
 gsw_sigma1 <- function(SA, CT)
 {
     l <- argfix(list(SA=SA, CT=CT))
@@ -1165,7 +1165,7 @@ gsw_sigma1 <- function(SA, CT)
 #' gsw_sigma2(34.7118, 28.8099) # 30.022796416066058
 #' @seealso Use \code{\link{gsw_sigma0}} for 0 dbar pressure, \code{\link{gsw_sigma1}} for 1000 dbar, \code{\link{gsw_sigma3}} for 3000 dbar, or \code{\link{gsw_sigma4}} for 4000 dbar.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma2.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_sigma2.html}
 gsw_sigma2 <- function(SA, CT)
 {
     l <- argfix(list(SA=SA, CT=CT))
@@ -1191,7 +1191,7 @@ gsw_sigma2 <- function(SA, CT)
 #' gsw_sigma3(34.7118, 28.8099) # 34.002600253012133
 #' @seealso Use \code{\link{gsw_sigma0}} for 0 dbar pressure, \code{\link{gsw_sigma1}} for 1000 dbar, \code{\link{gsw_sigma2}} for 2000 dbar, or \code{\link{gsw_sigma4}} for 4000 dbar.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma3.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_sigma3.html}
 gsw_sigma3 <- function(SA, CT)
 {
     l <- argfix(list(SA=SA, CT=CT))
@@ -1217,7 +1217,7 @@ gsw_sigma3 <- function(SA, CT)
 #' gsw_sigma4(34.7118, 28.8099) # 37.898467323406976
 #' @seealso Use \code{\link{gsw_sigma0}} for 0 dbar pressure, \code{\link{gsw_sigma1}} for 1000 dbar, \code{\link{gsw_sigma2}} for 2000 dbar, or \code{\link{gsw_sigma3}} for 3000 dbar.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma4.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_sigma4.html}
 gsw_sigma4 <- function(SA, CT)
 {
     l <- argfix(list(SA=SA, CT=CT))
@@ -1242,7 +1242,7 @@ gsw_sigma4 <- function(SA, CT)
 #' gsw_sound_speed(34.7118, 28.7856, 10) # 1542.420534932182
 #' @seealso \code{\link{gsw_sound_speed_t_exact}} for a precise formula using in-situ temperature
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_sound_speed.html}
 gsw_sound_speed<- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -1265,7 +1265,7 @@ gsw_sound_speed<- function(SA, CT, p)
 #' gsw_sound_speed_t_exact(34.7118, 28.7856, 10) # 1542.420534932182
 #' @seealso \code{\link{gsw_sound_speed}} for an approximate formula using CT
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed_t_exact.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_sound_speed_t_exact.html}
 gsw_sound_speed_t_exact <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
@@ -1288,7 +1288,7 @@ gsw_sound_speed_t_exact <- function(SA, t, p)
 #' gsw_specvol(34.7118, 28.8099, 10) # 9.78626363206202e-4
 #' @seealso With in-situ temperature, use \code{\link{gsw_specvol_t_exact}}; \code{\link{gsw_specvol_anom}} gives specific volume anomaly.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_specvol.html}
 gsw_specvol  <- function(SA, CT, p)
 {
     1 / gsw_rho(SA, CT, p)
@@ -1304,7 +1304,7 @@ gsw_specvol  <- function(SA, CT, p)
 #' gsw_specvol_anom(34.7118, 28.8099, 10) # 6.01005694856401e-6
 #' @seealso Specific volume itself is given by \code{\link{gsw_specvol}} and \code{\link{gsw_specvol_t_exact}}.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_anom.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_specvol_anom.html}
 gsw_specvol_anom  <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -1327,7 +1327,7 @@ gsw_specvol_anom  <- function(SA, CT, p)
 #' gsw_specvol_t_exact(34.7118, 28.7856, 10) # 9.78626625025472e-4
 #' @seealso With Conservative Temperature, use \code{\link{gsw_specvol}}; \code{\link{gsw_specvol_anom}} gives specific volume anomaly.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_t_exact.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_specvol_t_exact.html}
 gsw_specvol_t_exact  <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
@@ -1350,7 +1350,7 @@ gsw_specvol_t_exact  <- function(SA, t, p)
 #' gsw_SP_from_C(34.5487, 28.7856, 10) # 20.009869599086951
 #' @seealso \code{\link{gsw_C_from_SP}} does the reverse.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_C.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SP_from_C.html}
 gsw_SP_from_C <- function(C, t, p)
 {
     l <- argfix(list(C=C, t=t, p=p))
@@ -1384,7 +1384,7 @@ gsw_SP_from_C <- function(C, t, p)
 #' gsw_SP_from_SA(34.7118, 10, 188, 4) # 34.548721553448317
 #' @seealso \code{\link{gsw_SA_from_SP}} does the reverse, while \code{\link{gsw_SP_from_SK}}, \code{\link{gsw_SP_from_SR}} and \code{\link{gsw_SP_from_Sstar}} are similar to this.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SA.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SP_from_SA.html}
 gsw_SP_from_SA <- function(SA, p, longitude, latitude)
 {
     if (missing(longitude)) stop("must supply longitude")
@@ -1416,7 +1416,7 @@ gsw_SP_from_SA <- function(SA, p, longitude, latitude)
 #' gsw_SP_from_SK(34.5487) # 34.548721553448317
 #' @seealso \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SR}} and \code{\link{gsw_SP_from_Sstar}}.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SK.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SP_from_SK.html}
 gsw_SP_from_SK <- function(SK)
 {
     if (missing(SK)) stop("must supply SK")
@@ -1436,7 +1436,7 @@ gsw_SP_from_SK <- function(SK)
 #' gsw_SP_from_SR(34.5487) # 34.386552667080714
 #' @seealso The reverse is \code{\link{gsw_SR_from_SP}}; also related are \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SK}} and \code{\link{gsw_SP_from_Sstar}}.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SR.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SP_from_SR.html}
 gsw_SP_from_SR <- function(SR)
 {
     if (missing(SR)) stop("must supply SR")
@@ -1460,7 +1460,7 @@ gsw_SP_from_SR <- function(SR)
 #' @seealso
 #' \code{\link{gsw_Sstar_from_SP}} does the reverse; \code{\link{gsw_SA_from_Sstar}} is similar.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_Sstar.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SP_from_Sstar.html}
 gsw_SP_from_Sstar <- function(Sstar, p, longitude, latitude)
 {
     if (missing(Sstar)) stop("must supply Sstar")
@@ -1485,7 +1485,7 @@ gsw_SP_from_Sstar <- function(Sstar, p, longitude, latitude)
 #' gsw_SR_from_SP(34.5487) # 34.711611927085727
 #' @seealso The reverse is \code{\link{gsw_SP_from_SR}}; also related are \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SK}} and \code{\link{gsw_SP_from_Sstar}}.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SR_from_SP.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SR_from_SP.html}
 gsw_SR_from_SP <- function(SP)
 {
     if (missing(SP)) stop("must supply SP")
@@ -1515,7 +1515,7 @@ gsw_SR_from_SP <- function(SP)
 #' gsw_Sstar_from_SA(34.7118, 10, 188, 4) # 34.711575335926490
 #' @seealso \code{\link{gsw_SA_from_Sstar}} does the reverse; \code{\link{gsw_Sstar_from_SP}} is similar.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_Sstar_from_SA.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_Sstar_from_SA.html}
 gsw_Sstar_from_SA <- function(SA, p, longitude, latitude)
 {
     if (missing(SA)) stop("must supply SA")
@@ -1559,7 +1559,7 @@ gsw_Sstar_from_SA <- function(SA, p, longitude, latitude)
 #' gsw_Sstar_from_SP(34.5487, 10, 188, 4) # 34.711553680880769
 #' @seealso \code{\link{gsw_SP_from_Sstar}} does the reverse; \code{\link{gsw_Sstar_from_SA}} is similar.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_Sstar_from_SP.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_Sstar_from_SP.html}
 gsw_Sstar_from_SP <- function(SP, p, longitude, latitude)
 {
     if (missing(SP)) stop("must supply SP")
@@ -1599,8 +1599,8 @@ gsw_Sstar_from_SP <- function(SP, p, longitude, latitude)
 #' gsw_t_freezing(34.7118, 10) # -1.902704434299200
 #' @seealso \code{\link{gsw_CT_freezing}} is the analogue for Conservative Temperature.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing.html}
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_poly.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_t_freezing.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_t_freezing_poly.html}
 gsw_t_freezing <- function(SA, p, saturation_fraction=1)
 {
     l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
@@ -1623,7 +1623,7 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
 #' gsw_t_from_CT(34.7118, 28.8099, 10) # 28.785580227725703
 #' @seealso \code{\link{gsw_CT_from_t}} does the reverse.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_from_CT.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_t_from_CT.html}
 gsw_t_from_CT <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -1645,7 +1645,7 @@ gsw_t_from_CT <- function(SA, CT, p)
 #' @examples 
 #' gsw_thermobaric(34.7118, 28.8099, 10) # 1.40572143831373e-12
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_thermobaric.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_thermobaric.html}
 gsw_thermobaric <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -1673,7 +1673,7 @@ gsw_thermobaric <- function(SA, CT, p)
 #' p =  c(     10,      50)
 #' r <- gsw_Turner_Rsubrho(SA, CT, p) # -2.064830032393999, -0.9304018848608, 30
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_Turner_Rsubrho.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_Turner_Rsubrho.html}
 gsw_Turner_Rsubrho <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -1703,7 +1703,7 @@ gsw_Turner_Rsubrho <- function(SA, CT, p)
 #' @seealso
 #' This is (almost) the reverse of \code{\link{gsw_p_from_z}}
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_z_from_p.html}
+#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_z_from_p.html}
 gsw_z_from_p <- function(p, latitude)
 {
     l <- argfix(list(p=p, latitude=latitude))

@@ -2,8 +2,8 @@
 css
 Sweave.sty
 .build.timestamp
-gsw.bbl
-gsw.blg
+vignettes/gsw.bbl
+vignettes/gsw.blg
 _layouts
 _site
 src-i386

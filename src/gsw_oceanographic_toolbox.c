@@ -331,7 +331,7 @@ gsw_c_from_sp(double sp, double t, double p)
 		u19 = 3.345074990451475e-10,
 		u20 = 8.285687652694768e-13, k = 0.0162e0;
 
-	double	t68, ft68, x, rtx, dsp_drtx, sqrty,
+	double	t68, ft68, x, rtx=0.0, dsp_drtx, sqrty,
 		part1, part2, hill_ratio, sp_est,
 		rtx_old, rt, aa, bb, cc, dd, ee, ra,r, rt_lc, rtxm,
 		sp_hill_raw;
@@ -932,12 +932,12 @@ function gsw_pt0_from_t(sa,t,p)
 double
 gsw_pt0_from_t(double sa, double t, double p)
 {
-	int	n0, n2, no_iter;
+	int	no_iter; //int	n0, n2, no_iter;
 	double	pt0, pt0_old, dentropy, dentropy_dt, sso, cp0;
 	double	s1, true_entropy_part, pt0m;
 
-	n0	= 0;
-	n2	= 2;
+	//n0	= 0;
+	//n2	= 2;
 
 	cp0	= 3991.86795711963e0;
 	sso	= 35.16504e0;
@@ -985,19 +985,19 @@ function gsw_pt_from_ct(sa,ct)
 double
 gsw_pt_from_ct(double sa, double ct)
 {
-	int	n0, n2;
-	double	s1, p0, cp0 ;
+	//int	n0, n2;
+	double	s1, cp0 ; //double	s1, p0, cp0 ;
 	double	a0, a1, a2, a3, a4, a5, b0, b1, b2, b3;
 	double	a5ct, b3ct, ct_factor, pt_num, pt_den, ct_diff;
 	double	pt, pt_old, ptm, dct_dpt;
 
 	cp0	= 3991.86795711963e0;
 
-	n0	= 0;
-	n2	= 2;
+	//n0	= 0;
+	//n2	= 2;
 
 	s1	= sa*35.e0/35.16504e0;
-	p0	= 0.e0;
+	//p0	= 0.e0;
 
 	a0	= -1.446013646344788e-2;    
 	a1	= -3.305308995852924e-3;    
@@ -2134,7 +2134,7 @@ gsw_cabbeling(double sa, double ct, double p)
 	double	sqrtsa, v_hat_denominator, v_hat_numerator;
 	double	dvhatden_dct, dvhatnum_dct, dvhatden_dctdct, dvhatden_dctdsa;
 	double	dvhatden_dsa, dvhatnum_dsa, dvhatnum_dsadsa, dvhatden_dsadsa;
-	double	dvhatnum_dctdct, dvhatnum_dsadct, dvhatnum_dctdsa;
+	double	dvhatnum_dctdct, dvhatnum_dctdsa; //double	dvhatnum_dctdct, dvhatnum_dsadct, dvhatnum_dctdsa;
 	double	p1a, p1b, p1c, p1d, part1, factor2a, factor2b;
 	double	p2a, p2b, p2c, p2d, p2e, part2;
 	double	factor3a, factor3b, p3a, p3b, p3c, p3d, part3;
@@ -2777,7 +2777,7 @@ gsw_turner_rsubrho(double *sa, double *ct, double *p, int nz,
 	int	k;
 
 	double	pi = 3.141592653589793e0;
-	double	dsa, sa_mid, dct, ct_mid, dp;
+	double	dsa, sa_mid, dct, ct_mid; //double	dsa, sa_mid, dct, ct_mid, dp;
 	double	alpha_mid, beta_mid;
 
 	for (k = 0; k < nz-1; k++) {
@@ -2785,7 +2785,7 @@ gsw_turner_rsubrho(double *sa, double *ct, double *p, int nz,
 	    sa_mid = 0.5e0*(sa[k] + sa[k+1]);
 	    dct = (ct[k] - ct[k+1]);
 	    ct_mid = 0.5e0*(ct[k] + ct[k+1]);
-	    dp = (p[k] - p[k+1]);
+	    //dp = (p[k] - p[k+1]);
 	    p_mid[k] = 0.5e0*(p[k] + p[k+1]);
 
 	    alpha_mid = gsw_alpha(sa_mid,ct_mid,p_mid[k]);
@@ -2863,7 +2863,7 @@ gsw_ipv_vs_fnsquared_ratio(double *sa, double *ct, double *p, double p_ref,
 	    numerator = dct*alpha_pref - dsa*beta_pref;
 	    denominator = dct*alpha_mid - dsa*beta_mid;
 
-	    if (denominator == 0)
+	    if (denominator == 0.0)
 		ipv_vs_fnsquared_ratio[k] = GSW_INVALID_VALUE;
 	    else
 		ipv_vs_fnsquared_ratio[k] = numerator/denominator;

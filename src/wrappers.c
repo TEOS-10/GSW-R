@@ -6,6 +6,10 @@
 #include <Rdefines.h>
 #include "gswteos-10.h"
 
+// PART 1
+//
+// Interface to store data on package load and clear it on unload (see
+// functions .onLoad() and .onUnload() in the file ../R/zzz.R).
 void set_up_gsw_data(int *gsw_nx_val,
         int *gsw_ny_val,
         int *gsw_nz_val,
@@ -84,7 +88,7 @@ void clear_gsw_data()
     delta_sa_ref = NULL;
 }
 
-// PART 1: macros for wrappers
+// PART 2: macros for wrappers
 //
 // Any reasonable C programmer should understand how these macros work,
 // in light of Part 2. The number in the macro name is the number of 
@@ -100,15 +104,6 @@ void (wname)(double *(arg1), int *(n), double *(rval))\
         }\
     }\
 }
-
-// extern int gsw_nx, gsw_ny, gsw_nz;
-// extern double *longs_ref, *lats_ref, *p_ref, *ndepth_ref, *saar_ref, *delta_sa_ref;
-// Rprintf("TEST: gsw dimensions: %d %d %d\n", gsw_nx, gsw_ny, gsw_nz);
-// Rprintf("TEST: lats: %g %g ... %g\n", lats_ref[0], lats_ref[1], lats_ref[gsw_nx-1]);
-// Rprintf("TEST: longs: %g %g ... %g\n", longs_ref[0], longs_ref[1], longs_ref[gsw_nx-1]);
-// Rprintf("TEST: ndepth: %g %g ...\n", ndepth_ref[0], ndepth_ref[1]);
-// Rprintf("TEST: saar: %g %g ...\n", saar_ref[0], saar_ref[1]);
-// Rprintf("TEST: delta_sa: %g %g ...\n", delta_sa_ref[0], delta_sa_ref[1]);
 
 #define W2(wname, cname, arg1, arg2, n, rval) \
 void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval))\
@@ -143,7 +138,7 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), int
     }\
 }
 
-// PART 2: wrappers for functions that return a value. Wrapping is necessary 
+// PART 3: wrappers for functions that return a value. Wrapping is necessary 
 // because the R function .C() cannot handle return values.
 // See Part 3 for functios returning void.
 //
@@ -213,7 +208,7 @@ W3(wrap_gsw_t_from_CT, gsw_t_from_ct, SA, CT, p, n, rval)
 W3(wrap_gsw_thermobaric, gsw_thermobaric, SA, CT, p, n, rval)
 W2(wrap_gsw_z_from_p, gsw_z_from_p, p, lat, n, rval)
 
-// PART 3
+// PART 4
 //
 // Functions returning void do not really need wrappers, but the R code
 // is simpler to read if we use them anyway.

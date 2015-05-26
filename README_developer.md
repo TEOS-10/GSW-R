@@ -1,8 +1,8 @@
 How to add new functions
 ========================
 
-**Preamble.** There are a great many functions in the TEOS-10/GSW library, and
-adding each one to this package takes a fair bit of time. The steps for adding
+**Preamble.** There are a great many functions in the GSW library, and adding
+each one to this package takes a fair bit of time. The steps for adding
 functions are given in detail here, in hopes that some users will contribute to
 the coding process. Please send contributions to the developers with ``git
 pull`` requests.
@@ -26,7 +26,8 @@ case notation, but note that the GSW C functions that you will be calling all
 all named in *lower* case. It should not be difficult for someone with moderate
 C skill to write a wrapper; just examine the existing code and be aware of
 whether the underlying GSW function returns ``void`` or a value, and mimic a
-wrapper of similar type. You may test your C code by executing
+wrapper of similar type. You may test your C code for compilation errors by
+executing
 
         R CMD SHLIB wrappers.c
 in the ``src`` directory.
@@ -50,8 +51,8 @@ in the command line, to rebuild the documentation.
 
 4. Add an entry for the function in ``../NAMESPACE``.
 
-5. Add a test to ``../tests/teso10.R``, using a test value from the TEOS-10
-   website. This is important, because untested code is next to useless.
+5. Add a test to ``../tests/gsw.R``, using the test values in the GSW
+   documentation provided on the TEOS-10 website.
 
 6. Build the package to see that code matches docs, etc. This can be done in
    Rstudio, or in the commandline with e.g.
