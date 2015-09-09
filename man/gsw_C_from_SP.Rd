@@ -18,8 +18,9 @@ electrical conductivity [ mS/cm ]
 }
 \description{
 Note: the return value is not conductivity ratio, but rather
-conductivity itself, in mS/cm.  To convert to conductivity
-ratio, divide by gsw_C_from_SP(35, 15, 0).
+conductivity itself, in mS/cm.  To convert to conductivity ratio,
+divide by 42.9140 (the value of conductivity at S=35, T68=15, and
+p=0).
 }
 \examples{
 gsw_C_from_SP(34.5487, 28.7856, 10) # 56.412599581571186

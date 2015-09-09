@@ -332,8 +332,9 @@ gsw_cabbeling <- function(SA, CT, p)
 #' Electrical conductivity from Practical Salinity
 #'
 #' Note: the return value is not conductivity ratio, but rather
-#' conductivity itself, in mS/cm.  To convert to conductivity
-#' ratio, divide by gsw_C_from_SP(35, 15, 0).
+#' conductivity itself, in mS/cm.  To convert to conductivity ratio,
+#' divide by 42.9140 (the value of conductivity at S=35, T68=15, and
+#' p=0).
 #' 
 #' @param SP Practical Salinity (PSS-78) [ unitless ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
