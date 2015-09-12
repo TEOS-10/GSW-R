@@ -865,10 +865,15 @@ gsw_latentheat_evap_CT <- function(SA, CT)
 #' @param t in-situ temperature (ITS-90) [ deg C ]
 #' @return latent heat of evaporation [ J/kg ]
 #' @examples
-#' gsw_latentheat_evap_t(34.7118, 28.7856) # 2.429882982734836e6
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+#' lh = gsw_latentheat_evap_t(SA, t)
+#' expect_equal(lh, 1e6*c(2.429882982734836, 2.430730236218543, 2.444217294049004,
+#'                        2.474137411322517, 2.482156276375029, 2.488054617630297))
 #' @seealso \code{\link{gsw_latentheat_evap_CT}} is an analogue in terms of Conservative Temperature. For melting, see \code{\link{gsw_latentheat_melting}}.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_latentheat_evap_t.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_evap_t.html}
 gsw_latentheat_evap_t <- function(SA, t)
 {
     l <- argfix(list(SA=SA, t=t))
