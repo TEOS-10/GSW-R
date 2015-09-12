@@ -22,15 +22,15 @@ gsw_p_from_z(double z, double latitude,
     double p = -2 * z / ((1 - c1) + sqrt((1 - c1) * (1 - c1) + 8.84e-6 * z));
     // end of the first estimate from Saunders (1981)
 
-    double df_dp = db2Pa * gsw_specvol_sso_0_p(p);
+    double df_dp = db2Pa * gsw_specvol_sso_0(p);
     // initial value of the derivative of f
 
-    double f = gsw_enthalpy_sso_0_p(p) + gs * (z - 0.5*gamma*(z * z)) 
+    double f = gsw_enthalpy_sso_0(p) + gs * (z - 0.5*gamma*(z * z)) 
         - (geo_strf_dyn_height + sea_surface_geopotental);
     double p_old = p;
     p = p_old - f / df_dp;
     double p_mid = 0.5 * (p + p_old);
-    df_dp = db2Pa * gsw_specvol_sso_0_p(p_mid);
+    df_dp = db2Pa * gsw_specvol_sso_0(p_mid);
     p = p_old - f / df_dp;
     return(p);
 }

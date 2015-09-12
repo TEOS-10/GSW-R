@@ -4,9 +4,23 @@
 **
 **  GSW TEOS-10 V3.05
 */
-#include <gswteos-10.h>
-#include <gsw_internal_const.h>
-#include <gsw_saar_data.c>
+#include "gswteos-10.h"
+#include "gsw_internal_const.h"
+//#include <gsw_saar_data.c> removed for GSW-R
+
+// GSW-R {
+// Set to zeros initially so we can check against reallocation.
+int gsw_nx=0;
+int gsw_ny=0;
+int gsw_nz=0;
+double *longs_ref=NULL;
+double *lats_ref=NULL;
+double *p_ref=NULL;
+double *ndepth_ref=NULL;
+double *saar_ref=NULL;
+double *delta_sa_ref=NULL;
+// } GSW-R
+
 
 static double
 gsw_sum(double *x, int n)

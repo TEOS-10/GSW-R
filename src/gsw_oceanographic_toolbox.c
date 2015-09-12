@@ -46,8 +46,16 @@
 
 ==========================================================================
 */
-#include <gswteos-10.h>
-#include <gsw_internal_const.h>
+#include "gswteos-10.h"
+#include "gsw_internal_const.h"
+
+// Next block added for GSW-R
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <string.h>
+#include <R.h>
+#include <Rdefines.h>
+#include <Rinternals.h>
 
 /*
 !==========================================================================
