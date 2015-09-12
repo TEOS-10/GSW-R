@@ -1,24 +1,12 @@
 /*
-**  $Id: gsw_saar.c,v 7c235f8731c0 2013/09/17 15:56:24 fdelahoyde $
-**  $Version: 3.02.0 $
+**  $Id: gsw_saar.c,v 9461075b3458 2015/08/09 16:38:20 fdelahoyde $
+**  $Version: 3.05.0-1 $
 **
-**  TEOS-10 V3.0
+**  GSW TEOS-10 V3.05
 */
-//#include <gswteos-10.h>
-#include "gswteos-10.h"
-//#include <gsw_saar_data.c>
-//#include "gsw_saar_data.c"
-
-// Set to zeros initially so we can check against reallocation.
-int gsw_nx=0;
-int gsw_ny=0;
-int gsw_nz=0;
-double *longs_ref=NULL;
-double *lats_ref=NULL;
-double *p_ref=NULL;
-double *ndepth_ref=NULL;
-double *saar_ref=NULL;
-double *delta_sa_ref=NULL;
+#include <gswteos-10.h>
+#include <gsw_internal_const.h>
+#include <gsw_saar_data.c>
 
 static double
 gsw_sum(double *x, int n)
@@ -49,24 +37,22 @@ function gsw_saar(p,long,lat)
 double
 gsw_saar(double p, double lon, double lat)
 {
+	GSW_SAAR_DATA;
 	int	nx=gsw_nx, ny=gsw_ny, nz=gsw_nz;
-	int	indx0, indy0, indz0, k; //int	indx0, indy0, indz0, i, j, k;
-	int	ndepth_index; //int	nmean, flag_saar, ndepth_index;
-	int	deli[4] = {0,1,1,0}, delj[4] = {0,0,1,1};
+	int	indx0, indy0, indz0, i, j, k;
+	int	nmean, flag_saar, ndepth_index;
 	double	saar[4], saar_old[4];
-
-	double	dlong, dlat;
-	double	sa_upper, sa_lower; //double	lon0_in, sa_upper, sa_lower;
-	double	r1, s1, t1, ndepth_max, return_value; //double	r1, s1, t1, saar_mean, ndepth_max, return_value;
+	double	lon0_in, sa_upper, sa_lower, dlong, dlat;
+	double	r1, s1, t1, saar_mean, ndepth_max, return_value;
 
 
 	return_value	 = GSW_INVALID_VALUE;
 
-	if (lat  <  -86e0  ||  lat  >  90e0)
+	if (lat  <  -86.0  ||  lat  >  90.0)
 	    return (return_value);
 
 	if (lon  <  0.0)
-	    lon	= lon + 360.0;
+	    lon	+= 360.0;
 
 	dlong	= longs_ref[1]-longs_ref[0];
 	dlat	= lats_ref[1]-lats_ref[0];
@@ -81,19 +67,19 @@ gsw_saar(double p, double lon, double lat)
 	if(indy0 == ny-1)
 	    indy0	= ny-2;
 
-	ndepth_max	= -1;
+	ndepth_max	= -1.0;
 	for (k=0; k < 4; k++) {
 	    ndepth_index	= indy0+delj[k]+(indx0+deli[k])*ny;
 	    if (ndepth_ref[ndepth_index] > 0.0)
 		ndepth_max = max(ndepth_max, ndepth_ref[ndepth_index]);
 	}
 
-	if (ndepth_max == -1.e0)
+	if (ndepth_max == -1.0)
 	    return (0.0);
 
 	if (p > p_ref[(int)(ndepth_max)-1])
 	    p	= p_ref[(int)(ndepth_max)-1];
-	indz0	= gsw_indx(p_ref,nz,p);
+	indz0	= gsw_util_indx(p_ref,nz,p);
     
 	r1	= (lon-longs_ref[indx0])/(longs_ref[indx0+1]-longs_ref[indx0]);
 	s1	= (lat-lats_ref[indy0])/(lats_ref[indy0+1]-lats_ref[indy0]);
@@ -102,14 +88,14 @@ gsw_saar(double p, double lon, double lat)
 	for (k=0; k<4; k++)
 	    saar[k]	= saar_ref[indz0+nz*(indy0+delj[k]+(indx0+deli[k])*ny)];
 
-	if (260.0 <= lon && lon <= 291.999 && 3.4 <= lat && lat <= 19.55) {
+	if (longs_pan[0] <= lon && lon <= longs_pan[npan-1]-0.001 &&
+	    lats_pan[npan-1] <= lat && lat <= lats_pan[0]) {
 	    memmove(saar_old,saar,4*sizeof (double));
 	    gsw_add_barrier(saar_old,lon,lat,longs_ref[indx0],
 			lats_ref[indy0],dlong,dlat,saar);
-		/* FIXME v FIXME */
-	} else if (fabs(sum(saar))  >=  1e10) {
+	} else if (fabs(sum(saar))  >=  GSW_ERROR_LIMIT) {
 	    memmove(saar_old,saar,4*sizeof (double));
-	    gsw_add_mean(saar_old,lon,lat,saar);
+	    gsw_add_mean(saar_old,saar);
 	}
 
 	sa_upper	= (1.0-s1)*(saar[0] + r1*(saar[1]-saar[0])) +
@@ -119,23 +105,23 @@ gsw_saar(double p, double lon, double lat)
 	    saar[k]	= saar_ref[indz0+1+nz*(indy0+delj[k]+
 				(indx0+deli[k])*ny)];
 
-	if (260.0 <= lon && lon <= 291.999 && 3.4 <= lat && lat <= 19.55) {
+	if (longs_pan[0] <= lon && lon <= longs_pan[npan-1]-0.001 &&
+	    lats_pan[npan-1] <= lat && lat <= lats_pan[0]) {
 	    memmove(saar_old,saar,4*sizeof (double));
 	    gsw_add_barrier(saar_old,lon,lat,longs_ref[indx0],
 				lats_ref[indy0],dlong,dlat,saar);
-		/* FIXME v FIXME */
-	} else if (fabs(sum(saar))  >=  1e10) {
+	} else if (fabs(sum(saar))  >=  GSW_ERROR_LIMIT) {
 	    memmove(saar_old,saar,4*sizeof (double));
-	    gsw_add_mean(saar_old,lon,lat,saar);
+	    gsw_add_mean(saar_old,saar);
 	}
 
 	sa_lower	= (1.0-s1)*(saar[0] + r1*(saar[1]-saar[0])) +
 				s1*(saar[3] + r1*(saar[2]-saar[3]));
-	if (fabs(sa_lower)  >=  1e10)
+	if (fabs(sa_lower)  >=  GSW_ERROR_LIMIT)
 	    sa_lower	= sa_upper;
 	return_value	= sa_upper + t1*(sa_lower-sa_upper);
 
-	if (fabs(return_value) >= 1e10)
+	if (fabs(return_value) >= GSW_ERROR_LIMIT)
 	    return_value	= GSW_INVALID_VALUE;
 
 	return (return_value);
@@ -149,24 +135,22 @@ function gsw_deltasa_atlas(p,lon,lat)
 ! Calculates the Absolute Salinity Anomaly atlas value, delta_SA_atlas.
 !
 ! p      : sea pressure                                    [dbar]
-! lon   : longiture                                       [deg E]     
+! lon    : longiture                                       [deg E]     
 ! lat    : latitude                                        [deg N]
 !
-! gsw_deltasa_atlas : Absolute Salinity Anomaly atlas value    [g/kg]
+! deltasa_atlas : Absolute Salinity Anomaly atlas value    [g/kg]
 */
 double
 gsw_deltasa_atlas(double p, double lon, double lat)
 {
+	GSW_SAAR_DATA;
 	int	nx=gsw_nx, ny=gsw_ny, nz=gsw_nz;
-
-	int	indx0, indy0, indz0, k, ndepth_index; //int	indx0, indy0, indz0, i, j, k, ndepth_index;
-	//int	nmean, flag_dsar;
-	int	deli[4]={0,1,1,0}, delj[4]={0,0,1,1};
-
+	int	indx0, indy0, indz0, i, j, k, ndepth_index;
+	int	nmean, flag_dsar;
 	double	dsar[4], dsar_old[4];
 	double	dlong, dlat;
-	double	return_value, sa_upper, sa_lower; //double	return_value, lon0_in, sa_upper, sa_lower;
-	double	r1, s1, t1, ndepth_max; //double	r1, s1, t1, dsar_mean, ndepth_max;
+	double	return_value, lon0_in, sa_upper, sa_lower;
+	double	r1, s1, t1, dsar_mean, ndepth_max;
 
 	return_value	= GSW_INVALID_VALUE;
 
@@ -174,7 +158,7 @@ gsw_deltasa_atlas(double p, double lon, double lat)
 	    return (return_value);
 
 	if (lon < 0.0)
-	    lon	= lon + 360.0;
+	    lon	+= 360.0;
 
 	dlong	= longs_ref[1]-longs_ref[0];
 	dlat	= lats_ref[1]-lats_ref[0];
@@ -201,7 +185,7 @@ gsw_deltasa_atlas(double p, double lon, double lat)
 
 	if (p > p_ref[(int)(ndepth_max)-1])
 	    p	= p_ref[(int)(ndepth_max)-1];
-	indz0	= gsw_indx(p_ref,nz,p);
+	indz0	= gsw_util_indx(p_ref,nz,p);
     
 	r1	= (lon-longs_ref[indx0])/
 			(longs_ref[indx0+1]-longs_ref[indx0]);
@@ -214,13 +198,14 @@ gsw_deltasa_atlas(double p, double lon, double lat)
 	    dsar[k]	= delta_sa_ref[indz0+nz*(indy0+delj[k]+
 				(indx0+deli[k])*ny)];
 
-	if (260.0 <= lon && lon <= 291.999 && 3.4 <= lat && lat <= 19.55) {
+	if (longs_pan[0] <= lon && lon <= longs_pan[npan-1]-0.001 &&
+            lats_pan[npan-1] <= lat && lat <= lats_pan[0]) {
 	    memmove(dsar_old,dsar,4*sizeof (double));
 	    gsw_add_barrier(dsar_old,lon,lat,longs_ref[indx0],
 				lats_ref[indy0],dlong,dlat,dsar);
-	} else if (fabs(sum(dsar)) >= 1e10) {
+	} else if (fabs(sum(dsar)) >= GSW_ERROR_LIMIT) {
 	    memmove(dsar_old,dsar,4*sizeof (double));
-	    gsw_add_mean(dsar_old,lon,lat,dsar);
+	    gsw_add_mean(dsar_old,dsar);
 	}
 
 	sa_upper	= (1.0-s1)*(dsar[0] + r1*(dsar[1]-dsar[0])) +
@@ -230,22 +215,23 @@ gsw_deltasa_atlas(double p, double lon, double lat)
 	    dsar[k]	= delta_sa_ref[indz0+1+nz*(indy0+delj[k]+
 				(indx0+deli[k])*ny)];
 
-	if (260.0 <= lon && lon <= 291.999 && 3.4 <= lat && lat <= 19.55) {
+	if (longs_pan[0] <= lon && lon <= longs_pan[npan-1] &&
+	    lats_pan[npan-1] <= lat && lat <= lats_pan[0]) {
 	    memmove(dsar_old,dsar,4*sizeof (double));
 	    gsw_add_barrier(dsar_old,lon,lat,longs_ref[indx0],
 				lats_ref[indy0],dlong,dlat,dsar);
-	} else if (fabs(sum(dsar)) >= 1e10) {
+	} else if (fabs(sum(dsar)) >= GSW_ERROR_LIMIT) {
 	    memmove(dsar_old,dsar,4*sizeof (double));
-	    gsw_add_mean(dsar_old,lon,lat,dsar);
+	    gsw_add_mean(dsar_old,dsar);
 	}
 
 	sa_lower	= (1.0-s1)*(dsar[0] + r1*(dsar[1]-dsar[0])) +
 				s1*(dsar[3] + r1*(dsar[2]-dsar[3]));
-	if (fabs(sa_lower) >= 1e10)
+	if (fabs(sa_lower) >= GSW_ERROR_LIMIT)
 	    sa_lower	= sa_upper;
 	return_value	= sa_upper + t1*(sa_lower-sa_upper);
 
-	if (fabs(return_value) >= 1e10)
+	if (fabs(return_value) >= GSW_ERROR_LIMIT)
 	    return (GSW_INVALID_VALUE);
 
 	return (return_value);
