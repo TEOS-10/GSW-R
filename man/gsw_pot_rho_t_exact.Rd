@@ -22,10 +22,17 @@ potential density [ kg/m^3 ]
 Potential density
 }
 \examples{
-gsw_pot_rho_t_exact(34.7118, 28.7856, 10, 0) # 1021.798145811089
+library(testthat)
+SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+p <- c(      10,      50,     125,     250,     600,    1000)
+p_ref  <- 0
+prho <- gsw_pot_rho_t_exact(SA,t,p,p_ref)
+expect_equal(prho, 1e3*c(1.021798145811089, 1.022052484416980, 1.023893583651958,
+                         1.026667621124443, 1.027107230868492, 1.027409631264134))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_pot_rho_t_exact.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_rho_t_exact.html}
 }
 \seealso{
 \code{\link{gsw_rho}} and \code{\link{gsw_rho_t_exact}} compute density; \code{\link{gsw_sigma0}} and related functions compute potential density at particular pressures.
