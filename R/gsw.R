@@ -948,7 +948,7 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
     list(N2=r$n2, p_mid=r$p_mid)
 }
 
-#' Pressure from z
+#' Pressure from height (75-term equation)
 #' 
 #' @param z height, zero at surface (but note last 2 args) and positive upwards [ m ]
 #' @param latitude latitude in decimal degrees north [ -90 ... +90 ]
@@ -956,11 +956,16 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
 #' @param sea_surface_geopotential geopotential at zero sea pressure [ m^2/s^2 ]
 #' @return sea pressure [ dbar ]
 #' @examples
-#' gsw_p_from_z(-10, 4) # 10.05572704136
+#' library(testthat)
+#' z <- -c(10, 50, 125, 250, 600, 1000)
+#' latitude <- 4
+#' p <- gsw_p_from_z(z, latitude)
+#' expect_equal(p, 1e3*c(0.010055726724518, 0.050283543374874, 0.125731858435610,
+#'                       0.251540299593468, 0.604210012340727, 1.007990337692001))
 #' @seealso
 #' This is (almost) the reverse of \code{\link{gsw_z_from_p}}, apart from the last two arguments.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_p_from_z.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_p_from_z.html}
 gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height=0, sea_surface_geopotential=0)
 {
     l <- argfix(list(z=z, latitude=latitude,
