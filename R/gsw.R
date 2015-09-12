@@ -627,11 +627,17 @@ gsw_enthalpy <- function(SA, CT, p)
 #' @param p sea pressure [ dbar ]
 #' @return specific enthalpy [ J/kg ]
 #' @examples 
-#' gsw_enthalpy_t_exact(34.7118, 28.7856, 10) # 1.151032604783763e5
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' e <- gsw_enthalpy_t_exact(SA, t, p)
+#' expect_equal(e, 1e5*c(1.151032604783763, 1.140148036012021, 0.921799209310966,
+#'                       0.432553283808897, 0.330872159700175, 0.269705880448018))
 #' @seealso
 #' \code{\link{gsw_enthalpy}} and \code{\link{gsw_dynamic_enthalpy}}
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_enthalpy_t_exact.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_t_exact.html}
 gsw_enthalpy_t_exact <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
