@@ -18,10 +18,17 @@ latent heat of freezing [ J/kg ]
 Latent heat of melting
 }
 \examples{
-gsw_latentheat_melting(34.7118, 10) # 3.299495187300804e5
+library(testthat)
+SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+p <- c(      10,      50,     125,     250,     600,    1000)
+lh <- gsw_latentheat_melting(SA, p)
+expect_equal(lh, 1e5*c(3.299495187300804, 3.298611954422526, 3.297124383647952,
+                       3.294972884747496, 3.288480015369891, 3.280715953443947),
+             scale=1e5, tolerance=1e-6)
+# FIXME: why don't scale=NULL and tolerance=.Machine$double.eps^0.5 work?
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_latentheat_melting.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_melting.html}
 }
 \seealso{
 \code{\link{gsw_latentheat_evap_CT}} and \code{\link{gsw_latentheat_evap_t}} are analogues for evaporation.

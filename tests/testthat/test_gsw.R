@@ -194,4 +194,12 @@ lh = gsw_latentheat_evap_t(SA, t)
 expect_equal(lh, 1e6*c(2.429882982734836, 2.430730236218543, 2.444217294049004,
                        2.474137411322517, 2.482156276375029, 2.488054617630297))
 
+## gsw_latentheat_evap_melting
+SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+p <- c(      10,      50,     125,     250,     600,    1000)
+lh <- gsw_latentheat_melting(SA, p)
+expect_equal(lh, 1e5*c(3.299495187300804, 3.298611954422526, 3.297124383647952,
+                       3.294972884747496, 3.288480015369891, 3.280715953443947),
+             scale=1e5, tolerance=1e-6)
+## FIXME: above, why don't scale=NULL and tolerance=.Machine$double.eps^0.5 work?
 
