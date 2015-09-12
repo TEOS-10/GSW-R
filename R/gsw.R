@@ -1199,9 +1199,15 @@ gsw_rho_t_exact <- function(SA, t, p)
 #' @param p sea pressure [ dbar ]
 #' @return Absolute Salinity [ g/kg ]
 #' @examples
-#' gsw_SA_from_rho(1021.8482, 28.7856, 10) # 34.711382887931144
+#' library(testthat)
+#' rho <- c(1021.8482, 1022.2647, 1024.4207, 1027.7841, 1029.8287, 1031.9916)
+#' CT <-c(    28.7856,   28.4329,   22.8103,   10.2600,    6.8863,    4.4036)
+#' p <- c(         10,        50,       125,       250,       600,      1000)
+#' SA <- gsw_SA_from_rho(rho, CT, p)
+#' expect_equal(SA, c(34.712080120418108, 34.891723808488869, 35.026202257609505,
+#'                    34.847160842234572, 34.736398269039945, 34.732228881079742))
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SA_from_rho.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_rho.html}
 gsw_SA_from_rho <- function(rho, CT, p)
 {
     l <- argfix(list(rho=rho, CT=CT, p=p))

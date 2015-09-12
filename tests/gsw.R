@@ -1,24 +1,4 @@
-## NOTE -- this file will gradually be emptied, by this procedure:
-## 1. check the URL for new values
-## 2. using new or old values, rewrite test with expect_equal() or similar
-##    and put the result in testthat/test_gsw.R
-## 3. when the test works, move it to the function documentation and remove it
-##    from the present file
-## Once this file is empty, it will be removed. All tests will then be in two
-## places: the docs (for slow package checking) and testthat/test_gsw.R (for
-## fast package testing). I don't see any harm in keeping them in both places,
-## but I suppose they could be removed from testthat/test_gsw.R if duplication
-## came to be viewed as a larger issue than check times.
-
 library(gsw)
-
-## gsw_SA_from_rho()
-rho <- c(1021.8482, 1022.2647, 1024.4207, 1027.7841, 1029.8287, 1031.9916)
-CT <-c(    28.7856,   28.4329,   22.8103,   10.2600,    6.8863,    4.4036)
-p <- c(         10,        50,       125,       250,       600,      1000)
-SA <- gsw_SA_from_rho(rho, CT, p)
-stopifnot(all.equal(SA, c(34.711382887931144, 34.891005107845949, 35.025429483046373,
-                          34.846708947660034, 34.736425587999484, 34.732694768360886)))
 
 ## gsw_SA_from_SP()
 SP <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
