@@ -196,7 +196,7 @@ W2(wrap_gsw_sigma4, gsw_sigma4, SA, CT, n, rval)
 W3(wrap_gsw_sound_speed, gsw_sound_speed, SA, t, p, n, rval)
 W3(wrap_gsw_sound_speed_t_exact, gsw_sound_speed_t_exact, SA, t, p, n, rval)
 // gsw_specvol coded in R
-W3(wrap_gsw_specvol_anom, gsw_specvol_anom, SA, CT, p, n, rval)
+W3(wrap_gsw_specvol_anom_standard, gsw_specvol_anom_standard, SA, CT, p, n, rval)
 W3(wrap_gsw_specvol_t_exact, gsw_specvol_t_exact, SA, t, p, n, rval)
 W3(wrap_gsw_SP_from_C, gsw_sp_from_c, C, t, p, n, rval)
 W4(wrap_gsw_SP_from_SA, gsw_sp_from_sa, SA, p, longitude, latitude, n, rval)
