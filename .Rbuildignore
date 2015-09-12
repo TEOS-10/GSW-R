@@ -7,3 +7,4 @@ css
 .gitignore
 ^.*\.Rproj$
 src/*.o$
+^\.Rproj\.user$
