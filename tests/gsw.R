@@ -14,19 +14,6 @@ library(gsw)
 ## Test against with values provided on the TEOS-10 website, e.g.
 ##   http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_from_t.html
 
-
-## gsw_entropy_from_t()
-SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
-t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
-p <- c(      10,      50,     125,     250,     600,    1000)
-e <- gsw_entropy_from_t(SA, t, p)
-stopifnot(all.equal(e, 100 * c(4.003894252787245, 3.954381784340642, 3.198664981986740,
-                               1.467908815899072, 0.986473408657975, 0.627915087346090)))
-
-## gsw_grav()
-g <- gsw_grav(c(-90, -60, -30, 0), 0)
-stopifnot(all.equal(g, c(9.832186205884799, 9.819178859991149,
-                         9.793249257048750, 9.780327000000000)))
 ## gsw_internal_energy()
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)

@@ -18,9 +18,13 @@ gravitational acceleration [ m/s^2 ]
 Gravitational acceleration
 }
 \examples{
-gsw_grav(c(-90, -60), 0) # 9.832186205884799, 9.819178859991149
+library(testthat)
+lat <- c(-90, -60, -30, 0)
+grav <- gsw_grav(lat)
+expect_equal(grav, c(9.832186205884799, 9.819178859991149,
+                     9.793249257048750, 9.780327000000000))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_grav.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_grav.html}
 }
 
