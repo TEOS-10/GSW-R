@@ -1330,10 +1330,15 @@ gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
 #' @param CT Conservative Temperature [ deg C ]
 #' @return potential density anomaly [ kg/m^3 ]
 #' @examples
-#' gsw_sigma0(34.7118, 28.8099) # 21.798411276610750
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' sigma0 <- gsw_sigma0(SA,CT)
+#' expect_equal(sigma0, c(21.797900819337656, 22.052215404397316, 23.892985307893923,
+#'                        26.667608665972011, 27.107380455119710, 27.409748977090885))
 #' @seealso Use \code{\link{gsw_sigma1}} for 1000 dbar pressure, \code{\link{gsw_sigma2}} for 2000 dbar, \code{\link{gsw_sigma3}} for 3000 dbar, or \code{\link{gsw_sigma4}} for 4000 dbar.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_sigma0.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma0.html}
 gsw_sigma0 <- function(SA, CT)
 {
     l <- argfix(list(SA=SA, CT=CT))
