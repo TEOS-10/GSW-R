@@ -376,10 +376,16 @@ gsw_cabbeling <- function(SA, CT, p)
 #' @param p sea pressure [ dbar ]
 #' @return electrical conductivity [ mS/cm ]
 #' @examples 
-#' gsw_C_from_SP(34.5487, 28.7856, 10) # 56.412599581571186
+#' library(testthat)
+#' SP <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
+#' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' C <- gsw_C_from_SP(SP, t, p)
+#' expect_equal(C, c(56.412599581571186, 56.316185602699953, 50.670369333973944,
+#'                   38.134518936104350, 35.056577637635257, 32.986550607990118))
 #' @seealso \code{\link{gsw_SP_from_C}} does the reverse.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_C_from_SP.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_C_from_SP.html}
 gsw_C_from_SP <- function(SP, t, p)
 {
     l <- argfix(list(SP=SP, t=t, p=p))
