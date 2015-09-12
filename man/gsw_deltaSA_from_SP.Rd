@@ -22,10 +22,17 @@ deltaSA Absolute Salinity Anomaly  [ g/kg ]
 Absolute Salinity Anomaly from Practical Salinity
 }
 \examples{
-gsw_deltaSA_from_SP(34.7118, 10, 188, 4) # 0.000167203365230
+library(testthat)
+SP =   c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+p =    c(     10,      50,     125,     250,     600,    1000)
+lat =  c(      4,       4,       4,       4,       4,       4)
+long = c(    188,     188,     188,     188,     188,     188)
+deltaSA = gsw_deltaSA_from_SP(SP,p,long,lat)
+expect_equal(deltaSA, c(0.000167203365230, 0.000268836122231, 0.000665803155705,
+                        0.002706154619403, 0.005652977406832,  0.009444734661606))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_deltaSA_from_SP.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_deltaSA_from_SP.html}
 }
 \seealso{
 \code{\link{gsw_SA_from_SP}}
