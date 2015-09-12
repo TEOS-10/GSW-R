@@ -1,5 +1,6 @@
 useDynLib(gsw)
 importFrom(utils, data)
+importFrom("testthat", "expect_equal")
 export(
         argfix,
         gsw_adiabatic_lapse_rate_from_CT,
