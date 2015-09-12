@@ -1021,10 +1021,16 @@ gsw_pot_rho_t_exact <- function(SA, t, p, p_ref)
 #' @param p sea pressure [ dbar ]
 #' @return potential temperature [ deg C ]
 #' @examples
-#' gsw_pt0_from_t(34.7118, 28.7856, 10) # 28.783196819670632
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' pt0 <- gsw_pt0_from_t(SA, t, p)
+#' expect_equal(pt0, c(28.783196819670632, 28.420983342398962, 22.784930399117108,
+#'                     10.230523661095731, 6.829230224409661, 4.324510571845719))
 #' @seealso \code{\link{gsw_pt_from_CT}} and \code{\link{gsw_pt_from_t}}
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_pt0_from_t.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt0_from_t.html}
 gsw_pt0_from_t <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
@@ -1043,10 +1049,15 @@ gsw_pt0_from_t <- function(SA, t, p)
 #' @param CT Conservative Temperature [ deg C ]
 #' @return potential temperature [ deg C ]
 #' @examples
-#' gsw_pt_from_CT(34.7118, 28.8099) # 28.783177048624573 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' pt <- gsw_pt_from_CT(SA, CT)
+#' expect_equal(pt, c(28.783177048624573, 28.420955597191984, 22.784953468087107,
+#'                    10.230534394434429, 6.829216587061605, 4.324534835990236))
 #' @seealso \code{\link{gsw_pt0_from_t}} for the surface case and and \code{\link{gsw_pt_from_t}} for the general case.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_pt_from_CT.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_CT.html}
 gsw_pt_from_CT <- function(SA, CT)
 {
     l <- argfix(list(SA=SA, CT=CT))
