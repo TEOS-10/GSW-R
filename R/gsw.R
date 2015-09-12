@@ -1078,10 +1078,17 @@ gsw_pt_from_CT <- function(SA, CT)
 #' @param p_ref reference pressure [ dbar ]
 #' @return potential temperature [ deg C ]
 #' @examples
-#' gsw_pt_from_t(34.7118, 28.7856, 10, 0) # 28.783196819670632
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' p_ref <- 0
+#' pt <- gsw_pt_from_t(SA, t, p, p_ref)
+#' expect_equal(pt, c(28.783196819670632, 28.420983342398962, 22.784930399117108,
+#'                    10.230523661095731, 6.829230224409661, 4.324510571845719)) 
 #' @seealso \code{\link{gsw_pt_from_CT}} is the analogue for Conservative Temperature
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_pt_from_t.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_t.html}
 gsw_pt_from_t <- function(SA, t, p, p_ref=0)
 {
     l <- argfix(list(SA=SA, t=t, p=p, p_ref=p_ref))
