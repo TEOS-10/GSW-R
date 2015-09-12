@@ -1,22 +1,5 @@
 library(gsw)
 
-
-## gsw_sigma1()
-sigma1 <- gsw_sigma1(34.7118, 28.8099)
-expect_equal(sigma1, 25.955891533636986))
-
-## gsw_sigma2()
-sigma2 <- gsw_sigma2(34.7118, 28.8099)
-expect_equal(sigma2, 30.02279641606605))
-
-## gsw_sigma3()
-sigma3 <- gsw_sigma3(34.7118, 28.8099)
-expect_equal(sigma3, 34.002600253012133))
-
-## gsw_sigma4()
-sigma4 <- gsw_sigma4(34.7118, 28.8099)
-expect_equal(sigma4, 37.898467323406976))
-
 ## gsw_specvol()
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)

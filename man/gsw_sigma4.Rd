@@ -15,15 +15,20 @@ gsw_sigma4(SA, CT)
 potential density anomaly with reference pressure 4000 dbar [ kg/m^3 ]
 }
 \description{
-This uses the 48-term density equation, and returns
+This uses the 75-term density equation, and returns
 potential density referenced to a pressure of 4000 dbar,
 minus 1000 kg/m^3.
 }
 \examples{
-gsw_sigma4(34.7118, 28.8099) # 37.898467323406976
+library(testthat)
+SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+sigma4 <- gsw_sigma4(SA,CT)
+expect_equal(sigma4, c(37.900374609834898, 38.166979617032439, 40.280876075282549,
+                       43.896091033421953, 44.631677245327637, 45.171817312020039))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_sigma4.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma4.html}
 }
 \seealso{
 Use \code{\link{gsw_sigma0}} for 0 dbar pressure, \code{\link{gsw_sigma1}} for 1000 dbar, \code{\link{gsw_sigma2}} for 2000 dbar, or \code{\link{gsw_sigma3}} for 3000 dbar.

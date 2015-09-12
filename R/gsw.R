@@ -1353,7 +1353,7 @@ gsw_sigma0 <- function(SA, CT)
 
 #' Potential density anomaly referenced to 1000 dbar
 #'
-#' This uses the 48-term density equation, and returns
+#' This uses the 75-term density equation, and returns
 #' potential density referenced to a pressure of 1000 dbar,
 #' minus 1000 kg/m^3.
 #'
@@ -1361,10 +1361,15 @@ gsw_sigma0 <- function(SA, CT)
 #' @param CT Conservative Temperature [ deg C ]
 #' @return potential density anomaly [ kg/m^3 ]
 #' @examples
-#' gsw_sigma1(34.7118, 28.8099) # 25.955891533636986
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' sigma1 <- gsw_sigma1(SA,CT)
+#' expect_equal(sigma1, c(25.955618850310202, 26.213131422420247, 28.125423775188438,
+#'                        31.120360038882382, 31.637724222733368, 32.002453224572037))
 #' @seealso Use \code{\link{gsw_sigma0}} for 0 dbar pressure, \code{\link{gsw_sigma2}} for 2000 dbar, \code{\link{gsw_sigma3}} for 3000 dbar, or \code{\link{gsw_sigma4}} for 4000 dbar.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_sigma1.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma1.html}
 gsw_sigma1 <- function(SA, CT)
 {
     l <- argfix(list(SA=SA, CT=CT))
@@ -1379,7 +1384,7 @@ gsw_sigma1 <- function(SA, CT)
 
 #' Potential density anomaly referenced to 2000 dbar
 #'
-#' This uses the 48-term density equation, and returns
+#' This uses the 75-term density equation, and returns
 #' potential density referenced to a pressure of 2000 dbar,
 #' minus 1000 kg/m^3.
 #'
@@ -1387,10 +1392,15 @@ gsw_sigma1 <- function(SA, CT)
 #' @param CT Conservative Temperature [ deg C ]
 #' @return potential density anomaly [ kg/m^3 ]
 #' @examples
-#' gsw_sigma2(34.7118, 28.8099) # 30.022796416066058
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' sigma2 <- gsw_sigma2(SA,CT)
+#' expect_equal(sigma2, c(30.023152223799116, 30.283783336283477, 32.265556840289719,
+#'                        35.474550881051073, 36.067289438047737, 36.492606494879510)) 
 #' @seealso Use \code{\link{gsw_sigma0}} for 0 dbar pressure, \code{\link{gsw_sigma1}} for 1000 dbar, \code{\link{gsw_sigma3}} for 3000 dbar, or \code{\link{gsw_sigma4}} for 4000 dbar.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_sigma2.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma2.html}
 gsw_sigma2 <- function(SA, CT)
 {
     l <- argfix(list(SA=SA, CT=CT))
@@ -1405,7 +1415,7 @@ gsw_sigma2 <- function(SA, CT)
 
 #' Potential density anomaly referenced to 3000 dbar
 #'
-#' This uses the 48-term density equation, and returns
+#' This uses the 75-term density equation, and returns
 #' potential density referenced to a pressure of 3000 dbar,
 #' minus 1000 kg/m^3.
 #'
@@ -1413,10 +1423,15 @@ gsw_sigma2 <- function(SA, CT)
 #' @param CT Conservative Temperature [ deg C ]
 #' @return potential density anomaly with reference pressure 3000 dbar [ kg/m^3 ]
 #' @examples
-#' gsw_sigma3(34.7118, 28.8099) # 34.002600253012133
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' sigma3 <- gsw_sigma3(SA,CT)
+#' expect_equal(sigma3, c(34.003747849903675, 34.267409891564057, 36.316415829697917,
+#'                        39.732367693977039, 40.397934186745033, 40.881795690566832))
 #' @seealso Use \code{\link{gsw_sigma0}} for 0 dbar pressure, \code{\link{gsw_sigma1}} for 1000 dbar, \code{\link{gsw_sigma2}} for 2000 dbar, or \code{\link{gsw_sigma4}} for 4000 dbar.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_sigma3.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma3.html}
 gsw_sigma3 <- function(SA, CT)
 {
     l <- argfix(list(SA=SA, CT=CT))
@@ -1431,7 +1446,7 @@ gsw_sigma3 <- function(SA, CT)
 
 #' Potential density anomaly referenced to 4000 dbar
 #'
-#' This uses the 48-term density equation, and returns
+#' This uses the 75-term density equation, and returns
 #' potential density referenced to a pressure of 4000 dbar,
 #' minus 1000 kg/m^3.
 #'
@@ -1439,10 +1454,15 @@ gsw_sigma3 <- function(SA, CT)
 #' @param CT Conservative Temperature [ deg C ]
 #' @return potential density anomaly with reference pressure 4000 dbar [ kg/m^3 ]
 #' @examples
-#' gsw_sigma4(34.7118, 28.8099) # 37.898467323406976
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' sigma4 <- gsw_sigma4(SA,CT)
+#' expect_equal(sigma4, c(37.900374609834898, 38.166979617032439, 40.280876075282549,
+#'                        43.896091033421953, 44.631677245327637, 45.171817312020039))
 #' @seealso Use \code{\link{gsw_sigma0}} for 0 dbar pressure, \code{\link{gsw_sigma1}} for 1000 dbar, \code{\link{gsw_sigma2}} for 2000 dbar, or \code{\link{gsw_sigma3}} for 3000 dbar.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_sigma4.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma4.html}
 gsw_sigma4 <- function(SA, CT)
 {
     l <- argfix(list(SA=SA, CT=CT))
