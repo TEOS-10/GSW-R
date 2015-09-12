@@ -749,15 +749,17 @@ gsw_internal_energy <- function(SA, CT, p)
 #' @param p_ref reference pressure [ dbar ]
 #' @return list containing IPV_vs_fNsquared_ratio [ unitless ] and mid-point pressure p_mid [ dbar ]
 #' @examples 
-#' SA <- c(34.7118, 34.8915)
-#' CT <- c(28.8099, 28.4392)
-#' p <-  c(     10,      50)
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' p_ref <- 0
 #' r <- gsw_IPV_vs_fNsquared_ratio(SA, CT, p, p_ref)
-#' r$IPV_vs_fNsquared_ratio # 0.999745283730840
-#' r$p_mid                  # 30
+#' expect_equal(r$IPV_vs_fNsquared_ratio, c(0.999742244888022, 0.996939883468178, 0.986141997098021,
+#'                                          0.931595598713477, 0.861224354872028))
+#' expect_equal(r$p_mid, c(30, 87.5, 187.5, 425, 800))
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_IPV_vs_fNsquared_ratio.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_IPV_vs_fNsquared_ratio.html}
 gsw_IPV_vs_fNsquared_ratio <- function(SA, CT, p, p_ref=0)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p, p_ref=p_ref))
