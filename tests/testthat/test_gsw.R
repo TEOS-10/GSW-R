@@ -203,3 +203,16 @@ expect_equal(lh, 1e5*c(3.299495187300804, 3.298611954422526, 3.297124383647952,
              scale=1e5, tolerance=1e-6)
 ## FIXME: above, why don't scale=NULL and tolerance=.Machine$double.eps^0.5 work?
 
+## gsw_Nsquared()
+SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+p <- c(      10,      50,     125,     250,     600,    1000)
+latitude <- 4
+r <- gsw_Nsquared(SA, CT, p, latitude)
+N2 <- r$N2
+p_mid <- r$p_mid
+expect_equal(N2, 1e-3*c(0.060843209693499, 0.235723066151305, 0.216599928330380,
+                        0.012941204313372, 0.008434782795209))
+expect_equal(p_mid, c(30, 87.5, 187.5, 425, 800))
+
+
