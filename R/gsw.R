@@ -810,10 +810,16 @@ gsw_kappa <- function(SA, CT, p)
 #' @param p sea pressure [ dbar ]
 #' @return isentropic compressibility [ 1/Pa ] (not 1/dbar)
 #' @examples
-#' gsw_kappa_t_exact(34.7118, 28.7856, 10) # 4.11245799180373e-10
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <-c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' kappa <- gsw_kappa(SA, CT, p)
+#' expect_equal(kappa, 1e-9*c(0.411343648791300, 0.411105416128094, 0.416566236026610,
+#'                            0.435588650838751, 0.438782500588955, 0.439842289994702))
 #' @seealso \code{\link{gsw_kappa}} is an analogue in terms of Conservative Temperature
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_kappa_t_exact.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_kappa_t_exact.html}
 gsw_kappa_t_exact <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
