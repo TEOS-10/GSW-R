@@ -14,32 +14,6 @@ library(gsw)
 ## Test against with values provided on the TEOS-10 website, e.g.
 ##   http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_from_t.html
 
-## gsw_CT_freezing()
-##> SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
-##> p <- c(     10,      50,     125,     250,     600,    1000)
-##> saturation_fraction <- 1
-##> CT_freezing <- gsw_CT_freezing(SA, p, saturation_fraction)
-##> warning("gsw_CT_freezing() test values are from gsw_CT_freezing_poly()\n")
-##> stopifnot(all.equal(CT_freezing, c(-1.899657519404743, -1.940781208575193,
-##>                                    -2.006256923078589, -2.092413889940425,
-##>                                    -2.359438414203326, -2.677347349358548)))
-
-## gsw_CT_from_pt()
-SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
-pt <- c(28.7832, 28.4209, 22.7850, 10.2305,  6.8292,  4.3245)
-CT <- gsw_CT_from_pt(SA, pt)
-stopifnot(all.equal(CT, c(28.809923015982083, 28.439144260767169,
-                          22.786246608464264, 10.226165605435785,
-                           6.827183417643142,  4.323565182322069)))
-
-## gsw_cp_t_exact()
-SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
-t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
-p <- c(      10,      50,     125,     250,     600,    1000)
-CP <- gsw_cp_t_exact(SA, t, p)
-stopifnot(all.equal(CP, c(4002.888003958537, 4000.980283927373, 3995.546468894633,
-                          3985.076769021370, 3973.593843482723, 3960.184084786622 ))) 
-
 ## gsw_CT_from_t()
 CT <- gsw_CT_from_t(34.7118, 28.7856, 10)
 stopifnot(all.equal(CT, 28.809919826700281))

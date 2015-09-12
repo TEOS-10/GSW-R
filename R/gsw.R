@@ -471,11 +471,16 @@ gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
 #' @param pt potential temperature (ITS-90) [ deg C ]
 #' @return Conservative Temperature [ deg C ]
 #' @examples 
-#' gsw_CT_from_pt(34.7118, 28.7832) # 28.809923015982083
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' pt <- c(28.7832, 28.4209, 22.7850, 10.2305,  6.8292,  4.3245)
+#' CT <- gsw_CT_from_pt(SA, pt)
+#' expect_equal(CT, c(28.809923015982083, 28.439144260767169, 22.786246608464264,
+#'                    10.226165605435785, 6.827183417643142,  4.323565182322069))
 #' @seealso
 #' \code{\link{gsw_CT_from_t}} calculates Conservative Temperature from in-situ temperature
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_CT_from_pt.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_pt.html}
 gsw_CT_from_pt <- function(SA, pt)
 {
     l <- argfix(list(SA=SA, pt=pt))
@@ -495,10 +500,17 @@ gsw_CT_from_pt <- function(SA, pt)
 #' @param p sea pressure [ dbar ]
 #' @return Conservative Temperature [ deg C ]
 #' @examples 
-#' gsw_CT_from_t(34.7118, 28.7856, 10) # 28.809919826700281
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' t <-  c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+#' p <-  c(     10,      50,     125,     250,     600,    1000)
+#' CT <- gsw_CT_from_t(SA, t, p)
+#' expect_equal(CT, c(28.809919826700281, 28.439227816091140, 22.786176893078498,
+#'                    10.226189266620782, 6.827213633479988, 4.323575748610455))
+#' 
 #' @seealso \code{\link{gsw_t_from_CT}} does the reverse
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_CT_from_t.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_t.html}
 gsw_CT_from_t <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
