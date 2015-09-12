@@ -8,11 +8,11 @@ p_ref <- as.vector(ncvar_get(nc, "p_ref"))
 lats_ref <- as.vector(ncvar_get(nc, "lats_ref"))
 longs_ref <- as.vector(ncvar_get(nc, "longs_ref"))
 ndepth_ref <- as.vector(ncvar_get(nc, "ndepth_ref"))
-ndepth_ref[!is.finite(ndepth_ref)] <- NA
+ndepth_ref[!is.finite(ndepth_ref)] <- -9e99
 saar_ref <- as.vector(ncvar_get(nc, "SAAR_ref"))
-saar_ref[!is.finite(saar_ref)] <- NA
+saar_ref[!is.finite(saar_ref)] <- -9e99
 delta_sa_ref <- as.vector(ncvar_get(nc, "deltaSA_ref"))
-delta_sa_ref[!is.finite(delta_sa_ref)] <- NA
+delta_sa_ref[!is.finite(delta_sa_ref)] <- -9e99
 saar <- list(gsw_nx=length(longs_ref), gsw_ny=length(lats_ref), gsw_nz=length(p_ref),
              longs_ref=longs_ref, lats_ref=lats_ref, p_ref=p_ref, ndepth_ref=ndepth_ref,
              saar_ref=saar_ref, delta_sa_ref=delta_sa_ref)
@@ -33,12 +33,9 @@ expect_equal(new$gsw_nz, old$gsw_nz)
 expect_equal(new$longs_ref, old$longs_ref)
 expect_equal(new$lats_ref, old$lats_ref)
 expect_equal(new$p_ref, old$p_ref)
-missing <- -9e99
+expect_equal(old$ndepth_ref, new$ndepth_ref)
+expect_equal(old$saar_ref, new$saar_ref)
+expect_equal(old$deta_sa_ref, new$deta_sa_ref)
 
-look <- old$ndepth_ref != missing
-expect_equal(old$ndepth_ref[look], new$ndepth_ref[look])
-look <- old$saar_ref != missing
-expect_equal(old$saar_ref[look], new$saar_ref[look])
-look <- old$delta_sa_ref != missing
-expect_equal(old$delta_sa_ref[look], new$delta_sa_ref[look])
+message("if this passes all tests, now do    cp saar.rda ../data/saar.rda")
 
