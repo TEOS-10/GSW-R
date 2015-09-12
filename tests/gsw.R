@@ -14,14 +14,6 @@ library(gsw)
 ## Test against with values provided on the TEOS-10 website, e.g.
 ##   http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_from_t.html
 
-## gsw_kappa()
-SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
-CT <-c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
-p <- c(      10,      50,     125,     250,     600,    1000)
-kappa <- gsw_kappa(SA, CT, p)
-stopifnot(all.equal(kappa, 1e-9*c(0.411346577902628, 0.411103645001243, 0.416540984994117,
-                                  0.435546004842899, 0.438741805834381, 0.439808252322948)))
-
 ## gsw_kappa_t_exact()
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 t <-c(  28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
