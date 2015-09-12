@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_alpha}
 \alias{gsw_alpha}
-\title{Thermal expansion coefficient with respect to Conservative Temperature. (48-term equation)}
+\title{Thermal expansion coefficient with respect to Conservative Temperature. (75-term equation)}
 \usage{
 gsw_alpha(SA, CT, p)
 }
@@ -17,13 +17,19 @@ gsw_alpha(SA, CT, p)
 thermal expansion coefficient with respect to Conservative Temperature [ 1/K ]
 }
 \description{
-Thermal expansion coefficient with respect to Conservative Temperature. (48-term equation)
+Thermal expansion coefficient with respect to Conservative Temperature. (75-term equation)
 }
 \examples{
-gsw_alpha(34.7118, 28.7856, 10) # 3.24480399390879e-3
+library(testthat)
+SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+p <-  c(     10,      50,     125,     250,     600,    1000)
+alpha <- gsw_alpha(SA,CT,p)
+expect_equal(alpha, 1e-3 * c( 0.324464211877393, 0.322610094680523, 0.281335030247435,
+                             0.173529986885424, 0.146898108553385, 0.130265123640082))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_alpha.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha.html}
 }
 \seealso{
 The salinity analogue to this is \code{\link{gsw_beta}}; other related functions include \code{\link{gsw_beta_const_t_exact}}, \code{\link{gsw_alpha_wrt_t_exact}} and \code{\link{gsw_alpha_on_beta}}.

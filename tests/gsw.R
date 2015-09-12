@@ -1,14 +1,19 @@
-library(gsw)
-# Test against with values provided on the TEOS-10 website, e.g.
-#   http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_from_t.html
+## NOTE -- this file will gradually be emptied, by this procedure:
+## 1. check the URL for new values
+## 2. using new or old values, rewrite test with expect_equal() or similar
+##    and put the result in testthat/test_gsw.R
+## 3. when the test works, move it to the function documentation and remove it
+##    from the present file
+## Once this file is empty, it will be removed. All tests will then be in two
+## places: the docs (for slow package checking) and testthat/test_gsw.R (for
+## fast package testing). I don't see any harm in keeping them in both places,
+## but I suppose they could be removed from testthat/test_gsw.R if duplication
+## came to be viewed as a larger issue than check times.
 
-## gsw_alpha()
-SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
-CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
-p <- c(      10,      50,     125,     250,     600,    1000)
-a <- gsw_alpha(SA,CT,p)
-stopifnot(all.equal(a, 1e-3*c(0.324480399390879, 0.322623026070215, 0.281341259491397,
-                              0.173481771204433, 0.146828379793380, 0.130191733440652)))
+library(gsw)
+## Test against with values provided on the TEOS-10 website, e.g.
+##   http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_from_t.html
+
 
 ## gsw_alpha_on_beta()
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
