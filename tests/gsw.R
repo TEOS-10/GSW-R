@@ -15,14 +15,14 @@ library(gsw)
 ##   http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_from_t.html
 
 ## gsw_CT_freezing()
-SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
-p <- c(     10,      50,     125,     250,     600,    1000)
-saturation_fraction <- 1
-CT_freezing <- gsw_CT_freezing(SA, p, saturation_fraction)
-warning("gsw_CT_freezing() test values are from gsw_CT_freezing_poly()\n")
-stopifnot(all.equal(CT_freezing, c(-1.899657519404743, -1.940781208575193,
-                                   -2.006256923078589, -2.092413889940425,
-                                   -2.359438414203326, -2.677347349358548)))
+##> SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+##> p <- c(     10,      50,     125,     250,     600,    1000)
+##> saturation_fraction <- 1
+##> CT_freezing <- gsw_CT_freezing(SA, p, saturation_fraction)
+##> warning("gsw_CT_freezing() test values are from gsw_CT_freezing_poly()\n")
+##> stopifnot(all.equal(CT_freezing, c(-1.899657519404743, -1.940781208575193,
+##>                                    -2.006256923078589, -2.092413889940425,
+##>                                    -2.359438414203326, -2.677347349358548)))
 
 ## gsw_CT_from_pt()
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
