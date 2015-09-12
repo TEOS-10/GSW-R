@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_sound_speed}
 \alias{gsw_sound_speed}
-\title{Sound speed with 48-term density}
+\title{Sound speed (75-term equation)}
 \usage{
 gsw_sound_speed(SA, CT, p)
 }
@@ -17,13 +17,19 @@ gsw_sound_speed(SA, CT, p)
 sound speed [ m/s ]
 }
 \description{
-This uses the 48-term density equation.
+Sound speed (75-term equation)
 }
 \examples{
-gsw_sound_speed(34.7118, 28.7856, 10) # 1542.420534932182
+library(testthat)
+SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+p <- c(      10,      50,     125,     250,     600,    1000)
+sound_speed <- gsw_sound_speed(SA,CT,p)
+expect_equal(sound_speed, 1e3*c(1.542426412426373, 1.542558891663385, 1.530801535436184,
+                                1.494551099295314, 1.487622786765276, 1.484271672296205))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_sound_speed.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed.html}
 }
 \seealso{
 \code{\link{gsw_sound_speed_t_exact}} for a precise formula using in-situ temperature
