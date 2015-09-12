@@ -567,11 +567,17 @@ gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
 #' @param p sea pressure [ dbar ]
 #' @return dynamic enthalpy [ J/kg ]
 #' @examples 
-#' gsw_dynamic_enthalpy(34.7118, 28.8099, 10) # 1e3*0.097864649180491
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <-c( 28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' de <- gsw_dynamic_enthalpy(SA, CT, p)
+#' expect_equal(de, 1e3*c(0.097864698087770, 0.489161476686235, 1.220512192086506,
+#'                        2.433731199531144, 5.833880057399701, 9.711443860944032))
 #' @seealso
 #' \code{\link{gsw_enthalpy}} and \code{\link{gsw_enthalpy_t_exact}}
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_enthalpy.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
 gsw_dynamic_enthalpy <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -591,11 +597,17 @@ gsw_dynamic_enthalpy <- function(SA, CT, p)
 #' @param p sea pressure [ dbar ]
 #' @return specific enthalpy [ J/kg ]
 #' @examples 
-#' gsw_enthalpy(34.7118, 28.8099, 10) # 1.1510318130700132e5
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <-c( 28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' e <- gsw_enthalpy(SA, CT, p)
+#' expect_equal(e, 1e5*c(1.151031813559086, 1.140146926828028, 0.921800138366058,
+#'                       0.432553713026279, 0.330871609742468, 0.269706841603465))                  
 #' @seealso
 #' \code{\link{gsw_dynamic_enthalpy}} and \code{\link{gsw_enthalpy_t_exact}}
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_enthalpy.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
 gsw_enthalpy <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))

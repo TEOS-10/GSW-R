@@ -20,10 +20,16 @@ specific enthalpy [ J/kg ]
 Specific enthalpy of seawater (48-term equation)
 }
 \examples{
-gsw_enthalpy(34.7118, 28.8099, 10) # 1.1510318130700132e5
+library(testthat)
+SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+CT <-c( 28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+p <- c(      10,      50,     125,     250,     600,    1000)
+e <- gsw_enthalpy(SA, CT, p)
+expect_equal(e, 1e5*c(1.151031813559086, 1.140146926828028, 0.921800138366058,
+                      0.432553713026279, 0.330871609742468, 0.269706841603465))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_enthalpy.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
 }
 \seealso{
 \code{\link{gsw_dynamic_enthalpy}} and \code{\link{gsw_enthalpy_t_exact}}
