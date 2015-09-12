@@ -12,11 +12,6 @@
 
 library(gsw)
 
-## gsw_rho()
-## FIXME: add other values to gsw_rho() test
-rho <- gsw_rho(34.7118, 28.8099, 10)
-stopifnot(all.equal(rho, 1021.8404465661))
-
 ## gsw_rho_first_derivatives()
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)

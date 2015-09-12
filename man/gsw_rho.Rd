@@ -20,10 +20,16 @@ in-situ density [ kg/m^3 ]
 In-situ density (48-term equation)
 }
 \examples{
-gsw_rho(34.7118, 28.8099, 10) # 1021.8404465661
+library(testthat)
+SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+p <-  c(     10,      50,     125,     250,     600,    1000)
+rho <- gsw_rho(SA,CT,p)
+expect_equal(rho, 1e3*c(1.021839935738108, 1.022262457966867, 1.024427195413316,
+                        1.027790152759127, 1.029837779000189, 1.032002453224572))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_rho.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_rho.html}
 }
 \seealso{
 \code{\link{gsw_rho_t_exact}} is similar to this, but using in-situ temperature. SA and CT may be computed from UNESCO quantities using \code{\link{gsw_SA_from_SP}} and \code{\link{gsw_CT_from_t}}. For potential density anomalies, use \code{\link{gsw_sigma0}} and related functions.
