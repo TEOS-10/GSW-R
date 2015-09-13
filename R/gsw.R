@@ -1909,19 +1909,26 @@ gsw_Sstar_from_SP <- function(SP, p, longitude, latitude)
 
 #' Freezing temperature
 #'
-#' Note: as of 2014-12-23, this corresponds to the Matlab function
-#' called \code{gsw_t_freezing_poly}. (The confusion arises from a
-#' mismatch in release version between the Matlab and C libraries.)
+#' This uses the C function named \code{gsw_t_freezing_exact}, because the 
+#' C function named \code{gsw_t_freezing} does not produce check values that
+#' match the Matlab function called \code{gsw_t_freezing} (see references 
+#' for those test values).
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param p sea pressure [ dbar ]
 #' @param saturation_fraction saturation fraction of dissolved air in seawater
 #' @return in-situ freezing temperature (ITS-90) [ deg C ]
 #' @examples 
-#' gsw_t_freezing(34.7118, 10) # -1.902704434299200
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' saturation_fraction <- 1
+#' tf <- gsw_t_freezing(SA, p, saturation_fraction)
+#' expect_equal(tf, c(-1.902730710149803, -1.942908619287183, -2.006861069199743,
+#'                    -2.090985086875259, -2.351293130342102, -2.660498762776720)) 
 #' @seealso \code{\link{gsw_CT_freezing}} is the analogue for Conservative Temperature.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_t_freezing.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing.html}
 #' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_t_freezing_poly.html}
 gsw_t_freezing <- function(SA, p, saturation_fraction=1)
 {
@@ -1942,10 +1949,16 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
 #' @param p sea pressure [ dbar ]
 #' @return in-situ temperature (ITS-90) [ deg C ]
 #' @examples 
-#' gsw_t_from_CT(34.7118, 28.8099, 10) # 28.785580227725703
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' p <-  c(     10,      50,     125,     250,     600,    1000)
+#' t <- gsw_t_from_CT(SA, CT, p)
+#' expect_equal(t, c(28.785580227725703, 28.432872246163946, 22.810323087627076,
+#'                   10.260010752788906, 6.886286301029376, 4.403624452383043))
 #' @seealso \code{\link{gsw_CT_from_t}} does the reverse.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_t_from_CT.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_from_CT.html}
 gsw_t_from_CT <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -1958,16 +1971,22 @@ gsw_t_from_CT <- function(SA, CT, p)
     rval
 }
 
-#' Thermobaric coefficient (48-term equation)
+#' Thermobaric coefficient (75-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
 #' @return thermobaric coefficient wrt Conservative Temperature [ 1/(K Pa) ]
 #' @examples 
-#' gsw_thermobaric(34.7118, 28.8099, 10) # 1.40572143831373e-12
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' p <-  c(     10,      50,     125,     250,     600,    1000)
+#' tb <- gsw_thermobaric(SA, CT, p)
+#' expect_equal(tb, 1e-11 * c(0.152618598186650, 0.153662896162852, 0.173429325875738,
+#'                            0.232810160208414, 0.251984724005424, 0.266660342289558))
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_thermobaric.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_thermobaric.html}
 gsw_thermobaric <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
