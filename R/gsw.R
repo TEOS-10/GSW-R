@@ -33,7 +33,7 @@
 #' on the arguments and return values, relying on links to the
 #' TEOS-10 webpages for details.
 #' 
-#' See \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_contents.html}
+#' See \url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html}
 #' for a list of the TEOS-10 functions and 
 #' \url{http://teos-10.github.io/GSW-R/documentation.html} for a list
 #' of the functions implemented in the present package.
@@ -2040,17 +2040,20 @@ gsw_Turner_Rsubrho <- function(SA, CT, p)
     list(Tu=Tu, Rsubrho=Rsubrho, p_mid=p_mid)
 }
 
-#' Height from pressure (48-term equation)
+#' Height from pressure (75-term equation)
 #' 
 #' @param p sea pressure [ dbar ]
 #' @param latitude latitude in decimal degrees north [ -90 ... +90 ]
 #' @return height [ m ]
 #' @examples
-#' gsw_z_from_p(10, 4) # -9.9445831334188
+#' library(testthat)
+#' z <- gsw_z_from_p(c(10, 50, 125, 250, 600,1000), 4)
+#' expect_equal(z, 1e2*c(-0.099445834469453, -0.497180897012550, -1.242726219409978,
+#'                       -2.484700576548589, -5.958253480356214, -9.920919060719987)) 
 #' @seealso
 #' This is (almost) the reverse of \code{\link{gsw_p_from_z}}
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_z_from_p.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_z_from_p.html}
 gsw_z_from_p <- function(p, latitude)
 {
     l <- argfix(list(p=p, latitude=latitude))
