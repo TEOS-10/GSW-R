@@ -16,10 +16,14 @@ Practical Salinity (PSS-78) [ unitless ]
 Calculate Practical Salinity from Reference Salinity
 }
 \examples{
-gsw_SP_from_SR(34.5487) # 34.386552667080714
+library(testthat)
+SR <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
+SP <- gsw_SP_from_SR(SR)
+expect_equal(SP, c(34.386552667080714, 34.564513505458834, 34.696889296869848,
+                   34.518231743800094, 34.405762086435850, 34.397799632817147))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SP_from_SR.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SR.html}
 }
 \seealso{
 The reverse is \code{\link{gsw_SR_from_SP}}; also related are \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SK}} and \code{\link{gsw_SP_from_Sstar}}.
