@@ -1753,11 +1753,18 @@ gsw_SP_from_SR <- function(SR)
 #' @param latitude latitude in decimal degrees north [ -90 ... +90 ]
 #' @return Practical Salinity (PSS-78) [ unitless ]
 #' @examples 
-#' gsw_SP_from_Sstar(34.7115, 10, 188, 4) # 34.548646570969929
+#' library(testthat)
+#' Sstar <- c(34.7115, 34.8912, 35.0247, 34.8436, 34.7291, 34.7197)
+#' p <- c(         10,      50,     125,     250,     600,    1000)
+#' longitude <- 188
+#' latitude <- 4
+#' SP <- gsw_SP_from_Sstar(Sstar, p, longitude, latitude)
+#' expect_equal(SP, c(34.548646570969929, 34.727538423586189, 34.860549501859502,
+#'                    34.681006826476434, 34.568065697992346, 34.560023926979518)) 
 #' @seealso
 #' \code{\link{gsw_Sstar_from_SP}} does the reverse; \code{\link{gsw_SA_from_Sstar}} is similar.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SP_from_Sstar.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_Sstar.html}
 gsw_SP_from_Sstar <- function(Sstar, p, longitude, latitude)
 {
     if (missing(Sstar)) stop("must supply Sstar")
@@ -1779,10 +1786,14 @@ gsw_SP_from_Sstar <- function(Sstar, p, longitude, latitude)
 #' @param SP Practical Salinity (PSS-78) [ unitless ]
 #' @return Reference Salinity [ g/kg ]
 #' @examples 
-#' gsw_SR_from_SP(34.5487) # 34.711611927085727
+#' library(testthat)
+#' SP <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
+#' SR <- gsw_SR_from_SP(SP)
+#' expect_equal(SR, c(34.711611927085727, 34.891255045714303, 35.024882197714305,
+#'                    34.844535778285724, 34.731002934857159, 34.722965211428587))
 #' @seealso The reverse is \code{\link{gsw_SP_from_SR}}; also related are \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SK}} and \code{\link{gsw_SP_from_Sstar}}.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SR_from_SP.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SR_from_SP.html}
 gsw_SR_from_SP <- function(SP)
 {
     if (missing(SP)) stop("must supply SP")
@@ -1809,10 +1820,17 @@ gsw_SR_from_SP <- function(SP)
 #' @param latitude latitude in decimal degrees [ -90 to 90 ]
 #' @return Preformed Salinity [ g/kg ]
 #' @examples
-#' gsw_Sstar_from_SA(34.7118, 10, 188, 4) # 34.711575335926490
+#' library(testthat)
+#' SA <-   c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' p <-    c(     10,      50,     125,     250,     600,    1000)
+#' lat <-  c(      4,       4,       4,       4,       4,       4)
+#' long <- c(    188,     188,     188,     188,     188,     188)
+#' Sstar <- gsw_Sstar_from_SA(SA,p,long,lat)
+#' expect_equal(Sstar, c(34.711575335926490, 34.891138777337822, 35.024705401162166,
+#'                       34.843564118358302, 34.729005527604883, 34.719712883389462))    
 #' @seealso \code{\link{gsw_SA_from_Sstar}} does the reverse; \code{\link{gsw_Sstar_from_SP}} is similar.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_Sstar_from_SA.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_Sstar_from_SA.html}
 gsw_Sstar_from_SA <- function(SA, p, longitude, latitude)
 {
     if (missing(SA)) stop("must supply SA")
