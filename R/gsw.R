@@ -94,27 +94,24 @@ NULL
 #' Thus, the existing C library code "knows" about the data
 #' as local storage, which keeps alterations to the C library to 
 #' a minimum.
-#'
-#' The code used to create the RDA file (using the Fortran data
-#' file, version 3.0.3) is given below.
-#' \preformatted{
-#'     gsw_nx <- 91
-#'     gsw_ny <- 45
-#'     gsw_nz <- 45
-#'     f <- file("~/src/gsw_fortran_v3_03/gsw_data_v3_0.dat", "r")
-#'     longs_ref <- scan(f, double(), n=gsw_nx)
-#'     lats_ref <- scan(f, double(), n=gsw_ny)
-#'     p_ref <- scan(f, double(), n=gsw_nz)
-#'     ndepth_ref <- scan(f, double(), n=gsw_nx*gsw_ny)
-#'     saar_ref <- scan(f, double(), n=gsw_nx*gsw_ny*gsw_nz)
-#'     delta_sa_ref <- scan(f, double(), n=gsw_nx*gsw_ny*gsw_nz)
-#'     saar <- list(gsw_nx=gsw_nx, gsw_ny=gsw_ny, gsw_nz=gsw_nz,
-#'                  longs_ref=longs_ref, lats_ref=lats_ref, p_ref=p_ref, ndepth_ref=ndepth_ref,
-#'                  saar_ref=saar_ref, delta_sa_ref=delta_sa_ref)
-#'     save(saar, file="saar.rda")
-#'     tools::resaveRdaFiles("saar.rda")
-#'     close(f)
-#'}
+#'   library(ncdf4)
+#'   nc <- nc_open("~/src/GSW-Fortran/test/gsw_data_v3_0.nc")
+#'   ## Use as.vector() since these will all get handed into C, which does not understand matrices.
+#'   p_ref <- as.vector(ncvar_get(nc, "p_ref"))
+#'   lats_ref <- as.vector(ncvar_get(nc, "lats_ref"))
+#'   longs_ref <- as.vector(ncvar_get(nc, "longs_ref"))
+#'   ndepth_ref <- as.vector(ncvar_get(nc, "ndepth_ref"))
+#'   ndepth_ref[!is.finite(ndepth_ref)] <- -9e99
+#'   saar_ref <- as.vector(ncvar_get(nc, "SAAR_ref"))
+#'   saar_ref[!is.finite(saar_ref)] <- -9e99
+#'   delta_sa_ref <- as.vector(ncvar_get(nc, "deltaSA_ref"))
+#'   delta_sa_ref[!is.finite(delta_sa_ref)] <- -9e99
+#'   saar <- list(gsw_nx=gsw_nx, gsw_ny=gsw_ny, gsw_nz=gsw_nz,
+#'                longs_ref=longs_ref, lats_ref=lats_ref, p_ref=p_ref, ndepth_ref=ndepth_ref,
+#'                saar_ref=saar_ref, delta_sa_ref=delta_sa_ref)
+#'   save(saar, file="saar.rda")
+#'   tools::resaveRdaFiles("saar.rda")
+#'   nc_close(nc)
 #'
 #' @docType data
 #' @name saar
