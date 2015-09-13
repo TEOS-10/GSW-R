@@ -138,6 +138,18 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), int
     }\
 }
 
+#define W5(wname, cname, arg1, arg2, arg3, arg4, arg5, n, rval) \
+void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), double *(arg5), int *(n), double *(rval))\
+{\
+    for (int i=0; i < *(n); i++) {\
+        (rval)[i] = (cname)((arg1)[i], (arg2)[i], (arg3)[i], (arg4)[i], (arg5)[i]);\
+        if ((rval)[i] == GSW_INVALID_VALUE) {\
+            (rval)[i] = NA_REAL;\
+        }\
+    }\
+}
+
+
 // PART 3: wrappers for functions that return a value. Wrapping is necessary 
 // because the R function .C() cannot handle return values.
 // See Part 3 for functios returning void.
