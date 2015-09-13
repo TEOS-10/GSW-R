@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_dynamic_enthalpy}
 \alias{gsw_dynamic_enthalpy}
-\title{Dynamic enthalpy of seawater (48-term equation)}
+\title{Dynamic enthalpy of seawater (75-term equation)}
 \usage{
 gsw_dynamic_enthalpy(SA, CT, p)
 }
@@ -17,7 +17,7 @@ gsw_dynamic_enthalpy(SA, CT, p)
 dynamic enthalpy [ J/kg ]
 }
 \description{
-Dynamic enthalpy of seawater (48-term equation)
+Dynamic enthalpy of seawater (75-term equation)
 }
 \examples{
 library(testthat)

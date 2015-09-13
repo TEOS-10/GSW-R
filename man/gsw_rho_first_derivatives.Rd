@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_rho_first_derivatives}
 \alias{gsw_rho_first_derivatives}
-\title{SA, CT and p partial derivatives of density (48-term equation)}
+\title{SA, CT and p partial derivatives of density (75-term equation)}
 \usage{
 gsw_rho_first_derivatives(SA, CT, p)
 }
@@ -17,7 +17,7 @@ gsw_rho_first_derivatives(SA, CT, p)
 list containing drho_dSA [ kg^2/(g m^3) ], drho_dCT [ kg/(K m^3) ] and drho_dp [ kg/(Pa m^3) ]
 }
 \description{
-SA, CT and p partial derivatives of density (48-term equation)
+SA, CT and p partial derivatives of density (75-term equation)
 }
 \examples{
 library(testthat)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_enthalpy}
 \alias{gsw_enthalpy}
-\title{Specific enthalpy of seawater (48-term equation)}
+\title{Specific enthalpy of seawater (75-term equation)}
 \usage{
 gsw_enthalpy(SA, CT, p)
 }
@@ -17,7 +17,7 @@ gsw_enthalpy(SA, CT, p)
 specific enthalpy [ J/kg ]
 }
 \description{
-Specific enthalpy of seawater (48-term equation)
+Specific enthalpy of seawater (75-term equation)
 }
 \examples{
 library(testthat)

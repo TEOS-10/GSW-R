@@ -17,7 +17,7 @@ gsw_Turner_Rsubrho(SA, CT, p)
 list containing Tu [ degrees ], Rsubrho [ unitless ], and p_mid [ dbar ]
 }
 \description{
-This uses the 48-term density equation. The values of Turner Angle
+This uses the 75-term density equation. The values of Turner Angle
 Tu and density ratio Rrho are calculated at mid-point pressures, p_mid.
 }
 \examples{

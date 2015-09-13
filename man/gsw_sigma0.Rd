@@ -15,7 +15,7 @@ gsw_sigma0(SA, CT)
 potential density anomaly [ kg/m^3 ]
 }
 \description{
-This uses the 48-term density equation, and returns
+This uses the 75-term density equation, and returns
 potential density referenced to a pressure of 0 dbar,
 minus 1000 kg/m^3.
 }

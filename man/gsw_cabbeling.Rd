@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_cabbeling}
 \alias{gsw_cabbeling}
-\title{Cabbeling coefficient (48-term equation)}
+\title{Cabbeling coefficient (75-term equation)}
 \usage{
 gsw_cabbeling(SA, CT, p)
 }
@@ -17,7 +17,7 @@ gsw_cabbeling(SA, CT, p)
 cabbeling coefficient with respect to Conservative Temperature [ 1/(K^2) ]
 }
 \description{
-Cabbeling coefficient (48-term equation)
+Cabbeling coefficient (75-term equation)
 }
 \examples{
 library(testthat)

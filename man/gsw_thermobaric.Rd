@@ -17,7 +17,8 @@ gsw_thermobaric(SA, CT, p)
 thermobaric coefficient wrt Conservative Temperature [ 1/(K Pa) ]
 }
 \description{
-Thermobaric coefficient (75-term equation)
+It should be noted that this version produces test results that differ from
+those in version 3.03 by 5 to 10 percent.
 }
 \examples{
 library(testthat)

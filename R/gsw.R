@@ -190,7 +190,7 @@ gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
     rval
 }
                                         
-#' Thermal expansion coefficient with respect to Conservative Temperature. (75-term equation)
+#' Thermal expansion coefficient with respect to Conservative Temperature (75-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -219,7 +219,7 @@ gsw_alpha <- function(SA, CT, p)
     rval
 }
 
-#' Thermal expansion coefficient over haline contraction coefficient. (75-term equation)
+#' Thermal expansion coefficient over haline contraction coefficient (75-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -278,7 +278,7 @@ gsw_alpha_wrt_t_exact <- function(SA, t, p)
     rval
 }
 
-#' Saline contraction coefficient at constant Conservative Temperature. (75-term equation)
+#' Saline contraction coefficient at constant Conservative Temperature (75-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -340,7 +340,7 @@ gsw_beta_const_t_exact <- function(SA, t, p)
     rval
 }
 
-#' Cabbeling coefficient (48-term equation)
+#' Cabbeling coefficient (75-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -560,7 +560,7 @@ gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
     rval
 }
 
-#' Dynamic enthalpy of seawater (48-term equation)
+#' Dynamic enthalpy of seawater (75-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -590,7 +590,7 @@ gsw_dynamic_enthalpy <- function(SA, CT, p)
     rval
 }
 
-#' Specific enthalpy of seawater (48-term equation)
+#' Specific enthalpy of seawater (75-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -1101,7 +1101,7 @@ gsw_pt_from_t <- function(SA, t, p, p_ref=0)
     rval
 }
 
-#' In-situ density (48-term equation)
+#' In-situ density (75-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -1130,7 +1130,7 @@ gsw_rho <- function(SA, CT, p)
     rval
 }
 
-#' SA, CT and p partial derivatives of density (48-term equation)
+#' SA, CT and p partial derivatives of density (75-term equation)
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -1322,7 +1322,7 @@ gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
 
 #' Potential density anomaly referenced to 0 dbar
 #'
-#' This uses the 48-term density equation, and returns
+#' This uses the 75-term density equation, and returns
 #' potential density referenced to a pressure of 0 dbar,
 #' minus 1000 kg/m^3.
 #'
@@ -1972,6 +1972,9 @@ gsw_t_from_CT <- function(SA, CT, p)
 }
 
 #' Thermobaric coefficient (75-term equation)
+#'
+#' It should be noted that this version produces test results that differ from
+#' those in version 3.03 by 5 to 10 percent.
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -2001,7 +2004,7 @@ gsw_thermobaric <- function(SA, CT, p)
 
 #' Turner angle and density ratio
 #'
-#' This uses the 48-term density equation. The values of Turner Angle
+#' This uses the 75-term density equation. The values of Turner Angle
 #' Tu and density ratio Rrho are calculated at mid-point pressures, p_mid.
 #'
 #' @param SA Absolute Salinity [ g/kg ]
