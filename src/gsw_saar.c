@@ -1,3 +1,5 @@
+// next macro is used to prevent warnings from R compile flag -Wunused-variable
+#define RFIXES
 /*
 **  $Id: gsw_saar.c,v 9461075b3458 2015/08/09 16:38:20 fdelahoyde $
 **  $Version: 3.05.0-1 $
@@ -19,6 +21,7 @@ double *p_ref=NULL;
 double *ndepth_ref=NULL;
 double *saar_ref=NULL;
 double *delta_sa_ref=NULL;
+GSW_SAAR_DATA;
 // } GSW-R
 
 
@@ -51,13 +54,25 @@ function gsw_saar(p,long,lat)
 double
 gsw_saar(double p, double lon, double lat)
 {
+#ifndef RFIXES
 	GSW_SAAR_DATA;
-	int	nx=gsw_nx, ny=gsw_ny, nz=gsw_nz;
+#endif
+        int	nx=gsw_nx, ny=gsw_ny, nz=gsw_nz;
+#ifdef RFIXES
+	int	indx0, indy0, indz0, k;
+	int	ndepth_index;
+#else
 	int	indx0, indy0, indz0, i, j, k;
 	int	nmean, flag_saar, ndepth_index;
+#endif
 	double	saar[4], saar_old[4];
+#ifdef RFIXES
+	double	sa_upper, sa_lower, dlong, dlat;
+	double	r1, s1, t1, ndepth_max, return_value;
+#else
 	double	lon0_in, sa_upper, sa_lower, dlong, dlat;
 	double	r1, s1, t1, saar_mean, ndepth_max, return_value;
+#endif
 
 
 	return_value	 = GSW_INVALID_VALUE;
@@ -157,15 +172,25 @@ function gsw_deltasa_atlas(p,lon,lat)
 double
 gsw_deltasa_atlas(double p, double lon, double lat)
 {
+#ifndef RFIXES
 	GSW_SAAR_DATA;
+#endif
 	int	nx=gsw_nx, ny=gsw_ny, nz=gsw_nz;
+#ifdef RFIXES
+	int	indx0, indy0, indz0, k, ndepth_index;
+#else
 	int	indx0, indy0, indz0, i, j, k, ndepth_index;
 	int	nmean, flag_dsar;
+#endif
 	double	dsar[4], dsar_old[4];
 	double	dlong, dlat;
+#ifdef RFIXES
+	double	return_value, sa_upper, sa_lower;
+	double	r1, s1, t1, ndepth_max;
+#else
 	double	return_value, lon0_in, sa_upper, sa_lower;
 	double	r1, s1, t1, dsar_mean, ndepth_max;
-
+#endif
 	return_value	= GSW_INVALID_VALUE;
 
 	if (lat < -86.0  ||  lat  >  90.0)
