@@ -1663,10 +1663,17 @@ gsw_SP_from_C <- function(C, t, p)
 #' @param latitude latitude in decimal degrees [ -90 to 90 ]
 #' @return Practical Salinity (PSS-78) [ unitless ]
 #' @examples 
-#' gsw_SP_from_SA(34.7118, 10, 188, 4) # 34.548721553448317
+#' library(testthat)
+#' SA <-   c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' p <-    c(     10,      50,     125,     250,     600,    1000)
+#' lat <-  c(      4,       4,       4,       4,       4,       4)
+#' long <- c(    188,     188,     188,     188,     188,     188)
+#' SP <- gsw_SP_from_SA(SA,p,long,lat)
+#' expect_equal(SP, c(34.548721553448317, 34.727477488096639, 34.860554877708005,
+#'                    34.680971112271791, 34.567971663653388, 34.560036751118204))
 #' @seealso \code{\link{gsw_SA_from_SP}} does the reverse, while \code{\link{gsw_SP_from_SK}}, \code{\link{gsw_SP_from_SR}} and \code{\link{gsw_SP_from_Sstar}} are similar to this.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SP_from_SA.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SA.html}
 gsw_SP_from_SA <- function(SA, p, longitude, latitude)
 {
     if (missing(longitude)) stop("must supply longitude")
