@@ -1547,7 +1547,7 @@ gsw_sound_speed_t_exact <- function(SA, t, p)
 #' specvol <- gsw_specvol(SA, CT, p)
 #' expect_equal(specvol, 1e-3*c(0.978626852431313, 0.978222365701325, 0.976155264597929,
 #'                              0.972961258011157, 0.971026719344908, 0.968989944622149))
-#' @seealso With in-situ temperature, use \code{\link{gsw_specvol_t_exact}}; \code{\link{gsw_specvol_anom}} gives specific volume anomaly.
+#' @seealso With in-situ temperature, use \code{\link{gsw_specvol_t_exact}}; \code{\link{gsw_specvol_anom_standard}} gives specific volume anomaly.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol.html}
 gsw_specvol  <- function(SA, CT, p)
@@ -1601,7 +1601,7 @@ gsw_specvol_anom_standard <- function(SA, CT, p)
 #' v <- gsw_specvol_t_exact(SA, t, p)
 #' expect_equal(v, 1e-3 * c(0.978626625025472, 0.978222143734527, 0.976154768597586,
 #'                          0.972961211575438, 0.971026779948624, 0.968989990731808))
-#' @seealso With Conservative Temperature, use \code{\link{gsw_specvol}}; \code{\link{gsw_specvol_anom}} gives specific volume anomaly.
+#' @seealso With Conservative Temperature, use \code{\link{gsw_specvol}}; \code{\link{gsw_specvol_anom_standard}} gives specific volume anomaly.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_t_exact.html}
 gsw_specvol_t_exact  <- function(SA, t, p)

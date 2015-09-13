@@ -32,6 +32,6 @@ expect_equal(specvol, 1e-3*c(0.978626852431313, 0.978222365701325, 0.97615526459
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol.html}
 }
 \seealso{
-With in-situ temperature, use \code{\link{gsw_specvol_t_exact}}; \code{\link{gsw_specvol_anom}} gives specific volume anomaly.
+With in-situ temperature, use \code{\link{gsw_specvol_t_exact}}; \code{\link{gsw_specvol_anom_standard}} gives specific volume anomaly.
 }
 

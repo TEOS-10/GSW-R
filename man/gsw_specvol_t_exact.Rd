@@ -32,6 +32,6 @@ expect_equal(v, 1e-3 * c(0.978626625025472, 0.978222143734527, 0.976154768597586
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_t_exact.html}
 }
 \seealso{
-With Conservative Temperature, use \code{\link{gsw_specvol}}; \code{\link{gsw_specvol_anom}} gives specific volume anomaly.
+With Conservative Temperature, use \code{\link{gsw_specvol}}; \code{\link{gsw_specvol_anom_standard}} gives specific volume anomaly.
 }
 
