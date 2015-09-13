@@ -1,5 +1,5 @@
 /*
-**  $Id: gsw_oceanographic_toolbox.c,v c4753012ba34 2015/08/29 18:36:36 fdelahoyde $
+**  $Id: gsw_oceanographic_toolbox.c,v ff74fd981dc9 2015/09/13 18:29:10 fdelahoyde $
 **  $Version: 3.05.0-2 $
 **
 **  This is a translation of the original f90 source code into C
@@ -46,17 +46,13 @@
 
 ==========================================================================
 */
+// #include <gswteos-10.h>
+// #include <gsw_internal_const.h>
 #include "gswteos-10.h"
 #include "gsw_internal_const.h"
-
-// Next block added for GSW-R
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <string.h>
 #include <R.h>
 #include <Rdefines.h>
 #include <Rinternals.h>
-
 /*
 !==========================================================================
 subroutine gsw_add_barrier(input_data,lon,lat,long_grid,lat_grid,dlong_grid,dlat_grid,output_data)
@@ -508,7 +504,7 @@ gsw_c_from_sp(double sp, double t, double p)
 		u18 = 6.797409608973845e-7,	u19 = 3.345074990451475e-10,
 		u20 = 8.285687652694768e-13;
 
-	double	t68, ft68, x, rtx, dsp_drtx, sqrty,
+	double	t68, ft68, x, rtx=0.0, dsp_drtx, sqrty,
 		part1, part2, hill_ratio, sp_est,
 		rtx_old, rt, aa, bb, cc, dd, ee, ra,r, rt_lc, rtxm,
 		sp_hill_raw;
@@ -3723,9 +3719,11 @@ gsw_geo_strf_dyn_height(double *sa, double *ct, double *p, double p_ref,
 	p_min = p[0];
 	p_max = p[nz-1];
 
-	if (p_ref > p_max)
+	if (p_ref > p_max) {
 	    /*the reference pressure p_ref is deeper than all bottles*/
+	    free(dp);
 	    return (NULL);
+	}
 
 	/* Determine if there is a "bottle" at exactly p_ref */
 	ipref = -1;
@@ -3973,8 +3971,8 @@ gsw_geo_strf_dyn_height_pc(double *sa, double *ct, double *delta_p, int n_levels
 	double *geo_strf_dyn_height_pc, double *p_mid)
 {
 	int	i, np;
-	double	*delta_h, delta_h_half, dyn_height_deep, prv_dyn_height_deep,
-		*p_deep, *p_shallow;
+	double	*delta_h, delta_h_half, dyn_height_deep=0.0,
+		prv_dyn_height_deep, *p_deep, *p_shallow;
 
 	for (i=0; i<n_levels; i++)
 	    if (delta_p[i] < 0.0)
@@ -6749,7 +6747,7 @@ gsw_pt_from_ct(double sa, double ct)
 {
 	GSW_TEOS10_CONSTANTS;
 	double	a5ct, b3ct, ct_factor, pt_num, pt_recden, ct_diff;
-	double	ct0, pt, pt_old, ptm, dct, dpt_dct, s1;
+	double	pt, pt_old, ptm, dpt_dct, s1;
 	double	a0	= -1.446013646344788e-2,    
 		a1	= -3.305308995852924e-3,    
 		a2	=  1.062415929128982e-4,     
@@ -8344,8 +8342,8 @@ gsw_sa_freezing_from_t_poly(double t, double p, double saturation_fraction)
 	/*
 	! Find t > t_freezing_zero_SA.  If this is the case, the input values
 	! represent seawater that is not frozen (at any positive SA).
-	t_freezing_zero_sa = gsw_t_freezing_poly(0.0,p,saturation_fraction)
 	*/
+	t_freezing_zero_sa = gsw_t_freezing_poly(0.0,p,saturation_fraction,0);
 	if (t > t_freezing_zero_sa)
 	    return (GSW_INVALID_VALUE);
 	/*
@@ -9378,8 +9376,7 @@ void
 gsw_specvol_first_derivatives_wrt_enthalpy(double sa, double ct, double p,
 	double *v_sa, double *v_h)
 {
-	int	i;
-	double	h_ct, h_sa, rec_h_ct, vct_ct, vct_sa;
+	double	h_ct=1.0, h_sa, rec_h_ct, vct_ct, vct_sa;
 
 	if (v_sa != NULL) {
 
@@ -10053,7 +10050,7 @@ double
 gsw_t_freezing_exact (double sa, double p, double saturation_fraction)
 {
 	GSW_TEOS10_CONSTANTS;
-	double	df_dt, p_r, sa_r, tf, tfm, tf_old, x, f, return_value;
+	double	df_dt, tf, tfm, tf_old, f, return_value;
 	int	polynomial=1;
 
 	/* The initial value of t_freezing_exact (for air-free seawater) */
@@ -10347,7 +10344,7 @@ gsw_turner_rsubrho(double *sa, double *ct, double *p, int nz,
 {
 	GSW_TEOS10_CONSTANTS;
 	int	k;
-	double	dsa, sa_mid, dct, ct_mid, dp, alpha_mid, beta_mid;
+	double	dsa, sa_mid, dct, ct_mid, alpha_mid, beta_mid;
 
 	if (nz < 2)
 	    return;
@@ -10357,7 +10354,6 @@ gsw_turner_rsubrho(double *sa, double *ct, double *p, int nz,
 	    sa_mid	= 0.5e0*(sa[k] + sa[k+1]);
 	    dct		= (ct[k] - ct[k+1]);
 	    ct_mid	= 0.5e0*(ct[k] + ct[k+1]);
-	    dp		= (p[k] - p[k+1]);
 	    p_mid[k]	= 0.5e0*(p[k] + p[k+1]);
 	    gsw_specvol_alpha_beta(sa_mid,ct_mid,p_mid[k],NULL,&alpha_mid,
 					&beta_mid);
@@ -10565,6 +10561,16 @@ gsw_util_linear_interp(int nx, double *x, int ny, double *y, int nxi,
 	}
 	free(in_rng);
     /*
+    **  This algorithm mimics the Matlab interp1q function.
+    **
+    **  An explaination of this algorithm:
+    **  We have points we are interpolating from (x) and
+    **  points that we are interpolating to (xi).  We
+    **  sort the interpolating from points, concatenate
+    **  them with the interpolating to points and sort the result.
+    **  We then construct index r, the interpolation index in x for
+    **  each point in xi.
+    **
     **  Note that the following operations on the index
     **  vectors jrev and r depend on the sort utility
     **  gsw_util_sort_real() consistently ordering the
@@ -10580,6 +10586,7 @@ gsw_util_linear_interp(int nx, double *x, int ny, double *y, int nxi,
 	    jrev[j[i]] = i;
 	for (i = 0; i<n; i++)
 	    r[k[i]] = jrev[nx+i] - i - 1;
+	    /* this is now the interpolation index in x for a point in xi */
 
 	for (jy=jy0=jyi0=0; jy < ny; jy++, jy0+=nx, jyi0+=nxi) {
 	    for (i = 0; i<n; i++) {

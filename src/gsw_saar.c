@@ -1,17 +1,14 @@
-// next macro is used to prevent warnings from R compile flag -Wunused-variable
-#define RFIXES
 /*
-**  $Id: gsw_saar.c,v 9461075b3458 2015/08/09 16:38:20 fdelahoyde $
-**  $Version: 3.05.0-1 $
+**  $Id: gsw_saar.c,v b04abca68ac0 2015/09/13 17:47:28 fdelahoyde $
+**  $Version: 3.05.0-2 $
 **
 **  GSW TEOS-10 V3.05
 */
+
+// GSW-R { modifications needed for (a) path and (b) different data source
 #include "gswteos-10.h"
 #include "gsw_internal_const.h"
-//#include <gsw_saar_data.c> removed for GSW-R
-
-// GSW-R {
-// Set to zeros initially so we can check against reallocation.
+//#include "gsw_saar_data.c"
 int gsw_nx=0;
 int gsw_ny=0;
 int gsw_nz=0;
@@ -23,7 +20,6 @@ double *saar_ref=NULL;
 double *delta_sa_ref=NULL;
 GSW_SAAR_DATA;
 // } GSW-R
-
 
 static double
 gsw_sum(double *x, int n)
@@ -54,25 +50,12 @@ function gsw_saar(p,long,lat)
 double
 gsw_saar(double p, double lon, double lat)
 {
-#ifndef RFIXES
 	GSW_SAAR_DATA;
-#endif
-        int	nx=gsw_nx, ny=gsw_ny, nz=gsw_nz;
-#ifdef RFIXES
-	int	indx0, indy0, indz0, k;
-	int	ndepth_index;
-#else
-	int	indx0, indy0, indz0, i, j, k;
-	int	nmean, flag_saar, ndepth_index;
-#endif
+	int	nx=gsw_nx, ny=gsw_ny, nz=gsw_nz;
+	int	indx0, indy0, indz0, k, ndepth_index;
 	double	saar[4], saar_old[4];
-#ifdef RFIXES
 	double	sa_upper, sa_lower, dlong, dlat;
 	double	r1, s1, t1, ndepth_max, return_value;
-#else
-	double	lon0_in, sa_upper, sa_lower, dlong, dlat;
-	double	r1, s1, t1, saar_mean, ndepth_max, return_value;
-#endif
 
 
 	return_value	 = GSW_INVALID_VALUE;
@@ -172,25 +155,14 @@ function gsw_deltasa_atlas(p,lon,lat)
 double
 gsw_deltasa_atlas(double p, double lon, double lat)
 {
-#ifndef RFIXES
 	GSW_SAAR_DATA;
-#endif
 	int	nx=gsw_nx, ny=gsw_ny, nz=gsw_nz;
-#ifdef RFIXES
 	int	indx0, indy0, indz0, k, ndepth_index;
-#else
-	int	indx0, indy0, indz0, i, j, k, ndepth_index;
-	int	nmean, flag_dsar;
-#endif
 	double	dsar[4], dsar_old[4];
 	double	dlong, dlat;
-#ifdef RFIXES
 	double	return_value, sa_upper, sa_lower;
 	double	r1, s1, t1, ndepth_max;
-#else
-	double	return_value, lon0_in, sa_upper, sa_lower;
-	double	r1, s1, t1, dsar_mean, ndepth_max;
-#endif
+
 	return_value	= GSW_INVALID_VALUE;
 
 	if (lat < -86.0  ||  lat  >  90.0)
