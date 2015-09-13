@@ -1511,10 +1511,16 @@ gsw_sound_speed<- function(SA, CT, p)
 #' @param p sea pressure [ dbar ]
 #' @return sound speed [ m/s ]
 #' @examples
-#' gsw_sound_speed_t_exact(34.7118, 28.7856, 10) # 1542.420534932182
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' sound_speed <- gsw_sound_speed_t_exact(SA,CT,p)
+#' expect_equal(sound_speed, 1e3*c(1.542615803587414, 1.542703534065789, 1.530844979136360,
+#'                                 1.494409996920661, 1.487377102518027, 1.483934609078705))
 #' @seealso \code{\link{gsw_sound_speed}} for an approximate formula using CT
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_sound_speed_t_exact.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed_t_exact.html}
 gsw_sound_speed_t_exact <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
