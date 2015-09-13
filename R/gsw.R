@@ -1555,22 +1555,31 @@ gsw_specvol  <- function(SA, CT, p)
     1 / gsw_rho(SA, CT, p)
 }
 
-#' Specific volume anomaly
-#' 
+#' Specific volume anomaly [standard] (75-term equation)
+#'
+#' Note that the TEOS function named \code{specific_volume_anomaly} is not
+#' provided in the C library, so it is not provided in R, either.
+#'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
+#' @examples
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' a <- gsw_specvol_anom_standard(SA, CT, p)
+#' expect_equal(a, 1e-5*c(0.601051894897400, 0.578609769250563, 0.405600538950092,
+#'                        0.142190453761838, 0.104335535578967, 0.076383389577725))
 #' @return Specific volume anomaly [ m^3/kg ]
-#' @examples 
-#' gsw_specvol_anom(34.7118, 28.8099, 10) # 6.01005694856401e-6
 #' @seealso Specific volume itself is given by \code{\link{gsw_specvol}} and \code{\link{gsw_specvol_t_exact}}.
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_specvol_anom.html}
-gsw_specvol_anom  <- function(SA, CT, p)
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_anom_standard.html}
+gsw_specvol_anom_standard <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
     n <- length(l[[1]])
-    rval <- .C("wrap_gsw_specvol_anom_standard", # FIXME: is this correct for v3.05?
+    rval <- .C("wrap_gsw_specvol_anom_standard", # FIXME: why the "standard" in name?
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
                n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
     if (is.matrix(SA))
