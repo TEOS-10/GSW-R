@@ -9,3 +9,4 @@ src/*.rds
 vignettes/gsw.R
 vignettes/gsw.bbl
 .Rhistory
+.RData
