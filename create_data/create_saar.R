@@ -1,5 +1,6 @@
 ## NOTE: this file is for use by developers only. It is not incorporated into
-## the R package, although its output ("../data/saar.rda") is.
+## the R package, although its output ("../data/saar.rda") is incorporated,
+## by a "cp" command (see last line of this file).
 
 library(ncdf4)
 nc <- nc_open("~/src/GSW-Fortran/test/gsw_data_v3_0.nc")

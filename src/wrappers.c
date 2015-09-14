@@ -43,10 +43,7 @@ void set_up_gsw_data(int *gsw_nx_val,
         if (!p_ref) error("cannot allocate memory for GSW internal data item \"p_ref\"\n");
         for (int i = 0; i < gsw_nz; i++) p_ref[i] = p_ref_val[i];;
 
-        ndepth_ref = Calloc(gsw_nz, double);
-        if (!ndepth_ref) error("cannot allocate memory for GSW internal data item \"ndepth_ref\"\n");
-        for (int i = 0; i < gsw_nz; i++) ndepth_ref[i] = ndepth_ref_val[i];;
-
+        //  ndepth_ref isn't actually used anywhere, so perhaps it should not be saved.
         int nxy = gsw_nx * gsw_ny;
         ndepth_ref = Calloc(nxy, double);
         if (!ndepth_ref) error("cannot allocate memory for GSW internal data item \"ndepth_ref\"\n");
@@ -216,6 +213,7 @@ W1(wrap_gsw_SP_from_SK, gsw_sp_from_sk, SK, n, rval)
 W1(wrap_gsw_SP_from_SR, gsw_sp_from_sr, SR, n, rval)
 W4(wrap_gsw_SP_from_Sstar, gsw_sp_from_sstar, Sstar, p, longitude, latitude, n, rval)
 W3(wrap_gsw_t_freezing, gsw_t_freezing_exact, SA, p, saturation_fraction, n, rval)
+//W3(wrap_gsw_t_freezing, gsw_t_freezing, SA, p, saturation_fraction, n, rval)
 W3(wrap_gsw_t_from_CT, gsw_t_from_ct, SA, CT, p, n, rval)
 W3(wrap_gsw_thermobaric, gsw_thermobaric, SA, CT, p, n, rval)
 W2(wrap_gsw_z_from_p, gsw_z_from_p, p, lat, n, rval)
