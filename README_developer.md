@@ -1,11 +1,11 @@
 How to add new functions
 ========================
 
-**Preamble.** There are a great many functions in the GSW library, and adding
-each one to this package takes a fair bit of time. The steps for adding
-functions are given in detail here, in hopes that some users will contribute to
-the coding process. Please send contributions to the developers with ``git
-pull`` requests.
+**Preamble.** There are many functions in the GSW library, and adding each one
+to this package takes a fair bit of time. The steps for adding functions are
+given in detail here, in hopes that some users will contribute to the coding
+process. Please send contributions to the developers with ``git pull``
+requests.
 
 This package performs its work through linkage with TEOS-10 functions written
 in the C language. The R function ``.C()`` is used for this linkage.  Because
