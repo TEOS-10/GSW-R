@@ -1,1 +1,4 @@
-saar.rda
+*.rda
+Makefile
+*.out
+

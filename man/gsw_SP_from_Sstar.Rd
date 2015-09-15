@@ -22,10 +22,17 @@ Practical Salinity (PSS-78) [ unitless ]
 Practical Salinity from Preformed Salinity
 }
 \examples{
-gsw_SP_from_Sstar(34.7115, 10, 188, 4) # 34.548646570969929
+library(testthat)
+Sstar <- c(34.7115, 34.8912, 35.0247, 34.8436, 34.7291, 34.7197)
+p <- c(         10,      50,     125,     250,     600,    1000)
+longitude <- 188
+latitude <- 4
+SP <- gsw_SP_from_Sstar(Sstar, p, longitude, latitude)
+expect_equal(SP, c(34.548646570969929, 34.727538423586189, 34.860549501859502,
+                   34.681006826476434, 34.568065697992346, 34.560023926979518))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SP_from_Sstar.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_Sstar.html}
 }
 \seealso{
 \code{\link{gsw_Sstar_from_SP}} does the reverse; \code{\link{gsw_SA_from_Sstar}} is similar.

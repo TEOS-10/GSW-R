@@ -20,10 +20,16 @@ potential temperature [ deg C ]
 Potential temperature referenced to the surface
 }
 \examples{
-gsw_pt0_from_t(34.7118, 28.7856, 10) # 28.783196819670632
+library(testthat)
+SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+p <- c(      10,      50,     125,     250,     600,    1000)
+pt0 <- gsw_pt0_from_t(SA, t, p)
+expect_equal(pt0, c(28.783196819670632, 28.420983342398962, 22.784930399117108,
+                    10.230523661095731, 6.829230224409661, 4.324510571845719))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_pt0_from_t.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_pt0_from_t.html}
 }
 \seealso{
 \code{\link{gsw_pt_from_CT}} and \code{\link{gsw_pt_from_t}}

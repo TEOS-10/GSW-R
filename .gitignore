@@ -8,5 +8,10 @@ src/*.rds
 .Rproj.user
 vignettes/gsw.R
 vignettes/gsw.bbl
+<<<<<<< HEAD
 .RData
 .Rhistory
+=======
+.Rhistory
+.RData
+>>>>>>> 305

@@ -18,10 +18,15 @@ Conservative Temperature [ deg C ]
 Conservative Temperature from potential temperature
 }
 \examples{
-gsw_CT_from_pt(34.7118, 28.7832) # 28.809923015982083
+library(testthat)
+SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+pt <- c(28.7832, 28.4209, 22.7850, 10.2305,  6.8292,  4.3245)
+CT <- gsw_CT_from_pt(SA, pt)
+expect_equal(CT, c(28.809923015982083, 28.439144260767169, 22.786246608464264,
+                   10.226165605435785, 6.827183417643142,  4.323565182322069))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_CT_from_pt.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_pt.html}
 }
 \seealso{
 \code{\link{gsw_CT_from_t}} calculates Conservative Temperature from in-situ temperature

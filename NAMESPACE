@@ -1,5 +1,6 @@
 useDynLib(gsw)
 importFrom(utils, data)
+importFrom("testthat", "expect_equal")
 export(
         argfix,
         gsw_adiabatic_lapse_rate_from_CT,
@@ -49,7 +50,7 @@ export(
         gsw_sound_speed_t_exact,
         gsw_specvol,
         gsw_specvol_t_exact,
-        gsw_specvol_anom,
+        gsw_specvol_anom_standard,
         gsw_SP_from_C,
         gsw_SP_from_SA,
         gsw_SP_from_SK,

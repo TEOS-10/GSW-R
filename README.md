@@ -11,7 +11,9 @@ process, as is usual in R.)
 Function names match those used specified in the TEOS-10
 [documentation](http://www.teos-10.org/pubs/gsw/html/gsw_contents.html).
 
-The plan is to update this package to match publicised changes to GSW.  Users
+The plan is to update this package to match publicized changes to GSW.  Users
 should be aware that this may involve changes to function names or arguments,
 if TEOS-10 alters such things.
+
+TravisCI build status: ![TravisCI Build Status](https://travis-ci.org/TEOS-10/GSW-R.svg?branch=master)
 

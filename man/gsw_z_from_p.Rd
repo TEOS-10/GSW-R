@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_z_from_p}
 \alias{gsw_z_from_p}
-\title{Height from pressure (48-term equation)}
+\title{Height from pressure (75-term equation)}
 \usage{
 gsw_z_from_p(p, latitude)
 }
@@ -15,13 +15,16 @@ gsw_z_from_p(p, latitude)
 height [ m ]
 }
 \description{
-Height from pressure (48-term equation)
+Height from pressure (75-term equation)
 }
 \examples{
-gsw_z_from_p(10, 4) # -9.9445831334188
+library(testthat)
+z <- gsw_z_from_p(c(10, 50, 125, 250, 600,1000), 4)
+expect_equal(z, 1e2*c(-0.099445834469453, -0.497180897012550, -1.242726219409978,
+                      -2.484700576548589, -5.958253480356214, -9.920919060719987))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_z_from_p.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_z_from_p.html}
 }
 \seealso{
 This is (almost) the reverse of \code{\link{gsw_p_from_z}}

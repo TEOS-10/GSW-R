@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_rho_first_derivatives}
 \alias{gsw_rho_first_derivatives}
-\title{SA, CT and p partial derivatives of density (48-term equation)}
+\title{SA, CT and p partial derivatives of density (75-term equation)}
 \usage{
 gsw_rho_first_derivatives(SA, CT, p)
 }
@@ -17,12 +17,22 @@ gsw_rho_first_derivatives(SA, CT, p)
 list containing drho_dSA [ kg^2/(g m^3) ], drho_dCT [ kg/(K m^3) ] and drho_dp [ kg/(Pa m^3) ]
 }
 \description{
-SA, CT and p partial derivatives of density (48-term equation)
+SA, CT and p partial derivatives of density (75-term equation)
 }
 \examples{
-gsw_rho_first_derivatives(34.7118, 28.8099, 10) #' # 0.73321 -0.33174 4.20305e-7
+library(testthat)
+SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+p <- c(      10,      50,     125,     250,     600,    1000)
+r <- gsw_rho_first_derivatives(SA, CT, p)
+expect_equal(r$drho_dSA, c(0.733153791778356, 0.733624109867480, 0.743950957375504,
+                           0.771357282286743, 0.777581141431288, 0.781278296628328))
+expect_equal(r$drho_dCT, c(-0.331729027977015, -0.329838643311336, -0.288013324730644,
+                           -0.178012962919839, -0.150654632545556, -0.133556437868984))
+expect_equal(r$drho_dp, 1e-6*c(0.420302360738476, 0.420251070273888, 0.426773054953941,
+                               0.447763615252861, 0.452011501791479, 0.454118117103094))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_rho_first_derivatives.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_first_derivatives.html}
 }
 

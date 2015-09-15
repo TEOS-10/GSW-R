@@ -43,10 +43,7 @@ void set_up_gsw_data(int *gsw_nx_val,
         if (!p_ref) error("cannot allocate memory for GSW internal data item \"p_ref\"\n");
         for (int i = 0; i < gsw_nz; i++) p_ref[i] = p_ref_val[i];;
 
-        ndepth_ref = Calloc(gsw_nz, double);
-        if (!ndepth_ref) error("cannot allocate memory for GSW internal data item \"ndepth_ref\"\n");
-        for (int i = 0; i < gsw_nz; i++) ndepth_ref[i] = ndepth_ref_val[i];;
-
+        //  ndepth_ref isn't actually used anywhere, so perhaps it should not be saved.
         int nxy = gsw_nx * gsw_ny;
         ndepth_ref = Calloc(nxy, double);
         if (!ndepth_ref) error("cannot allocate memory for GSW internal data item \"ndepth_ref\"\n");
@@ -138,6 +135,18 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), int
     }\
 }
 
+#define W5(wname, cname, arg1, arg2, arg3, arg4, arg5, n, rval) \
+void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), double *(arg5), int *(n), double *(rval))\
+{\
+    for (int i=0; i < *(n); i++) {\
+        (rval)[i] = (cname)((arg1)[i], (arg2)[i], (arg3)[i], (arg4)[i], (arg5)[i]);\
+        if ((rval)[i] == GSW_INVALID_VALUE) {\
+            (rval)[i] = NA_REAL;\
+        }\
+    }\
+}
+
+
 // PART 3: wrappers for functions that return a value. Wrapping is necessary 
 // because the R function .C() cannot handle return values.
 // See Part 3 for functios returning void.
@@ -156,7 +165,7 @@ W3(wrap_gsw_C_from_SP, gsw_c_from_sp, SP, t, p, n, rval)
 W3(wrap_gsw_cabbeling, gsw_cabbeling, SA, CT, p, n, rval)
 W4(wrap_gsw_Sstar_from_SA, gsw_sstar_from_sa, SA, p, longitude, latitude, n, rval)
 W4(wrap_gsw_Sstar_from_SP, gsw_sstar_from_sp, SP, p, longitude, latitude, n, rval)
-W3(wrap_gsw_CT_freezing, gsw_ct_freezing, SA, p, saturation_fraction, n, rval)
+W3(wrap_gsw_CT_freezing, gsw_ct_freezing_exact, SA, p, saturation_fraction, n, rval)
 W2(wrap_gsw_CT_from_pt, gsw_ct_from_pt, SA, pt, n, rval)
 W3(wrap_gsw_cp_t_exact, gsw_cp_t_exact, SA, t, p, n, rval)
 W3(wrap_gsw_CT_from_t, gsw_ct_from_t, SA, t, p, n, rval)
@@ -196,14 +205,15 @@ W2(wrap_gsw_sigma4, gsw_sigma4, SA, CT, n, rval)
 W3(wrap_gsw_sound_speed, gsw_sound_speed, SA, t, p, n, rval)
 W3(wrap_gsw_sound_speed_t_exact, gsw_sound_speed_t_exact, SA, t, p, n, rval)
 // gsw_specvol coded in R
-W3(wrap_gsw_specvol_anom, gsw_specvol_anom, SA, CT, p, n, rval)
+W3(wrap_gsw_specvol_anom_standard, gsw_specvol_anom_standard, SA, CT, p, n, rval)
 W3(wrap_gsw_specvol_t_exact, gsw_specvol_t_exact, SA, t, p, n, rval)
 W3(wrap_gsw_SP_from_C, gsw_sp_from_c, C, t, p, n, rval)
 W4(wrap_gsw_SP_from_SA, gsw_sp_from_sa, SA, p, longitude, latitude, n, rval)
 W1(wrap_gsw_SP_from_SK, gsw_sp_from_sk, SK, n, rval)
 W1(wrap_gsw_SP_from_SR, gsw_sp_from_sr, SR, n, rval)
 W4(wrap_gsw_SP_from_Sstar, gsw_sp_from_sstar, Sstar, p, longitude, latitude, n, rval)
-W3(wrap_gsw_t_freezing, gsw_t_freezing, SA, p, saturation_fraction, n, rval)
+W3(wrap_gsw_t_freezing, gsw_t_freezing_exact, SA, p, saturation_fraction, n, rval)
+//W3(wrap_gsw_t_freezing, gsw_t_freezing, SA, p, saturation_fraction, n, rval)
 W3(wrap_gsw_t_from_CT, gsw_t_from_ct, SA, CT, p, n, rval)
 W3(wrap_gsw_thermobaric, gsw_thermobaric, SA, CT, p, n, rval)
 W2(wrap_gsw_z_from_p, gsw_z_from_p, p, lat, n, rval)
