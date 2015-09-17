@@ -431,10 +431,6 @@ gsw_cp_t_exact <- function(SA, t, p)
 
 #' Conservative temperature freezing point
 #'
-#' Note: as of 2014-12-23, this corresponds to the Matlab function
-#' called \code{gsw_t_freezing_poly}. (The confusion arises from a
-#' mismatch in release version between the Matlab and C libraries.)
-#' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param p sea pressure [ dbar ]
 #' @param saturation_fraction saturation fraction of dissolved air in seawater
