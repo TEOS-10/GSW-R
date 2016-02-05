@@ -16,11 +16,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-%\newcommand\CT{$\textTheta$\xspace} % conservative temperature
-\newcommand\CT{$\Theta$\xspace} % conservative temperature
-\newcommand\SA{$S_\textrm{A}$\xspace} % absolute salinity
-
-
 **Abstract.** The `gsw` package provides an R implementation of the Gibbs
 SeaWater toolbox for the calculation of seawater properties.  This vignette
 outlines how to use `gsw` alone or as part of the `oce` package.
@@ -28,11 +23,11 @@ outlines how to use `gsw` alone or as part of the `oce` package.
 ## Introduction
 
 In recent years, thermodynamic considerations have led to improved formulae for
-the calculation of seawater properties^[ioc2010tite]^[millero2010hote], an
-important component of which is the Gibbs-SeaWater (GSW)
-toolbox^[mcdougall2011gswt]^[pawlowicz2012ahpo]. The `gsw` package is an R
-version of GSW, which may be used independently or within the more general `oce`
-package^[kelley2014oaoo]. 
+the calculation of seawater properties (IOC, 2010; Millero et al 2010), an
+important component of which is the Gibbs-SeaWater (GSW) toolbox (McDougall
+2011; Pawlowicz et al 2012). The `gsw` package is an R version of GSW, which
+may be used independently or within the more general `oce` package (Kelley and
+Richards 2016).
 
 This vignette sketches how to use `gsw`.  Readers are assumed to be familiar
 with oceanographic processing, and at least somewhat familiar with GSW.  A good
@@ -55,11 +50,10 @@ being provided through hyperlinks to the GSW reference documentation. The idea
 is to avoid duplication and to encourage users to consult the technical 
 materials linked to the GSW functions mimicked in `gsw`.  The GSW system is
 somewhat complex, and analysts owe it to themselves to learn how it works, and
-also to develop an appreciation for its scientific context by consulting various
-documents provided on [http://www.teos-10.org](http://www.teos-10.org),
+also to develop an appreciation for its scientific context by consulting
+various documents at [http://www.teos-10.org](http://www.teos-10.org),
 including expansive white papers and pointers to the growing peer-reviewed
-literature^[wright2011asds^[mcdougall2012agaf]^[graham2013qtnp].
-
+literature (Wright et al.  2011; McDougall et al. 2012; Graham et al. 2013)
 
 
 ## Using gsw independent of oce
@@ -68,9 +62,9 @@ literature^[wright2011asds^[mcdougall2012agaf]^[graham2013qtnp].
 options(keep.source=TRUE, width=60, prompt=' ', continue=' ', oceEOS="unesco")
 ```
 
-Suppose a water sample taken at pressure\footnote{For practical reasons, `gsw`
+Suppose a water sample taken at pressure (For practical reasons, `gsw`
 goes beyond SI to incorporate oceanographic units, such as decibars for
-pressure.} 100 dbar, longitude 188E and latitude 4N, reveals Practical Salinity
+pressure.) 100 dbar, longitude 188E and latitude 4N, reveals Practical Salinity
 35 and in-situ temperature 10$^\circ$C (ITS-90).  Then the Absolute Salinity may
 be calculated as follows.
 
@@ -93,9 +87,9 @@ other functions needed for their work among the roughly 60 that `gsw` provides.
 
 ## Using gsw within oce
 
-![**Figure 1.** TS diagram with UNESCO formulation](TS_unesco)
+![**Figure 1.** TS diagram with UNESCO formulation](TS_unesco.png)
 
-![**Figure 2.** TS diagram with GSW formulation](TS_gsw)
+![**Figure 2.** TS diagram with GSW formulation](TS_gsw.png)
 
 
 Many `oce` plotting functions have an argument named `eos` that can be set to
@@ -116,7 +110,7 @@ plotTS(ctd, Slim=Slim, Tlim=Tlim, eos="unesco")
 ```
 
 where plot limits are used to match axes for a plot using
-\code{gsw} (right-hand panel of Figure~\ref{figure:TS}):
+`gsw`
 ```{r eval=FALSE}
 plotTS(ctd, Slim=Slim, Tlim=Tlim, eos="gsw")
 ```
@@ -131,7 +125,7 @@ selecting the seawater formulation. This includes functions for plotting and for
 calculating.  In addition, most of the objects within `oce` have accessors that
 can return temperature and salinity in either the `UNESCO` or GSW scheme. For
 example, the ratio of Conservative Temperature to `UNESCO`-formulated potential
-temperature $\theta$ for all the CTD profiles in \code{section} is constructed
+temperature $\theta$ for all the CTD profiles in `section` is constructed
 as follows (Figures 3 and 4).
 
 ```{r eval=FALSE}
@@ -148,8 +142,8 @@ par(mar=c(3.2, 3, 1, 1/2), mgp=c(2, 0.85, 0))
 hist(section[["salinity"]] / section[["SA"]], main="")
 ```
 
-![**Figure 3.** Sea surface Practical Salinity, for Levitus dataset](SSS_1)
-![**Figure 4.** Sea surface Absolute Salinity minus Practical Salinity, for Levitus dataset.](SSS_2)
+![**Figure 3.** Sea surface Practical Salinity, for Levitus dataset](SSS_1.png)
+![**Figure 4.** Sea surface Absolute Salinity minus Practical Salinity, for Levitus dataset.](SSS_2.png)
 
 
 ```{r eval=FALSE}
@@ -169,6 +163,45 @@ title("Surface SA-SP, percent")
 Note the use of quantile-specified scales for the images, the colour mappings of
 which would otherwise be controlled by isolated low-saline waters, yielding
 little to see in the wider expanses of the world ocean; a broader context has
-been detailed in the literature^[mcdougall2012agaf].
+been detailed in the literature (McDougall et al. 2012).
+
+## References
+
+Graham, F. S. and T. J. McDougall, 2012.  Quantifying the Nonconservative
+Production of Conservative Temperature, Potential Temperature, and Entropy.
+Journal of Physical Oceanography, 43(5):838-862.
+[http://dx.doi.org/10.1175/JPO-D-11-0188.1](http://dx.doi.org/10.1175/JPO-D-11-0188.1)
+
+IOC and SCOR and IAPSO, 2010.  Intergovernmental Oceanographic Commission,
+Manuals and Guide, 56, UNESCO.
+[http://www.teos-10.org/pubs/TEOS-10_Manual.pdf](http://www.teos-10.org/pubs/TEOS-10_Manual.pdf)
+
+Kelley, D. and C. Richards, 2016.  oce: Analysis of Oceanographic data, R
+package version 0.9-18.  Comprehensive R Archive Network.
+[http://dankelley.github.com/oce](http://dankelley.github.com/oce)
+
+McDougall, T. J. and P. M. Barker,2011.  Getting started with TEOS-10 and the
+Gibbs Seawater (GSW) Oceanographic Toolbox.  SCOR/IAPSO WG127.
+978-0-646-55621-5.
+
+McDougall, T. J., D. R. Jackett, F. J. Millero, R. Pawlowicz and P. M.  Barker,
+2012.  A global algorithm for estimating Absolute Salinity.  Ocean Science,
+   8:1123-1134.
+   [http://www.ocean-sci.net/8/1123/2012/os-8-1123-2012.pdf](http://www.ocean-sci.net/8/1123/2012/os-8-1123-2012.pdf)
+
+Millero, F. J. 2010.  History of the equation of state of seawater.
+Oceanography, 23:18-33.
+[http://www.tos.org/oceanography/archive/23-3_millero.html](http://www.tos.org/oceanography/archive/23-3_millero.html)
+
+Pawlowicz, R., T. McDougall, R. Feistel and R. Tailleux, 2012.  Preface ``An
+historical perspective on the development of the Thermodynamic Equation of
+Seawater--2010''}.  Ocean Science, 8:161-174.
+[http://www.ocean-sci.net/8/161/2012/os-8-161-2012.pdf](http://www.ocean-sci.net/8/161/2012/os-8-161-2012.pdf)
+
+Wright, D. G., R. Pawlowicz, T. J. McDougall, R. Feistel and G. M.  Marion,
+2011.  Absolute Salinity, Density Salinity and the Reference-Composition
+   Salinity Scale: present and future use in the seawater standard TEOS-10.
+   Ocean Science, 7:1-26.
+   [http://www.ocean-sci.net/7/1/2011/os-7-1-2011.pdf](http://www.ocean-sci.net/7/1/2011/os-7-1-2011.pdf)
 
 
