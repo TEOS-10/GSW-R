@@ -1,0 +1,174 @@
+---
+title: "gsw"
+author: "Dan Kelley and Clark Richards"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    fig_caption: yes
+    fig_width: 5
+    fig_height: 5
+    dev.args: list(pointsize=11)
+
+vignette: >
+  %\VignetteIndexEntry{gsw}
+  %\VignetteEngine{rmarkdown:render}
+  %\VignetteEncoding{UTF-8}
+---
+
+%\newcommand\CT{$\textTheta$\xspace} % conservative temperature
+\newcommand\CT{$\Theta$\xspace} % conservative temperature
+\newcommand\SA{$S_\textrm{A}$\xspace} % absolute salinity
+
+
+**Abstract.** The `gsw` package provides an R implementation of the Gibbs
+SeaWater toolbox for the calculation of seawater properties.  This vignette
+outlines how to use `gsw` alone or as part of the `oce` package.
+
+## Introduction
+
+In recent years, thermodynamic considerations have led to improved formulae for
+the calculation of seawater properties^[ioc2010tite]^[millero2010hote], an
+important component of which is the Gibbs-SeaWater (GSW)
+toolbox^[mcdougall2011gswt]^[pawlowicz2012ahpo]. The `gsw` package is an R
+version of GSW, which may be used independently or within the more general `oce`
+package^[kelley2014oaoo]. 
+
+This vignette sketches how to use `gsw`.  Readers are assumed to be familiar
+with oceanographic processing, and at least somewhat familiar with GSW.  A good
+resource for learning more about GSW is
+[http://www.teos-10.org](http://www.teos-10.org), which provides technical
+manuals for the Matlab version of GSW
+[http://www.teos-10.org/pubs/gsw/html/gsw_contents.html](http://www.teos-10.org/pubs/gsw/html/gsw_contents.html),
+along with white papers and links to the growing peer-reviewed literature on the
+topic.
+
+The `gsw` framework involves a series of wrappers that connect R with the C
+version of the Gibbs Seawater library. This yields high processing speed and the
+minimization of transliteration errors increases reliability. The incorporation
+of GSW check values into the package-building process is an additional measure
+taken to achieve reliability.
+
+By design, the documentation of `gsw` functions is spare, amounting mainly to an
+explanation of function arguments and return values, with most other details
+being provided through hyperlinks to the GSW reference documentation. The idea
+is to avoid duplication and to encourage users to consult the technical 
+materials linked to the GSW functions mimicked in `gsw`.  The GSW system is
+somewhat complex, and analysts owe it to themselves to learn how it works, and
+also to develop an appreciation for its scientific context by consulting various
+documents provided on [http://www.teos-10.org](http://www.teos-10.org),
+including expansive white papers and pointers to the growing peer-reviewed
+literature^[wright2011asds^[mcdougall2012agaf]^[graham2013qtnp].
+
+
+
+## Using gsw independent of oce
+
+```{r results="hide"}
+options(keep.source=TRUE, width=60, prompt=' ', continue=' ', oceEOS="unesco")
+```
+
+Suppose a water sample taken at pressure\footnote{For practical reasons, `gsw`
+goes beyond SI to incorporate oceanographic units, such as decibars for
+pressure.} 100 dbar, longitude 188E and latitude 4N, reveals Practical Salinity
+35 and in-situ temperature 10$^\circ$C (ITS-90).  Then the Absolute Salinity may
+be calculated as follows.
+
+```{r}
+library(gsw)
+SA <- gsw_SA_from_SP(SP=35, p=100, longitude=188, latitude=4)
+```
+
+This yields 
+`SA`=`r sprintf("%.4f", SA)` [g/kg], which can then be used to 
+calculate Conservative Temperature as follows.
+
+```{r}
+CT <- gsw_CT_from_t(SA=SA, t=10, p=100)
+```
+
+The above yields `CT`=`r sprintf("%.4f", CT)` [$^\circ$C]. Readers familiar with
+GSW will recognize the function and argument names, and are likely to find the
+other functions needed for their work among the roughly 60 that `gsw` provides.
+
+## Using gsw within oce
+
+![**Figure 1.** TS diagram with UNESCO formulation](TS_unesco)
+
+![**Figure 2.** TS diagram with GSW formulation](TS_gsw)
+
+
+Many `oce` plotting functions have an argument named `eos` that can be set to
+the string `"unesco"` to get the older seawater formulation, or to `"gsw"` to
+get the newer one. For example, the `section` dataset provided by `oce` holds a
+sequence of CTD casts in the North Atlantic.  Individual casts may be selected
+by index, so a TS diagram of the station at index 100 (south of Cape Cod in 4000
+m of water) can be plotted as follows.
+
+
+```{r eval=FALSE}
+library(oce)
+data(section)
+ctd <- section[["station", 100]]
+Slim <- c(34.8, 37.0)
+Tlim <- c(0, 25)
+plotTS(ctd, Slim=Slim, Tlim=Tlim, eos="unesco")
+```
+
+where plot limits are used to match axes for a plot using
+\code{gsw} (right-hand panel of Figure~\ref{figure:TS}):
+```{r eval=FALSE}
+plotTS(ctd, Slim=Slim, Tlim=Tlim, eos="gsw")
+```
+
+
+![**Figure 3.** ](temperature_comparison.png)
+
+![**Figure 4.**](salinity_comparison.png)
+
+Most hydrography-related functions of `oce` provide this `eos` argument for
+selecting the seawater formulation. This includes functions for plotting and for
+calculating.  In addition, most of the objects within `oce` have accessors that
+can return temperature and salinity in either the `UNESCO` or GSW scheme. For
+example, the ratio of Conservative Temperature to `UNESCO`-formulated potential
+temperature $\theta$ for all the CTD profiles in \code{section} is constructed
+as follows (Figures 3 and 4).
+
+```{r eval=FALSE}
+hist(section[["theta"]] / section[["CT"]], main="")
+```
+
+The corresponding panel comparing Practical Salinity to Absolute Salinity
+is constructed as follows.
+
+```{r eval=FALSE}
+dev.off()
+pdf('salinity_comparison.pdf', height=5, pointsize=18)
+par(mar=c(3.2, 3, 1, 1/2), mgp=c(2, 0.85, 0))
+hist(section[["salinity"]] / section[["SA"]], main="")
+```
+
+![**Figure 3.** Sea surface Practical Salinity, for Levitus dataset](SSS_1)
+![**Figure 4.** Sea surface Absolute Salinity minus Practical Salinity, for Levitus dataset.](SSS_2)
+
+
+```{r eval=FALSE}
+data("levitus", package="ocedata")
+SSS <- levitus$SSS
+dim <- dim(SSS)
+ll <- expand.grid(lon=levitus$longitude, lat=levitus$latitude)
+SA <- gsw_SA_from_SP(levitus$SSS, 0, ll$lon, ll$lat)
+imagep(levitus$longitude, levitus$latitude, levitus$SSS, col=oceColorsJet)
+title("Surface SP")
+per <- 100 * (1 - levitus$SSS / SA)
+imagep(levitus$longitude, levitus$latitude, per, col=oceColorsJet,
+       zlim=quantile(per, c(0.001, 0.999), na.rm=TRUE))
+title("Surface SA-SP, percent")
+```
+
+Note the use of quantile-specified scales for the images, the colour mappings of
+which would otherwise be controlled by isolated low-saline waters, yielding
+little to see in the wider expanses of the world ocean; a broader context has
+been detailed in the literature^[mcdougall2012agaf].
+
+
