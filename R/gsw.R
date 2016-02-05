@@ -431,10 +431,6 @@ gsw_cp_t_exact <- function(SA, t, p)
 
 #' Conservative temperature freezing point
 #'
-#' Note: as of 2014-12-23, this corresponds to the Matlab function
-#' called \code{gsw_t_freezing_poly}. (The confusion arises from a
-#' mismatch in release version between the Matlab and C libraries.)
-#' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param p sea pressure [ dbar ]
 #' @param saturation_fraction saturation fraction of dissolved air in seawater
@@ -1924,7 +1920,6 @@ gsw_Sstar_from_SP <- function(SP, p, longitude, latitude)
 #' @seealso \code{\link{gsw_CT_freezing}} is the analogue for Conservative Temperature.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing.html}
-#' \url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_t_freezing_poly.html}
 gsw_t_freezing <- function(SA, p, saturation_fraction=1)
 {
     l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
