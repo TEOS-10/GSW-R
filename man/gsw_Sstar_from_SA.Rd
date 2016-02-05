@@ -28,10 +28,17 @@ lengths of longitude and latitude, then the latter are
 converted to analogous matrices with \code{\link{expand.grid}}.
 }
 \examples{
-gsw_Sstar_from_SA(34.7118, 10, 188, 4) # 34.711575335926490
+library(testthat)
+SA <-   c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+p <-    c(     10,      50,     125,     250,     600,    1000)
+lat <-  c(      4,       4,       4,       4,       4,       4)
+long <- c(    188,     188,     188,     188,     188,     188)
+Sstar <- gsw_Sstar_from_SA(SA,p,long,lat)
+expect_equal(Sstar, c(34.711575335926490, 34.891138777337822, 35.024705401162166,
+                      34.843564118358302, 34.729005527604883, 34.719712883389462))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_Sstar_from_SA.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_Sstar_from_SA.html}
 }
 \seealso{
 \code{\link{gsw_SA_from_Sstar}} does the reverse; \code{\link{gsw_Sstar_from_SP}} is similar.

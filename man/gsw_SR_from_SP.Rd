@@ -16,10 +16,14 @@ Reference Salinity [ g/kg ]
 Calculate Reference Salinity from Practical Salinity
 }
 \examples{
-gsw_SR_from_SP(34.5487) # 34.711611927085727
+library(testthat)
+SP <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
+SR <- gsw_SR_from_SP(SP)
+expect_equal(SR, c(34.711611927085727, 34.891255045714303, 35.024882197714305,
+                   34.844535778285724, 34.731002934857159, 34.722965211428587))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_SR_from_SP.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_SR_from_SP.html}
 }
 \seealso{
 The reverse is \code{\link{gsw_SP_from_SR}}; also related are \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SK}} and \code{\link{gsw_SP_from_Sstar}}.

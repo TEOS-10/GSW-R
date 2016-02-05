@@ -20,9 +20,15 @@ adiabatic lapse rate (note unconventional unit) [ K/Pa ]
 Note that the unit is K/Pa, i.e. 1e-4 times K/dbar.
 }
 \examples{
-gsw_adiabatic_lapse_rate_from_CT(34.7118, 28.7856, 10) # 2.40199646230069e-8
+library(testthat)
+SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+p <- c(      10,      50,     125,     250,     600,    1000)
+lr <- gsw_adiabatic_lapse_rate_from_CT(SA, CT, p)
+expect_equal(lr, 1e-7*c(0.240199646230069, 0.238457486976761, 0.203635157319712,
+                        0.119829566859790, 0.100052760967308, 0.087773070307283))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_adiabatic_lapse_rate_from_CT.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_from_CT.html}
 }
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_dynamic_enthalpy}
 \alias{gsw_dynamic_enthalpy}
-\title{Dynamic enthalpy of seawater (48-term equation)}
+\title{Dynamic enthalpy of seawater (75-term equation)}
 \usage{
 gsw_dynamic_enthalpy(SA, CT, p)
 }
@@ -17,13 +17,19 @@ gsw_dynamic_enthalpy(SA, CT, p)
 dynamic enthalpy [ J/kg ]
 }
 \description{
-Dynamic enthalpy of seawater (48-term equation)
+Dynamic enthalpy of seawater (75-term equation)
 }
 \examples{
-gsw_dynamic_enthalpy(34.7118, 28.8099, 10) # 1e3*0.097864649180491
+library(testthat)
+SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+CT <-c( 28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+p <- c(      10,      50,     125,     250,     600,    1000)
+de <- gsw_dynamic_enthalpy(SA, CT, p)
+expect_equal(de, 1e3*c(0.097864698087770, 0.489161476686235, 1.220512192086506,
+                       2.433731199531144, 5.833880057399701, 9.711443860944032))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_enthalpy.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
 }
 \seealso{
 \code{\link{gsw_enthalpy}} and \code{\link{gsw_enthalpy_t_exact}}

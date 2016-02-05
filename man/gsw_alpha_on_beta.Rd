@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_alpha_on_beta}
 \alias{gsw_alpha_on_beta}
-\title{Thermal expansion coefficient over haline contraction coefficient (48-term equation)}
+\title{Thermal expansion coefficient over haline contraction coefficient (75-term equation)}
 \usage{
 gsw_alpha_on_beta(SA, CT, p)
 }
@@ -17,13 +17,19 @@ gsw_alpha_on_beta(SA, CT, p)
 ratio of thermal expansion coefficient to haline contraction coefficient [ (g/kg)/K ]
 }
 \description{
-Thermal expansion coefficient over haline contraction coefficient (48-term equation)
+Thermal expansion coefficient over haline contraction coefficient (75-term equation)
 }
 \examples{
-gsw_alpha_on_beta(34.7118, 28.8099, 10) # 0.452454540612631
+library(testthat)
+SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+p <-  c(     10,      50,     125,     250,     600,    1000)
+alpha_on_beta <- gsw_alpha_on_beta(SA,CT,p)
+expect_equal(alpha_on_beta, c(0.452468543022009, 0.449601695030057, 0.387140203094424,
+                              0.230778871228268, 0.193747796234162, 0.170946048860385))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/v3_04/html/gsw_alpha_on_beta.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha_on_beta.html}
 }
 \seealso{
 This yields the ratio of the return values from \code{\link{gsw_alpha}} and \code{\link{gsw_beta}}, to within computational precision.
