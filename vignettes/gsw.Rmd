@@ -9,12 +9,19 @@ output:
     fig_width: 5
     fig_height: 5
     dev.args: list(pointsize=11)
-
 vignette: >
   %\VignetteIndexEntry{gsw}
-  %\VignetteEngine{rmarkdown:render}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+```{r echo=FALSE}
+# Developer notes (in R because Rmarkdown lacks comments!)
+# 1. Run
+#     devtools::build_vignettes()
+# before doing the build. And note that this fails if using `rmarkdown::render` as the engine,
+# as I was doing on the advise of TravisCI (DK 2016-02-06).
+```
 
 **Abstract.** The `gsw` package provides an R implementation of the Gibbs
 SeaWater toolbox for the calculation of seawater properties.  This vignette
@@ -97,8 +104,11 @@ the string `"unesco"` to get the older seawater formulation, or to `"gsw"` to
 get the newer one. For example, the `section` dataset provided by `oce` holds a
 sequence of CTD casts in the North Atlantic.  Individual casts may be selected
 by index, so a TS diagram of the station at index 100 (south of Cape Cod in 4000
-m of water) can be plotted as follows.
+m of water) can be plotted as follows (Figure 1).
 
+```{r eval=FALSE, echo=FALSE}
+png("TS_unesco.png", width=353, height=353, pointsize=12)
+```
 
 ```{r eval=FALSE}
 library(oce)
@@ -109,56 +119,81 @@ Tlim <- c(0, 25)
 plotTS(ctd, Slim=Slim, Tlim=Tlim, eos="unesco")
 ```
 
-where plot limits are used to match axes for a plot using
-`gsw`
+```{r eval=FALSE, echo=FALSE}
+dev.off()
+png("TS_gsw.png", width=353, height=353, pointsize=12)
+```
+
+For comparison, it helps to plot a `gsw` equivalent with the same plot limits (Figure 2).
 ```{r eval=FALSE}
 plotTS(ctd, Slim=Slim, Tlim=Tlim, eos="gsw")
 ```
 
+```{r eval=FALSE, echo=FALSE}
+dev.off()
+png("TS_gsw.png", width=353, height=353, pointsize=12)
+```
 
-![**Figure 3.** ](temperature_comparison.png)
-
-![**Figure 4.**](salinity_comparison.png)
 
 Most hydrography-related functions of `oce` provide this `eos` argument for
-selecting the seawater formulation. This includes functions for plotting and for
-calculating.  In addition, most of the objects within `oce` have accessors that
-can return temperature and salinity in either the `UNESCO` or GSW scheme. For
-example, the ratio of Conservative Temperature to `UNESCO`-formulated potential
-temperature $\theta$ for all the CTD profiles in `section` is constructed
-as follows (Figures 3 and 4).
+selecting the seawater formulation. This includes functions for plotting and
+for calculating.  In addition, most of the objects within `oce` have accessors
+that can return temperature and salinity in either the `UNESCO` or GSW scheme.
+For example, the ratio of Conservative Temperature to `UNESCO`-formulated
+potential temperature $\theta$ for all the CTD profiles in `section` is
+constructed as Figure 3 with
+
+```{r eval=FALSE, echo=FALSE}
+png('temperature_comparison.png', width=353, height=252, pointsize=12)
+par(mar=c(3.2, 3, 1, 1/2), mgp=c(2, 0.85, 0))
+```
 
 ```{r eval=FALSE}
 hist(section[["theta"]] / section[["CT"]], main="")
 ```
 
-The corresponding panel comparing Practical Salinity to Absolute Salinity
-is constructed as follows.
+A salinity comparison (Figure 4) is constructed with
+
+```{r eval=FALSE, echo=FALSE}
+dev.off()
+png('salinity_comparison.png', width=353, height=252, pointsize=12)
+par(mar=c(3.2, 3, 1, 1/2), mgp=c(2, 0.85, 0))
+```
 
 ```{r eval=FALSE}
-dev.off()
-pdf('salinity_comparison.pdf', height=5, pointsize=18)
-par(mar=c(3.2, 3, 1, 1/2), mgp=c(2, 0.85, 0))
 hist(section[["salinity"]] / section[["SA"]], main="")
 ```
 
-![**Figure 3.** Sea surface Practical Salinity, for Levitus dataset](SSS_1.png)
-![**Figure 4.** Sea surface Absolute Salinity minus Practical Salinity, for Levitus dataset.](SSS_2.png)
+![**Figure 3.** Comparison of GSW Conservative Temperature and UNESCO potential temperature for the `section` dataset, spanning the mid-latitude North Atlantic.](temperature_comparison.png)
 
+![**Figure 4.** Comparison of Absolute Salinity and Practical salinity for the `section` dataset.](salinity_comparison.png)
+
+
+```{r eval=FALSE, echo=FALSE}
+png("SSS_2.png", width=588, height=336)
+```
+
+An examination of spatial patterns is also informative. Figure 5, for example,
+is produced as follows.
 
 ```{r eval=FALSE}
+library(oce)
 data("levitus", package="ocedata")
 SSS <- levitus$SSS
 dim <- dim(SSS)
 ll <- expand.grid(lon=levitus$longitude, lat=levitus$latitude)
 SA <- gsw_SA_from_SP(levitus$SSS, 0, ll$lon, ll$lat)
-imagep(levitus$longitude, levitus$latitude, levitus$SSS, col=oceColorsJet)
-title("Surface SP")
 per <- 100 * (1 - levitus$SSS / SA)
 imagep(levitus$longitude, levitus$latitude, per, col=oceColorsJet,
        zlim=quantile(per, c(0.001, 0.999), na.rm=TRUE))
-title("Surface SA-SP, percent")
+title(expression("Percent difference between " * S[A] * " and " * S[P]))
 ```
+
+```{r eval=FALSE, echo=FALSE}
+dev.off()
+```
+
+![**Figure 5.** Percent difference between surface Absolute Salinity and Practical Salinity, for Levitus dataset.](SSS_2.png)
 
 Note the use of quantile-specified scales for the images, the colour mappings of
 which would otherwise be controlled by isolated low-saline waters, yielding
@@ -184,10 +219,10 @@ McDougall, T. J. and P. M. Barker,2011.  Getting started with TEOS-10 and the
 Gibbs Seawater (GSW) Oceanographic Toolbox.  SCOR/IAPSO WG127.
 978-0-646-55621-5.
 
-McDougall, T. J., D. R. Jackett, F. J. Millero, R. Pawlowicz and P. M.  Barker,
+McDougall, T. J., D. R. Jackett, F. J. Millero, R. Pawlowicz and P. M.  Barker, 
 2012.  A global algorithm for estimating Absolute Salinity.  Ocean Science,
-   8:1123-1134.
-   [http://www.ocean-sci.net/8/1123/2012/os-8-1123-2012.pdf](http://www.ocean-sci.net/8/1123/2012/os-8-1123-2012.pdf)
+       8:1123-1134.
+       [http://www.ocean-sci.net/8/1123/2012/os-8-1123-2012.pdf](http://www.ocean-sci.net/8/1123/2012/os-8-1123-2012.pdf)
 
 Millero, F. J. 2010.  History of the equation of state of seawater.
 Oceanography, 23:18-33.
