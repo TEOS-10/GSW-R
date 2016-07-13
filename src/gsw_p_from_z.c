@@ -1,4 +1,8 @@
 #include "gswteos-10.h"
+#ifndef M_PI
+#define M_PI       3.14159265358979323846264338328      /* pi */
+#endif
+
 double
 gsw_p_from_z(double z, double latitude,
         double geo_strf_dyn_height, double sea_surface_geopotental)
