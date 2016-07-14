@@ -9,7 +9,7 @@ CRAN: ![RStudio CRAN mirror downloads](http://cranlogs.r-pkg.org/badges/last-mon
 gsw is an R package that provides a connection to the thermodynamic equation of
 seawater version 3.03, downloaded from [teos-10.org](http://www.teos-10.org) on
 2014-08-25. This package was first installed on
-[CRAN](http://cran.r-project.org/web/packages/gsw/) in January 2015.
+[CRAN](https://cran.r-project.org/package=gsw) in January 2015.
 
 All the gsw functions reproduce [teos-10.org](http://www.teos-10.org) test
 values to a tolerance of 1.5e-8, the default for numerical comparison in R

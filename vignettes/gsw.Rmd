@@ -226,7 +226,7 @@ McDougall, T. J., D. R. Jackett, F. J. Millero, R. Pawlowicz and P. M.  Barker,
 
 Millero, F. J. 2010.  History of the equation of state of seawater.
 Oceanography, 23:18-33.
-[http://www.tos.org/oceanography/archive/23-3_millero.html](http://www.tos.org/oceanography/archive/23-3_millero.html)
+[http://www.tos.org/oceanography/article/history-of-the-equation-of-state-of-seawater](http://www.tos.org/oceanography/article/history-of-the-equation-of-state-of-seawater)
 
 Pawlowicz, R., T. McDougall, R. Feistel and R. Tailleux, 2012.  Preface ``An
 historical perspective on the development of the Thermodynamic Equation of
