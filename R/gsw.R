@@ -1796,6 +1796,102 @@ gsw_SR_from_SP <- function(SP)
     rval
 }
 
+
+#' Seawater Spiciness at p=0 dbar
+#'
+#' Calculate seawater spiciness referenced to 0 dbar (i.e. the surface).
+#'
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @return spiciness [ kg/m^3 ]
+#' @examples
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' spiciness <- gsw_spiciness0(SA, CT)
+#' expect_equal(spiciness, c(5.728998558542941, 5.749940496782486, 4.163547112671111,
+#'                           1.069362556641764, 0.426428274444305, 0.089725188494086))
+#' @seealso \code{\link{gsw_spiciness1}} and \code{\link{gsw_spiciness2}} for calculations at 1000 dbar
+#' and 2000 dbar.
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_spiciness0.html}
+gsw_spiciness0 <- function(SA, CT)
+{
+    if (missing(SA)) stop("must supply SA")
+    if (missing(CT)) stop("must supply CT")
+    l <- argfix(list(SA=SA, CT=CT))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_spiciness0",
+               SA=as.double(l$SA), CT=as.double(l$CT), n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' Seawater Spiciness at p=1000 dbar
+#'
+#' Calculate seawater spiciness referenced to 1000 dbar.
+#'
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @return spiciness [ kg/m^3 ]
+#' @examples
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' spiciness <- gsw_spiciness1(SA, CT)
+#' expect_equal(spiciness, c(6.311038322123224, 6.326411175472160, 4.667218659743284,
+#'                           1.351722468726905, 0.628494082166029, 0.224779784908478))
+#' @seealso \code{\link{gsw_spiciness0}} and \code{\link{gsw_spiciness2}} for calculations
+#' at 0 dbar and 2000 dbar.
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_spiciness1.html}
+gsw_spiciness1 <- function(SA, CT)
+{
+    if (missing(SA)) stop("must supply SA")
+    if (missing(CT)) stop("must supply CT")
+    l <- argfix(list(SA=SA, CT=CT))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_spiciness1",
+               SA=as.double(l$SA), CT=as.double(l$CT), n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' Seawater Spiciness at p=2000 dbar
+#'
+#' Calculate seawater spiciness referenced to 2000 dbar.
+#'
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @return spiciness [ kg/m^3 ]
+#' @examples
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' spiciness <- gsw_spiciness2(SA, CT)
+#' expect_equal(spiciness, c(6.874671751873180, 6.884616399155135, 5.154458892387083,
+#'                           1.624327800598636, 0.823490797424952, 0.355069307641827))
+#' @seealso \code{\link{gsw_spiciness0}} and \code{\link{gsw_spiciness1}} for calculations
+#' at 0 dbar and 1000 dbar.
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_spiciness2.html}
+gsw_spiciness2 <- function(SA, CT)
+{
+    if (missing(SA)) stop("must supply SA")
+    if (missing(CT)) stop("must supply CT")
+    l <- argfix(list(SA=SA, CT=CT))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_spiciness2",
+               SA=as.double(l$SA), CT=as.double(l$CT), n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+
+
 #' Convert from Absolute Salinity to Preformed Salinity
 #'
 #' Calculate Preformed Salinity from Absolute Salinity, pressure,
