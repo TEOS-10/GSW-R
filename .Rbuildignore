@@ -9,3 +9,5 @@ css
 ^.*\.Rproj$
 src/*.o$
 ^\.Rproj\.user$
+developer
+

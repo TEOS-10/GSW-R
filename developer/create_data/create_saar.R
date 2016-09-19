@@ -21,22 +21,5 @@ save(saar, file="saar.rda")
 tools::resaveRdaFiles("saar.rda")
 nc_close(nc)
 
-new <- saar
-load("~/src/GSW-R/data/saar.rda")
-old <- saar
-str(new)
-str(old)
-
-library(testthat)
-expect_equal(new$gsw_nx, old$gsw_nx)
-expect_equal(new$gsw_ny, old$gsw_ny)
-expect_equal(new$gsw_nz, old$gsw_nz)
-expect_equal(new$longs_ref, old$longs_ref)
-expect_equal(new$lats_ref, old$lats_ref)
-expect_equal(new$p_ref, old$p_ref)
-expect_equal(old$ndepth_ref, new$ndepth_ref)
-expect_equal(old$saar_ref, new$saar_ref)
-expect_equal(old$deta_sa_ref, new$deta_sa_ref)
-
-message("if this passes all tests, now do    cp saar.rda ../data/saar.rda")
+message("Next, do        cp saar.rda ../../data/saar.rda")
 
