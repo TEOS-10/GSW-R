@@ -11,9 +11,6 @@ C4 <- gsub("^[ ]*extern[ ]*((void)|(int)|(double))*[ ]*", "", C3)
 C5 <- gsub("^\\*", "", C4)
 C6 <- gsub("\\(.*$", "", C5)
 C7 <- sort(C6)
-message("C functions in '", source, "' (", length(C7), ") are:\n* [ ] ",
-        paste(C7, collapse="\n* [ ] "))
-
-
-
+cat("C functions in '", source, "' (", length(C7), ") are:\n* [ ] ",
+        paste(C7, collapse="\n* [ ] "), "\n")
                
