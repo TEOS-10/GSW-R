@@ -11,6 +11,7 @@ the following steps.
    store them somewhere convenient (in the illustrations provided here, they
 are in `~/src`, )
 2. Copy the C version as follows
+
     ```
     cp  ~/src/GSW-C/gsw_internal_const.h .
     cp  ~/src/GSW-C/gsw_oceanographic_toolbox.c gsw_oceanographic_toolbox.c
