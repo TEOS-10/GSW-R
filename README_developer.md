@@ -32,7 +32,8 @@ into
 R --no-save < create_data.R
 ```
 and, if that worked OK (look at the tests) then do
-    ```cp saar.rda ../data
+    ```
+cp saar.rda ../data
 ```
 to update the data file.
 6. Try a test build. If that fails, it will likely be due to a compiler error, and you'll need to sort that out (and report an issue). If it passes, proceed to the next step.
