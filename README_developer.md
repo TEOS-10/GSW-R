@@ -10,12 +10,12 @@ the following steps.
 1. Use `git` to update local copies of both the C and Fortran versions, and
    store them somewhere convenient (in the illustrations provided here, they
 are in `~/src`, )
-2. Copy the C version
+2. Copy the C version as follows
     ```
-cp  ~/src/GSW-C/gsw_internal_const.h .
-cp  ~/src/GSW-C/gsw_oceanographic_toolbox.c gsw_oceanographic_toolbox.c
-cp  ~/src/GSW-C/gswteos-10.h gswteos-10.h 
-```
+    cp  ~/src/GSW-C/gsw_internal_const.h .
+    cp  ~/src/GSW-C/gsw_oceanographic_toolbox.c gsw_oceanographic_toolbox.c
+    cp  ~/src/GSW-C/gswteos-10.h gswteos-10.h 
+    ```
 3. Edit the toolbox to change angled bracket inclusions to double-quote inclusions, specifically, change 
     ```
 #include <gswteos-10.h>
