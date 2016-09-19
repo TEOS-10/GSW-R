@@ -1,3 +1,43 @@
+How to update for a new version of GSW
+======================================
+
+The C code that provides the foundation for this is based on the [C
+version](https://github.com/TEOS-10/GSW-C), which is in turn based on the
+[Fortran version](https://github.com/TEOS-10/GSW-Fortran). Updating requires
+the following steps.
+
+
+1. Use `git` to update local copies of both the C and Fortran versions, and
+   store them somewhere convenient (in the illustrations provided here, they
+are in `~/src`, )
+2. Copy the C version
+    ```cp  ~/src/GSW-C/gsw_internal_const.h .
+    cp  ~/src/GSW-C/gsw_oceanographic_toolbox.c gsw_oceanographic_toolbox.c
+    cp  ~/src/GSW-C/gswteos-10.h gswteos-10.h 
+```
+3. Edit the toolbox to change angled bracket inclusions to double-quote inclusions, specifically, change 
+    ```#include <gswteos-10.h>
+     #include <gsw_internal_const.h>
+```
+into
+    ```#include "gswteos-10.h"
+#include "gsw_internal_const.h"
+```
+4. It is a good idea to do a test build/check at this stage. If it won't build owing to a compiler error, etc., then you will need to fix that problem before proceeding.
+5. Enter `create_data` and do
+    ```R --no-save < create_data.R
+```
+and, if that worked OK (look at the tests) then do
+    ```cp saar.rda ../data
+```
+to update the data file.
+6. Try a test build. If that fails, it will likely be due to a compiler error, and you'll need to sort that out (and report an issue). If it passes, proceed to the next step.
+7. Try a test check. This should pass with no errors, no warnings, and no notes. Otherwise, please open an issue.
+
+
+
+
+
 How to add new functions
 ========================
 
