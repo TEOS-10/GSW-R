@@ -187,7 +187,12 @@ gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
     rval
 }
                                         
-#' Thermal expansion coefficient with respect to Conservative Temperature (75-term equation)
+#' Thermal expansion coefficient with respect to Conservative Temperature
+#'
+#' Thermal expansion coefficient with respect to Conservative Temperature, using
+#' the 75-term equation for specific volume.
+#'
+#' @template teos10template
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -216,7 +221,12 @@ gsw_alpha <- function(SA, CT, p)
     rval
 }
 
-#' Thermal expansion coefficient over haline contraction coefficient (75-term equation)
+#' Thermal expansion coefficient over haline contraction coefficient
+#'
+#' Thermal expansion coefficient over haline contraction coefficient,
+#' using the 75-term equation for specific volume.
+#'
+#' @template teos10template
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -246,6 +256,10 @@ gsw_alpha_on_beta <- function(SA, CT, p)
 }
 
 #' Thermal expansion coefficient with respect to in-situ temperature
+#'
+#' Thermal expansion coefficient with respect to in-situ temperature.
+#' 
+#' @template teos10template
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90)  [ deg C ]
@@ -275,12 +289,17 @@ gsw_alpha_wrt_t_exact <- function(SA, t, p)
     rval
 }
 
-#' Saline contraction coefficient at constant Conservative Temperature (75-term equation)
+#' Haline contraction coefficient at constant Conservative Temperature
+#'
+#' Haline contraction coefficient with respect to Conservative Temperature, using
+#' the 75-term equation for specific volume.
+#' 
+#' @template teos10template
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
-#' @return saline contraction coefficient at constant Conservative Temperature [ kg/g ]
+#' @return Haline contraction coefficient at constant Conservative Temperature [ kg/g ]
 #' @examples
 #' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -291,8 +310,7 @@ gsw_alpha_wrt_t_exact <- function(SA, t, p)
 #'                           0.750420924314564, 0.754903052075032, 0.756841573481865))
 #' 
 #' @seealso
-#' The temperature analogue to this is \code{\link{gsw_alpha}}; other related functions
-#' include \code{\link{gsw_alpha_wrt_t_exact}} and \code{\link{gsw_alpha_on_beta}}.
+#' The analogue at constant in-situ temperature is \code{\link{gsw_beta_const_t_exact}}.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta.html}
 gsw_beta <- function(SA, CT, p)
@@ -307,12 +325,16 @@ gsw_beta <- function(SA, CT, p)
     rval
 }
 
-#' Saline contraction coefficient at constant in-situ temperature
+#' Haline contraction coefficient at constant in-situ temperature
+#'
+#' Haline contraction coefficient at constant in-situ temperature.
+#' 
+#' @template teos10template
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
 #' @param p sea pressure [ dbar ]
-#' @return saline contraction coefficient at constant in-situ temperature [ kg/g ]
+#' @return Haline contraction coefficient at constant in-situ temperature [ kg/g ]
 #' @examples
 #' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -322,7 +344,8 @@ gsw_beta <- function(SA, CT, p)
 #' expect_equal(b, 1e-3*c(0.731120837010429, 0.731071779078011, 0.736019128913071,
 #'                        0.753810501711847, 0.757259405338257, 0.758649268096996))
 #' @seealso
-#' A related function is \code{\link{gsw_beta}}.
+#' The analogue at constant in-situ Conservative Temperature
+#' \code{\link{gsw_beta}}.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta_const_t_exact.html}
 gsw_beta_const_t_exact <- function(SA, t, p)

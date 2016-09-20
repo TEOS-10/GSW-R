@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_beta_const_t_exact}
 \alias{gsw_beta_const_t_exact}
-\title{Saline contraction coefficient at constant in-situ temperature}
+\title{Haline contraction coefficient at constant in-situ temperature}
 \usage{
 gsw_beta_const_t_exact(SA, t, p)
 }
@@ -17,7 +17,16 @@ gsw_beta_const_t_exact(SA, t, p)
 saline contraction coefficient at constant in-situ temperature [ kg/g ]
 }
 \description{
-Saline contraction coefficient at constant in-situ temperature
+Haline contraction coefficient at constant in-situ temperature.
+}
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
 }
 \examples{
 library(testthat)
@@ -32,6 +41,7 @@ expect_equal(b, 1e-3*c(0.731120837010429, 0.731071779078011, 0.736019128913071,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta_const_t_exact.html}
 }
 \seealso{
-A related function is \code{\link{gsw_beta}}.
+The analogue at constant in-situ Conservative Temperature
+\code{\link{gsw_beta}}.
 }
 

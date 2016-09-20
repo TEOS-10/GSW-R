@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_alpha_on_beta}
 \alias{gsw_alpha_on_beta}
-\title{Thermal expansion coefficient over haline contraction coefficient (75-term equation)}
+\title{Thermal expansion coefficient over haline contraction coefficient}
 \usage{
 gsw_alpha_on_beta(SA, CT, p)
 }
@@ -17,7 +17,17 @@ gsw_alpha_on_beta(SA, CT, p)
 ratio of thermal expansion coefficient to haline contraction coefficient [ (g/kg)/K ]
 }
 \description{
-Thermal expansion coefficient over haline contraction coefficient (75-term equation)
+Thermal expansion coefficient over haline contraction coefficient,
+using the 75-term equation for specific volume.
+}
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
 }
 \examples{
 library(testthat)
