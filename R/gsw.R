@@ -2114,12 +2114,14 @@ gsw_thermobaric <- function(SA, CT, p)
 #' Turner angle and density ratio
 #'
 #' This uses the 75-term density equation. The values of Turner Angle
-#' Tu and density ratio Rrho are calculated at mid-point pressures, p_mid.
+#' Tu and density ratio Rrho are calculated at mid-point pressures, \code{p_mid}.
+#'
+#' @template teos10template
 #'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
-#' @return list containing Tu [ degrees ], Rsubrho [ unitless ], and p_mid [ dbar ]
+#' @return List containing \code{Tu} [ degrees ], \code{Rsubrho} [ unitless ], and \code{p_mid} [ dbar ]
 #' @examples
 #' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -2152,7 +2154,12 @@ gsw_Turner_Rsubrho <- function(SA, CT, p)
     list(Tu=Tu, Rsubrho=Rsubrho, p_mid=p_mid)
 }
 
-#' Height from pressure (75-term equation)
+#' Height from pressure
+#'
+#' Computation of height (above sea level) from pressure, using the 75-term equation for 
+#' specific volume.
+#'
+#' @template teos10template
 #' 
 #' @param p sea pressure [ dbar ]
 #' @param latitude latitude in decimal degrees north [ -90 ... +90 ]

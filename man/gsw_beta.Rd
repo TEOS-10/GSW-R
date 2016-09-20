@@ -14,7 +14,7 @@ gsw_beta(SA, CT, p)
 \item{p}{sea pressure [ dbar ]}
 }
 \value{
-saline contraction coefficient at constant Conservative Temperature [ kg/g ]
+Haline contraction coefficient at constant Conservative Temperature [ kg/g ]
 }
 \description{
 Haline contraction coefficient with respect to Conservative Temperature, using

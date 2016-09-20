@@ -14,11 +14,20 @@ gsw_Turner_Rsubrho(SA, CT, p)
 \item{p}{sea pressure [ dbar ]}
 }
 \value{
-list containing Tu [ degrees ], Rsubrho [ unitless ], and p_mid [ dbar ]
+List containing \code{Tu} [ degrees ], \code{Rsubrho} [ unitless ], and \code{p_mid} [ dbar ]
 }
 \description{
 This uses the 75-term density equation. The values of Turner Angle
-Tu and density ratio Rrho are calculated at mid-point pressures, p_mid.
+Tu and density ratio Rrho are calculated at mid-point pressures, \code{p_mid}.
+}
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
 }
 \examples{
 library(testthat)

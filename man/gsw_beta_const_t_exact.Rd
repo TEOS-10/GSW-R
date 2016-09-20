@@ -14,7 +14,7 @@ gsw_beta_const_t_exact(SA, t, p)
 \item{p}{sea pressure [ dbar ]}
 }
 \value{
-saline contraction coefficient at constant in-situ temperature [ kg/g ]
+Haline contraction coefficient at constant in-situ temperature [ kg/g ]
 }
 \description{
 Haline contraction coefficient at constant in-situ temperature.
