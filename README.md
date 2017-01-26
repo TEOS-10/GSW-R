@@ -1,8 +1,8 @@
 # gsw
 
-TravisCI test: [![Build Status](https://travis-ci.org/TEOS-10/GSW-R.svg?branch=master)](https://travis-ci.org/TEOS-10/GSW-R)
-
-CRAN: ![RStudio CRAN mirror downloads](http://cranlogs.r-pkg.org/badges/last-month/gsw)
+[![Build Status](https://travis-ci.org/TEOS-10/GSW-R.svg?branch=master)](https://travis-ci.org/TEOS-10/GSW-R)
+[![codecov](https://codecov.io/gh/TEOS-10/GSW-R/branch/master/graph/badge.svg)](https://codecov.io/gh/TEOS-10/GSW-R)
+![RStudio CRAN mirror downloads](http://cranlogs.r-pkg.org/badges/last-month/gsw)
 ![RStudio CRAN mirror downloads](http://cranlogs.r-pkg.org/badges/last-week/gsw)
 ![RStudio CRAN mirror downloads](http://cranlogs.r-pkg.org/badges/last-day/gsw)
 

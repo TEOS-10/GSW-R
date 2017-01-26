@@ -187,7 +187,12 @@ gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
     rval
 }
                                         
-#' Thermal expansion coefficient with respect to Conservative Temperature (75-term equation)
+#' Thermal expansion coefficient with respect to Conservative Temperature
+#'
+#' Thermal expansion coefficient with respect to Conservative Temperature, using
+#' the 75-term equation for specific volume.
+#'
+#' @template teos10template
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -216,7 +221,12 @@ gsw_alpha <- function(SA, CT, p)
     rval
 }
 
-#' Thermal expansion coefficient over haline contraction coefficient (75-term equation)
+#' Thermal expansion coefficient over haline contraction coefficient
+#'
+#' Thermal expansion coefficient over haline contraction coefficient,
+#' using the 75-term equation for specific volume.
+#'
+#' @template teos10template
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -246,6 +256,10 @@ gsw_alpha_on_beta <- function(SA, CT, p)
 }
 
 #' Thermal expansion coefficient with respect to in-situ temperature
+#'
+#' Thermal expansion coefficient with respect to in-situ temperature.
+#' 
+#' @template teos10template
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90)  [ deg C ]
@@ -275,12 +289,17 @@ gsw_alpha_wrt_t_exact <- function(SA, t, p)
     rval
 }
 
-#' Saline contraction coefficient at constant Conservative Temperature (75-term equation)
+#' Haline contraction coefficient at constant Conservative Temperature
+#'
+#' Haline contraction coefficient with respect to Conservative Temperature, using
+#' the 75-term equation for specific volume.
+#' 
+#' @template teos10template
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
-#' @return saline contraction coefficient at constant Conservative Temperature [ kg/g ]
+#' @return Haline contraction coefficient at constant Conservative Temperature [ kg/g ]
 #' @examples
 #' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -291,8 +310,7 @@ gsw_alpha_wrt_t_exact <- function(SA, t, p)
 #'                           0.750420924314564, 0.754903052075032, 0.756841573481865))
 #' 
 #' @seealso
-#' The temperature analogue to this is \code{\link{gsw_alpha}}; other related functions
-#' include \code{\link{gsw_alpha_wrt_t_exact}} and \code{\link{gsw_alpha_on_beta}}.
+#' The analogue at constant in-situ temperature is \code{\link{gsw_beta_const_t_exact}}.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta.html}
 gsw_beta <- function(SA, CT, p)
@@ -307,12 +325,16 @@ gsw_beta <- function(SA, CT, p)
     rval
 }
 
-#' Saline contraction coefficient at constant in-situ temperature
+#' Haline contraction coefficient at constant in-situ temperature
+#'
+#' Haline contraction coefficient at constant in-situ temperature.
+#' 
+#' @template teos10template
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
 #' @param p sea pressure [ dbar ]
-#' @return saline contraction coefficient at constant in-situ temperature [ kg/g ]
+#' @return Haline contraction coefficient at constant in-situ temperature [ kg/g ]
 #' @examples
 #' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -322,7 +344,8 @@ gsw_beta <- function(SA, CT, p)
 #' expect_equal(b, 1e-3*c(0.731120837010429, 0.731071779078011, 0.736019128913071,
 #'                        0.753810501711847, 0.757259405338257, 0.758649268096996))
 #' @seealso
-#' A related function is \code{\link{gsw_beta}}.
+#' The analogue at constant in-situ Conservative Temperature
+#' \code{\link{gsw_beta}}.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta_const_t_exact.html}
 gsw_beta_const_t_exact <- function(SA, t, p)
@@ -337,12 +360,16 @@ gsw_beta_const_t_exact <- function(SA, t, p)
     rval
 }
 
-#' Cabbeling coefficient (75-term equation)
+#' Cabbeling coefficient
 #' 
+#' Cabbeling coefficient (75-term equation)
+#'
+#' @template teos10template
+#'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
-#' @return cabbeling coefficient with respect to Conservative Temperature [ 1/(K^2) ]
+#' @return Cabbeling coefficient with respect to Conservative Temperature [ 1/(K^2) ]
 #' @examples
 #' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -365,12 +392,15 @@ gsw_cabbeling <- function(SA, CT, p)
         dim(rval) <- dim(SA)
     rval
 }
+
 #' Electrical conductivity from Practical Salinity
 #'
-#' Note: the return value is not conductivity ratio, but rather
-#' conductivity itself, in mS/cm.  To convert to conductivity ratio,
+#' Electrical conductivity (in mS/cm) from Practical Salinity.
+#' To convert the return value to conductivity ratio,
 #' divide by 42.9140 (the value of conductivity at S=35, T68=15, and
 #' p=0).
+#'
+#' @template teos10template
 #' 
 #' @param SP Practical Salinity (PSS-78) [ unitless ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
@@ -680,6 +710,8 @@ gsw_entropy_from_t <- function(SA, t, p)
 
 #' Gravitational acceleration
 #' 
+#' @template teos10template
+#'
 #' @param latitude latitude in decimal degress north [ -90 ... +90 ]
 #' @param p sea pressure [ dbar ]
 #' @return gravitational acceleration [ m/s^2 ]
@@ -1092,7 +1124,11 @@ gsw_pt_from_t <- function(SA, t, p, p_ref=0)
     rval
 }
 
-#' In-situ density (75-term equation)
+#' In-situ density
+#'
+#' In-situ density, using the 75-term equation for specific volume.
+#'
+#' @template teos10template
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -1317,6 +1353,8 @@ gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
 #' potential density referenced to a pressure of 0 dbar,
 #' minus 1000 kg/m^3.
 #'
+#' @template teos10template
+#'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @return potential density anomaly [ kg/m^3 ]
@@ -1347,6 +1385,8 @@ gsw_sigma0 <- function(SA, CT)
 #' This uses the 75-term density equation, and returns
 #' potential density referenced to a pressure of 1000 dbar,
 #' minus 1000 kg/m^3.
+#'
+#' @template teos10template
 #'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -1379,6 +1419,8 @@ gsw_sigma1 <- function(SA, CT)
 #' potential density referenced to a pressure of 2000 dbar,
 #' minus 1000 kg/m^3.
 #'
+#' @template teos10template
+#'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @return potential density anomaly [ kg/m^3 ]
@@ -1409,6 +1451,8 @@ gsw_sigma2 <- function(SA, CT)
 #' This uses the 75-term density equation, and returns
 #' potential density referenced to a pressure of 3000 dbar,
 #' minus 1000 kg/m^3.
+#'
+#' @template teos10template
 #'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -1441,6 +1485,8 @@ gsw_sigma3 <- function(SA, CT)
 #' potential density referenced to a pressure of 4000 dbar,
 #' minus 1000 kg/m^3.
 #'
+#' @template teos10template
+#'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @return potential density anomaly with reference pressure 4000 dbar [ kg/m^3 ]
@@ -1466,7 +1512,11 @@ gsw_sigma4 <- function(SA, CT)
     rval
 }
 
-#' Sound speed (75-term equation)
+#' Sound speed
+#'
+#' Speed of sound in seawater, using the 75-term equation for specific volume.
+#'
+#' @template teos10template
 #'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -1801,6 +1851,8 @@ gsw_SR_from_SP <- function(SP)
 #'
 #' Calculate seawater spiciness referenced to 0 dbar (i.e. the surface).
 #'
+#' @template teos10template
+#'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @return spiciness [ kg/m^3 ]
@@ -1832,6 +1884,8 @@ gsw_spiciness0 <- function(SA, CT)
 #'
 #' Calculate seawater spiciness referenced to 1000 dbar.
 #'
+#' @template teos10template
+#'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @return spiciness [ kg/m^3 ]
@@ -1862,6 +1916,8 @@ gsw_spiciness1 <- function(SA, CT)
 #' Seawater Spiciness at p=2000 dbar
 #'
 #' Calculate seawater spiciness referenced to 2000 dbar.
+#'
+#' @template teos10template
 #'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
@@ -2091,12 +2147,14 @@ gsw_thermobaric <- function(SA, CT, p)
 #' Turner angle and density ratio
 #'
 #' This uses the 75-term density equation. The values of Turner Angle
-#' Tu and density ratio Rrho are calculated at mid-point pressures, p_mid.
+#' Tu and density ratio Rrho are calculated at mid-point pressures, \code{p_mid}.
+#'
+#' @template teos10template
 #'
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param CT Conservative Temperature [ deg C ]
 #' @param p sea pressure [ dbar ]
-#' @return list containing Tu [ degrees ], Rsubrho [ unitless ], and p_mid [ dbar ]
+#' @return List containing \code{Tu} [ degrees ], \code{Rsubrho} [ unitless ], and \code{p_mid} [ dbar ]
 #' @examples
 #' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -2129,7 +2187,12 @@ gsw_Turner_Rsubrho <- function(SA, CT, p)
     list(Tu=Tu, Rsubrho=Rsubrho, p_mid=p_mid)
 }
 
-#' Height from pressure (75-term equation)
+#' Height from pressure
+#'
+#' Computation of height (above sea level) from pressure, using the 75-term equation for 
+#' specific volume.
+#'
+#' @template teos10template
 #' 
 #' @param p sea pressure [ dbar ]
 #' @param latitude latitude in decimal degrees north [ -90 ... +90 ]

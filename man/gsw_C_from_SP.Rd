@@ -17,10 +17,19 @@ gsw_C_from_SP(SP, t, p)
 electrical conductivity [ mS/cm ]
 }
 \description{
-Note: the return value is not conductivity ratio, but rather
-conductivity itself, in mS/cm.  To convert to conductivity ratio,
+Electrical conductivity (in mS/cm) from Practical Salinity.
+To convert the return value to conductivity ratio,
 divide by 42.9140 (the value of conductivity at S=35, T68=15, and
 p=0).
+}
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
 }
 \examples{
 library(testthat)
