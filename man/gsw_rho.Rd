@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_rho}
 \alias{gsw_rho}
-\title{In-situ density (75-term equation)}
+\title{In-situ density}
 \usage{
 gsw_rho(SA, CT, p)
 }
@@ -17,7 +17,16 @@ gsw_rho(SA, CT, p)
 in-situ density [ kg/m^3 ]
 }
 \description{
-In-situ density (75-term equation)
+In-situ density, using the 75-term equation for specific volume.
+}
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
 }
 \examples{
 library(testthat)
@@ -34,4 +43,3 @@ expect_equal(rho, 1e3*c(1.021839935738108, 1.022262457966867, 1.024427195413316,
 \seealso{
 \code{\link{gsw_rho_t_exact}} is similar to this, but using in-situ temperature. SA and CT may be computed from UNESCO quantities using \code{\link{gsw_SA_from_SP}} and \code{\link{gsw_CT_from_t}}. For potential density anomalies, use \code{\link{gsw_sigma0}} and related functions.
 }
-

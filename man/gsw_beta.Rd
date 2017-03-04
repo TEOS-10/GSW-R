@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_beta}
 \alias{gsw_beta}
-\title{Saline contraction coefficient at constant Conservative Temperature (75-term equation)}
+\title{Haline contraction coefficient at constant Conservative Temperature}
 \usage{
 gsw_beta(SA, CT, p)
 }
@@ -14,10 +14,20 @@ gsw_beta(SA, CT, p)
 \item{p}{sea pressure [ dbar ]}
 }
 \value{
-saline contraction coefficient at constant Conservative Temperature [ kg/g ]
+Haline contraction coefficient at constant Conservative Temperature [ kg/g ]
 }
 \description{
-Saline contraction coefficient at constant Conservative Temperature (75-term equation)
+Haline contraction coefficient with respect to Conservative Temperature, using
+the 75-term equation for specific volume.
+}
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
 }
 \examples{
 library(testthat)
@@ -33,7 +43,5 @@ expect_equal(beta, 1e-3*c(0.717521909550091, 0.717657376442386, 0.72616978574854
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta.html}
 }
 \seealso{
-The temperature analogue to this is \code{\link{gsw_alpha}}; other related functions
-include \code{\link{gsw_alpha_wrt_t_exact}} and \code{\link{gsw_alpha_on_beta}}.
+The analogue at constant in-situ temperature is \code{\link{gsw_beta_const_t_exact}}.
 }
-

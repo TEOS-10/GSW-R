@@ -31,4 +31,3 @@ expect_equal(lr, 1e-7*c(0.240199646230069, 0.238457486976761, 0.203635157319712,
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_from_CT.html}
 }
-

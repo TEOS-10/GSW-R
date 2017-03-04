@@ -37,4 +37,3 @@ expect_equal(prho, 1e3*c(1.021798145811089, 1.022052484416980, 1.023893583651958
 \seealso{
 \code{\link{gsw_rho}} and \code{\link{gsw_rho_t_exact}} compute density; \code{\link{gsw_sigma0}} and related functions compute potential density at particular pressures.
 }
-

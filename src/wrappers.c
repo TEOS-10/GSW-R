@@ -91,13 +91,22 @@ void clear_gsw_data()
 // in light of Part 2. The number in the macro name is the number of 
 // arguments sent to the C library function named 'cname'. See part 3
 // for the handling of C library functions that return void.
+//
+// Note the check for NaN values within these macros; this is necessary
+// because the GSW code does not check for NaN. (To be clear, in the
+// GSW code, there are numerous comments about checking for NaN, but they
+// refer to checking for GSW_INVALID_VALUE.)
 #define W1(wname, cname, arg1, n, rval) \
 void (wname)(double *(arg1), int *(n), double *(rval))\
 {\
     for (int i=0; i < *(n); i++) {\
-        (rval)[i] = (cname)((arg1)[i]);\
-        if ((rval)[i] == GSW_INVALID_VALUE) {\
+        if (isnan((arg1)[i])) {\
             (rval)[i] = NA_REAL;\
+        } else {\
+            (rval)[i] = (cname)((arg1)[i]);\
+            if ((rval)[i] == GSW_INVALID_VALUE) {\
+                (rval)[i] = NA_REAL;\
+            }\
         }\
     }\
 }
@@ -105,10 +114,14 @@ void (wname)(double *(arg1), int *(n), double *(rval))\
 #define W2(wname, cname, arg1, arg2, n, rval) \
 void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval))\
 {\
-   for (int i=0; i < *(n); i++) {\
-        (rval)[i] = (cname)((arg1)[i], (arg2)[i]);\
-        if ((rval)[i] == GSW_INVALID_VALUE) {\
+    for (int i=0; i < *(n); i++) {\
+        if (isnan((arg1)[i]) || isnan((arg2)[i])) {\
             (rval)[i] = NA_REAL;\
+        } else {\
+            (rval)[i] = (cname)((arg1)[i], (arg2)[i]);\
+            if ((rval)[i] == GSW_INVALID_VALUE) {\
+                (rval)[i] = NA_REAL;\
+            }\
         }\
     }\
 }
@@ -117,9 +130,13 @@ void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval))\
 void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(rval))\
 {\
     for (int i=0; i < *(n); i++) {\
-        (rval)[i] = (cname)((arg1)[i], (arg2)[i], (arg3)[i]);\
-        if ((rval)[i] == GSW_INVALID_VALUE) {\
+        if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i])) {\
             (rval)[i] = NA_REAL;\
+        } else {\
+            (rval)[i] = (cname)((arg1)[i], (arg2)[i], (arg3)[i]);\
+            if ((rval)[i] == GSW_INVALID_VALUE) {\
+                (rval)[i] = NA_REAL;\
+            }\
         }\
     }\
 }
@@ -128,9 +145,19 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(
 void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), int *(n), double *(rval))\
 {\
     for (int i=0; i < *(n); i++) {\
-        (rval)[i] = (cname)((arg1)[i], (arg2)[i], (arg3)[i], (arg4)[i]);\
-        if ((rval)[i] == GSW_INVALID_VALUE) {\
+        /*Rprintf("args: %f %f %f %f %f; i=%d; n=%d\n", (arg1)[i], (arg2)[i], (arg3)[i], (arg4)[i], i, *(n));*/\
+        /*Rprintf("invalid: %f\n", GSW_INVALID_VALUE);*/\
+        /*if (isnan((arg1)[i])) Rprintf("arg1 is NaN\n");*/\
+        /*if (isnan((arg2)[i])) Rprintf("arg2 is NaN\n");*/\
+        /*if (isnan((arg3)[i])) Rprintf("arg3 is NaN\n");*/\
+        /*if (isnan((arg4)[i])) Rprintf("arg4 is NaN\n");*/\
+        if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i]) || isnan((arg4)[i])) {\
             (rval)[i] = NA_REAL;\
+        } else {\
+            (rval)[i] = (cname)((arg1)[i], (arg2)[i], (arg3)[i], (arg4)[i]);\
+            if ((rval)[i] == GSW_INVALID_VALUE) {\
+                (rval)[i] = NA_REAL;\
+            }\
         }\
     }\
 }
@@ -139,9 +166,13 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), int
 void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), double *(arg5), int *(n), double *(rval))\
 {\
     for (int i=0; i < *(n); i++) {\
-        (rval)[i] = (cname)((arg1)[i], (arg2)[i], (arg3)[i], (arg4)[i], (arg5)[i]);\
-        if ((rval)[i] == GSW_INVALID_VALUE) {\
+        if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i]) || isnan((arg4)[i]) || isnn((arg5)[i])) {\
             (rval)[i] = NA_REAL;\
+        } else {\
+            (rval)[i] = (cname)((arg1)[i], (arg2)[i], (arg3)[i], (arg4)[i], (arg5)[i]);\
+            if ((rval)[i] == GSW_INVALID_VALUE) {\
+                (rval)[i] = NA_REAL;\
+            }\
         }\
     }\
 }

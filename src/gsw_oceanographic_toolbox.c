@@ -1,6 +1,6 @@
 /*
-**  $Id: gsw_oceanographic_toolbox.c,v ff74fd981dc9 2015/09/13 18:29:10 fdelahoyde $
-**  $Version: 3.05.0-2 $
+**  $Id: gsw_oceanographic_toolbox.c,v 9248219e2c8d 2016/08/29 23:43:19 fdelahoyde $
+**  Version: 3.05.0-3
 **
 **  This is a translation of the original f90 source code into C
 **  by the Shipboard Technical Support Computing Resources group
@@ -46,13 +46,9 @@
 
 ==========================================================================
 */
-// #include <gswteos-10.h>
-// #include <gsw_internal_const.h>
 #include "gswteos-10.h"
 #include "gsw_internal_const.h"
-#include <R.h>
-#include <Rdefines.h>
-#include <Rinternals.h>
+
 /*
 !==========================================================================
 subroutine gsw_add_barrier(input_data,lon,lat,long_grid,lat_grid,dlong_grid,dlat_grid,output_data)
@@ -3682,7 +3678,7 @@ gsw_geo_strf_dyn_height(double *sa, double *ct, double *p, double p_ref,
 {
 	GSW_TEOS10_CONSTANTS;
 	int	m_levels = (n_levels <= 0) ? 1 : n_levels,
-		p_cnt, top_pad, i, nz, ibottle, ipref, np_max, np, ibpr,
+		p_cnt, top_pad, i, nz, ibottle, ipref, np_max, np, ibpr=0,
 		*iidata;
 	double	dp_min, dp_max, p_min, p_max, max_dp_i,
 		*b, *b_av, *dp, *dp_i, *sa_i=NULL, *ct_i, *p_i,
@@ -7466,7 +7462,7 @@ void
 gsw_rho_first_derivatives_wrt_enthalpy (double sa, double ct, double p,
 	double *rho_sa, double *rho_h)
 {
-	double	rec_v2, v_h, v_sa;
+	double	rec_v2, v_h=0.0, v_sa;
 
 	if ((rho_sa != NULL) && (rho_h != NULL)) {
 
@@ -10088,7 +10084,7 @@ elemental subroutine gsw_t_freezing_first_derivatives (sa, p, &
                             saturation_fraction, tfreezing_sa, tfreezing_p)
 !==========================================================================
 !
-!  Calculates the frist derivatives of the in-situ temperature at which 
+!  Calculates the first derivatives of the in-situ temperature at which 
 !  seawater freezes with respect to Absolute Salinity SA and pressure P (in
 !  Pa).  These expressions come from differentiating the expression that
 !  defines the freezing temperature, namely the equality between the 
@@ -10139,7 +10135,7 @@ elemental subroutine gsw_t_freezing_first_derivatives_poly (sa, p, &
                             saturation_fraction, tfreezing_sa, tfreezing_p)
 !==========================================================================
 !
-!  Calculates the frist derivatives of the in-situ temperature at which 
+!  Calculates the first derivatives of the in-situ temperature at which 
 !  seawater freezes with respect to Absolute Salinity SA and pressure P (in
 !  Pa).  These expressions come from differentiating the expression that
 !  defines the freezing temperature, namely the equality between the 
@@ -10602,11 +10598,20 @@ gsw_util_linear_interp(int nx, double *x, int ny, double *y, int nxi,
 pure function gsw_util_sort_real (rarray) result(iarray)
 */
 
-static double *rdata;
-
+#if (defined __APPLE__ || defined __MACH__ || defined __DARWIN__ || \
+         defined __FREEBSD__ || defined __BSD__ || \
+	 defined _WIN32 || defined _WIN64 || defined __WINDOWS__)
 static int
-compare(const void *p1, const void *p2)
+compare(void *rarray, const void *p1, const void *p2)
+#else
+
+extern void qsort_r(void *, size_t, size_t, int (*)(const void *, const void *,
+			void *), void *);
+static int
+compare(const void *p1, const void *p2, void *rarray)
+#endif
 {
+	double	*rdata = rarray;
 	if (rdata[*(int *)p1] < rdata[*(int *)p2])
 	    return (-1);
 	if (rdata[*(int *)p1] > rdata[*(int *)p2])
@@ -10621,6 +10626,11 @@ compare(const void *p1, const void *p2)
 	return (0);
 }
 
+/*
+**  Sort the double array rarray into ascending value sequence
+**  returning an index array of the sorted result.  This function
+**  is thread-safe.
+*/
 void
 gsw_util_sort_real(double *rarray, int nx, int *iarray)
 {
@@ -10628,8 +10638,14 @@ gsw_util_sort_real(double *rarray, int nx, int *iarray)
 
 	for (i=0; i<nx; i++)
 	    iarray[i] = i;
-	rdata = rarray;
-	qsort(iarray,nx,sizeof (int),compare);
+#if (defined __APPLE__ || defined __MACH__ || defined __DARWIN__ || \
+         defined __FREEBSD__ || defined __BSD__ )
+	qsort_r(iarray, nx, sizeof (int), (void *)rarray, compare);
+#elif (defined _WIN32 || defined _WIN64 || defined __WINDOWS__)
+	qsort_s(iarray, nx, sizeof (int), compare, (void *)rarray);
+#else
+	qsort_r(iarray, nx, sizeof (int), compare, (void *)rarray);
+#endif
 }
 /*
 !==========================================================================

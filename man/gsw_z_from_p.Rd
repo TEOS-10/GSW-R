@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_z_from_p}
 \alias{gsw_z_from_p}
-\title{Height from pressure (75-term equation)}
+\title{Height from pressure}
 \usage{
 gsw_z_from_p(p, latitude)
 }
@@ -15,7 +15,17 @@ gsw_z_from_p(p, latitude)
 height [ m ]
 }
 \description{
-Height from pressure (75-term equation)
+Computation of height (above sea level) from pressure, using the 75-term equation for 
+specific volume.
+}
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
 }
 \examples{
 library(testthat)
@@ -29,4 +39,3 @@ expect_equal(z, 1e2*c(-0.099445834469453, -0.497180897012550, -1.242726219409978
 \seealso{
 This is (almost) the reverse of \code{\link{gsw_p_from_z}}
 }
-

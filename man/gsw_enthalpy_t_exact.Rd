@@ -34,4 +34,3 @@ expect_equal(e, 1e5*c(1.151032604783763, 1.140148036012021, 0.921799209310966,
 \seealso{
 \code{\link{gsw_enthalpy}} and \code{\link{gsw_dynamic_enthalpy}}
 }
-

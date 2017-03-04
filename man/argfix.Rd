@@ -23,4 +23,3 @@ otherwise the underlying C code will be looking past the end of
 the vectors storing longitude and latitude, which can yield odd
 results or even segmentation faults.
 }
-

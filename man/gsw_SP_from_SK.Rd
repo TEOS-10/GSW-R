@@ -28,4 +28,3 @@ expect_equal(SP, c(34.548342096952908, 34.727295637119113, 34.860409847645435,
 \seealso{
 \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SR}} and \code{\link{gsw_SP_from_Sstar}}.
 }
-

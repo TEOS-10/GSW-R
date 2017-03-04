@@ -28,4 +28,3 @@ expect_equal(SR, c(34.711611927085727, 34.891255045714303, 35.024882197714305,
 \seealso{
 The reverse is \code{\link{gsw_SP_from_SR}}; also related are \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SK}} and \code{\link{gsw_SP_from_Sstar}}.
 }
-

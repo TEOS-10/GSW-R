@@ -34,4 +34,3 @@ expect_equal(SP,  c(20.009869599086951, 20.265511864874270, 22.981513062527689,
 \seealso{
 \code{\link{gsw_C_from_SP}} does the reverse.
 }
-

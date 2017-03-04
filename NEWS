@@ -1,4 +1,5 @@
 1.0-4
+- handle NaN values better
 - add gsw_spiciness0, gsw_spiciness1, gsw_spiciness2 
 - updated for GSW version 3.05
 

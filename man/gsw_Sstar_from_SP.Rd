@@ -43,4 +43,3 @@ expect_equal(Sstar, c(34.711553680880769, 34.891161395333754, 35.024650265047370
 \seealso{
 \code{\link{gsw_SP_from_Sstar}} does the reverse; \code{\link{gsw_Sstar_from_SA}} is similar.
 }
-
