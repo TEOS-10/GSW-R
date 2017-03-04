@@ -34,4 +34,3 @@ expect_equal(t, c(28.785580227725703, 28.432872246163946, 22.810323087627076,
 \seealso{
 \code{\link{gsw_CT_from_t}} does the reverse.
 }
-

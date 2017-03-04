@@ -32,4 +32,3 @@ expect_equal(cp_t_exact, 1e3*c(4.002888003958537, 4.000980283927373, 3.995546468
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_cp_t_exact.html}
 }
-

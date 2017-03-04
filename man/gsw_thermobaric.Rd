@@ -32,4 +32,3 @@ expect_equal(tb, 1e-11 * c(0.152618598186650, 0.153662896162852, 0.1734293258757
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_thermobaric.html}
 }
-

@@ -39,4 +39,3 @@ expect_equal(z, 1e2*c(-0.099445834469453, -0.497180897012550, -1.242726219409978
 \seealso{
 This is (almost) the reverse of \code{\link{gsw_p_from_z}}
 }
-

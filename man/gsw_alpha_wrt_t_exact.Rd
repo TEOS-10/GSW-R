@@ -44,4 +44,3 @@ expect_equal(alpha_wrt_t_exact, 1e-3*c(0.325601747227247, 0.323448083851267, 0.2
 \seealso{
 \code{\link{gsw_alpha}}, \code{\link{gsw_beta}} and \code{\link{gsw_alpha_on_beta}}
 }
-

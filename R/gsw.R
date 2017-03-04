@@ -181,7 +181,7 @@ gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_adiabatic_lapse_rate_from_CT",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -215,7 +215,7 @@ gsw_alpha <- function(SA, CT, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_alpha",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -249,7 +249,7 @@ gsw_alpha_on_beta <- function(SA, CT, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_alpha_on_beta",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -283,7 +283,7 @@ gsw_alpha_wrt_t_exact <- function(SA, t, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_alpha_wrt_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -319,7 +319,7 @@ gsw_beta <- function(SA, CT, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_beta",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -354,7 +354,7 @@ gsw_beta_const_t_exact <- function(SA, t, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_beta_const_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -387,7 +387,7 @@ gsw_cabbeling <- function(SA, CT, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_cabbeling",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -423,7 +423,7 @@ gsw_C_from_SP <- function(SP, t, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_C_from_SP",
                SP=as.double(l$SP), t=as.double(l$t), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SP))
         dim(rval) <- dim(SP)
     rval
@@ -452,7 +452,7 @@ gsw_cp_t_exact <- function(SA, t, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_cp_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -482,7 +482,7 @@ gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_CT_freezing",
                SA=as.double(l$SA), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -510,7 +510,7 @@ gsw_CT_from_pt <- function(SA, pt)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_CT_from_pt",
                SA=as.double(l$SA), pt=as.double(l$pt),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -540,7 +540,7 @@ gsw_CT_from_t <- function(SA, t, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_CT_from_t",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -577,7 +577,7 @@ gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
     rval <- .C("wrap_gsw_deltaSA_from_SP",
                SP=as.double(l$SP), p=as.double(l$p),
                longitude=as.double(l$longitude), latitude=as.double(l$latitude),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SP))
         dim(rval) <- dim(SP)
     rval
@@ -607,7 +607,7 @@ gsw_dynamic_enthalpy <- function(SA, CT, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_dynamic_enthalpy",
                SA=as.double(l$SA), t=as.double(l$CT), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -637,7 +637,7 @@ gsw_enthalpy <- function(SA, CT, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_enthalpy",
                SA=as.double(l$SA), t=as.double(l$CT), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -667,7 +667,7 @@ gsw_enthalpy_t_exact <- function(SA, t, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_enthalpy_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -702,7 +702,7 @@ gsw_entropy_from_t <- function(SA, t, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_entropy_from_t",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -729,7 +729,7 @@ gsw_grav <- function(latitude, p=0)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_grav",
                latitude=as.double(l$latitude), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(latitude))
         dim(rval) <- dim(latitude)
     rval
@@ -757,7 +757,7 @@ gsw_internal_energy <- function(SA, CT, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_internal_energy",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -793,7 +793,7 @@ gsw_IPV_vs_fNsquared_ratio <- function(SA, CT, p, p_ref=0)
     r <- .C("wrap_gsw_IPV_vs_fNsquared_ratio",
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), p_ref=as.double(l$p_ref[1]),
             n=as.integer(n),
-            ratio=double(n-1), p_mid=double(n-1), NAOK=TRUE, package="gsw")
+            ratio=double(n-1), p_mid=double(n-1), NAOK=TRUE, PACKAGE="gsw")
     if (is.matrix(SA))
         stop("gsw_IPV_vs_fNsquared_ratio() cannot handle matrix SA")
     list(IPV_vs_fNsquared_ratio=r$ratio, p_mid=r$p_mid)
@@ -822,7 +822,7 @@ gsw_kappa <- function(SA, CT, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_kappa",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -851,7 +851,7 @@ gsw_kappa_t_exact <- function(SA, t, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_kappa_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -878,7 +878,7 @@ gsw_latentheat_evap_CT <- function(SA, CT)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_latentheat_evap_CT",
                SA=as.double(l$SA), CT=as.double(l$CT),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -905,7 +905,7 @@ gsw_latentheat_evap_t <- function(SA, t)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_latentheat_evap_t",
                SA=as.double(l$SA), t=as.double(l$t),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -932,7 +932,7 @@ gsw_latentheat_melting <- function(SA, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_latentheat_melting",
                SA=as.double(l$SA), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -965,7 +965,7 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
     n <- length(l[[1]])
     r <- .C("wrap_gsw_Nsquared",
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), latitude=as.double(l$latitude),
-            n=as.integer(n), n2=double(n-1), p_mid=double(n-1), NAOK=TRUE, package="gsw")
+            n=as.integer(n), n2=double(n-1), p_mid=double(n-1), NAOK=TRUE, PACKAGE="gsw")
     if (is.matrix(SA))
         stop("gsw_Nsquared() cannot handle matrix SA")
     list(N2=r$n2, p_mid=r$p_mid)
@@ -999,7 +999,7 @@ gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height=0, sea_surface_geopote
                z=as.double(l$z), latitude=as.double(l$latitude),
                geo_strf_dyn_height=as.double(l$geo_strf_dyn_height),
                sea_surface_geopotential=as.double(l$sea_surface_geopotential),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(z))
         dim(rval) <- dim(z)
     rval
@@ -1031,7 +1031,7 @@ gsw_pot_rho_t_exact <- function(SA, t, p, p_ref)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_pot_rho_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p), pref=as.double(l$p_ref),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1060,7 +1060,7 @@ gsw_pt0_from_t <- function(SA, t, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_pt0_from_t",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1087,7 +1087,7 @@ gsw_pt_from_CT <- function(SA, CT)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_pt_from_CT",
                SA=as.double(l$SA), t=as.double(l$CT),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1118,7 +1118,7 @@ gsw_pt_from_t <- function(SA, t, p, p_ref=0)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_pt_from_t",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p), p_ref=as.double(l$p_ref),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1151,7 +1151,7 @@ gsw_rho <- function(SA, CT, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_rho",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1184,7 +1184,7 @@ gsw_rho_first_derivatives <- function(SA, CT, p)
     rval <- .C("wrap_gsw_rho_first_derivatives",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
                n=n, drho_dSA=double(n), drho_dCT=double(n), drho_dp=double(n),
-               NAOK=TRUE, package="gsw")
+               NAOK=TRUE, PACKAGE="gsw")
     if (is.matrix(SA))
         stop("gsw_rho_first_derivatives() cannot handle matrix SA")
     list(drho_dSA=rval$drho_dSA, drho_dCT=rval$drho_dCT, drho_dp=rval$drho_dp)
@@ -1213,7 +1213,7 @@ gsw_rho_t_exact <- function(SA, t, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_rho_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1241,7 +1241,7 @@ gsw_SA_from_rho <- function(rho, CT, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_SA_from_rho",
                SA=as.double(l$rho), CT=as.double(l$CT), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(rho))
         dim(rval) <- dim(rho)
     rval
@@ -1291,7 +1291,7 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
     rval <- .C("wrap_gsw_SA_from_SP",
                SP=as.double(l$SP), p=as.double(l$p),
                longitude=as.double(l$longitude), latitude=as.double(l$latitude),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SP))
         dim(rval) <- dim(SP)
     rval
@@ -1341,7 +1341,7 @@ gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
     rval <- .C("wrap_gsw_SA_from_Sstar",
                Sstar=as.double(l$Sstar), p=as.double(l$p),
                longitude=as.double(l$longitude), latitude=as.double(l$latitude),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(Sstar))
         dim(rval) <- dim(Sstar)
     rval
@@ -1374,7 +1374,7 @@ gsw_sigma0 <- function(SA, CT)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_sigma0",
                SA=as.double(l$SA), CT=as.double(l$CT),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1407,7 +1407,7 @@ gsw_sigma1 <- function(SA, CT)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_sigma1",
                SA=as.double(l$SA), CT=as.double(l$CT),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1440,7 +1440,7 @@ gsw_sigma2 <- function(SA, CT)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_sigma2",
                SA=as.double(l$SA), CT=as.double(l$CT),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1473,7 +1473,7 @@ gsw_sigma3 <- function(SA, CT)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_sigma3",
                SA=as.double(l$SA), CT=as.double(l$CT),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1506,7 +1506,7 @@ gsw_sigma4 <- function(SA, CT)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_sigma4",
                SA=as.double(l$SA), CT=as.double(l$CT),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1539,7 +1539,7 @@ gsw_sound_speed<- function(SA, CT, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_sound_speed",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1568,7 +1568,7 @@ gsw_sound_speed_t_exact <- function(SA, t, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_sound_speed_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1622,7 +1622,7 @@ gsw_specvol_anom_standard <- function(SA, CT, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_specvol_anom_standard", # FIXME: why the "standard" in name?
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1651,7 +1651,7 @@ gsw_specvol_t_exact  <- function(SA, t, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_specvol_t_exact",
                SA=as.double(l$SA), CT=as.double(l$t), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1680,7 +1680,7 @@ gsw_SP_from_C <- function(C, t, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_SP_from_C",
                C=as.double(l$C), t=as.double(l$t), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(C))
         dim(rval) <- dim(C)
     rval
@@ -1732,7 +1732,7 @@ gsw_SP_from_SA <- function(SA, p, longitude, latitude)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_SP_from_SA",
                SA=as.double(l$SA), p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
-               n=n, SP=double(n), NAOK=TRUE, package="gsw")$SP
+               n=n, SP=double(n), NAOK=TRUE, PACKAGE="gsw")$SP
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1756,7 +1756,7 @@ gsw_SP_from_SK <- function(SK)
     if (missing(SK)) stop("must supply SK")
     n <- length(SK)
     rval <- .C("wrap_gsw_SP_from_SK",
-               SA=as.double(SK), n=as.integer(n), SP=double(n), NAOK=TRUE, package="gsw")$SP
+               SA=as.double(SK), n=as.integer(n), SP=double(n), NAOK=TRUE, PACKAGE="gsw")$SP
     if (is.matrix(SK))
         dim(rval) <- dim(SK)
     rval
@@ -1780,7 +1780,7 @@ gsw_SP_from_SR <- function(SR)
     if (missing(SR)) stop("must supply SR")
     n <- length(SR)
     rval <- .C("wrap_gsw_SP_from_SR",
-               SA=as.double(SR), n=as.integer(n), SP=double(n), NAOK=TRUE, package="gsw")$SP
+               SA=as.double(SR), n=as.integer(n), SP=double(n), NAOK=TRUE, PACKAGE="gsw")$SP
     if (is.matrix(SR))
         dim(rval) <- dim(SR)
     rval
@@ -1816,7 +1816,7 @@ gsw_SP_from_Sstar <- function(Sstar, p, longitude, latitude)
     n <- length(Sstar)
     rval <- .C("wrap_gsw_SP_from_Sstar",
                Sstar=as.double(l$Sstar), p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(Sstar))
         dim(rval) <- dim(Sstar)
     rval
@@ -1840,7 +1840,7 @@ gsw_SR_from_SP <- function(SP)
     if (missing(SP)) stop("must supply SP")
     n <- length(SP)
     rval <- .C("wrap_gsw_SR_from_SP",
-               SP=as.double(SP), n=as.integer(n), SR=double(n), NAOK=TRUE, package="gsw")$SR
+               SP=as.double(SP), n=as.integer(n), SR=double(n), NAOK=TRUE, PACKAGE="gsw")$SR
     if (is.matrix(SP))
         dim(rval) <- dim(SP)
     rval
@@ -1874,7 +1874,7 @@ gsw_spiciness0 <- function(SA, CT)
     l <- argfix(list(SA=SA, CT=CT))
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_spiciness0",
-               SA=as.double(l$SA), CT=as.double(l$CT), n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               SA=as.double(l$SA), CT=as.double(l$CT), n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1907,7 +1907,7 @@ gsw_spiciness1 <- function(SA, CT)
     l <- argfix(list(SA=SA, CT=CT))
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_spiciness1",
-               SA=as.double(l$SA), CT=as.double(l$CT), n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               SA=as.double(l$SA), CT=as.double(l$CT), n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1940,7 +1940,7 @@ gsw_spiciness2 <- function(SA, CT)
     l <- argfix(list(SA=SA, CT=CT))
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_spiciness2",
-               SA=as.double(l$SA), CT=as.double(l$CT), n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               SA=as.double(l$SA), CT=as.double(l$CT), n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1993,7 +1993,7 @@ gsw_Sstar_from_SA <- function(SA, p, longitude, latitude)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_Sstar_from_SA",
                SA=as.double(l$SA), p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -2044,7 +2044,7 @@ gsw_Sstar_from_SP <- function(SP, p, longitude, latitude)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_Sstar_from_SP",
                SP=as.double(l$SP), p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SP))
         dim(rval) <- dim(SP)
     rval
@@ -2078,7 +2078,7 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_t_freezing",
                SA=as.double(l$SA), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -2107,7 +2107,7 @@ gsw_t_from_CT <- function(SA, CT, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_t_from_CT",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -2138,7 +2138,7 @@ gsw_thermobaric <- function(SA, CT, p)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_thermobaric",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -2212,7 +2212,7 @@ gsw_z_from_p <- function(p, latitude)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_z_from_p",
                p=as.double(l$p), lat=as.double(l$latitude),
-               n=n, rval=double(n), NAOK=TRUE, package="gsw")$rval
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(p))
         dim(rval) <- dim(p)
     rval

@@ -43,4 +43,3 @@ expect_equal(sound_speed, 1e3*c(1.542426412426373, 1.542558891663385, 1.53080153
 \seealso{
 \code{\link{gsw_sound_speed_t_exact}} for a precise formula using in-situ temperature
 }
-

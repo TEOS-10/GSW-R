@@ -37,4 +37,3 @@ expect_equal(e, 100*c(4.003894252787245, 3.954381784340642, 3.198664981986740,
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_from_t.html}
 }
-

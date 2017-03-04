@@ -34,4 +34,3 @@ expect_equal(kappa, 1e-9*c(0.411343648791300, 0.411105416128094, 0.4165662360266
 \seealso{
 \code{\link{gsw_kappa}} is an analogue in terms of Conservative Temperature
 }
-

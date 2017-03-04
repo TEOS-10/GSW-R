@@ -37,4 +37,3 @@ expect_equal(p_mid, c(30, 87.5, 187.5, 425, 800))
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_Nsquared.html}
 }
-

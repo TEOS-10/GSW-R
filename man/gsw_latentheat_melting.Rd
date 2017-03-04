@@ -31,4 +31,3 @@ expect_equal(lh, 1e5*c(3.299496680271213, 3.298613352397986, 3.297125622834541,
 \seealso{
 \code{\link{gsw_latentheat_evap_CT}} and \code{\link{gsw_latentheat_evap_t}} are analogues for evaporation.
 }
-

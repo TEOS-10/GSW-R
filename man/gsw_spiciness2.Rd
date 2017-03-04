@@ -41,4 +41,3 @@ expect_equal(spiciness, c(6.874671751873180, 6.884616399155135, 5.15445889238708
 \code{\link{gsw_spiciness0}} and \code{\link{gsw_spiciness1}} for calculations
 at 0 dbar and 1000 dbar.
 }
-

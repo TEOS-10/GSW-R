@@ -31,4 +31,3 @@ expect_equal(SA, c(34.712080120418108, 34.891723808488869, 35.026202257609505,
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_rho.html}
 }
-

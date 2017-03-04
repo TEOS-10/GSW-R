@@ -43,4 +43,3 @@ expect_equal(rho, 1e3*c(1.021839935738108, 1.022262457966867, 1.024427195413316,
 \seealso{
 \code{\link{gsw_rho_t_exact}} is similar to this, but using in-situ temperature. SA and CT may be computed from UNESCO quantities using \code{\link{gsw_SA_from_SP}} and \code{\link{gsw_CT_from_t}}. For potential density anomalies, use \code{\link{gsw_sigma0}} and related functions.
 }
-

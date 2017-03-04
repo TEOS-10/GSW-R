@@ -35,4 +35,3 @@ expect_equal(a, 1e-5*c(0.601051894897400, 0.578609769250563, 0.405600538950092,
 \seealso{
 Specific volume itself is given by \code{\link{gsw_specvol}} and \code{\link{gsw_specvol_t_exact}}.
 }
-

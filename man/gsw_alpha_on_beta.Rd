@@ -44,4 +44,3 @@ expect_equal(alpha_on_beta, c(0.452468543022009, 0.449601695030057, 0.3871402030
 \seealso{
 This yields the ratio of the return values from \code{\link{gsw_alpha}} and \code{\link{gsw_beta}}, to within computational precision.
 }
-
