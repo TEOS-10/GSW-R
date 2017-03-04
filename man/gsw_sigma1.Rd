@@ -42,4 +42,3 @@ expect_equal(sigma1, c(25.955618850310202, 26.213131422420247, 28.12542377518843
 \seealso{
 Use \code{\link{gsw_sigma0}} for 0 dbar pressure, \code{\link{gsw_sigma2}} for 2000 dbar, \code{\link{gsw_sigma3}} for 3000 dbar, or \code{\link{gsw_sigma4}} for 4000 dbar.
 }
-

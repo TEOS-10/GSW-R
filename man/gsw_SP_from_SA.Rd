@@ -46,4 +46,3 @@ expect_equal(SP, c(34.548721553448317, 34.727477488096639, 34.860554877708005,
 \seealso{
 \code{\link{gsw_SA_from_SP}} does the reverse, while \code{\link{gsw_SP_from_SK}}, \code{\link{gsw_SP_from_SR}} and \code{\link{gsw_SP_from_Sstar}} are similar to this.
 }
-

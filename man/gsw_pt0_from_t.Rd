@@ -34,4 +34,3 @@ expect_equal(pt0, c(28.783196819670632, 28.420983342398962, 22.784930399117108,
 \seealso{
 \code{\link{gsw_pt_from_CT}} and \code{\link{gsw_pt_from_t}}
 }
-

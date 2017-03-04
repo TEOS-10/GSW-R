@@ -44,4 +44,3 @@ expect_equal(alpha, 1e-3 * c( 0.324464211877393, 0.322610094680523, 0.2813350302
 \seealso{
 The salinity analogue to this is \code{\link{gsw_beta}}; other related functions include \code{\link{gsw_beta_const_t_exact}}, \code{\link{gsw_alpha_wrt_t_exact}} and \code{\link{gsw_alpha_on_beta}}.
 }
-

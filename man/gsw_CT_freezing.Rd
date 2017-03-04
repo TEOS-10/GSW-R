@@ -34,4 +34,3 @@ expect_equal(CT_freezing, c(-1.899683776424096, -1.940791867869104, -2.006240664
 \seealso{
 \code{\link{gsw_t_freezing}} is the analogue for in-situ temperature.
 }
-

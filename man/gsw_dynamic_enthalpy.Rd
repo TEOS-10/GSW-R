@@ -34,4 +34,3 @@ expect_equal(de, 1e3*c(0.097864698087770, 0.489161476686235, 1.220512192086506,
 \seealso{
 \code{\link{gsw_enthalpy}} and \code{\link{gsw_enthalpy_t_exact}}
 }
-

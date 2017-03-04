@@ -36,4 +36,3 @@ expect_equal(grav, c(9.832186205884799, 9.819178859991149,
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_grav.html}
 }
-

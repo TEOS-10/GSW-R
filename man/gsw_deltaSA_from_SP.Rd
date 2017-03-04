@@ -37,4 +37,3 @@ expect_equal(deltaSA, c(0.000167203365230, 0.000268836122231, 0.000665803155705,
 \seealso{
 \code{\link{gsw_SA_from_SP}}
 }
-

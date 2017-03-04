@@ -31,4 +31,3 @@ expect_equal(lh, 1e6*c(2.429882982734836, 2.430730236218543, 2.444217294049004,
 \seealso{
 \code{\link{gsw_latentheat_evap_CT}} is an analogue in terms of Conservative Temperature. For melting, see \code{\link{gsw_latentheat_melting}}.
 }
-

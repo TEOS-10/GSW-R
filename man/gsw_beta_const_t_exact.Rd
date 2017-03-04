@@ -44,4 +44,3 @@ expect_equal(b, 1e-3*c(0.731120837010429, 0.731071779078011, 0.736019128913071,
 The analogue at constant in-situ Conservative Temperature
 \code{\link{gsw_beta}}.
 }
-

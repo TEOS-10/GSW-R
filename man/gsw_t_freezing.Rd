@@ -37,4 +37,3 @@ expect_equal(tf, c(-1.902730710149803, -1.942908619287183, -2.006861069199743,
 \seealso{
 \code{\link{gsw_CT_freezing}} is the analogue for Conservative Temperature.
 }
-

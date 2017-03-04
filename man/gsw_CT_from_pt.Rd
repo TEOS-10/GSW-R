@@ -31,4 +31,3 @@ expect_equal(CT, c(28.809923015982083, 28.439144260767169, 22.786246608464264,
 \seealso{
 \code{\link{gsw_CT_from_t}} calculates Conservative Temperature from in-situ temperature
 }
-

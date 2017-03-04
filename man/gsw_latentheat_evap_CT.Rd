@@ -31,4 +31,3 @@ expect_equal(lh, 1e6*c(2.429947107462561, 2.430774073049213, 2.444220372158452,
 \seealso{
 \code{\link{gsw_latentheat_evap_t}} is an analogue in terms of in-situ temperature. For melting, see \code{\link{gsw_latentheat_melting}}.
 }
-

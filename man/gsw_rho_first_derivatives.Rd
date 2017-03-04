@@ -35,4 +35,3 @@ expect_equal(r$drho_dp, 1e-6*c(0.420302360738476, 0.420251070273888, 0.426773054
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_first_derivatives.html}
 }
-

@@ -31,4 +31,3 @@ expect_equal(pt, c(28.783177048624573, 28.420955597191984, 22.784953468087107,
 \seealso{
 \code{\link{gsw_pt0_from_t}} for the surface case and and \code{\link{gsw_pt_from_t}} for the general case.
 }
-

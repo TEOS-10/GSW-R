@@ -14,6 +14,9 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+<!-- edit vignettes/gsw.Rmd then run with -->
+<!-- devtools::build_vignettes() -->
+<!-- in the console. -->
 
 ```{r echo=FALSE}
 # Developer notes (in R because Rmarkdown lacks comments!)
@@ -24,8 +27,8 @@ vignette: >
 ```
 
 **Abstract.** The `gsw` package provides an R implementation of the Gibbs
-SeaWater toolbox for the calculation of seawater properties.  This vignette
-outlines how to use `gsw` alone or as part of the `oce` package.
+SeaWater toolbox for the calculation of seawater properties (version 3.05).
+This vignette outlines how to use `gsw` alone or as part of the `oce` package.
 
 ## Introduction
 
@@ -81,16 +84,17 @@ SA <- gsw_SA_from_SP(SP=35, p=100, longitude=188, latitude=4)
 ```
 
 This yields 
-`SA`=`r sprintf("%.4f", SA)` [g/kg], which can then be used to 
+`SA`=`r SA` [g/kg], which can then be used to 
 calculate Conservative Temperature as follows.
 
 ```{r}
 CT <- gsw_CT_from_t(SA=SA, t=10, p=100)
 ```
 
-The above yields `CT`=`r sprintf("%.4f", CT)` [$^\circ$C]. Readers familiar with
+The above yields `CT`=`r CT` [$^\circ$C]. Readers familiar with
 GSW will recognize the function and argument names, and are likely to find the
-other functions needed for their work among the roughly 60 that `gsw` provides.
+other functions needed for their work among the roughly sixty functions that
+`gsw` provides.
 
 ## Using gsw within oce
 

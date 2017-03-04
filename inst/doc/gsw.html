@@ -12,7 +12,7 @@
 
 <meta name="author" content="Dan Kelley and Clark Richards" />
 
-<meta name="date" content="2016-07-16" />
+<meta name="date" content="2017-03-04" />
 
 <title>gsw</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">gsw</h1>
 <h4 class="author"><em>Dan Kelley and Clark Richards</em></h4>
-<h4 class="date"><em>2016-07-16</em></h4>
+<h4 class="date"><em>2017-03-04</em></h4>
 
 
 <div id="TOC">
@@ -82,7 +82,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </div>
 
-<p><strong>Abstract.</strong> The <code>gsw</code> package provides an R implementation of the Gibbs SeaWater toolbox for the calculation of seawater properties. This vignette outlines how to use <code>gsw</code> alone or as part of the <code>oce</code> package.</p>
+<!-- edit vignettes/gsw.Rmd then run with -->
+<!-- devtools::build_vignettes() -->
+<!-- in the console. -->
+<p><strong>Abstract.</strong> The <code>gsw</code> package provides an R implementation of the Gibbs SeaWater toolbox for the calculation of seawater properties (version 3.05). This vignette outlines how to use <code>gsw</code> alone or as part of the <code>oce</code> package.</p>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
 <p>In recent years, thermodynamic considerations have led to improved formulae for the calculation of seawater properties (IOC, 2010; Millero et al 2010), an important component of which is the Gibbs-SeaWater (GSW) toolbox (McDougall 2011; Pawlowicz et al 2012). The <code>gsw</code> package is an R version of GSW, which may be used independently or within the more general <code>oce</code> package (Kelley and Richards 2016).</p>
@@ -96,9 +99,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Suppose a water sample taken at pressure (For practical reasons, <code>gsw</code> goes beyond SI to incorporate oceanographic units, such as decibars for pressure.) 100 dbar, longitude 188E and latitude 4N, reveals Practical Salinity 35 and in-situ temperature 10<span class="math inline">\(^\circ\)</span>C (ITS-90). Then the Absolute Salinity may be calculated as follows.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gsw)
 SA &lt;-<span class="st"> </span><span class="kw">gsw_SA_from_SP</span>(<span class="dt">SP=</span><span class="dv">35</span>, <span class="dt">p=</span><span class="dv">100</span>, <span class="dt">longitude=</span><span class="dv">188</span>, <span class="dt">latitude=</span><span class="dv">4</span>)</code></pre></div>
-<p>This yields <code>SA</code>=35.1655 [g/kg], which can then be used to calculate Conservative Temperature as follows.</p>
+<p>This yields <code>SA</code>=35.1655491 [g/kg], which can then be used to calculate Conservative Temperature as follows.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">CT &lt;-<span class="st"> </span><span class="kw">gsw_CT_from_t</span>(<span class="dt">SA=</span>SA, <span class="dt">t=</span><span class="dv">10</span>, <span class="dt">p=</span><span class="dv">100</span>)</code></pre></div>
-<p>The above yields <code>CT</code>=9.9782 [<span class="math inline">\(^\circ\)</span>C]. Readers familiar with GSW will recognize the function and argument names, and are likely to find the other functions needed for their work among the roughly 60 that <code>gsw</code> provides.</p>
+<p>The above yields <code>CT</code>=9.9782488 [<span class="math inline">\(^\circ\)</span>C]. Readers familiar with GSW will recognize the function and argument names, and are likely to find the other functions needed for their work among the roughly sixty functions that <code>gsw</code> provides.</p>
 </div>
 <div id="using-gsw-within-oce" class="section level2">
 <h2>Using gsw within oce</h2>

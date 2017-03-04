@@ -45,4 +45,3 @@ expect_equal(beta, 1e-3*c(0.717521909550091, 0.717657376442386, 0.72616978574854
 \seealso{
 The analogue at constant in-situ temperature is \code{\link{gsw_beta_const_t_exact}}.
 }
-

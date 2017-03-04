@@ -41,4 +41,3 @@ expect_equal(cabbeling, 1e-4*c(0.086645721047423, 0.086837829466794, 0.092525582
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_cabbeling.html}
 }
-

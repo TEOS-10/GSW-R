@@ -34,4 +34,3 @@ expect_equal(rho, 1e3*c(1.021840173185531, 1.022262689926782, 1.024427715941676,
 \seealso{
 \code{\link{gsw_rho}} is similar but uses SA and CT; SA may be computed from UNESCO quantities using \code{\link{gsw_SA_from_SP}}.
 }
-
