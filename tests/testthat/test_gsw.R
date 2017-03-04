@@ -1,7 +1,10 @@
+## vim:textwidth=80:expandtab:shiftwidth=2:softtabstop=2
 library(gsw)
-library(testthat)
+
 ## These tests compare with check values on the TEOS-10 website, at the 
 ## links provided in the R documentation of each function.
+
+context("TEOS-10")
 
 test_that("handle NaN values", {
           expect_equal(c(35.16579718, NA), gsw_SA_from_SP(SP=c(35, 35), p=c(100,100), longitude=c(-30,NA), latitude=c(45,30)))
