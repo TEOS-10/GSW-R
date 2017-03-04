@@ -1,6 +1,6 @@
 Package: gsw
 Version: 1.0-4
-Date: 2016-09-14
+Date: 2017-01-27
 Title: Gibbs Sea Water Functions
 Authors@R: c(person("Dan", "Kelley", role=c("aut","cre","cph"), email="dan.kelley@dal.ca", comment="C wrapper plus R code, tests, and documentation"), person("Clark", "Richards", role=c("aut","cph"), email="clark.richards@gmail.com", comment="C wrapper plus R code, tests, and documentation"), person("WG127", "SCOR/IAPSO", role=c("aut","cph"), comment="Original 'Matlab' and derived code"))
 Copyright: Original algorithms and 'Matlab'/C library (c) 2014 WG127 SCOR/IAPSO
@@ -14,7 +14,7 @@ Depends:
 Suggests: 
     knitr
 BugReports: https://github.com/TEOS-10/GSW-R/issues
-Description: Provides an interface to the Gibbs 'SeaWater' ('TEOS-10') C library,
+Description: Provides an interface to the Gibbs 'SeaWater' ('TEOS-10') C library, version 3.05,
     which derives from 'Matlab' and other code written by Working Group 127 of
     'SCOR'/'IAPSO' (Scientific Committee on Oceanic Research / International Association
     for the Physical Sciences of the Oceans).
