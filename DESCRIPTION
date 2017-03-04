@@ -9,10 +9,10 @@ Copyright: Original algorithms and 'Matlab'/C library (c) 2014 WG127 SCOR/IAPSO
     (c) 2015 Dan Kelley and Clark Richards
 Maintainer: Dan Kelley <dan.kelley@dal.ca>
 Depends:
-    R (>= 2.15),
-    testthat
+    R (>= 2.15)
 Suggests: 
-    knitr
+    knitr,
+    testthat
 BugReports: https://github.com/TEOS-10/GSW-R/issues
 Description: Provides an interface to the Gibbs 'SeaWater' ('TEOS-10') C library, version 3.05,
     which derives from 'Matlab' and other code written by Working Group 127 of
