@@ -1007,6 +1007,50 @@ gsw_latentheat_melting <- function(SA, p)
     rval
 }
 
+#' Calculate properties related to ice melting in seawater
+#'
+#' Calculate properties related to ice melting in seawater
+#'
+#' @param SA Absolute Salinity [ g/kg ]
+#' @param CT Conservative Temperature [ deg C ]
+#' @param p sea pressure [ dbar ]
+#' @param w_Ih initial mass fraction (ice) / (water + ice)
+#' @param t_Ih initial temperature of ice [ deg C ]
+#' @return list containing SA_final, CT_final and w_Ih_final
+#' @examples 
+#' library(testthat)
+#' SA <- c(  34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(   4.7856,  2.4329,  1.8103,  1.2600,  0.6886,  0.4403)
+#' p <- c(        10,      50,     125,     250,     600,    1000)
+#' w_Ih <- c( 0.0560, 0.02513, 0.02159, 0.01210, 0.00943, 0.00751)
+#' t_Ih <- c(-4.7856, -4.4329, -3.8103, -4.2600, -3.8863, -3.4036)
+#' r <- gsw_melting_ice_into_seawater(SA, CT, p, w_Ih, t_Ih)
+#' expect_equal(r$SA_final, c(32.767939199999994, 34.014676604999998, 34.269397295999994,
+#'                            34.425548880000001, 34.409033862000001, 34.471559675999998))
+#' expect_equal(r$CT_final, c(-0.298448911022612, 0.215263001418312, -0.074341719211557,
+#'                            0.207796293045473, -0.123785388299875, -0.202531182809225))
+#' expect_equal(r$w_Ih_final, rep(0, 6))
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_into_seawater.html}
+gsw_melting_ice_into_seawater <- function(SA, CT, p, w_Ih, t_Ih)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p, w_Ih=w_Ih, t_Ih=t_Ih))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_melting_ice_into_seawater",
+            SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), w_Ih=as.double(l$w_Ih), t_Ih=as.double(l$t_Ih),
+            n=as.integer(n), SA_final=double(n), CT_final=double(n), w_Ih_final=double(n),
+            NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(SA)) {
+        dim <- dim(SA)
+        dim(r$SA_final) <- dim
+        dim(r$CT_final) <- dim
+        dim(r$t_Ih_final) <- dim
+    }
+    list(SA_final=r$SA_final, CT_final=r$CT_final, w_Ih_final=r$w_Ih_final)
+}
+
+
 #' Calculate Brunt Vaisala Frequency squared
 #'
 #' @param SA Absolute Salinity [ g/kg ]
@@ -1020,12 +1064,10 @@ gsw_latentheat_melting <- function(SA, p)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' latitude <- 4
-#' r <- gsw_Nsquared(SA, CT, p, latitude)
-#' N2 <- r$N2
-#' p_mid <- r$p_mid
-#' expect_equal(N2, 1e-3*c(0.060843209693499, 0.235723066151305, 0.216599928330380,
-#'                         0.012941204313372, 0.008434782795209))
-#' expect_equal(p_mid, c(30, 87.5, 187.5, 425, 800))
+#' r <- gsw_Nsquared(SA, CT, p, latitude=0)
+#' expect_equal(r$N2, 1e-3*c(0.060843209693499, 0.235723066151305, 0.216599928330380,
+#'                           0.012941204313372, 0.008434782795209))
+#' expect_equal(r$p_mid, c(30, 87.5, 187.5, 425, 800))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_Nsquared.html}
 gsw_Nsquared <- function(SA, CT, p, latitude=0)

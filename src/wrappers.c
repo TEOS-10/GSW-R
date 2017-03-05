@@ -277,6 +277,18 @@ void wrap_gsw_rho_first_derivatives(double *SA, double *CT, double *p, int *n,
     }
 }
 
+// [SA_final, CT_final, w_Ih_final] = gsw_melting_ice_into_seawater(SA,CT,p,w_Ih,t_Ih)
+void wrap_gsw_melting_ice_into_seawater(double *SA, double *CT, double *p, double *w_Ih, double *t_Ih,
+        int *n, double *SA_final, double *CT_final, double *w_Ih_final)
+{
+    // see gswteos-10.h line 147 for declaration of gsw_melting_ice_into_seawater
+    for (int i=0; i < *(n); i++) {
+        gsw_melting_ice_into_seawater(SA[i], CT[i], p[i], w_Ih[i], t_Ih[i],
+                &SA_final[i], &CT_final[i], &w_Ih_final[i]);
+    }
+}
+
+
 void wrap_gsw_Nsquared(double *SA, double *CT, double *p, double *latitude, int *n, double *n2, double *p_mid)
 {
     extern void gsw_nsquared(double *sa, double *ct, double *p, double *latitude, int nz, double *n2, double *p_mid);

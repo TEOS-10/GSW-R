@@ -39,5 +39,6 @@ expect_equal(rho, c(918.2879969148962, 918.7043487325120, 918.6962796312690,
 }
 \seealso{
 Other things related to ice: \code{\link{gsw_cp_ice}},
-  \code{\link{gsw_enthalpy_ice}}
+  \code{\link{gsw_enthalpy_ice}},
+  \code{\link{gsw_melting_ice_into_seawater}}
 }
