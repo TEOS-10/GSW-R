@@ -429,6 +429,40 @@ gsw_C_from_SP <- function(SP, t, p)
     rval
 }
 
+
+#' Specific heat to ice
+#'
+#' Specific heat of ice
+#'
+#' @template teos10template
+#' 
+#' @template ttemplate
+#' @template ptemplate
+#'
+#' @return specific heat [ J/(degC*kg) ]
+#'
+#' @family things related to ice
+#' @examples
+#' library(testthat)
+#' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
+#' p <-  c(     10,      50,     125,     250,     600,    1000)
+#' rho <- gsw_cp_ice(t, p)
+#' expect_equal(rho, c(2017.314262094657, 1997.830122682709, 2002.281331375396,
+#'                     2006.127319545421, 2015.676303959609, 2033.308170371559))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_cp_ice.html}
+gsw_cp_ice <- function(t, p)
+{
+    l <- argfix(list(t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_cp_ice",
+               t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(t))
+        dim(rval) <- dim(t)
+    rval
+}
+
 #' Isobaric heat capacity
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
@@ -642,6 +676,41 @@ gsw_enthalpy <- function(SA, CT, p)
         dim(rval) <- dim(SA)
     rval
 }
+
+
+#' Specific enthalpy of ice
+#'
+#' Specific enthalpy of ice [ J/kg ]. Note that this is a negative quantity.
+#'
+#' @template teos10template
+#' 
+#' @template ttemplate
+#' @template ptemplate
+#'
+#' @return specific enthalpy [ J/kg ]
+#'
+#' @family things related to ice
+#' @examples
+#' library(testthat)
+#' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
+#' p <-  c(     10,      50,     125,     250,     600,    1000)
+#' rho <- gsw_enthalpy_ice(t, p)
+#' expect_equal(rho, 1e5 * c(-3.554414597446597, -3.603380857687490, -3.583089884253586,
+#'                           -3.558998379233944, -3.494811024956881, -3.402784319238127))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_ice.html}
+gsw_enthalpy_ice <- function(t, p)
+{
+    l <- argfix(list(t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_enthalpy_ice",
+               t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(t))
+        dim(rval) <- dim(t)
+    rval
+}
+
 
 #' Specific enthalpy of seawater
 #' 
@@ -1190,7 +1259,41 @@ gsw_rho_first_derivatives <- function(SA, CT, p)
     list(drho_dSA=rval$drho_dSA, drho_dCT=rval$drho_dCT, drho_dp=rval$drho_dp)
 }
 
-#' In-situ density
+#' In-situ density of ice
+#'
+#' In-situ density of ice [kg/m^3]
+#'
+#' @template teos10template
+#' 
+#' @template ttemplate
+#' @template ptemplate
+#'
+#' @return in-situ density [ kg/m^3 ]
+#'
+#' @family things related to ice
+#' @examples
+#' library(testthat)
+#' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
+#' p <-  c(     10,      50,     125,     250,     600,    1000)
+#' rho <- gsw_rho_ice(t, p)
+#' expect_equal(rho, c(918.2879969148962, 918.7043487325120, 918.6962796312690,
+#'              918.7513732275766, 918.9291139833307, 919.0032237449378)) 
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_ice.html}
+gsw_rho_ice <- function(t, p)
+{
+    l <- argfix(list(t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_rho_ice",
+               t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(t))
+        dim(rval) <- dim(t)
+    rval
+}
+
+
+#' In-situ density of seawater
 #' 
 #' @param SA Absolute Salinity [ g/kg ]
 #' @param t in-situ temperature (ITS-90) [ deg C ]
