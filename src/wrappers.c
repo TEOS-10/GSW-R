@@ -297,7 +297,8 @@ void wrap_gsw_Nsquared(double *SA, double *CT, double *p, double *latitude, int 
 void wrap_gsw_saar(double *p, double *longitude, double *latitude, int *n, double *saar, int *inocean)
 {
     for (int i=0; i < *(n); i++) {
-        &saar[i] = gsw_saar(p[i], longitude[i], latitude[i]);
+        saar[i] = gsw_saar(p[i], longitude[i], latitude[i]);
+        inocean[i] = 1; // FIXME
         //&saar[i], &inocean[i]);
     }
 }
