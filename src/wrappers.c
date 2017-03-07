@@ -288,11 +288,19 @@ void wrap_gsw_melting_ice_into_seawater(double *SA, double *CT, double *p, doubl
     }
 }
 
-
 void wrap_gsw_Nsquared(double *SA, double *CT, double *p, double *latitude, int *n, double *n2, double *p_mid)
 {
     extern void gsw_nsquared(double *sa, double *ct, double *p, double *latitude, int nz, double *n2, double *p_mid);
     gsw_nsquared(SA, CT, p, latitude, *n, n2, p_mid);
+}
+
+void wrap_gsw_saar(double *p, double *longitude, double *latitude, int *n, double *saar, int *inocean)
+{
+    for (int i=0; i < *(n); i++) {
+        saar[i] = gsw_saar(p[i], longitude[i], latitude[i]);
+        inocean[i] = 1; // FIXME
+        //&saar[i], &inocean[i]);
+    }
 }
 
 void wrap_gsw_Turner_Rsubrho(double *SA, double *CT, double *p, int *n, double *Tu, double *Rsubrho, double *p_mid)

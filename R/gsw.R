@@ -1366,6 +1366,47 @@ gsw_rho_t_exact <- function(SA, t, p)
     rval
 }
 
+#' Absolute Salinity Anomaly Ratio
+#'
+#' @template teos10template
+#'
+#' @template ptemplate
+#' @template longitudetemplate
+#' @template latitudetemplate
+#' @return a list containing \code{SAAR}, which is
+#' the Absolute Salinity Anomality Ratio [ unitless ], and \code{in_ocean},
+#' which is (erroneously) just a vector of 1s.
+#'
+#' @section Bugs:
+#' The \code{in_ocean} component of the return value should be 0 for points
+#' that are over land.  This error is expected to be rectified in March of 2017,
+#' when the source code for the base Matlab function is made public.
+#' @examples
+#' library(testthat)
+#' p <- c(10, 50, 125, 250, 600, 1000)
+#' longitude <- c(188, 188, 188, 188, 188, 188)
+#' latitude <- c(4, 4, 4, 4, 4, 4)
+#' SAAR <- gsw_SAAR(p, longitude, latitude)
+#' expect_equal(1e3*SAAR$saar, c(0.004794295602143, 0.007668755837570, 0.018919828449091,
+#'                               0.077293264028981, 0.161974583039298, 0.270652408428964))
+#' expect_equal(SAAR$inocean, rep(1, 6))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_saar.html}
+gsw_SAAR <- function(p, longitude, latitude)
+{
+    l <- argfix(list(p=p, longitude=longitude, latitude=latitude))
+    n <- length(l[[1]])
+    r<- .C("wrap_gsw_saar",
+           p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
+           n=n, saar=double(n), inocean=integer(n), NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(p)) {
+        dim(r$saar) <- dim(p)
+        dim(r$inocean) <- dim(p)
+    }
+    list(saar=r$saar, inocean=r$inocean)
+}
+
+
 #' Convert from density to absolute salinity
 #'
 #' @param rho seawater density [ kg/m^3 ]
