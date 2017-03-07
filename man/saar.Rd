@@ -31,8 +31,9 @@ and the data are inserted, when \code{gsw} is launched.
 Thus, the existing C library code "knows" about the data
 as local storage, which keeps alterations to the C library to 
 a minimum.
+\preformatted{
   library(ncdf4)
-  nc <- nc_open("~/src/GSW-Fortran/test/gsw_data_v3_0.nc")
+  nc <- nc_open("~/git/GSW-Fortran/test/gsw_data_v3_0.nc")
   ## Use as.vector() since these will all get handed into C, which does not understand matrices.
   p_ref <- as.vector(ncvar_get(nc, "p_ref"))
   lats_ref <- as.vector(ncvar_get(nc, "lats_ref"))
@@ -49,4 +50,5 @@ a minimum.
   save(saar, file="saar.rda")
   tools::resaveRdaFiles("saar.rda")
   nc_close(nc)
+}
 }
