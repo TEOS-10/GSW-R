@@ -256,14 +256,17 @@ W3(wrap_gsw_thermobaric, gsw_thermobaric, SA, CT, p, n, rval)
 W2(wrap_gsw_z_from_p, gsw_z_from_p, p, lat, n, rval)
 
 // PART 4
-//
-// Functions returning void do not really need wrappers, but the R code
-// is simpler to read if we use them anyway.
+
+void wrap_gsw_ice_fraction_to_freeze_seawater(double *SA, double *CT, double *p, double *t_Ih, int *n,
+        double *SA_freeze, double *CT_freeze, double *w_Ih)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_ice_fraction_to_freeze_seawater(SA[i], CT[i], p[i], t_Ih[i], &SA_freeze[i], &CT_freeze[i], &w_Ih[i]);
+}
+
 void wrap_gsw_IPV_vs_fNsquared_ratio(double *SA, double *CT, double *p, double *p_ref, int *n,
         double *IPV_vs_fNsquared_ratio, double *p_mid)
 {
-    extern void gsw_ipv_vs_fnsquared_ratio(double *sa, double *ct, double *p, double p_ref, int n,
-            double *ipv_vs_fnsquared_ratio, double *p_mid);
     gsw_ipv_vs_fnsquared_ratio(SA, CT, p, *p_ref, *n, IPV_vs_fNsquared_ratio, p_mid);
 }
 

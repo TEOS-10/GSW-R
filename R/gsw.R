@@ -806,11 +806,52 @@ gsw_grav <- function(latitude, p=0)
     rval
 }
 
+
+#' Ice fraction to cool seawater to freezing.
+#'
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#' @template t_Ihtemplate
+#' @return a list containing \code{SA_freeze}, \code{CT_freeze} and \code{w_Ih}.
+#' @examples 
+#' library(testthat)
+#' SA <- c(   34.7118,  34.8915,  35.0256,  34.8472,  34.7366, 34.7324)
+#' CT <- c(   28.7856,  28.4329,  22.8103,  10.2600,   6.8863,  4.4036)
+#' p <- c(         10,       50,      125,      250,      600,    1000)
+#' t_Ih <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
+#' r <- gsw_ice_fraction_to_freeze_seawater(SA, CT, p, t_Ih)
+#' expect_equal(r$SA_freeze, c(25.823952352620722, 26.120495895535438, 27.460572941868072,
+#'                           30.629978769577168, 31.458222332943784, 32.121170316796444))
+#' expect_equal(r$CT_freeze, c(-1.389936216242376, -1.437013334134283, -1.569815847128818,
+#'                           -1.846419165657020, -2.166786673735941, -2.522730879078756))
+#' expect_equal(r$w_Ih, c(0.256046867272203, 0.251379393389925, 0.215985652155336,
+#'                      0.121020375537284, 0.094378196687535, 0.075181377710828))
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_ice_fraction_to_freeze_seawater.html}
+gsw_ice_fraction_to_freeze_seawater <- function(SA, CT, p, t_Ih)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p, t_Ih=t_Ih))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_ice_fraction_to_freeze_seawater",
+            SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), t_Ih=as.double(l$t_Ih),
+            n=as.integer(n), SA_freeze=double(n), CT_freeze=double(n), w_Ih=double(n),
+            NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(SA)) {
+        dim <- dim(SA)
+        dim(r$SA_freeze) <- dim
+        dim(r$CT_freeze) <- dim
+        dim(r$t_Ih) <- dim
+    }
+    list(SA_freeze=r$SA_freeze, CT_freeze=r$CT_freeze, w_Ih=r$w_Ih)
+}
+
 #' Specific internal energy of seawater (75-term equation)
 #' 
-#' @param SA Absolute Salinity [ g/kg ]
-#' @param CT Conservative Temperature [ deg C ]
-#' @param p sea pressure [ dbar ]
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
 #' @return specific internal energy [ J/kg ]
 #' @examples
 #' library(testthat)
@@ -1011,14 +1052,12 @@ gsw_latentheat_melting <- function(SA, p)
 
 #' Calculate properties related to ice melting in seawater
 #'
-#' Calculate properties related to ice melting in seawater
-#'
-#' @param SA Absolute Salinity [ g/kg ]
-#' @param CT Conservative Temperature [ deg C ]
-#' @param p sea pressure [ dbar ]
-#' @param w_Ih initial mass fraction (ice) / (water + ice)
-#' @param t_Ih initial temperature of ice [ deg C ]
-#' @return list containing SA_final, CT_final and w_Ih_final
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#' @template w_Ihtemplate
+#' @template t_Ihtemplate
+#' @return a list containing \code{SA_final}, \code{CT_final} and \code{w_Ih_final}.
 #' @examples 
 #' library(testthat)
 #' SA <- c(  34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)

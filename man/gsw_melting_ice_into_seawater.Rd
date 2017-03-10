@@ -11,14 +11,14 @@ gsw_melting_ice_into_seawater(SA, CT, p, w_Ih, t_Ih)
 
 \item{CT}{Conservative Temperature [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
 \item{w_Ih}{initial mass fraction (ice) / (water + ice)}
 
 \item{t_Ih}{initial temperature of ice [ deg C ]}
 }
 \value{
-list containing SA_final, CT_final and w_Ih_final
+a list containing \code{SA_final}, \code{CT_final} and \code{w_Ih_final}.
 }
 \description{
 Calculate properties related to ice melting in seawater
@@ -42,5 +42,7 @@ expect_equal(r$w_Ih_final, rep(0, 6))
 }
 \seealso{
 Other things related to ice: \code{\link{gsw_cp_ice}},
-  \code{\link{gsw_enthalpy_ice}}, \code{\link{gsw_rho_ice}}
+  \code{\link{gsw_enthalpy_ice}},
+  \code{\link{gsw_ice_fraction_to_freeze_seawater}},
+  \code{\link{gsw_rho_ice}}
 }
