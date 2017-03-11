@@ -265,6 +265,13 @@ void wrap_gsw_CT_from_rho(double *rho, double *SA, double *p, int *n,
         gsw_ct_from_rho(rho[i], SA[i], p[i], &CT[i], &CT_multiple[i]);
 }
 
+void wrap_gsw_frazil_properties(double *SA_bulk, double *h_bulk, double *p, int *n,
+        double *SA_final, double *CT_final, double *w_Ih_final)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_frazil_properties(SA_bulk[i], h_bulk[i], p[i],
+                &SA_final[i], &CT_final[i], &w_Ih_final[i]);
+}
 
 void wrap_gsw_ice_fraction_to_freeze_seawater(double *SA, double *CT, double *p, double *t_Ih, int *n,
         double *SA_freeze, double *CT_freeze, double *w_Ih)

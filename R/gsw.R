@@ -837,6 +837,48 @@ gsw_entropy_from_t <- function(SA, t, p)
     rval
 }
 
+#' Properties of Frazil ice
+#'
+#' Calculation of Absolute Salinity, Conservative Temperature, and ice mass fraction
+#' based on bulk Absolute Salinity, bulk enthalpy, and pressure
+#'
+#' @template SAbulktemplate
+#' @template hbulktemplate
+#' @template ptemplate
+#' @return a list containing \code{SA_final}, \code{h_final} and \code{w_Ih_final}.
+#' @examples 
+#' library(testthat)
+#' SA_bulk <- c(  34.7118,   34.8915,   35.0256,   34.8472,   34.7366,   34.7324)
+#' h_bulk <- c( -4.5544e4, -4.6033e4, -4.5830e4, -4.5589e4, -4.4948e4, -4.4027e4)
+#' p <- c(             10,        50,       125,       250,       600,      1000)
+#' r <- gsw_frazil_properties(SA_bulk, h_bulk, p)
+#' expect_equal(r$SA_final, c(39.111030663000442, 39.407625769681573, 39.595789974885108,
+#'                          39.481230045372889, 39.591177095552503, 39.826467709177123))
+#' expect_equal(r$CT_final, c(-2.156311126114311, -2.204672298963783, -2.273689262333450,
+#'                          -2.363714136353600, -2.644541000680772, -2.977651291726651))
+#' expect_equal(r$w_Ih_final, c(0.112480560814322, 0.114600300867556, 0.115421108602301,
+#'                            0.117372990660305, 0.122617649983886, 0.127906590822347))
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_frazil_properties.html}
+gsw_frazil_properties <- function(SA_bulk, h_bulk, p)
+{
+    l <- argfix(list(SA_bulk=SA_bulk, h_bulk=h_bulk, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_frazil_properties",
+            SA_bulk=as.double(l$SA_bulk), h_bulk=as.double(l$h_bulk), p=as.double(l$p),
+            n=as.integer(n),
+            SA_final=double(n), CT_final=double(n), w_Ih_final=double(n),
+            NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(SA_bulk)) {
+        dim <- dim(SA_bulk)
+        dim(r$SA_final) <- dim
+        dim(r$CT_final) <- dim
+        dim(r$t_Ih_final) <- dim
+    }
+    list(SA_final=r$SA_final, CT_final=r$CT_final, w_Ih_final=r$w_Ih_final)
+}
+
 #' Gravitational acceleration
 #' 
 #' @template teos10template
