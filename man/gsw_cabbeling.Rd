@@ -11,7 +11,7 @@ gsw_cabbeling(SA, CT, p)
 
 \item{CT}{Conservative Temperature [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 Cabbeling coefficient with respect to Conservative Temperature [ 1/(K^2) ]

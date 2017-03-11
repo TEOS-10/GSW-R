@@ -26,5 +26,15 @@ expect_equal(SP, c(34.548342096952908, 34.727295637119113, 34.860409847645435,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SK.html}
 }
 \seealso{
-\code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SR}} and \code{\link{gsw_SP_from_Sstar}}.
+Other things related to salinity: \code{\link{gsw_C_from_SP}},
+  \code{\link{gsw_SA_from_SP}},
+  \code{\link{gsw_SA_from_Sstar}},
+  \code{\link{gsw_SP_from_C}},
+  \code{\link{gsw_SP_from_SA}},
+  \code{\link{gsw_SP_from_SR}},
+  \code{\link{gsw_SP_from_Sstar}},
+  \code{\link{gsw_SR_from_SP}},
+  \code{\link{gsw_Sstar_from_SA}},
+  \code{\link{gsw_Sstar_from_SP}},
+  \code{\link{gsw_deltaSA_from_SP}}
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_ice_fraction_to_freeze_seawater}
 \alias{gsw_ice_fraction_to_freeze_seawater}
-\title{Ice fraction to cool seawater to freezing.}
+\title{Ice Fraction to Cool Seawater to Freezing}
 \usage{
 gsw_ice_fraction_to_freeze_seawater(SA, CT, p, t_Ih)
 }
@@ -19,7 +19,7 @@ gsw_ice_fraction_to_freeze_seawater(SA, CT, p, t_Ih)
 a list containing \code{SA_freeze}, \code{CT_freeze} and \code{w_Ih}.
 }
 \description{
-Ice fraction to cool seawater to freezing.
+Ice Fraction to Cool Seawater to Freezing
 }
 \examples{
 library(testthat)
@@ -39,8 +39,8 @@ expect_equal(r$w_Ih, c(0.256046867272203, 0.251379393389925, 0.215985652155336,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_ice_fraction_to_freeze_seawater.html}
 }
 \seealso{
-Other things related to ice: \code{\link{gsw_cp_ice}},
-  \code{\link{gsw_enthalpy_ice}},
+Other things related to ice: \code{\link{gsw_CT_freezing}},
+  \code{\link{gsw_cp_ice}}, \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_melting_ice_into_seawater}},
-  \code{\link{gsw_rho_ice}}
+  \code{\link{gsw_rho_ice}}, \code{\link{gsw_t_freezing}}
 }

@@ -2,20 +2,20 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_latentheat_melting}
 \alias{gsw_latentheat_melting}
-\title{Latent heat of melting}
+\title{Latent Heat of Melting}
 \usage{
 gsw_latentheat_melting(SA, p)
 }
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 latent heat of freezing [ J/kg ]
 }
 \description{
-Latent heat of melting
+Latent Heat of Melting
 }
 \examples{
 library(testthat)
@@ -29,5 +29,9 @@ expect_equal(lh, 1e5*c(3.299496680271213, 3.298613352397986, 3.297125622834541,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_melting.html}
 }
 \seealso{
-\code{\link{gsw_latentheat_evap_CT}} and \code{\link{gsw_latentheat_evap_t}} are analogues for evaporation.
+Other things related to heat: \code{\link{gsw_dynamic_enthalpy}},
+  \code{\link{gsw_enthalpy_t_exact}},
+  \code{\link{gsw_enthalpy}},
+  \code{\link{gsw_latentheat_evap_CT}},
+  \code{\link{gsw_latentheat_evap_t}}
 }

@@ -11,7 +11,7 @@ gsw_sound_speed_t_exact(SA, t, p)
 
 \item{t}{in-situ temperature (ITS-90) [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 sound speed [ m/s ]
@@ -32,5 +32,5 @@ expect_equal(sound_speed, 1e3*c(1.542615803587414, 1.542703534065789, 1.53084497
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed_t_exact.html}
 }
 \seealso{
-\code{\link{gsw_sound_speed}} for an approximate formula using CT
+Other things related to sound: \code{\link{gsw_sound_speed}}
 }

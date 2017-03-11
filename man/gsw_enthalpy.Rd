@@ -11,7 +11,7 @@ gsw_enthalpy(SA, CT, p)
 
 \item{CT}{Conservative Temperature [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 specific enthalpy [ J/kg ]
@@ -32,5 +32,9 @@ expect_equal(e, 1e5*c(1.151031813559086, 1.140146926828028, 0.921800138366058,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
 }
 \seealso{
-\code{\link{gsw_dynamic_enthalpy}} and \code{\link{gsw_enthalpy_t_exact}}
+Other things related to heat: \code{\link{gsw_dynamic_enthalpy}},
+  \code{\link{gsw_enthalpy_t_exact}},
+  \code{\link{gsw_latentheat_evap_CT}},
+  \code{\link{gsw_latentheat_evap_t}},
+  \code{\link{gsw_latentheat_melting}}
 }

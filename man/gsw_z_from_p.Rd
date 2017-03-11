@@ -7,9 +7,10 @@
 gsw_z_from_p(p, latitude)
 }
 \arguments{
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
-\item{latitude}{latitude in decimal degrees north [ -90 ... +90 ]}
+\item{latitude}{latitude in decimal degrees, positive to the north of the equator. (This
+is called \code{lat} in the TEOS-10 Matlab code.)}
 }
 \value{
 height [ m ]
@@ -37,5 +38,5 @@ expect_equal(z, 1e2*c(-0.099445834469453, -0.497180897012550, -1.242726219409978
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_z_from_p.html}
 }
 \seealso{
-This is (almost) the reverse of \code{\link{gsw_p_from_z}}
+Other things related to depth: \code{\link{gsw_p_from_z}}
 }

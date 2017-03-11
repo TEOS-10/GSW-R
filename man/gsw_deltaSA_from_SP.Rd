@@ -7,13 +7,15 @@
 gsw_deltaSA_from_SP(SP, p, longitude, latitude)
 }
 \arguments{
-\item{SP}{Practical Salinity  (PSS-78) [ unitless ]}
+\item{SP}{Practical Salinity (PSS-78) [ unitless ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
-\item{longitude}{longitude in decimal degrees [ 0 ... +360 ] or [ -180 ... +180 ]}
+\item{longitude}{longitude in decimal degrees, positive to the east of Greenwich. (This
+is called \code{long} in the TEOS-10 Matlab code.)}
 
-\item{latitude}{latitude in decimal degrees north [ -90 ... +90 ]}
+\item{latitude}{latitude in decimal degrees, positive to the north of the equator. (This
+is called \code{lat} in the TEOS-10 Matlab code.)}
 }
 \value{
 deltaSA Absolute Salinity Anomaly  [ g/kg ]
@@ -35,5 +37,15 @@ expect_equal(deltaSA, c(0.000167203365230, 0.000268836122231, 0.000665803155705,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_deltaSA_from_SP.html}
 }
 \seealso{
-\code{\link{gsw_SA_from_SP}}
+Other things related to salinity: \code{\link{gsw_C_from_SP}},
+  \code{\link{gsw_SA_from_SP}},
+  \code{\link{gsw_SA_from_Sstar}},
+  \code{\link{gsw_SP_from_C}},
+  \code{\link{gsw_SP_from_SA}},
+  \code{\link{gsw_SP_from_SK}},
+  \code{\link{gsw_SP_from_SR}},
+  \code{\link{gsw_SP_from_Sstar}},
+  \code{\link{gsw_SR_from_SP}},
+  \code{\link{gsw_Sstar_from_SA}},
+  \code{\link{gsw_Sstar_from_SP}}
 }

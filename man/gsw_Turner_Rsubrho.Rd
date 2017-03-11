@@ -11,7 +11,7 @@ gsw_Turner_Rsubrho(SA, CT, p)
 
 \item{CT}{Conservative Temperature [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 List containing \code{Tu} [ degrees ], \code{Rsubrho} [ unitless ], and \code{p_mid} [ dbar ]

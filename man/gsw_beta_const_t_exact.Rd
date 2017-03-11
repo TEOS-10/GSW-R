@@ -11,7 +11,7 @@ gsw_beta_const_t_exact(SA, t, p)
 
 \item{t}{in-situ temperature (ITS-90) [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 Haline contraction coefficient at constant in-situ temperature [ kg/g ]
@@ -41,6 +41,18 @@ expect_equal(b, 1e-3*c(0.731120837010429, 0.731071779078011, 0.736019128913071,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta_const_t_exact.html}
 }
 \seealso{
-The analogue at constant in-situ Conservative Temperature
-\code{\link{gsw_beta}}.
+Other things related to density: \code{\link{gsw_SA_from_rho}},
+  \code{\link{gsw_alpha_on_beta}},
+  \code{\link{gsw_alpha_wrt_t_exact}},
+  \code{\link{gsw_alpha}}, \code{\link{gsw_beta}},
+  \code{\link{gsw_pot_rho_t_exact}},
+  \code{\link{gsw_rho_alpha_beta}},
+  \code{\link{gsw_rho_first_derivatives}},
+  \code{\link{gsw_rho_ice}}, \code{\link{gsw_rho_t_exact}},
+  \code{\link{gsw_rho}}, \code{\link{gsw_sigma0}},
+  \code{\link{gsw_sigma1}}, \code{\link{gsw_sigma2}},
+  \code{\link{gsw_sigma3}}, \code{\link{gsw_sigma4}},
+  \code{\link{gsw_specvol_anom_standard}},
+  \code{\link{gsw_specvol_t_exact}},
+  \code{\link{gsw_specvol}}
 }

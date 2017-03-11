@@ -11,7 +11,7 @@ gsw_rho(SA, CT, p)
 
 \item{CT}{Conservative Temperature [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 in-situ density [ kg/m^3 ]
@@ -41,5 +41,20 @@ expect_equal(rho, 1e3*c(1.021839935738108, 1.022262457966867, 1.024427195413316,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho.html}
 }
 \seealso{
-\code{\link{gsw_rho_t_exact}} is similar to this, but using in-situ temperature. SA and CT may be computed from UNESCO quantities using \code{\link{gsw_SA_from_SP}} and \code{\link{gsw_CT_from_t}}. For potential density anomalies, use \code{\link{gsw_sigma0}} and related functions.
+Other things related to density: \code{\link{gsw_SA_from_rho}},
+  \code{\link{gsw_alpha_on_beta}},
+  \code{\link{gsw_alpha_wrt_t_exact}},
+  \code{\link{gsw_alpha}},
+  \code{\link{gsw_beta_const_t_exact}},
+  \code{\link{gsw_beta}},
+  \code{\link{gsw_pot_rho_t_exact}},
+  \code{\link{gsw_rho_alpha_beta}},
+  \code{\link{gsw_rho_first_derivatives}},
+  \code{\link{gsw_rho_ice}}, \code{\link{gsw_rho_t_exact}},
+  \code{\link{gsw_sigma0}}, \code{\link{gsw_sigma1}},
+  \code{\link{gsw_sigma2}}, \code{\link{gsw_sigma3}},
+  \code{\link{gsw_sigma4}},
+  \code{\link{gsw_specvol_anom_standard}},
+  \code{\link{gsw_specvol_t_exact}},
+  \code{\link{gsw_specvol}}
 }

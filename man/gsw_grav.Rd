@@ -7,9 +7,10 @@
 gsw_grav(latitude, p = 0)
 }
 \arguments{
-\item{latitude}{latitude in decimal degress north [ -90 ... +90 ]}
+\item{latitude}{latitude in decimal degrees, positive to the north of the equator. (This
+is called \code{lat} in the TEOS-10 Matlab code.)}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 gravitational acceleration [ m/s^2 ]
