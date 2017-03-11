@@ -14,22 +14,14 @@ gsw_rho_alpha_beta(SA, CT, p)
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
-<<<<<<< HEAD
 A list containing in-situ density \code{rho} [ kg/m^3 ], thermal expansion
-=======
-a list containing in-situ density \code{rho} [ kg/m^3 ], thermal expansion
->>>>>>> 88f37dd5c3b3f75bb9c9958085680fcc19628dcb
 coefficient \code{alpha} [ 1/degC ], and haline contraction coefficient
-\code{beta} [ kg/g].
+\code{beta} [ kg/g ].
 }
 \description{
-<<<<<<< HEAD
 Calculate the in-situ density, the expansion coefficient (with respect to Conservative Temperature) and
 the haline contraction coefficient (with respect to Absolute Salinity), using the
 75-term equation.
-=======
-In-situ density, thermal expansion coefficient and haline contraction coefficient (75-term equation)
->>>>>>> 88f37dd5c3b3f75bb9c9958085680fcc19628dcb
 }
 \details{
 The present function works with a wrapper to a C function contained
