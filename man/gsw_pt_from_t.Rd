@@ -35,7 +35,9 @@ expect_equal(pt, c(28.783196819670632, 28.420983342398962, 22.784930399117108,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_t.html}
 }
 \seealso{
-Other things related to temperature: \code{\link{gsw_CT_from_pt}},
+Other things related to temperature: \code{\link{gsw_CT_freezing}},
+  \code{\link{gsw_CT_from_pt}},
+  \code{\link{gsw_CT_from_rho}},
   \code{\link{gsw_CT_from_t}},
   \code{\link{gsw_pt0_from_t}},
   \code{\link{gsw_pt_from_CT}}, \code{\link{gsw_t_from_CT}}

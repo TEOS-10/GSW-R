@@ -36,6 +36,7 @@ expect_equal(tf, c(-1.902730710149803, -1.942908619287183, -2.006861069199743,
 }
 \seealso{
 Other things related to ice: \code{\link{gsw_CT_freezing}},
+  \code{\link{gsw_alpha_wrt_t_ice}},
   \code{\link{gsw_cp_ice}}, \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_ice_fraction_to_freeze_seawater}},
   \code{\link{gsw_melting_ice_into_seawater}},

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_rho_first_derivatives}
 \alias{gsw_rho_first_derivatives}
-\title{Density derivatives wrt SA, CT and p (75-term equation)}
+\title{Density First Derivatives wrt SA, CT and p (75-term equation)}
 \usage{
 gsw_rho_first_derivatives(SA, CT, p)
 }
@@ -17,7 +17,7 @@ gsw_rho_first_derivatives(SA, CT, p)
 list containing drho_dSA [ kg^2/(g m^3) ], drho_dCT [ kg/(K m^3) ] and drho_dp [ kg/(Pa m^3) ]
 }
 \description{
-Density derivatives wrt SA, CT and p (75-term equation)
+Density First Derivatives wrt SA, CT and p (75-term equation)
 }
 \examples{
 library(testthat)
@@ -36,14 +36,17 @@ expect_equal(r$drho_dp, 1e-6*c(0.420302360738476, 0.420251070273888, 0.426773054
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_first_derivatives.html}
 }
 \seealso{
-Other things related to density: \code{\link{gsw_SA_from_rho}},
+Other things related to density: \code{\link{gsw_CT_from_rho}},
+  \code{\link{gsw_SA_from_rho}},
   \code{\link{gsw_alpha_on_beta}},
   \code{\link{gsw_alpha_wrt_t_exact}},
+  \code{\link{gsw_alpha_wrt_t_ice}},
   \code{\link{gsw_alpha}},
   \code{\link{gsw_beta_const_t_exact}},
   \code{\link{gsw_beta}},
   \code{\link{gsw_pot_rho_t_exact}},
   \code{\link{gsw_rho_alpha_beta}},
+  \code{\link{gsw_rho_first_derivatives_wrt_enthalpy}},
   \code{\link{gsw_rho_ice}}, \code{\link{gsw_rho_t_exact}},
   \code{\link{gsw_rho}}, \code{\link{gsw_sigma0}},
   \code{\link{gsw_sigma1}}, \code{\link{gsw_sigma2}},

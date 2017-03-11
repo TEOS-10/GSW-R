@@ -290,6 +290,38 @@ gsw_alpha_wrt_t_exact <- function(SA, t, p)
     rval
 }
 
+#' Ice Thermal Expansion Coefficient with Respect to in-situ Temperature
+#'
+#' Thermal expansion coefficient of ice, with respect to in-situ temperature.
+#' 
+#' @template teos10template
+#' 
+#' @template ttemplate
+#' @template ptemplate
+#' @return thermal expansion coefficient with respect to in-situ temperature [ 1/K ]
+#' @examples
+#' library(testthat)
+#' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
+#' p <-  c(     10,       50,      125,      250,      600,    1000)
+#' alpha <- gsw_alpha_wrt_t_ice(t, p)
+#' expect_equal(alpha*1e3, c(0.154472408751279, 0.153041866100900, 0.153232698269327,
+#'                         0.153297634665747, 0.153387461617896, 0.153938395452558))
+#' @family things related to density
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha_wrt_t_ice.html}
+gsw_alpha_wrt_t_ice <- function(t, p)
+{
+    l <- argfix(list(t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_alpha_wrt_t_ice",
+               t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(t))
+        dim(rval) <- dim(t)
+    rval
+}
+
 #' Haline contraction coefficient at constant Conservative Temperature
 #'
 #' Haline contraction coefficient with respect to Conservative Temperature, using
@@ -504,6 +536,7 @@ gsw_cp_t_exact <- function(SA, t, p)
 #' expect_equal(CT_freezing, c(-1.899683776424096, -1.940791867869104, -2.006240664432488,
 #'                             -2.092357761318778, -2.359300831770506, -2.677162675412748))
 #' @family things related to ice
+#' @family things related to temperature
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing.html}
 gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
@@ -545,6 +578,43 @@ gsw_CT_from_pt <- function(SA, pt)
     rval
 }
 
+#' Conservative Temperature from Density, Absolute Salinity and Pressure
+#' 
+#' @template rhotemplate
+#' @template SAtemplate
+#' @template pttemplate
+#' @return A list containing two estimates of Conservative Temperature:
+#' \code{CT} and \code{CT_multiple}, each in [ deg C ].
+#' @examples 
+#' library(testthat)
+#' rho <- c(1021.8484, 1022.2647, 1024.4207, 1027.7841, 1029.8287, 1031.9916)
+#' SA <- c(   34.7118,   34.8915,   35.0256,   34.8472,   34.7366,   34.7324)
+#' p <- c(         10,        50,       125,       250,       600,      1000)
+#' r <- gsw_CT_from_rho(rho, SA, p)
+#' expect_equal(r$CT, c(28.784377302226968, 28.432402127485858, 22.808745445250068,
+#'                    10.260169334807866, 6.887336649146716, 4.404594162282834))
+#' @family things related to density
+#' @family things related to temperature
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_rho.html}
+gsw_CT_from_rho <- function(rho, SA, p)
+{
+    l <- argfix(list(rho=rho, SA=SA, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_CT_from_rho",
+            rho=as.double(l$rho), SA=as.double(l$SA), p=as.double(l$p),
+            n=as.integer(n), CT=double(n), CT_multiple=double(n),
+            NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(rho)) {
+        dim(r$CT) <- dim(rho)
+        dim(r$CT_multiple) <- dim(rho)
+    }
+    ## NaN is coming out as 9e15 in the doc test case
+    r$CT[r$CT > 1e15] <- NA
+    r$CT_multiple[r$CT_multiple > 1e15] <- NA
+    list(CT=r$CT, CT_multiple=r$CT_multiple)
+}
+
 #' Convert from temperature to conservative temperature
 #' 
 #' @template SAtemplate
@@ -559,7 +629,6 @@ gsw_CT_from_pt <- function(SA, pt)
 #' CT <- gsw_CT_from_t(SA, t, p)
 #' expect_equal(CT, c(28.809919826700281, 28.439227816091140, 22.786176893078498,
 #'                    10.226189266620782, 6.827213633479988, 4.323575748610455))
-#' 
 #' @family things related to temperature
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_t.html}
@@ -1340,7 +1409,7 @@ gsw_rho_alpha_beta <- function(SA, CT, p)
     list(rho=r$rho, alpha=r$alpha, beta=r$beta)
 }
 
-#' Density derivatives wrt SA, CT and p (75-term equation)
+#' Density First Derivatives wrt SA, CT and p (75-term equation)
 #' 
 #' @template SAtemplate
 #' @template CTtemplate
@@ -1373,6 +1442,43 @@ gsw_rho_first_derivatives <- function(SA, CT, p)
         stop("gsw_rho_first_derivatives() cannot handle matrix SA")
     list(drho_dSA=rval$drho_dSA, drho_dCT=rval$drho_dCT, drho_dp=rval$drho_dp)
 }
+
+#' Density First Derivatives wrt enthalpy (75-term equation)
+#' 
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#' @return A list containing \code{rho_SA_wrt_h} [ (kg/m^3)/(g/kg)/(J/kg) ]
+#' and \code{rho_h} [ (kg/m^3)/(J/kg) ].
+#' @examples
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' r <- gsw_rho_first_derivatives_wrt_enthalpy(SA, CT, p)
+#' expect_equal(r$rho_SA_wrt_h, c(0.733147960400929, 0.733595114830609, 0.743886977148835,
+#'                               0.771275693831993, 0.777414200397148, 0.781030546357425))
+#' expect_equal(r$rho_h*1e4, c(-0.831005413475887, -0.826243794873652, -0.721438289309903,
+#'                           -0.445892608094272, -0.377326924646647, -0.334475962698187))
+#' @family things related to density
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_first_derivatives_wrt_enthalpy.html}
+gsw_rho_first_derivatives_wrt_enthalpy <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_rho_first_derivatives_wrt_enthalpy",
+            SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+            n=as.integer(n),
+            rho_SA_wrt_h=double(n), rho_h=double(n),
+            NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(SA)) {
+        dim(r$rho_SA_wrt_h)  <- dim(SA)
+        dim(r$rho_h)  <- dim(SA)
+    }
+    list(rho_SA_wrt_h=r$rho_SA_wrt_h, rho_h=r$rho_h)
+}
+
 
 #' In-situ density of ice
 #'

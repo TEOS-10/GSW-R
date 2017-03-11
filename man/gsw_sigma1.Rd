@@ -40,14 +40,17 @@ expect_equal(sigma1, c(25.955618850310202, 26.213131422420247, 28.12542377518843
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma1.html}
 }
 \seealso{
-Other things related to density: \code{\link{gsw_SA_from_rho}},
+Other things related to density: \code{\link{gsw_CT_from_rho}},
+  \code{\link{gsw_SA_from_rho}},
   \code{\link{gsw_alpha_on_beta}},
   \code{\link{gsw_alpha_wrt_t_exact}},
+  \code{\link{gsw_alpha_wrt_t_ice}},
   \code{\link{gsw_alpha}},
   \code{\link{gsw_beta_const_t_exact}},
   \code{\link{gsw_beta}},
   \code{\link{gsw_pot_rho_t_exact}},
   \code{\link{gsw_rho_alpha_beta}},
+  \code{\link{gsw_rho_first_derivatives_wrt_enthalpy}},
   \code{\link{gsw_rho_first_derivatives}},
   \code{\link{gsw_rho_ice}}, \code{\link{gsw_rho_t_exact}},
   \code{\link{gsw_rho}}, \code{\link{gsw_sigma0}},

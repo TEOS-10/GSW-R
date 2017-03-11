@@ -190,6 +190,7 @@ W3(wrap_gsw_adiabatic_lapse_rate_from_CT, gsw_adiabatic_lapse_rate_from_ct, SA, 
 W3(wrap_gsw_alpha, gsw_alpha, SA, CT, p, n, rval)
 W3(wrap_gsw_alpha_on_beta, gsw_alpha_on_beta, SA, CT, p, n, rval)
 W3(wrap_gsw_alpha_wrt_t_exact, gsw_alpha_wrt_t_exact, SA, t, p, n, rval)
+W2(wrap_gsw_alpha_wrt_t_ice, gsw_alpha_wrt_t_ice, t, p, n, rval)
 W3(wrap_gsw_beta, gsw_beta, SA, CT, p, n, rval)
 W3(wrap_gsw_beta_const_t_exact, gsw_beta_const_t_exact, SA, t, p, n, rval)
 W3(wrap_gsw_cabbeling, gsw_cabbeling, SA, CT, p, n, rval)
@@ -256,6 +257,14 @@ W3(wrap_gsw_thermobaric, gsw_thermobaric, SA, CT, p, n, rval)
 W2(wrap_gsw_z_from_p, gsw_z_from_p, p, lat, n, rval)
 
 // PART 4
+// Handle cases with multiple return values.
+void wrap_gsw_CT_from_rho(double *rho, double *SA, double *p, int *n,
+        double *CT, double *CT_multiple)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_ct_from_rho(rho[i], SA[i], p[i], &CT[i], &CT_multiple[i]);
+}
+
 
 void wrap_gsw_ice_fraction_to_freeze_seawater(double *SA, double *CT, double *p, double *t_Ih, int *n,
         double *SA_freeze, double *CT_freeze, double *w_Ih)
@@ -273,12 +282,17 @@ void wrap_gsw_IPV_vs_fNsquared_ratio(double *SA, double *CT, double *p, double *
 void wrap_gsw_rho_first_derivatives(double *SA, double *CT, double *p, int *n,
         double *drho_dsa, double *drho_dct, double *drho_dp)
 {
-    extern void gsw_rho_first_derivatives(double sa, double ct, double p,
-            double *drho_dsa, double *drho_dct, double *drho_dp);
-    for (int i=0; i < *(n); i++) {
+    for (int i=0; i < *(n); i++)
         gsw_rho_first_derivatives(SA[i], CT[i], p[i], &drho_dsa[i], &drho_dct[i], &drho_dp[i]);
-    }
 }
+
+void wrap_gsw_rho_first_derivatives_wrt_enthalpy(double *SA, double *CT, double *p, int *n,
+        double *rho_sa_wrt_h, double *rho_h)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_rho_first_derivatives_wrt_enthalpy(SA[i], CT[i], p[i], &rho_sa_wrt_h[i], &rho_h[i]);
+}
+
 
 // [SA_final, CT_final, w_Ih_final] = gsw_melting_ice_into_seawater(SA,CT,p,w_Ih,t_Ih)
 void wrap_gsw_melting_ice_into_seawater(double *SA, double *CT, double *p, double *w_Ih, double *t_Ih,

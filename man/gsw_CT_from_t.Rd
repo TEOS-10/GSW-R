@@ -27,13 +27,14 @@ p <-  c(     10,      50,     125,     250,     600,    1000)
 CT <- gsw_CT_from_t(SA, t, p)
 expect_equal(CT, c(28.809919826700281, 28.439227816091140, 22.786176893078498,
                    10.226189266620782, 6.827213633479988, 4.323575748610455))
-
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_t.html}
 }
 \seealso{
-Other things related to temperature: \code{\link{gsw_CT_from_pt}},
+Other things related to temperature: \code{\link{gsw_CT_freezing}},
+  \code{\link{gsw_CT_from_pt}},
+  \code{\link{gsw_CT_from_rho}},
   \code{\link{gsw_pt0_from_t}},
   \code{\link{gsw_pt_from_CT}},
   \code{\link{gsw_pt_from_t}}, \code{\link{gsw_t_from_CT}}

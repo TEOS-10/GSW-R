@@ -38,14 +38,17 @@ expect_equal(rho, c(918.2879969148962, 918.7043487325120, 918.6962796312690,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_ice.html}
 }
 \seealso{
-Other things related to density: \code{\link{gsw_SA_from_rho}},
+Other things related to density: \code{\link{gsw_CT_from_rho}},
+  \code{\link{gsw_SA_from_rho}},
   \code{\link{gsw_alpha_on_beta}},
   \code{\link{gsw_alpha_wrt_t_exact}},
+  \code{\link{gsw_alpha_wrt_t_ice}},
   \code{\link{gsw_alpha}},
   \code{\link{gsw_beta_const_t_exact}},
   \code{\link{gsw_beta}},
   \code{\link{gsw_pot_rho_t_exact}},
   \code{\link{gsw_rho_alpha_beta}},
+  \code{\link{gsw_rho_first_derivatives_wrt_enthalpy}},
   \code{\link{gsw_rho_first_derivatives}},
   \code{\link{gsw_rho_t_exact}}, \code{\link{gsw_rho}},
   \code{\link{gsw_sigma0}}, \code{\link{gsw_sigma1}},
@@ -56,6 +59,7 @@ Other things related to density: \code{\link{gsw_SA_from_rho}},
   \code{\link{gsw_specvol}}
 
 Other things related to ice: \code{\link{gsw_CT_freezing}},
+  \code{\link{gsw_alpha_wrt_t_ice}},
   \code{\link{gsw_cp_ice}}, \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_ice_fraction_to_freeze_seawater}},
   \code{\link{gsw_melting_ice_into_seawater}},

@@ -41,12 +41,16 @@ expect_equal(alpha_wrt_t_exact*1e3, c(0.325601747227247, 0.323448083851267, 0.28
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha_wrt_t_exact.html}
 }
 \seealso{
-Other things related to density: \code{\link{gsw_SA_from_rho}},
-  \code{\link{gsw_alpha_on_beta}}, \code{\link{gsw_alpha}},
+Other things related to density: \code{\link{gsw_CT_from_rho}},
+  \code{\link{gsw_SA_from_rho}},
+  \code{\link{gsw_alpha_on_beta}},
+  \code{\link{gsw_alpha_wrt_t_ice}},
+  \code{\link{gsw_alpha}},
   \code{\link{gsw_beta_const_t_exact}},
   \code{\link{gsw_beta}},
   \code{\link{gsw_pot_rho_t_exact}},
   \code{\link{gsw_rho_alpha_beta}},
+  \code{\link{gsw_rho_first_derivatives_wrt_enthalpy}},
   \code{\link{gsw_rho_first_derivatives}},
   \code{\link{gsw_rho_ice}}, \code{\link{gsw_rho_t_exact}},
   \code{\link{gsw_rho}}, \code{\link{gsw_sigma0}},
