@@ -32,7 +32,7 @@ t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 p <- c(      10,       50,      125,      250,      600,    1000)
 speed <- gsw_sound_speed_ice(t, p)
 expect_equal(speed/1e3, c(3.111311360346254, 3.116492565497544, 3.115833462003452,
-                          3.115637032488204, 3.115377253092692, 3.113321384499191))
+                         3.115637032488204, 3.115377253092692, 3.113321384499191))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed_ice.html}
@@ -47,7 +47,8 @@ Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_melting_ice_SA_CT_ratio}},
   \code{\link{gsw_melting_ice_equilibrium_SA_CT_ratio}},
   \code{\link{gsw_melting_ice_into_seawater}},
-  \code{\link{gsw_rho_ice}}, \code{\link{gsw_t_freezing}}
+  \code{\link{gsw_rho_ice}}, \code{\link{gsw_specvol_ice}},
+  \code{\link{gsw_t_freezing}}
 
 Other things related to sound: \code{\link{gsw_sound_speed_t_exact}},
   \code{\link{gsw_sound_speed}}

@@ -244,6 +244,7 @@ W2(wrap_gsw_sound_speed_ice, gsw_sound_speed_ice, t, p, n, rval)
 W3(wrap_gsw_sound_speed_t_exact, gsw_sound_speed_t_exact, SA, t, p, n, rval)
 // gsw_specvol coded in R
 W3(wrap_gsw_specvol_anom_standard, gsw_specvol_anom_standard, SA, CT, p, n, rval)
+W2(wrap_gsw_specvol_ice, gsw_specvol_ice, t, p, n, rval)
 W3(wrap_gsw_specvol_t_exact, gsw_specvol_t_exact, SA, t, p, n, rval)
 W2(wrap_gsw_spiciness0, gsw_spiciness0, SA, CT, n, rval)
 W2(wrap_gsw_spiciness1, gsw_spiciness1, SA, CT, n, rval)

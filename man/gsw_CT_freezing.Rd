@@ -42,6 +42,7 @@ Other things related to ice: \code{\link{gsw_adiabatic_lapse_rate_ice}},
   \code{\link{gsw_melting_ice_into_seawater}},
   \code{\link{gsw_rho_ice}},
   \code{\link{gsw_sound_speed_ice}},
+  \code{\link{gsw_specvol_ice}},
   \code{\link{gsw_t_freezing}}
 
 Other things related to temperature: \code{\link{gsw_CT_from_pt}},

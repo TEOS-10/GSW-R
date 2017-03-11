@@ -2219,6 +2219,35 @@ gsw_specvol_anom_standard <- function(SA, CT, p)
     rval
 }
 
+#' Specific volume of ice
+#' 
+#' @template ttemplate
+#' @template ptemplate
+#' @return Specific volume [ m^3/kg ]
+#' @examples 
+#' library(testthat)
+#' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
+#' p <- c(      10,       50,      125,      250,       600,     1000)
+#' v <- gsw_specvol_ice(t, p)
+#' expect_equal(v, c(0.001088982980677, 0.001088489459509, 0.001088499019939,
+#'                 0.001088433747301, 0.001088223220685, 0.001088135464776))
+#' @family things related to density
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_ice.html}
+gsw_specvol_ice  <- function(t, p)
+{
+    l <- argfix(list(t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_specvol_ice",
+               t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(t))
+        dim(rval) <- dim(t)
+    rval
+}
+
+
 #' Specific volume
 #' 
 #' @template SAtemplate

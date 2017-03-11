@@ -55,6 +55,7 @@ Other things related to density: \code{\link{gsw_CT_from_rho}},
   \code{\link{gsw_sigma2}}, \code{\link{gsw_sigma3}},
   \code{\link{gsw_sigma4}},
   \code{\link{gsw_specvol_anom_standard}},
+  \code{\link{gsw_specvol_ice}},
   \code{\link{gsw_specvol_t_exact}},
   \code{\link{gsw_specvol}}
 
@@ -68,5 +69,6 @@ Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_melting_ice_equilibrium_SA_CT_ratio}},
   \code{\link{gsw_melting_ice_into_seawater}},
   \code{\link{gsw_sound_speed_ice}},
+  \code{\link{gsw_specvol_ice}},
   \code{\link{gsw_t_freezing}}
 }
