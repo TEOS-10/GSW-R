@@ -187,6 +187,7 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), dou
 // the second argument should be lower-case, since this is used in the C
 // library.
 W3(wrap_gsw_adiabatic_lapse_rate_from_CT, gsw_adiabatic_lapse_rate_from_ct, SA, CT, p, n, rval)
+W2(wrap_gsw_adiabatic_lapse_rate_ice, gsw_adiabatic_lapse_rate_ice, t, p, n, rval)
 W3(wrap_gsw_alpha, gsw_alpha, SA, CT, p, n, rval)
 W3(wrap_gsw_alpha_on_beta, gsw_alpha_on_beta, SA, CT, p, n, rval)
 W3(wrap_gsw_alpha_wrt_t_exact, gsw_alpha_wrt_t_exact, SA, t, p, n, rval)
@@ -214,6 +215,7 @@ W3(wrap_gsw_kappa_t_exact, gsw_kappa_t_exact, SA, t, p, n, rval)
 W2(wrap_gsw_latentheat_evap_CT, gsw_latentheat_evap_ct, SA, CT, n, rval)
 W2(wrap_gsw_latentheat_evap_t, gsw_latentheat_evap_t, SA, t, n, rval)
 W2(wrap_gsw_latentheat_melting, gsw_latentheat_melting, SA, p, n, rval)
+W2(wrap_gsw_melting_ice_equilibrium_SA_CT_ratio, gsw_melting_ice_equilibrium_sa_ct_ratio, SA, p, n, rval)
 W4(wrap_gsw_melting_ice_SA_CT_ratio, gsw_melting_ice_sa_ct_ratio, SA, CT, p, t_Ih, n, rval)
 
 // declare since it's not in the TEOS-10 C library yet, and was coded separately.
@@ -238,6 +240,7 @@ W2(wrap_gsw_sigma2, gsw_sigma2, SA, CT, n, rval)
 W2(wrap_gsw_sigma3, gsw_sigma3, SA, CT, n, rval)
 W2(wrap_gsw_sigma4, gsw_sigma4, SA, CT, n, rval)
 W3(wrap_gsw_sound_speed, gsw_sound_speed, SA, t, p, n, rval)
+W2(wrap_gsw_sound_speed_ice, gsw_sound_speed_ice, t, p, n, rval)
 W3(wrap_gsw_sound_speed_t_exact, gsw_sound_speed_t_exact, SA, t, p, n, rval)
 // gsw_specvol coded in R
 W3(wrap_gsw_specvol_anom_standard, gsw_specvol_anom_standard, SA, CT, p, n, rval)

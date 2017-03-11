@@ -32,13 +32,17 @@ expect_equal(CT_freezing, c(-1.899683776424096, -1.940791867869104, -2.006240664
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing.html}
 }
 \seealso{
-Other things related to ice: \code{\link{gsw_alpha_wrt_t_ice}},
+Other things related to ice: \code{\link{gsw_adiabatic_lapse_rate_ice}},
+  \code{\link{gsw_alpha_wrt_t_ice}},
   \code{\link{gsw_cp_ice}}, \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_frazil_properties}},
   \code{\link{gsw_ice_fraction_to_freeze_seawater}},
   \code{\link{gsw_melting_ice_SA_CT_ratio}},
+  \code{\link{gsw_melting_ice_equilibrium_SA_CT_ratio}},
   \code{\link{gsw_melting_ice_into_seawater}},
-  \code{\link{gsw_rho_ice}}, \code{\link{gsw_t_freezing}}
+  \code{\link{gsw_rho_ice}},
+  \code{\link{gsw_sound_speed_ice}},
+  \code{\link{gsw_t_freezing}}
 
 Other things related to temperature: \code{\link{gsw_CT_from_pt}},
   \code{\link{gsw_CT_from_rho}},

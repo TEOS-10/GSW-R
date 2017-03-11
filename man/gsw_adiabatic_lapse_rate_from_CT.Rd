@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_adiabatic_lapse_rate_from_CT}
 \alias{gsw_adiabatic_lapse_rate_from_CT}
-\title{Adiabatic lapse rate from Conservative Temperature}
+\title{Adiabatic Lapse Rate}
 \usage{
 gsw_adiabatic_lapse_rate_from_CT(SA, CT, p)
 }
@@ -17,7 +17,7 @@ gsw_adiabatic_lapse_rate_from_CT(SA, CT, p)
 adiabatic lapse rate (note unconventional unit) [ K/Pa ]
 }
 \description{
-Note that the unit is K/Pa, i.e. 1e-4 times K/dbar.
+Note that the unit is degC/Pa; multiply by 1e4 to get the more useful degC/dbar.
 }
 \examples{
 library(testthat)

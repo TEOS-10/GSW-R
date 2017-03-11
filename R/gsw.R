@@ -159,9 +159,9 @@ argfix <- function(list)
 
 ## PART 3: gsw (Gibbs SeaWater) functions, in alphabetical order (ignoring case)
 
-#' Adiabatic lapse rate from Conservative Temperature
+#' Adiabatic Lapse Rate
 #'
-#' Note that the unit is K/Pa, i.e. 1e-4 times K/dbar.
+#' Note that the unit is degC/Pa; multiply by 1e4 to get the more useful degC/dbar.
 #' 
 #' @template SAtemplate
 #' @template CTtemplate
@@ -188,7 +188,36 @@ gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
         dim(rval) <- dim(SA)
     rval
 }
-                                        
+
+#' Adiabatic Lapse Rate of Ice
+#'
+#' Note that the unit is degC/Pa; multiply by 1e4 to get the more useful degC/dbar.
+#' 
+#' @template ttemplate
+#' @template ptemplate
+#' @return adiabatic lapse rate (note unconventional unit) [ K/Pa ]
+#' @examples
+#' library(testthat)
+#' t  <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
+#' p <- c(       10,       50,      125,      250,      600,    1000)
+#' lr <- gsw_adiabatic_lapse_rate_ice(t, p)
+#' expect_equal(lr*1e7, c(0.218777853913651, 0.216559115188599, 0.216867659957613,
+#'                      0.216988337914416, 0.217182707402780, 0.218100558740840))
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_ice.html}
+gsw_adiabatic_lapse_rate_ice <- function(t, p)
+{
+    l <- argfix(list(t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_adiabatic_lapse_rate_ice",
+               t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(t))
+        dim(rval) <- dim(t)
+    rval
+}
+                                         
 #' Thermal expansion coefficient with respect to Conservative Temperature
 #'
 #' Thermal expansion coefficient with respect to Conservative Temperature, using
@@ -1191,13 +1220,41 @@ gsw_melting_ice_into_seawater <- function(SA, CT, p, w_Ih, t_Ih)
     list(SA_final=r$SA_final, CT_final=r$CT_final, w_Ih_final=r$w_Ih_final)
 }
 
+#' Calculate d(SA)/d(CT) for ice melting in seawater at nearly freezing temperature
+#'
+#' @template SAtemplate
+#' @template ptemplate
+#' @return ratio of change in \code{SA} to change in \code{CT} [ g/kg/degC ].
+#' @examples 
+#' library(testthat)
+#' SA <- c(   34.7118,  34.8915,  35.0256,  34.8472,  34.7366, 34.7324)
+#' p <- c(         10,       50,      125,      250,      600,    1000)
+#' r <- gsw_melting_ice_equilibrium_SA_CT_ratio(SA, p)
+#' expect_equal(r, c(0.420209509196985, 0.422511693121631, 0.424345503216433,
+#'                 0.422475836091426, 0.422023427778221, 0.423037622331042))
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_equilibrium_SA_CT_ratio.html}
+gsw_melting_ice_equilibrium_SA_CT_ratio <- function(SA, p)
+{
+    l <- argfix(list(SA=SA, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_melting_ice_equilibrium_SA_CT_ratio",
+               SA=as.double(l$SA), p=as.double(l$p),
+               n=as.integer(n), rval=double(n),
+               NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Calculate d(SA)/d(CT) for ice melting in seawater
 #'
 #' @template SAtemplate
 #' @template CTtemplate
 #' @template ptemplate
 #' @template t_Ihtemplate
-#' @return ratio of change in \code{SA} to change in \code{CT}.
+#' @return ratio of change in \code{SA} to change in \code{CT} [ g/kg/degC ].
 #' @examples 
 #' library(testthat)
 #' SA <- c(   34.7118,  34.8915,  35.0256,  34.8472,  34.7366, 34.7324)
@@ -2026,9 +2083,9 @@ gsw_sigma4 <- function(SA, CT)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
-#' sound_speed <- gsw_sound_speed(SA,CT,p)
-#' expect_equal(sound_speed/1e3, c(1.542426412426373, 1.542558891663385, 1.530801535436184,
-#'                               1.494551099295314, 1.487622786765276, 1.484271672296205))
+#' speed <- gsw_sound_speed(SA,CT,p)
+#' expect_equal(speed/1e3, c(1.542426412426373, 1.542558891663385, 1.530801535436184,
+#'                         1.494551099295314, 1.487622786765276, 1.484271672296205))
 #' @family things related to sound
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed.html}
@@ -2043,6 +2100,41 @@ gsw_sound_speed <- function(SA, CT, p)
         dim(rval) <- dim(SA)
     rval
 }
+
+#' Sound speed in ice
+#'
+#' Speed of sound in ice.
+#'
+#' @template teos10template
+#'
+#' @template ttemplate
+#' @template ptemplate
+#' @return sound speed [ m/s ]
+#' @examples
+#' library(testthat)
+#' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
+#' p <- c(      10,       50,      125,      250,      600,    1000)
+#' speed <- gsw_sound_speed_ice(t, p)
+#' expect_equal(speed/1e3, c(3.111311360346254, 3.116492565497544, 3.115833462003452,
+#'                          3.115637032488204, 3.115377253092692, 3.113321384499191))
+#' @family things related to ice
+#' @family things related to sound
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed_ice.html}
+gsw_sound_speed_ice <- function(t, p)
+{
+    l <- argfix(list(t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_sound_speed_ice",
+               t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(t))
+        dim(rval) <- dim(t)
+    rval
+}
+
+
+
 
 #' Sound speed
 #'
