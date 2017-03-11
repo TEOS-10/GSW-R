@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_SA_from_SP}
 \alias{gsw_SA_from_SP}
-\title{Convert from practical salinity to absolute salinity}
+\title{Convert from Practical Salinity to Absolute Salinity}
 \usage{
 gsw_SA_from_SP(SP, p, longitude, latitude)
 }
@@ -44,6 +44,7 @@ expect_equal(SA, c(34.711778344814114, 34.891522618230098, 35.025544862476920,
 }
 \seealso{
 Other things related to salinity: \code{\link{gsw_C_from_SP}},
+  \code{\link{gsw_SA_from_SP_baltic}},
   \code{\link{gsw_SA_from_Sstar}},
   \code{\link{gsw_SP_from_C}},
   \code{\link{gsw_SP_from_SA}},

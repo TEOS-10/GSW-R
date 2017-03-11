@@ -1667,7 +1667,7 @@ gsw_SA_from_rho <- function(rho, CT, p)
     rval
 }
 
-#' Convert from practical salinity to absolute salinity
+#' Convert from Practical Salinity to Absolute Salinity
 #'
 #' Calculate Absolute Salinity from Practical Salinity, pressure,
 #' longitude, and latitude.
@@ -1712,6 +1712,53 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
                SP=as.double(l$SP), p=as.double(l$p),
                longitude=as.double(l$longitude), latitude=as.double(l$latitude),
                n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SP))
+        dim(rval) <- dim(SP)
+    rval
+}
+
+#' Convert from Practical Salinity to Absolute Salinity (Baltic)
+#'
+#' Calculate Absolute Salinity from Practical Salinity, pressure,
+#' longitude, and latitude.
+#'
+#' If SP is a matrix and if its dimensions correspond to the
+#' lengths of longitude and latitude, then the latter are
+#' converted to analogous matrices with \code{\link{expand.grid}}.
+#' 
+#' @template SPtemplate
+#' @template longitudetemplate
+#' @template latitudetemplate
+#' @return Absolute Salinity [ g/kg ]
+#' @examples
+#' library(testthat)
+#' SP <- c( 6.5683, 6.6719, 6.8108, 7.2629, 7.4825, 10.2796)
+#' lon <- c(    20,     20,     20,     20,     20,      20)
+#' lat <- c(    59,     59,     59,     59,     59,      59)
+#' SA <- gsw_SA_from_SP_baltic(SP, lon, lat)
+#' expect_equal(SA, c(6.669945432342856, 6.773776430742856, 6.912986138057142,
+#'                  7.366094191885713, 7.586183837142856, 10.389520570971428))
+#' @family things related to salinity
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP_baltic.html}
+gsw_SA_from_SP_baltic <- function(SP, longitude, latitude)
+{
+    if (missing(longitude)) stop("must supply longitude")
+    if (missing(latitude)) stop("must supply latitude")
+    ## check for special case that SP is a matrix defined on lon and lat
+    if (is.matrix(SP)) {
+        dim <- dim(SP)
+        if (length(longitude) == dim[1] && length(latitude) == dim[2]) {
+            ll <- expand.grid(longitude=as.vector(longitude), latitude=as.vector(latitude))
+            longitude <- ll$longitude
+            latitude <- ll$latitude
+        }
+    }
+    l <- argfix(list(SP=SP, longitude=longitude, latitude=latitude))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_SA_from_SP_baltic",
+               SP=as.double(l$SP), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
+               n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SP))
         dim(rval) <- dim(SP)
     rval
