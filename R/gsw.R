@@ -582,7 +582,7 @@ gsw_CT_from_pt <- function(SA, pt)
 #' 
 #' @template rhotemplate
 #' @template SAtemplate
-#' @template pttemplate
+#' @template ptemplate
 #' @return A list containing two estimates of Conservative Temperature:
 #' \code{CT} and \code{CT_multiple}, each in [ deg C ].
 #' @examples 

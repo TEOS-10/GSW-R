@@ -11,7 +11,7 @@ gsw_CT_from_rho(rho, SA, p)
 
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{pt}{potential temperature (ITS-90) [ deg C ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 A list containing two estimates of Conservative Temperature:
