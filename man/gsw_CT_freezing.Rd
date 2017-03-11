@@ -9,7 +9,7 @@ gsw_CT_freezing(SA, p, saturation_fraction = 1)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
 \item{saturation_fraction}{saturation fraction of dissolved air in seawater}
 }
@@ -32,5 +32,9 @@ expect_equal(CT_freezing, c(-1.899683776424096, -1.940791867869104, -2.006240664
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing.html}
 }
 \seealso{
-\code{\link{gsw_t_freezing}} is the analogue for in-situ temperature.
+Other things related to ice: \code{\link{gsw_cp_ice}},
+  \code{\link{gsw_enthalpy_ice}},
+  \code{\link{gsw_ice_fraction_to_freeze_seawater}},
+  \code{\link{gsw_melting_ice_into_seawater}},
+  \code{\link{gsw_rho_ice}}, \code{\link{gsw_t_freezing}}
 }

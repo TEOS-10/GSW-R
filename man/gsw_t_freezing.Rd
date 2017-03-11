@@ -9,7 +9,7 @@ gsw_t_freezing(SA, p, saturation_fraction = 1)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
 \item{saturation_fraction}{saturation fraction of dissolved air in seawater}
 }
@@ -35,5 +35,9 @@ expect_equal(tf, c(-1.902730710149803, -1.942908619287183, -2.006861069199743,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing.html}
 }
 \seealso{
-\code{\link{gsw_CT_freezing}} is the analogue for Conservative Temperature.
+Other things related to ice: \code{\link{gsw_CT_freezing}},
+  \code{\link{gsw_cp_ice}}, \code{\link{gsw_enthalpy_ice}},
+  \code{\link{gsw_ice_fraction_to_freeze_seawater}},
+  \code{\link{gsw_melting_ice_into_seawater}},
+  \code{\link{gsw_rho_ice}}
 }

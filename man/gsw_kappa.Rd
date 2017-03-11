@@ -11,7 +11,7 @@ gsw_kappa(SA, CT, p)
 
 \item{CT}{Conservative Temperature [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 isentropic compressibility [ 1/Pa ] (not 1/dbar)
@@ -32,5 +32,5 @@ expect_equal(kappa, 1e-9*c(0.411343648791300, 0.411105416128094, 0.4165662360266
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_kappa.html}
 }
 \seealso{
-\code{\link{gsw_kappa_t_exact}} is an analogue in terms of in-situ temperature
+Other things related to compressibility: \code{\link{gsw_kappa_t_exact}}
 }

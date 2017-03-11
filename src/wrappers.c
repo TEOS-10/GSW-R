@@ -297,6 +297,13 @@ void wrap_gsw_Nsquared(double *SA, double *CT, double *p, double *latitude, int 
     gsw_nsquared(SA, CT, p, latitude, *n, n2, p_mid);
 }
 
+void wrap_gsw_rho_alpha_beta(double *SA, double *CT, double *p, int *n,
+        double *rho, double *alpha, double *beta)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_rho_alpha_beta(SA[i], CT[i], p[i], &rho[i], &alpha[i], &beta[i]);
+}
+
 void wrap_gsw_SAAR(double *p, double *longitude, double *latitude, int *n, double *saar, int *inocean)
 {
     for (int i=0; i < *(n); i++) {

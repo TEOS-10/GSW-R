@@ -29,5 +29,9 @@ expect_equal(lh, 1e6*c(2.429882982734836, 2.430730236218543, 2.444217294049004,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_evap_t.html}
 }
 \seealso{
-\code{\link{gsw_latentheat_evap_CT}} is an analogue in terms of Conservative Temperature. For melting, see \code{\link{gsw_latentheat_melting}}.
+Other things related to heat: \code{\link{gsw_dynamic_enthalpy}},
+  \code{\link{gsw_enthalpy_t_exact}},
+  \code{\link{gsw_enthalpy}},
+  \code{\link{gsw_latentheat_evap_CT}},
+  \code{\link{gsw_latentheat_melting}}
 }

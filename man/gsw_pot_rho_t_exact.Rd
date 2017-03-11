@@ -11,7 +11,7 @@ gsw_pot_rho_t_exact(SA, t, p, p_ref)
 
 \item{t}{in-situ temperature (ITS-90) [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
 \item{p_ref}{reference pressure [ dbar ]}
 }
@@ -35,5 +35,18 @@ expect_equal(prho, 1e3*c(1.021798145811089, 1.022052484416980, 1.023893583651958
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_rho_t_exact.html}
 }
 \seealso{
-\code{\link{gsw_rho}} and \code{\link{gsw_rho_t_exact}} compute density; \code{\link{gsw_sigma0}} and related functions compute potential density at particular pressures.
+Other things related to density: \code{\link{gsw_SA_from_rho}},
+  \code{\link{gsw_alpha_on_beta}},
+  \code{\link{gsw_alpha_wrt_t_exact}},
+  \code{\link{gsw_alpha}},
+  \code{\link{gsw_beta_const_t_exact}},
+  \code{\link{gsw_beta}}, \code{\link{gsw_rho_alpha_beta}},
+  \code{\link{gsw_rho_first_derivatives}},
+  \code{\link{gsw_rho_ice}}, \code{\link{gsw_rho_t_exact}},
+  \code{\link{gsw_rho}}, \code{\link{gsw_sigma0}},
+  \code{\link{gsw_sigma1}}, \code{\link{gsw_sigma2}},
+  \code{\link{gsw_sigma3}}, \code{\link{gsw_sigma4}},
+  \code{\link{gsw_specvol_anom_standard}},
+  \code{\link{gsw_specvol_t_exact}},
+  \code{\link{gsw_specvol}}
 }

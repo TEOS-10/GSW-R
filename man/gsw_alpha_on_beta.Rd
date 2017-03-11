@@ -11,7 +11,7 @@ gsw_alpha_on_beta(SA, CT, p)
 
 \item{CT}{Conservative Temperature [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 ratio of thermal expansion coefficient to haline contraction coefficient [ (g/kg)/K ]
@@ -42,5 +42,19 @@ expect_equal(alpha_on_beta, c(0.452468543022009, 0.449601695030057, 0.3871402030
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha_on_beta.html}
 }
 \seealso{
-This yields the ratio of the return values from \code{\link{gsw_alpha}} and \code{\link{gsw_beta}}, to within computational precision.
+Other things related to density: \code{\link{gsw_SA_from_rho}},
+  \code{\link{gsw_alpha_wrt_t_exact}},
+  \code{\link{gsw_alpha}},
+  \code{\link{gsw_beta_const_t_exact}},
+  \code{\link{gsw_beta}},
+  \code{\link{gsw_pot_rho_t_exact}},
+  \code{\link{gsw_rho_alpha_beta}},
+  \code{\link{gsw_rho_first_derivatives}},
+  \code{\link{gsw_rho_ice}}, \code{\link{gsw_rho_t_exact}},
+  \code{\link{gsw_rho}}, \code{\link{gsw_sigma0}},
+  \code{\link{gsw_sigma1}}, \code{\link{gsw_sigma2}},
+  \code{\link{gsw_sigma3}}, \code{\link{gsw_sigma4}},
+  \code{\link{gsw_specvol_anom_standard}},
+  \code{\link{gsw_specvol_t_exact}},
+  \code{\link{gsw_specvol}}
 }

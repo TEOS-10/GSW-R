@@ -11,7 +11,7 @@ gsw_IPV_vs_fNsquared_ratio(SA, CT, p, p_ref = 0)
 
 \item{CT}{Conservative Temperature [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
 \item{p_ref}{reference pressure [ dbar ]}
 }

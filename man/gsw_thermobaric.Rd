@@ -11,7 +11,7 @@ gsw_thermobaric(SA, CT, p)
 
 \item{CT}{Conservative Temperature [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 thermobaric coefficient wrt Conservative Temperature [ 1/(K Pa) ]

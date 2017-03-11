@@ -11,7 +11,7 @@ gsw_cp_t_exact(SA, t, p)
 
 \item{t}{in-situ temperature (ITS-90) [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 heat capacity [ J/(kg*K) ]

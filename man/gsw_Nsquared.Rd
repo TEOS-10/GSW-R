@@ -11,9 +11,10 @@ gsw_Nsquared(SA, CT, p, latitude = 0)
 
 \item{CT}{Conservative Temperature [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
-\item{latitude}{latitude in decimal degrees [ -90 to 90 ]}
+\item{latitude}{latitude in decimal degrees, positive to the north of the equator. (This
+is called \code{lat} in the TEOS-10 Matlab code.)}
 }
 \value{
 list containing N2 [ 1/s^ ] and mid-point pressure p_mid [ dbar ]

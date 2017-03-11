@@ -40,5 +40,20 @@ expect_equal(sigma4, c(37.900374609834898, 38.166979617032439, 40.28087607528254
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma4.html}
 }
 \seealso{
-Use \code{\link{gsw_sigma0}} for 0 dbar pressure, \code{\link{gsw_sigma1}} for 1000 dbar, \code{\link{gsw_sigma2}} for 2000 dbar, or \code{\link{gsw_sigma3}} for 3000 dbar.
+Other things related to density: \code{\link{gsw_SA_from_rho}},
+  \code{\link{gsw_alpha_on_beta}},
+  \code{\link{gsw_alpha_wrt_t_exact}},
+  \code{\link{gsw_alpha}},
+  \code{\link{gsw_beta_const_t_exact}},
+  \code{\link{gsw_beta}},
+  \code{\link{gsw_pot_rho_t_exact}},
+  \code{\link{gsw_rho_alpha_beta}},
+  \code{\link{gsw_rho_first_derivatives}},
+  \code{\link{gsw_rho_ice}}, \code{\link{gsw_rho_t_exact}},
+  \code{\link{gsw_rho}}, \code{\link{gsw_sigma0}},
+  \code{\link{gsw_sigma1}}, \code{\link{gsw_sigma2}},
+  \code{\link{gsw_sigma3}},
+  \code{\link{gsw_specvol_anom_standard}},
+  \code{\link{gsw_specvol_t_exact}},
+  \code{\link{gsw_specvol}}
 }

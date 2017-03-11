@@ -38,6 +38,5 @@ expect_equal(spiciness, c(6.874671751873180, 6.884616399155135, 5.15445889238708
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_spiciness2.html}
 }
 \seealso{
-\code{\link{gsw_spiciness0}} and \code{\link{gsw_spiciness1}} for calculations
-at 0 dbar and 1000 dbar.
+Other things related to spiciness: \code{\link{gsw_spiciness1}}
 }

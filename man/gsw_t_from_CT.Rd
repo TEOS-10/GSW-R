@@ -11,7 +11,7 @@ gsw_t_from_CT(SA, CT, p)
 
 \item{CT}{Conservative Temperature [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 in-situ temperature (ITS-90) [ deg C ]
@@ -32,5 +32,8 @@ expect_equal(t, c(28.785580227725703, 28.432872246163946, 22.810323087627076,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_from_CT.html}
 }
 \seealso{
-\code{\link{gsw_CT_from_t}} does the reverse.
+Other things related to temperature: \code{\link{gsw_CT_from_pt}},
+  \code{\link{gsw_CT_from_t}},
+  \code{\link{gsw_pt0_from_t}},
+  \code{\link{gsw_pt_from_CT}}, \code{\link{gsw_pt_from_t}}
 }

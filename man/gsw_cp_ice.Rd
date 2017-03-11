@@ -30,16 +30,17 @@ it all, consult \url{http://www.teos-10.org}.
 library(testthat)
 t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 p <-  c(     10,      50,     125,     250,     600,    1000)
-rho <- gsw_cp_ice(t, p)
-expect_equal(rho, c(2017.314262094657, 1997.830122682709, 2002.281331375396,
-                    2006.127319545421, 2015.676303959609, 2033.308170371559))
+cp <- gsw_cp_ice(t, p)
+expect_equal(cp, c(2017.314262094657, 1997.830122682709, 2002.281331375396,
+                 2006.127319545421, 2015.676303959609, 2033.308170371559))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_cp_ice.html}
 }
 \seealso{
-Other things related to ice: \code{\link{gsw_enthalpy_ice}},
+Other things related to ice: \code{\link{gsw_CT_freezing}},
+  \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_ice_fraction_to_freeze_seawater}},
   \code{\link{gsw_melting_ice_into_seawater}},
-  \code{\link{gsw_rho_ice}}
+  \code{\link{gsw_rho_ice}}, \code{\link{gsw_t_freezing}}
 }

@@ -11,7 +11,7 @@ gsw_specvol_anom_standard(SA, CT, p)
 
 \item{CT}{Conservative Temperature [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 Specific volume anomaly [ m^3/kg ]
@@ -33,5 +33,19 @@ expect_equal(a, 1e-5*c(0.601051894897400, 0.578609769250563, 0.405600538950092,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_anom_standard.html}
 }
 \seealso{
-Specific volume itself is given by \code{\link{gsw_specvol}} and \code{\link{gsw_specvol_t_exact}}.
+Other things related to density: \code{\link{gsw_SA_from_rho}},
+  \code{\link{gsw_alpha_on_beta}},
+  \code{\link{gsw_alpha_wrt_t_exact}},
+  \code{\link{gsw_alpha}},
+  \code{\link{gsw_beta_const_t_exact}},
+  \code{\link{gsw_beta}},
+  \code{\link{gsw_pot_rho_t_exact}},
+  \code{\link{gsw_rho_alpha_beta}},
+  \code{\link{gsw_rho_first_derivatives}},
+  \code{\link{gsw_rho_ice}}, \code{\link{gsw_rho_t_exact}},
+  \code{\link{gsw_rho}}, \code{\link{gsw_sigma0}},
+  \code{\link{gsw_sigma1}}, \code{\link{gsw_sigma2}},
+  \code{\link{gsw_sigma3}}, \code{\link{gsw_sigma4}},
+  \code{\link{gsw_specvol_t_exact}},
+  \code{\link{gsw_specvol}}
 }

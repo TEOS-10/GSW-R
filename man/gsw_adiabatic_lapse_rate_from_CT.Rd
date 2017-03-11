@@ -11,7 +11,7 @@ gsw_adiabatic_lapse_rate_from_CT(SA, CT, p)
 
 \item{CT}{Conservative Temperature [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 adiabatic lapse rate (note unconventional unit) [ K/Pa ]

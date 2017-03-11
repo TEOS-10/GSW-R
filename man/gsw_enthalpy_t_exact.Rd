@@ -9,9 +9,9 @@ gsw_enthalpy_t_exact(SA, t, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{t}{in-situ temperature (ITS-90)  [ deg C ]}
+\item{t}{in-situ temperature (ITS-90) [ deg C ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 specific enthalpy [ J/kg ]
@@ -32,5 +32,9 @@ expect_equal(e, 1e5*c(1.151032604783763, 1.140148036012021, 0.921799209310966,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_t_exact.html}
 }
 \seealso{
-\code{\link{gsw_enthalpy}} and \code{\link{gsw_dynamic_enthalpy}}
+Other things related to heat: \code{\link{gsw_dynamic_enthalpy}},
+  \code{\link{gsw_enthalpy}},
+  \code{\link{gsw_latentheat_evap_CT}},
+  \code{\link{gsw_latentheat_evap_t}},
+  \code{\link{gsw_latentheat_melting}}
 }

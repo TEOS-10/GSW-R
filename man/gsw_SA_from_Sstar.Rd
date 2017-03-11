@@ -9,11 +9,13 @@ gsw_SA_from_Sstar(Sstar, p, longitude, latitude)
 \arguments{
 \item{Sstar}{Preformed Salinity [ g/kg ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
-\item{longitude}{longitude in decimal degrees [ 0 to 360 or -180 to 180]}
+\item{longitude}{longitude in decimal degrees, positive to the east of Greenwich. (This
+is called \code{long} in the TEOS-10 Matlab code.)}
 
-\item{latitude}{latitude in decimal degrees [ -90 to 90 ]}
+\item{latitude}{latitude in decimal degrees, positive to the north of the equator. (This
+is called \code{lat} in the TEOS-10 Matlab code.)}
 }
 \value{
 Absolute Salinity [ g/kg ]
@@ -41,5 +43,15 @@ expect_equal(SA, c(34.711724663585905, 34.891561223296009, 35.025594598699882,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_Sstar.html}
 }
 \seealso{
-\code{\link{gsw_Sstar_from_SA}} does the reverse.
+Other things related to salinity: \code{\link{gsw_C_from_SP}},
+  \code{\link{gsw_SA_from_SP}},
+  \code{\link{gsw_SP_from_C}},
+  \code{\link{gsw_SP_from_SA}},
+  \code{\link{gsw_SP_from_SK}},
+  \code{\link{gsw_SP_from_SR}},
+  \code{\link{gsw_SP_from_Sstar}},
+  \code{\link{gsw_SR_from_SP}},
+  \code{\link{gsw_Sstar_from_SA}},
+  \code{\link{gsw_Sstar_from_SP}},
+  \code{\link{gsw_deltaSA_from_SP}}
 }
