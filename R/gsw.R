@@ -1191,6 +1191,38 @@ gsw_melting_ice_into_seawater <- function(SA, CT, p, w_Ih, t_Ih)
     list(SA_final=r$SA_final, CT_final=r$CT_final, w_Ih_final=r$w_Ih_final)
 }
 
+#' Calculate d(SA)/d(CT) for ice melting in seawater
+#'
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#' @template t_Ihtemplate
+#' @return ratio of change in \code{SA} to change in \code{CT}.
+#' @examples 
+#' library(testthat)
+#' SA <- c(   34.7118,  34.8915,  35.0256,  34.8472,  34.7366, 34.7324)
+#' CT <- c(    3.7856,   3.4329,   2.8103,   1.2600,   0.6886,  0.4403)
+#' p <- c(         10,       50,      125,      250,      600,    1000)
+#' t_Ih <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036) 
+#' r <- gsw_melting_ice_SA_CT_ratio(SA, CT, p, t_Ih)
+#' expect_equal(r, c(0.373840909022490, 0.371878514972099, 0.377104664622191,
+#'                 0.382777696796156, 0.387133845152000, 0.393947316026914))
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_SA_CT_ratio.html}
+gsw_melting_ice_SA_CT_ratio <- function(SA, CT, p, t_Ih)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p, t_Ih=t_Ih))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_melting_ice_SA_CT_ratio",
+               SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), t_Ih=as.double(l$t_Ih),
+               n=as.integer(n), rval=double(n),
+               NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 
 #' Calculate Brunt Vaisala Frequency squared
 #'
@@ -1667,7 +1699,7 @@ gsw_SA_from_rho <- function(rho, CT, p)
     rval
 }
 
-#' Convert from practical salinity to absolute salinity
+#' Convert from Practical Salinity to Absolute Salinity
 #'
 #' Calculate Absolute Salinity from Practical Salinity, pressure,
 #' longitude, and latitude.
@@ -1712,6 +1744,53 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
                SP=as.double(l$SP), p=as.double(l$p),
                longitude=as.double(l$longitude), latitude=as.double(l$latitude),
                n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SP))
+        dim(rval) <- dim(SP)
+    rval
+}
+
+#' Convert from Practical Salinity to Absolute Salinity (Baltic)
+#'
+#' Calculate Absolute Salinity from Practical Salinity, pressure,
+#' longitude, and latitude.
+#'
+#' If SP is a matrix and if its dimensions correspond to the
+#' lengths of longitude and latitude, then the latter are
+#' converted to analogous matrices with \code{\link{expand.grid}}.
+#' 
+#' @template SPtemplate
+#' @template longitudetemplate
+#' @template latitudetemplate
+#' @return Absolute Salinity [ g/kg ]
+#' @examples
+#' library(testthat)
+#' SP <- c( 6.5683, 6.6719, 6.8108, 7.2629, 7.4825, 10.2796)
+#' lon <- c(    20,     20,     20,     20,     20,      20)
+#' lat <- c(    59,     59,     59,     59,     59,      59)
+#' SA <- gsw_SA_from_SP_baltic(SP, lon, lat)
+#' expect_equal(SA, c(6.669945432342856, 6.773776430742856, 6.912986138057142,
+#'                  7.366094191885713, 7.586183837142856, 10.389520570971428))
+#' @family things related to salinity
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP_baltic.html}
+gsw_SA_from_SP_baltic <- function(SP, longitude, latitude)
+{
+    if (missing(longitude)) stop("must supply longitude")
+    if (missing(latitude)) stop("must supply latitude")
+    ## check for special case that SP is a matrix defined on lon and lat
+    if (is.matrix(SP)) {
+        dim <- dim(SP)
+        if (length(longitude) == dim[1] && length(latitude) == dim[2]) {
+            ll <- expand.grid(longitude=as.vector(longitude), latitude=as.vector(latitude))
+            longitude <- ll$longitude
+            latitude <- ll$latitude
+        }
+    }
+    l <- argfix(list(SP=SP, longitude=longitude, latitude=latitude))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_SA_from_SP_baltic",
+               SP=as.double(l$SP), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
+               n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SP))
         dim(rval) <- dim(SP)
     rval

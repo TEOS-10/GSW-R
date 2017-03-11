@@ -214,6 +214,7 @@ W3(wrap_gsw_kappa_t_exact, gsw_kappa_t_exact, SA, t, p, n, rval)
 W2(wrap_gsw_latentheat_evap_CT, gsw_latentheat_evap_ct, SA, CT, n, rval)
 W2(wrap_gsw_latentheat_evap_t, gsw_latentheat_evap_t, SA, t, n, rval)
 W2(wrap_gsw_latentheat_melting, gsw_latentheat_melting, SA, p, n, rval)
+W4(wrap_gsw_melting_ice_SA_CT_ratio, gsw_melting_ice_sa_ct_ratio, SA, CT, p, t_Ih, n, rval)
 
 // declare since it's not in the TEOS-10 C library yet, and was coded separately.
 extern double gsw_p_from_z(double z, double latitude, double geo_strf_dyn_height, double sea_surface_geopotential);
@@ -228,6 +229,7 @@ W2(wrap_gsw_rho_ice, gsw_rho_ice, t, p, n, rval)
 W3(wrap_gsw_rho_t_exact, gsw_rho_t_exact, SA, t, p, n, rval)
 W3(wrap_gsw_SA_from_rho, gsw_sa_from_rho, rho, CT, p, n, rval)
 W4(wrap_gsw_SA_from_SP, gsw_sa_from_sp, CT, p, longitude, latitude, n, rval)
+W3(wrap_gsw_SA_from_SP_baltic, gsw_sa_from_sp_baltic, SP, longitude, latitude, n, rval)
 W4(wrap_gsw_SA_from_Sstar, gsw_sa_from_sstar, Sstar, p, longitude, latitude, n, rval)
 W1(wrap_gsw_SR_from_SP, gsw_sr_from_sp, SP, n, rval)
 W2(wrap_gsw_sigma0, gsw_sigma0, SA, CT, n, rval)
