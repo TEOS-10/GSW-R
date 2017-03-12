@@ -1191,6 +1191,37 @@ gsw_kappa <- function(SA, CT, p)
     rval
 }
 
+#' Isothermal Compressibility of Ice
+#'
+#' Calculate isothermal compressibility of ice, in 1/Pa.
+#' 
+#' @template ttemplate
+#' @template ptemplate
+#' @return isothermal compressibility of ice [ 1/Pa ] (not 1/dbar)
+#' @examples
+#' library(testthat)
+#' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
+#' p <- c(      10,       50,      125,      250,       600,     1000)
+#' kappa <- gsw_kappa_const_t_ice(t, p)
+#' expect_equal(kappa*1e9, c(0.115874753261484, 0.115384948953145, 0.115442212717850,
+#'                         0.115452884634531, 0.115454824232421, 0.115619994536961))
+#' @family things related to compressibility
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_kappa_const_t_ice.html}
+gsw_kappa_const_t_ice <- function(t, p)
+{
+    l <- argfix(list(t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_kappa_const_t_ice",
+               t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(t))
+        dim(rval) <- dim(t)
+    rval
+}
+
+
 #' Isentropic Compressibility of Ice
 #'
 #' Calculate isentropic compressibility of ice, in 1/Pa.

@@ -32,6 +32,6 @@ expect_equal(kappa*1e9, c(0.411343648791300, 0.411105416128094, 0.41656623602661
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_kappa_t_exact.html}
 }
 \seealso{
-Other things related to compressibility: \code{\link{gsw_kappa_ice}},
-  \code{\link{gsw_kappa}}
+Other things related to compressibility: \code{\link{gsw_kappa_const_t_ice}},
+  \code{\link{gsw_kappa_ice}}, \code{\link{gsw_kappa}}
 }
