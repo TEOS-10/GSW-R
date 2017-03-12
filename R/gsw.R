@@ -831,6 +831,35 @@ gsw_enthalpy_t_exact <- function(SA, t, p)
     rval
 }
 
+#' Specific Entropy in terms of Absolute Salinity and Potential Temperature
+#'
+#' Calculate specific entropy given absolute salinity and potential temperature.
+#'
+#' @template SAtemplate
+#' @template pttemplate
+#' @return specific entropy [ J/(kg*K) ]
+#' @examples
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' pt <- c(28.7832, 28.4210, 22.7850, 10.2305,  6.8292,  4.3245)
+#' e <- gsw_entropy_from_pt(SA, pt)
+#' expect_equal(e/1e2, c(4.003894674443156, 3.954383994925507, 3.198674385897981,
+#'                     1.467905482842553, 0.986469100565646, 0.627913567234252))
+#' @family things related to entropy
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_from_pt.html}
+gsw_entropy_from_pt <- function(SA, pt)
+{
+    l <- argfix(list(SA=SA, pt=pt))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_entropy_from_pt",
+               SA=as.double(l$SA), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Specific entropy as a function of in-situ temperature and pressure
 #'
 #' Calculates specific entropy given Absolute Salinity, in-situ
@@ -852,6 +881,7 @@ gsw_enthalpy_t_exact <- function(SA, t, p)
 #' e <- gsw_entropy_from_t(SA, t, p)
 #' expect_equal(e/1e2, c(4.003894252787245, 3.954381784340642, 3.198664981986740,
 #'                     1.467908815899072, 0.986473408657975, 0.627915087346090))
+#' @family things related to entropy
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_from_t.html}
 gsw_entropy_from_t <- function(SA, t, p)
@@ -866,7 +896,6 @@ gsw_entropy_from_t <- function(SA, t, p)
     rval
 }
 
-##########
 #' Entropy of ice
 #'
 #' @template ttemplate
@@ -879,6 +908,7 @@ gsw_entropy_from_t <- function(SA, t, p)
 #' e <- gsw_entropy_ice(t, p)
 #' expect_equal(e/1e3, c(-1.303663820598987, -1.324090218294577, -1.319426394193644,
 #'                     -1.315402956671801, -1.305426590579231, -1.287021035328113))
+#' @family things related to entropy
 #' @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_ice.html}
@@ -893,7 +923,6 @@ gsw_entropy_ice <- function(t, p)
         dim(rval) <- dim(t)
     rval
 }
-##########
 
 #' Properties of Frazil ice
 #'

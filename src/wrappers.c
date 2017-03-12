@@ -208,6 +208,7 @@ W2(wrap_gsw_enthalpy_ice, gsw_enthalpy_ice, t, p, n, rval)
 W3(wrap_gsw_enthalpy_t_exact, gsw_enthalpy_t_exact, SA, t, p, n, rval)
 // gsw_entropy_from_CT is not in the C library.
 W2(wrap_gsw_entropy_ice, gsw_entropy_ice, t, p, n, rval)
+W2(wrap_gsw_entropy_from_pt, gsw_entropy_from_pt, SA, pt, n, rval)
 W3(wrap_gsw_entropy_from_t, gsw_entropy_from_t, SA, t, p, n, rval)
 W2(wrap_gsw_grav, gsw_grav, latitude, p, n, rval)
 W3(wrap_gsw_internal_energy, gsw_internal_energy, SA, CT, p, n, rval)
