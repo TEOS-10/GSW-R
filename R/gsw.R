@@ -1528,6 +1528,34 @@ gsw_pot_rho_t_exact <- function(SA, t, p, p_ref)
     rval
 }
 
+#' Pressure Coefficient for Ice
+#' 
+#' @template ttemplate
+#' @template ptemplate
+#' @return specific internal energy [ Pa/degC ]
+#' @examples
+#' library(testthat)
+#' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
+#' p <-  c(     10,      50,     125,     250,     600,    1000)
+#' pc <- gsw_pressure_coefficient_ice(t, p)
+#' expect_equal(pc/1e6, c(1.333098059787838, 1.326359005133730, 1.327354133828322,
+#'                      1.327793888831923, 1.328549609231685, 1.331416733490227))
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pressure_coefficient_ice.html}
+gsw_pressure_coefficient_ice <- function(t, p)
+{
+    l <- argfix(list(t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_pressure_coefficient_ice",
+               t=(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(t))
+        dim(rval) <- dim(t)
+    rval
+}
+
+
 #' Potential temperature referenced to the surface
 #' 
 #' @template SAtemplate
