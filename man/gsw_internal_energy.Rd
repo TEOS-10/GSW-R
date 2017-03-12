@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_internal_energy}
 \alias{gsw_internal_energy}
-\title{Specific internal energy of seawater (75-term equation)}
+\title{Specific Internal Energy of Seawater (75-term equation)}
 \usage{
 gsw_internal_energy(SA, CT, p)
 }
@@ -17,7 +17,7 @@ gsw_internal_energy(SA, CT, p)
 specific internal energy [ J/kg ]
 }
 \description{
-Specific internal energy of seawater (75-term equation)
+Specific Internal Energy of Seawater (75-term equation)
 }
 \examples{
 library(testthat)

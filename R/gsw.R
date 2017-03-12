@@ -1068,7 +1068,7 @@ gsw_ice_fraction_to_freeze_seawater <- function(SA, CT, p, t_Ih)
     list(SA_freeze=r$SA_freeze, CT_freeze=r$CT_freeze, w_Ih=r$w_Ih)
 }
 
-#' Specific internal energy of seawater (75-term equation)
+#' Specific Internal Energy of Seawater (75-term equation)
 #' 
 #' @template SAtemplate
 #' @template CTtemplate
@@ -1095,6 +1095,34 @@ gsw_internal_energy <- function(SA, CT, p)
         dim(rval) <- dim(SA)
     rval
 }
+
+#' Specific Internal Energy of Ice (75-term equation)
+#' 
+#' @template ttemplate
+#' @template ptemplate
+#' @return specific internal energy [ J/kg ]
+#' @examples
+#' library(testthat)
+#' t_Ih <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
+#' p <-  c(     10,      50,     125,     250,     600,    1000)
+#' e <- gsw_internal_energy_ice(t_Ih, p)
+#' expect_equal(e/1e5, c(-3.556606992432442, -3.609926216929878, -3.597799043634774,
+#'                     -3.587312078410920, -3.561207060376329, -3.512700418975375))
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_internal_energy_ice.html}
+gsw_internal_energy_ice <- function(t, p)
+{
+    l <- argfix(list(t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_internal_energy_ice",
+               t=(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(t))
+        dim(rval) <- dim(t)
+    rval
+}
+
 
 #' Ratio of vert. gradient of pot. density to vert grad of locally-referenced pot density
 #'
