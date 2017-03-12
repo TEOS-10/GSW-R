@@ -935,6 +935,98 @@ gsw_grav <- function(latitude, p=0)
     rval
 }
 
+#' Gibbs Energy of Seawater, and its Derivatives
+#' 
+#' @template teos10template
+#'
+#' @param ns An integer, the order of the \code{SA} derivative. Must be 0, 1, or 2.
+#' @param nt An integer, the order of the \code{t} derivative. Must be 0, 1, or 2.
+#' @param np An integer, the order of the \code{p} derivative. Must be 0, 1, or 2.
+#' @template SAtemplate
+#' @template ttemplate
+#' @template ptemplate
+#' @return Gibbs energy [ J/kg ] if \code{ns}=\code{nt}=\code{np}=0. Derivative of energy
+#' with respect to \code{SA} [ J/kg/(g/kg)^ns ] if \code{ns} is nonzero and \code{nt}=\code{np}=0,
+#' etc. Note that derivatives with respect to pressure are in units with Pa, not dbar.
+#' @section Caution:
+#' The TEOS-10 webpage for \code{gsw_gibbs} does not provide test values, so 
+#' the present R version should be considered untested.
+#' @examples
+#' library(gsw)
+#' p <- seq(0, 100, 1)
+#' SA <- rep(35, length(p))
+#' t <- rep(-5, length(p))
+#' ## Check the derivative wrt pressure. Note the unit change
+#' E <- gsw_gibbs(0, 0, 0, SA, t, p)
+#' # Estimate derivative from linear fit (try plotting: it is very linear)
+#' m <- lm(E ~ p)
+#' print(summary(m))
+#' plot(p, E)
+#' abline(m)
+#' dEdp1 <- coef(m)[2]
+#' # Calculate derivative ... note we multiply by 1e4 to get from 1/Pa to 1/dbar
+#' dEdp2 <- 1e4 * gsw_gibbs(0, 0, 1, SA[1], t[1], p[1])
+#' ## Ratio
+#' dEdp1 / dEdp2
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_gibbs.html}
+gsw_gibbs <- function(ns, nt, np, SA, t, p=0)
+{
+    l <- argfix(list(SA=SA, t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_gibbs",
+               as.integer(ns[1]), as.integer(nt[1]), as.integer(np[1]),
+               SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' Gibbs Energy of Ice, and its Derivatives
+#' 
+#' @template teos10template
+#'
+#' @param nt An integer, the order of the \code{t} derivative. Must be 0, 1, or 2.
+#' @param np An integer, the order of the \code{p} derivative. Must be 0, 1, or 2.
+#' @template ttemplate
+#' @template ptemplate
+#' @return Gibbs energy [ J/kg ] if \code{ns}=\code{nt}=\code{np}=0. Derivative of energy
+#' with respect to \code{t} [ J/kg/(degC)^nt ] if \code{nt} is nonzero,
+#' etc. Note that derivatives with respect to pressure are in units with Pa, not dbar.
+#' @section Caution:
+#' The TEOS-10 webpage for \code{gsw_gibbs_ice} does not provide test values, so 
+#' the present R version should be considered untested.
+#' @examples
+#' library(gsw)
+#' p <- seq(0, 100, 1)
+#' t <- rep(-5, length(p))
+#' ## Check the derivative wrt pressure. Note the unit change
+#' E <- gsw_gibbs_ice(0, 0, t, p)
+#' # Estimate derivative from linear fit (try plotting: it is very linear)
+#' m <- lm(E ~ p)
+#' print(summary(m))
+#' plot(p, E)
+#' abline(m)
+#' dEdp1 <- coef(m)[2]
+#' # Calculate derivative ... note we multiply by 1e4 to get from 1/Pa to 1/dbar
+#' dEdp2 <- 1e4 * gsw_gibbs_ice(0, 1, t[1], p[1])
+#' ## Ratio
+#' dEdp1 / dEdp2
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_gibbs_ice.html}
+gsw_gibbs_ice <- function(nt, np, t, p=0)
+{
+    l <- argfix(list(t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_gibbs_ice",
+               as.integer(nt[1]), as.integer(np[1]),
+               t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(t))
+        dim(rval) <- dim(t)
+    rval
+}
 
 #' Ice Fraction to Cool Seawater to Freezing
 #'

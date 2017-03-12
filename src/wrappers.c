@@ -280,6 +280,18 @@ void wrap_gsw_frazil_properties(double *SA_bulk, double *h_bulk, double *p, int 
                 &SA_final[i], &CT_final[i], &w_Ih_final[i]);
 }
 
+void wrap_gsw_gibbs(int *ns, int *nt, int *np, double *SA, double *t, double *p, int *n, double *res)
+{
+    for (int i=0; i < *(n); i++)
+        res[i] = gsw_gibbs(*ns, *nt, *np, SA[i], t[i], p[i]);
+}
+
+void wrap_gsw_gibbs_ice(int *nt, int *np, double *t, double *p, int *n, double *res)
+{
+    for (int i=0; i < *(n); i++)
+        res[i] = gsw_gibbs_ice(*nt, *np, t[i], p[i]);
+}
+
 void wrap_gsw_ice_fraction_to_freeze_seawater(double *SA, double *CT, double *p, double *t_Ih, int *n,
         double *SA_freeze, double *CT_freeze, double *w_Ih)
 {
