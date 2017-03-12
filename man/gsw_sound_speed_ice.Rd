@@ -41,6 +41,7 @@ expect_equal(speed/1e3, c(3.111311360346254, 3.116492565497544, 3.11583346200345
 Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_adiabatic_lapse_rate_ice}},
   \code{\link{gsw_alpha_wrt_t_ice}},
+  \code{\link{gsw_chem_potential_water_ice}},
   \code{\link{gsw_cp_ice}}, \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_entropy_ice}},
   \code{\link{gsw_frazil_properties}},

@@ -487,6 +487,32 @@ gsw_C_from_SP <- function(SP, t, p)
     rval
 }
 
+#' Chemical Potential of Ice
+#'
+#' @template ttemplate
+#' @template ptemplate
+#' @return chemical potential [ J/kg ]
+#' @examples 
+#' library(testthat)
+#' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
+#' p <- c(      10,       50,      125,      250,      600,      1000)
+#' pot <- gsw_chem_potential_water_ice(t, p)
+#' expect_equal(pot/1e4, c(-1.340648365149857, -1.644921413491445, -1.480991678890353,
+#'                       -1.272436055728805, -0.711509477199393, 0.045575390357792))
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_chem_potential_water_ice.html}
+gsw_chem_potential_water_ice <- function(t, p)
+{
+    l <- argfix(list(t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_chem_potential_water_ice",
+            t=as.double(l$t), p=as.double(l$p), n=as.integer(n),
+            rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(t))
+        dim(rval) <- dim(t)
+    rval
+}
 
 #' Specific heat to ice
 #'
