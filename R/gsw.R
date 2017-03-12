@@ -1040,7 +1040,9 @@ gsw_IPV_vs_fNsquared_ratio <- function(SA, CT, p, p_ref=0)
     list(IPV_vs_fNsquared_ratio=r$ratio, p_mid=r$p_mid)
 }
 
-#' Isentropic compressibility of seawater (75-term equation)
+#' Isentropic Compressibility of Seawater (75-term equation)
+#'
+#' Isentropic Compressibility of Seawater (75-term equation)
 #' 
 #' @template SAtemplate
 #' @template CTtemplate
@@ -1069,7 +1071,37 @@ gsw_kappa <- function(SA, CT, p)
     rval
 }
 
-#' Isentropic compressibility of seawater
+#' Isentropic Compressibility of Ice
+#'
+#' Calculate isentropic compressibility of ice, in 1/Pa.
+#' 
+#' @template ttemplate
+#' @template ptemplate
+#' @return isentropic compressibility of ice [ 1/Pa ] (not 1/dbar)
+#' @examples
+#' library(testthat)
+#' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
+#' p <- c(      10,       50,      125,      250,       600,     1000)
+#' kappa <- gsw_kappa_ice(t, p)
+#' expect_equal(kappa*1e9, c(0.112495239053936, 0.112070687842183, 0.112119091047584,
+#'                         0.112126504739297, 0.112123513812840, 0.112262589530974))
+#' @family things related to compressibility
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_kappa_ice.html}
+gsw_kappa_ice <- function(t, p)
+{
+    l <- argfix(list(t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_kappa_ice",
+               t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(t))
+        dim(rval) <- dim(t)
+    rval
+}
+
+#' Isentropic compressibility of seawater (exact)
 #' 
 #' @template SAtemplate
 #' @template ttemplate

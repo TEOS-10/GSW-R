@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_kappa}
 \alias{gsw_kappa}
-\title{Isentropic compressibility of seawater (75-term equation)}
+\title{Isentropic Compressibility of Seawater (75-term equation)}
 \usage{
 gsw_kappa(SA, CT, p)
 }
@@ -17,7 +17,7 @@ gsw_kappa(SA, CT, p)
 isentropic compressibility [ 1/Pa ] (not 1/dbar)
 }
 \description{
-Isentropic compressibility of seawater (75-term equation)
+Isentropic Compressibility of Seawater (75-term equation)
 }
 \examples{
 library(testthat)
@@ -32,5 +32,6 @@ expect_equal(kappa*1e9, c(0.411343648791300, 0.411105416128094, 0.41656623602661
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_kappa.html}
 }
 \seealso{
-Other things related to compressibility: \code{\link{gsw_kappa_t_exact}}
+Other things related to compressibility: \code{\link{gsw_kappa_ice}},
+  \code{\link{gsw_kappa_t_exact}}
 }
