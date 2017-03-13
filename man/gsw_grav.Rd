@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_grav}
 \alias{gsw_grav}
-\title{Gravitational acceleration}
+\title{Gravitational Acceleration}
 \usage{
 gsw_grav(latitude, p = 0)
 }
@@ -16,7 +16,7 @@ is called \code{lat} in the TEOS-10 Matlab code.)}
 gravitational acceleration [ m/s^2 ]
 }
 \description{
-Gravitational acceleration
+Gravitational Acceleration
 }
 \details{
 The present R function works with a wrapper to a C function contained

@@ -302,6 +302,14 @@ void wrap_gsw_frazil_ratios_adiabatic(double *SA, double *p, double *w_Ih, int *
                 &dSA_dCT_frazil[i], &dSA_dP_frazil[i], &dCT_dP_frazil[i]);
 }
 
+void wrap_gsw_frazil_ratios_adiabatic_poly(double *SA, double *p, double *w_Ih, int *n,
+        double *dSA_dCT_frazil, double *dSA_dP_frazil, double *dCT_dP_frazil)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_frazil_ratios_adiabatic_poly(SA[i], p[i], w_Ih[i],
+                &dSA_dCT_frazil[i], &dSA_dP_frazil[i], &dCT_dP_frazil[i]);
+}
+
 void wrap_gsw_gibbs(int *ns, int *nt, int *np, double *SA, double *t, double *p, int *n, double *res)
 {
     for (int i=0; i < *(n); i++)
