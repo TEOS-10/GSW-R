@@ -20,13 +20,13 @@ Conservative Temperature at freezing of seawater [ deg C ]. That is, the freezin
 Conservative temperature freezing point
 }
 \details{
-The present function works with a wrapper to a C function contained
-within the GSW-C system (with sourcecode at
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (with source code at
 \url{https://github.com/TEOS-10/GSW-C}), which
 in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
 which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
-To learn more about these software systems, and about the science behind
-it all, consult \url{http://www.teos-10.org}.
+To learn more about these software systems, their authorships, and the science behind
+it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
 library(testthat)
@@ -55,6 +55,7 @@ Other things related to ice: \code{\link{gsw_adiabatic_lapse_rate_ice}},
   \code{\link{gsw_melting_ice_SA_CT_ratio}},
   \code{\link{gsw_melting_ice_equilibrium_SA_CT_ratio}},
   \code{\link{gsw_melting_ice_into_seawater}},
+  \code{\link{gsw_pot_enthalpy_from_pt_ice}},
   \code{\link{gsw_pressure_coefficient_ice}},
   \code{\link{gsw_pt0_from_t_ice}},
   \code{\link{gsw_pt_from_t_ice}},

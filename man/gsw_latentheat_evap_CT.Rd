@@ -18,13 +18,13 @@ latent heat of evaporation [ J/kg ]
 Latent heat of evaporation
 }
 \details{
-The present function works with a wrapper to a C function contained
-within the GSW-C system (with sourcecode at
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (with source code at
 \url{https://github.com/TEOS-10/GSW-C}), which
 in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
 which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
-To learn more about these software systems, and about the science behind
-it all, consult \url{http://www.teos-10.org}.
+To learn more about these software systems, their authorships, and the science behind
+it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
 library(testthat)
@@ -38,10 +38,7 @@ expect_equal(lh/1e6, c(2.429947107462561, 2.430774073049213, 2.444220372158452,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_evap_CT.html}
 }
 \seealso{
-Other things related to heat: \code{\link{gsw_dynamic_enthalpy}},
-  \code{\link{gsw_enthalpy_t_exact}},
-  \code{\link{gsw_enthalpy}},
-  \code{\link{gsw_latentheat_evap_t}},
+Other things related to latent heat: \code{\link{gsw_latentheat_evap_t}},
   \code{\link{gsw_latentheat_melting}}
 }
 

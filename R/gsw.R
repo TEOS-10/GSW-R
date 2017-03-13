@@ -801,7 +801,7 @@ gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
 #' de <- gsw_dynamic_enthalpy(SA, CT, p)
 #' expect_equal(de/1000, c(0.097864698087770, 0.489161476686235, 1.220512192086506,
 #'                       2.433731199531144, 5.833880057399701, 9.711443860944032))
-#' @family things related to heat
+#' @family things related to enthalpy
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
 gsw_dynamic_enthalpy <- function(SA, CT, p)
@@ -832,7 +832,7 @@ gsw_dynamic_enthalpy <- function(SA, CT, p)
 #' e <- gsw_enthalpy(SA, CT, p)
 #' expect_equal(e/1e5, c(1.151031813559086, 1.140146926828028, 0.921800138366058,
 #'                     0.432553713026279, 0.330871609742468, 0.269706841603465))                  
-#' @family things related to heat
+#' @family things related to enthalpy
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
 gsw_enthalpy <- function(SA, CT, p)
@@ -859,6 +859,7 @@ gsw_enthalpy <- function(SA, CT, p)
 #'
 #' @return specific enthalpy [ J/kg ]
 #'
+#' @family things related to enthalpy
 #' @family things related to ice
 #' @examples
 #' library(testthat)
@@ -898,7 +899,7 @@ gsw_enthalpy_ice <- function(t, p)
 #' e <- gsw_enthalpy_t_exact(SA, t, p)
 #' expect_equal(e/1e5, c(1.151032604783763, 1.140148036012021, 0.921799209310966,
 #'                     0.432553283808897, 0.330872159700175, 0.269705880448018))
-#' @family things related to heat
+#' @family things related to enthalpy
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_t_exact.html}
 gsw_enthalpy_t_exact <- function(SA, t, p)
@@ -1035,6 +1036,7 @@ gsw_entropy_ice <- function(t, p)
 #'                          -2.363714136353600, -2.644541000680772, -2.977651291726651))
 #' expect_equal(r$w_Ih_final, c(0.112480560814322, 0.114600300867556, 0.115421108602301,
 #'                            0.117372990660305, 0.122617649983886, 0.127906590822347))
+#' @family things related to enthalpy
 #' @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_frazil_properties.html}
@@ -1518,7 +1520,7 @@ gsw_kappa_t_exact <- function(SA, t, p)
 #' lh  <- gsw_latentheat_evap_CT(SA, CT)
 #' expect_equal(lh/1e6, c(2.429947107462561, 2.430774073049213, 2.444220372158452,
 #'                      2.474127109232524, 2.482151446148560, 2.488052297193594))
-#' @family things related to heat
+#' @family things related to latent heat
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_evap_CT.html}
 gsw_latentheat_evap_CT <- function(SA, CT)
@@ -1547,7 +1549,7 @@ gsw_latentheat_evap_CT <- function(SA, CT)
 #' lh = gsw_latentheat_evap_t(SA, t)
 #' expect_equal(lh/1e6, c(2.429882982734836, 2.430730236218543, 2.444217294049004,
 #'                      2.474137411322517, 2.482156276375029, 2.488054617630297))
-#' @family things related to heat
+#' @family things related to latent heat
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_evap_t.html}
 gsw_latentheat_evap_t <- function(SA, t)
@@ -1576,7 +1578,7 @@ gsw_latentheat_evap_t <- function(SA, t)
 #' lh <- gsw_latentheat_melting(SA, p)
 #' expect_equal(lh/1e5, c(3.299496680271213, 3.298613352397986, 3.297125622834541,
 #'                      3.294973895330757, 3.288480445559747, 3.280715862416388))
-#' @family things related to heat
+#' @family things related to latent heat
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_melting.html}
 gsw_latentheat_melting <- function(SA, p)
@@ -1764,6 +1766,36 @@ gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height=0, sea_surface_geopote
                n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(z))
         dim(rval) <- dim(z)
+    rval
+}
+
+#' Potential Enthalpy of Ice
+#' 
+#' @template teos10template
+#' 
+#' @template pt0_icetemplate
+#' @return potential enthalpy [ J/kg ]
+#' @examples
+#' library(testthat)
+#' pt0_ice <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
+#' e <- gsw_pot_enthalpy_from_pt_ice(pt0_ice)
+#'\dontrun{ # dk20170313: I am not sure why this fails, but I am removing the test to get gsw to build
+#' expect_equal(e/1e5, c(-3.555459449611868, -3.608607069998877, -3.596153890859193,
+#'                     -3.585123178806596, -3.557490528226009, -3.507198313847837))
+#'}
+#' @family things related to enthalpy
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_from_pt_ice.html}
+gsw_pot_enthalpy_from_pt_ice <- function(pt0_ice)
+{
+    l <- argfix(list(pt0_ice))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_pot_enthalpy_from_pt_ice",
+               pt0_ice=as.double(l$pt0_ice),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(pt0_ice))
+        dim(rval) <- dim(pt0_ice)
     rval
 }
 

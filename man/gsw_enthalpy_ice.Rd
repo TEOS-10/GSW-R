@@ -18,13 +18,13 @@ specific enthalpy [ J/kg ]
 Specific enthalpy of ice [ J/kg ]. Note that this is a negative quantity.
 }
 \details{
-The present function works with a wrapper to a C function contained
-within the GSW-C system (with sourcecode at
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (with source code at
 \url{https://github.com/TEOS-10/GSW-C}), which
 in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
 which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
-To learn more about these software systems, and about the science behind
-it all, consult \url{http://www.teos-10.org}.
+To learn more about these software systems, their authorships, and the science behind
+it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
 library(testthat)
@@ -38,6 +38,12 @@ expect_equal(se/1e5, c(-3.554414597446597, -3.603380857687490, -3.58308988425358
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_ice.html}
 }
 \seealso{
+Other things related to enthalpy: \code{\link{gsw_dynamic_enthalpy}},
+  \code{\link{gsw_enthalpy_t_exact}},
+  \code{\link{gsw_enthalpy}},
+  \code{\link{gsw_frazil_properties}},
+  \code{\link{gsw_pot_enthalpy_from_pt_ice}}
+
 Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_adiabatic_lapse_rate_ice}},
   \code{\link{gsw_alpha_wrt_t_ice}},
@@ -52,6 +58,7 @@ Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_melting_ice_SA_CT_ratio}},
   \code{\link{gsw_melting_ice_equilibrium_SA_CT_ratio}},
   \code{\link{gsw_melting_ice_into_seawater}},
+  \code{\link{gsw_pot_enthalpy_from_pt_ice}},
   \code{\link{gsw_pressure_coefficient_ice}},
   \code{\link{gsw_pt0_from_t_ice}},
   \code{\link{gsw_pt_from_t_ice}},
