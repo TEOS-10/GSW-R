@@ -9,7 +9,7 @@ gsw_Turner_Rsubrho(SA, CT, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
@@ -44,4 +44,3 @@ expect_equal(r$p_mid, 100*c(0.300, 0.875, 1.875, 4.250, 8.000))
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_Turner_Rsubrho.html}
 }
-

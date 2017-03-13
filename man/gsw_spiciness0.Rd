@@ -9,7 +9,7 @@ gsw_spiciness0(SA, CT)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 }
 \value{
 spiciness [ kg/m^3 ]
@@ -37,4 +37,3 @@ expect_equal(spiciness, c(5.728998558542941, 5.749940496782486, 4.16354711267111
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_spiciness0.html}
 }
-

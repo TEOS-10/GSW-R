@@ -9,7 +9,7 @@ gsw_entropy_from_pt(SA, pt)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{pt}{potential temperature (ITS-90) [ deg C ]}
+\item{pt}{potential temperature (ITS-90) [ degC ]}
 }
 \value{
 specific entropy [ J/(kg*K) ]
@@ -41,4 +41,3 @@ expect_equal(e/1e2, c(4.003894674443156, 3.954383994925507, 3.198674385897981,
 Other things related to entropy: \code{\link{gsw_entropy_from_t}},
   \code{\link{gsw_entropy_ice}}
 }
-

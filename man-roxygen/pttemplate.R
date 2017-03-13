@@ -1,1 +1,1 @@
-#' @param pt potential temperature (ITS-90) [ deg C ]
+#' @param pt potential temperature (ITS-90) [ degC ]

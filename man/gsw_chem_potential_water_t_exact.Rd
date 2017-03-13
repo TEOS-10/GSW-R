@@ -9,7 +9,7 @@ gsw_chem_potential_water_t_exact(SA, t, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{t}{in-situ temperature (ITS-90) [ deg C ]}
+\item{t}{in-situ temperature (ITS-90) [ degC ]}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
@@ -43,4 +43,3 @@ expect_equal(pot, c(-8.545561146284534, -8.008085548342105, -5.103980139874876,
 \seealso{
 Other things related to chemical potential: \code{\link{gsw_chem_potential_water_ice}}
 }
-

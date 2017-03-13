@@ -9,7 +9,7 @@ gsw_thermobaric(SA, CT, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
@@ -40,4 +40,3 @@ expect_equal(tb*1e11, c(0.152618598186650, 0.153662896162852, 0.173429325875738,
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_thermobaric.html}
 }
-

@@ -1,1 +1,1 @@
-#' @param t_Ih initial temperature of ice [ deg C ]
+#' @param t_Ih initial temperature of ice [ degC ]

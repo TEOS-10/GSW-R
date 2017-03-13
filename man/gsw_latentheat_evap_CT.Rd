@@ -9,7 +9,7 @@ gsw_latentheat_evap_CT(SA, CT)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 }
 \value{
 latent heat of evaporation [ J/kg ]
@@ -41,4 +41,3 @@ expect_equal(lh/1e6, c(2.429947107462561, 2.430774073049213, 2.444220372158452,
 Other things related to latent heat: \code{\link{gsw_latentheat_evap_t}},
   \code{\link{gsw_latentheat_melting}}
 }
-

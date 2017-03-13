@@ -9,7 +9,7 @@ gsw_kappa(SA, CT, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
@@ -45,4 +45,3 @@ Other things related to compressibility: \code{\link{gsw_kappa_const_t_ice}},
   \code{\link{gsw_kappa_ice}},
   \code{\link{gsw_kappa_t_exact}}
 }
-

@@ -9,7 +9,7 @@ gsw_pot_rho_t_exact(SA, t, p, p_ref)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{t}{in-situ temperature (ITS-90) [ deg C ]}
+\item{t}{in-situ temperature (ITS-90) [ degC ]}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
@@ -63,4 +63,3 @@ Other things related to density: \code{\link{gsw_CT_from_rho}},
   \code{\link{gsw_specvol_t_exact}},
   \code{\link{gsw_specvol}}
 }
-

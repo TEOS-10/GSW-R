@@ -9,7 +9,7 @@ gsw_spiciness2(SA, CT)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 }
 \value{
 spiciness [ kg/m^3 ]
@@ -40,4 +40,3 @@ expect_equal(spiciness, c(6.874671751873180, 6.884616399155135, 5.15445889238708
 \seealso{
 Other things related to spiciness: \code{\link{gsw_spiciness1}}
 }
-

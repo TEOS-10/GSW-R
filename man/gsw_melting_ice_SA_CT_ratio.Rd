@@ -9,11 +9,11 @@ gsw_melting_ice_SA_CT_ratio(SA, CT, p, t_Ih)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
-\item{t_Ih}{initial temperature of ice [ deg C ]}
+\item{t_Ih}{initial temperature of ice [ degC ]}
 }
 \value{
 ratio of change in \code{SA} to change in \code{CT} [ g/kg/degC ].
@@ -51,6 +51,7 @@ Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_cp_ice}}, \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_entropy_ice}},
   \code{\link{gsw_frazil_properties}},
+  \code{\link{gsw_frazil_ratios_adiabatic}},
   \code{\link{gsw_helmholtz_energy_ice}},
   \code{\link{gsw_ice_fraction_to_freeze_seawater}},
   \code{\link{gsw_internal_energy_ice}},
@@ -61,6 +62,7 @@ Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_pot_enthalpy_from_pt_ice}},
   \code{\link{gsw_pressure_coefficient_ice}},
   \code{\link{gsw_pt0_from_t_ice}},
+  \code{\link{gsw_pt_from_pot_enthalpy_ice}},
   \code{\link{gsw_pt_from_t_ice}},
   \code{\link{gsw_rho_ice}},
   \code{\link{gsw_sound_speed_ice}},
@@ -68,4 +70,3 @@ Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_t_freezing}},
   \code{\link{gsw_t_from_pt0_ice}}
 }
-

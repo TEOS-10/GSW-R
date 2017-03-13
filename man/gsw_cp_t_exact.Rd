@@ -9,7 +9,7 @@ gsw_cp_t_exact(SA, t, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{t}{in-situ temperature (ITS-90) [ deg C ]}
+\item{t}{in-situ temperature (ITS-90) [ degC ]}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
@@ -40,4 +40,3 @@ expect_equal(cp_t_exact/1e3, c(4.002888003958537, 4.000980283927373, 3.995546468
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_cp_t_exact.html}
 }
-

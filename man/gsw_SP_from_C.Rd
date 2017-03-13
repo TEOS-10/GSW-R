@@ -9,7 +9,7 @@ gsw_SP_from_C(C, t, p)
 \arguments{
 \item{C}{conductivity [ mS/cm ]}
 
-\item{t}{in-situ temperature (ITS-90) [ deg C ]}
+\item{t}{in-situ temperature (ITS-90) [ degC ]}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
@@ -41,8 +41,6 @@ expect_equal(SP,  c(20.009869599086951, 20.265511864874270, 22.981513062527689,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_C.html}
 }
 \seealso{
-Other things related to conductivity: \code{\link{gsw_C_from_SP}}
-
 Other things related to salinity: \code{\link{gsw_C_from_SP}},
   \code{\link{gsw_SA_from_SP_baltic}},
   \code{\link{gsw_SA_from_SP}},
@@ -55,5 +53,6 @@ Other things related to salinity: \code{\link{gsw_C_from_SP}},
   \code{\link{gsw_Sstar_from_SA}},
   \code{\link{gsw_Sstar_from_SP}},
   \code{\link{gsw_deltaSA_from_SP}}
-}
 
+Other things related to conductivity: \code{\link{gsw_C_from_SP}}
+}

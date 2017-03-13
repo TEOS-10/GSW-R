@@ -41,4 +41,3 @@ expect_equal(lh/1e5, c(3.299496680271213, 3.298613352397986, 3.297125622834541,
 Other things related to latent heat: \code{\link{gsw_latentheat_evap_CT}},
   \code{\link{gsw_latentheat_evap_t}}
 }
-

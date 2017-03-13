@@ -9,7 +9,7 @@ gsw_sigma3(SA, CT)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 }
 \value{
 potential density anomaly with reference pressure 3000 dbar [ kg/m^3 ]
@@ -61,4 +61,3 @@ Other things related to density: \code{\link{gsw_CT_from_rho}},
   \code{\link{gsw_specvol_t_exact}},
   \code{\link{gsw_specvol}}
 }
-

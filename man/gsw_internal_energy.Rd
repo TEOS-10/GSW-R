@@ -9,7 +9,7 @@ gsw_internal_energy(SA, CT, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
@@ -40,4 +40,3 @@ expect_equal(e/1e5, c(1.148091576956162, 1.134013145527675, 0.909571141498779,
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_internal_energy.html}
 }
-

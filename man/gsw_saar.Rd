@@ -47,6 +47,7 @@ since it seems likely that this function would only be called with oceanic
 locations, anyway. If problems arise for users, a patch can be written to
 improve things.
 }
+
 \examples{
 library(testthat)
 p <- c(10, 50, 125, 250, 600, 1000)
@@ -60,4 +61,3 @@ expect_equal(SAAR$in_ocean, rep(1, 6))
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_saar.html}
 }
-

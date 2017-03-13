@@ -1,2 +1,2 @@
-#' @param CT Conservative Temperature [ deg C ]
+#' @param CT Conservative Temperature [ degC ]
 

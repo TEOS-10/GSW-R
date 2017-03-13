@@ -50,7 +50,8 @@ Other things related to enthalpy: \code{\link{gsw_dynamic_enthalpy}},
   \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_enthalpy_t_exact}},
   \code{\link{gsw_enthalpy}},
-  \code{\link{gsw_pot_enthalpy_from_pt_ice}}
+  \code{\link{gsw_pot_enthalpy_from_pt_ice}},
+  \code{\link{gsw_pt_from_pot_enthalpy_ice}}
 
 Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_adiabatic_lapse_rate_ice}},
@@ -58,6 +59,7 @@ Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_chem_potential_water_ice}},
   \code{\link{gsw_cp_ice}}, \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_entropy_ice}},
+  \code{\link{gsw_frazil_ratios_adiabatic}},
   \code{\link{gsw_helmholtz_energy_ice}},
   \code{\link{gsw_ice_fraction_to_freeze_seawater}},
   \code{\link{gsw_internal_energy_ice}},
@@ -69,6 +71,7 @@ Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_pot_enthalpy_from_pt_ice}},
   \code{\link{gsw_pressure_coefficient_ice}},
   \code{\link{gsw_pt0_from_t_ice}},
+  \code{\link{gsw_pt_from_pot_enthalpy_ice}},
   \code{\link{gsw_pt_from_t_ice}},
   \code{\link{gsw_rho_ice}},
   \code{\link{gsw_sound_speed_ice}},
@@ -76,4 +79,3 @@ Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_t_freezing}},
   \code{\link{gsw_t_from_pt0_ice}}
 }
-

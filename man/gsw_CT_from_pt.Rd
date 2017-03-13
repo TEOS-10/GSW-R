@@ -9,7 +9,7 @@ gsw_CT_from_pt(SA, pt)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{pt}{potential temperature (ITS-90) [ deg C ]}
+\item{pt}{potential temperature (ITS-90) [ degC ]}
 }
 \value{
 Conservative Temperature [ deg C ]
@@ -44,8 +44,8 @@ Other things related to temperature: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_pt0_from_t_ice}},
   \code{\link{gsw_pt0_from_t}},
   \code{\link{gsw_pt_from_CT}},
+  \code{\link{gsw_pt_from_pot_enthalpy_ice}},
   \code{\link{gsw_pt_from_t_ice}},
   \code{\link{gsw_pt_from_t}}, \code{\link{gsw_t_from_CT}},
   \code{\link{gsw_t_from_pt0_ice}}
 }
-

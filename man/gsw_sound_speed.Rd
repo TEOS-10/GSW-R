@@ -9,7 +9,7 @@ gsw_sound_speed(SA, CT, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
@@ -44,4 +44,3 @@ expect_equal(speed/1e3, c(1.542426412426373, 1.542558891663385, 1.53080153543618
 Other things related to sound: \code{\link{gsw_sound_speed_ice}},
   \code{\link{gsw_sound_speed_t_exact}}
 }
-

@@ -9,7 +9,7 @@ gsw_kappa_t_exact(SA, t, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{t}{in-situ temperature (ITS-90) [ deg C ]}
+\item{t}{in-situ temperature (ITS-90) [ degC ]}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
@@ -44,4 +44,3 @@ expect_equal(kappa*1e9, c(0.411343648791300, 0.411105416128094, 0.41656623602661
 Other things related to compressibility: \code{\link{gsw_kappa_const_t_ice}},
   \code{\link{gsw_kappa_ice}}, \code{\link{gsw_kappa}}
 }
-

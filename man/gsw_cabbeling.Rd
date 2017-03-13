@@ -9,7 +9,7 @@ gsw_cabbeling(SA, CT, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
@@ -40,4 +40,3 @@ expect_equal(cabbeling*1e4, c(0.086645721047423, 0.086837829466794, 0.0925255820
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_cabbeling.html}
 }
-

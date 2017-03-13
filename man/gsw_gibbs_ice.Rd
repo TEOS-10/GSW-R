@@ -11,7 +11,7 @@ gsw_gibbs_ice(nt, np, t, p = 0)
 
 \item{np}{An integer, the order of the \code{p} derivative. Must be 0, 1, or 2.}
 
-\item{t}{in-situ temperature (ITS-90) [ deg C ]}
+\item{t}{in-situ temperature (ITS-90) [ degC ]}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
@@ -37,6 +37,7 @@ it all, please consult \url{http://www.teos-10.org}.
 The TEOS-10 webpage for \code{gsw_gibbs_ice} does not provide test values, so 
 the present R version should be considered untested.
 }
+
 \examples{
 library(gsw)
 p <- seq(0, 100, 1)
@@ -57,4 +58,3 @@ dEdp1 / dEdp2
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_gibbs_ice.html}
 }
-

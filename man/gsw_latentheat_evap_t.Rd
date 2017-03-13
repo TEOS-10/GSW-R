@@ -9,7 +9,7 @@ gsw_latentheat_evap_t(SA, t)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{t}{in-situ temperature (ITS-90) [ deg C ]}
+\item{t}{in-situ temperature (ITS-90) [ degC ]}
 }
 \value{
 latent heat of evaporation [ J/kg ]
@@ -41,4 +41,3 @@ expect_equal(lh/1e6, c(2.429882982734836, 2.430730236218543, 2.444217294049004,
 Other things related to latent heat: \code{\link{gsw_latentheat_evap_CT}},
   \code{\link{gsw_latentheat_melting}}
 }
-

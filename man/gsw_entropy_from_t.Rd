@@ -9,7 +9,7 @@ gsw_entropy_from_t(SA, t, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{t}{in-situ temperature (ITS-90) [ deg C ]}
+\item{t}{in-situ temperature (ITS-90) [ degC ]}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
@@ -49,4 +49,3 @@ expect_equal(e/1e2, c(4.003894252787245, 3.954381784340642, 3.198664981986740,
 Other things related to entropy: \code{\link{gsw_entropy_from_pt}},
   \code{\link{gsw_entropy_ice}}
 }
-

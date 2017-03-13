@@ -9,7 +9,7 @@ gsw_rho_first_derivatives(SA, CT, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
@@ -65,4 +65,3 @@ Other things related to density: \code{\link{gsw_CT_from_rho}},
   \code{\link{gsw_specvol_t_exact}},
   \code{\link{gsw_specvol}}
 }
-

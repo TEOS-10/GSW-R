@@ -9,7 +9,7 @@ gsw_t_from_CT(SA, CT, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
@@ -48,8 +48,8 @@ Other things related to temperature: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_pt0_from_t_ice}},
   \code{\link{gsw_pt0_from_t}},
   \code{\link{gsw_pt_from_CT}},
+  \code{\link{gsw_pt_from_pot_enthalpy_ice}},
   \code{\link{gsw_pt_from_t_ice}},
   \code{\link{gsw_pt_from_t}},
   \code{\link{gsw_t_from_pt0_ice}}
 }
-

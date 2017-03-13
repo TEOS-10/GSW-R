@@ -52,4 +52,3 @@ a minimum.
   nc_close(nc)
 }
 }
-

@@ -237,6 +237,7 @@ W4(wrap_gsw_pot_rho_t_exact, gsw_pot_rho_t_exact, SA, t, p, p_ref, n, rval)
 W3(wrap_gsw_pt0_from_t, gsw_pt0_from_t, SA, t, p, n, rval)
 W2(wrap_gsw_pt0_from_t_ice, gsw_pt0_from_t_ice, t, p, n, rval)
 W2(wrap_gsw_pt_from_CT, gsw_pt_from_ct, SA, CT, n, rval)
+W1(wrap_gsw_pt_from_pot_enthalpy_ice, gsw_pt_from_pot_enthalpy_ice, pot_enthalpy_ice, n, rval)
 W4(wrap_gsw_pt_from_t, gsw_pt_from_t, SA, t, p, p_ref, n, rval)
 W3(wrap_gsw_pt_from_t_ice, gsw_pt_from_t_ice, t, p, p_ref, n, rval)
 W3(wrap_gsw_rho, gsw_rho, SA, CT, p, n, rval)
@@ -291,6 +292,14 @@ void wrap_gsw_frazil_properties(double *SA_bulk, double *h_bulk, double *p, int 
     for (int i=0; i < *(n); i++)
         gsw_frazil_properties(SA_bulk[i], h_bulk[i], p[i],
                 &SA_final[i], &CT_final[i], &w_Ih_final[i]);
+}
+
+void wrap_gsw_frazil_ratios_adiabatic(double *SA, double *p, double *w_Ih, int *n,
+        double *dSA_dCT_frazil, double *dSA_dP_frazil, double *dCT_dP_frazil)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_frazil_ratios_adiabatic(SA[i], p[i], w_Ih[i],
+                &dSA_dCT_frazil[i], &dSA_dP_frazil[i], &dCT_dP_frazil[i]);
 }
 
 void wrap_gsw_gibbs(int *ns, int *nt, int *np, double *SA, double *t, double *p, int *n, double *res)

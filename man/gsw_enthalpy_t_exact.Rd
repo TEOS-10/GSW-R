@@ -9,7 +9,7 @@ gsw_enthalpy_t_exact(SA, t, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{t}{in-situ temperature (ITS-90) [ deg C ]}
+\item{t}{in-situ temperature (ITS-90) [ degC ]}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
@@ -45,6 +45,6 @@ Other things related to enthalpy: \code{\link{gsw_dynamic_enthalpy}},
   \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_enthalpy}},
   \code{\link{gsw_frazil_properties}},
-  \code{\link{gsw_pot_enthalpy_from_pt_ice}}
+  \code{\link{gsw_pot_enthalpy_from_pt_ice}},
+  \code{\link{gsw_pt_from_pot_enthalpy_ice}}
 }
-
