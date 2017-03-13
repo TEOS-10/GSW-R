@@ -226,7 +226,7 @@ W2(wrap_gsw_latentheat_evap_t, gsw_latentheat_evap_t, SA, t, n, rval)
 W2(wrap_gsw_latentheat_melting, gsw_latentheat_melting, SA, p, n, rval)
 W2(wrap_gsw_melting_ice_equilibrium_SA_CT_ratio, gsw_melting_ice_equilibrium_sa_ct_ratio, SA, p, n, rval)
 W4(wrap_gsw_melting_ice_SA_CT_ratio, gsw_melting_ice_sa_ct_ratio, SA, CT, p, t_Ih, n, rval)
-W1(wrap_gsw_pot_enthalpy_from_pt_ice, gsw_pot_enthalpy_from_pt_ice, pt, n, rval)
+W1(wrap_gsw_pot_enthalpy_from_pt_ice, gsw_pot_enthalpy_from_pt_ice, pt_ice, n, rval)
 W2(wrap_gsw_pressure_coefficient_ice, gsw_pressure_coefficient_ice, t, p, n, rval)
 
 // declare since it's not in the TEOS-10 C library yet, and was coded separately.

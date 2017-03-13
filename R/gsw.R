@@ -1779,17 +1779,15 @@ gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height=0, sea_surface_geopote
 #' library(testthat)
 #' pt0_ice <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' e <- gsw_pot_enthalpy_from_pt_ice(pt0_ice)
-#'\dontrun{ # dk20170313: I am not sure why this fails, but I am removing the test to get gsw to build
 #' expect_equal(e/1e5, c(-3.555459449611868, -3.608607069998877, -3.596153890859193,
 #'                     -3.585123178806596, -3.557490528226009, -3.507198313847837))
-#'}
 #' @family things related to enthalpy
 #' @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_from_pt_ice.html}
 gsw_pot_enthalpy_from_pt_ice <- function(pt0_ice)
 {
-    l <- argfix(list(pt0_ice))
+    l <- argfix(list(pt0_ice=pt0_ice))
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_pot_enthalpy_from_pt_ice",
                pt0_ice=as.double(l$pt0_ice),
