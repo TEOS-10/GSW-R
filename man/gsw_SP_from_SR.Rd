@@ -15,6 +15,15 @@ Practical Salinity (PSS-78) [ unitless ]
 \description{
 Calculate Practical Salinity from Reference Salinity
 }
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
+}
 \examples{
 library(testthat)
 SR <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
@@ -39,3 +48,4 @@ Other things related to salinity: \code{\link{gsw_C_from_SP}},
   \code{\link{gsw_Sstar_from_SP}},
   \code{\link{gsw_deltaSA_from_SP}}
 }
+

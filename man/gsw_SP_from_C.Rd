@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_SP_from_C}
 \alias{gsw_SP_from_C}
-\title{Convert from electrical conductivity to practical salinity}
+\title{Convert from Electrical Conductivity to Practical Salinity}
 \usage{
 gsw_SP_from_C(C, t, p)
 }
@@ -17,7 +17,16 @@ gsw_SP_from_C(C, t, p)
 Practical Salinity (PSS-78) [ unitless ]
 }
 \description{
-Convert from electrical conductivity to practical salinity
+Convert from Electrical Conductivity to Practical Salinity
+}
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
 }
 \examples{
 library(testthat)
@@ -32,6 +41,8 @@ expect_equal(SP,  c(20.009869599086951, 20.265511864874270, 22.981513062527689,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_C.html}
 }
 \seealso{
+Other things related to conductivity: \code{\link{gsw_C_from_SP}}
+
 Other things related to salinity: \code{\link{gsw_C_from_SP}},
   \code{\link{gsw_SA_from_SP_baltic}},
   \code{\link{gsw_SA_from_SP}},
@@ -44,6 +55,5 @@ Other things related to salinity: \code{\link{gsw_C_from_SP}},
   \code{\link{gsw_Sstar_from_SA}},
   \code{\link{gsw_Sstar_from_SP}},
   \code{\link{gsw_deltaSA_from_SP}}
-
-Other things related to conductivity: \code{\link{gsw_C_from_SP}}
 }
+

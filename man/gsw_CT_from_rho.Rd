@@ -20,6 +20,15 @@ A list containing two estimates of Conservative Temperature:
 \description{
 Conservative Temperature from Density, Absolute Salinity and Pressure
 }
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
+}
 \examples{
 library(testthat)
 rho <- c(1021.8484, 1022.2647, 1024.4207, 1027.7841, 1029.8287, 1031.9916)
@@ -56,7 +65,9 @@ Other things related to density: \code{\link{gsw_SA_from_rho}},
 Other things related to temperature: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_CT_from_pt}},
   \code{\link{gsw_CT_from_t}},
+  \code{\link{gsw_pt0_from_t_ice}},
   \code{\link{gsw_pt0_from_t}},
   \code{\link{gsw_pt_from_CT}},
   \code{\link{gsw_pt_from_t}}, \code{\link{gsw_t_from_CT}}
 }
+

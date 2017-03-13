@@ -60,3 +60,4 @@ This can be handy with gridded datasets. However, the careful
 analyst will probably prefer to avoid this and other conveniences,
 supplying properly-matched arguments from the outset.
 }
+

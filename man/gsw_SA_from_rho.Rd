@@ -19,6 +19,15 @@ Absolute Salinity [ g/kg ]
 \description{
 Convert from density to absolute salinity
 }
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
+}
 \examples{
 library(testthat)
 rho <- c(1021.8482, 1022.2647, 1024.4207, 1027.7841, 1029.8287, 1031.9916)
@@ -52,3 +61,4 @@ Other things related to density: \code{\link{gsw_CT_from_rho}},
   \code{\link{gsw_specvol_t_exact}},
   \code{\link{gsw_specvol}}
 }
+

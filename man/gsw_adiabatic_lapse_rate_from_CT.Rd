@@ -19,6 +19,15 @@ adiabatic lapse rate (note unconventional unit) [ K/Pa ]
 \description{
 Note that the unit is degC/Pa; multiply by 1e4 to get the more useful degC/dbar.
 }
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
+}
 \examples{
 library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -31,3 +40,4 @@ expect_equal(lr*1e7, c(0.240199646230069, 0.238457486976761, 0.203635157319712,
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_from_CT.html}
 }
+

@@ -19,6 +19,15 @@ list containing drho_dSA [ kg^2/(g m^3) ], drho_dCT [ kg/(K m^3) ] and drho_dp [
 \description{
 Density First Derivatives wrt SA, CT and p (75-term equation)
 }
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
+}
 \examples{
 library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -56,3 +65,4 @@ Other things related to density: \code{\link{gsw_CT_from_rho}},
   \code{\link{gsw_specvol_t_exact}},
   \code{\link{gsw_specvol}}
 }
+

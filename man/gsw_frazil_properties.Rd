@@ -20,6 +20,15 @@ a list containing \code{SA_final}, \code{h_final} and \code{w_Ih_final}.
 Calculation of Absolute Salinity, Conservative Temperature, and ice mass fraction
 based on bulk Absolute Salinity, bulk enthalpy, and pressure
 }
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
+}
 \examples{
 library(testthat)
 SA_bulk <- c(  34.7118,   34.8915,   35.0256,   34.8472,   34.7366,   34.7324)
@@ -43,6 +52,7 @@ Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_chem_potential_water_ice}},
   \code{\link{gsw_cp_ice}}, \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_entropy_ice}},
+  \code{\link{gsw_helmholtz_energy_ice}},
   \code{\link{gsw_ice_fraction_to_freeze_seawater}},
   \code{\link{gsw_internal_energy_ice}},
   \code{\link{gsw_kappa_const_t_ice}},
@@ -51,8 +61,10 @@ Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_melting_ice_equilibrium_SA_CT_ratio}},
   \code{\link{gsw_melting_ice_into_seawater}},
   \code{\link{gsw_pressure_coefficient_ice}},
+  \code{\link{gsw_pt0_from_t_ice}},
   \code{\link{gsw_rho_ice}},
   \code{\link{gsw_sound_speed_ice}},
   \code{\link{gsw_specvol_ice}},
   \code{\link{gsw_t_freezing}}
 }
+

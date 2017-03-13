@@ -17,6 +17,15 @@ chemical potential [ J/kg ]
 \description{
 Chemical Potential of Ice
 }
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
+}
 \examples{
 library(testthat)
 t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
@@ -37,6 +46,7 @@ Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_cp_ice}}, \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_entropy_ice}},
   \code{\link{gsw_frazil_properties}},
+  \code{\link{gsw_helmholtz_energy_ice}},
   \code{\link{gsw_ice_fraction_to_freeze_seawater}},
   \code{\link{gsw_internal_energy_ice}},
   \code{\link{gsw_kappa_const_t_ice}},
@@ -45,8 +55,10 @@ Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_melting_ice_equilibrium_SA_CT_ratio}},
   \code{\link{gsw_melting_ice_into_seawater}},
   \code{\link{gsw_pressure_coefficient_ice}},
+  \code{\link{gsw_pt0_from_t_ice}},
   \code{\link{gsw_rho_ice}},
   \code{\link{gsw_sound_speed_ice}},
   \code{\link{gsw_specvol_ice}},
   \code{\link{gsw_t_freezing}}
 }
+

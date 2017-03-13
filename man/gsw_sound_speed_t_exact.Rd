@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_sound_speed_t_exact}
 \alias{gsw_sound_speed_t_exact}
-\title{Sound speed}
+\title{Sound Speed in Seawater}
 \usage{
 gsw_sound_speed_t_exact(SA, t, p)
 }
@@ -17,7 +17,16 @@ gsw_sound_speed_t_exact(SA, t, p)
 sound speed [ m/s ]
 }
 \description{
-Sound speed
+Sound Speed in Seawater
+}
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
 }
 \examples{
 library(testthat)
@@ -35,3 +44,4 @@ expect_equal(sound_speed/1e3, c(1.542615803587414, 1.542703534065789, 1.53084497
 Other things related to sound: \code{\link{gsw_sound_speed_ice}},
   \code{\link{gsw_sound_speed}}
 }
+

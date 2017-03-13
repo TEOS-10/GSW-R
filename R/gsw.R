@@ -139,7 +139,7 @@ NULL
 argfix <- function(list)
 {
     n <- length(list)
-    if (n > 0) {
+    if (n > 1) {
         length1 <- length(list[[1]])
         for (i in 2:n) {
             if (length(list[[i]]) != length1) {
@@ -163,6 +163,8 @@ argfix <- function(list)
 #'
 #' Note that the unit is degC/Pa; multiply by 1e4 to get the more useful degC/dbar.
 #' 
+#' @template teos10template
+#'
 #' @template SAtemplate
 #' @template CTtemplate
 #' @template ptemplate
@@ -193,6 +195,8 @@ gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
 #'
 #' Note that the unit is degC/Pa; multiply by 1e4 to get the more useful degC/dbar.
 #' 
+#' @template teos10template
+
 #' @template ttemplate
 #' @template ptemplate
 #' @return adiabatic lapse rate (note unconventional unit) [ K/Pa ]
@@ -489,6 +493,8 @@ gsw_C_from_SP <- function(SP, t, p)
 
 #' Chemical Potential of Ice
 #'
+#' @template teos10template
+#'
 #' @template ttemplate
 #' @template ptemplate
 #' @return chemical potential [ J/kg ]
@@ -516,6 +522,8 @@ gsw_chem_potential_water_ice <- function(t, p)
 }
 
 #' Chemical Potential of Water in Seawater
+#'
+#' @template teos10template
 #'
 #' @template SAtemplate
 #' @template ttemplate
@@ -579,6 +587,8 @@ gsw_cp_ice <- function(t, p)
 
 #' Isobaric heat capacity
 #' 
+#' @template teos10template
+#' 
 #' @template SAtemplate
 #' @template ttemplate
 #' @template ptemplate
@@ -607,6 +617,8 @@ gsw_cp_t_exact <- function(SA, t, p)
 
 
 #' Conservative temperature freezing point
+#'
+#' @template teos10template
 #'
 #' @template SAtemplate
 #' @template ptemplate
@@ -638,6 +650,8 @@ gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
 
 #' Conservative Temperature from potential temperature
 #' 
+#' @template teos10template
+#' 
 #' @template SAtemplate
 #' @template pttemplate
 #' @return Conservative Temperature [ deg C ]
@@ -664,6 +678,8 @@ gsw_CT_from_pt <- function(SA, pt)
 }
 
 #' Conservative Temperature from Density, Absolute Salinity and Pressure
+#' 
+#' @template teos10template
 #' 
 #' @template rhotemplate
 #' @template SAtemplate
@@ -702,6 +718,8 @@ gsw_CT_from_rho <- function(rho, SA, p)
 
 #' Convert from temperature to conservative temperature
 #' 
+#' @template teos10template
+#' 
 #' @template SAtemplate
 #' @template ttemplate
 #' @template ptemplate
@@ -730,6 +748,8 @@ gsw_CT_from_t <- function(SA, t, p)
 }
 
 #' Absolute Salinity Anomaly from Practical Salinity
+#' 
+#' @template teos10template
 #' 
 #' @template SPtemplate
 #' @template ptemplate
@@ -767,6 +787,8 @@ gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
 
 #' Dynamic enthalpy of seawater (75-term equation)
 #' 
+#' @template teos10template
+#' 
 #' @template SAtemplate
 #' @template CTtemplate
 #' @template ptemplate
@@ -795,6 +817,8 @@ gsw_dynamic_enthalpy <- function(SA, CT, p)
 }
 
 #' Specific enthalpy of seawater (75-term equation)
+#' 
+#' @template teos10template
 #' 
 #' @template SAtemplate
 #' @template CTtemplate
@@ -860,6 +884,8 @@ gsw_enthalpy_ice <- function(t, p)
 
 #' Specific enthalpy of seawater
 #' 
+#' @template teos10template
+#' 
 #' @template SAtemplate
 #' @template ttemplate
 #' @template ptemplate
@@ -890,6 +916,8 @@ gsw_enthalpy_t_exact <- function(SA, t, p)
 #' Specific Entropy in terms of Absolute Salinity and Potential Temperature
 #'
 #' Calculate specific entropy given absolute salinity and potential temperature.
+#'
+#' @template teos10template
 #'
 #' @template SAtemplate
 #' @template pttemplate
@@ -925,6 +953,8 @@ gsw_entropy_from_pt <- function(SA, pt)
 #' in the C library, although it is available in the (later-
 #' versioned) Matlab library.
 #' 
+#' @template teos10template
+#' 
 #' @template SAtemplate
 #' @template ttemplate
 #' @template ptemplate
@@ -953,6 +983,8 @@ gsw_entropy_from_t <- function(SA, t, p)
 }
 
 #' Entropy of ice
+#'
+#' @template teos10template
 #'
 #' @template ttemplate
 #' @template ptemplate
@@ -984,6 +1016,8 @@ gsw_entropy_ice <- function(t, p)
 #'
 #' Calculation of Absolute Salinity, Conservative Temperature, and ice mass fraction
 #' based on bulk Absolute Salinity, bulk enthalpy, and pressure
+#'
+#' @template teos10template
 #'
 #' @template SAbulktemplate
 #' @template hbulktemplate
@@ -1142,7 +1176,68 @@ gsw_gibbs_ice <- function(nt, np, t, p=0)
     rval
 }
 
+#' Helmholtz Energy of Ice
+#'
+#' @template teos10template
+#'
+#' @template ttemplate
+#' @template ptemplate
+#' @return Helmholtz energy if ice [ J/kg ]
+#' @examples 
+#' library(testthat)
+#' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
+#' p <- c(      10,       50,      125,      250,       600,     1000)
+#' e <- gsw_helmholtz_energy_ice(t, p)
+#' expect_equal(e/1e4, c(-1.362572315008330, -1.710375005915343, -1.628083272702224,
+#'                     -1.555573047498573, -1.375469831393882, -1.053585607014677))
+#' @family things related to energy
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_helmholtz_energy_ice.html}
+gsw_helmholtz_energy_ice <- function(t, p)
+{
+    l <- argfix(list(t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_helmholtz_energy_ice",
+               t=as.double(l$t), p=as.double(l$p),
+               n=as.integer(n), rval=double(n),
+               NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(t))
+        dim(rval) <- dim(t)
+    rval
+}
+
+##> #' Hill Ratio
+##> #'
+##> #' @template teos10template
+##> #'
+##> #' @template ttemplate
+##> #' @return Hill ratio [ unitless ]
+##> #' @examples 
+##> #' library(testthat)
+##> #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
+##> #' r <- gsw_hill_ratio_at_sp2(t)
+##> #' expect_equal(r4, c(-1.362572315008330, -1.710375005915343, -1.628083272702224,
+##> #'                     -1.555573047498573, -1.375469831393882, -1.053585607014677))
+##> #' @references
+##> #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_hill_ratio_at_sp2.html}
+##> gsw_hill_ratio_at_sp2 <- function(t)
+##> {
+##>     l <- argfix(list(t=t))
+##>     n <- length(l[[1]])
+##>     rval <- .C("wrap_gsw_hill_ratio_at_sp2",
+##>                t=as.double(l$t),
+##>                n=as.integer(n), rval=double(n),
+##>                NAOK=TRUE, PACKAGE="gsw")$rval
+##>     if (is.matrix(t))
+##>         dim(rval) <- dim(t)
+##>     rval
+##> }
+
+
 #' Ice Fraction to Cool Seawater to Freezing
+#'
+#' @template teos10template
 #'
 #' @template SAtemplate
 #' @template CTtemplate
@@ -1184,6 +1279,8 @@ gsw_ice_fraction_to_freeze_seawater <- function(SA, CT, p, t_Ih)
 
 #' Specific Internal Energy of Seawater (75-term equation)
 #' 
+#' @template teos10template
+#' 
 #' @template SAtemplate
 #' @template CTtemplate
 #' @template ptemplate
@@ -1211,6 +1308,8 @@ gsw_internal_energy <- function(SA, CT, p)
 }
 
 #' Specific Internal Energy of Ice (75-term equation)
+#' 
+#' @template teos10template
 #' 
 #' @template ttemplate
 #' @template ptemplate
@@ -1242,6 +1341,8 @@ gsw_internal_energy_ice <- function(t, p)
 #'
 #' Note that the C library had to be patched to get this working; a new
 #' version of the library will address the bug directly.
+#'
+#' @template teos10template
 #'
 #' @template SAtemplate
 #' @template CTtemplate
@@ -1278,6 +1379,8 @@ gsw_IPV_vs_fNsquared_ratio <- function(SA, CT, p, p_ref=0)
 #'
 #' Isentropic Compressibility of Seawater (75-term equation)
 #' 
+#' @template teos10template
+#' 
 #' @template SAtemplate
 #' @template CTtemplate
 #' @template ptemplate
@@ -1308,6 +1411,8 @@ gsw_kappa <- function(SA, CT, p)
 #' Isothermal Compressibility of Ice
 #'
 #' Calculate isothermal compressibility of ice, in 1/Pa.
+#' 
+#' @template teos10template
 #' 
 #' @template ttemplate
 #' @template ptemplate
@@ -1340,6 +1445,8 @@ gsw_kappa_const_t_ice <- function(t, p)
 #'
 #' Calculate isentropic compressibility of ice, in 1/Pa.
 #' 
+#' @template teos10template
+#' 
 #' @template ttemplate
 #' @template ptemplate
 #' @return isentropic compressibility of ice [ 1/Pa ] (not 1/dbar)
@@ -1367,6 +1474,8 @@ gsw_kappa_ice <- function(t, p)
 }
 
 #' Isentropic compressibility of seawater (exact)
+#' 
+#' @template teos10template
 #' 
 #' @template SAtemplate
 #' @template ttemplate
@@ -1397,6 +1506,8 @@ gsw_kappa_t_exact <- function(SA, t, p)
 
 #' Latent heat of evaporation
 #' 
+#' @template teos10template
+#'
 #' @template SAtemplate
 #' @template CTtemplate
 #' @return latent heat of evaporation [ J/kg ]
@@ -1423,6 +1534,8 @@ gsw_latentheat_evap_CT <- function(SA, CT)
 }
 
 #' Latent heat of evaporation
+#' 
+#' @template teos10template
 #' 
 #' @template SAtemplate
 #' @template ttemplate
@@ -1451,6 +1564,8 @@ gsw_latentheat_evap_t <- function(SA, t)
 
 #' Latent Heat of Melting
 #' 
+#' @template teos10template
+#' 
 #' @template SAtemplate
 #' @template ptemplate
 #' @return latent heat of freezing [ J/kg ]
@@ -1477,6 +1592,8 @@ gsw_latentheat_melting <- function(SA, p)
 }
 
 #' Calculate properties related to ice melting in seawater
+#' 
+#' @template teos10template
 #'
 #' @template SAtemplate
 #' @template CTtemplate
@@ -1518,6 +1635,8 @@ gsw_melting_ice_into_seawater <- function(SA, CT, p, w_Ih, t_Ih)
 }
 
 #' Calculate d(SA)/d(CT) for ice melting in seawater at nearly freezing temperature
+#' 
+#' @template teos10template
 #'
 #' @template SAtemplate
 #' @template ptemplate
@@ -1546,6 +1665,8 @@ gsw_melting_ice_equilibrium_SA_CT_ratio <- function(SA, p)
 }
 
 #' Calculate d(SA)/d(CT) for ice melting in seawater
+#' 
+#' @template teos10template
 #'
 #' @template SAtemplate
 #' @template CTtemplate
@@ -1579,6 +1700,8 @@ gsw_melting_ice_SA_CT_ratio <- function(SA, CT, p, t_Ih)
 
 
 #' Calculate Brunt Vaisala Frequency squared
+#' 
+#' @template teos10template
 #'
 #' @template SAtemplate
 #' @template CTtemplate
@@ -1610,6 +1733,8 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
 }
 
 #' Pressure from height (75-term equation)
+#' 
+#' @template teos10template
 #' 
 #' @param z height, zero at surface (but note last 2 args) and positive upwards [ m ]
 #' @template latitudetemplate
@@ -1644,6 +1769,8 @@ gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height=0, sea_surface_geopote
 
 #' Potential density
 #' 
+#' @template teos10template
+#' 
 #' @template SAtemplate
 #' @template ttemplate
 #' @template ptemplate
@@ -1675,6 +1802,8 @@ gsw_pot_rho_t_exact <- function(SA, t, p, p_ref)
 
 #' Pressure Coefficient for Ice
 #' 
+#' @template teos10template
+#' 
 #' @template ttemplate
 #' @template ptemplate
 #' @return specific internal energy [ Pa/degC ]
@@ -1703,6 +1832,8 @@ gsw_pressure_coefficient_ice <- function(t, p)
 
 #' Potential temperature referenced to the surface
 #' 
+#' @template teos10template
+#' 
 #' @template SAtemplate
 #' @template ttemplate
 #' @template ptemplate
@@ -1730,7 +1861,40 @@ gsw_pt0_from_t <- function(SA, t, p)
     rval
 }
 
+#' Potential Temperature of Ice Referenced to the Surface
+#' 
+#' @template teos10template
+#' 
+#' @template ttemplate
+#' @template ptemplate
+#' @return potential temperature [ deg C ]
+#' @examples
+#' library(testthat)
+#' t  <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
+#' p <- c(       10,       50,      125,      250,      600,    1000)
+#' pt0 <- gsw_pt0_from_t_ice(t, p)
+#' expect_equal(pt0, c(-10.787787898205298, -13.443730926050607, -12.837427056999708,
+#'                   -12.314321615760905, -11.017040858094250, -8.622907355083088))
+#' @family things related to ice
+#' @family things related to temperature
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt0_from_t_ice.html}
+gsw_pt0_from_t_ice <- function(t, p)
+{
+    l <- argfix(list(t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_pt0_from_t_ice",
+               t=as.double(l$t), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(t))
+        dim(rval) <- dim(t)
+    rval
+}
+
+
 #' Potential temperature from Conservative Temperature
+#' 
+#' @template teos10template
 #' 
 #' @template SAtemplate
 #' @template CTtemplate
@@ -1758,6 +1922,8 @@ gsw_pt_from_CT <- function(SA, CT)
 }
 
 #' Potential temperature from in-situ temperature
+#' 
+#' @template teos10template
 #' 
 #' @template SAtemplate
 #' @template ttemplate
@@ -1867,6 +2033,8 @@ gsw_rho_alpha_beta <- function(SA, CT, p)
 
 #' Density First Derivatives wrt SA, CT and p (75-term equation)
 #' 
+#' @template teos10template
+#' 
 #' @template SAtemplate
 #' @template CTtemplate
 #' @template ptemplate
@@ -1900,6 +2068,8 @@ gsw_rho_first_derivatives <- function(SA, CT, p)
 }
 
 #' Density First Derivatives wrt enthalpy (75-term equation)
+#' 
+#' @template teos10template
 #' 
 #' @template SAtemplate
 #' @template CTtemplate
@@ -1972,6 +2142,8 @@ gsw_rho_ice <- function(t, p)
 
 
 #' In-situ density of seawater
+#' 
+#' @template teos10template
 #' 
 #' @template SAtemplate
 #' @template ttemplate
@@ -2053,6 +2225,8 @@ gsw_SAAR <- function(p, longitude, latitude)
 
 
 #' Convert from density to absolute salinity
+#' 
+#' @template teos10template
 #'
 #' @template rhotemplate
 #' @template CTtemplate
@@ -2089,6 +2263,8 @@ gsw_SA_from_rho <- function(rho, CT, p)
 #' If SP is a matrix and if its dimensions correspond to the
 #' lengths of longitude and latitude, then the latter are
 #' converted to analogous matrices with \code{\link{expand.grid}}.
+#' 
+#' @template teos10template
 #' 
 #' @template SPtemplate
 #' @template ptemplate
@@ -2140,6 +2316,8 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
 #' lengths of longitude and latitude, then the latter are
 #' converted to analogous matrices with \code{\link{expand.grid}}.
 #' 
+#' @template teos10template
+#' 
 #' @template SPtemplate
 #' @template longitudetemplate
 #' @template latitudetemplate
@@ -2186,6 +2364,8 @@ gsw_SA_from_SP_baltic <- function(SP, longitude, latitude)
 #' If Sstar is a matrix and if its dimensions correspond to the
 #' lengths of longitude and latitude, then the latter are
 #' converted to analogous matrices with \code{\link{expand.grid}}.
+#' 
+#' @template teos10template
 #' 
 #' @template Sstartemplate
 #' @template ptemplate
@@ -2461,7 +2641,9 @@ gsw_sound_speed_ice <- function(t, p)
 
 
 
-#' Sound speed
+#' Sound Speed in Seawater
+#' 
+#' @template teos10template
 #'
 #' @template SAtemplate
 #' @template ttemplate
@@ -2490,7 +2672,9 @@ gsw_sound_speed_t_exact <- function(SA, t, p)
     rval
 }
 
-#' Specific volume
+#' Specific Volume of Seawater
+#' 
+#' @template teos10template
 #' 
 #' @template SAtemplate
 #' @template CTtemplate
@@ -2516,6 +2700,8 @@ gsw_specvol  <- function(SA, CT, p)
 #'
 #' Note that the TEOS function named \code{specific_volume_anomaly} is not
 #' provided in the C library, so it is not provided in R, either.
+#' 
+#' @template teos10template
 #'
 #' @template SAtemplate
 #' @template CTtemplate
@@ -2544,7 +2730,9 @@ gsw_specvol_anom_standard <- function(SA, CT, p)
     rval
 }
 
-#' Specific volume of ice
+#' Specific Volume of Ice
+#' 
+#' @template teos10template
 #' 
 #' @template ttemplate
 #' @template ptemplate
@@ -2573,7 +2761,9 @@ gsw_specvol_ice  <- function(t, p)
 }
 
 
-#' Specific volume
+#' Specific Volume of Seawater
+#' 
+#' @template teos10template
 #' 
 #' @template SAtemplate
 #' @template ttemplate
@@ -2602,7 +2792,9 @@ gsw_specvol_t_exact  <- function(SA, t, p)
     rval
 }
 
-#' Convert from electrical conductivity to practical salinity
+#' Convert from Electrical Conductivity to Practical Salinity
+#' 
+#' @template teos10template
 #' 
 #' @template Ctemplate
 #' @template ttemplate
@@ -2643,6 +2835,8 @@ gsw_SP_from_C <- function(C, t, p)
 #'
 #' Note: unlike the corresponding Matlab function, this does not
 #' return a flag indicating whether the location is in the ocean.
+#' 
+#' @template teos10template
 #' 
 #' @template SAtemplate
 #' @template ptemplate
@@ -2709,6 +2903,8 @@ gsw_SP_from_SK <- function(SK)
 }
 
 #' Calculate Practical Salinity from Reference Salinity
+#' 
+#' @template teos10template
 #'
 #' @template SRtemplate
 #' @return Practical Salinity (PSS-78) [ unitless ]
@@ -2733,6 +2929,8 @@ gsw_SP_from_SR <- function(SR)
 }
 
 #' Practical Salinity from Preformed Salinity
+#' 
+#' @template teos10template
 #' 
 #' @template Sstartemplate
 #' @template ptemplate
@@ -2768,6 +2966,8 @@ gsw_SP_from_Sstar <- function(Sstar, p, longitude, latitude)
 }
 
 #' Calculate Reference Salinity from Practical Salinity
+#' 
+#' @template teos10template
 #'
 #' @template SPtemplate
 #' @return Reference Salinity [ g/kg ]
@@ -2900,6 +3100,8 @@ gsw_spiciness2 <- function(SA, CT)
 #' lengths of longitude and latitude, then the latter are
 #' converted to analogous matrices with \code{\link{expand.grid}}.
 #' 
+#' @template teos10template
+#' 
 #' @template SAtemplate
 #' @template ptemplate
 #' @template longitudetemplate
@@ -2951,6 +3153,8 @@ gsw_Sstar_from_SA <- function(SA, p, longitude, latitude)
 #' lengths of longitude and latitude, then the latter are
 #' converted to analogous matrices with \code{\link{expand.grid}}.
 #' 
+#' @template teos10template
+#' 
 #' @template SPtemplate
 #' @template ptemplate
 #' @template longitudetemplate
@@ -2993,12 +3197,14 @@ gsw_Sstar_from_SP <- function(SP, p, longitude, latitude)
     rval
 }
 
-#' Freezing temperature
+#' Freezing Temperature of Seawater
 #'
 #' This uses the C function named \code{gsw_t_freezing_exact}, because the 
 #' C function named \code{gsw_t_freezing} does not produce check values that
 #' match the Matlab function called \code{gsw_t_freezing} (see references 
 #' for those test values).
+#' 
+#' @template teos10template
 #' 
 #' @template SAtemplate
 #' @template ptemplate
@@ -3029,6 +3235,8 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
 
 #' In situ temperature from Conservative Temperature
 #' 
+#' @template teos10template
+#' 
 #' @template SAtemplate
 #' @template CTtemplate
 #' @template ptemplate
@@ -3058,8 +3266,7 @@ gsw_t_from_CT <- function(SA, CT, p)
 
 #' Thermobaric coefficient (75-term equation)
 #'
-#' It should be noted that this version produces test results that differ from
-#' those in version 3.03 by 5 to 10 percent.
+#' @template teos10template
 #' 
 #' @template SAtemplate
 #' @template CTtemplate
@@ -3087,7 +3294,7 @@ gsw_thermobaric <- function(SA, CT, p)
     rval
 }
 
-#' Turner angle and density ratio
+#' Turner Angle and Density Ratio
 #'
 #' This uses the 75-term density equation. The values of Turner Angle
 #' Tu and density ratio Rrho are calculated at mid-point pressures, \code{p_mid}.
@@ -3130,12 +3337,13 @@ gsw_Turner_Rsubrho <- function(SA, CT, p)
     list(Tu=Tu, Rsubrho=Rsubrho, p_mid=p_mid)
 }
 
-#' Height from pressure
+#' Height from Pressure
 #'
 #' Computation of height (above sea level) from pressure, using the 75-term equation for 
 #' specific volume.
 #'
 #' @template teos10template
+#'
 #' @template ptemplate
 #' @template latitudetemplate
 #' @return height [ m ]

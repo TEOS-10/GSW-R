@@ -17,8 +17,16 @@ gsw_thermobaric(SA, CT, p)
 thermobaric coefficient wrt Conservative Temperature [ 1/(K Pa) ]
 }
 \description{
-It should be noted that this version produces test results that differ from
-those in version 3.03 by 5 to 10 percent.
+Thermobaric coefficient (75-term equation)
+}
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
 }
 \examples{
 library(testthat)
@@ -32,3 +40,4 @@ expect_equal(tb*1e11, c(0.152618598186650, 0.153662896162852, 0.173429325875738,
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_thermobaric.html}
 }
+

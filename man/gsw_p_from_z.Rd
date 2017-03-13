@@ -23,6 +23,15 @@ sea pressure [ dbar ]
 \description{
 Pressure from height (75-term equation)
 }
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
+}
 \examples{
 library(testthat)
 z <- -c(10, 50, 125, 250, 600, 1000)
@@ -37,3 +46,4 @@ expect_equal(p/1e3, c(0.010055726724518, 0.050283543374874, 0.125731858435610,
 \seealso{
 Other things related to depth: \code{\link{gsw_z_from_p}}
 }
+

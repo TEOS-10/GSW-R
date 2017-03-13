@@ -44,3 +44,4 @@ expect_equal(speed/1e3, c(1.542426412426373, 1.542558891663385, 1.53080153543618
 Other things related to sound: \code{\link{gsw_sound_speed_ice}},
   \code{\link{gsw_sound_speed_t_exact}}
 }
+

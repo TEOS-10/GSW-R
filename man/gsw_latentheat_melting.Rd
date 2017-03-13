@@ -17,6 +17,15 @@ latent heat of freezing [ J/kg ]
 \description{
 Latent Heat of Melting
 }
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
+}
 \examples{
 library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -35,3 +44,4 @@ Other things related to heat: \code{\link{gsw_dynamic_enthalpy}},
   \code{\link{gsw_latentheat_evap_CT}},
   \code{\link{gsw_latentheat_evap_t}}
 }
+

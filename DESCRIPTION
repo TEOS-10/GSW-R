@@ -10,19 +10,19 @@ Copyright: Original algorithms and 'Matlab'/C library (c) 2014 WG127 SCOR/IAPSO
 Maintainer: Dan Kelley <dan.kelley@dal.ca>
 Depends:
     R (>= 2.15)
-Suggests: 
+Suggests:
     knitr,
     testthat
 BugReports: https://github.com/TEOS-10/GSW-R/issues
-Description: Provides an interface to the Gibbs 'SeaWater' ('TEOS-10') C library, version 3.05,
-    which derives from 'Matlab' and other code written by Working Group 127 of
-    'SCOR'/'IAPSO' (Scientific Committee on Oceanic Research / International Association
-    for the Physical Sciences of the Oceans).
+Description: Provides an interface to the Gibbs 'SeaWater' ('TEOS-10') C
+    library, version 3.05, which derives from 'Matlab' and other code written by
+    Working Group 127 of 'SCOR'/'IAPSO' (Scientific Committee on Oceanic Research /
+    International Association for the Physical Sciences of the Oceans).
 URL: http://teos-10.github.io/GSW-R/index.html
 License: GPL (>= 2) | file LICENSE
 LazyLoad: yes
 LazyData: no
 Packaged: Dan Kelley
 Encoding: UTF-8
-RoxygenNote: 6.0.1
+RoxygenNote: 5.0.1
 VignetteBuilder: knitr

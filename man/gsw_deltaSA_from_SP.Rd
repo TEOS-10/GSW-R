@@ -23,6 +23,15 @@ deltaSA Absolute Salinity Anomaly  [ g/kg ]
 \description{
 Absolute Salinity Anomaly from Practical Salinity
 }
+\details{
+The present function works with a wrapper to a C function contained
+within the GSW-C system (with sourcecode at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, and about the science behind
+it all, consult \url{http://www.teos-10.org}.
+}
 \examples{
 library(testthat)
 SP =   c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -50,3 +59,4 @@ Other things related to salinity: \code{\link{gsw_C_from_SP}},
   \code{\link{gsw_Sstar_from_SA}},
   \code{\link{gsw_Sstar_from_SP}}
 }
+

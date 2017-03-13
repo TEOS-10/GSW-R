@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_z_from_p}
 \alias{gsw_z_from_p}
-\title{Height from pressure}
+\title{Height from Pressure}
 \usage{
 gsw_z_from_p(p, latitude)
 }
@@ -40,3 +40,4 @@ expect_equal(z/1e2, c(-0.099445834469453, -0.497180897012550, -1.242726219409978
 \seealso{
 Other things related to depth: \code{\link{gsw_p_from_z}}
 }
+

@@ -44,6 +44,8 @@ expect_equal(C, c(56.412599581571186, 56.316185602699953, 50.670369333973944,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_C_from_SP.html}
 }
 \seealso{
+Other things related to conductivity: \code{\link{gsw_SP_from_C}}
+
 Other things related to salinity: \code{\link{gsw_SA_from_SP_baltic}},
   \code{\link{gsw_SA_from_SP}},
   \code{\link{gsw_SA_from_Sstar}},
@@ -56,6 +58,5 @@ Other things related to salinity: \code{\link{gsw_SA_from_SP_baltic}},
   \code{\link{gsw_Sstar_from_SA}},
   \code{\link{gsw_Sstar_from_SP}},
   \code{\link{gsw_deltaSA_from_SP}}
-
-Other things related to conductivity: \code{\link{gsw_SP_from_C}}
 }
+
