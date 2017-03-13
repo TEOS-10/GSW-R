@@ -66,9 +66,11 @@ Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_melting_ice_equilibrium_SA_CT_ratio}},
   \code{\link{gsw_pressure_coefficient_ice}},
   \code{\link{gsw_pt0_from_t_ice}},
+  \code{\link{gsw_pt_from_t_ice}},
   \code{\link{gsw_rho_ice}},
   \code{\link{gsw_sound_speed_ice}},
   \code{\link{gsw_specvol_ice}},
-  \code{\link{gsw_t_freezing}}
+  \code{\link{gsw_t_freezing}},
+  \code{\link{gsw_t_from_pt0_ice}}
 }
 

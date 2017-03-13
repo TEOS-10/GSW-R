@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_pt_from_t}
 \alias{gsw_pt_from_t}
-\title{Potential temperature from in-situ temperature}
+\title{Potential Temperature from in-situ Temperature}
 \usage{
 gsw_pt_from_t(SA, t, p, p_ref = 0)
 }
@@ -19,7 +19,7 @@ gsw_pt_from_t(SA, t, p, p_ref = 0)
 potential temperature [ deg C ]
 }
 \description{
-Potential temperature from in-situ temperature
+Potential Temperature from in-situ Temperature
 }
 \details{
 The present function works with a wrapper to a C function contained
@@ -50,6 +50,9 @@ Other things related to temperature: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_CT_from_t}},
   \code{\link{gsw_pt0_from_t_ice}},
   \code{\link{gsw_pt0_from_t}},
-  \code{\link{gsw_pt_from_CT}}, \code{\link{gsw_t_from_CT}}
+  \code{\link{gsw_pt_from_CT}},
+  \code{\link{gsw_pt_from_t_ice}},
+  \code{\link{gsw_t_from_CT}},
+  \code{\link{gsw_t_from_pt0_ice}}
 }
 

@@ -1921,7 +1921,7 @@ gsw_pt_from_CT <- function(SA, CT)
     rval
 }
 
-#' Potential temperature from in-situ temperature
+#' Potential Temperature from in-situ Temperature
 #' 
 #' @template teos10template
 #' 
@@ -1951,6 +1951,38 @@ gsw_pt_from_t <- function(SA, t, p, p_ref=0)
                n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
+    rval
+}
+
+#' Potential Temperature of Ice from in-situ Temperature
+#' 
+#' @template teos10template
+#' 
+#' @template ttemplate
+#' @template ptemplate
+#' @param p_ref reference pressure [ dbar ]
+#' @return potential temperature [ deg C ]
+#' @examples
+#' library(testthat)
+#' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
+#' p <- c(      10,       50,      125,      250,      600,    1000)
+#' p_ref <- 0 # not actually needed, since 0 is the default
+#' pt <- gsw_pt_from_t_ice(t, p, p_ref)
+#' expect_equal(pt, c(-10.787787898205272, -13.443730926050661, -12.837427056999676,
+#'                  -12.314321615760921, -11.017040858094234, -8.622907355083147))
+#' @family things related to ice
+#' @family things related to temperature
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_t_ice.html}
+gsw_pt_from_t_ice <- function(t, p, p_ref=0)
+{
+    l <- argfix(list(t=t, p=p, p_ref=p_ref))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_pt_from_t_ice",
+               t=as.double(l$t), p=as.double(l$p), p_ref=as.double(l$p_ref),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(t))
+        dim(rval) <- dim(t)
     rval
 }
 
@@ -3263,6 +3295,37 @@ gsw_t_from_CT <- function(SA, CT, p)
         dim(rval) <- dim(SA)
     rval
 }
+
+#' In situ Temperature from Potential Temperature at 0dbar
+#' 
+#' @template teos10template
+#' 
+#' @template pt0_icetemplate
+#' @template ptemplate
+#' @return in-situ temperature (ITS-90) [ deg C ]
+#' @examples 
+#' library(testthat)
+#' pt0_ice  <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
+#' p <-  c(     10,      50,     125,     250,     600,    1000)
+#' t <- gsw_t_from_pt0_ice(pt0_ice, p)
+#' expect_equal(t, c(-10.783412084414074, -13.422068638139141, -12.783170223330448,
+#'                 -12.205667526492039, -10.755496924674144, -8.184121042593350))
+#' @family things related to ice
+#' @family things related to temperature
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_from_pt0_ice.html}
+gsw_t_from_pt0_ice <- function(pt0_ice, p)
+{
+    l <- argfix(list(pt0_ice=pt0_ice, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_t_from_pt0_ice",
+               pt0_ice=as.double(l$pt0_ice), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(pt0_ice))
+        dim(rval) <- dim(pt0_ice)
+    rval
+}
+
 
 #' Thermobaric coefficient (75-term equation)
 #'
