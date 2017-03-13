@@ -294,6 +294,14 @@ void wrap_gsw_frazil_properties(double *SA_bulk, double *h_bulk, double *p, int 
                 &SA_final[i], &CT_final[i], &w_Ih_final[i]);
 }
 
+void wrap_gsw_frazil_properties_potential(double *SA_bulk, double *h_pot_bulk, double *p, int *n,
+        double *SA_final, double *CT_final, double *w_Ih_final)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_frazil_properties_potential(SA_bulk[i], h_pot_bulk[i], p[i],
+                &SA_final[i], &CT_final[i], &w_Ih_final[i]);
+}
+
 void wrap_gsw_frazil_ratios_adiabatic(double *SA, double *p, double *w_Ih, int *n,
         double *dSA_dCT_frazil, double *dSA_dP_frazil, double *dCT_dP_frazil)
 {

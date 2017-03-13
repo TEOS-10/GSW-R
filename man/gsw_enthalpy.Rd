@@ -44,6 +44,7 @@ expect_equal(e/1e5, c(1.151031813559086, 1.140146926828028, 0.921800138366058,
 Other things related to enthalpy: \code{\link{gsw_dynamic_enthalpy}},
   \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_enthalpy_t_exact}},
+  \code{\link{gsw_frazil_properties_potential}},
   \code{\link{gsw_frazil_properties}},
   \code{\link{gsw_pot_enthalpy_from_pt_ice}},
   \code{\link{gsw_pt_from_pot_enthalpy_ice}}

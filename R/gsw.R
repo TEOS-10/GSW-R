@@ -1058,6 +1058,58 @@ gsw_frazil_properties <- function(SA_bulk, h_bulk, p)
     list(SA_final=r$SA_final, CT_final=r$CT_final, w_Ih_final=r$w_Ih_final)
 }
 
+
+#' Properties of Frazil ice i.t.o. potential enthalpy
+#'
+#' Calculation of Absolute Salinity, Conservative Temperature, and ice mass fraction
+#' based on bulk Absolute Salinity, bulk potential enthalpy, and pressure
+#'
+#' @template teos10template
+#'
+#' @template SAbulktemplate
+#' @template h_pot_bulktemplate
+#' @template ptemplate
+#' @return a list containing \code{SA_final}, \code{h_final} and \code{w_Ih_final}.
+#' @examples 
+#' library(testthat)
+#' SA_bulk <- c(     34.7118,   34.8915,   35.0256,   34.8472,   34.7366,   34.7324)
+#' h_pot_bulk <- c(-4.5544e4, -4.6033e4, -4.5830e4, -4.5589e4, -4.4948e4, -4.4027e4)
+#' p <- c(                 10,        50,       125,       250,       600,      1000)
+#' r <- gsw_frazil_properties_potential(SA_bulk, h_pot_bulk, p)
+#' expect_equal(r$SA_final, c(39.098258701462051, 39.343217598625756, 39.434254585716296,
+#'                          39.159536295126657, 38.820511558004590, 38.542322667924459))
+#' expect_equal(r$CT_final, c(-2.155553336670014, -2.200844802695826, -2.264077329325076,
+#'                          -2.344567015865174, -2.598559540430464, -2.900814843304696))
+#' expect_equal(r$w_Ih_final, c(0.112190640891586, 0.113150826758543, 0.111797588975174,
+#'                            0.110122251260246, 0.105199838799201, 0.098850365110330))
+#' @family things related to enthalpy
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_frazil_properties_potential.html}
+gsw_frazil_properties_potential <- function(SA_bulk, h_pot_bulk, p)
+{
+    l <- argfix(list(SA_bulk=SA_bulk, h_pot_bulk=h_pot_bulk, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_frazil_properties_potential",
+            SA_bulk=as.double(l$SA_bulk), h_pot_bulk=as.double(l$h_pot_bulk), p=as.double(l$p),
+            n=as.integer(n),
+            SA_final=double(n), CT_final=double(n), w_Ih_final=double(n),
+            NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(SA_bulk)) {
+        dim <- dim(SA_bulk)
+        dim(r$SA_final) <- dim
+        dim(r$CT_final) <- dim
+        dim(r$t_Ih_final) <- dim
+    }
+    list(SA_final=r$SA_final, CT_final=r$CT_final, w_Ih_final=r$w_Ih_final)
+}
+
+
+
+
+
+
+
 #' Ratios of SA, CT and p changes when Frazil Ice Forms
 #'
 #' Ratios of changes in \code{SA}, \code{CT} and \code{p} that occur
