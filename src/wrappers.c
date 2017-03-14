@@ -289,6 +289,14 @@ void wrap_gsw_CT_first_derivatives(double *SA, double *pt, int *n,
         gsw_ct_first_derivatives(SA[i], pt[i], &CT_SA[i], &CT_pt[i]);
 }
 
+void wrap_gsw_CT_first_derivatives_wrt_t_exact(double *SA, double *t, double *p, int *n,
+        double *CT_SA_wrt_t, double *CT_t_wrt_t, double *CT_p_wrt_t)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_ct_first_derivatives_wrt_t_exact(SA[i], t[i], p[i],
+                &CT_SA_wrt_t[i], &CT_t_wrt_t[i], &CT_p_wrt_t[i]);
+}
+
 void wrap_gsw_CT_from_rho(double *rho, double *SA, double *p, int *n,
         double *CT, double *CT_multiple)
 {

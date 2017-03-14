@@ -647,10 +647,58 @@ gsw_CT_first_derivatives <- function(SA, pt)
             n=as.integer(n), CT_SA=double(n), CT_pt=double(n), NAOK=TRUE, PACKAGE="gsw")
     if (is.matrix(SA)) {
         dim(r$CT_SA) <- dim(SA)
-        dim(r$CT_CP) <- dim(SA)
+        dim(r$CT_pt) <- dim(SA)
     }
     list(CT_SA=r$CT_SA, CT_pt=r$CT_pt)
 }
+
+
+#' Derivatives of Conservative Temperature with Respect to or at
+#' Constant in-situ Temperature
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template ttemplate
+#' @template ptemplate
+#' @return A list containing \code{CT_SA_wrt_t} [ degC/(g/kg) ], the derivative of
+#' Conservative Temperature with respect to Absolute Salinity at constant
+#' temperature and pressure, \code{CT_t_wrt_t} [ unitless], the derivative of
+#' Conservative Temperature with respect to temperature at constant
+#' Absolute Salinity and pressure, and \code{CT_p_wrt_t}, the derivative 
+#' of Conservative Temperature with respect to pressure at constant Absolute
+#' Salinity and temperature.
+#' @examples 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' r <- gsw_CT_first_derivatives_wrt_t_exact(SA, t, p)
+#' expect_equal(r$CT_SA_wrt_t, c(-0.041988694538987, -0.041596549088952, -0.034853545749326,
+#'                             -0.019067140454607, -0.015016439826591, -0.012233725491373))
+#' expect_equal(r$CT_t_wrt_t, c(1.002752642867571, 1.002243118597902, 1.000835702767227,
+#'                            0.998194915250648, 0.995219303532390, 0.991780205482695))
+#' expect_equal(r$CT_p_wrt_t/1e-7, c(-0.241011880838437, -0.239031676279078, -0.203649928441505,
+#'                                 -0.119370679226136, -0.099140832825342, -0.086458168643579))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_first_derivatives_wrt_t_exact.html}
+gsw_CT_first_derivatives_wrt_t_exact <- function(SA, t, p)
+{
+    l <- argfix(list(SA=SA, t=t, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_CT_first_derivatives_wrt_t_exact",
+            SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
+            n=as.integer(n),
+            CT_SA_wrt_t=double(n), CT_t_wrt_t=double(n), CT_p_wrt_t=double(n),
+            NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(SA)) {
+        dim(r$CT_SA_wrt_t) <- dim(SA)
+        dim(r$CT_t_wrt_t) <- dim(SA)
+        dim(r$CT_p_wrt_t) <- dim(SA)
+    }
+    list(CT_SA_wrt_t=r$CT_SA_wrt_t, CT_t_wrt_t=r$CT_t_wrt_t, CT_p_wrt_t=r$CT_p_wrt_t)
+}
+
 
 
 
