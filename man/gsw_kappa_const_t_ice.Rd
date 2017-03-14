@@ -41,7 +41,8 @@ expect_equal(kappa*1e9, c(0.115874753261484, 0.115384948953145, 0.11544221271785
 Other things related to compressibility: \code{\link{gsw_kappa_ice}},
   \code{\link{gsw_kappa_t_exact}}, \code{\link{gsw_kappa}}
 
-Other things related to ice: \code{\link{gsw_CT_freezing}},
+Other things related to ice: \code{\link{gsw_CT_freezing_poly}},
+  \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_adiabatic_lapse_rate_ice}},
   \code{\link{gsw_alpha_wrt_t_ice}},
   \code{\link{gsw_chem_potential_water_ice}},

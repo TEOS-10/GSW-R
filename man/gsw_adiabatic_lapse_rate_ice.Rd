@@ -38,7 +38,8 @@ expect_equal(lr*1e7, c(0.218777853913651, 0.216559115188599, 0.216867659957613,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_ice.html}
 }
 \seealso{
-Other things related to ice: \code{\link{gsw_CT_freezing}},
+Other things related to ice: \code{\link{gsw_CT_freezing_poly}},
+  \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_alpha_wrt_t_ice}},
   \code{\link{gsw_chem_potential_water_ice}},
   \code{\link{gsw_cp_ice}}, \code{\link{gsw_enthalpy_ice}},

@@ -44,7 +44,8 @@ expect_equal(r, c(0.373840908629278, 0.371878512745054, 0.377104658031030,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_SA_CT_ratio_poly.html}
 }
 \seealso{
-Other things related to ice: \code{\link{gsw_CT_freezing}},
+Other things related to ice: \code{\link{gsw_CT_freezing_poly}},
+  \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_adiabatic_lapse_rate_ice}},
   \code{\link{gsw_alpha_wrt_t_ice}},
   \code{\link{gsw_chem_potential_water_ice}},

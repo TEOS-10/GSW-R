@@ -50,7 +50,8 @@ expect_equal(r$w_Ih_final, rep(0, 6))
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_into_seawater.html}
 }
 \seealso{
-Other things related to ice: \code{\link{gsw_CT_freezing}},
+Other things related to ice: \code{\link{gsw_CT_freezing_poly}},
+  \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_adiabatic_lapse_rate_ice}},
   \code{\link{gsw_alpha_wrt_t_ice}},
   \code{\link{gsw_chem_potential_water_ice}},

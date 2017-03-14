@@ -48,7 +48,8 @@ expect_equal(r$w_Ih, c(0.256046867272203, 0.251379393389925, 0.215985652155336,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_ice_fraction_to_freeze_seawater.html}
 }
 \seealso{
-Other things related to ice: \code{\link{gsw_CT_freezing}},
+Other things related to ice: \code{\link{gsw_CT_freezing_poly}},
+  \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_adiabatic_lapse_rate_ice}},
   \code{\link{gsw_alpha_wrt_t_ice}},
   \code{\link{gsw_chem_potential_water_ice}},

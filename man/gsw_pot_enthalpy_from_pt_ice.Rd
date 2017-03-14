@@ -44,7 +44,8 @@ Other things related to enthalpy: \code{\link{gsw_dynamic_enthalpy}},
   \code{\link{gsw_frazil_properties}},
   \code{\link{gsw_pt_from_pot_enthalpy_ice}}
 
-Other things related to ice: \code{\link{gsw_CT_freezing}},
+Other things related to ice: \code{\link{gsw_CT_freezing_poly}},
+  \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_adiabatic_lapse_rate_ice}},
   \code{\link{gsw_alpha_wrt_t_ice}},
   \code{\link{gsw_chem_potential_water_ice}},

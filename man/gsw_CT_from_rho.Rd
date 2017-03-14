@@ -62,7 +62,8 @@ Other things related to density: \code{\link{gsw_SA_from_rho}},
   \code{\link{gsw_specvol_t_exact}},
   \code{\link{gsw_specvol}}
 
-Other things related to temperature: \code{\link{gsw_CT_freezing}},
+Other things related to temperature: \code{\link{gsw_CT_freezing_poly}},
+  \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_CT_from_pt}},
   \code{\link{gsw_CT_from_t}},
   \code{\link{gsw_pt0_from_t_ice}},

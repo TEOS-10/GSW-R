@@ -38,7 +38,8 @@ expect_equal(t, c(-10.783412084414074, -13.422068638139141, -12.783170223330448,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_from_pt0_ice.html}
 }
 \seealso{
-Other things related to ice: \code{\link{gsw_CT_freezing}},
+Other things related to ice: \code{\link{gsw_CT_freezing_poly}},
+  \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_adiabatic_lapse_rate_ice}},
   \code{\link{gsw_alpha_wrt_t_ice}},
   \code{\link{gsw_chem_potential_water_ice}},
@@ -69,7 +70,8 @@ Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_specvol_ice}},
   \code{\link{gsw_t_freezing}}
 
-Other things related to temperature: \code{\link{gsw_CT_freezing}},
+Other things related to temperature: \code{\link{gsw_CT_freezing_poly}},
+  \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_CT_from_pt}},
   \code{\link{gsw_CT_from_rho}},
   \code{\link{gsw_CT_from_t}},

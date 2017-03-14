@@ -38,7 +38,8 @@ expect_equal(e/1e4, c(-1.362572315008330, -1.710375005915343, -1.628083272702224
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_helmholtz_energy_ice.html}
 }
 \seealso{
-Other things related to ice: \code{\link{gsw_CT_freezing}},
+Other things related to ice: \code{\link{gsw_CT_freezing_poly}},
+  \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_adiabatic_lapse_rate_ice}},
   \code{\link{gsw_alpha_wrt_t_ice}},
   \code{\link{gsw_chem_potential_water_ice}},

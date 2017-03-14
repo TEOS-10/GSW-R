@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_CT_freezing}
 \alias{gsw_CT_freezing}
-\title{Conservative temperature freezing point}
+\title{Conservative Temperature Freezing Point}
 \usage{
 gsw_CT_freezing(SA, p, saturation_fraction = 1)
 }
@@ -17,7 +17,7 @@ gsw_CT_freezing(SA, p, saturation_fraction = 1)
 Conservative Temperature at freezing of seawater [ deg C ]. That is, the freezing temperature expressed in terms of Conservative Temperature (ITS-90).
 }
 \description{
-Conservative temperature freezing point
+Conservative Temperature Freezing Point
 }
 \details{
 The present R function works with a wrapper to a C function contained
@@ -33,15 +33,16 @@ library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 p <-  c(     10,      50,     125,     250,     600,    1000)
 saturation_fraction <- 1
-CT_freezing <- gsw_CT_freezing(SA, p, saturation_fraction)
-expect_equal(CT_freezing, c(-1.899683776424096, -1.940791867869104, -2.006240664432488,
-                            -2.092357761318778, -2.359300831770506, -2.677162675412748))
+CT <- gsw_CT_freezing(SA, p, saturation_fraction)
+expect_equal(CT, c(-1.899683776424096, -1.940791867869104, -2.006240664432488,
+                 -2.092357761318778, -2.359300831770506, -2.677162675412748))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing.html}
 }
 \seealso{
-Other things related to ice: \code{\link{gsw_adiabatic_lapse_rate_ice}},
+Other things related to ice: \code{\link{gsw_CT_freezing_poly}},
+  \code{\link{gsw_adiabatic_lapse_rate_ice}},
   \code{\link{gsw_alpha_wrt_t_ice}},
   \code{\link{gsw_chem_potential_water_ice}},
   \code{\link{gsw_cp_ice}}, \code{\link{gsw_enthalpy_ice}},
@@ -72,7 +73,8 @@ Other things related to ice: \code{\link{gsw_adiabatic_lapse_rate_ice}},
   \code{\link{gsw_t_freezing}},
   \code{\link{gsw_t_from_pt0_ice}}
 
-Other things related to temperature: \code{\link{gsw_CT_from_pt}},
+Other things related to temperature: \code{\link{gsw_CT_freezing_poly}},
+  \code{\link{gsw_CT_from_pt}},
   \code{\link{gsw_CT_from_rho}},
   \code{\link{gsw_CT_from_t}},
   \code{\link{gsw_pt0_from_t_ice}},

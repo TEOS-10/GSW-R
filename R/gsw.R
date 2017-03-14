@@ -699,11 +699,39 @@ gsw_CT_first_derivatives_wrt_t_exact <- function(SA, t, p)
     list(CT_SA_wrt_t=r$CT_SA_wrt_t, CT_t_wrt_t=r$CT_t_wrt_t, CT_p_wrt_t=r$CT_p_wrt_t)
 }
 
+#' Conservative Temperature Freezing Point
+#'
+#' @template teos10template
+#'
+#' @template SAtemplate
+#' @template ptemplate
+#' @param saturation_fraction saturation fraction of dissolved air in seawater
+#' @return Conservative Temperature at freezing of seawater [ deg C ]. That is, the freezing temperature expressed in terms of Conservative Temperature (ITS-90). 
+#' @examples 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' p <-  c(     10,      50,     125,     250,     600,    1000)
+#' saturation_fraction <- 1
+#' CT <- gsw_CT_freezing(SA, p, saturation_fraction)
+#' expect_equal(CT, c(-1.899683776424096, -1.940791867869104, -2.006240664432488,
+#'                  -2.092357761318778, -2.359300831770506, -2.677162675412748))
+#' @family things related to ice
+#' @family things related to temperature
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing.html}
+gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
+{
+    l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_CT_freezing_exact",
+               SA=as.double(l$SA), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
 
-
-
-
-#' Conservative temperature freezing point
+#' Conservative Temperature Freezing Point (Polynomial form)
 #'
 #' @template teos10template
 #'
@@ -722,18 +750,20 @@ gsw_CT_first_derivatives_wrt_t_exact <- function(SA, t, p)
 #' @family things related to ice
 #' @family things related to temperature
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing.html}
-gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing_poly.html}
+gsw_CT_freezing_poly <- function(SA, p, saturation_fraction=1)
 {
     l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
     n <- length(l[[1]])
-    rval <- .C("wrap_gsw_CT_freezing",
+    rval <- .C("wrap_gsw_CT_freezing_poly",
                SA=as.double(l$SA), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
                n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
+
 
 #' Conservative Temperature from potential temperature
 #' 
