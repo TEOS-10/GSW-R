@@ -616,6 +616,45 @@ gsw_cp_t_exact <- function(SA, t, p)
 }
 
 
+#' First Derivatives of Conservative Temperature
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template pttemplate
+#' @return A list containing \code{CT_SA} [ degC/(g/kg) ], the derivative of
+#' Conservative Temperature with respect to Absolute Salinity at constant
+#' potential temperature, and \code{CT_pt} [ unitless], the derivative of
+#' Conservative Temperature with respect to potential temperature at constant
+#' Absolute Salinity.
+#' @examples 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' pt <- c(28.7832, 28.4209, 22.7850, 10.2305,  6.8292,  4.3245)
+#' r <- gsw_CT_first_derivatives(SA, pt)
+#' expect_equal(r$CT_SA, c(-0.041981092877806, -0.041558140199508, -0.034739209004865,
+#'                       -0.018711103772892, -0.014075941811725, -0.010571716552295))
+#' expect_equal(r$CT_pt, c(1.002814937296636, 1.002554817053239, 1.001645140295163,
+#'                       1.000003771100520, 0.999716359504731, 0.999474326580093))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_first_derivatives.html}
+gsw_CT_first_derivatives <- function(SA, pt)
+{
+    l <- argfix(list(SA=SA, pt=pt))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_CT_first_derivatives",
+            SA=as.double(l$SA), pt=as.double(l$pt),
+            n=as.integer(n), CT_SA=double(n), CT_pt=double(n), NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(SA)) {
+        dim(r$CT_SA) <- dim(SA)
+        dim(r$CT_CP) <- dim(SA)
+    }
+    list(CT_SA=r$CT_SA, CT_pt=r$CT_pt)
+}
+
+
+
+
 #' Conservative temperature freezing point
 #'
 #' @template teos10template

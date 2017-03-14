@@ -281,6 +281,14 @@ W2(wrap_gsw_z_from_p, gsw_z_from_p, p, lat, n, rval)
 
 // PART 4
 // Handle cases with multiple return values.
+
+void wrap_gsw_CT_first_derivatives(double *SA, double *pt, int *n,
+        double *CT_SA, double *CT_pt)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_ct_first_derivatives(SA[i], pt[i], &CT_SA[i], &CT_pt[i]);
+}
+
 void wrap_gsw_CT_from_rho(double *rho, double *SA, double *p, int *n,
         double *CT, double *CT_multiple)
 {
