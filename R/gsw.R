@@ -1107,6 +1107,52 @@ gsw_frazil_properties_potential <- function(SA_bulk, h_pot_bulk, p)
 
 
 
+#' Properties of Frazil ice i.t.o. potential enthalpy (polynomial version)
+#'
+#' Calculation of Absolute Salinity, Conservative Temperature, and ice mass fraction
+#' based on bulk Absolute Salinity, bulk potential enthalpy, and pressure
+#'
+#' @template teos10template
+#'
+#' @template SAbulktemplate
+#' @template h_pot_bulktemplate
+#' @template ptemplate
+#' @return a list containing \code{SA_final}, \code{h_final} and \code{w_Ih_final}.
+#' @examples 
+#' library(testthat)
+#' SA_bulk <- c(     34.7118,   34.8915,   35.0256,   34.8472,   34.7366,   34.7324)
+#' h_pot_bulk <- c(-4.5544e4, -4.6033e4, -4.5830e4, -4.5589e4, -4.4948e4, -4.4027e4)
+#' p <- c(                10,        50,       125,       250,       600,      1000)
+#' r <- gsw_frazil_properties_potential_poly(SA_bulk, h_pot_bulk, p)
+#' expect_equal(r$SA_final, c(39.098264696022831, 39.343217436835218, 39.434244243586633,
+#'                          39.159511498029801, 38.820458704205542, 38.542256756176229))
+#' expect_equal(r$CT_final, c(-2.155537691991377, -2.200841508940901, -2.264094318382661,
+#'                          -2.344613208230164, -2.598663953454472, -2.900948531145453))
+#' expect_equal(r$w_Ih_final, c(0.112190777010854, 0.113150823111566, 0.111797356032850,
+#'                            0.110121687760246, 0.105198620534670, 0.098848824039493))
+#' @family things related to enthalpy
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_frazil_properties_potential_poly.html}
+gsw_frazil_properties_potential_poly <- function(SA_bulk, h_pot_bulk, p)
+{
+    l <- argfix(list(SA_bulk=SA_bulk, h_pot_bulk=h_pot_bulk, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_frazil_properties_potential_poly",
+            SA_bulk=as.double(l$SA_bulk), h_pot_bulk=as.double(l$h_pot_bulk), p=as.double(l$p),
+            n=as.integer(n),
+            SA_final=double(n), CT_final=double(n), w_Ih_final=double(n),
+            NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(SA_bulk)) {
+        dim <- dim(SA_bulk)
+        dim(r$SA_final) <- dim
+        dim(r$CT_final) <- dim
+        dim(r$t_Ih_final) <- dim
+    }
+    list(SA_final=r$SA_final, CT_final=r$CT_final, w_Ih_final=r$w_Ih_final)
+}
+
+
 
 
 
@@ -1779,7 +1825,7 @@ gsw_melting_ice_into_seawater <- function(SA, CT, p, w_Ih, t_Ih)
     list(SA_final=r$SA_final, CT_final=r$CT_final, w_Ih_final=r$w_Ih_final)
 }
 
-#' Calculate d(SA)/d(CT) for ice melting in seawater at nearly freezing temperature
+#' Calculate d(SA)/d(CT) for Ice Melting in near-freezing Seawater
 #' 
 #' @template teos10template
 #'
@@ -1809,7 +1855,38 @@ gsw_melting_ice_equilibrium_SA_CT_ratio <- function(SA, p)
     rval
 }
 
-#' Calculate d(SA)/d(CT) for ice melting in seawater
+#' Calculate d(SA)/d(CT) for Ice Melting in near-freezing Seawater (Polynomial version)
+#' 
+#' @template teos10template
+#'
+#' @template SAtemplate
+#' @template ptemplate
+#' @return ratio of change in \code{SA} to change in \code{CT} [ g/kg/degC ].
+#' @examples 
+#' library(testthat)
+#' SA <- c(   34.7118,  34.8915,  35.0256,  34.8472,  34.7366, 34.7324)
+#' p <- c(         10,       50,      125,      250,      600,    1000)
+#' r <- gsw_melting_ice_equilibrium_SA_CT_ratio_poly(SA, p)
+#' expect_equal(r, c(0.420209444587263, 0.422511664682796, 0.424345538275708,
+#'                 0.422475965003649, 0.422023755182266, 0.423038080717229))
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_equilibrium_SA_CT_ratio_poly.html}
+gsw_melting_ice_equilibrium_SA_CT_ratio_poly <- function(SA, p)
+{
+    l <- argfix(list(SA=SA, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_melting_ice_equilibrium_SA_CT_ratio_poly",
+               SA=as.double(l$SA), p=as.double(l$p),
+               n=as.integer(n), rval=double(n),
+               NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+
+#' Calculate d(SA)/d(CT) for Ice Melting in Seawater
 #' 
 #' @template teos10template
 #'
@@ -1843,6 +1920,40 @@ gsw_melting_ice_SA_CT_ratio <- function(SA, CT, p, t_Ih)
     rval
 }
 
+
+#' Calculate d(SA)/d(CT) for Ice Melting in Seawater (Polynomial version)
+#' 
+#' @template teos10template
+#'
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#' @template t_Ihtemplate
+#' @return ratio of change in \code{SA} to change in \code{CT} [ g/kg/degC ].
+#' @examples 
+#' library(testthat)
+#' SA <- c(   34.7118,  34.8915,  35.0256,  34.8472,  34.7366, 34.7324)
+#' CT <- c(    3.7856,   3.4329,   2.8103,   1.2600,   0.6886,  0.4403)
+#' p <- c(         10,       50,      125,      250,      600,    1000)
+#' t_Ih <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036) 
+#' r <- gsw_melting_ice_SA_CT_ratio_poly(SA, CT, p, t_Ih)
+#' expect_equal(r, c(0.373840908629278, 0.371878512745054, 0.377104658031030,
+#'                 0.382777681212224, 0.387133812279563, 0.393947267481204))
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_SA_CT_ratio_poly.html}
+gsw_melting_ice_SA_CT_ratio_poly <- function(SA, CT, p, t_Ih)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p, t_Ih=t_Ih))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_melting_ice_SA_CT_ratio_poly",
+               SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), t_Ih=as.double(l$t_Ih),
+               n=as.integer(n), rval=double(n),
+               NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
 
 #' Calculate Brunt Vaisala Frequency squared
 #' 

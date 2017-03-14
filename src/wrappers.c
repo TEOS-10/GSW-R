@@ -225,7 +225,9 @@ W2(wrap_gsw_latentheat_evap_CT, gsw_latentheat_evap_ct, SA, CT, n, rval)
 W2(wrap_gsw_latentheat_evap_t, gsw_latentheat_evap_t, SA, t, n, rval)
 W2(wrap_gsw_latentheat_melting, gsw_latentheat_melting, SA, p, n, rval)
 W2(wrap_gsw_melting_ice_equilibrium_SA_CT_ratio, gsw_melting_ice_equilibrium_sa_ct_ratio, SA, p, n, rval)
+W2(wrap_gsw_melting_ice_equilibrium_SA_CT_ratio_poly, gsw_melting_ice_equilibrium_sa_ct_ratio_poly, SA, p, n, rval)
 W4(wrap_gsw_melting_ice_SA_CT_ratio, gsw_melting_ice_sa_ct_ratio, SA, CT, p, t_Ih, n, rval)
+W4(wrap_gsw_melting_ice_SA_CT_ratio_poly, gsw_melting_ice_sa_ct_ratio_poly, SA, CT, p, t_Ih, n, rval)
 W1(wrap_gsw_pot_enthalpy_from_pt_ice, gsw_pot_enthalpy_from_pt_ice, pt_ice, n, rval)
 W2(wrap_gsw_pressure_coefficient_ice, gsw_pressure_coefficient_ice, t, p, n, rval)
 
@@ -299,6 +301,14 @@ void wrap_gsw_frazil_properties_potential(double *SA_bulk, double *h_pot_bulk, d
 {
     for (int i=0; i < *(n); i++)
         gsw_frazil_properties_potential(SA_bulk[i], h_pot_bulk[i], p[i],
+                &SA_final[i], &CT_final[i], &w_Ih_final[i]);
+}
+
+void wrap_gsw_frazil_properties_potential_poly(double *SA_bulk, double *h_pot_bulk, double *p, int *n,
+        double *SA_final, double *CT_final, double *w_Ih_final)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_frazil_properties_potential_poly(SA_bulk[i], h_pot_bulk[i], p[i],
                 &SA_final[i], &CT_final[i], &w_Ih_final[i]);
 }
 

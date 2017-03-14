@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_melting_ice_equilibrium_SA_CT_ratio}
 \alias{gsw_melting_ice_equilibrium_SA_CT_ratio}
-\title{Calculate d(SA)/d(CT) for ice melting in seawater at nearly freezing temperature}
+\title{Calculate d(SA)/d(CT) for Ice Melting in near-freezing Seawater}
 \usage{
 gsw_melting_ice_equilibrium_SA_CT_ratio(SA, p)
 }
@@ -15,7 +15,7 @@ gsw_melting_ice_equilibrium_SA_CT_ratio(SA, p)
 ratio of change in \code{SA} to change in \code{CT} [ g/kg/degC ].
 }
 \description{
-Calculate d(SA)/d(CT) for ice melting in seawater at nearly freezing temperature
+Calculate d(SA)/d(CT) for Ice Melting in near-freezing Seawater
 }
 \details{
 The present R function works with a wrapper to a C function contained
@@ -44,6 +44,7 @@ Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_chem_potential_water_ice}},
   \code{\link{gsw_cp_ice}}, \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_entropy_ice}},
+  \code{\link{gsw_frazil_properties_potential_poly}},
   \code{\link{gsw_frazil_properties_potential}},
   \code{\link{gsw_frazil_properties}},
   \code{\link{gsw_frazil_ratios_adiabatic_poly}},
@@ -53,7 +54,9 @@ Other things related to ice: \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_internal_energy_ice}},
   \code{\link{gsw_kappa_const_t_ice}},
   \code{\link{gsw_kappa_ice}},
+  \code{\link{gsw_melting_ice_SA_CT_ratio_poly}},
   \code{\link{gsw_melting_ice_SA_CT_ratio}},
+  \code{\link{gsw_melting_ice_equilibrium_SA_CT_ratio_poly}},
   \code{\link{gsw_melting_ice_into_seawater}},
   \code{\link{gsw_pot_enthalpy_from_pt_ice}},
   \code{\link{gsw_pressure_coefficient_ice}},
