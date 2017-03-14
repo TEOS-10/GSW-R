@@ -46,6 +46,7 @@ expect_equal(e/1e2, c(4.003894252787245, 3.954381784340642, 3.198664981986740,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_from_t.html}
 }
 \seealso{
-Other things related to entropy: \code{\link{gsw_entropy_from_pt}},
+Other things related to entropy: \code{\link{gsw_CT_from_entropy}},
+  \code{\link{gsw_entropy_from_pt}},
   \code{\link{gsw_entropy_ice}}
 }

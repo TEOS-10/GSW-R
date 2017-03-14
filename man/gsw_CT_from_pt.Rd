@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_CT_from_pt}
 \alias{gsw_CT_from_pt}
-\title{Conservative Temperature from potential temperature}
+\title{Conservative Temperature from Potential Temperature}
 \usage{
 gsw_CT_from_pt(SA, pt)
 }
@@ -15,7 +15,7 @@ gsw_CT_from_pt(SA, pt)
 Conservative Temperature [ deg C ]
 }
 \description{
-Conservative Temperature from potential temperature
+Conservative Temperature from Potential Temperature
 }
 \details{
 The present R function works with a wrapper to a C function contained
@@ -41,6 +41,7 @@ expect_equal(CT, c(28.809923015982083, 28.439144260767169, 22.786246608464264,
 Other things related to temperature: \code{\link{gsw_CT_freezing_poly}},
   \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_CT_from_enthalpy}},
+  \code{\link{gsw_CT_from_entropy}},
   \code{\link{gsw_CT_from_rho}},
   \code{\link{gsw_CT_from_t}},
   \code{\link{gsw_pt0_from_t_ice}},
