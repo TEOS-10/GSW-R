@@ -41,7 +41,8 @@ expect_equal(de/1000, c(0.097864698087770, 0.489161476686235, 1.220512192086506,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
 }
 \seealso{
-Other things related to enthalpy: \code{\link{gsw_enthalpy_ice}},
+Other things related to enthalpy: \code{\link{gsw_CT_from_enthalpy}},
+  \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_enthalpy_t_exact}},
   \code{\link{gsw_enthalpy}},
   \code{\link{gsw_frazil_properties_potential_poly}},

@@ -40,6 +40,7 @@ expect_equal(pt, c(28.783177048624573, 28.420955597191984, 22.784953468087107,
 \seealso{
 Other things related to temperature: \code{\link{gsw_CT_freezing_poly}},
   \code{\link{gsw_CT_freezing}},
+  \code{\link{gsw_CT_from_enthalpy}},
   \code{\link{gsw_CT_from_pt}},
   \code{\link{gsw_CT_from_rho}},
   \code{\link{gsw_CT_from_t}},

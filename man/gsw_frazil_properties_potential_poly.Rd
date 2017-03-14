@@ -46,7 +46,8 @@ expect_equal(r$w_Ih_final, c(0.112190777010854, 0.113150823111566, 0.11179735603
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_frazil_properties_potential_poly.html}
 }
 \seealso{
-Other things related to enthalpy: \code{\link{gsw_dynamic_enthalpy}},
+Other things related to enthalpy: \code{\link{gsw_CT_from_enthalpy}},
+  \code{\link{gsw_dynamic_enthalpy}},
   \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_enthalpy_t_exact}},
   \code{\link{gsw_enthalpy}},

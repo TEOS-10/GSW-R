@@ -74,6 +74,7 @@ Other things related to ice: \code{\link{gsw_CT_freezing_poly}},
   \code{\link{gsw_t_from_pt0_ice}}
 
 Other things related to temperature: \code{\link{gsw_CT_freezing_poly}},
+  \code{\link{gsw_CT_from_enthalpy}},
   \code{\link{gsw_CT_from_pt}},
   \code{\link{gsw_CT_from_rho}},
   \code{\link{gsw_CT_from_t}},

@@ -764,6 +764,39 @@ gsw_CT_freezing_poly <- function(SA, p, saturation_fraction=1)
 }
 
 
+#' Conservative Temperature from Enthalpy
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template htemplate
+#' @template ptemplate
+#' @return Conservative Temperature [ deg C ]
+#' @examples 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' h <- c(1.15103e5, 1.14014e5, 0.92180e5, 0.43255e5, 0.33087e5, 0.26970e5)
+#' p <- c(       10,        50,       125,       250,       600,      1000)
+#' pt <- c(28.7832, 28.4209, 22.7850, 10.2305,  6.8292,  4.3245)
+#' CT <- gsw_CT_from_enthalpy(SA, h, p)
+#' expect_equal(CT, c(28.809854569021972, 28.439026483379287, 22.786196534098817,
+#'   10.226106994920777, 6.827159682675204, 4.323428660306681))
+#' @family things related to enthalpy
+#' @family things related to temperature
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_enthalpy.html}
+gsw_CT_from_enthalpy <- function(SA, h, p)
+{
+    l <- argfix(list(SA=SA, h=h, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_CT_from_enthalpy",
+               SA=as.double(l$SA), h=as.double(l$h), p=as.double(l$p),
+               n=n, rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 
 #' Conservative Temperature from potential temperature
 #' 
