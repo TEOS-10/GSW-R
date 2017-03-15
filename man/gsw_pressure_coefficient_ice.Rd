@@ -38,7 +38,9 @@ expect_equal(pc/1e6, c(1.333098059787838, 1.326359005133730, 1.327354133828322,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_pressure_coefficient_ice.html}
 }
 \seealso{
-Other things related to ice: \code{\link{gsw_CT_freezing_poly}},
+Other things related to ice: \code{\link{gsw_CT_freezing_first_derivatives_poly}},
+  \code{\link{gsw_CT_freezing_first_derivatives}},
+  \code{\link{gsw_CT_freezing_poly}},
   \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_adiabatic_lapse_rate_ice}},
   \code{\link{gsw_alpha_wrt_t_ice}},

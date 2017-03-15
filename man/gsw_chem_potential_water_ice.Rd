@@ -40,7 +40,9 @@ expect_equal(pot/1e4, c(-1.340648365149857, -1.644921413491445, -1.4809916788903
 \seealso{
 Other things related to chemical potential: \code{\link{gsw_chem_potential_water_t_exact}}
 
-Other things related to ice: \code{\link{gsw_CT_freezing_poly}},
+Other things related to ice: \code{\link{gsw_CT_freezing_first_derivatives_poly}},
+  \code{\link{gsw_CT_freezing_first_derivatives}},
+  \code{\link{gsw_CT_freezing_poly}},
   \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_adiabatic_lapse_rate_ice}},
   \code{\link{gsw_alpha_wrt_t_ice}},

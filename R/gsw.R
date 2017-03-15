@@ -731,6 +731,87 @@ gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
     rval
 }
 
+
+
+
+#' First Derivatives of Conservative Temperature for Freezing Water
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template ptemplate
+#' @template saturation_fractiontemplate
+#' @return A list containing \code{CTfreezing_SA} [ degC/(g/kg) ], the derivative of
+#' Conservative Temperature with respect to Absolute Salinity at constant
+#' potential temperature, and \code{CTfreezing_p} [ unitless], the derivative of
+#' Conservative Temperature with respect to pressure at constant
+#' Absolute Salinity.
+#' @examples 
+#' library(testthat)
+#' SA <- c(                 34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' p <- c(                       10,      50,     125,     250,     600,    1000)
+#' saturation_fraction <- c(      1,     0.8,     0.6,     0.5,     0.4,       0)
+#' r <- gsw_CT_freezing_first_derivatives(SA, p, saturation_fraction)
+#' expect_equal(r$CTfreezing_SA, c(-0.058193253897272, -0.058265158334170, -0.058345661671901,
+#'                               -0.058373842446463, -0.058534544740846, -0.058730846361252))
+#' expect_equal(r$CTfreezing_p/1e-7, c(-0.765300390432684, -0.766942996466485, -0.769892679988284,
+#'                                   -0.774561011527902, -0.787769143040504, -0.802771548245855))
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing_first_derivatives.html}
+gsw_CT_freezing_first_derivatives <- function(SA, p, saturation_fraction)
+{
+    l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_CT_freezing_first_derivatives",
+            SA=as.double(l$SA), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
+            n=as.integer(n), CTfreezing_SA=double(n), CTfreezing_p=double(n), NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(SA)) {
+        dim(r$CTfreezing_SA) <- dim(SA)
+        dim(r$CTfreezing_p) <- dim(SA)
+    }
+    list(CTfreezing_SA=r$CTfreezing_SA, CTfreezing_p=r$CTfreezing_p)
+}
+
+#' First Derivatives of Conservative Temperature for Freezing Water (Polynomial version)
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template ptemplate
+#' @template saturation_fractiontemplate
+#' @return A list containing \code{CTfreezing_SA} [ degC/(g/kg) ], the derivative of
+#' Conservative Temperature with respect to Absolute Salinity at constant
+#' potential temperature, and \code{CTfreezing_p} [ unitless], the derivative of
+#' Conservative Temperature with respect to pressure at constant
+#' Absolute Salinity.
+#' @examples 
+#' library(testthat)
+#' SA <- c(                 34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' p <- c(                       10,      50,     125,     250,     600,    1000)
+#' saturation_fraction <- c(      1,     0.8,     0.6,     0.5,     0.4,       0)
+#' r <- gsw_CT_freezing_first_derivatives_poly(SA, p, saturation_fraction)
+#' expect_equal(r$CTfreezing_SA, c(-0.058191181082769, -0.058263310660779, -0.058343573188907,
+#'                               -0.058370514075271, -0.058528023214462, -0.058722959729433))
+#' expect_equal(r$CTfreezing_p/1e-7, c(-0.765690732336706, -0.767310677213890, -0.770224214219328,
+#'                                   -0.774843488962665, -0.787930403016584, -0.802821704643775))
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing_first_derivatives_poly.html}
+gsw_CT_freezing_first_derivatives_poly <- function(SA, p, saturation_fraction)
+{
+    l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_CT_freezing_first_derivatives_poly",
+            SA=as.double(l$SA), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
+            n=as.integer(n), CTfreezing_SA=double(n), CTfreezing_p=double(n), NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(SA)) {
+        dim(r$CTfreezing_SA) <- dim(SA)
+        dim(r$CTfreezing_p) <- dim(SA)
+    }
+    list(CTfreezing_SA=r$CTfreezing_SA, CTfreezing_p=r$CTfreezing_p)
+}
+
 #' Conservative Temperature Freezing Point (Polynomial form)
 #'
 #' @template teos10template

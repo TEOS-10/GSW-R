@@ -42,7 +42,9 @@ Other things related to entropy: \code{\link{gsw_CT_from_entropy}},
   \code{\link{gsw_entropy_from_pt}},
   \code{\link{gsw_entropy_from_t}}
 
-Other things related to ice: \code{\link{gsw_CT_freezing_poly}},
+Other things related to ice: \code{\link{gsw_CT_freezing_first_derivatives_poly}},
+  \code{\link{gsw_CT_freezing_first_derivatives}},
+  \code{\link{gsw_CT_freezing_poly}},
   \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_adiabatic_lapse_rate_ice}},
   \code{\link{gsw_alpha_wrt_t_ice}},

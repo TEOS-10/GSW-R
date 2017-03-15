@@ -41,7 +41,9 @@ expect_equal(pt, c(-10.787787898205272, -13.443730926050661, -12.837427056999676
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_t_ice.html}
 }
 \seealso{
-Other things related to ice: \code{\link{gsw_CT_freezing_poly}},
+Other things related to ice: \code{\link{gsw_CT_freezing_first_derivatives_poly}},
+  \code{\link{gsw_CT_freezing_first_derivatives}},
+  \code{\link{gsw_CT_freezing_poly}},
   \code{\link{gsw_CT_freezing}},
   \code{\link{gsw_adiabatic_lapse_rate_ice}},
   \code{\link{gsw_alpha_wrt_t_ice}},

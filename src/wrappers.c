@@ -300,6 +300,20 @@ void wrap_gsw_CT_first_derivatives_wrt_t_exact(double *SA, double *t, double *p,
                 &CT_SA_wrt_t[i], &CT_t_wrt_t[i], &CT_p_wrt_t[i]);
 }
 
+void wrap_gsw_CT_freezing_first_derivatives(double *SA, double *p, double *saturation_fraction, int *n,
+        double *CTfreezing_SA, double *CTfreezing_p)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_ct_freezing_first_derivatives(SA[i], p[i], saturation_fraction[i], &CTfreezing_SA[i], &CTfreezing_p[i]);
+}
+
+void wrap_gsw_CT_freezing_first_derivatives_poly(double *SA, double *p, double *saturation_fraction, int *n,
+        double *CTfreezing_SA, double *CTfreezing_p)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_ct_freezing_first_derivatives_poly(SA[i], p[i], saturation_fraction[i], &CTfreezing_SA[i], &CTfreezing_p[i]);
+}
+
 void wrap_gsw_CT_from_rho(double *rho, double *SA, double *p, int *n,
         double *CT, double *CT_multiple)
 {
