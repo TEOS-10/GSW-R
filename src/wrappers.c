@@ -395,22 +395,6 @@ void wrap_gsw_IPV_vs_fNsquared_ratio(double *SA, double *CT, double *p, double *
     gsw_ipv_vs_fnsquared_ratio(SA, CT, p, *p_ref, *n, IPV_vs_fNsquared_ratio, p_mid);
 }
 
-void wrap_gsw_rho_first_derivatives(double *SA, double *CT, double *p, int *n,
-        double *drho_dsa, double *drho_dct, double *drho_dp)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_rho_first_derivatives(SA[i], CT[i], p[i], &drho_dsa[i], &drho_dct[i], &drho_dp[i]);
-}
-
-void wrap_gsw_rho_first_derivatives_wrt_enthalpy(double *SA, double *CT, double *p, int *n,
-        double *rho_sa_wrt_h, double *rho_h)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_rho_first_derivatives_wrt_enthalpy(SA[i], CT[i], p[i], &rho_sa_wrt_h[i], &rho_h[i]);
-}
-
-
-// [SA_final, CT_final, w_Ih_final] = gsw_melting_ice_into_seawater(SA,CT,p,w_Ih,t_Ih)
 void wrap_gsw_melting_ice_into_seawater(double *SA, double *CT, double *p, double *w_Ih, double *t_Ih,
         int *n, double *SA_final, double *CT_final, double *w_Ih_final)
 {
@@ -427,6 +411,20 @@ void wrap_gsw_Nsquared(double *SA, double *CT, double *p, double *latitude, int 
     gsw_nsquared(SA, CT, p, latitude, *n, n2, p_mid);
 }
 
+void wrap_gsw_rho_first_derivatives(double *SA, double *CT, double *p, int *n,
+        double *drho_dsa, double *drho_dct, double *drho_dp)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_rho_first_derivatives(SA[i], CT[i], p[i], &drho_dsa[i], &drho_dct[i], &drho_dp[i]);
+}
+
+void wrap_gsw_rho_first_derivatives_wrt_enthalpy(double *SA, double *CT, double *p, int *n,
+        double *rho_sa_wrt_h, double *rho_h)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_rho_first_derivatives_wrt_enthalpy(SA[i], CT[i], p[i], &rho_sa_wrt_h[i], &rho_h[i]);
+}
+
 void wrap_gsw_rho_alpha_beta(double *SA, double *CT, double *p, int *n,
         double *rho, double *alpha, double *beta)
 {
@@ -440,6 +438,13 @@ void wrap_gsw_SAAR(double *p, double *longitude, double *latitude, int *n, doubl
         saar[i] = gsw_saar(p[i], longitude[i], latitude[i]);
         inocean[i] = saar[i]==0?0:1;
     }
+}
+
+void wrap_gsw_specvol_alpha_beta(double *SA, double *CT, double *p, int *n,
+        double *specvol, double *alpha, double *beta)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_specvol_alpha_beta(SA[i], CT[i], p[i], &specvol[i], &alpha[i], &beta[i]);
 }
 
 void wrap_gsw_Turner_Rsubrho(double *SA, double *CT, double *p, int *n, double *Tu, double *Rsubrho, double *p_mid)

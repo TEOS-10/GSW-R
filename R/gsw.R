@@ -3409,6 +3409,51 @@ gsw_specvol  <- function(SA, CT, p)
     1 / gsw_rho(SA, CT, p)
 }
 
+##====
+#' Specific Volume, alpha, and beta
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#' @return a list holding \code{specvol}, the specific volume [ m^3/kg ], \code{alpha},
+#' the thermal expansion coefficient [ 1/degC ], and \code{beta}, the haline contraction
+#' coefficient [ kg/g ].
+#' @examples 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' r <- gsw_specvol_alpha_beta(SA, CT, p)
+#' expect_equal(r$specvol/1e-3, c(0.978626852431313, 0.978222365701325, 0.976155264597929,
+#'                              0.972961258011157, 0.971026719344908, 0.968989944622149))
+#' expect_equal(r$alpha/1e-3, c(0.324638934509245, 0.322655537959731, 0.281145723210171,
+#'                            0.173199716344780, 0.146289673594824, 0.129414845334599))
+#' expect_equal(r$beta/1e-3, c(0.717483987596135, 0.717647512290095, 0.726211643644768,
+#'                           0.750500751749777, 0.755052064788492, 0.757050813384370))
+#' @family things related to density
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_alpha_beta.html}
+gsw_specvol_alpha_beta  <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_specvol_alpha_beta",
+            SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+            n=as.integer(n),
+            specvol=double(n), alpha=double(n), beta=double(n),
+            NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(CT)) {
+        dim(r$specvol) <- dim(CT)
+        dim(r$alpha) <- dim(CT)
+        dim(r$beta) <- dim(CT)
+    }
+    list(specvol=r$specvol, alpha=r$alpha, beta=r$beta)
+}
+##====
+
+
 #' Specific volume anomaly [standard] (75-term equation)
 #'
 #' Note that the TEOS function named \code{specific_volume_anomaly} is not
@@ -3442,6 +3487,7 @@ gsw_specvol_anom_standard <- function(SA, CT, p)
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Specific Volume of Ice
 #' 
