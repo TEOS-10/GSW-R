@@ -43,6 +43,7 @@ expect_equal(CT, c(28.809854569021972, 28.439026483379287, 22.786196534098817,
 }
 \seealso{
 Other things related to enthalpy: \code{\link{gsw_dynamic_enthalpy}},
+  \code{\link{gsw_enthalpy_CT_exact}},
   \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_enthalpy_t_exact}},
   \code{\link{gsw_enthalpy}},

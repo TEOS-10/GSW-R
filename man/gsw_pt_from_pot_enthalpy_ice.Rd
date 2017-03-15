@@ -37,6 +37,7 @@ expect_equal(pt, c(-10.733087588125384, -13.167397822300588, -12.154205899172704
 \seealso{
 Other things related to enthalpy: \code{\link{gsw_CT_from_enthalpy}},
   \code{\link{gsw_dynamic_enthalpy}},
+  \code{\link{gsw_enthalpy_CT_exact}},
   \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_enthalpy_t_exact}},
   \code{\link{gsw_enthalpy}},

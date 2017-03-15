@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_enthalpy_ice}
 \alias{gsw_enthalpy_ice}
-\title{Specific enthalpy of ice}
+\title{Ice Specific Enthalpy}
 \usage{
 gsw_enthalpy_ice(t, p)
 }
@@ -40,6 +40,7 @@ expect_equal(se/1e5, c(-3.554414597446597, -3.603380857687490, -3.58308988425358
 \seealso{
 Other things related to enthalpy: \code{\link{gsw_CT_from_enthalpy}},
   \code{\link{gsw_dynamic_enthalpy}},
+  \code{\link{gsw_enthalpy_CT_exact}},
   \code{\link{gsw_enthalpy_t_exact}},
   \code{\link{gsw_enthalpy}},
   \code{\link{gsw_frazil_properties_potential_poly}},

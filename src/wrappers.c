@@ -211,6 +211,7 @@ W4(wrap_gsw_deltaSA_from_SP, gsw_deltasa_from_sp, SP, p, longitude, latitude, n,
 W3(wrap_gsw_dilution_coefficient_t_exact, gsw_dilution_coefficient_t_exact, SA, t, p, n, rval)
 W3(wrap_gsw_dynamic_enthalpy, gsw_dynamic_enthalpy, SA, CT, p, n, rval)
 W3(wrap_gsw_enthalpy, gsw_enthalpy, SA, CT, p, n, rval)
+W3(wrap_gsw_enthalpy_ct_exact, gsw_enthalpy_ct_exact, SA, t, p, n, rval)
 W2(wrap_gsw_enthalpy_ice, gsw_enthalpy_ice, t, p, n, rval)
 W3(wrap_gsw_enthalpy_t_exact, gsw_enthalpy_t_exact, SA, t, p, n, rval)
 // gsw_entropy_from_CT is not in the C library.

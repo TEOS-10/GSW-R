@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_enthalpy_t_exact}
 \alias{gsw_enthalpy_t_exact}
-\title{Specific enthalpy of seawater}
+\title{Seawater Specific Enthalpy in terms of in-situ Temperature}
 \usage{
 gsw_enthalpy_t_exact(SA, t, p)
 }
@@ -17,7 +17,7 @@ gsw_enthalpy_t_exact(SA, t, p)
 specific enthalpy [ J/kg ]
 }
 \description{
-Specific enthalpy of seawater
+Seawater Specific Enthalpy in terms of in-situ Temperature
 }
 \details{
 The present R function works with a wrapper to a C function contained
@@ -43,6 +43,7 @@ expect_equal(e/1e5, c(1.151032604783763, 1.140148036012021, 0.921799209310966,
 \seealso{
 Other things related to enthalpy: \code{\link{gsw_CT_from_enthalpy}},
   \code{\link{gsw_dynamic_enthalpy}},
+  \code{\link{gsw_enthalpy_CT_exact}},
   \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_enthalpy}},
   \code{\link{gsw_frazil_properties_potential_poly}},

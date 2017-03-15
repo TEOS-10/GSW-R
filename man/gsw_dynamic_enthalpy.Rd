@@ -42,6 +42,7 @@ expect_equal(de/1000, c(0.097864698087770, 0.489161476686235, 1.220512192086506,
 }
 \seealso{
 Other things related to enthalpy: \code{\link{gsw_CT_from_enthalpy}},
+  \code{\link{gsw_enthalpy_CT_exact}},
   \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_enthalpy_t_exact}},
   \code{\link{gsw_enthalpy}},
