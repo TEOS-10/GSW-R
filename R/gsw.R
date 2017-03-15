@@ -1009,6 +1009,35 @@ gsw_CT_from_t <- function(SA, t, p)
     rval
 }
 
+#' Conservative Temperature at Maximum Density
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template ptemplate
+#' @return Conservative Temperature [ deg C ]
+#' @examples 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' p <-  c(     10,      50,     125,     250,     600,    1000)
+#' CT <- gsw_CT_maxdensity(SA, p)
+#' expect_equal(CT, c(-3.731407240089855, -3.861137427731664, -4.060390602245942,
+#'                  -4.306222571955388, -5.089240667106197, -6.028034316992341))
+#' @family things related to temperature
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_maxdensity.html}
+gsw_CT_maxdensity <- function(SA, p)
+{
+    l <- argfix(list(SA=SA, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_CT_maxdensity",
+               SA=as.double(l$SA), p=as.double(l$p),
+               n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Absolute Salinity Anomaly from Practical Salinity
 #' 
 #' @template teos10template
