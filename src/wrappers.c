@@ -322,6 +322,13 @@ void wrap_gsw_CT_from_rho(double *rho, double *SA, double *p, int *n,
         gsw_ct_from_rho(rho[i], SA[i], p[i], &CT[i], &CT_multiple[i]);
 }
 
+void wrap_gsw_CT_second_derivatives(double *SA, double *pt, int *n,
+        double *CT_SA_SA, double *CT_SA_pt, double *CT_pt_pt)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_ct_second_derivatives(SA[i], pt[i], &CT_SA_SA[i], &CT_SA_pt[i], &CT_pt_pt[i]);
+}
+
 void wrap_gsw_frazil_properties(double *SA_bulk, double *h_bulk, double *p, int *n,
         double *SA_final, double *CT_final, double *w_Ih_final)
 {

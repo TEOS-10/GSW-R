@@ -1038,6 +1038,59 @@ gsw_CT_maxdensity <- function(SA, p)
     rval
 }
 
+
+
+##=============
+
+#' Second Derivatives of Conservative Temperature
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template pttemplate
+#' @return A list containing \code{CT_SA_SA} [ degC/(g/kg)^2 ], the second derivative of
+#' Conservative Temperature with respect to Absolute Salinity at constant
+#' potential temperature, and \code{CT_SA_pt} [ 1/(g/kg) ], the derivative of
+#' Conservative Temperature with respect to potential temperature and 
+#' Absolute Salinity, and \code{CT_pt_pt} [ 1/degC ], the second derivative of
+#' Conservative Temperature with respect to potential temperature.
+#' @examples 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' pt <- c(28.7832, 28.4209, 22.7850, 10.2305,  6.8292,  4.3245)
+#' r <- gsw_CT_second_derivatives(SA, pt)
+#' expect_equal(r$CT_SA_SA/1e-3, c(-0.060718502077064, -0.062065324400873, -0.084017055354742,
+#'                               -0.148436050120131, -0.171270386500246, -0.189920754900116))
+#' expect_equal(r$CT_SA_pt, c(-0.001197415000869, -0.001198309530139, -0.001226523296082,
+#'                          -0.001335896286481, -0.001380492698572, -0.001417751669135))
+#' expect_equal(r$CT_pt_pt/1e-3, c(0.123012754427146, 0.124662008871271, 0.140829458783443,
+#'                               0.140646803448166, 0.113684095615077, 0.082286843477998))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_second_derivatives.html}
+gsw_CT_second_derivatives <- function(SA, pt)
+{
+    l <- argfix(list(SA=SA, pt=pt))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_CT_second_derivatives",
+            SA=as.double(l$SA), pt=as.double(l$pt),
+            n=as.integer(n),
+            CT_SA_SA=double(n), CT_SA_pt=double(n), CT_pt_pt=double(n),
+            NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(SA)) {
+        dim(r$CT_SA_SA) <- dim(SA)
+        dim(r$CT_SA_pt) <- dim(SA)
+        dim(r$CT_pt_pt) <- dim(SA)
+    }
+    list(CT_SA_SA=r$CT_SA_SA, CT_SA_pt=r$CT_SA_pt, CT_pt_pt=r$CT_pt_pt)
+}
+
+##=============
+
+
+
+
+
+
 #' Absolute Salinity Anomaly from Practical Salinity
 #' 
 #' @template teos10template
