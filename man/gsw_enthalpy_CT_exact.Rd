@@ -43,6 +43,7 @@ expect_equal(e/1e5, c(1.151031813321767, 1.140146925586514, 0.921800131787836,
 \seealso{
 Other things related to enthalpy: \code{\link{gsw_CT_from_enthalpy}},
   \code{\link{gsw_dynamic_enthalpy}},
+  \code{\link{gsw_enthalpy_diff}},
   \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_enthalpy_t_exact}},
   \code{\link{gsw_enthalpy}},

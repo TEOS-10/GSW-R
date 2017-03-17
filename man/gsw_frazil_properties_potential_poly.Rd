@@ -49,6 +49,7 @@ expect_equal(r$w_Ih_final, c(0.112190777010854, 0.113150823111566, 0.11179735603
 Other things related to enthalpy: \code{\link{gsw_CT_from_enthalpy}},
   \code{\link{gsw_dynamic_enthalpy}},
   \code{\link{gsw_enthalpy_CT_exact}},
+  \code{\link{gsw_enthalpy_diff}},
   \code{\link{gsw_enthalpy_ice}},
   \code{\link{gsw_enthalpy_t_exact}},
   \code{\link{gsw_enthalpy}},
