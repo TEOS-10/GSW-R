@@ -1835,16 +1835,16 @@ gsw_helmholtz_energy_ice <- function(t, p)
 ##> #' @examples 
 ##> #' library(testthat)
 ##> #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
-##> #' r <- gsw_hill_ratio_at_sp2(t)
+##> #' r <- gsw_hill_ratio_at_SP2(t)
 ##> #' expect_equal(r4, c(-1.362572315008330, -1.710375005915343, -1.628083272702224,
 ##> #'                     -1.555573047498573, -1.375469831393882, -1.053585607014677))
 ##> #' @references
 ##> #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_hill_ratio_at_sp2.html}
-##> gsw_hill_ratio_at_sp2 <- function(t)
+##> gsw_hill_ratio_at_SP2 <- function(t)
 ##> {
 ##>     l <- argfix(list(t=t))
 ##>     n <- length(l[[1]])
-##>     rval <- .C("wrap_gsw_hill_ratio_at_sp2",
+##>     rval <- .C("wrap_gsw_hill_ratio_at_SP2",
 ##>                t=as.double(l$t),
 ##>                n=as.integer(n), rval=double(n),
 ##>                NAOK=TRUE, PACKAGE="gsw")$rval
@@ -4009,6 +4009,42 @@ gsw_Sstar_from_SP <- function(SP, p, longitude, latitude)
         dim(rval) <- dim(SP)
     rval
 }
+
+
+####
+
+#' Derivative of Chemical Potential of Water in Seawater wrt Temperature
+#'
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template ttemplate
+#' @template ptemplate
+#' @return derivative [ J/(g*degC) ]
+#' @examples 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' d <- gsw_t_deriv_chem_potential_water_t_exact(SA, t, p)
+#' expect_equal(d, c(-0.428798278908442, -0.423860344327343, -0.345277821010421,
+#'                 -0.164446485487145, -0.114228046736087, -0.076990819658255))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_deriv_chem_potential_water_t_exact.html}
+gsw_t_deriv_chem_potential_water_t_exact <- function(SA, t, p)
+{
+    l <- argfix(list(SA=SA, t=t, p=p))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_t_deriv_chem_potential_water_t_exact",
+               SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
+               n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+####
+
+
 
 #' Freezing Temperature of Seawater
 #'
