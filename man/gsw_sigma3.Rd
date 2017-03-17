@@ -41,6 +41,7 @@ expect_equal(sigma3, c(34.003747849903675, 34.267409891564057, 36.31641582969791
 }
 \seealso{
 Other things related to density: \code{\link{gsw_CT_from_rho}},
+  \code{\link{gsw_CT_maxdensity}},
   \code{\link{gsw_SA_from_rho}},
   \code{\link{gsw_alpha_on_beta}},
   \code{\link{gsw_alpha_wrt_t_exact}},

@@ -11,7 +11,7 @@ gsw_t_freezing(SA, p, saturation_fraction = 1)
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
-\item{saturation_fraction}{saturation fraction of dissolved air in seawater}
+\item{saturation_fraction}{fraction of air in water [unitless]}
 }
 \value{
 in-situ freezing temperature (ITS-90) [ deg C ]
@@ -76,5 +76,7 @@ Other things related to ice: \code{\link{gsw_CT_freezing_first_derivatives_poly}
   \code{\link{gsw_rho_ice}},
   \code{\link{gsw_sound_speed_ice}},
   \code{\link{gsw_specvol_ice}},
+  \code{\link{gsw_t_freezing_first_derivatives_poly}},
+  \code{\link{gsw_t_freezing_first_derivatives}},
   \code{\link{gsw_t_from_pt0_ice}}
 }

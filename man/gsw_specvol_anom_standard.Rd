@@ -43,6 +43,7 @@ expect_equal(a*1e5, c(0.601051894897400, 0.578609769250563, 0.405600538950092,
 }
 \seealso{
 Other things related to density: \code{\link{gsw_CT_from_rho}},
+  \code{\link{gsw_CT_maxdensity}},
   \code{\link{gsw_SA_from_rho}},
   \code{\link{gsw_alpha_on_beta}},
   \code{\link{gsw_alpha_wrt_t_exact}},

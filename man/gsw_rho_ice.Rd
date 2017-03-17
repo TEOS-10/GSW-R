@@ -39,6 +39,7 @@ expect_equal(rho, c(918.2879969148962, 918.7043487325120, 918.6962796312690,
 }
 \seealso{
 Other things related to density: \code{\link{gsw_CT_from_rho}},
+  \code{\link{gsw_CT_maxdensity}},
   \code{\link{gsw_SA_from_rho}},
   \code{\link{gsw_alpha_on_beta}},
   \code{\link{gsw_alpha_wrt_t_exact}},
@@ -91,6 +92,8 @@ Other things related to ice: \code{\link{gsw_CT_freezing_first_derivatives_poly}
   \code{\link{gsw_pt_from_t_ice}},
   \code{\link{gsw_sound_speed_ice}},
   \code{\link{gsw_specvol_ice}},
+  \code{\link{gsw_t_freezing_first_derivatives_poly}},
+  \code{\link{gsw_t_freezing_first_derivatives}},
   \code{\link{gsw_t_freezing}},
   \code{\link{gsw_t_from_pt0_ice}}
 }

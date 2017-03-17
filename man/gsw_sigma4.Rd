@@ -41,6 +41,7 @@ expect_equal(sigma4, c(37.900374609834898, 38.166979617032439, 40.28087607528254
 }
 \seealso{
 Other things related to density: \code{\link{gsw_CT_from_rho}},
+  \code{\link{gsw_CT_maxdensity}},
   \code{\link{gsw_SA_from_rho}},
   \code{\link{gsw_alpha_on_beta}},
   \code{\link{gsw_alpha_wrt_t_exact}},

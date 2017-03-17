@@ -45,6 +45,7 @@ expect_equal(prho/1e3, c(1.021798145811089, 1.022052484416980, 1.023893583651958
 }
 \seealso{
 Other things related to density: \code{\link{gsw_CT_from_rho}},
+  \code{\link{gsw_CT_maxdensity}},
   \code{\link{gsw_SA_from_rho}},
   \code{\link{gsw_alpha_on_beta}},
   \code{\link{gsw_alpha_wrt_t_exact}},

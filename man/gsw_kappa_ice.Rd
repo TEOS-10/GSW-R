@@ -72,6 +72,8 @@ Other things related to ice: \code{\link{gsw_CT_freezing_first_derivatives_poly}
   \code{\link{gsw_rho_ice}},
   \code{\link{gsw_sound_speed_ice}},
   \code{\link{gsw_specvol_ice}},
+  \code{\link{gsw_t_freezing_first_derivatives_poly}},
+  \code{\link{gsw_t_freezing_first_derivatives}},
   \code{\link{gsw_t_freezing}},
   \code{\link{gsw_t_from_pt0_ice}}
 }

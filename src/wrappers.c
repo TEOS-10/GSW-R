@@ -449,6 +449,23 @@ void wrap_gsw_specvol_alpha_beta(double *SA, double *CT, double *p, int *n,
         gsw_specvol_alpha_beta(SA[i], CT[i], p[i], &specvol[i], &alpha[i], &beta[i]);
 }
 
+void wrap_gsw_t_freezing_first_derivatives(double *SA, double *p, double *saturation_fraction, int *n,
+        double *tfreezing_sa, double *tfreezing_p)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_t_freezing_first_derivatives(SA[i], p[i], saturation_fraction[i],
+                &tfreezing_sa[i], &tfreezing_p[i]);
+}
+
+void wrap_gsw_t_freezing_first_derivatives_poly(double *SA, double *p, double *saturation_fraction, int *n,
+        double *tfreezing_sa, double *tfreezing_p)
+{
+    for (int i=0; i < *(n); i++)
+        gsw_t_freezing_first_derivatives_poly(SA[i], p[i], saturation_fraction[i],
+                &tfreezing_sa[i], &tfreezing_p[i]);
+}
+
+
 void wrap_gsw_Turner_Rsubrho(double *SA, double *CT, double *p, int *n, double *Tu, double *Rsubrho, double *p_mid)
 {
     extern void gsw_turner_rsubrho(double *sa, double *ct, double *p, int nz, double *Tu, double *Rsubrho, double *p_mid);

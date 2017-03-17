@@ -42,6 +42,7 @@ expect_equal(specvol*1e3, c(0.978626852431313, 0.978222365701325, 0.976155264597
 }
 \seealso{
 Other things related to density: \code{\link{gsw_CT_from_rho}},
+  \code{\link{gsw_CT_maxdensity}},
   \code{\link{gsw_SA_from_rho}},
   \code{\link{gsw_alpha_on_beta}},
   \code{\link{gsw_alpha_wrt_t_exact}},

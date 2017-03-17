@@ -43,6 +43,7 @@ expect_equal(alpha_on_beta, c(0.452468543022009, 0.449601695030057, 0.3871402030
 }
 \seealso{
 Other things related to density: \code{\link{gsw_CT_from_rho}},
+  \code{\link{gsw_CT_maxdensity}},
   \code{\link{gsw_SA_from_rho}},
   \code{\link{gsw_alpha_wrt_t_exact}},
   \code{\link{gsw_alpha_wrt_t_ice}},

@@ -40,19 +40,3 @@ expect_equal(CT, c(28.809919826700281, 28.439227816091140, 22.786176893078498,
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_t.html}
 }
-\seealso{
-Other things related to temperature: \code{\link{gsw_CT_freezing_poly}},
-  \code{\link{gsw_CT_freezing}},
-  \code{\link{gsw_CT_from_enthalpy}},
-  \code{\link{gsw_CT_from_entropy}},
-  \code{\link{gsw_CT_from_pt}},
-  \code{\link{gsw_CT_from_rho}},
-  \code{\link{gsw_CT_maxdensity}},
-  \code{\link{gsw_pt0_from_t_ice}},
-  \code{\link{gsw_pt0_from_t}},
-  \code{\link{gsw_pt_from_CT}},
-  \code{\link{gsw_pt_from_pot_enthalpy_ice}},
-  \code{\link{gsw_pt_from_t_ice}},
-  \code{\link{gsw_pt_from_t}}, \code{\link{gsw_t_from_CT}},
-  \code{\link{gsw_t_from_pt0_ice}}
-}
