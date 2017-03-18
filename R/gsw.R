@@ -2781,7 +2781,7 @@ gsw_pt_from_CT <- function(SA, CT)
 #'                  10.230532066931868, 6.829213325916900, 4.324537782985845))
 #' @family things related to entropy
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_entropoy.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_entropy.html}
 gsw_pt_from_entropy <- function(SA, entropy)
 {
     l <- argfix(list(SA=SA, entropy=entropy))

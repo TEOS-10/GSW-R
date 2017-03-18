@@ -9,7 +9,7 @@ gsw_CT_from_entropy(SA, entropy)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{entropy}{specific entropy[ degC ]}
+\item{entropy}{specific entropy [ J/(degC*kg) ]}
 }
 \value{
 Conservative Temperature [ deg C ]

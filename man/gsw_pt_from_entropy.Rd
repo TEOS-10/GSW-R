@@ -9,7 +9,7 @@ gsw_pt_from_entropy(SA, entropy)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{entropy}{specific entropy[ degC ]}
+\item{entropy}{specific entropy [ J/(degC*kg) ]}
 }
 \value{
 potential temperature [ deg C ]
@@ -35,7 +35,7 @@ expect_equal(pt, c(28.783179828078666, 28.420954825949291, 22.784952736245351,
                  10.230532066931868, 6.829213325916900, 4.324537782985845))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_entropoy.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_entropy.html}
 }
 \seealso{
 Other things related to entropy: \code{\link{gsw_CT_from_entropy}},
