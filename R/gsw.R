@@ -1277,6 +1277,48 @@ gsw_enthalpy_diff <- function(SA, CT, p_shallow, p_deep)
     rval
 }
 
+#' First Derivatives of Enthalpy
+#'
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#'
+#' @return a list containing FILL IN
+#'
+#' @family things related to enthalpy
+#' @examples
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+#' p <-  c(     10,      50,     125,     250,     600,    1000)
+#' d <- gsw_enthalpy_first_derivatives(SA, CT, p)
+#'\dontrun{ # I think the HTML is wrong ... it also says the function returns 3 things, not 2.
+#' expect_equal(d$h_SA, c(-0.070175858133742, -0.350930227941697, -0.886796332314973,
+#'                      -1.829592995957160, -4.423460664577400, -7.405099527558439))
+#'}
+#' expect_equal(d$h_CT/1e3, c(3.991899705530481, 3.992025640520101, 3.992210365030743,
+#'                          3.992284150250490, 3.992685389122658, 3.993014168534175))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_first_derivatives.html}
+gsw_enthalpy_first_derivatives <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_enthalpy_first_derivatives",
+            SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+            n=as.integer(n),
+            h_SA=double(n), h_CT=double(n),
+            NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(SA)) {
+        dim(r$h_SA) <- dim(SA)
+        dim(r$h_CT) <- dim(SA)
+    }
+    list(h_SA=r$h_SA, h_CT=r$h_CT)
+}
+
+
 #' Ice Specific Enthalpy
 #'
 #' Specific enthalpy of ice [ J/kg ]. Note that this is a negative quantity.
