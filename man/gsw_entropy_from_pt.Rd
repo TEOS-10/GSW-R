@@ -42,5 +42,6 @@ expect_equal(e/1e2, c(4.003894674443156, 3.954383994925507, 3.198674385897981,
 Other things related to entropy: \code{\link{gsw_CT_from_entropy}},
   \code{\link{gsw_entropy_first_derivatives}},
   \code{\link{gsw_entropy_from_t}},
-  \code{\link{gsw_entropy_ice}}
+  \code{\link{gsw_entropy_ice}},
+  \code{\link{gsw_pt_from_entropy}}
 }

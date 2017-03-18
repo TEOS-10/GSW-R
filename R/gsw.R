@@ -2765,6 +2765,35 @@ gsw_pt_from_CT <- function(SA, CT)
     rval
 }
 
+#' Potential Temperature from Entropy
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template entropytemplate
+#' @return potential temperature [ deg C ]
+#' @examples
+#' library(testthat)
+#' SA <- c(      34.7118,  34.8915,  35.0256,  34.8472, 34.7366, 34.7324)
+#' entropy <- c(400.3892, 395.4378, 319.8668, 146.7910, 98.6471, 62.7919)
+#' pt <- gsw_pt_from_entropy(SA, entropy)
+#' expect_equal(pt, c(28.783179828078666, 28.420954825949291, 22.784952736245351,
+#'                  10.230532066931868, 6.829213325916900, 4.324537782985845))
+#' @family things related to entropy
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_entropoy.html}
+gsw_pt_from_entropy <- function(SA, entropy)
+{
+    l <- argfix(list(SA=SA, entropy=entropy))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_pt_from_entropy",
+               SA=as.double(l$SA), entropy=as.double(l$entropy),
+               n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Potential Temperature from Potential Enthalpy of Ice
 #' 
 #' @template teos10template

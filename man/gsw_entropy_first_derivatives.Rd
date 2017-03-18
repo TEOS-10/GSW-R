@@ -45,5 +45,6 @@ expect_equal(d$eta_CT, c(13.221031210083824, 13.236911191313675, 13.489004628681
 Other things related to entropy: \code{\link{gsw_CT_from_entropy}},
   \code{\link{gsw_entropy_from_pt}},
   \code{\link{gsw_entropy_from_t}},
-  \code{\link{gsw_entropy_ice}}
+  \code{\link{gsw_entropy_ice}},
+  \code{\link{gsw_pt_from_entropy}}
 }
