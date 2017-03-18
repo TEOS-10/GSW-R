@@ -51,6 +51,7 @@ Other things related to enthalpy: \code{\link{gsw_CT_from_enthalpy}},
   \code{\link{gsw_enthalpy_t_exact}},
   \code{\link{gsw_frazil_properties_potential_poly}},
   \code{\link{gsw_frazil_properties_potential}},
+  \code{\link{gsw_pot_enthalpy_from_pt_ice_poly}},
   \code{\link{gsw_pot_enthalpy_from_pt_ice}},
   \code{\link{gsw_pt_from_pot_enthalpy_ice}}
 }

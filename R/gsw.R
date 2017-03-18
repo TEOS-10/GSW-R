@@ -2655,6 +2655,34 @@ gsw_pot_enthalpy_from_pt_ice <- function(pt0_ice)
     rval
 }
 
+#' Potential Enthalpy of Ice (Polynomial version)
+#' 
+#' @template teos10template
+#' 
+#' @template pt0_icetemplate
+#' @return potential enthalpy [ J/kg ]
+#' @examples
+#' library(testthat)
+#' pt0_ice <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
+#' e <- gsw_pot_enthalpy_from_pt_ice_poly(pt0_ice)
+#' expect_equal(e/1e5, c(-3.555459482216265, -3.608607100959428, -3.596153924697033,
+#'                     -3.585123214031169, -3.557490561327994, -3.507198320793373))
+#' @family things related to enthalpy
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_from_pt_ice_poly.html}
+gsw_pot_enthalpy_from_pt_ice_poly <- function(pt0_ice)
+{
+    l <- argfix(list(pt0_ice=pt0_ice))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_pot_enthalpy_from_pt_ice_poly",
+               pt0_ice=as.double(l$pt0_ice),
+               n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(pt0_ice))
+        dim(rval) <- dim(pt0_ice)
+    rval
+}
+
 #' Potential density
 #' 
 #' @template teos10template
