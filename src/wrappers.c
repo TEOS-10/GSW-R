@@ -386,6 +386,8 @@ void wrap_gsw_Nsquared(double *SA, double *CT, double *p, double *latitude, int 
 }
 W11(wrap_gsw_pot_enthalpy_from_pt_ice, gsw_pot_enthalpy_from_pt_ice, pt_ice, n, rval)
 W11(wrap_gsw_pot_enthalpy_from_pt_ice_poly, gsw_pot_enthalpy_from_pt_ice_poly, pt_ice, n, rval)
+//W31(wrap_gsw_pot_enthalpy_ice_freezing, gsw_pot_enthalpy_ice_freezing, SA, p, saturaion_fraction, n, rval)
+W21(wrap_gsw_pot_enthalpy_ice_freezing, gsw_pot_enthalpy_ice_freezing, SA, p, n, rval)
 W21(wrap_gsw_pressure_coefficient_ice, gsw_pressure_coefficient_ice, t, p, n, rval)
 // The next line is necessary because gsw_p_from_z() is not in the TEOS-10 C library yet.
 extern double gsw_p_from_z(double z, double latitude, double geo_strf_dyn_height, double sea_surface_geopotential);

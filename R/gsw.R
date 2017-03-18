@@ -2683,6 +2683,45 @@ gsw_pot_enthalpy_from_pt_ice_poly <- function(pt0_ice)
     rval
 }
 
+#' Potential Enthalpy of Ice at Freezing Point
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template ptemplate
+#' @template saturation_fractiontemplate
+#' @return potential enthalpy [ J/kg ]
+#' @examples
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' saturation_fraction = 1
+#' e <- gsw_pot_enthalpy_ice_freezing(SA, p, saturation_fraction)
+#'\dontrun{ # does not match matlab's check value.
+#' expect_equal(e/1e5, c(-3.373409558967978, -3.374434164002012, -3.376117536928847,
+#'                     -3.378453698871986, -3.385497832886802, -3.393768587631489))
+#'}
+#' @section Bugs:
+#' The C source underlying this function lacks an argument, \code{saturation_fraction},
+#' which is present in the Matlab source, and so that argument is ignored here.
+#' Note also that the Matlab check values are not reproduced by the present R function,
+#' so the test in the documentation is not run.
+#' @family things related to enthalpy
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_ice_freezing.html}
+gsw_pot_enthalpy_ice_freezing <- function(SA, p, saturation_fraction)
+{
+    l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_pot_enthalpy_ice_freezing",
+               SA=as.double(l$SA), p=as.double(l$p), # saturation_fraction=as.double(l$saturation_fraction),
+               n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
 #' Potential density
 #' 
 #' @template teos10template
