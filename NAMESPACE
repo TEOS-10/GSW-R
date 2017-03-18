@@ -38,7 +38,7 @@ export(argfix,
        gsw_enthalpy_CT_exact,
        gsw_enthalpy_diff,
        gsw_enthalpy_first_derivatives,
-       #gsw_enthalpy_first_derivatives_CT_exact, #
+       gsw_enthalpy_first_derivatives_CT_exact,
        gsw_enthalpy_ice,
        gsw_enthalpy_t_exact,
        gsw_entropy_from_pt,

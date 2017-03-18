@@ -1285,7 +1285,16 @@ gsw_enthalpy_diff <- function(SA, CT, p_shallow, p_deep)
 #' @template CTtemplate
 #' @template ptemplate
 #'
-#' @return a list containing FILL IN
+#' @return a list containing \code{h_SA} [ (J/kg)/(g/kg) ], the derivative
+#' of enthalpy wrt Absolute Salinity, and \code{h_CT} [ (J/kg)/degC ],
+#' the derivative of enthalpy wrt Conservative Temperature.
+#'
+#' @section Bugs:
+#' The HTML documentation suggests that this function returns 3 values, but
+#' there are only 2 returned values in the C code used here (and the matlab code
+#' on which that is based). Also, the d/dSA check values given the HTML are not
+#' reproduced by the present function. This was reported on Mar 18, 2017;
+#' see https://github.com/TEOS-10/GSW-Matlab/issues/7.
 #'
 #' @family things related to enthalpy
 #' @examples
@@ -1307,6 +1316,54 @@ gsw_enthalpy_first_derivatives <- function(SA, CT, p)
     l <- argfix(list(SA=SA, CT=CT, p=p))
     n <- length(l[[1]])
     r <- .C("wrap_gsw_enthalpy_first_derivatives",
+            SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+            n=as.integer(n),
+            h_SA=double(n), h_CT=double(n),
+            NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(SA)) {
+        dim(r$h_SA) <- dim(SA)
+        dim(r$h_CT) <- dim(SA)
+    }
+    list(h_SA=r$h_SA, h_CT=r$h_CT)
+}
+
+#' First Derivatives of Enthalpy wrt CT
+#'
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#'
+#' @return a list containing \code{h_SA} [ (J/kg)/(g/kg) ], the derivative
+#' of enthalpy wrt Absolute Salinity, and \code{h_CT} [ (J/kg)/degC ],
+#' the derivative of enthalpy wrt Conservative Temperature.
+#'
+#' @section Bugs:
+#' The HTML documentation suggests that this function returns 3 values, but
+#' there are only 2 returned values in the C code used here (and the matlab code
+#' on which that is based). Also, the d/dSA check values given the HTML are not
+#' reproduced by the present function. This was reported on Mar 18, 2017;
+#' see https://github.com/TEOS-10/GSW-Matlab/issues/7.
+#'
+#' @family things related to enthalpy
+#' @examples
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+#' p <-  c(     10,      50,     125,     250,     600,    1000)
+#' d <- gsw_enthalpy_first_derivatives_CT_exact(SA, CT, p)
+#' expect_equal(d$h_SA, c(-0.070224183838619, -0.351159869043798, -0.887036550157504,
+#'                      -1.829626251448858, -4.423522691827955, -7.405211691293971))
+#' expect_equal(d$h_CT/1e3, c(3.991899712269790, 3.992025674159605, 3.992210402650973,
+#'                          3.992283991748418, 3.992685275917238, 3.993014370250710))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_first_derivatives_CT_exact.html}
+gsw_enthalpy_first_derivatives_CT_exact <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_enthalpy_first_derivatives_CT_exact",
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
             n=as.integer(n),
             h_SA=double(n), h_CT=double(n),
