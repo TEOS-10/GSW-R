@@ -85,18 +85,34 @@ void clear_gsw_data()
     delta_sa_ref = NULL;
 }
 
-// PART 2: macros for wrappers
+// Wrappers are used because the R function .C() cannot handle
+// return values. A few notes may help the reader.
 //
-// Any reasonable C programmer should understand how these macros work,
-// in light of Part 2. The number in the macro name is the number of 
-// arguments sent to the C library function named 'cname'. See part 3
-// for the handling of C library functions that return void.
+// 1. Macros (e.g. W11, etc) are used for most cases,
+// but some, such as gsw_gibbs(), have argument lists that are not
+// like the majority of the other functions, so no macros are used in that
+// case.
 //
-// Note the check for NaN values within these macros; this is necessary
-// because the GSW code does not check for NaN. (To be clear, in the
-// GSW code, there are numerous comments about checking for NaN, but they
-// refer to checking for GSW_INVALID_VALUE.)
-#define W1(wname, cname, arg1, n, rval) \
+// 2. Macros are only used for C functions that return either a single
+// scalar or a set of scalars. They are not used for C functions that fill
+// up vectors (e.g. the N^2 calculation).
+//
+// 3. The case in the wrapper function names (first argument to macros)
+// should match that in the TEOS-10 matlab functions, but that case in
+// the second argument should be lower-case, since this is the convention
+// of the underlying C library that does all the actual calculations.
+//
+// 4. We convert NaN values to the GSW convention for missing values,
+// which is what is checked for whenever C code checks for 
+// GSW_INVALID_VALUE.
+//
+// 5. Macro names reflect the number of input and output values. The first
+// digit after "W" is the number of input values (not counting "n", which
+// is the vector length of each of these input values) and the second digit
+// is the number of output values. Thus, for example, W32 takes three input
+// values (plus "n") and returns 2 output values.
+
+#define W11(wname, cname, arg1, n, rval) \
 void (wname)(double *(arg1), int *(n), double *(rval))\
 {\
     for (int i=0; i < *(n); i++) {\
@@ -111,7 +127,8 @@ void (wname)(double *(arg1), int *(n), double *(rval))\
     }\
 }
 
-#define W2(wname, cname, arg1, arg2, n, rval) \
+// 2 input values, 1 output value
+#define W21(wname, cname, arg1, arg2, n, rval) \
 void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval))\
 {\
     for (int i=0; i < *(n); i++) {\
@@ -126,7 +143,43 @@ void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval))\
     }\
 }
 
-#define W3(wname, cname, arg1, arg2, arg3, n, rval) \
+// 2 input values, 2 output values
+#define W22(wname, cname, arg1, arg2, n, rval1, rval2) \
+void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval1), double *(rval2))\
+{\
+    for (int i = 0; i < *(n); i++) {\
+        if (isnan((arg1)[i]) || isnan((arg2)[i])) {\
+            (rval1)[i] = NA_REAL;\
+            (rval2)[i] = NA_REAL;\
+        } else {\
+            (cname)((arg1)[i], (arg2)[i], &(rval1)[i], &(rval2)[i]);\
+            if ((rval1)[i] == GSW_INVALID_VALUE) (rval1)[i] = NA_REAL;\
+            if ((rval2)[i] == GSW_INVALID_VALUE) (rval2)[i] = NA_REAL;\
+        }\
+    }\
+}
+
+// 2 input values, 3 output values
+#define W23(wname, cname, arg1, arg2, n, rval1, rval2, rval3) \
+void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval1), double *(rval2), double *(rval3))\
+{\
+    for (int i = 0; i < *(n); i++) {\
+        if (isnan((arg1)[i]) || isnan((arg2)[i])) {\
+            (rval1)[i] = NA_REAL;\
+            (rval2)[i] = NA_REAL;\
+            (rval3)[i] = NA_REAL;\
+        } else {\
+            (cname)((arg1)[i], (arg2)[i], &(rval1)[i], &(rval2)[i], &(rval3)[i]);\
+            if ((rval1)[i] == GSW_INVALID_VALUE) (rval1)[i] = NA_REAL;\
+            if ((rval2)[i] == GSW_INVALID_VALUE) (rval2)[i] = NA_REAL;\
+            if ((rval3)[i] == GSW_INVALID_VALUE) (rval3)[i] = NA_REAL;\
+        }\
+    }\
+}
+
+
+// 3 input values, 1 output value
+#define W31(wname, cname, arg1, arg2, arg3, n, rval) \
 void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(rval))\
 {\
     for (int i=0; i < *(n); i++) {\
@@ -141,16 +194,45 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(
     }\
 }
 
-#define W4(wname, cname, arg1, arg2, arg3, arg4, n, rval) \
+// 3 input values, 2 output values
+#define W32(wname, cname, arg1, arg2, arg3, n, rval1, rval2) \
+void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(rval1), double *(rval2))\
+{\
+    for (int i = 0; i < *(n); i++) {\
+        if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i])) {\
+            (rval1)[i] = NA_REAL;\
+            (rval2)[i] = NA_REAL;\
+        } else {\
+            (cname)((arg1)[i], (arg2)[i], (arg3)[i], &(rval1)[i], &(rval2)[i]);\
+            if ((rval1)[i] == GSW_INVALID_VALUE) (rval1)[i] = NA_REAL;\
+            if ((rval2)[i] == GSW_INVALID_VALUE) (rval2)[i] = NA_REAL;\
+        }\
+    }\
+}
+
+// 3 input values, 3 output values
+#define W33(wname, cname, arg1, arg2, arg3, n, rval1, rval2, rval3) \
+void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(rval1), double *(rval2), double *(rval3))\
+{\
+    for (int i = 0; i < *(n); i++) {\
+        if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i])) {\
+            (rval1)[i] = NA_REAL;\
+            (rval2)[i] = NA_REAL;\
+            (rval3)[i] = NA_REAL;\
+        } else {\
+            (cname)((arg1)[i], (arg2)[i], (arg3)[i], &(rval1)[i], &(rval2)[i], &(rval3)[i]);\
+            if ((rval1)[i] == GSW_INVALID_VALUE) (rval1)[i] = NA_REAL;\
+            if ((rval2)[i] == GSW_INVALID_VALUE) (rval2)[i] = NA_REAL;\
+            if ((rval3)[i] == GSW_INVALID_VALUE) (rval3)[i] = NA_REAL;\
+        }\
+    }\
+}
+
+// 4 input parameters, 1 output value
+#define W41(wname, cname, arg1, arg2, arg3, arg4, n, rval) \
 void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), int *(n), double *(rval))\
 {\
-    for (int i=0; i < *(n); i++) {\
-        /*Rprintf("args: %f %f %f %f %f; i=%d; n=%d\n", (arg1)[i], (arg2)[i], (arg3)[i], (arg4)[i], i, *(n));*/\
-        /*Rprintf("invalid: %f\n", GSW_INVALID_VALUE);*/\
-        /*if (isnan((arg1)[i])) Rprintf("arg1 is NaN\n");*/\
-        /*if (isnan((arg2)[i])) Rprintf("arg2 is NaN\n");*/\
-        /*if (isnan((arg3)[i])) Rprintf("arg3 is NaN\n");*/\
-        /*if (isnan((arg4)[i])) Rprintf("arg4 is NaN\n");*/\
+    for (int i = 0; i < *(n); i++) {\
         if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i]) || isnan((arg4)[i])) {\
             (rval)[i] = NA_REAL;\
         } else {\
@@ -162,279 +244,142 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), int
     }\
 }
 
-#define W5(wname, cname, arg1, arg2, arg3, arg4, arg5, n, rval) \
-void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), double *(arg5), int *(n), double *(rval))\
+// 4 input parameters, 3 output values
+#define W43(wname, cname, arg1, arg2, arg3, arg4, n, rval1, rval2, rval3) \
+void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), int *(n), double *(rval1), double *(rval2), double *(rval3))\
 {\
-    for (int i=0; i < *(n); i++) {\
-        if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i]) || isnan((arg4)[i]) || isnn((arg5)[i])) {\
-            (rval)[i] = NA_REAL;\
+    for (int i = 0; i < *(n); i++) {\
+        if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i]) || isnan((arg4)[i])) {\
+            (rval1)[i] = NA_REAL;\
+            (rval2)[i] = NA_REAL;\
+            (rval3)[i] = NA_REAL;\
         } else {\
-            (rval)[i] = (cname)((arg1)[i], (arg2)[i], (arg3)[i], (arg4)[i], (arg5)[i]);\
-            if ((rval)[i] == GSW_INVALID_VALUE) {\
-                (rval)[i] = NA_REAL;\
-            }\
+            (cname)((arg1)[i], (arg2)[i], (arg3)[i], (arg4)[i], &(rval1)[i], &(rval2)[i], &(rval3)[i]);\
+            if ((rval1)[i] == GSW_INVALID_VALUE) (rval1)[i] = NA_REAL;\
+            if ((rval2)[i] == GSW_INVALID_VALUE) (rval2)[i] = NA_REAL;\
+            if ((rval3)[i] == GSW_INVALID_VALUE) (rval3)[i] = NA_REAL;\
         }\
     }\
 }
 
-
-// PART 3: wrappers for functions that return a value. Wrapping is necessary 
-// because the R function .C() cannot handle return values.
-// See Part 3 for functios returning void.
-//
-// The case in the wrapper function names (first argument to macros)
-// should match that in the TEOS-10 matlab functions, but note that case in
-// the second argument should be lower-case, since this is used in the C
-// library.
-W3(wrap_gsw_adiabatic_lapse_rate_from_CT, gsw_adiabatic_lapse_rate_from_ct, SA, CT, p, n, rval)
-W2(wrap_gsw_adiabatic_lapse_rate_ice, gsw_adiabatic_lapse_rate_ice, t, p, n, rval)
-W3(wrap_gsw_alpha, gsw_alpha, SA, CT, p, n, rval)
-W3(wrap_gsw_alpha_on_beta, gsw_alpha_on_beta, SA, CT, p, n, rval)
-W3(wrap_gsw_alpha_wrt_t_exact, gsw_alpha_wrt_t_exact, SA, t, p, n, rval)
-W2(wrap_gsw_alpha_wrt_t_ice, gsw_alpha_wrt_t_ice, t, p, n, rval)
-W3(wrap_gsw_beta, gsw_beta, SA, CT, p, n, rval)
-W3(wrap_gsw_beta_const_t_exact, gsw_beta_const_t_exact, SA, t, p, n, rval)
-W3(wrap_gsw_cabbeling, gsw_cabbeling, SA, CT, p, n, rval)
-W3(wrap_gsw_C_from_SP, gsw_c_from_sp, SP, t, p, n, rval)
-W2(wrap_gsw_chem_potential_water_ice, gsw_chem_potential_water_ice, t, p, n, rval)
-W3(wrap_gsw_chem_potential_water_t_exact, gsw_chem_potential_water_t_exact, SA, t, p, n, rval)
-W2(wrap_gsw_cp_ice, gsw_cp_ice, t, p, n, rval)
-W3(wrap_gsw_cp_t_exact, gsw_cp_t_exact, SA, t, p, n, rval)
-W3(wrap_gsw_CT_freezing, gsw_ct_freezing, SA, p, saturation_fraction, n, rval)
-W3(wrap_gsw_CT_freezing_exact, gsw_ct_freezing_exact, SA, p, saturation_fraction, n, rval)
-W3(wrap_gsw_CT_from_enthalpy, gsw_ct_from_enthalpy, SA, h, p, n, rval)
-W2(wrap_gsw_CT_from_entropy, gsw_ct_from_entropy, SA, entropy, n, rval)
-W2(wrap_gsw_CT_from_pt, gsw_ct_from_pt, SA, pt, n, rval)
-W3(wrap_gsw_CT_from_t, gsw_ct_from_t, SA, t, p, n, rval)
-W2(wrap_gsw_CT_maxdensity, gsw_ct_maxdensity, SA, p, n, rval)
-W4(wrap_gsw_deltaSA_from_SP, gsw_deltasa_from_sp, SP, p, longitude, latitude, n, rval)
-W3(wrap_gsw_dilution_coefficient_t_exact, gsw_dilution_coefficient_t_exact, SA, t, p, n, rval)
-W3(wrap_gsw_dynamic_enthalpy, gsw_dynamic_enthalpy, SA, CT, p, n, rval)
-W3(wrap_gsw_enthalpy, gsw_enthalpy, SA, CT, p, n, rval)
-W3(wrap_gsw_enthalpy_ct_exact, gsw_enthalpy_ct_exact, SA, t, p, n, rval)
-W4(wrap_gsw_enthalpy_diff, gsw_enthalpy_diff, SA, CT, p_shallow, p_deep, n, rval)
-W2(wrap_gsw_enthalpy_ice, gsw_enthalpy_ice, t, p, n, rval)
-W3(wrap_gsw_enthalpy_t_exact, gsw_enthalpy_t_exact, SA, t, p, n, rval)
+// 5 input parameters, 3 output values
+#define W53(wname, cname, arg1, arg2, arg3, arg4, arg5, n, rval1, rval2, rval3) \
+void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), double *(arg5), int *(n), double *(rval1), double *(rval2), double *(rval3))\
+{\
+    for (int i = 0; i < *(n); i++) {\
+        if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i]) || isnan((arg4)[i]) || isnan((arg5)[i])) {\
+            (rval1)[i] = NA_REAL;\
+            (rval2)[i] = NA_REAL;\
+            (rval3)[i] = NA_REAL;\
+        } else {\
+            (cname)((arg1)[i], (arg2)[i], (arg3)[i], (arg4)[i], (arg5)[i], &(rval1)[i], &(rval2)[i], &(rval3)[i]);\
+            if ((rval1)[i] == GSW_INVALID_VALUE) (rval1)[i] = NA_REAL;\
+            if ((rval2)[i] == GSW_INVALID_VALUE) (rval2)[i] = NA_REAL;\
+            if ((rval3)[i] == GSW_INVALID_VALUE) (rval3)[i] = NA_REAL;\
+        }\
+    }\
+}
+ 
+W31(wrap_gsw_adiabatic_lapse_rate_from_CT, gsw_adiabatic_lapse_rate_from_ct, SA, CT, p, n, rval)
+W21(wrap_gsw_adiabatic_lapse_rate_ice, gsw_adiabatic_lapse_rate_ice, t, p, n, rval)
+W31(wrap_gsw_alpha, gsw_alpha, SA, CT, p, n, rval)
+W31(wrap_gsw_alpha_on_beta, gsw_alpha_on_beta, SA, CT, p, n, rval)
+W31(wrap_gsw_alpha_wrt_t_exact, gsw_alpha_wrt_t_exact, SA, t, p, n, rval)
+W21(wrap_gsw_alpha_wrt_t_ice, gsw_alpha_wrt_t_ice, t, p, n, rval)
+W31(wrap_gsw_beta, gsw_beta, SA, CT, p, n, rval)
+W31(wrap_gsw_beta_const_t_exact, gsw_beta_const_t_exact, SA, t, p, n, rval)
+W31(wrap_gsw_cabbeling, gsw_cabbeling, SA, CT, p, n, rval)
+W31(wrap_gsw_C_from_SP, gsw_c_from_sp, SP, t, p, n, rval)
+W21(wrap_gsw_chem_potential_water_ice, gsw_chem_potential_water_ice, t, p, n, rval)
+W31(wrap_gsw_chem_potential_water_t_exact, gsw_chem_potential_water_t_exact, SA, t, p, n, rval)
+W21(wrap_gsw_cp_ice, gsw_cp_ice, t, p, n, rval)
+W31(wrap_gsw_cp_t_exact, gsw_cp_t_exact, SA, t, p, n, rval)
+W22(wrap_gsw_CT_first_derivatives, gsw_ct_first_derivatives, SA, pt, n, CT_SA, CT_pt)
+W33(wrap_gsw_CT_first_derivatives_wrt_t_exact, gsw_ct_first_derivatives_wrt_t_exact, SA, t, p, n, CT_SA_wrt_t, CT_t_wrt_t, CT_p_wrt_t)
+W31(wrap_gsw_CT_freezing, gsw_ct_freezing, SA, p, saturation_fraction, n, rval)
+W31(wrap_gsw_CT_freezing_exact, gsw_ct_freezing_exact, SA, p, saturation_fraction, n, rval)
+W32(wrap_gsw_CT_freezing_first_derivatives, gsw_ct_freezing_first_derivatives, SA, p, saturation_fraction, n, CTfreezing_SA, CTfreezing_p)
+W32(wrap_gsw_CT_freezing_first_derivatives_poly,gsw_ct_freezing_first_derivatives_poly,SA,p,saturation_fraction,n,CTfreezing_SA,CTfreezing_p)
+W31(wrap_gsw_CT_from_enthalpy, gsw_ct_from_enthalpy, SA, h, p, n, rval)
+W21(wrap_gsw_CT_from_entropy, gsw_ct_from_entropy, SA, entropy, n, rval)
+W21(wrap_gsw_CT_from_pt, gsw_ct_from_pt, SA, pt, n, rval)
+W32(wrap_gsw_CT_from_rho, gsw_ct_from_rho, rho, SA, p, n, CT, CT_multiple)
+W31(wrap_gsw_CT_from_t, gsw_ct_from_t, SA, t, p, n, rval)
+W21(wrap_gsw_CT_maxdensity, gsw_ct_maxdensity, SA, p, n, rval)
+W23(wrap_gsw_CT_second_derivatives, gsw_ct_second_derivatives, SA, pt, n, CT_SA_SA, CT_SA_pt, CT_pt_pt)
+W41(wrap_gsw_deltaSA_from_SP, gsw_deltasa_from_sp, SP, p, longitude, latitude, n, rval)
+W31(wrap_gsw_dilution_coefficient_t_exact, gsw_dilution_coefficient_t_exact, SA, t, p, n, rval)
+W31(wrap_gsw_dynamic_enthalpy, gsw_dynamic_enthalpy, SA, CT, p, n, rval)
+W31(wrap_gsw_enthalpy, gsw_enthalpy, SA, CT, p, n, rval)
+W31(wrap_gsw_enthalpy_ct_exact, gsw_enthalpy_ct_exact, SA, t, p, n, rval)
+W41(wrap_gsw_enthalpy_diff, gsw_enthalpy_diff, SA, CT, p_shallow, p_deep, n, rval)
+W21(wrap_gsw_enthalpy_ice, gsw_enthalpy_ice, t, p, n, rval)
+W31(wrap_gsw_enthalpy_t_exact, gsw_enthalpy_t_exact, SA, t, p, n, rval)
 // gsw_entropy_from_CT is not in the C library.
-W2(wrap_gsw_entropy_ice, gsw_entropy_ice, t, p, n, rval)
-W2(wrap_gsw_entropy_from_pt, gsw_entropy_from_pt, SA, pt, n, rval)
-W3(wrap_gsw_entropy_from_t, gsw_entropy_from_t, SA, t, p, n, rval)
-W2(wrap_gsw_grav, gsw_grav, latitude, p, n, rval)
-W2(wrap_gsw_helmholtz_energy_ice, gsw_helmholtz_energy_ice, t, p, n, rval)
-W1(wrap_gsw_hill_ratio_at_sp2, gsw_hill_ratio_at_sp2, t, n, rval)
-W3(wrap_gsw_internal_energy, gsw_internal_energy, SA, CT, p, n, rval)
-W2(wrap_gsw_internal_energy_ice, gsw_internal_energy_ice, t, p, n, rval)
-W3(wrap_gsw_kappa, gsw_kappa, SA, CT, p, n, rval)
-W2(wrap_gsw_kappa_const_t_ice, gsw_kappa_const_t_ice, t, p, n, rval)
-W2(wrap_gsw_kappa_ice, gsw_kappa_ice, t, p, n, rval)
-W3(wrap_gsw_kappa_t_exact, gsw_kappa_t_exact, SA, t, p, n, rval)
-W2(wrap_gsw_latentheat_evap_CT, gsw_latentheat_evap_ct, SA, CT, n, rval)
-W2(wrap_gsw_latentheat_evap_t, gsw_latentheat_evap_t, SA, t, n, rval)
-W2(wrap_gsw_latentheat_melting, gsw_latentheat_melting, SA, p, n, rval)
-W2(wrap_gsw_melting_ice_equilibrium_SA_CT_ratio, gsw_melting_ice_equilibrium_sa_ct_ratio, SA, p, n, rval)
-W2(wrap_gsw_melting_ice_equilibrium_SA_CT_ratio_poly, gsw_melting_ice_equilibrium_sa_ct_ratio_poly, SA, p, n, rval)
-W4(wrap_gsw_melting_ice_SA_CT_ratio, gsw_melting_ice_sa_ct_ratio, SA, CT, p, t_Ih, n, rval)
-W4(wrap_gsw_melting_ice_SA_CT_ratio_poly, gsw_melting_ice_sa_ct_ratio_poly, SA, CT, p, t_Ih, n, rval)
-W1(wrap_gsw_pot_enthalpy_from_pt_ice, gsw_pot_enthalpy_from_pt_ice, pt_ice, n, rval)
-W2(wrap_gsw_pressure_coefficient_ice, gsw_pressure_coefficient_ice, t, p, n, rval)
-
-// declare since it's not in the TEOS-10 C library yet, and was coded separately.
-extern double gsw_p_from_z(double z, double latitude, double geo_strf_dyn_height, double sea_surface_geopotential);
-W4(wrap_gsw_p_from_z, gsw_p_from_z, z, latitude, geo_strf_dyn_height, sea_surface_geopotential, n, rval)
-
-W4(wrap_gsw_pot_rho_t_exact, gsw_pot_rho_t_exact, SA, t, p, p_ref, n, rval)
-W3(wrap_gsw_pt0_from_t, gsw_pt0_from_t, SA, t, p, n, rval)
-W2(wrap_gsw_pt0_from_t_ice, gsw_pt0_from_t_ice, t, p, n, rval)
-W2(wrap_gsw_pt_from_CT, gsw_pt_from_ct, SA, CT, n, rval)
-W1(wrap_gsw_pt_from_pot_enthalpy_ice, gsw_pt_from_pot_enthalpy_ice, pot_enthalpy_ice, n, rval)
-W4(wrap_gsw_pt_from_t, gsw_pt_from_t, SA, t, p, p_ref, n, rval)
-W3(wrap_gsw_pt_from_t_ice, gsw_pt_from_t_ice, t, p, p_ref, n, rval)
-W3(wrap_gsw_rho, gsw_rho, SA, CT, p, n, rval)
-W2(wrap_gsw_rho_ice, gsw_rho_ice, t, p, n, rval)
-W3(wrap_gsw_rho_t_exact, gsw_rho_t_exact, SA, t, p, n, rval)
-W3(wrap_gsw_SA_from_rho, gsw_sa_from_rho, rho, CT, p, n, rval)
-W4(wrap_gsw_SA_from_SP, gsw_sa_from_sp, CT, p, longitude, latitude, n, rval)
-W3(wrap_gsw_SA_from_SP_baltic, gsw_sa_from_sp_baltic, SP, longitude, latitude, n, rval)
-W4(wrap_gsw_SA_from_Sstar, gsw_sa_from_sstar, Sstar, p, longitude, latitude, n, rval)
-W1(wrap_gsw_SR_from_SP, gsw_sr_from_sp, SP, n, rval)
-W2(wrap_gsw_sigma0, gsw_sigma0, SA, CT, n, rval)
-W2(wrap_gsw_sigma1, gsw_sigma1, SA, CT, n, rval)
-W2(wrap_gsw_sigma2, gsw_sigma2, SA, CT, n, rval)
-W2(wrap_gsw_sigma3, gsw_sigma3, SA, CT, n, rval)
-W2(wrap_gsw_sigma4, gsw_sigma4, SA, CT, n, rval)
-W3(wrap_gsw_sound_speed, gsw_sound_speed, SA, t, p, n, rval)
-W2(wrap_gsw_sound_speed_ice, gsw_sound_speed_ice, t, p, n, rval)
-W3(wrap_gsw_sound_speed_t_exact, gsw_sound_speed_t_exact, SA, t, p, n, rval)
-// gsw_specvol coded in R
-W3(wrap_gsw_specvol_anom_standard, gsw_specvol_anom_standard, SA, CT, p, n, rval)
-W2(wrap_gsw_specvol_ice, gsw_specvol_ice, t, p, n, rval)
-W3(wrap_gsw_specvol_t_exact, gsw_specvol_t_exact, SA, t, p, n, rval)
-W2(wrap_gsw_spiciness0, gsw_spiciness0, SA, CT, n, rval)
-W2(wrap_gsw_spiciness1, gsw_spiciness1, SA, CT, n, rval)
-W2(wrap_gsw_spiciness2, gsw_spiciness2, SA, CT, n, rval)
-W3(wrap_gsw_SP_from_C, gsw_sp_from_c, C, t, p, n, rval)
-W4(wrap_gsw_SP_from_SA, gsw_sp_from_sa, SA, p, longitude, latitude, n, rval)
-W1(wrap_gsw_SP_from_SK, gsw_sp_from_sk, SK, n, rval)
-W1(wrap_gsw_SP_from_SR, gsw_sp_from_sr, SR, n, rval)
-W4(wrap_gsw_SP_from_Sstar, gsw_sp_from_sstar, Sstar, p, longitude, latitude, n, rval)
-W4(wrap_gsw_Sstar_from_SA, gsw_sstar_from_sa, SA, p, longitude, latitude, n, rval)
-W4(wrap_gsw_Sstar_from_SP, gsw_sstar_from_sp, SP, p, longitude, latitude, n, rval)
-W3(wrap_gsw_t_deriv_chem_potential_water_t_exact, gsw_t_deriv_chem_potential_water_t_exact, SA, t, p, n, rval)
-W3(wrap_gsw_t_freezing, gsw_t_freezing_exact, SA, p, saturation_fraction, n, rval)
-//W3(wrap_gsw_t_freezing, gsw_t_freezing, SA, p, saturation_fraction, n, rval)
-W3(wrap_gsw_t_from_CT, gsw_t_from_ct, SA, CT, p, n, rval)
-W2(wrap_gsw_t_from_pt0_ice, gsw_t_from_pt0_ice, pt0_ice, p, n, rval)
-W3(wrap_gsw_thermobaric, gsw_thermobaric, SA, CT, p, n, rval)
-W2(wrap_gsw_z_from_p, gsw_z_from_p, p, lat, n, rval)
-
-// PART 4
-// Handle cases with multiple return values.
-
-void wrap_gsw_CT_first_derivatives(double *SA, double *pt, int *n,
-        double *CT_SA, double *CT_pt)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_ct_first_derivatives(SA[i], pt[i], &CT_SA[i], &CT_pt[i]);
-}
-
-void wrap_gsw_CT_first_derivatives_wrt_t_exact(double *SA, double *t, double *p, int *n,
-        double *CT_SA_wrt_t, double *CT_t_wrt_t, double *CT_p_wrt_t)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_ct_first_derivatives_wrt_t_exact(SA[i], t[i], p[i],
-                &CT_SA_wrt_t[i], &CT_t_wrt_t[i], &CT_p_wrt_t[i]);
-}
-
-void wrap_gsw_CT_freezing_first_derivatives(double *SA, double *p, double *saturation_fraction, int *n,
-        double *CTfreezing_SA, double *CTfreezing_p)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_ct_freezing_first_derivatives(SA[i], p[i], saturation_fraction[i], &CTfreezing_SA[i], &CTfreezing_p[i]);
-}
-
-void wrap_gsw_CT_freezing_first_derivatives_poly(double *SA, double *p, double *saturation_fraction, int *n,
-        double *CTfreezing_SA, double *CTfreezing_p)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_ct_freezing_first_derivatives_poly(SA[i], p[i], saturation_fraction[i], &CTfreezing_SA[i], &CTfreezing_p[i]);
-}
-
-void wrap_gsw_CT_from_rho(double *rho, double *SA, double *p, int *n,
-        double *CT, double *CT_multiple)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_ct_from_rho(rho[i], SA[i], p[i], &CT[i], &CT_multiple[i]);
-}
-
-void wrap_gsw_CT_second_derivatives(double *SA, double *pt, int *n,
-        double *CT_SA_SA, double *CT_SA_pt, double *CT_pt_pt)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_ct_second_derivatives(SA[i], pt[i], &CT_SA_SA[i], &CT_SA_pt[i], &CT_pt_pt[i]);
-}
-
-void wrap_gsw_frazil_properties(double *SA_bulk, double *h_bulk, double *p, int *n,
-        double *SA_final, double *CT_final, double *w_Ih_final)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_frazil_properties(SA_bulk[i], h_bulk[i], p[i],
-                &SA_final[i], &CT_final[i], &w_Ih_final[i]);
-}
-
-void wrap_gsw_frazil_properties_potential(double *SA_bulk, double *h_pot_bulk, double *p, int *n,
-        double *SA_final, double *CT_final, double *w_Ih_final)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_frazil_properties_potential(SA_bulk[i], h_pot_bulk[i], p[i],
-                &SA_final[i], &CT_final[i], &w_Ih_final[i]);
-}
-
-void wrap_gsw_frazil_properties_potential_poly(double *SA_bulk, double *h_pot_bulk, double *p, int *n,
-        double *SA_final, double *CT_final, double *w_Ih_final)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_frazil_properties_potential_poly(SA_bulk[i], h_pot_bulk[i], p[i],
-                &SA_final[i], &CT_final[i], &w_Ih_final[i]);
-}
-
-void wrap_gsw_frazil_ratios_adiabatic(double *SA, double *p, double *w_Ih, int *n,
-        double *dSA_dCT_frazil, double *dSA_dP_frazil, double *dCT_dP_frazil)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_frazil_ratios_adiabatic(SA[i], p[i], w_Ih[i],
-                &dSA_dCT_frazil[i], &dSA_dP_frazil[i], &dCT_dP_frazil[i]);
-}
-
-void wrap_gsw_frazil_ratios_adiabatic_poly(double *SA, double *p, double *w_Ih, int *n,
-        double *dSA_dCT_frazil, double *dSA_dP_frazil, double *dCT_dP_frazil)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_frazil_ratios_adiabatic_poly(SA[i], p[i], w_Ih[i],
-                &dSA_dCT_frazil[i], &dSA_dP_frazil[i], &dCT_dP_frazil[i]);
-}
-
+W21(wrap_gsw_entropy_ice, gsw_entropy_ice, t, p, n, rval)
+W21(wrap_gsw_entropy_from_pt, gsw_entropy_from_pt, SA, pt, n, rval)
+W31(wrap_gsw_entropy_from_t, gsw_entropy_from_t, SA, t, p, n, rval)
+W33(wrap_gsw_frazil_properties, gsw_frazil_properties, SA_bulk, h_bulk, p, n, SA_final, CT_final, w_Ih_final)
+W33(wrap_gsw_frazil_properties_potential, gsw_frazil_properties_potential, SA_bulk, h_pot_bulk, p, n, SA_final, CT_final, w_Ih_final)
+W33(wrap_gsw_frazil_properties_potential_poly, gsw_frazil_properties_potential_poly, SA_bulk, h_pot_bulk, p, n, SA_final, CT_final, w_Ih_final)
+W33(wrap_gsw_frazil_ratios_adiabatic, gsw_frazil_ratios_adiabatic, SA, p, w_Ih, n, dSA_dCT_frazil, dSA_dP_frazil, dCT_dP_frazil)
+W33(wrap_gsw_frazil_ratios_adiabatic_poly, gsw_frazil_ratios_adiabatic_poly, SA, p, w_Ih, n, dSA_dCT_frazil, dSA_dP_frazil, dCT_dP_frazil)
 void wrap_gsw_gibbs(int *ns, int *nt, int *np, double *SA, double *t, double *p, int *n, double *res)
 {
     for (int i=0; i < *(n); i++)
         res[i] = gsw_gibbs(*ns, *nt, *np, SA[i], t[i], p[i]);
 }
-
 void wrap_gsw_gibbs_ice(int *nt, int *np, double *t, double *p, int *n, double *res)
 {
     for (int i=0; i < *(n); i++)
         res[i] = gsw_gibbs_ice(*nt, *np, t[i], p[i]);
 }
-
-void wrap_gsw_ice_fraction_to_freeze_seawater(double *SA, double *CT, double *p, double *t_Ih, int *n,
-        double *SA_freeze, double *CT_freeze, double *w_Ih)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_ice_fraction_to_freeze_seawater(SA[i], CT[i], p[i], t_Ih[i], &SA_freeze[i], &CT_freeze[i], &w_Ih[i]);
-}
-
+W21(wrap_gsw_grav, gsw_grav, latitude, p, n, rval)
+W21(wrap_gsw_helmholtz_energy_ice, gsw_helmholtz_energy_ice, t, p, n, rval)
+W11(wrap_gsw_hill_ratio_at_sp2, gsw_hill_ratio_at_sp2, t, n, rval)
+W43(wrap_gsw_ice_fraction_to_freeze_seawater, gsw_ice_fraction_to_freeze_seawater, SA, CT, p, t_Ih, n, SA_freeze, CT_freeze, w_Ih)
+W53(wrap_gsw_melting_ice_into_seawater, gsw_melting_ice_into_seawater, SA, CT, p, w_Ih, t_Ih, n, SA_final, CT_final, w_Ih_final)
+W31(wrap_gsw_internal_energy, gsw_internal_energy, SA, CT, p, n, rval)
+W21(wrap_gsw_internal_energy_ice, gsw_internal_energy_ice, t, p, n, rval)
 void wrap_gsw_IPV_vs_fNsquared_ratio(double *SA, double *CT, double *p, double *p_ref, int *n,
         double *IPV_vs_fNsquared_ratio, double *p_mid)
 {
     gsw_ipv_vs_fnsquared_ratio(SA, CT, p, *p_ref, *n, IPV_vs_fNsquared_ratio, p_mid);
 }
-
-void wrap_gsw_melting_ice_into_seawater(double *SA, double *CT, double *p, double *w_Ih, double *t_Ih,
-        int *n, double *SA_final, double *CT_final, double *w_Ih_final)
-{
-    // see gswteos-10.h line 147 for declaration of gsw_melting_ice_into_seawater
-    for (int i=0; i < *(n); i++) {
-        gsw_melting_ice_into_seawater(SA[i], CT[i], p[i], w_Ih[i], t_Ih[i],
-                &SA_final[i], &CT_final[i], &w_Ih_final[i]);
-    }
-}
-
+W31(wrap_gsw_kappa, gsw_kappa, SA, CT, p, n, rval)
+W21(wrap_gsw_kappa_const_t_ice, gsw_kappa_const_t_ice, t, p, n, rval)
+W21(wrap_gsw_kappa_ice, gsw_kappa_ice, t, p, n, rval)
+W31(wrap_gsw_kappa_t_exact, gsw_kappa_t_exact, SA, t, p, n, rval)
+W21(wrap_gsw_latentheat_evap_CT, gsw_latentheat_evap_ct, SA, CT, n, rval)
+W21(wrap_gsw_latentheat_evap_t, gsw_latentheat_evap_t, SA, t, n, rval)
+W21(wrap_gsw_latentheat_melting, gsw_latentheat_melting, SA, p, n, rval)
+W21(wrap_gsw_melting_ice_equilibrium_SA_CT_ratio, gsw_melting_ice_equilibrium_sa_ct_ratio, SA, p, n, rval)
+W21(wrap_gsw_melting_ice_equilibrium_SA_CT_ratio_poly, gsw_melting_ice_equilibrium_sa_ct_ratio_poly, SA, p, n, rval)
+W41(wrap_gsw_melting_ice_SA_CT_ratio, gsw_melting_ice_sa_ct_ratio, SA, CT, p, t_Ih, n, rval)
+W41(wrap_gsw_melting_ice_SA_CT_ratio_poly, gsw_melting_ice_sa_ct_ratio_poly, SA, CT, p, t_Ih, n, rval)
 void wrap_gsw_Nsquared(double *SA, double *CT, double *p, double *latitude, int *n, double *n2, double *p_mid)
 {
     extern void gsw_nsquared(double *sa, double *ct, double *p, double *latitude, int nz, double *n2, double *p_mid);
     gsw_nsquared(SA, CT, p, latitude, *n, n2, p_mid);
 }
-
-void wrap_gsw_rho_first_derivatives(double *SA, double *CT, double *p, int *n,
-        double *drho_dsa, double *drho_dct, double *drho_dp)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_rho_first_derivatives(SA[i], CT[i], p[i], &drho_dsa[i], &drho_dct[i], &drho_dp[i]);
-}
-
-void wrap_gsw_rho_first_derivatives_wrt_enthalpy(double *SA, double *CT, double *p, int *n,
-        double *rho_sa_wrt_h, double *rho_h)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_rho_first_derivatives_wrt_enthalpy(SA[i], CT[i], p[i], &rho_sa_wrt_h[i], &rho_h[i]);
-}
-
-void wrap_gsw_rho_alpha_beta(double *SA, double *CT, double *p, int *n,
-        double *rho, double *alpha, double *beta)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_rho_alpha_beta(SA[i], CT[i], p[i], &rho[i], &alpha[i], &beta[i]);
-}
-
+W11(wrap_gsw_pot_enthalpy_from_pt_ice, gsw_pot_enthalpy_from_pt_ice, pt_ice, n, rval)
+W21(wrap_gsw_pressure_coefficient_ice, gsw_pressure_coefficient_ice, t, p, n, rval)
+// The next line is necessary because gsw_p_from_z() is not in the TEOS-10 C library yet.
+extern double gsw_p_from_z(double z, double latitude, double geo_strf_dyn_height, double sea_surface_geopotential);
+W41(wrap_gsw_p_from_z, gsw_p_from_z, z, latitude, geo_strf_dyn_height, sea_surface_geopotential, n, rval)
+W41(wrap_gsw_pot_rho_t_exact, gsw_pot_rho_t_exact, SA, t, p, p_ref, n, rval)
+W31(wrap_gsw_pt0_from_t, gsw_pt0_from_t, SA, t, p, n, rval)
+W21(wrap_gsw_pt0_from_t_ice, gsw_pt0_from_t_ice, t, p, n, rval)
+W21(wrap_gsw_pt_from_CT, gsw_pt_from_ct, SA, CT, n, rval)
+W11(wrap_gsw_pt_from_pot_enthalpy_ice, gsw_pt_from_pot_enthalpy_ice, pot_enthalpy_ice, n, rval)
+W41(wrap_gsw_pt_from_t, gsw_pt_from_t, SA, t, p, p_ref, n, rval)
+W31(wrap_gsw_pt_from_t_ice, gsw_pt_from_t_ice, t, p, p_ref, n, rval)
+W31(wrap_gsw_rho, gsw_rho, SA, CT, p, n, rval)
+W33(wrap_gsw_rho_alpha_beta, gsw_rho_alpha_beta, SA, CT, p, n, rho, alpha, beta)
+W33(wrap_gsw_rho_first_derivatives, gsw_rho_first_derivatives, SA, CT, p, n, drho_dsa, drho_dct, drho_dp)
+W32(wrap_gsw_rho_first_derivatives_wrt_enthalpy, gsw_rho_first_derivatives_wrt_enthalpy, SA, CT, p, n, rho_sa_wrt_h, rho_h)
+W21(wrap_gsw_rho_ice, gsw_rho_ice, t, p, n, rval)
+W31(wrap_gsw_rho_t_exact, gsw_rho_t_exact, SA, t, p, n, rval)
 void wrap_gsw_SAAR(double *p, double *longitude, double *latitude, int *n, double *saar, int *inocean)
 {
     for (int i=0; i < *(n); i++) {
@@ -442,34 +387,46 @@ void wrap_gsw_SAAR(double *p, double *longitude, double *latitude, int *n, doubl
         inocean[i] = saar[i]==0?0:1;
     }
 }
-
-void wrap_gsw_specvol_alpha_beta(double *SA, double *CT, double *p, int *n,
-        double *specvol, double *alpha, double *beta)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_specvol_alpha_beta(SA[i], CT[i], p[i], &specvol[i], &alpha[i], &beta[i]);
-}
-
-void wrap_gsw_t_freezing_first_derivatives(double *SA, double *p, double *saturation_fraction, int *n,
-        double *tfreezing_sa, double *tfreezing_p)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_t_freezing_first_derivatives(SA[i], p[i], saturation_fraction[i],
-                &tfreezing_sa[i], &tfreezing_p[i]);
-}
-
-void wrap_gsw_t_freezing_first_derivatives_poly(double *SA, double *p, double *saturation_fraction, int *n,
-        double *tfreezing_sa, double *tfreezing_p)
-{
-    for (int i=0; i < *(n); i++)
-        gsw_t_freezing_first_derivatives_poly(SA[i], p[i], saturation_fraction[i],
-                &tfreezing_sa[i], &tfreezing_p[i]);
-}
-
-
+W31(wrap_gsw_SA_from_rho, gsw_sa_from_rho, rho, CT, p, n, rval)
+W41(wrap_gsw_SA_from_SP, gsw_sa_from_sp, CT, p, longitude, latitude, n, rval)
+W31(wrap_gsw_SA_from_SP_baltic, gsw_sa_from_sp_baltic, SP, longitude, latitude, n, rval)
+W41(wrap_gsw_SA_from_Sstar, gsw_sa_from_sstar, Sstar, p, longitude, latitude, n, rval)
+W11(wrap_gsw_SR_from_SP, gsw_sr_from_sp, SP, n, rval)
+W21(wrap_gsw_sigma0, gsw_sigma0, SA, CT, n, rval)
+W21(wrap_gsw_sigma1, gsw_sigma1, SA, CT, n, rval)
+W21(wrap_gsw_sigma2, gsw_sigma2, SA, CT, n, rval)
+W21(wrap_gsw_sigma3, gsw_sigma3, SA, CT, n, rval)
+W21(wrap_gsw_sigma4, gsw_sigma4, SA, CT, n, rval)
+W31(wrap_gsw_sound_speed, gsw_sound_speed, SA, t, p, n, rval)
+W21(wrap_gsw_sound_speed_ice, gsw_sound_speed_ice, t, p, n, rval)
+W31(wrap_gsw_sound_speed_t_exact, gsw_sound_speed_t_exact, SA, t, p, n, rval)
+W33(wrap_gsw_specvol_alpha_beta, gsw_specvol_alpha_beta, SA, CT, p, n, specvol, alpha, beta)
+// gsw_specvol coded in R (??)
+W31(wrap_gsw_specvol_anom_standard, gsw_specvol_anom_standard, SA, CT, p, n, rval)
+W21(wrap_gsw_specvol_ice, gsw_specvol_ice, t, p, n, rval)
+W31(wrap_gsw_specvol_t_exact, gsw_specvol_t_exact, SA, t, p, n, rval)
+W21(wrap_gsw_spiciness0, gsw_spiciness0, SA, CT, n, rval)
+W21(wrap_gsw_spiciness1, gsw_spiciness1, SA, CT, n, rval)
+W21(wrap_gsw_spiciness2, gsw_spiciness2, SA, CT, n, rval)
+W31(wrap_gsw_SP_from_C, gsw_sp_from_c, C, t, p, n, rval)
+W41(wrap_gsw_SP_from_SA, gsw_sp_from_sa, SA, p, longitude, latitude, n, rval)
+W11(wrap_gsw_SP_from_SK, gsw_sp_from_sk, SK, n, rval)
+W11(wrap_gsw_SP_from_SR, gsw_sp_from_sr, SR, n, rval)
+W41(wrap_gsw_SP_from_Sstar, gsw_sp_from_sstar, Sstar, p, longitude, latitude, n, rval)
+W41(wrap_gsw_Sstar_from_SA, gsw_sstar_from_sa, SA, p, longitude, latitude, n, rval)
+W41(wrap_gsw_Sstar_from_SP, gsw_sstar_from_sp, SP, p, longitude, latitude, n, rval)
+W31(wrap_gsw_t_deriv_chem_potential_water_t_exact, gsw_t_deriv_chem_potential_water_t_exact, SA, t, p, n, rval)
+W31(wrap_gsw_t_freezing, gsw_t_freezing_exact, SA, p, saturation_fraction, n, rval)
+W32(wrap_gsw_t_freezing_first_derivatives, gsw_t_freezing_first_derivatives, SA, p, saturation_fraction, n, tfreezing_SA, tfreezing_p)
+W32(wrap_gsw_t_freezing_first_derivatives_poly, gsw_t_freezing_first_derivatives_poly, SA, p, saturation_fraction, n, tfreezing_SA, tfreezing_p)
+W31(wrap_gsw_t_from_CT, gsw_t_from_ct, SA, CT, p, n, rval)
+W21(wrap_gsw_t_from_pt0_ice, gsw_t_from_pt0_ice, pt0_ice, p, n, rval)
+W31(wrap_gsw_thermobaric, gsw_thermobaric, SA, CT, p, n, rval)
+// gsw_turner_rsubrho() works on an *entire* profile; it should not be wrapped in W33.
 void wrap_gsw_Turner_Rsubrho(double *SA, double *CT, double *p, int *n, double *Tu, double *Rsubrho, double *p_mid)
 {
     extern void gsw_turner_rsubrho(double *sa, double *ct, double *p, int nz, double *Tu, double *Rsubrho, double *p_mid);
     gsw_turner_rsubrho(SA, CT, p, *n, Tu, Rsubrho, p_mid);
 }
+W21(wrap_gsw_z_from_p, gsw_z_from_p, p, lat, n, rval)
 
