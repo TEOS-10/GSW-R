@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_entropy_from_pt}
 \alias{gsw_entropy_from_pt}
-\title{Specific Entropy in terms of Absolute Salinity and Potential Temperature}
+\title{Specific Entropy ito Absolute Salinity and Potential Temperature}
 \usage{
 gsw_entropy_from_pt(SA, pt)
 }
@@ -12,10 +12,11 @@ gsw_entropy_from_pt(SA, pt)
 \item{pt}{potential temperature (ITS-90) [ degC ]}
 }
 \value{
-specific entropy [ J/(kg*K) ]
+specific entropy [ J/(kg*degC) ]
 }
 \description{
-Calculate specific entropy given absolute salinity and potential temperature.
+Calculates specific entropy in terms of Absolute Salinity and
+Potential Temperature.
 }
 \details{
 The present R function works with a wrapper to a C function contained

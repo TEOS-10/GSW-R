@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_entropy_from_t}
 \alias{gsw_entropy_from_t}
-\title{Specific entropy as a function of in-situ temperature and pressure}
+\title{Specific Entropy i.t.o. Absolute Salinity, Temperature, and Pressure}
 \usage{
 gsw_entropy_from_t(SA, t, p)
 }
@@ -17,14 +17,10 @@ gsw_entropy_from_t(SA, t, p)
 specific entropy [ J/(kg*K) ]
 }
 \description{
-Calculates specific entropy given Absolute Salinity, in-situ
+Calculates specific entropy in terms of Absolute Salinity, in-situ
 temperature and pressure.
 }
 \details{
-The related function gsw_entropy_from_CT() is not provided
-in the C library, although it is available in the (later-
-versioned) Matlab library.
-
 The present R function works with a wrapper to a C function contained
 within the GSW-C system (with source code at
 \url{https://github.com/TEOS-10/GSW-C}), which

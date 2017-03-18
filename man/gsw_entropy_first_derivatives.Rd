@@ -10,12 +10,10 @@ gsw_entropy_first_derivatives(SA, CT)
 \item{SA}{Absolute Salinity [ g/kg ]}
 
 \item{CT}{Conservative Temperature [ degC ]}
-
-\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
-a list containing \code{eta_SA} [ (J/kg)/(g/kg) ], the derivative
-of entropy wrt Absolute Salinity, and \code{eta_CT} [ (J/kg)/degC ],
+a list containing \code{eta_SA} [ (J/(kg*degC) / (g/kg) ],
+the derivative of entropy wrt Absolute Salinity, and \code{eta_CT} [ (J/(kg*degC^2) ],
 the derivative of entropy wrt Conservative Temperature.
 }
 \description{

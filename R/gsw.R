@@ -1448,10 +1448,9 @@ gsw_enthalpy_t_exact <- function(SA, t, p)
 #' 
 #' @template SAtemplate
 #' @template CTtemplate
-#' @template ptemplate
 #'
-#' @return a list containing \code{eta_SA} [ (J/kg)/(g/kg) ], the derivative
-#' of entropy wrt Absolute Salinity, and \code{eta_CT} [ (J/kg)/degC ],
+#' @return a list containing \code{eta_SA} [ (J/(kg*degC) / (g/kg) ],
+#' the derivative of entropy wrt Absolute Salinity, and \code{eta_CT} [ (J/(kg*degC^2) ],
 #' the derivative of entropy wrt Conservative Temperature.
 #'
 #' @family things related to entropy
@@ -1482,15 +1481,16 @@ gsw_entropy_first_derivatives <- function(SA, CT)
     list(eta_SA=r$eta_SA, eta_CT=r$eta_CT)
 }
 
-#' Specific Entropy in terms of Absolute Salinity and Potential Temperature
+#' Specific Entropy ito Absolute Salinity and Potential Temperature
 #'
-#' Calculate specific entropy given absolute salinity and potential temperature.
+#' Calculates specific entropy in terms of Absolute Salinity and
+#' Potential Temperature.
 #'
 #' @template teos10template
 #'
 #' @template SAtemplate
 #' @template pttemplate
-#' @return specific entropy [ J/(kg*K) ]
+#' @return specific entropy [ J/(kg*degC) ]
 #' @examples
 #' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -1513,15 +1513,11 @@ gsw_entropy_from_pt <- function(SA, pt)
     rval
 }
 
-#' Specific entropy as a function of in-situ temperature and pressure
+#' Specific Entropy i.t.o. Absolute Salinity, Temperature, and Pressure
 #'
-#' Calculates specific entropy given Absolute Salinity, in-situ
+#' Calculates specific entropy in terms of Absolute Salinity, in-situ
 #' temperature and pressure.
 #'
-#' The related function gsw_entropy_from_CT() is not provided
-#' in the C library, although it is available in the (later-
-#' versioned) Matlab library.
-#' 
 #' @template teos10template
 #' 
 #' @template SAtemplate
