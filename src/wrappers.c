@@ -279,6 +279,23 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), dou
         }\
     }\
 }
+
+// 6 input parameters, 2 output values
+#define W63(wname, cname, arg1, arg2, arg3, arg4, arg5, arg6, n, rval1, rval2) \
+void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), double *(arg5), double *(arg6), int *(n), double *(rval1), double *(rval2))\
+{\
+    for (int i = 0; i < *(n); i++) {\
+        if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i]) || isnan((arg4)[i]) || isnan((arg5)[i]) || isnan((arg6)[i])) {\
+            (rval1)[i] = NA_REAL;\
+            (rval2)[i] = NA_REAL;\
+        } else {\
+            (cname)((arg1)[i], (arg2)[i], (arg3)[i], (arg4)[i], (arg5)[i], (arg6)[i], &(rval1)[i], &(rval2)[i]);\
+            if ((rval1)[i] == GSW_INVALID_VALUE) (rval1)[i] = NA_REAL;\
+            if ((rval2)[i] == GSW_INVALID_VALUE) (rval2)[i] = NA_REAL;\
+        }\
+    }\
+}
+ 
  
 W31(wrap_gsw_adiabatic_lapse_rate_from_CT, gsw_adiabatic_lapse_rate_from_ct, SA, CT, p, n, rval)
 W21(wrap_gsw_adiabatic_lapse_rate_ice, gsw_adiabatic_lapse_rate_ice, t, p, n, rval)
@@ -327,6 +344,7 @@ W33(wrap_gsw_frazil_properties_potential, gsw_frazil_properties_potential, SA_bu
 W33(wrap_gsw_frazil_properties_potential_poly, gsw_frazil_properties_potential_poly, SA_bulk, h_pot_bulk, p, n, SA_final, CT_final, w_Ih_final)
 W33(wrap_gsw_frazil_ratios_adiabatic, gsw_frazil_ratios_adiabatic, SA, p, w_Ih, n, dSA_dCT_frazil, dSA_dP_frazil, dCT_dP_frazil)
 W33(wrap_gsw_frazil_ratios_adiabatic_poly, gsw_frazil_ratios_adiabatic_poly, SA, p, w_Ih, n, dSA_dCT_frazil, dSA_dP_frazil, dCT_dP_frazil)
+
 void wrap_gsw_gibbs(int *ns, int *nt, int *np, double *SA, double *t, double *p, int *n, double *res)
 {
     for (int i=0; i < *(n); i++)
@@ -341,7 +359,6 @@ W21(wrap_gsw_grav, gsw_grav, latitude, p, n, rval)
 W21(wrap_gsw_helmholtz_energy_ice, gsw_helmholtz_energy_ice, t, p, n, rval)
 W11(wrap_gsw_hill_ratio_at_sp2, gsw_hill_ratio_at_sp2, t, n, rval)
 W43(wrap_gsw_ice_fraction_to_freeze_seawater, gsw_ice_fraction_to_freeze_seawater, SA, CT, p, t_Ih, n, SA_freeze, CT_freeze, w_Ih)
-W53(wrap_gsw_melting_ice_into_seawater, gsw_melting_ice_into_seawater, SA, CT, p, w_Ih, t_Ih, n, SA_final, CT_final, w_Ih_final)
 W31(wrap_gsw_internal_energy, gsw_internal_energy, SA, CT, p, n, rval)
 W21(wrap_gsw_internal_energy_ice, gsw_internal_energy_ice, t, p, n, rval)
 void wrap_gsw_IPV_vs_fNsquared_ratio(double *SA, double *CT, double *p, double *p_ref, int *n,
@@ -358,8 +375,10 @@ W21(wrap_gsw_latentheat_evap_t, gsw_latentheat_evap_t, SA, t, n, rval)
 W21(wrap_gsw_latentheat_melting, gsw_latentheat_melting, SA, p, n, rval)
 W21(wrap_gsw_melting_ice_equilibrium_SA_CT_ratio, gsw_melting_ice_equilibrium_sa_ct_ratio, SA, p, n, rval)
 W21(wrap_gsw_melting_ice_equilibrium_SA_CT_ratio_poly, gsw_melting_ice_equilibrium_sa_ct_ratio_poly, SA, p, n, rval)
+W53(wrap_gsw_melting_ice_into_seawater, gsw_melting_ice_into_seawater, SA, CT, p, w_Ih, t_Ih, n, SA_final, CT_final, w_Ih_final)
 W41(wrap_gsw_melting_ice_SA_CT_ratio, gsw_melting_ice_sa_ct_ratio, SA, CT, p, t_Ih, n, rval)
 W41(wrap_gsw_melting_ice_SA_CT_ratio_poly, gsw_melting_ice_sa_ct_ratio_poly, SA, CT, p, t_Ih, n, rval)
+W63(wrap_gsw_melting_seaice_into_seawater, gsw_melting_seaice_into_seawater, SA, CT, p, w_seaice, SA_seaice, t_seaice, n, SA_final, CT_final)
 void wrap_gsw_Nsquared(double *SA, double *CT, double *p, double *latitude, int *n, double *n2, double *p_mid)
 {
     extern void gsw_nsquared(double *sa, double *ct, double *p, double *latitude, int nz, double *n2, double *p_mid);
