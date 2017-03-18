@@ -317,6 +317,7 @@ W32(wrap_gsw_enthalpy_first_derivatives, gsw_enthalpy_first_derivatives, SA, CT,
 W32(wrap_gsw_enthalpy_first_derivatives_CT_exact, gsw_enthalpy_first_derivatives_ct_exact, SA, CT, p, n, h_SA, h_CT)
 W21(wrap_gsw_enthalpy_ice, gsw_enthalpy_ice, t, p, n, rval)
 W31(wrap_gsw_enthalpy_t_exact, gsw_enthalpy_t_exact, SA, t, p, n, rval)
+W22(wrap_gsw_entropy_first_derivatives, gsw_entropy_first_derivatives, SA, CT, n, eta_SA, eta_CT)
 // gsw_entropy_from_CT is not in the C library.
 W21(wrap_gsw_entropy_ice, gsw_entropy_ice, t, p, n, rval)
 W21(wrap_gsw_entropy_from_pt, gsw_entropy_from_pt, SA, pt, n, rval)

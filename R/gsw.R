@@ -1442,6 +1442,46 @@ gsw_enthalpy_t_exact <- function(SA, t, p)
     rval
 }
 
+#' First Derivatives of Entropy
+#'
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#'
+#' @return a list containing \code{eta_SA} [ (J/kg)/(g/kg) ], the derivative
+#' of entropy wrt Absolute Salinity, and \code{eta_CT} [ (J/kg)/degC ],
+#' the derivative of entropy wrt Conservative Temperature.
+#'
+#' @family things related to entropy
+#' @examples
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' d <- gsw_entropy_first_derivatives(SA, CT)
+#' expect_equal(d$eta_SA, c(-0.263286800711655, -0.263977276574528, -0.255367497912925,
+#'                        -0.238066586439561, -0.234438260606436, -0.232820684341694))
+#' expect_equal(d$eta_CT, c(13.221031210083824, 13.236911191313675, 13.489004628681361,
+#'                        14.086599016583795, 14.257729576432077, 14.386429945649411))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_first_derivatives.html}
+gsw_entropy_first_derivatives <- function(SA, CT)
+{
+    l <- argfix(list(SA=SA, CT=CT))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_entropy_first_derivatives",
+            SA=as.double(l$SA), CT=as.double(l$CT),
+            n=as.integer(n),
+            eta_SA=double(n), eta_CT=double(n),
+            NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(SA)) {
+        dim(r$eta_SA) <- dim(SA)
+        dim(r$eta_CT) <- dim(SA)
+    }
+    list(eta_SA=r$eta_SA, eta_CT=r$eta_CT)
+}
+
 #' Specific Entropy in terms of Absolute Salinity and Potential Temperature
 #'
 #' Calculate specific entropy given absolute salinity and potential temperature.
