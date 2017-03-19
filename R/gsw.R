@@ -1539,11 +1539,44 @@ gsw_entropy_from_t <- function(SA, t, p)
 {
     l <- argfix(list(SA=SA, t=t, p=p))
     n <- length(l[[1]])
-    rval <- .C("wrap_gsw_entropy_from_t",
+    rval <- .C("wrap_gsw_entropy_from_t", NAOK=TRUE, PACKAGE="gsw",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
-               n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
-    if (is.matrix(SA))
-        dim(rval) <- dim(SA)
+               n=as.integer(n),
+               rval=double(n))$rval
+     if (is.matrix(SA))
+         dim(rval) <- dim(SA)
+     rval
+}
+
+
+#' Ratio of Absolute to Preformed Salinity, minus 1
+#'
+#' @template teos10template
+#'
+#' @template ptemplate
+#' @template longitudetemplate
+#' @template latitudetemplate
+#' @return (S/SStar)-1 [ unitless ]
+#' @examples
+#' library(testthat)
+#' p <- c(         10,   50,  125,  250,  600, 1000)
+#' latitude <- c(   4,    4,    4,    4,    4,    4)
+#' longitude <- c(188,  188,  188,  188,  188,  188)
+#' r <- gsw_Fdelta(p, longitude, latitude)
+#' expect_equal(r/1e-3, c(0.006472309923452, 0.010352848168433, 0.025541937543450,
+#'                      0.104348729347986, 0.218678084205081, 0.365415366571266))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_Fdelta.html}
+gsw_Fdelta <- function(p, longitude, latitude)
+{
+    l <- argfix(list(p=p, longitude=longitude, latitude=latitude))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_Fdelta", NAOK=TRUE, PACKAGE="gsw",
+               p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
+               n=as.integer(n),
+               rval=double(n))$rval
+    if (is.matrix(p))
+        dim(rval) <- dim(p)
     rval
 }
 
