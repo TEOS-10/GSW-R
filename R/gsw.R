@@ -3815,6 +3815,51 @@ gsw_specvol_anom_standard <- function(SA, CT, p)
 }
 
 
+###
+
+#' First Derivatives of Specific Volume
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#' @return A list containing \code{v_SA} [ (m^3/kg)/(g/kg) ], the derivative of
+#' specific volume with respect to Absolute Salinity, \code{v_CT} [ (m^3/kg)/degC],
+#' the derivative of specific volume with respect to Conservative Temperature, and
+#' \code{v_p} [ (m^3/kg)/dbar ], the derivative of specific volume with respect
+#' to pressure.
+#' @examples 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' r <- gsw_specvol_first_derivatives(SA, CT, p)
+#' expect_equal(r$v_SA/1e-6, c(-0.702149096451073, -0.702018847212088, -0.708895319156155,
+#'                           -0.730208155560782, -0.733175729406169, -0.733574625737474))
+#' expect_equal(r$v_CT/1e-6, c(0.317700378655437, 0.315628863649601, 0.274441877830800,
+#'                           0.168516613901993, 0.142051181824820, 0.125401683814057))
+#' expect_equal(r$v_p/1e-12, c(-0.402527990904794, -0.402146232553089, -0.406663124765787,
+#'                           -0.423877042622481, -0.426198431093548, -0.426390351853055))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_first_derivatives.html}
+gsw_specvol_first_derivatives <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_specvol_first_derivatives", NAOK=TRUE, PACKAGE="gsw",
+            SA=as.double(l$SA), CT=as.double(CT), p=as.double(l$p), n=as.integer(n),
+            v_SA=double(n), v_CT=double(n), v_p=double(n))
+    if (is.matrix(SA)) {
+        dim(r$v_SA) <- dim(SA)
+        dim(r$v_CT) <- dim(SA)
+        dim(r$v_p) <- dim(SA)
+    }
+    list(v_SA=r$v_SA, v_CT=r$v_CT, v_p=r$v_p)
+}
+###
+
+
 #' Specific Volume of Ice
 #' 
 #' @template teos10template

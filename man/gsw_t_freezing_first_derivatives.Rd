@@ -14,8 +14,6 @@ gsw_t_freezing_first_derivatives(SA, p, saturation_fraction = 1)
 \item{saturation_fraction}{fraction of air in water [unitless]}
 }
 \value{
-a list containing
-
 a list containing \code{tfreezing_SA}, which is the derivative of freezing
 temperature with Absolute Salinity in [ degC/(g/kg) ], and
 \code{tfreezing_p}, which is the derivative with respect to pressure in [ degC/dbar ].
