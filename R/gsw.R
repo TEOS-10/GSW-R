@@ -2962,6 +2962,34 @@ gsw_pt_from_t <- function(SA, t, p, p_ref=0)
     rval
 }
 
+#' Potential Temperature from Potential Enthalpy of Ice (Polynomial version)
+#' 
+#' @template teos10template
+#' 
+#' @template pot_enthalpy_icetemplate
+#' @return potential temperature [ deg C ]
+#' @examples
+#' library(testthat)
+#' pot_enthalpy_ice <- c(-3.5544e5, -3.6033e5, -3.5830e5, -3.5589e5, -3.4948e5, -3.4027e5)
+#' pt <- gsw_pt_from_pot_enthalpy_ice_poly(pot_enthalpy_ice)
+#' expect_equal(pt, c(-10.733085986035007, -13.167396204945987, -12.154204137867396,
+#'                  -10.956201046447006, -7.794963341294590, -3.314907552013722))
+#' @family things related to enthalpy
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_pot_enthalpy_ice_poly.html}
+gsw_pt_from_pot_enthalpy_ice_poly <- function(pot_enthalpy_ice)
+{
+    l <- argfix(list(pot_enthalpy_ice=pot_enthalpy_ice))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_pt_from_pot_enthalpy_ice_poly",
+               pot_enthalpy_ice=as.double(l$pot_enthalpy_ice),
+               n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(pot_enthalpy_ice))
+        dim(rval) <- dim(pot_enthalpy_ice)
+    rval
+}
+
 #' Potential Temperature of Ice from in-situ Temperature
 #' 
 #' @template teos10template
