@@ -2841,7 +2841,7 @@ gsw_pressure_coefficient_ice <- function(t, p)
 #'                     0.251150973076077, 0.601441775836021, 1.002273338145043))
 #' @family things related to ice
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pressure_freezing_PT.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pressure_freezing_CT.html}
 gsw_pressure_freezing_CT <- function(SA, CT, saturation_fraction)
 {
     l <- argfix(list(SA=SA, CT=CT, saturation_fraction=saturation_fraction))

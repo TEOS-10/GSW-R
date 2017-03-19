@@ -38,7 +38,7 @@ expect_equal(p/1e3, c(0.009890530270710, 0.050376026585933, 0.125933117050624,
                     0.251150973076077, 0.601441775836021, 1.002273338145043))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_pressure_freezing_PT.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_pressure_freezing_CT.html}
 }
 \seealso{
 Other things related to ice: \code{\link{gsw_CT_freezing_first_derivatives_poly}},
