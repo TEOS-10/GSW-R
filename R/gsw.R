@@ -3815,8 +3815,6 @@ gsw_specvol_anom_standard <- function(SA, CT, p)
 }
 
 
-###
-
 #' First Derivatives of Specific Volume
 #' 
 #' @template teos10template
@@ -3841,6 +3839,7 @@ gsw_specvol_anom_standard <- function(SA, CT, p)
 #'                           0.168516613901993, 0.142051181824820, 0.125401683814057))
 #' expect_equal(r$v_p/1e-12, c(-0.402527990904794, -0.402146232553089, -0.406663124765787,
 #'                           -0.423877042622481, -0.426198431093548, -0.426390351853055))
+#' @family things related to enthalpy
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_first_derivatives.html}
 gsw_specvol_first_derivatives <- function(SA, CT, p)
@@ -3857,7 +3856,48 @@ gsw_specvol_first_derivatives <- function(SA, CT, p)
     }
     list(v_SA=r$v_SA, v_CT=r$v_CT, v_p=r$v_p)
 }
-###
+
+#' First Derivatives of Specific Volume wrt Enthalpy
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#' @return A list containing \code{v_SA_wrt_h} and \code{v_h}. See \dQuote{Bugs}.
+#' @examples 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' r <- gsw_specvol_first_derivatives_wrt_enthalpy(SA, CT, p)
+#' expect_equal(r$v_SA_wrt_h/1e-6, c(-0.702143511679586, -0.701991101310494, -0.708834353735310,
+#'                                 -0.730130919555592, -0.733018321892082, -0.733342002723321))
+#' expect_equal(r$v_h/1e-10, c(0.795862623587769, 0.790648383268264, 0.687443468257647,
+#'                           0.422105846942233, 0.355778874334799, 0.314053366403993))
+#' @section Bugs:
+#' The Matlab and C sources vary in the names of the returned values; the names used
+#' here correspond to the Matlab documentation. The units listed in the Matlab documentation
+#' (see \dQuote{References}) do not seem to make sense. A first derivative of specific volume
+#' wrt SA should have unit (m^3/kg)/(g/kg) but the unit is listed as (m^3/kg)(g/kg)^(-1)(J/kg)^(-1)
+#' in the Matlab documentation. And the sentence describing \code{v_h} is a bit confusing, since
+#' it talks of a first derivative with respect to two items.
+#' @family things related to enthalpy
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_first_derivatives_wrt_enthalpy.html}
+gsw_specvol_first_derivatives_wrt_enthalpy <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_specvol_first_derivatives_wrt_enthalpy", NAOK=TRUE, PACKAGE="gsw",
+            SA=as.double(l$SA), CT=as.double(CT), p=as.double(l$p), n=as.integer(n),
+            v_SA_wrt_h=double(n), v_h=double(n))
+    if (is.matrix(SA)) {
+        dim(r$v_SA_wrt_h) <- dim(SA)
+        dim(r$v_h) <- dim(SA)
+    }
+    list(v_SA_wrt_h=r$v_SA_wrt_h, v_h=r$v_h)
+}
 
 
 #' Specific Volume of Ice

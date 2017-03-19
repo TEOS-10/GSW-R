@@ -48,7 +48,9 @@ Other things related to enthalpy: \code{\link{gsw_CT_from_enthalpy}},
   \code{\link{gsw_frazil_properties_potential}},
   \code{\link{gsw_pot_enthalpy_from_pt_ice_poly}},
   \code{\link{gsw_pot_enthalpy_from_pt_ice}},
-  \code{\link{gsw_pot_enthalpy_ice_freezing}}
+  \code{\link{gsw_pot_enthalpy_ice_freezing}},
+  \code{\link{gsw_specvol_first_derivatives_wrt_enthalpy}},
+  \code{\link{gsw_specvol_first_derivatives}}
 
 Other things related to ice: \code{\link{gsw_CT_freezing_first_derivatives_poly}},
   \code{\link{gsw_CT_freezing_first_derivatives}},
