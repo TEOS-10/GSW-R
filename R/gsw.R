@@ -2061,7 +2061,7 @@ gsw_ice_fraction_to_freeze_seawater <- function(SA, CT, p, t_Ih)
         dim <- dim(SA)
         dim(r$SA_freeze) <- dim
         dim(r$CT_freeze) <- dim
-        dim(r$t_Ih) <- dim
+        dim(r$w_Ih) <- dim
     }
     list(SA_freeze=r$SA_freeze, CT_freeze=r$CT_freeze, w_Ih=r$w_Ih)
 }
@@ -4234,6 +4234,51 @@ gsw_SP_from_Sstar <- function(Sstar, p, longitude, latitude)
     rval
 }
 
+#' Sea ice Fraction to Cool Seawater to Freezing
+#'
+#' @template teos10template
+#'
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#' @template SA_seaicetemplate
+#' @template t_seaicetemplate
+#' @return a list containing \code{SA_freeze}, \code{CT_freeze} and \code{w_Ih}.
+#' @examples 
+#' library(testthat)
+#' SA <- c(      34.7118, 34.8915, 35.0256, 34.8472, 34.7366,  34.7324)
+#' CT <- c(      -1.7856, -1.4329, -1.8103, -1.2600, -0.6886,   0.4403)
+#' p <- c(            10,      50,     125,     250,     600,     1000)
+#' SA_seaice <- c(     5,     4.8,     3.5,     2.5,       1,      0.4)
+#' t_seaice <- c(-5.7856, -4.4329, -3.8103, -4.2600, -3.8863,  -3.4036) 
+#' r <- gsw_seaice_fraction_to_freeze_seawater(SA, CT, p, SA_seaice, t_seaice)
+#' expect_equal(r$SA_freeze, c(34.671271207148074, 34.703449677481224, 34.950192062047861,
+#'                           34.525277379661880, 34.077349518029997, 33.501836583274191))
+#' expect_equal(r$CT_freeze, c(-1.895419711000293, -1.927935638317893, -1.999943183939312,
+#'                           -2.071677444370745, -2.318866154643864, -2.603185031462614))
+#' expect_equal(r$w_seaice, c(0.001364063868629, 0.006249283768465, 0.002391958850970,
+#'                          0.009952101583387, 0.019541106156815, 0.035842627277027))
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_seaice_fraction_to_freeze_seawater.html}
+gsw_seaice_fraction_to_freeze_seawater <- function(SA, CT, p, SA_seaice, t_seaice)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p, SA_seaice=SA_seaice, t_seaice=t_seaice))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_seaice_fraction_to_freeze_seawater", NAOK=TRUE, PACKAGE="gsw",
+            SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), SA_seiace=as.double(l$SA_seaice), t_seaice=as.double(l$t_seaice),
+            n=as.integer(n), SA_freeze=double(n), CT_freeze=double(n), w_seaice=double(n))
+    if (is.matrix(SA)) {
+        dim <- dim(SA)
+        dim(r$SA_freeze) <- dim
+        dim(r$CT_freeze) <- dim
+        dim(r$w_seaice) <- dim
+    }
+    list(SA_freeze=r$SA_freeze, CT_freeze=r$CT_freeze, w_seaice=r$w_seaice)
+}
+
+
+
 #' Calculate Reference Salinity from Practical Salinity
 #' 
 #' @template teos10template
@@ -4561,7 +4606,7 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
 #'                                       -0.756168260769629, -0.767277303444694, -0.779936552091913))
 #'}
 #' @family things related to ice
-#' @section Bugs
+#' @section Bugs:
 #' Test values fail
 #' See https://github.com/TEOS-10/GSW-R/issues/31
 #' @references

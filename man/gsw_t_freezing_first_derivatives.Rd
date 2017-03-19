@@ -30,6 +30,12 @@ which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10
 To learn more about these software systems, their authorships, and the science behind
 it all, please consult \url{http://www.teos-10.org}.
 }
+\section{Bugs}{
+
+Test values fail
+See https://github.com/TEOS-10/GSW-R/issues/31
+}
+
 \examples{
 library(testthat)
 SA <- c(               34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -82,6 +88,7 @@ Other things related to ice: \code{\link{gsw_CT_freezing_first_derivatives_poly}
   \code{\link{gsw_pt_from_pot_enthalpy_ice}},
   \code{\link{gsw_pt_from_t_ice}},
   \code{\link{gsw_rho_ice}},
+  \code{\link{gsw_seaice_fraction_to_freeze_seawater}},
   \code{\link{gsw_sound_speed_ice}},
   \code{\link{gsw_specvol_ice}},
   \code{\link{gsw_t_freezing_first_derivatives_poly}},
