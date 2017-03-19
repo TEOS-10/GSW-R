@@ -2817,6 +2817,37 @@ gsw_pressure_coefficient_ice <- function(t, p)
     rval
 }
 
+#' Pressure at which Seawater Freezes
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template saturation_fractiontemplate
+#' @return pressure at which freezing will occur [ dbar ]
+#' @examples
+#' library(testthat)
+#' SA <- c(                 34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(                 -1.8996, -1.9407, -2.0062, -2.0923, -2.3593, -2.6771)
+#' saturation_fraction <- c(       1,    0.8,     0.6,     0.5,     0.4,       0)
+#' p <- gsw_pressure_freezing_CT(SA, CT, saturation_fraction)
+#' expect_equal(p/1e3, c(0.009890530270710, 0.050376026585933, 0.125933117050624,
+#'                     0.251150973076077, 0.601441775836021, 1.002273338145043))
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pressure_freezing_PT.html}
+gsw_pressure_freezing_CT <- function(SA, CT, saturation_fraction)
+{
+    l <- argfix(list(SA=SA, CT=CT, saturation_fraction=saturation_fraction))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_pressure_freezing_CT", NAOK=TRUE, PACKAGE="gsw",
+               SA=as.double(l$SA), CT=as.double(l$CT), saturation_fraction=as.double(l$saturation_fraction),
+               n=as.integer(n),
+               rval=double(n))$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
 
 #' Potential temperature referenced to the surface
 #' 
