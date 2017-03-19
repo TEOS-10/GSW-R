@@ -32,6 +32,12 @@ which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10
 To learn more about these software systems, their authorships, and the science behind
 it all, please consult \url{http://www.teos-10.org}.
 }
+\section{Bugs}{
+
+Test values fail
+See https://github.com/TEOS-10/GSW-R/issues/32
+}
+
 \examples{
 library(testthat)
 SA <- c(               34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)

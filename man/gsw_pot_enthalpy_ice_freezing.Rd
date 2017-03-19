@@ -34,6 +34,7 @@ The C source underlying this function lacks an argument, \code{saturation_fracti
 which is present in the Matlab source, and so that argument is ignored here.
 Note also that the Matlab check values are not reproduced by the present R function,
 so the test in the documentation is not run.
+See https://github.com/TEOS-10/GSW-R/issues/27
 }
 
 \examples{

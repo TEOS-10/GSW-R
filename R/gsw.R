@@ -1293,8 +1293,9 @@ gsw_enthalpy_diff <- function(SA, CT, p_shallow, p_deep)
 #' The HTML documentation suggests that this function returns 3 values, but
 #' there are only 2 returned values in the C code used here (and the matlab code
 #' on which that is based). Also, the d/dSA check values given the HTML are not
-#' reproduced by the present function. This was reported on Mar 18, 2017;
-#' see https://github.com/TEOS-10/GSW-Matlab/issues/7.
+#' reproduced by the present function. This was reported on Mar 18, 2017
+#' as https://github.com/TEOS-10/GSW-Matlab/issues/7.
+#' See https://github.com/TEOS-10/GSW-R/issues/33
 #'
 #' @family things related to enthalpy
 #' @examples
@@ -1309,6 +1310,9 @@ gsw_enthalpy_diff <- function(SA, CT, p_shallow, p_deep)
 #'}
 #' expect_equal(d$h_CT/1e3, c(3.991899705530481, 3.992025640520101, 3.992210365030743,
 #'                          3.992284150250490, 3.992685389122658, 3.993014168534175))
+#' @section Bugs:
+#' The test values on the Matlab documentation webpage fail with this R function.
+#' See https://github.com/TEOS-10/GSW-R/issues/28
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_first_derivatives.html}
 gsw_enthalpy_first_derivatives <- function(SA, CT, p)
@@ -1343,8 +1347,9 @@ gsw_enthalpy_first_derivatives <- function(SA, CT, p)
 #' The HTML documentation suggests that this function returns 3 values, but
 #' there are only 2 returned values in the C code used here (and the matlab code
 #' on which that is based). Also, the d/dSA check values given the HTML are not
-#' reproduced by the present function. This was reported on Mar 18, 2017;
-#' see https://github.com/TEOS-10/GSW-Matlab/issues/7.
+#' reproduced by the present function. This was reported on Mar 18, 2017
+#' as https://github.com/TEOS-10/GSW-Matlab/issues/7.
+#' See https://github.com/TEOS-10/GSW-R/issues/34
 #'
 #' @family things related to enthalpy
 #' @examples
@@ -2739,6 +2744,7 @@ gsw_pot_enthalpy_from_pt_ice_poly <- function(pt0_ice)
 #' which is present in the Matlab source, and so that argument is ignored here.
 #' Note also that the Matlab check values are not reproduced by the present R function,
 #' so the test in the documentation is not run.
+#' See https://github.com/TEOS-10/GSW-R/issues/27
 #' @family things related to enthalpy
 #' @family things related to ice
 #' @references
@@ -3974,6 +3980,7 @@ gsw_specvol_first_derivatives <- function(SA, CT, p)
 #' wrt SA should have unit (m^3/kg)/(g/kg) but the unit is listed as (m^3/kg)(g/kg)^(-1)(J/kg)^(-1)
 #' in the Matlab documentation. And the sentence describing \code{v_h} is a bit confusing, since
 #' it talks of a first derivative with respect to two items.
+#' See https://github.com/TEOS-10/GSW-R/issues/30
 #' @family things related to enthalpy
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_first_derivatives_wrt_enthalpy.html}
@@ -4554,6 +4561,9 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
 #'                                       -0.756168260769629, -0.767277303444694, -0.779936552091913))
 #'}
 #' @family things related to ice
+#' @section Bugs
+#' Test values fail
+#' See https://github.com/TEOS-10/GSW-R/issues/31
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_first_derivatives.html}
 gsw_t_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)
@@ -4594,6 +4604,9 @@ gsw_t_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)
 #' expect_equal(derivs$tfreezing_p/1e-7, c(-0.748987354878138, -0.750288853857513, -0.752676389629787,
 #'                                       -0.756549680608529, -0.767482625710990, -0.779985619685683))
 #'}
+#' @section Bugs:
+#' Test values fail
+#' See https://github.com/TEOS-10/GSW-R/issues/32
 #' @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_first_derivatives.html}

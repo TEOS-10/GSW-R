@@ -35,8 +35,13 @@ it all, please consult \url{http://www.teos-10.org}.
 The HTML documentation suggests that this function returns 3 values, but
 there are only 2 returned values in the C code used here (and the matlab code
 on which that is based). Also, the d/dSA check values given the HTML are not
-reproduced by the present function. This was reported on Mar 18, 2017;
-see https://github.com/TEOS-10/GSW-Matlab/issues/7.
+reproduced by the present function. This was reported on Mar 18, 2017
+as https://github.com/TEOS-10/GSW-Matlab/issues/7.
+See https://github.com/TEOS-10/GSW-R/issues/33
+
+
+The test values on the Matlab documentation webpage fail with this R function.
+See https://github.com/TEOS-10/GSW-R/issues/28
 }
 
 \examples{

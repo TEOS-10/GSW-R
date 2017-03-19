@@ -36,6 +36,7 @@ here correspond to the Matlab documentation. The units listed in the Matlab docu
 wrt SA should have unit (m^3/kg)/(g/kg) but the unit is listed as (m^3/kg)(g/kg)^(-1)(J/kg)^(-1)
 in the Matlab documentation. And the sentence describing \code{v_h} is a bit confusing, since
 it talks of a first derivative with respect to two items.
+See https://github.com/TEOS-10/GSW-R/issues/30
 }
 
 \examples{
