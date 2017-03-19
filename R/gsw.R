@@ -2761,6 +2761,39 @@ gsw_pot_enthalpy_ice_freezing <- function(SA, p, saturation_fraction)
     rval
 }
 
+#' Potential Enthalpy of Ice at Freezing Point (Polynomial version)
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template ptemplate
+#' @template saturation_fractiontemplate
+#' @return potential enthalpy [ J/kg ]
+#' @examples
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' saturation_fraction = 1
+#' e <- gsw_pot_enthalpy_ice_freezing_poly(SA, p, saturation_fraction)
+#' expect_equal(e/1e5, c(-3.373370858777002, -3.374395733068549, -3.376079507278181,
+#'                     -3.378416106344322, -3.385460970578123, -3.393731732645173))
+#' @family things related to enthalpy
+#' @family things related to ice
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_ice_freezing_poly.html}
+gsw_pot_enthalpy_ice_freezing_poly <- function(SA, p, saturation_fraction)
+{
+    l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_pot_enthalpy_ice_freezing_poly",
+               SA=as.double(l$SA), p=as.double(l$p), # saturation_fraction=as.double(l$saturation_fraction),
+               n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+
 #' Potential density
 #' 
 #' @template teos10template
