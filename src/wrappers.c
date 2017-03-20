@@ -391,6 +391,7 @@ W11(wrap_gsw_pot_enthalpy_from_pt_ice_poly, gsw_pot_enthalpy_from_pt_ice_poly, p
 W21(wrap_gsw_pot_enthalpy_ice_freezing, gsw_pot_enthalpy_ice_freezing, SA, p, n, rval)
 W21(wrap_gsw_pot_enthalpy_ice_freezing_poly, gsw_pot_enthalpy_ice_freezing_poly, SA, p, n, rval)
 W22(wrap_gsw_pot_enthalpy_ice_freezing_first_derivatives, gsw_pot_enthalpy_ice_freezing_first_derivatives, SA, p, n, pot_enthalpy_ice_freezing_SA, pot_enthalpy_ice_freezing_p)
+W22(wrap_gsw_pot_enthalpy_ice_freezing_first_derivatives_poly, gsw_pot_enthalpy_ice_freezing_first_derivatives_poly, SA, p, n, pot_enthalpy_ice_freezing_SA, pot_enthalpy_ice_freezing_p)
 W21(wrap_gsw_pressure_coefficient_ice, gsw_pressure_coefficient_ice, t, p, n, rval)
 W31(wrap_gsw_pressure_freezing_CT, gsw_pressure_freezing_ct, SA, CT, saturation_fraction, n, rval)
 // The next line is necessary because gsw_p_from_z() is not in the TEOS-10 C library yet.

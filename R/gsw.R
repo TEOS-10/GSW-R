@@ -2783,8 +2783,6 @@ gsw_pot_enthalpy_ice_freezing_poly <- function(SA, p, saturation_fraction)
     rval
 }
 
-#########
-
 #' First Derivatives of Potential Enthalpy
 #' 
 #' @template teos10template
@@ -2823,7 +2821,46 @@ gsw_pot_enthalpy_ice_freezing_first_derivatives <- function(SA, p)
     }
     list(pot_enthalpy_ice_freezing_SA=r$pot_enthalpy_ice_freezing_SA, pot_enthalpy_ice_freezing_p=r$pot_enthalpy_ice_freezing_p)
 }
-#########
+
+
+#' First Derivatives of Potential Enthalpy (Polynomial version)
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template ptemplate
+#' @return A list containing \code{pot_enthalpy_ice_freezing_SA} [ (J/kg)/(g/kg) ], the derivative of
+#' potential enthalpy with respect to Absolute Salinity,
+#' and \code{pot_enthalpy_ice_freezing_p} [ unitless ], the derivative of
+#' Conservative Temperature with respect to potential temperature. (Note that the second
+#' quantity is denoted \code{pot_enthalpy_ice_freezing_P} in the documentation for the Matlab function.)
+#' @examples 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' r <- gsw_pot_enthalpy_ice_freezing_first_derivatives_poly(SA, p)
+#' expect_equal(r$pot_enthalpy_ice_freezing_SA/1e2,
+#'       c(-1.183498006918154, -1.184135169530602, -1.184626138334419,
+#'       -1.184032656542549, -1.183727371435808, -1.183805326863513))
+#' expect_equal(r$pot_enthalpy_ice_freezing_p/1e-3,
+#'       c(-0.202934280214689, -0.203136950111241, -0.203515960539503,
+#'       -0.204145112153220, -0.205898365024147, -0.207885289186464))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_ice_freezing_first_derivatives_poly.html}
+gsw_pot_enthalpy_ice_freezing_first_derivatives_poly <- function(SA, p)
+{
+    l <- argfix(list(SA=SA, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_pot_enthalpy_ice_freezing_first_derivatives_poly", NAOK=TRUE, PACKAGE="gsw",
+            SA=as.double(l$SA), p=as.double(l$p),
+            n=as.integer(n),
+            pot_enthalpy_ice_freezing_SA=double(n), pot_enthalpy_ice_freezing_p=double(n))
+    if (is.matrix(SA)) {
+        dim(r$pot_enthalpy_ice_freezing_SA) <- dim(SA)
+        dim(r$pot_enthalpy_ice_freezing_p) <- dim(SA)
+    }
+    list(pot_enthalpy_ice_freezing_SA=r$pot_enthalpy_ice_freezing_SA, pot_enthalpy_ice_freezing_p=r$pot_enthalpy_ice_freezing_p)
+}
 
 
 #' Potential density
