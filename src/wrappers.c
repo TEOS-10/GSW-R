@@ -398,6 +398,7 @@ W41(wrap_gsw_p_from_z, gsw_p_from_z, z, latitude, geo_strf_dyn_height, sea_surfa
 W41(wrap_gsw_pot_rho_t_exact, gsw_pot_rho_t_exact, SA, t, p, p_ref, n, rval)
 W31(wrap_gsw_pt0_from_t, gsw_pt0_from_t, SA, t, p, n, rval)
 W21(wrap_gsw_pt0_from_t_ice, gsw_pt0_from_t_ice, t, p, n, rval)
+W22(wrap_gsw_pt_first_derivatives, gsw_pt_first_derivatives, SA, CT, n, pt_SA, pt_CT)
 W21(wrap_gsw_pt_from_CT, gsw_pt_from_ct, SA, CT, n, rval)
 W21(wrap_gsw_pt_from_entropy, gsw_pt_from_entropy, SA, entropy, n, rval)
 W11(wrap_gsw_pt_from_pot_enthalpy_ice, gsw_pt_from_pot_enthalpy_ice, pot_enthalpy_ice, n, rval)
