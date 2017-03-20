@@ -4,7 +4,7 @@
 \alias{gsw_CT_freezing_first_derivatives}
 \title{First Derivatives of Conservative Temperature for Freezing Water}
 \usage{
-gsw_CT_freezing_first_derivatives(SA, p, saturation_fraction)
+gsw_CT_freezing_first_derivatives(SA, p, saturation_fraction = 1)
 }
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}

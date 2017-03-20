@@ -4,7 +4,7 @@
 \alias{gsw_pressure_freezing_CT}
 \title{Pressure at which Seawater Freezes}
 \usage{
-gsw_pressure_freezing_CT(SA, CT, saturation_fraction)
+gsw_pressure_freezing_CT(SA, CT, saturation_fraction = 1)
 }
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}

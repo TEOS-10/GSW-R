@@ -757,7 +757,7 @@ gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
 #' @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing_first_derivatives.html}
-gsw_CT_freezing_first_derivatives <- function(SA, p, saturation_fraction)
+gsw_CT_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)
 {
     l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
     n <- length(l[[1]])
@@ -796,7 +796,7 @@ gsw_CT_freezing_first_derivatives <- function(SA, p, saturation_fraction)
 #' @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing_first_derivatives_poly.html}
-gsw_CT_freezing_first_derivatives_poly <- function(SA, p, saturation_fraction)
+gsw_CT_freezing_first_derivatives_poly <- function(SA, p, saturation_fraction=1)
 {
     l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
     n <- length(l[[1]])
@@ -2739,7 +2739,7 @@ gsw_pot_enthalpy_from_pt_ice_poly <- function(pt0_ice)
 #' @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_ice_freezing.html}
-gsw_pot_enthalpy_ice_freezing <- function(SA, p, saturation_fraction)
+gsw_pot_enthalpy_ice_freezing <- function(SA, p, saturation_fraction=1)
 {
     l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
     n <- length(l[[1]])
@@ -2771,7 +2771,7 @@ gsw_pot_enthalpy_ice_freezing <- function(SA, p, saturation_fraction)
 #' @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_ice_freezing_poly.html}
-gsw_pot_enthalpy_ice_freezing_poly <- function(SA, p, saturation_fraction)
+gsw_pot_enthalpy_ice_freezing_poly <- function(SA, p, saturation_fraction=1)
 {
     l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
     n <- length(l[[1]])
@@ -2944,7 +2944,7 @@ gsw_pressure_coefficient_ice <- function(t, p)
 #' @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pressure_freezing_CT.html}
-gsw_pressure_freezing_CT <- function(SA, CT, saturation_fraction)
+gsw_pressure_freezing_CT <- function(SA, CT, saturation_fraction=1)
 {
     l <- argfix(list(SA=SA, CT=CT, saturation_fraction=saturation_fraction))
     n <- length(l[[1]])
@@ -3515,7 +3515,7 @@ gsw_SAAR <- function(p, longitude, latitude)
 #'                  32.868973869711390, 34.017513292374431, 32.859871943514150))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_freezing_from_CT.html}
-gsw_SA_freezing_from_CT <- function(CT, p, saturation_fraction)
+gsw_SA_freezing_from_CT <- function(CT, p, saturation_fraction=1)
 {
     l <- argfix(list(CT=CT, p=p, saturation_fraction=saturation_fraction))
     n <- length(l[[1]])
@@ -3546,7 +3546,7 @@ gsw_SA_freezing_from_CT <- function(CT, p, saturation_fraction)
 #'                  32.867931280363138, 34.015087798162732, 32.856434894818825))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_freezing_from_CT_poly.html}
-gsw_SA_freezing_from_CT_poly <- function(CT, p, saturation_fraction)
+gsw_SA_freezing_from_CT_poly <- function(CT, p, saturation_fraction=1)
 {
     l <- argfix(list(CT=CT, p=p, saturation_fraction=saturation_fraction))
     n <- length(l[[1]])

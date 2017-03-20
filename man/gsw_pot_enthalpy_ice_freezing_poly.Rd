@@ -4,7 +4,7 @@
 \alias{gsw_pot_enthalpy_ice_freezing_poly}
 \title{Potential Enthalpy of Ice at Freezing Point (Polynomial version)}
 \usage{
-gsw_pot_enthalpy_ice_freezing_poly(SA, p, saturation_fraction)
+gsw_pot_enthalpy_ice_freezing_poly(SA, p, saturation_fraction = 1)
 }
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}

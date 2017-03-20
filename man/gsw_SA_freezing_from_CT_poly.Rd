@@ -4,7 +4,7 @@
 \alias{gsw_SA_freezing_from_CT_poly}
 \title{Compute Absolute Salinity at Freezing Point (Polynomial version)}
 \usage{
-gsw_SA_freezing_from_CT_poly(CT, p, saturation_fraction)
+gsw_SA_freezing_from_CT_poly(CT, p, saturation_fraction = 1)
 }
 \arguments{
 \item{CT}{Conservative Temperature [ degC ]}
