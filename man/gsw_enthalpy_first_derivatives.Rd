@@ -30,30 +30,14 @@ which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10
 To learn more about these software systems, their authorships, and the science behind
 it all, please consult \url{http://www.teos-10.org}.
 }
-\section{Bugs}{
-
-The HTML documentation suggests that this function returns 3 values, but
-there are only 2 returned values in the C code used here (and the matlab code
-on which that is based). Also, the d/dSA check values given the HTML are not
-reproduced by the present function. This was reported on Mar 18, 2017
-as https://github.com/TEOS-10/GSW-Matlab/issues/7.
-See https://github.com/TEOS-10/GSW-R/issues/33
-
-
-The test values on the Matlab documentation webpage fail with this R function.
-See https://github.com/TEOS-10/GSW-R/issues/28
-}
-
 \examples{
 library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 p <-  c(     10,      50,     125,     250,     600,    1000)
 d <- gsw_enthalpy_first_derivatives(SA, CT, p)
-\dontrun{ # I think the HTML is wrong ... it also says the function returns 3 things, not 2.
-expect_equal(d$h_SA, c(-0.070175858133742, -0.350930227941697, -0.886796332314973,
-                     -1.829592995957160, -4.423460664577400, -7.405099527558439))
-}
+expect_equal(d$h_SA, c(-0.070223912348929, -0.351159768365102, -0.887025065692568,
+                     -1.829602387915694, -4.423463748270238, -7.405100077558673))
 expect_equal(d$h_CT/1e3, c(3.991899705530481, 3.992025640520101, 3.992210365030743,
                          3.992284150250490, 3.992685389122658, 3.993014168534175))
 }
