@@ -13,10 +13,9 @@ gsw_CT_first_derivatives(SA, pt)
 }
 \value{
 A list containing \code{CT_SA} [ degC/(g/kg) ], the derivative of
-Conservative Temperature with respect to Absolute Salinity at constant
-potential temperature, and \code{CT_pt} [ unitless], the derivative of
-Conservative Temperature with respect to potential temperature at constant
-Absolute Salinity.
+Conservative Temperature with respect to Absolute Salinity,
+and \code{CT_pt} [ unitless ], the derivative of
+Conservative Temperature with respect to potential temperature.
 }
 \description{
 First Derivatives of Conservative Temperature

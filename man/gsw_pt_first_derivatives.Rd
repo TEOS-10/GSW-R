@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_pt_first_derivatives}
 \alias{gsw_pt_first_derivatives}
-\title{First Derivatives of PotentialTemperature}
+\title{First Derivatives of Potential Temperature}
 \usage{
 gsw_pt_first_derivatives(SA, CT)
 }
@@ -14,11 +14,11 @@ gsw_pt_first_derivatives(SA, CT)
 \value{
 A list containing \code{pt_SA} [ degC/(g/kg) ], the derivative of
 potential temperature with respect to Absolute Salinity,
-and \code{pt_CT} [ unitless], the derivative of potential temperature
+and \code{pt_CT} [ unitless ], the derivative of potential temperature
 with respect to Conservative Temperature.
 }
 \description{
-First Derivatives of PotentialTemperature
+First Derivatives of Potential Temperature
 }
 \details{
 The present R function works with a wrapper to a C function contained

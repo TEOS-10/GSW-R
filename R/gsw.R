@@ -623,10 +623,9 @@ gsw_cp_t_exact <- function(SA, t, p)
 #' @template SAtemplate
 #' @template pttemplate
 #' @return A list containing \code{CT_SA} [ degC/(g/kg) ], the derivative of
-#' Conservative Temperature with respect to Absolute Salinity at constant
-#' potential temperature, and \code{CT_pt} [ unitless], the derivative of
-#' Conservative Temperature with respect to potential temperature at constant
-#' Absolute Salinity.
+#' Conservative Temperature with respect to Absolute Salinity,
+#' and \code{CT_pt} [ unitless ], the derivative of
+#' Conservative Temperature with respect to potential temperature.
 #' @examples 
 #' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -2938,7 +2937,7 @@ gsw_pt0_from_t_ice <- function(t, p)
     rval
 }
 
-#' First Derivatives of PotentialTemperature
+#' First Derivatives of Potential Temperature
 #' 
 #' @template teos10template
 #' 
@@ -2946,7 +2945,7 @@ gsw_pt0_from_t_ice <- function(t, p)
 #' @template CTtemplate
 #' @return A list containing \code{pt_SA} [ degC/(g/kg) ], the derivative of
 #' potential temperature with respect to Absolute Salinity,
-#' and \code{pt_CT} [ unitless], the derivative of potential temperature
+#' and \code{pt_CT} [ unitless ], the derivative of potential temperature
 #' with respect to Conservative Temperature.
 #' @examples 
 #' library(testthat)
