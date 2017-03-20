@@ -2783,6 +2783,48 @@ gsw_pot_enthalpy_ice_freezing_poly <- function(SA, p, saturation_fraction)
     rval
 }
 
+#########
+
+#' First Derivatives of Potential Enthalpy
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template ptemplate
+#' @return A list containing \code{pot_enthalpy_ice_freezing_SA} [ (J/kg)/(g/kg) ], the derivative of
+#' potential enthalpy with respect to Absolute Salinity,
+#' and \code{pot_enthalpy_ice_freezing_p} [ unitless ], the derivative of
+#' Conservative Temperature with respect to potential temperature. (Note that the second
+#' quantity is denoted \code{pot_enthalpy_ice_freezing_P} in the documentation for the Matlab function.)
+#' @examples 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' r <- gsw_pot_enthalpy_ice_freezing_first_derivatives(SA, p)
+#' expect_equal(r$pot_enthalpy_ice_freezing_SA/1e2,
+#'       c(-1.183484968590718, -1.184125268891200, -1.184619267864844,
+#'       -1.184026131143674, -1.183727706650925, -1.183814873741961))
+#' expect_equal(r$pot_enthalpy_ice_freezing_p/1e-3,
+#'       c(-0.202880939983260, -0.203087335312542, -0.203473018454630,
+#'       -0.204112435106666, -0.205889571619502, -0.207895691215823))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_ice_freezing_first_derivatives.html}
+gsw_pot_enthalpy_ice_freezing_first_derivatives <- function(SA, p)
+{
+    l <- argfix(list(SA=SA, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_pot_enthalpy_ice_freezing_first_derivatives", NAOK=TRUE, PACKAGE="gsw",
+            SA=as.double(l$SA), p=as.double(l$p),
+            n=as.integer(n),
+            pot_enthalpy_ice_freezing_SA=double(n), pot_enthalpy_ice_freezing_p=double(n))
+    if (is.matrix(SA)) {
+        dim(r$pot_enthalpy_ice_freezing_SA) <- dim(SA)
+        dim(r$pot_enthalpy_ice_freezing_p) <- dim(SA)
+    }
+    list(pot_enthalpy_ice_freezing_SA=r$pot_enthalpy_ice_freezing_SA, pot_enthalpy_ice_freezing_p=r$pot_enthalpy_ice_freezing_p)
+}
+#########
+
 
 #' Potential density
 #' 
@@ -3982,7 +4024,8 @@ gsw_specvol_anom_standard <- function(SA, CT, p)
 #' specific volume with respect to Absolute Salinity, \code{v_CT} [ (m^3/kg)/degC],
 #' the derivative of specific volume with respect to Conservative Temperature, and
 #' \code{v_p} [ (m^3/kg)/dbar ], the derivative of specific volume with respect
-#' to pressure.
+#' to pressure. (Note that the last quantity is denoted \code{v_P} in the
+#' documentation for the Matlab function.)
 #' @examples 
 #' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)

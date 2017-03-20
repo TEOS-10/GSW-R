@@ -80,6 +80,8 @@ export(argfix,
        gsw_pot_enthalpy_from_pt_ice_poly,
        gsw_pot_enthalpy_ice_freezing,
        gsw_pot_enthalpy_ice_freezing_poly,
+       gsw_pot_enthalpy_ice_freezing_first_derivatives,
+       #gsw_pot_enthalpy_ice_freezing_first_derivatives_poly,#
        gsw_pressure_coefficient_ice,
        gsw_pressure_freezing_CT,
        gsw_pt0_from_t,

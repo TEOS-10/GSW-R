@@ -18,7 +18,8 @@ A list containing \code{v_SA} [ (m^3/kg)/(g/kg) ], the derivative of
 specific volume with respect to Absolute Salinity, \code{v_CT} [ (m^3/kg)/degC],
 the derivative of specific volume with respect to Conservative Temperature, and
 \code{v_p} [ (m^3/kg)/dbar ], the derivative of specific volume with respect
-to pressure.
+to pressure. (Note that the last quantity is denoted \code{v_P} in the
+documentation for the Matlab function.)
 }
 \description{
 First Derivatives of Specific Volume
