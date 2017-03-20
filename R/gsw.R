@@ -3497,8 +3497,39 @@ gsw_SAAR <- function(p, longitude, latitude)
     list(SAAR=r$SAAR, in_ocean=r$in_ocean)
 }
 
+#' Compute Absolute Salinity at Freezing Point
+#' 
+#' @template teos10template
+#'
+#' @template CTtemplate
+#' @template ptemplate
+#' @template saturation_fractiontemplate
+#' @return Absolute Salinity [ g/kg ]
+#' @examples
+#' library(testthat)
+#' CT <- c(-0.11901, -0.15608, -0.72138, -1.97738, -2.31728, -2.56764)
+#' p <- c(       10,       50,      125,      250,      600,     1000)
+#' saturation_fraction <- 1
+#' SA <- gsw_SA_freezing_from_CT(CT, p, saturation_fraction)
+#' expect_equal(SA, c(2.280500648179144, 2.416867651098550, 11.973503162175106,
+#'                  32.868973869711390, 34.017513292374431, 32.859871943514150))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_freezing_from_CT.html}
+gsw_SA_freezing_from_CT <- function(CT, p, saturation_fraction)
+{
+    l <- argfix(list(CT=CT, p=p, saturation_fraction=saturation_fraction))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_SA_freezing_from_CT", NAOK=TRUE, PACKAGE="gsw",
+               CT=as.double(l$CT), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
+               n=as.integer(n),
+               rval=double(n))$rval
+    if (is.matrix(CT))
+        dim(rval) <- dim(CT)
+    rval
+}
 
-#' Convert from density to absolute salinity
+
+#' Compute Absolute Salinity from Density, etc
 #' 
 #' @template teos10template
 #'

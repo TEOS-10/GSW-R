@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_SA_from_rho}
 \alias{gsw_SA_from_rho}
-\title{Convert from density to absolute salinity}
+\title{Compute Absolute Salinity from Density, etc}
 \usage{
 gsw_SA_from_rho(rho, CT, p)
 }
@@ -17,7 +17,7 @@ gsw_SA_from_rho(rho, CT, p)
 Absolute Salinity [ g/kg ]
 }
 \description{
-Convert from density to absolute salinity
+Compute Absolute Salinity from Density, etc
 }
 \details{
 The present R function works with a wrapper to a C function contained

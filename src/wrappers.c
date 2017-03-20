@@ -420,6 +420,7 @@ void wrap_gsw_SAAR(double *p, double *longitude, double *latitude, int *n, doubl
         inocean[i] = saar[i]==0?0:1;
     }
 }
+W31(wrap_gsw_SA_freezing_from_CT, gsw_sa_freezing_from_ct, CT, p, saturation_fraction, n, rval)
 W31(wrap_gsw_SA_from_rho, gsw_sa_from_rho, rho, CT, p, n, rval)
 W41(wrap_gsw_SA_from_SP, gsw_sa_from_sp, CT, p, longitude, latitude, n, rval)
 W31(wrap_gsw_SA_from_SP_baltic, gsw_sa_from_sp_baltic, SP, longitude, latitude, n, rval)
