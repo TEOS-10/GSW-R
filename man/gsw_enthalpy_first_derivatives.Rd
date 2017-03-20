@@ -30,6 +30,13 @@ which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10
 To learn more about these software systems, their authorships, and the science behind
 it all, please consult \url{http://www.teos-10.org}.
 }
+\section{Bugs}{
+
+The website cited in \dQuote{References} has incorrect check values, as of 2017-03-20 09:30:47 UTC.
+This should be a temporary problem, but this section will be retained until the page
+is updated.
+}
+
 \examples{
 library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)

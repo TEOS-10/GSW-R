@@ -14,11 +14,9 @@ gsw_t_freezing_first_derivatives_poly(SA, p, saturation_fraction = 1)
 \item{saturation_fraction}{fraction of air in water [unitless]}
 }
 \value{
-a list containing
-
-a list containing \code{tfreezing_SA}, which is the derivative of freezing
-temperature with Absolute Salinity in [ degC/(g/kg) ], and
-\code{tfreezing_p}, which is the derivative with respect to pressure in [ degC/dbar ].
+a list containing \code{tfreezing_SA} [ degC/(g/kg) ], the derivative of freezing
+temperature with Absolute Salinity and
+\code{tfreezing_p} [ degC/dbar ], the derivative with respect to pressure.
 }
 \description{
 Derivatives of Freezing Water Properties (Polynomial version)
@@ -34,7 +32,9 @@ it all, please consult \url{http://www.teos-10.org}.
 }
 \section{Bugs}{
 
-Test values fail
+The website cited in \dQuote{References} has incorrect check values, as of 2017-03-20 09:30:47 UTC.
+This should be a temporary problem, but this section will be retained until the page
+is updated.
 See https://github.com/TEOS-10/GSW-R/issues/32
 }
 
@@ -44,12 +44,10 @@ SA <- c(               34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 p <- c(                     10,      50,     125,     250,     600,    1000)
 saturation_fraction <- c(    1,     0.8,     0.6,     0.5,     0.4,       0)
 derivs <- gsw_t_freezing_first_derivatives_poly(SA, p, saturation_fraction)
-\dontrun{
-expect_equal(derivs$tfreezing_SA, c(-0.056810211180173, -0.056855569660572, -0.056901981959942,
-                                  -0.056903551701245, -0.056975467088605, -0.057084386393761))
+expect_equal(derivs$tfreezing_SA, c(-0.056810211094078, -0.056855567524973, -0.056901968693345,
+                                  -0.056903498206432, -0.056975157476629, -0.057083526206200))
 expect_equal(derivs$tfreezing_p/1e-7, c(-0.748987354878138, -0.750288853857513, -0.752676389629787,
                                       -0.756549680608529, -0.767482625710990, -0.779985619685683))
-}
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_first_derivatives.html}

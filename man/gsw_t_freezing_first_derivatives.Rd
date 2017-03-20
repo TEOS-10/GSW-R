@@ -14,9 +14,9 @@ gsw_t_freezing_first_derivatives(SA, p, saturation_fraction = 1)
 \item{saturation_fraction}{fraction of air in water [unitless]}
 }
 \value{
-a list containing \code{tfreezing_SA}, which is the derivative of freezing
-temperature with Absolute Salinity in [ degC/(g/kg) ], and
-\code{tfreezing_p}, which is the derivative with respect to pressure in [ degC/dbar ].
+a list containing \code{tfreezing_SA} [ degC/(g/kg) ], the derivative of freezing
+temperature with Absolute Salinity and
+\code{tfreezing_p} [ degC/dbar ], the derivative with respect to pressure.
 }
 \description{
 Derivatives of Freezing Water Properties
@@ -32,7 +32,9 @@ it all, please consult \url{http://www.teos-10.org}.
 }
 \section{Bugs}{
 
-Test values fail
+The website cited in \dQuote{References} has incorrect check values, as of 2017-03-20 09:30:47 UTC.
+This should be a temporary problem, but this section will be retained until the page
+is updated.
 See https://github.com/TEOS-10/GSW-R/issues/31
 }
 
@@ -42,12 +44,10 @@ SA <- c(               34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 p <- c(                     10,      50,     125,     250,     600,    1000)
 saturation_fraction <- c(    1,     0.8,     0.6,     0.5,     0.4,       0)
 derivs <- gsw_t_freezing_first_derivatives(SA, p, saturation_fraction)
-\dontrun{
-expect_equal(derivs$tfreezing_SA , c(-0.056825918594083, -0.056868294573942, -0.056911551133121,
-                                   -0.056911078625592, -0.056980234135748, -0.057082363270642))
-expect_equal(derivs$tfreezing_p/1e-7, c(-0.748463078687009, -0.749788953392739, -0.752221838472067,
-                                      -0.756168260769629, -0.767277303444694, -0.779936552091913))
-}
+expect_equal(derivs$tfreezing_SA, c(-0.056811800705787, -0.056856999671114, -0.056903079789292,
+                                  -0.056904020028541, -0.056974588411844, -0.057082363270642))
+expect_equal(derivs$tfreezing_p/1e-7, c(-0.748468312442338, -0.749793159537290, -0.752225023995510,
+                                      -0.756170965034610, -0.767279572670040, -0.779936552091913))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_first_derivatives.html}

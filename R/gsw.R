@@ -1300,6 +1300,10 @@ gsw_enthalpy_diff <- function(SA, CT, p_shallow, p_deep)
 #'                      -1.829602387915694, -4.423463748270238, -7.405100077558673))
 #' expect_equal(d$h_CT/1e3, c(3.991899705530481, 3.992025640520101, 3.992210365030743,
 #'                          3.992284150250490, 3.992685389122658, 3.993014168534175))
+#' @section Bugs:
+#' The website cited in \dQuote{References} has incorrect check values, as of 2017-03-20 09:30:47 UTC.
+#' This should be a temporary problem, but this section will be retained until the page
+#' is updated.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_first_derivatives.html}
 gsw_enthalpy_first_derivatives <- function(SA, CT, p)
@@ -4610,24 +4614,24 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
 #' @template SAtemplate
 #' @template ptemplate
 #' @template saturation_fractiontemplate
-#' @return a list containing \code{tfreezing_SA}, which is the derivative of freezing
-#' temperature with Absolute Salinity in [ degC/(g/kg) ], and
-#' \code{tfreezing_p}, which is the derivative with respect to pressure in [ degC/dbar ].
+#' @return a list containing \code{tfreezing_SA} [ degC/(g/kg) ], the derivative of freezing
+#' temperature with Absolute Salinity and
+#' \code{tfreezing_p} [ degC/dbar ], the derivative with respect to pressure.
 #' @examples 
 #' library(testthat)
 #' SA <- c(               34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <- c(                     10,      50,     125,     250,     600,    1000)
 #' saturation_fraction <- c(    1,     0.8,     0.6,     0.5,     0.4,       0)
 #' derivs <- gsw_t_freezing_first_derivatives(SA, p, saturation_fraction)
-#'\dontrun{
-#' expect_equal(derivs$tfreezing_SA , c(-0.056825918594083, -0.056868294573942, -0.056911551133121,
-#'                                    -0.056911078625592, -0.056980234135748, -0.057082363270642))
-#' expect_equal(derivs$tfreezing_p/1e-7, c(-0.748463078687009, -0.749788953392739, -0.752221838472067,
-#'                                       -0.756168260769629, -0.767277303444694, -0.779936552091913))
-#'}
+#' expect_equal(derivs$tfreezing_SA, c(-0.056811800705787, -0.056856999671114, -0.056903079789292,
+#'                                   -0.056904020028541, -0.056974588411844, -0.057082363270642))
+#' expect_equal(derivs$tfreezing_p/1e-7, c(-0.748468312442338, -0.749793159537290, -0.752225023995510,
+#'                                       -0.756170965034610, -0.767279572670040, -0.779936552091913))
 #' @family things related to ice
 #' @section Bugs:
-#' Test values fail
+#' The website cited in \dQuote{References} has incorrect check values, as of 2017-03-20 09:30:47 UTC.
+#' This should be a temporary problem, but this section will be retained until the page
+#' is updated.
 #' See https://github.com/TEOS-10/GSW-R/issues/31
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_first_derivatives.html}
@@ -4653,24 +4657,23 @@ gsw_t_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)
 #' @template SAtemplate
 #' @template ptemplate
 #' @template saturation_fractiontemplate
-#' @return a list containing 
-#' @return a list containing \code{tfreezing_SA}, which is the derivative of freezing
-#' temperature with Absolute Salinity in [ degC/(g/kg) ], and
-#' \code{tfreezing_p}, which is the derivative with respect to pressure in [ degC/dbar ].
+#' @return a list containing \code{tfreezing_SA} [ degC/(g/kg) ], the derivative of freezing
+#' temperature with Absolute Salinity and
+#' \code{tfreezing_p} [ degC/dbar ], the derivative with respect to pressure.
 #' @examples 
 #' library(testthat)
 #' SA <- c(               34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <- c(                     10,      50,     125,     250,     600,    1000)
 #' saturation_fraction <- c(    1,     0.8,     0.6,     0.5,     0.4,       0)
 #' derivs <- gsw_t_freezing_first_derivatives_poly(SA, p, saturation_fraction)
-#'\dontrun{
-#' expect_equal(derivs$tfreezing_SA, c(-0.056810211180173, -0.056855569660572, -0.056901981959942,
-#'                                   -0.056903551701245, -0.056975467088605, -0.057084386393761))
+#' expect_equal(derivs$tfreezing_SA, c(-0.056810211094078, -0.056855567524973, -0.056901968693345,
+#'                                   -0.056903498206432, -0.056975157476629, -0.057083526206200))
 #' expect_equal(derivs$tfreezing_p/1e-7, c(-0.748987354878138, -0.750288853857513, -0.752676389629787,
 #'                                       -0.756549680608529, -0.767482625710990, -0.779985619685683))
-#'}
 #' @section Bugs:
-#' Test values fail
+#' The website cited in \dQuote{References} has incorrect check values, as of 2017-03-20 09:30:47 UTC.
+#' This should be a temporary problem, but this section will be retained until the page
+#' is updated.
 #' See https://github.com/TEOS-10/GSW-R/issues/32
 #' @family things related to ice
 #' @references
