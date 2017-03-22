@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_rho_t_exact}
 \alias{gsw_rho_t_exact}
-\title{In-situ density of seawater}
+\title{In-situ Density of Seawater}
 \usage{
 gsw_rho_t_exact(SA, t, p)
 }
@@ -17,7 +17,7 @@ gsw_rho_t_exact(SA, t, p)
 in-situ density [ kg/m^3 ]
 }
 \description{
-In-situ density of seawater
+In-situ Density of Seawater
 }
 \details{
 The present R function works with a wrapper to a C function contained

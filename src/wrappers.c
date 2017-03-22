@@ -228,6 +228,29 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(
     }\
 }
 
+// 3 input values, 5 output values
+#define W35(wname, cname, arg1, arg2, arg3, n, rval1, rval2, rval3, rval4, rval5) \
+void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(rval1), double *(rval2), double *(rval3), double *(rval4), double *(rval5))\
+{\
+    for (int i = 0; i < *(n); i++) {\
+        if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i])) {\
+            (rval1)[i] = NA_REAL;\
+            (rval2)[i] = NA_REAL;\
+            (rval3)[i] = NA_REAL;\
+            (rval4)[i] = NA_REAL;\
+            (rval5)[i] = NA_REAL;\
+        } else {\
+            (cname)((arg1)[i], (arg2)[i], (arg3)[i], &(rval1)[i], &(rval2)[i], &(rval3)[i], &(rval4)[i], &(rval5)[i]);\
+            if ((rval1)[i] == GSW_INVALID_VALUE) (rval1)[i] = NA_REAL;\
+            if ((rval2)[i] == GSW_INVALID_VALUE) (rval2)[i] = NA_REAL;\
+            if ((rval3)[i] == GSW_INVALID_VALUE) (rval3)[i] = NA_REAL;\
+            if ((rval4)[i] == GSW_INVALID_VALUE) (rval4)[i] = NA_REAL;\
+            if ((rval5)[i] == GSW_INVALID_VALUE) (rval5)[i] = NA_REAL;\
+        }\
+    }\
+}
+
+
 // 4 input parameters, 1 output value
 #define W41(wname, cname, arg1, arg2, arg3, arg4, n, rval) \
 void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), int *(n), double *(rval))\
@@ -416,6 +439,7 @@ W33(wrap_gsw_rho_alpha_beta, gsw_rho_alpha_beta, SA, CT, p, n, rho, alpha, beta)
 W33(wrap_gsw_rho_first_derivatives, gsw_rho_first_derivatives, SA, CT, p, n, drho_dsa, drho_dct, drho_dp)
 W32(wrap_gsw_rho_first_derivatives_wrt_enthalpy, gsw_rho_first_derivatives_wrt_enthalpy, SA, CT, p, n, rho_sa_wrt_h, rho_h)
 W21(wrap_gsw_rho_ice, gsw_rho_ice, t, p, n, rval)
+W35(wrap_gsw_rho_second_derivatives, gsw_rho_second_derivatives, SA, CT, p, n, rho_SA_SA, rho_SA_CT, rho_CT_CT, rho_SA_p, rho_CT_p)
 W31(wrap_gsw_rho_t_exact, gsw_rho_t_exact, SA, t, p, n, rval)
 void wrap_gsw_SAAR(double *p, double *longitude, double *latitude, int *n, double *saar, int *inocean)
 {
