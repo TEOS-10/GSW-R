@@ -18,7 +18,7 @@ A list containing \code{specvol_SA_SA} [ (m^3/kg)/(g/kg)^2 ], the second derivat
 specific volume with respect to Absolute Salinity,
 \code{specvol_SA_CT} [ (m^3/kg)/(g/kg)/degC ], the derivative of
 specific volume with respect to Absolute Salinity and Conservative Temperature,
-and \code{specvol_CT_CT} [ (m^3/kg)/degC^2 ], the second derivative of
+\code{specvol_CT_CT} [ (m^3/kg)/degC^2 ], the second derivative of
 specific volume with respect to Conservative Temperature,
 \code{specvol_SA_p} [ (m^3/kg)/(g/kg)/dbar ], the derivative of specific volume with respect to Absolute
 Salinity and pressure, and \code{specvol_CT_p} [ (m^3/kg)/degC/dbar ], the derivative of specific

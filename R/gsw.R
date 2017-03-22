@@ -4503,7 +4503,6 @@ gsw_specvol_ice  <- function(t, p)
     rval
 }
 
-###
 
 #' Second Derivatives of Specific Volume 
 #' 
@@ -4516,7 +4515,7 @@ gsw_specvol_ice  <- function(t, p)
 #' specific volume with respect to Absolute Salinity,
 #' \code{specvol_SA_CT} [ (m^3/kg)/(g/kg)/degC ], the derivative of
 #' specific volume with respect to Absolute Salinity and Conservative Temperature,
-#' and \code{specvol_CT_CT} [ (m^3/kg)/degC^2 ], the second derivative of
+#' \code{specvol_CT_CT} [ (m^3/kg)/degC^2 ], the second derivative of
 #' specific volume with respect to Conservative Temperature,
 #' \code{specvol_SA_p} [ (m^3/kg)/(g/kg)/dbar ], the derivative of specific volume with respect to Absolute
 #' Salinity and pressure, and \code{specvol_CT_p} [ (m^3/kg)/degC/dbar ], the derivative of specific
@@ -4557,7 +4556,56 @@ gsw_specvol_second_derivatives <- function(SA, CT, p)
     }
     list(specvol_SA_SA=r$specvol_SA_SA, specvol_SA_CT=r$specvol_SA_CT, specvol_CT_CT=r$specvol_CT_CT, specvol_SA_p=r$specvol_SA_p, specvol_CT_p=r$specvol_CT_p)
 }
-###
+
+#' Second Derivatives of Specific Volume wrt Enthalpy
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#' @return A list containing \code{specvol_SA_SA} [ (m^3/kg)/(g/kg)^2 ], the second derivative of
+#' specific volume with respect to Absolute Salinity,
+#' \code{specvol_SA_h} [ (m^3/kg)/(g/kg)/(J/kg) ], the derivative of
+#' specific volume with respect to Absolute Salinity and enthalpy,
+#' and \code{specvol_h_h} [ (m^3/kg)/(J/kg)^2 ], the second derivative of
+#' specific volume with respect to enthalpy.
+#' @examples 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' r <- gsw_specvol_second_derivatives_wrt_enthalpy(SA, CT, p)
+#'\dontrun{
+#' expect_equal(r$specvol_SA_SA/1e-8, c(0.080900025859182, 0.080937984647615, 0.084663048560091,
+#'                                    0.096973363977898, 0.099727453084020, 0.101353037917500))
+#' expect_equal(r$specvol_SA_h/1e-12, c(0.325437111980685, 0.327060359677010, 0.375273458551009,
+#'                                    0.545188827543840, 0.589424880032330, 0.616101547884275))
+#'}
+#' expect_equal(r$specvol_h_h/1e-15, c(0.447949998681476, 0.449121446914278, 0.485998151346315,
+#'                                   0.598480711660961, 0.628708349875318, 0.647433212216398))
+#' @section Bugs:
+#' Fails some of the tests provided in the official teos-10 HTML documentation.
+#' (These tests are not run by \code{examples} for this function.)
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_second_derivatives_wrt_enthalpy.html}
+gsw_specvol_second_derivatives_wrt_enthalpy <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_specvol_second_derivatives_wrt_enthalpy", NAOK=TRUE, PACKAGE="gsw",
+            SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+            n=as.integer(n),
+            specvol_SA_SA=double(n), specvol_SA_h=double(n), specvol_h_h=double(n))
+    if (is.matrix(SA)) {
+        dim <- dim(SA)
+        dim(r$specvol_SA_SA) <- dim
+        dim(r$specvol_SA_h) <- dim
+        dim(r$specvol_h_h) <- dim
+    }
+    list(specvol_SA_SA=r$specvol_SA_SA, specvol_SA_h=r$specvol_SA_h, specvol_h_h=r$specvol_h_h)
+}
+
 
 #' Specific Volume of Seawater
 #' 

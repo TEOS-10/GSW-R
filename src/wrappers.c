@@ -473,6 +473,7 @@ W32(wrap_gsw_specvol_first_derivatives_wrt_enthalpy, gsw_specvol_first_derivativ
 W21(wrap_gsw_specvol_ice, gsw_specvol_ice, t, p, n, rval)
 
 W35(wrap_gsw_specvol_second_derivatives, gsw_specvol_second_derivatives, SA, CT, p, n, specvol_SA_SA, specvol_SA_CT, specvol_CT_CT, specvol_SA_p, specvol_CT_p)
+W33(wrap_gsw_specvol_second_derivatives_wrt_enthalpy, gsw_specvol_second_derivatives_wrt_enthalpy, SA, CT, p, n, specvol_SA_SA, specvol_SA_h, specvol_h_h)
 
 W31(wrap_gsw_specvol_t_exact, gsw_specvol_t_exact, SA, t, p, n, rval)
 W21(wrap_gsw_spiciness0, gsw_spiciness0, SA, CT, n, rval)
