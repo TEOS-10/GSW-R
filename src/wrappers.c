@@ -410,6 +410,7 @@ W11(wrap_gsw_pt_from_pot_enthalpy_ice, gsw_pt_from_pot_enthalpy_ice, pot_enthalp
 W11(wrap_gsw_pt_from_pot_enthalpy_ice_poly, gsw_pt_from_pot_enthalpy_ice_poly, pot_enthalpy_ice, n, rval)
 W41(wrap_gsw_pt_from_t, gsw_pt_from_t, SA, t, p, p_ref, n, rval)
 W31(wrap_gsw_pt_from_t_ice, gsw_pt_from_t_ice, t, p, p_ref, n, rval)
+W23(wrap_gsw_pt_second_derivatives, gsw_pt_second_derivatives, SA, CT, n, pt_SA_SA, pt_SA_CT, pt_CT_CT)
 W31(wrap_gsw_rho, gsw_rho, SA, CT, p, n, rval)
 W33(wrap_gsw_rho_alpha_beta, gsw_rho_alpha_beta, SA, CT, p, n, rho, alpha, beta)
 W33(wrap_gsw_rho_first_derivatives, gsw_rho_first_derivatives, SA, CT, p, n, drho_dsa, drho_dct, drho_dp)
