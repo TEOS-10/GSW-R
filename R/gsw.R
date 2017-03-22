@@ -1407,7 +1407,6 @@ gsw_enthalpy_ice <- function(t, p)
 
 
 
-############
 
 #' Second Derivatives of Enthalpy
 #' 
@@ -1439,11 +1438,10 @@ gsw_enthalpy_second_derivatives <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
     n <- length(l[[1]])
-    r <- .C("wrap_gsw_enthalpy_second_derivatives",
+    r <- .C("wrap_gsw_enthalpy_second_derivatives", NAOK=TRUE, PACKAGE="gsw",
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
             n=as.integer(n),
-            h_SA_SA=double(n), h_SA_CT=double(n), h_CT_CT=double(n),
-            NAOK=TRUE, PACKAGE="gsw")
+            h_SA_SA=double(n), h_SA_CT=double(n), h_CT_CT=double(n))
     if (is.matrix(SA)) {
         dim(r$h_SA_SA) <- dim(SA)
         dim(r$h_SA_CT) <- dim(SA)
@@ -1451,7 +1449,50 @@ gsw_enthalpy_second_derivatives <- function(SA, CT, p)
     }
     list(h_SA_SA=r$h_SA_SA, h_SA_CT=r$h_SA_CT, h_CT_CT=r$h_CT_CT)
 }
-############
+
+#' Second Derivatives of Enthalpy (exact)
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#' @return A list containing \code{h_SA_SA} [ (J/kg)/(g/kg)^2 ], the second derivative of
+#' enthalpy with respect to Absolute Salinity, \code{h_SA_CT} [ (J/kg)/(degC*g/kg) ], the derivative of
+#' enthalpy with respect to Absolute Salinity and Conservative Temperature,
+#' and \code{h_CT_CT} [ (J/kg)/degC^2 ], the second derivative of
+#' enthalpy with respect to Conservative Temperature.
+#' @examples 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' r <- gsw_enthalpy_second_derivatives(SA, CT, p)
+#' expect_equal(r$h_SA_SA, c(0.000082767011576, 0.000414469343141, 0.001089580017293,
+#'                         0.002472193425998, 0.006103171596320, 0.010377465312463))
+#' expect_equal(r$h_SA_CT, c(0.000130320164426, 0.000655016236924, 0.001879127443985,
+#'                         0.005468695168037, 0.014315709000526, 0.025192691262061))
+#'\dontrun{ # does not match website -- asked CR to check with matlab
+#' expect_equal(r$h_CT_CT, c(0.000714365642428, 0.003584965089168, 0.009733337653703,
+#'                         0.024044402143825, 0.061449390733344, 0.107333638394904))
+#'}
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_second_derivatives_CT_exact.html}
+gsw_enthalpy_second_derivatives_CT_exact <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_enthalpy_second_derivatives_CT_exact", NAOK=TRUE, PACKAGE="gsw",
+            SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+            n=as.integer(n),
+            h_SA_SA=double(n), h_SA_CT=double(n), h_CT_CT=double(n))
+    if (is.matrix(SA)) {
+        dim(r$h_SA_SA) <- dim(SA)
+        dim(r$h_SA_CT) <- dim(SA)
+        dim(r$h_CT_CT) <- dim(SA)
+    }
+    list(h_SA_SA=r$h_SA_SA, h_SA_CT=r$h_SA_CT, h_CT_CT=r$h_CT_CT)
+}
 
 
 #' Seawater Specific Enthalpy in terms of in-situ Temperature
