@@ -31,6 +31,10 @@ and the data are inserted, when \code{gsw} is launched.
 Thus, the existing C library code "knows" about the data
 as local storage, which keeps alterations to the C library to 
 a minimum.
+
+The \code{saar} dataset was created by the following R code, which
+makes an assumption that the GSW-Fortran repository has been cloned
+to the \code{~/git} directory on a unix-like machine.
 \preformatted{
   library(ncdf4)
   nc <- nc_open("~/git/GSW-Fortran/test/gsw_data_v3_0.nc")
