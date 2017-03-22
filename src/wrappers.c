@@ -440,6 +440,7 @@ W33(wrap_gsw_rho_first_derivatives, gsw_rho_first_derivatives, SA, CT, p, n, drh
 W32(wrap_gsw_rho_first_derivatives_wrt_enthalpy, gsw_rho_first_derivatives_wrt_enthalpy, SA, CT, p, n, rho_sa_wrt_h, rho_h)
 W21(wrap_gsw_rho_ice, gsw_rho_ice, t, p, n, rval)
 W35(wrap_gsw_rho_second_derivatives, gsw_rho_second_derivatives, SA, CT, p, n, rho_SA_SA, rho_SA_CT, rho_CT_CT, rho_SA_p, rho_CT_p)
+W33(wrap_gsw_rho_second_derivatives_wrt_enthalpy, gsw_rho_second_derivatives_wrt_enthalpy, SA, CT, p, n, rho_SA_SA, rho_SA_h, rho_h_h)
 W31(wrap_gsw_rho_t_exact, gsw_rho_t_exact, SA, t, p, n, rval)
 void wrap_gsw_SAAR(double *p, double *longitude, double *latitude, int *n, double *saar, int *inocean)
 {

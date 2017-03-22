@@ -1654,7 +1654,8 @@ gsw_entropy_from_t <- function(SA, t, p)
 #' expect_equal(r$eta_CT_CT, c(-0.043665023731109, -0.043781336189326, -0.045506114440888,
 #'                           -0.049708939454018, -0.050938690879443, -0.051875017843472))
 #' @section Bugs:
-#' Fails one or more tests provided in the official teos-10 HTML documentation.
+#' Fails some of the tests provided in the official teos-10 HTML documentation.
+#' (These tests are not run by \code{examples} for this function.)
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_second_derivatives.html}
 gsw_entropy_second_derivatives <- function(SA, CT)
@@ -3639,6 +3640,54 @@ gsw_rho_second_derivatives <- function(SA, CT, p)
     list(rho_SA_SA=r$rho_SA_SA, rho_SA_CT=r$rho_SA_CT, rho_CT_CT=r$rho_CT_CT, rho_SA_p=r$rho_SA_p, rho_CT_p=r$rho_CT_p)
 }
 
+#' Second Derivatives of Density wrt Enthalpy
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#' @return A list containing \code{rho_SA_SA} [ (kg/m^3)/(g/kg)^2 ], the second derivative of
+#' density with respect to Absolute Salinity,
+#' \code{rho_SA_h} [ (g/kg)/(g/kg)/(J/kg)], the derivative of
+#' density with respect to Absolute Salinity and enthalpy,
+#' and \code{rho_h_h} [ (kg/m^3)/(J/kg)^2 ], the second derivative of
+#' density with respect to enthalpy.
+#' @examples 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' r <- gsw_rho_second_derivatives_wrt_enthalpy(SA, CT, p)
+#'\dontrun{
+#' expect_equal(r$rho_SA_SA/1e-3, c(0.207312311365309, 0.207065245046916, 0.191848573966760,
+#'                                0.133182874760740, 0.116049038653105, 0.102745310138668))
+#' expect_equal(r$rho_SA_h/1e-6, c(-0.459053058196368, -0.460370465121129, -0.498605501625317,
+#'                               -0.642833102745046, -0.682091960979835, -0.706793055100969))
+#'}
+#' expect_equal(r$rho_h_h/1e-9, c(-0.454213854637790, -0.455984900239309, -0.499870030989387,
+#'                              -0.628337767293403, -0.664021595759308, -0.687367088752173))
+#' @section Bugs:
+#' Fails some of the tests provided in the official teos-10 HTML documentation.
+#' (These tests are not run by \code{examples} for this function.)
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_second_derivatives_wrt_enthalpy.html}
+gsw_rho_second_derivatives_wrt_enthalpy <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_rho_second_derivatives_wrt_enthalpy", NAOK=TRUE, PACKAGE="gsw",
+            SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+            n=as.integer(n),
+            rho_SA_SA=double(n), rho_SA_h=double(n), rho_h_h=double(n))
+    if (is.matrix(SA)) {
+        dim <- dim(SA)
+        dim(r$rho_SA_SA) <- dim
+        dim(r$rho_SA_h) <- dim
+        dim(r$rho_h_h) <- dim
+    }
+    list(rho_SA_SA=r$rho_SA_SA, rho_SA_h=r$rho_SA_h, rho_h_h=r$rho_h_h)
+}
 
 #' In-situ Density of Seawater
 #' 
