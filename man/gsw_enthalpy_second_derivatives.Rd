@@ -34,7 +34,7 @@ it all, please consult \url{http://www.teos-10.org}.
 }
 \section{Bugs}{
 
-Fails the first test listed in the documentation.
+Fails one or more tests provided in the official teos-10 HTML documentation.
 }
 
 \examples{

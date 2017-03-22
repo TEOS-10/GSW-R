@@ -341,6 +341,7 @@ W22(wrap_gsw_entropy_first_derivatives, gsw_entropy_first_derivatives, SA, CT, n
 W21(wrap_gsw_entropy_ice, gsw_entropy_ice, t, p, n, rval)
 W21(wrap_gsw_entropy_from_pt, gsw_entropy_from_pt, SA, pt, n, rval)
 W31(wrap_gsw_entropy_from_t, gsw_entropy_from_t, SA, t, p, n, rval)
+W23(wrap_gsw_entropy_second_derivatives, gsw_entropy_second_derivatives, SA, CT, n, h_SA_SA, h_SA_CT, h_CT_CT)
 W31(wrap_gsw_Fdelta, gsw_fdelta, p, longitude, latitude, n, rval)
 W33(wrap_gsw_frazil_properties, gsw_frazil_properties, SA_bulk, h_bulk, p, n, SA_final, CT_final, w_Ih_final)
 W33(wrap_gsw_frazil_properties_potential, gsw_frazil_properties_potential, SA_bulk, h_pot_bulk, p, n, SA_final, CT_final, w_Ih_final)

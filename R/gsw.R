@@ -1435,7 +1435,7 @@ gsw_enthalpy_ice <- function(t, p)
 #' expect_equal(r$h_CT_CT, c(0.000714303909834, 0.003584401249266, 0.009718730753139,
 #'                         0.024064471995224, 0.061547884081343, 0.107493969308119))
 #' @section Bugs:
-#' Fails the first test listed in the documentation.
+#' Fails one or more tests provided in the official teos-10 HTML documentation.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_second_derivatives.html}
 gsw_enthalpy_second_derivatives <- function(SA, CT, p)
@@ -1633,6 +1633,51 @@ gsw_entropy_from_t <- function(SA, t, p)
          dim(rval) <- dim(SA)
      rval
 }
+
+
+#' Second Derivatives of Entropy
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template CTtemplate
+#' @return A list containing \code{eta_SA_SA} [ (J/(degC*kg))/(g/kg)^2 ], the second derivative of
+#' entropy with respect to Absolute Salinity, \code{eta_SA_CT} [ (J/(degC*kg))/(degC*g/kg) ], the derivative of
+#' entropy with respect to Absolute Salinity and Conservative Temperature,
+#' and \code{eta_CT_CT} [ (J/(degC*kg))/degC^2 ], the second derivative of
+#' entropy with respect to Conservative Temperature.
+#' @examples 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' r <- gsw_entropy_second_derivatives(SA, CT)
+#' expect_equal(r$eta_SA_SA, c(-0.007627718929669, -0.007591969960708, -0.007528186784540,
+#'                           -0.007455177590576, -0.007441108287466, -0.007414368396280))
+#' expect_equal(r$eta_SA_CT, c(-0.001833104216751, -0.001819473824306, -0.001580843823414,
+#'                           -0.000930111408561, -0.000717011215195, -0.000548410546830))
+#' expect_equal(r$eta_CT_CT, c(-0.043665023731109, -0.043781336189326, -0.045506114440888,
+#'                           -0.049708939454018, -0.050938690879443, -0.051875017843472))
+#' @section Bugs:
+#' Fails one or more tests provided in the official teos-10 HTML documentation.
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_second_derivatives.html}
+gsw_entropy_second_derivatives <- function(SA, CT)
+{
+    l <- argfix(list(SA=SA, CT=CT))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_entropy_second_derivatives", NAOK=TRUE, PACKAGE="gsw",
+            SA=as.double(l$SA), CT=as.double(l$CT),
+            n=as.integer(n),
+            eta_SA_SA=double(n), eta_SA_CT=double(n), eta_CT_CT=double(n))
+    if (is.matrix(SA)) {
+        dim(r$eta_SA_SA) <- dim(SA)
+        dim(r$eta_SA_CT) <- dim(SA)
+        dim(r$eta_CT_CT) <- dim(SA)
+    }
+    list(eta_SA_SA=r$eta_SA_SA, eta_SA_CT=r$eta_SA_CT, eta_CT_CT=r$eta_CT_CT)
+}
+
+
 
 
 #' Ratio of Absolute to Preformed Salinity, minus 1
