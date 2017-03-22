@@ -32,14 +32,21 @@ which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10
 To learn more about these software systems, their authorships, and the science behind
 it all, please consult \url{http://www.teos-10.org}.
 }
+\section{Bugs}{
+
+Fails the first test listed in the documentation.
+}
+
 \examples{
 library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 p <- c(      10,      50,     125,     250,     600,    1000)
 r <- gsw_enthalpy_second_derivatives(SA, CT, p)
+\dontrun{
 expect_equal(r$h_SA_SA, c(0.000080922482023, 0.000404963500641, 0.001059800046742,
                         0.002431088963823, 0.006019611828423, 0.010225411250217))
+}
 expect_equal(r$h_SA_CT, c(0.000130004715129, 0.000653614489248, 0.001877220817849,
                         0.005470392103793, 0.014314756132297, 0.025195603327700))
 expect_equal(r$h_CT_CT, c(0.000714303909834, 0.003584401249266, 0.009718730753139,

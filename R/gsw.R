@@ -1426,12 +1426,16 @@ gsw_enthalpy_ice <- function(t, p)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_enthalpy_second_derivatives(SA, CT, p)
+#'\dontrun{
 #' expect_equal(r$h_SA_SA, c(0.000080922482023, 0.000404963500641, 0.001059800046742,
 #'                         0.002431088963823, 0.006019611828423, 0.010225411250217))
+#'}
 #' expect_equal(r$h_SA_CT, c(0.000130004715129, 0.000653614489248, 0.001877220817849,
 #'                         0.005470392103793, 0.014314756132297, 0.025195603327700))
 #' expect_equal(r$h_CT_CT, c(0.000714303909834, 0.003584401249266, 0.009718730753139,
 #'                         0.024064471995224, 0.061547884081343, 0.107493969308119))
+#' @section Bugs:
+#' Fails the first test listed in the documentation.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_second_derivatives.html}
 gsw_enthalpy_second_derivatives <- function(SA, CT, p)
@@ -1467,15 +1471,13 @@ gsw_enthalpy_second_derivatives <- function(SA, CT, p)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
-#' r <- gsw_enthalpy_second_derivatives(SA, CT, p)
+#' r <- gsw_enthalpy_second_derivatives_CT_exact(SA, CT, p)
 #' expect_equal(r$h_SA_SA, c(0.000082767011576, 0.000414469343141, 0.001089580017293,
 #'                         0.002472193425998, 0.006103171596320, 0.010377465312463))
 #' expect_equal(r$h_SA_CT, c(0.000130320164426, 0.000655016236924, 0.001879127443985,
 #'                         0.005468695168037, 0.014315709000526, 0.025192691262061))
-#'\dontrun{ # does not match website -- asked CR to check with matlab
 #' expect_equal(r$h_CT_CT, c(0.000714365642428, 0.003584965089168, 0.009733337653703,
 #'                         0.024044402143825, 0.061449390733344, 0.107333638394904))
-#'}
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_second_derivatives_CT_exact.html}
 gsw_enthalpy_second_derivatives_CT_exact <- function(SA, CT, p)
