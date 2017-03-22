@@ -3771,7 +3771,7 @@ gsw_SAAR <- function(p, longitude, latitude)
     list(SAAR=r$SAAR, in_ocean=r$in_ocean)
 }
 
-#' Compute Absolute Salinity at Freezing Point
+#' Compute Absolute Salinity at Freezing Conservative Temperature
 #' 
 #' @template teos10template
 #'
@@ -3833,6 +3833,36 @@ gsw_SA_freezing_from_CT_poly <- function(CT, p, saturation_fraction=1)
     rval
 }
 
+#' Compute Absolute Salinity at Freezing in-situ Temperature
+#' 
+#' @template teos10template
+#'
+#' @template ttemplate
+#' @template ptemplate
+#' @template saturation_fractiontemplate
+#' @return Absolute Salinity [ g/kg ]
+#' @examples
+#' library(testthat)
+#' t <- c(-0.11901, -0.15608, -0.72138, -1.97738, -2.31728, -2.56764)
+#' p <- c(      10,       50,      125,      250,      600,     1000)
+#' saturation_fraction <- 1
+#' SA <- gsw_SA_freezing_from_t(t, p, saturation_fraction)
+#' expect_equal(SA, c(2.015798440008186, 2.150742019102164, 11.679080083422074,
+#'                  32.844196564019278, 34.138949682974413, 33.100945437175568))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_freezing_from_t.html}
+gsw_SA_freezing_from_t <- function(t, p, saturation_fraction=1)
+{
+    l <- argfix(list(t=t, p=p, saturation_fraction=saturation_fraction))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_SA_freezing_from_t", NAOK=TRUE, PACKAGE="gsw",
+               t=as.double(l$t), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
+               n=as.integer(n),
+               rval=double(n))$rval
+    if (is.matrix(CT))
+        dim(rval) <- dim(CT)
+    rval
+}
 
 #' Compute Absolute Salinity from Density, etc
 #' 
