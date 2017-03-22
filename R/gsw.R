@@ -1406,6 +1406,54 @@ gsw_enthalpy_ice <- function(t, p)
 }
 
 
+
+############
+
+#' Second Derivatives of Enthalpy
+#' 
+#' @template teos10template
+#' 
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#' @return A list containing \code{h_SA_SA} [ (J/kg)/(g/kg)^2 ], the second derivative of
+#' enthalpy with respect to Absolute Salinity, \code{h_SA_CT} [ (J/kg)/(degC*g/kg) ], the derivative of
+#' enthalpy with respect to Absolute Salinity and Conservative Temperature,
+#' and \code{h_CT_CT} [ (J/kg)/degC^2 ], the second derivative of
+#' enthalpy with respect to Conservative Temperature.
+#' @examples 
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' r <- gsw_enthalpy_second_derivatives(SA, CT, p)
+#' expect_equal(r$h_SA_SA, c(0.000080922482023, 0.000404963500641, 0.001059800046742,
+#'                         0.002431088963823, 0.006019611828423, 0.010225411250217))
+#' expect_equal(r$h_SA_CT, c(0.000130004715129, 0.000653614489248, 0.001877220817849,
+#'                         0.005470392103793, 0.014314756132297, 0.025195603327700))
+#' expect_equal(r$h_CT_CT, c(0.000714303909834, 0.003584401249266, 0.009718730753139,
+#'                         0.024064471995224, 0.061547884081343, 0.107493969308119))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_second_derivatives.html}
+gsw_enthalpy_second_derivatives <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    r <- .C("wrap_gsw_enthalpy_second_derivatives",
+            SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+            n=as.integer(n),
+            h_SA_SA=double(n), h_SA_CT=double(n), h_CT_CT=double(n),
+            NAOK=TRUE, PACKAGE="gsw")
+    if (is.matrix(SA)) {
+        dim(r$h_SA_SA) <- dim(SA)
+        dim(r$h_SA_CT) <- dim(SA)
+        dim(r$h_CT_CT) <- dim(SA)
+    }
+    list(h_SA_SA=r$h_SA_SA, h_SA_CT=r$h_SA_CT, h_CT_CT=r$h_CT_CT)
+}
+############
+
+
 #' Seawater Specific Enthalpy in terms of in-situ Temperature
 #' 
 #' @template teos10template
