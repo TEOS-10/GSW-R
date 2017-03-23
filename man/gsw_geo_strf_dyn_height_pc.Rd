@@ -17,6 +17,10 @@ assumed to be constant. Note that \code{delta_p} must be positive.}
 }
 \value{
 A list containing \code{dyn_height}, the dynamic height anomaly [ m^2/s^2 ], and
+\code{p_mid} [ dbar ], the pressures at the layer centres. Note that the dynamic height
+anomaly unit, also known as a "dynamic meter", corresponds to approximately 1.02 metres of sealevel height
+(see e.g. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition.
+Elsevier).
 }
 \description{
 Geostrophic Dynamic Height Anomaly (Piecewise-Constant Profile)

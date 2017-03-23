@@ -2007,7 +2007,10 @@ gsw_grav <- function(latitude, p=0)
 #' @template CTtemplate
 #' @template ptemplate
 #' @template p_reftemplate
-#' @return Dynamic height anomaly [ m^2/s^2 ]
+#' @return Dynamic height anomaly [ m^2/s^2 ]. Note that this unit, sometimes called
+#' a "dynamical meter", corresponds to approximately 1.02 metres of sealevel height
+#' (see e.g. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition.
+#' Elsevier).
 #' @examples
 #' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -2043,7 +2046,10 @@ gsw_geo_strf_dyn_height <- function(SA, CT, p, p_ref=0)
 #' @template CTtemplate
 #' @template delta_ptemplate
 #' @return A list containing \code{dyn_height}, the dynamic height anomaly [ m^2/s^2 ], and
-#" \code{p_mid} [ dbar ], the pressures at the layer centres.
+#' \code{p_mid} [ dbar ], the pressures at the layer centres. Note that the dynamic height
+#' anomaly unit, also known as a "dynamic meter", corresponds to approximately 1.02 metres of sealevel height
+#' (see e.g. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition.
+#' Elsevier).
 #' @examples
 #' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)

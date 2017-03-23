@@ -16,7 +16,10 @@ gsw_geo_strf_dyn_height(SA, CT, p, p_ref = 0)
 \item{p_ref}{reference pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
-Dynamic height anomaly [ m^2/s^2 ]
+Dynamic height anomaly [ m^2/s^2 ]. Note that this unit, sometimes called
+a "dynamical meter", corresponds to approximately 1.02 metres of sealevel height
+(see e.g. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition.
+Elsevier).
 }
 \description{
 Geostrophic Dynamic Height Anomaly
