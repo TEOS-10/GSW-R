@@ -1999,6 +1999,42 @@ gsw_grav <- function(latitude, p=0)
     rval
 }
 
+#' Geostrophic Streamfunction
+#' 
+#' @template teos10template
+#'
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#' @template p_reftemplate
+#' @return Geostrophic dynamic height [ m^2/s^2 ]
+#' @examples
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' p_ref <- 1000
+#' dh <- gsw_geo_strf_dyn_height(SA, CT, p, p_ref)
+#' expect_equal(dh, c(17.039204557769487, 14.665853784722286, 10.912861136923812,
+#'                  7.567928838774945, 3.393524055565328, 0))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_geo_strf_dyn_height.html}
+gsw_geo_strf_dyn_height <- function(SA, CT, p, p_ref=0)
+{
+    if (missing(SA) || missing(CT) || missing(p)) stop("must supply SA, CT, and p")
+    if (!is.vector(SA)) stop("SA must be a vector")
+    if (!is.vector(CT)) stop("CT must be a vector")
+    if (!is.vector(p)) stop("p must be a vector")
+    if (length(SA) != length(CT)) stop("SA and CT must be of the same length")
+    if (length(CT) != length(p)) stop("CT and p must be of the same length")
+    n <- length(SA)
+    rval <- .C("wrap_gsw_geo_strf_dyn_height", NAOK=TRUE, PACKAGE="gsw",
+               SA=as.double(SA), CT=as.double(CT), p=as.double(p), p_ref=as.double(p_ref[1]),
+               n=as.integer(n), rval=double(n))$rval
+    rval
+}
+
+
 #' Gibbs Energy of Seawater, and its Derivatives
 #' 
 #' @template teos10template

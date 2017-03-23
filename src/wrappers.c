@@ -372,6 +372,11 @@ W33(wrap_gsw_frazil_properties_potential_poly, gsw_frazil_properties_potential_p
 W33(wrap_gsw_frazil_ratios_adiabatic, gsw_frazil_ratios_adiabatic, SA, p, w_Ih, n, dSA_dCT_frazil, dSA_dP_frazil, dCT_dP_frazil)
 W33(wrap_gsw_frazil_ratios_adiabatic_poly, gsw_frazil_ratios_adiabatic_poly, SA, p, w_Ih, n, dSA_dCT_frazil, dSA_dP_frazil, dCT_dP_frazil)
 
+void wrap_gsw_geo_strf_dyn_height(double *SA, double *CT, double *p, double *p_ref, int *n, double *dyn_height)
+{
+    gsw_geo_strf_dyn_height(SA, CT, p, *p_ref, *n, dyn_height);
+}
+
 void wrap_gsw_gibbs(int *ns, int *nt, int *np, double *SA, double *t, double *p, int *n, double *res)
 {
     for (int i=0; i < *(n); i++)
