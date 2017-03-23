@@ -377,6 +377,12 @@ void wrap_gsw_geo_strf_dyn_height(double *SA, double *CT, double *p, double *p_r
     gsw_geo_strf_dyn_height(SA, CT, p, *p_ref, *n, dyn_height);
 }
 
+void wrap_gsw_geo_strf_dyn_height_pc(double *SA, double *CT, double *delta_p, int *n, double *dyn_height, double *p_mid)
+{
+    gsw_geo_strf_dyn_height_pc(SA, CT, delta_p, *n, dyn_height, p_mid);
+}
+
+
 void wrap_gsw_gibbs(int *ns, int *nt, int *np, double *SA, double *t, double *p, int *n, double *res)
 {
     for (int i=0; i < *(n); i++)

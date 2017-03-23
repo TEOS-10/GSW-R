@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_geo_strf_dyn_height}
 \alias{gsw_geo_strf_dyn_height}
-\title{Geostrophic Streamfunction}
+\title{Geostrophic Dynamic Height Anomaly}
 \usage{
 gsw_geo_strf_dyn_height(SA, CT, p, p_ref = 0)
 }
@@ -16,10 +16,10 @@ gsw_geo_strf_dyn_height(SA, CT, p, p_ref = 0)
 \item{p_ref}{reference pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
-Geostrophic dynamic height [ m^2/s^2 ]
+Dynamic height anomaly [ m^2/s^2 ]
 }
 \description{
-Geostrophic Streamfunction
+Geostrophic Dynamic Height Anomaly
 }
 \details{
 The present R function works with a wrapper to a C function contained

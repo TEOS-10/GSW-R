@@ -1999,7 +1999,7 @@ gsw_grav <- function(latitude, p=0)
     rval
 }
 
-#' Geostrophic Streamfunction
+#' Geostrophic Dynamic Height Anomaly
 #' 
 #' @template teos10template
 #'
@@ -2007,7 +2007,7 @@ gsw_grav <- function(latitude, p=0)
 #' @template CTtemplate
 #' @template ptemplate
 #' @template p_reftemplate
-#' @return Geostrophic dynamic height [ m^2/s^2 ]
+#' @return Dynamic height anomaly [ m^2/s^2 ]
 #' @examples
 #' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -2032,6 +2032,44 @@ gsw_geo_strf_dyn_height <- function(SA, CT, p, p_ref=0)
                SA=as.double(SA), CT=as.double(CT), p=as.double(p), p_ref=as.double(p_ref[1]),
                n=as.integer(n), rval=double(n))$rval
     rval
+}
+
+
+#' Geostrophic Dynamic Height Anomaly (Piecewise-Constant Profile)
+#' 
+#' @template teos10template
+#'
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template delta_ptemplate
+#' @return A list containing \code{dyn_height}, the dynamic height anomaly [ m^2/s^2 ], and
+#" \code{p_mid} [ dbar ], the pressures at the layer centres.
+#' @examples
+#' library(testthat)
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' delta_p <- c(10,      40,      75,     125,     350,     400)
+#' r <- gsw_geo_strf_dyn_height_pc(SA, CT, delta_p)
+#' expect_equal(r$dyn_height, c(-0.300346215853487, -1.755165998114308, -4.423531083131365,
+#'                            -6.816659136254657, -9.453175257818430, -12.721009624991439))
+#' expect_equal(r$p_mid/1e2, c(0.050000000000000, 0.300000000000000, 0.875000000000000,
+#'                           1.875000000000000, 4.250000000000000, 8.000000000000000))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_geo_strf_dyn_height.html}
+gsw_geo_strf_dyn_height_pc <- function(SA, CT, delta_p)
+{
+    if (missing(SA) || missing(CT) || missing(delta_p)) stop("must supply SA, CT, and delta_p")
+    if (!is.vector(SA)) stop("SA must be a vector")
+    if (!is.vector(CT)) stop("CT must be a vector")
+    if (!is.vector(delta_p)) stop("delta_p must be a vector")
+    if (any(delta_p <= 0)) stop("each delta_p value must be positive")
+    if (length(SA) != length(CT)) stop("SA and CT must be of the same length")
+    if (length(CT) != length(delta_p)) stop("CT and delta_p must be of the same length")
+    n <- length(SA)
+    r <- .C("wrap_gsw_geo_strf_dyn_height_pc", NAOK=TRUE, PACKAGE="gsw",
+            SA=as.double(SA), CT=as.double(CT), delta_p=as.double(delta_p),
+            n=as.integer(n), dyn_height=double(n), p_mid=double(n))
+    list(dyn_height=r$dyn_height, p_mid=r$p_mid)
 }
 
 
