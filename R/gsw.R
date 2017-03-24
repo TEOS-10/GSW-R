@@ -95,9 +95,10 @@ NULL
 #' as local storage, which keeps alterations to the C library to 
 #' a minimum.
 #'
-#' The \code{saar} dataset was created by the following R code, which
-#' makes an assumption that the GSW-Fortran repository has been cloned
-#' to the \code{~/git} directory on a unix-like machine.
+#' The \code{saar} dataset was created by the following R code. The 
+#' netcdf file used in this code comes from the GSW-Fortran
+#' repository (at commit \code{baa0c09ffc7ed1f74972a1a2902d8754caa5b4cb})
+#' and its md5 value is \code{dacb3f981e8e710ac2e83477701b3905}.
 #'\preformatted{
 #'   library(ncdf4)
 #'   nc <- nc_open("~/git/GSW-Fortran/test/gsw_data_v3_0.nc")
