@@ -30,11 +30,13 @@ it all, please consult \url{http://www.teos-10.org}.
 }
 \section{Bugs}{
 
-The C source underlying this function lacks an argument, \code{saturation_fraction},
+1. The C source underlying this function lacks an argument, \code{saturation_fraction},
 which is present in the Matlab source, and so that argument is ignored here.
-Note also that the Matlab check values are not reproduced by the present R function,
-so the test in the documentation is not run.
-See https://github.com/TEOS-10/GSW-R/issues/27
+
+2. The R code does not reproduce the check values stated at 
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_ice_freezing.html}. Those
+values are incorporated in the test provided in \dQuote{Examples}, so that test
+is not performed during build tests.  See https://github.com/TEOS-10/GSW-R/issues/27.
 }
 
 \examples{
@@ -43,7 +45,7 @@ SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 p <- c(      10,      50,     125,     250,     600,    1000)
 saturation_fraction = 1
 e <- gsw_pot_enthalpy_ice_freezing(SA, p, saturation_fraction)
-\dontrun{ # does not match matlab's check value.
+\dontrun{
 expect_equal(e/1e5, c(-3.373409558967978, -3.374434164002012, -3.376117536928847,
                     -3.378453698871986, -3.385497832886802, -3.393768587631489))
 }

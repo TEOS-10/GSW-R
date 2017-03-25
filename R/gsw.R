@@ -2943,16 +2943,18 @@ gsw_pot_enthalpy_from_pt_ice_poly <- function(pt0_ice)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' saturation_fraction = 1
 #' e <- gsw_pot_enthalpy_ice_freezing(SA, p, saturation_fraction)
-#'\dontrun{ # does not match matlab's check value.
+#' \dontrun{
 #' expect_equal(e/1e5, c(-3.373409558967978, -3.374434164002012, -3.376117536928847,
 #'                     -3.378453698871986, -3.385497832886802, -3.393768587631489))
 #'}
 #' @section Bugs:
-#' The C source underlying this function lacks an argument, \code{saturation_fraction},
+#' 1. The C source underlying this function lacks an argument, \code{saturation_fraction},
 #' which is present in the Matlab source, and so that argument is ignored here.
-#' Note also that the Matlab check values are not reproduced by the present R function,
-#' so the test in the documentation is not run.
-#' See https://github.com/TEOS-10/GSW-R/issues/27
+#'
+#' 2. The R code does not reproduce the check values stated at 
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_ice_freezing.html}. Those
+#' values are incorporated in the test provided in \dQuote{Examples}, so that test
+#' is not performed during build tests.  See https://github.com/TEOS-10/GSW-R/issues/27.
 #' @family things related to enthalpy
 #' @family things related to ice
 #' @references
@@ -3754,7 +3756,9 @@ gsw_rho_second_derivatives <- function(SA, CT, p)
 #'                              -0.628337767293403, -0.664021595759308, -0.687367088752173))
 #' @section Bugs:
 #' Fails some of the tests provided in the official teos-10 HTML documentation.
-#' (These tests are not run by \code{examples} for this function.)
+#' However, the values produced by the present function agree with values calculated
+#' by Matlab, so I think the teos-10 HTML documentation must be incorrect.
+#' See https://github.com/TEOS-10/GSW-R/issues/35
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_second_derivatives_wrt_enthalpy.html}
 gsw_rho_second_derivatives_wrt_enthalpy <- function(SA, CT, p)
