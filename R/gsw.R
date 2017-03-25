@@ -4737,7 +4737,9 @@ gsw_specvol_second_derivatives <- function(SA, CT, p)
 #'                                   0.598480711660961, 0.628708349875318, 0.647433212216398))
 #' @section Bugs:
 #' Fails some of the tests provided in the official teos-10 HTML documentation.
-#' (These tests are not run by \code{examples} for this function.)
+#' However, the values produced by the present function agree with values calculated
+#' by Matlab, so I think the teos-10 HTML documentation must be incorrect.
+#' See https://github.com/TEOS-10/GSW-R/issues/36
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_second_derivatives_wrt_enthalpy.html}
 gsw_specvol_second_derivatives_wrt_enthalpy <- function(SA, CT, p)
