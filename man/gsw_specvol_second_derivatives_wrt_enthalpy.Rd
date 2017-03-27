@@ -35,10 +35,10 @@ it all, please consult \url{http://www.teos-10.org}.
 }
 \section{Bugs}{
 
-Fails some of the tests provided in the official teos-10 HTML documentation.
-However, the values produced by the present function agree with values calculated
-by Matlab, so I think the teos-10 HTML documentation must be incorrect.
-See https://github.com/TEOS-10/GSW-R/issues/36
+The test values used in \dQuote{Examples} are taken from a comment at
+https://github.com/TEOS-10/GSW-R/issues/36, and the hope is that they will
+appear in the website cited in \dQuote{References} sometime in April of
+2017.
 }
 
 \examples{
@@ -47,12 +47,10 @@ SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 p <- c(      10,      50,     125,     250,     600,    1000)
 r <- gsw_specvol_second_derivatives_wrt_enthalpy(SA, CT, p)
-\dontrun{
-expect_equal(r$specvol_SA_SA/1e-8, c(0.080900025859182, 0.080937984647615, 0.084663048560091,
-                                   0.096973363977898, 0.099727453084020, 0.101353037917500))
-expect_equal(r$specvol_SA_h/1e-12, c(0.325437111980685, 0.327060359677010, 0.375273458551009,
-                                   0.545188827543840, 0.589424880032330, 0.616101547884275))
-}
+expect_equal(r$specvol_SA_SA/1e-8, c(0.080900028996264, 0.080937999675000, 0.084663065647101,
+                                   0.096973364985384, 0.099727453432293, 0.101353037979356))
+expect_equal(r$specvol_SA_h/1e-12, c(0.325437133570796, 0.327060462851431, 0.375273569184178,
+                                   0.545188833073084, 0.589424881889351, 0.616101548209175))
 expect_equal(r$specvol_h_h/1e-15, c(0.447949998681476, 0.449121446914278, 0.485998151346315,
                                   0.598480711660961, 0.628708349875318, 0.647433212216398))
 }
