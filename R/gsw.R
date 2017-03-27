@@ -5331,10 +5331,10 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
 #'                                       -0.756170965034610, -0.767279572670040, -0.779936552091913))
 #' @family things related to ice
 #' @section Bugs:
-#' The website cited in \dQuote{References} has incorrect check values, as of 2017-03-20 09:30:47 UTC.
-#' This should be a temporary problem, but this section will be retained until the page
-#' is updated.
-#' See https://github.com/TEOS-10/GSW-R/issues/31
+#' The test values used in \dQuote{Examples} are not the same as those listed on 
+#' the website cited in \dQuote{References}. It is hoped that the latter will
+#' be updated sometime in April of 2017.
+#' (See https://github.com/TEOS-10/GSW-R/issues/31.)
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_first_derivatives.html}
 gsw_t_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)
