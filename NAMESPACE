@@ -1,5 +1,5 @@
 # vim:filetype=r:textwidth=80:expandtab:shiftwidth=4:softtabstop=4
-useDynLib(gsw)
+useDynLib(gsw, .registration=TRUE)
 
 importFrom("utils", "data")
 
