@@ -32,8 +32,13 @@ it all, please consult \url{http://www.teos-10.org}.
 }
 \section{Bugs}{
 
-Fails some of the tests provided in the official teos-10 HTML documentation.
-(These tests are not run by \code{examples} for this function.)
+
+As of March 27, 2017, the test values listed in \dQuote{Examples} do not match
+values provided at the TEOS-10 website listed in \dQuote{References},
+but they match with values given by the Matlab code that is
+provided on the TEOS-10 website. It is expected that the
+TEOS-10 website will be updated by May 2017. As those updates to the TEOS-10
+website become available, the present comment will be revised or deleted.
 }
 
 \examples{
@@ -50,4 +55,11 @@ expect_equal(r$eta_CT_CT, c(-0.043665023731109, -0.043781336189326, -0.045506114
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_second_derivatives.html}
+}
+\seealso{
+Other functions with suspicious test values on the TEOS-10 website: \code{\link{gsw_enthalpy_first_derivatives}},
+  \code{\link{gsw_rho_second_derivatives_wrt_enthalpy}},
+  \code{\link{gsw_specvol_second_derivatives_wrt_enthalpy}},
+  \code{\link{gsw_t_freezing_first_derivatives_poly}},
+  \code{\link{gsw_t_freezing_first_derivatives}}
 }

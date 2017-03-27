@@ -32,9 +32,13 @@ it all, please consult \url{http://www.teos-10.org}.
 }
 \section{Bugs}{
 
-The website cited in \dQuote{References} has incorrect check values, as of 2017-03-20 09:30:47 UTC.
-This should be a temporary problem, but this section will be retained until the page
-is updated.
+
+As of March 27, 2017, the test values listed in \dQuote{Examples} do not match
+values provided at the TEOS-10 website listed in \dQuote{References},
+but they match with values given by the Matlab code that is
+provided on the TEOS-10 website. It is expected that the
+TEOS-10 website will be updated by May 2017. As those updates to the TEOS-10
+website become available, the present comment will be revised or deleted.
 }
 
 \examples{
@@ -70,4 +74,10 @@ Other things related to enthalpy: \code{\link{gsw_CT_from_enthalpy}},
   \code{\link{gsw_pt_from_pot_enthalpy_ice}},
   \code{\link{gsw_specvol_first_derivatives_wrt_enthalpy}},
   \code{\link{gsw_specvol_first_derivatives}}
+
+Other functions with suspicious test values on the TEOS-10 website: \code{\link{gsw_entropy_second_derivatives}},
+  \code{\link{gsw_rho_second_derivatives_wrt_enthalpy}},
+  \code{\link{gsw_specvol_second_derivatives_wrt_enthalpy}},
+  \code{\link{gsw_t_freezing_first_derivatives_poly}},
+  \code{\link{gsw_t_freezing_first_derivatives}}
 }

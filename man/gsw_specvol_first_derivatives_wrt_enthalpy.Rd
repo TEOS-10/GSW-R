@@ -14,7 +14,7 @@ gsw_specvol_first_derivatives_wrt_enthalpy(SA, CT, p)
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
-A list containing \code{v_SA_wrt_h} and \code{v_h}. See \dQuote{Bugs}.
+A list containing \code{v_SA_wrt_h} and \code{v_h}.
 }
 \description{
 First Derivatives of Specific Volume wrt Enthalpy

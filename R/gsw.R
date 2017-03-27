@@ -1304,10 +1304,8 @@ gsw_enthalpy_diff <- function(SA, CT, p_shallow, p_deep)
 #'                      -1.829602387915694, -4.423463748270238, -7.405100077558673))
 #' expect_equal(d$h_CT/1e3, c(3.991899705530481, 3.992025640520101, 3.992210365030743,
 #'                          3.992284150250490, 3.992685389122658, 3.993014168534175))
-#' @section Bugs:
-#' The website cited in \dQuote{References} has incorrect check values, as of 2017-03-20 09:30:47 UTC.
-#' This should be a temporary problem, but this section will be retained until the page
-#' is updated.
+#' @template broken-test-values
+#' @template broken-test-values-family
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_first_derivatives.html}
 gsw_enthalpy_first_derivatives <- function(SA, CT, p)
@@ -1658,9 +1656,8 @@ gsw_entropy_from_t <- function(SA, t, p)
 #'                           -0.000930111408561, -0.000717011215195, -0.000548410546830))
 #' expect_equal(r$eta_CT_CT, c(-0.043665023731109, -0.043781336189326, -0.045506114440888,
 #'                           -0.049708939454018, -0.050938690879443, -0.051875017843472))
-#' @section Bugs:
-#' Fails some of the tests provided in the official teos-10 HTML documentation.
-#' (These tests are not run by \code{examples} for this function.)
+#' @template broken-test-values
+#' @template broken-test-values-family
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_second_derivatives.html}
 gsw_entropy_second_derivatives <- function(SA, CT)
@@ -3752,11 +3749,8 @@ gsw_rho_second_derivatives <- function(SA, CT, p)
 #'                               -0.642833108550133, -0.682091962941161, -0.706793055445909))
 #' expect_equal(r$rho_h_h/1e-9, c(-0.454213854637790, -0.455984900239309, -0.499870030989387,
 #'                              -0.628337767293403, -0.664021595759308, -0.687367088752173))
-#' @section Bugs:
-#' The test values used in \dQuote{Examples} are taken from a comment at
-#' https://github.com/TEOS-10/GSW-R/issues/35, and the hope is that they will
-#' appear in the website cited in \dQuote{References} sometime in April of
-#' 2017.
+#' @template broken-test-values
+#' @template broken-test-values-family
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_second_derivatives_wrt_enthalpy.html}
 gsw_rho_second_derivatives_wrt_enthalpy <- function(SA, CT, p)
@@ -3816,7 +3810,7 @@ gsw_rho_t_exact <- function(SA, t, p)
 #' @template latitudetemplate
 #' @return a list containing \code{SAAR}, which is
 #' the (unitless) Absolute Salinity Anomality Ratio, and \code{in_ocean} 
-#' is set to 1 if \code{SAAR} is nonzero, or to 0 otherwise. (See \dQuote{Bugs}.)
+#' is set to 1 if \code{SAAR} is nonzero, or to 0 otherwise.
 #'
 #' @section Bugs:
 #' The definition of \code{in_ocean} is incorrect, because the C function named
@@ -4585,7 +4579,7 @@ gsw_specvol_first_derivatives <- function(SA, CT, p)
 #' @template SAtemplate
 #' @template CTtemplate
 #' @template ptemplate
-#' @return A list containing \code{v_SA_wrt_h} and \code{v_h}. See \dQuote{Bugs}.
+#' @return A list containing \code{v_SA_wrt_h} and \code{v_h}.
 #' @examples 
 #' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -4731,11 +4725,8 @@ gsw_specvol_second_derivatives <- function(SA, CT, p)
 #'                                    0.545188833073084, 0.589424881889351, 0.616101548209175))
 #' expect_equal(r$specvol_h_h/1e-15, c(0.447949998681476, 0.449121446914278, 0.485998151346315,
 #'                                   0.598480711660961, 0.628708349875318, 0.647433212216398))
-#' @section Bugs:
-#' The test values used in \dQuote{Examples} are taken from a comment at
-#' https://github.com/TEOS-10/GSW-R/issues/36, and the hope is that they will
-#' appear in the website cited in \dQuote{References} sometime in April of
-#' 2017.
+#' @template broken-test-values
+#' @template broken-test-values-family
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_second_derivatives_wrt_enthalpy.html}
 gsw_specvol_second_derivatives_wrt_enthalpy <- function(SA, CT, p)
@@ -5330,11 +5321,8 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
 #' expect_equal(derivs$tfreezing_p/1e-7, c(-0.748468312442338, -0.749793159537290, -0.752225023995510,
 #'                                       -0.756170965034610, -0.767279572670040, -0.779936552091913))
 #' @family things related to ice
-#' @section Bugs:
-#' The test values used in \dQuote{Examples} are not the same as those listed on 
-#' the website cited in \dQuote{References}. It is hoped that the latter will
-#' be updated sometime in April of 2017.
-#' (See https://github.com/TEOS-10/GSW-R/issues/31.)
+#' @template broken-test-values
+#' @template broken-test-values-family
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_first_derivatives.html}
 gsw_t_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)
@@ -5372,11 +5360,8 @@ gsw_t_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)
 #'                                   -0.056903498206432, -0.056975157476629, -0.057083526206200))
 #' expect_equal(derivs$tfreezing_p/1e-7, c(-0.748987354878138, -0.750288853857513, -0.752676389629787,
 #'                                       -0.756549680608529, -0.767482625710990, -0.779985619685683))
-#' @section Bugs:
-#' The website cited in \dQuote{References} has incorrect check values, as of 2017-03-20 09:30:47 UTC.
-#' This should be a temporary problem, but this section will be retained until the page
-#' is updated.
-#' See https://github.com/TEOS-10/GSW-R/issues/32
+#' @template broken-test-values
+#' @template broken-test-values-family
 #' @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_first_derivatives.html}

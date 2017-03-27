@@ -32,10 +32,13 @@ it all, please consult \url{http://www.teos-10.org}.
 }
 \section{Bugs}{
 
-The test values used in \dQuote{Examples} are not the same as those listed on 
-the website cited in \dQuote{References}. It is hoped that the latter will
-be updated sometime in April of 2017.
-(See https://github.com/TEOS-10/GSW-R/issues/31.)
+
+As of March 27, 2017, the test values listed in \dQuote{Examples} do not match
+values provided at the TEOS-10 website listed in \dQuote{References},
+but they match with values given by the Matlab code that is
+provided on the TEOS-10 website. It is expected that the
+TEOS-10 website will be updated by May 2017. As those updates to the TEOS-10
+website become available, the present comment will be revised or deleted.
 }
 
 \examples{
@@ -95,4 +98,10 @@ Other things related to ice: \code{\link{gsw_CT_freezing_first_derivatives_poly}
   \code{\link{gsw_t_freezing_first_derivatives_poly}},
   \code{\link{gsw_t_freezing}},
   \code{\link{gsw_t_from_pt0_ice}}
+
+Other functions with suspicious test values on the TEOS-10 website: \code{\link{gsw_enthalpy_first_derivatives}},
+  \code{\link{gsw_entropy_second_derivatives}},
+  \code{\link{gsw_rho_second_derivatives_wrt_enthalpy}},
+  \code{\link{gsw_specvol_second_derivatives_wrt_enthalpy}},
+  \code{\link{gsw_t_freezing_first_derivatives_poly}}
 }

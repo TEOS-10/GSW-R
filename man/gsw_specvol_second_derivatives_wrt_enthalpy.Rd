@@ -35,10 +35,13 @@ it all, please consult \url{http://www.teos-10.org}.
 }
 \section{Bugs}{
 
-The test values used in \dQuote{Examples} are taken from a comment at
-https://github.com/TEOS-10/GSW-R/issues/36, and the hope is that they will
-appear in the website cited in \dQuote{References} sometime in April of
-2017.
+
+As of March 27, 2017, the test values listed in \dQuote{Examples} do not match
+values provided at the TEOS-10 website listed in \dQuote{References},
+but they match with values given by the Matlab code that is
+provided on the TEOS-10 website. It is expected that the
+TEOS-10 website will be updated by May 2017. As those updates to the TEOS-10
+website become available, the present comment will be revised or deleted.
 }
 
 \examples{
@@ -56,4 +59,11 @@ expect_equal(r$specvol_h_h/1e-15, c(0.447949998681476, 0.449121446914278, 0.4859
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_second_derivatives_wrt_enthalpy.html}
+}
+\seealso{
+Other functions with suspicious test values on the TEOS-10 website: \code{\link{gsw_enthalpy_first_derivatives}},
+  \code{\link{gsw_entropy_second_derivatives}},
+  \code{\link{gsw_rho_second_derivatives_wrt_enthalpy}},
+  \code{\link{gsw_t_freezing_first_derivatives_poly}},
+  \code{\link{gsw_t_freezing_first_derivatives}}
 }
