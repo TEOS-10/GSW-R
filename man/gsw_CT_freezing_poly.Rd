@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_CT_freezing_poly}
 \alias{gsw_CT_freezing_poly}
-\title{Conservative Temperature Freezing Point (Polynomial form)}
+\title{Conservative Temperature Freezing Point (Polynomial version)}
 \usage{
 gsw_CT_freezing_poly(SA, p, saturation_fraction = 1)
 }
@@ -17,7 +17,7 @@ gsw_CT_freezing_poly(SA, p, saturation_fraction = 1)
 Conservative Temperature at freezing of seawater [ deg C ]. That is, the freezing temperature expressed in terms of Conservative Temperature (ITS-90).
 }
 \description{
-Conservative Temperature Freezing Point (Polynomial form)
+Conservative Temperature Freezing Point (Polynomial version)
 }
 \details{
 The present R function works with a wrapper to a C function contained

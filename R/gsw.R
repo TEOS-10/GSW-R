@@ -4,7 +4,7 @@
 
 ## PART 1: document the package and the 'gsw' dataset
 
-#' R implementation of the Thermodynamic Equation Of Seawater - 2010 (TEOS-10)
+#' R implementation of Thermodynamic Equation Of Seawater - 2010 (TEOS-10)
 #'
 #' @description
 #' Provides an R interface to the TEOS-10 / GSW (Gibbs Sea Water) library,
@@ -127,7 +127,7 @@ NULL
 
 ## PART 2: utility functions
 
-#' Reshape list elements to match the shape of the first element.
+#' Reshape list elements to match that of the first element
 #'
 #' This is mainly used within gsw, to ensure that arguments sent
 #' to the C functions are of equal length.  This is a convenience, 
@@ -815,7 +815,7 @@ gsw_CT_freezing_first_derivatives_poly <- function(SA, p, saturation_fraction=1)
     list(CTfreezing_SA=r$CTfreezing_SA, CTfreezing_p=r$CTfreezing_p)
 }
 
-#' Conservative Temperature Freezing Point (Polynomial form)
+#' Conservative Temperature Freezing Point (Polynomial version)
 #'
 #' @template teos10template
 #'

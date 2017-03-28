@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{argfix}
 \alias{argfix}
-\title{Reshape list elements to match the shape of the first element.}
+\title{Reshape list elements to match that of the first element}
 \usage{
 argfix(list)
 }
