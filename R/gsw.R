@@ -212,7 +212,7 @@ gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
 #' lr <- gsw_adiabatic_lapse_rate_ice(t, p)
 #' expect_equal(lr*1e7, c(0.218777853913651, 0.216559115188599, 0.216867659957613,
 #'                      0.216988337914416, 0.217182707402780, 0.218100558740840))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_ice.html}
 gsw_adiabatic_lapse_rate_ice <- function(t, p)
@@ -345,7 +345,7 @@ gsw_alpha_wrt_t_exact <- function(SA, t, p)
 #' expect_equal(alpha*1e3, c(0.154472408751279, 0.153041866100900, 0.153232698269327,
 #'                         0.153297634665747, 0.153387461617896, 0.153938395452558))
 #' @family things related to density
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha_wrt_t_ice.html}
 gsw_alpha_wrt_t_ice <- function(t, p)
@@ -511,7 +511,7 @@ gsw_C_from_SP <- function(SP, t, p)
 #' expect_equal(pot/1e4, c(-1.340648365149857, -1.644921413491445, -1.480991678890353,
 #'                       -1.272436055728805, -0.711509477199393, 0.045575390357792))
 #' @family things related to chemical potential
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_chem_potential_water_ice.html}
 gsw_chem_potential_water_ice <- function(t, p)
@@ -568,7 +568,7 @@ gsw_chem_potential_water_t_exact <- function(SA, t, p)
 #'
 #' @return specific heat [ J/(degC*kg) ]
 #'
-#' @family things related to ice
+## @family things related to ice
 #' @examples
 #' library(testthat)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
@@ -719,7 +719,7 @@ gsw_CT_first_derivatives_wrt_t_exact <- function(SA, t, p)
 #' CT <- gsw_CT_freezing(SA, p, saturation_fraction)
 #' expect_equal(CT, c(-1.899683776424096, -1.940791867869104, -2.006240664432488,
 #'                  -2.092357761318778, -2.359300831770506, -2.677162675412748))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing.html}
 gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
@@ -759,7 +759,7 @@ gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
 #'                               -0.058373842446463, -0.058534544740846, -0.058730846361252))
 #' expect_equal(r$CTfreezing_p/1e-7, c(-0.765300390432684, -0.766942996466485, -0.769892679988284,
 #'                                   -0.774561011527902, -0.787769143040504, -0.802771548245855))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing_first_derivatives.html}
 gsw_CT_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)
@@ -798,7 +798,7 @@ gsw_CT_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)
 #'                               -0.058370514075271, -0.058528023214462, -0.058722959729433))
 #' expect_equal(r$CTfreezing_p/1e-7, c(-0.765690732336706, -0.767310677213890, -0.770224214219328,
 #'                                   -0.774843488962665, -0.787930403016584, -0.802821704643775))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing_first_derivatives_poly.html}
 gsw_CT_freezing_first_derivatives_poly <- function(SA, p, saturation_fraction=1)
@@ -831,7 +831,7 @@ gsw_CT_freezing_first_derivatives_poly <- function(SA, p, saturation_fraction=1)
 #' CT_freezing <- gsw_CT_freezing(SA, p, saturation_fraction)
 #' expect_equal(CT_freezing, c(-1.899683776424096, -1.940791867869104, -2.006240664432488,
 #'                             -2.092357761318778, -2.359300831770506, -2.677162675412748))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing_poly.html}
 gsw_CT_freezing_poly <- function(SA, p, saturation_fraction=1)
@@ -1386,7 +1386,7 @@ gsw_enthalpy_first_derivatives_CT_exact <- function(SA, CT, p)
 #' @return specific enthalpy [ J/kg ]
 #'
 #' @family things related to enthalpy
-#' @family things related to ice
+## @family things related to ice
 #' @examples
 #' library(testthat)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
@@ -1725,7 +1725,7 @@ gsw_Fdelta <- function(p, longitude, latitude)
 #' expect_equal(e/1e3, c(-1.303663820598987, -1.324090218294577, -1.319426394193644,
 #'                     -1.315402956671801, -1.305426590579231, -1.287021035328113))
 #' @family things related to entropy
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_ice.html}
 gsw_entropy_ice <- function(t, p)
@@ -1763,7 +1763,7 @@ gsw_entropy_ice <- function(t, p)
 #'                          -2.363714136353600, -2.644541000680772, -2.977651291726651))
 #' expect_equal(r$w_Ih_final, c(0.112480560814322, 0.114600300867556, 0.115421108602301,
 #'                            0.117372990660305, 0.122617649983886, 0.127906590822347))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_frazil_properties.html}
 gsw_frazil_properties <- function(SA_bulk, h_bulk, p)
@@ -1809,7 +1809,7 @@ gsw_frazil_properties <- function(SA_bulk, h_bulk, p)
 #' expect_equal(r$w_Ih_final, c(0.112190640891586, 0.113150826758543, 0.111797588975174,
 #'                            0.110122251260246, 0.105199838799201, 0.098850365110330))
 #' @family things related to enthalpy
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_frazil_properties_potential.html}
 gsw_frazil_properties_potential <- function(SA_bulk, h_pot_bulk, p)
@@ -1855,7 +1855,7 @@ gsw_frazil_properties_potential <- function(SA_bulk, h_pot_bulk, p)
 #' expect_equal(r$w_Ih_final, c(0.112190777010854, 0.113150823111566, 0.111797356032850,
 #'                            0.110121687760246, 0.105198620534670, 0.098848824039493))
 #' @family things related to enthalpy
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_frazil_properties_potential_poly.html}
 gsw_frazil_properties_potential_poly <- function(SA_bulk, h_pot_bulk, p)
@@ -1904,7 +1904,7 @@ gsw_frazil_properties_potential_poly <- function(SA_bulk, h_pot_bulk, p)
 #'                               -0.038806356507548, -0.033541272953744, -0.033350141194082))
 #' expect_equal(r$dCT_dP_frazil/1e-7, c(-0.650401727338347, -0.689317412221414, -0.743301297684333,
 #'                                    -0.751910946738026, -0.768138213038669, -0.783184728059898))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_frazil_ratios_adiabatic.html}
 gsw_frazil_ratios_adiabatic <- function(SA, p, w_Ih)
@@ -1949,7 +1949,7 @@ gsw_frazil_ratios_adiabatic <- function(SA, p, w_Ih)
 #'                                    -0.038820466574251, -0.033548047632788, -0.033352365425407))
 #' expect_equal(r$dCT_dP_frazil/1e-7, c(-0.650715350062703, -0.689634794137768, -0.743613932027895,
 #'                                    -0.752179782823459, -0.768292629045686, -0.783236208526200))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_frazil_ratios_adiabatic_poly.html}
 gsw_frazil_ratios_adiabatic_poly <- function(SA, p, w_Ih)
@@ -2185,7 +2185,7 @@ gsw_gibbs_ice <- function(nt, np, t, p=0)
 #' expect_equal(e/1e4, c(-1.362572315008330, -1.710375005915343, -1.628083272702224,
 #'                     -1.555573047498573, -1.375469831393882, -1.053585607014677))
 #' @family things related to energy
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_helmholtz_energy_ice.html}
 gsw_helmholtz_energy_ice <- function(t, p)
@@ -2251,7 +2251,7 @@ gsw_helmholtz_energy_ice <- function(t, p)
 #'                           -1.846419165657020, -2.166786673735941, -2.522730879078756))
 #' expect_equal(r$w_Ih, c(0.256046867272203, 0.251379393389925, 0.215985652155336,
 #'                      0.121020375537284, 0.094378196687535, 0.075181377710828))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_ice_fraction_to_freeze_seawater.html}
 gsw_ice_fraction_to_freeze_seawater <- function(SA, CT, p, t_Ih)
@@ -2315,7 +2315,7 @@ gsw_internal_energy <- function(SA, CT, p)
 #' e <- gsw_internal_energy_ice(t_Ih, p)
 #' expect_equal(e/1e5, c(-3.556606992432442, -3.609926216929878, -3.597799043634774,
 #'                     -3.587312078410920, -3.561207060376329, -3.512700418975375))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_internal_energy_ice.html}
 gsw_internal_energy_ice <- function(t, p)
@@ -2419,7 +2419,7 @@ gsw_kappa <- function(SA, CT, p)
 #' expect_equal(kappa*1e9, c(0.115874753261484, 0.115384948953145, 0.115442212717850,
 #'                         0.115452884634531, 0.115454824232421, 0.115619994536961))
 #' @family things related to compressibility
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_kappa_const_t_ice.html}
 gsw_kappa_const_t_ice <- function(t, p)
@@ -2452,7 +2452,7 @@ gsw_kappa_const_t_ice <- function(t, p)
 #' expect_equal(kappa*1e9, c(0.112495239053936, 0.112070687842183, 0.112119091047584,
 #'                         0.112126504739297, 0.112123513812840, 0.112262589530974))
 #' @family things related to compressibility
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_kappa_ice.html}
 gsw_kappa_ice <- function(t, p)
@@ -2608,7 +2608,7 @@ gsw_latentheat_melting <- function(SA, p)
 #' expect_equal(r$CT_final, c(-0.298448911022612, 0.215263001418312, -0.074341719211557,
 #'                            0.207796293045473, -0.123785388299875, -0.202531182809225))
 #' expect_equal(r$w_Ih_final, rep(0, 6))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_into_seawater.html}
 gsw_melting_ice_into_seawater <- function(SA, CT, p, w_Ih, t_Ih)
@@ -2652,7 +2652,7 @@ gsw_melting_ice_into_seawater <- function(SA, CT, p, w_Ih, t_Ih)
 #'                          34.455798880000003, 34.418463862000003, 34.474563675999995))
 #' expect_equal(r$CT_final, c(-0.018822367305381, 0.345095540241769, 0.020418581143151,
 #'                          0.242672380976922, -0.111078380121959, -0.197363471215418))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_seaice_into_seawater.html}
 gsw_melting_seaice_into_seawater <- function(SA, CT, p, w_seaice, SA_seaice, t_seaice)
@@ -2686,7 +2686,7 @@ gsw_melting_seaice_into_seawater <- function(SA, CT, p, w_seaice, SA_seaice, t_s
 #' r <- gsw_melting_ice_equilibrium_SA_CT_ratio(SA, p)
 #' expect_equal(r, c(0.420209509196985, 0.422511693121631, 0.424345503216433,
 #'                 0.422475836091426, 0.422023427778221, 0.423037622331042))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_equilibrium_SA_CT_ratio.html}
 gsw_melting_ice_equilibrium_SA_CT_ratio <- function(SA, p)
@@ -2716,7 +2716,7 @@ gsw_melting_ice_equilibrium_SA_CT_ratio <- function(SA, p)
 #' r <- gsw_melting_ice_equilibrium_SA_CT_ratio_poly(SA, p)
 #' expect_equal(r, c(0.420209444587263, 0.422511664682796, 0.424345538275708,
 #'                 0.422475965003649, 0.422023755182266, 0.423038080717229))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_equilibrium_SA_CT_ratio_poly.html}
 gsw_melting_ice_equilibrium_SA_CT_ratio_poly <- function(SA, p)
@@ -2751,7 +2751,7 @@ gsw_melting_ice_equilibrium_SA_CT_ratio_poly <- function(SA, p)
 #' r <- gsw_melting_ice_SA_CT_ratio(SA, CT, p, t_Ih)
 #' expect_equal(r, c(0.373840909022490, 0.371878514972099, 0.377104664622191,
 #'                 0.382777696796156, 0.387133845152000, 0.393947316026914))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_SA_CT_ratio.html}
 gsw_melting_ice_SA_CT_ratio <- function(SA, CT, p, t_Ih)
@@ -2786,7 +2786,7 @@ gsw_melting_ice_SA_CT_ratio <- function(SA, CT, p, t_Ih)
 #' r <- gsw_melting_ice_SA_CT_ratio_poly(SA, CT, p, t_Ih)
 #' expect_equal(r, c(0.373840908629278, 0.371878512745054, 0.377104658031030,
 #'                 0.382777681212224, 0.387133812279563, 0.393947267481204))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_SA_CT_ratio_poly.html}
 gsw_melting_ice_SA_CT_ratio_poly <- function(SA, CT, p, t_Ih)
@@ -2883,7 +2883,7 @@ gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height=0, sea_surface_geopote
 #' expect_equal(e/1e5, c(-3.555459449611868, -3.608607069998877, -3.596153890859193,
 #'                     -3.585123178806596, -3.557490528226009, -3.507198313847837))
 #' @family things related to enthalpy
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_from_pt_ice.html}
 gsw_pot_enthalpy_from_pt_ice <- function(pt0_ice)
@@ -2911,7 +2911,7 @@ gsw_pot_enthalpy_from_pt_ice <- function(pt0_ice)
 #' expect_equal(e/1e5, c(-3.555459482216265, -3.608607100959428, -3.596153924697033,
 #'                     -3.585123214031169, -3.557490561327994, -3.507198320793373))
 #' @family things related to enthalpy
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_from_pt_ice_poly.html}
 gsw_pot_enthalpy_from_pt_ice_poly <- function(pt0_ice)
@@ -2953,7 +2953,7 @@ gsw_pot_enthalpy_from_pt_ice_poly <- function(pt0_ice)
 #' values are incorporated in the test provided in \dQuote{Examples}, so that test
 #' is not performed during build tests.  See https://github.com/TEOS-10/GSW-R/issues/27.
 #' @family things related to enthalpy
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_ice_freezing.html}
 gsw_pot_enthalpy_ice_freezing <- function(SA, p, saturation_fraction=1)
@@ -2985,7 +2985,7 @@ gsw_pot_enthalpy_ice_freezing <- function(SA, p, saturation_fraction=1)
 #' expect_equal(e/1e5, c(-3.373370858777002, -3.374395733068549, -3.376079507278181,
 #'                     -3.378416106344322, -3.385460970578123, -3.393731732645173))
 #' @family things related to enthalpy
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_ice_freezing_poly.html}
 gsw_pot_enthalpy_ice_freezing_poly <- function(SA, p, saturation_fraction=1)
@@ -3127,7 +3127,7 @@ gsw_pot_rho_t_exact <- function(SA, t, p, p_ref)
 #' pc <- gsw_pressure_coefficient_ice(t, p)
 #' expect_equal(pc/1e6, c(1.333098059787838, 1.326359005133730, 1.327354133828322,
 #'                      1.327793888831923, 1.328549609231685, 1.331416733490227))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pressure_coefficient_ice.html}
 gsw_pressure_coefficient_ice <- function(t, p)
@@ -3158,7 +3158,7 @@ gsw_pressure_coefficient_ice <- function(t, p)
 #' p <- gsw_pressure_freezing_CT(SA, CT, saturation_fraction)
 #' expect_equal(p/1e3, c(0.009890530270710, 0.050376026585933, 0.125933117050624,
 #'                     0.251150973076077, 0.601441775836021, 1.002273338145043))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pressure_freezing_CT.html}
 gsw_pressure_freezing_CT <- function(SA, CT, saturation_fraction=1)
@@ -3218,7 +3218,7 @@ gsw_pt0_from_t <- function(SA, t, p)
 #' pt0 <- gsw_pt0_from_t_ice(t, p)
 #' expect_equal(pt0, c(-10.787787898205298, -13.443730926050607, -12.837427056999708,
 #'                   -12.314321615760905, -11.017040858094250, -8.622907355083088))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt0_from_t_ice.html}
 gsw_pt0_from_t_ice <- function(t, p)
@@ -3339,7 +3339,7 @@ gsw_pt_from_entropy <- function(SA, entropy)
 #' expect_equal(pt, c(-10.733087588125384, -13.167397822300588, -12.154205899172704,
 #'                  -10.956202704066083, -7.794963180206421, -3.314905214262531))
 #' @family things related to enthalpy
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_pot_enthalpy_ice.html}
 gsw_pt_from_pot_enthalpy_ice <- function(pot_enthalpy_ice)
@@ -3399,7 +3399,7 @@ gsw_pt_from_t <- function(SA, t, p, p_ref=0)
 #' expect_equal(pt, c(-10.733085986035007, -13.167396204945987, -12.154204137867396,
 #'                  -10.956201046447006, -7.794963341294590, -3.314907552013722))
 #' @family things related to enthalpy
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_pot_enthalpy_ice_poly.html}
 gsw_pt_from_pot_enthalpy_ice_poly <- function(pot_enthalpy_ice)
@@ -3430,7 +3430,7 @@ gsw_pt_from_pot_enthalpy_ice_poly <- function(pot_enthalpy_ice)
 #' pt <- gsw_pt_from_t_ice(t, p, p_ref)
 #' expect_equal(pt, c(-10.787787898205272, -13.443730926050661, -12.837427056999676,
 #'                  -12.314321615760921, -11.017040858094234, -8.622907355083147))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_t_ice.html}
 gsw_pt_from_t_ice <- function(t, p, p_ref=0)
@@ -3658,7 +3658,7 @@ gsw_rho_first_derivatives_wrt_enthalpy <- function(SA, CT, p)
 #' expect_equal(rho, c(918.2879969148962, 918.7043487325120, 918.6962796312690,
 #'              918.7513732275766, 918.9291139833307, 919.0032237449378)) 
 #' @family things related to density
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_ice.html}
 gsw_rho_ice <- function(t, p)
@@ -4375,7 +4375,7 @@ gsw_sound_speed <- function(SA, CT, p)
 #' speed <- gsw_sound_speed_ice(t, p)
 #' expect_equal(speed/1e3, c(3.111311360346254, 3.116492565497544, 3.115833462003452,
 #'                          3.115637032488204, 3.115377253092692, 3.113321384499191))
-#' @family things related to ice
+## @family things related to ice
 #' @family things related to sound
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed_ice.html}
@@ -4631,7 +4631,7 @@ gsw_specvol_first_derivatives_wrt_enthalpy <- function(SA, CT, p)
 #' expect_equal(v, c(0.001088982980677, 0.001088489459509, 0.001088499019939,
 #'                 0.001088433747301, 0.001088223220685, 0.001088135464776))
 #' @family things related to density
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_ice.html}
 gsw_specvol_ice  <- function(t, p)
@@ -4975,7 +4975,7 @@ gsw_SP_from_Sstar <- function(Sstar, p, longitude, latitude)
 #'                           -2.071677444370745, -2.318866154643864, -2.603185031462614))
 #' expect_equal(r$w_seaice, c(0.001364063868629, 0.006249283768465, 0.002391958850970,
 #'                          0.009952101583387, 0.019541106156815, 0.035842627277027))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_seaice_fraction_to_freeze_seawater.html}
 gsw_seaice_fraction_to_freeze_seawater <- function(SA, CT, p, SA_seaice, t_seaice)
@@ -5285,7 +5285,7 @@ gsw_t_deriv_chem_potential_water_t_exact <- function(SA, t, p)
 #' tf <- gsw_t_freezing(SA, p, saturation_fraction)
 #' expect_equal(tf, c(-1.902730710149803, -1.942908619287183, -2.006861069199743,
 #'                    -2.090985086875259, -2.351293130342102, -2.660498762776720)) 
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing.html}
 gsw_t_freezing <- function(SA, p, saturation_fraction=1)
@@ -5320,7 +5320,7 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
 #'                                   -0.056904020028541, -0.056974588411844, -0.057082363270642))
 #' expect_equal(derivs$tfreezing_p/1e-7, c(-0.748468312442338, -0.749793159537290, -0.752225023995510,
 #'                                       -0.756170965034610, -0.767279572670040, -0.779936552091913))
-#' @family things related to ice
+## @family things related to ice
 #' @template broken-test-values
 #' @template broken-test-values-family
 #' @references
@@ -5362,7 +5362,7 @@ gsw_t_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)
 #'                                       -0.756549680608529, -0.767482625710990, -0.779985619685683))
 #' @template broken-test-values
 #' @template broken-test-values-family
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_first_derivatives.html}
 gsw_t_freezing_first_derivatives_poly <- function(SA, p, saturation_fraction=1)
@@ -5427,7 +5427,7 @@ gsw_t_from_CT <- function(SA, CT, p)
 #' t <- gsw_t_from_pt0_ice(pt0_ice, p)
 #' expect_equal(t, c(-10.783412084414074, -13.422068638139141, -12.783170223330448,
 #'                 -12.205667526492039, -10.755496924674144, -8.184121042593350))
-#' @family things related to ice
+## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_from_pt0_ice.html}
 gsw_t_from_pt0_ice <- function(pt0_ice, p)
