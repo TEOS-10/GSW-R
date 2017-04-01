@@ -36,7 +36,7 @@ expect_equal(SR, c(34.711611927085727, 34.891255045714303, 35.024882197714305,
 }
 \seealso{
 Other things related to salinity: \code{\link{gsw_C_from_SP}},
-  \code{\link{gsw_SA_from_SP_baltic}},
+  \code{\link{gsw_SA_from_SP_Baltic}},
   \code{\link{gsw_SA_from_SP}},
   \code{\link{gsw_SA_from_Sstar}},
   \code{\link{gsw_SP_from_C}},

@@ -52,7 +52,7 @@ expect_equal(Sstar, c(34.711553680880769, 34.891161395333754, 35.024650265047370
 }
 \seealso{
 Other things related to salinity: \code{\link{gsw_C_from_SP}},
-  \code{\link{gsw_SA_from_SP_baltic}},
+  \code{\link{gsw_SA_from_SP_Baltic}},
   \code{\link{gsw_SA_from_SP}},
   \code{\link{gsw_SA_from_Sstar}},
   \code{\link{gsw_SP_from_C}},

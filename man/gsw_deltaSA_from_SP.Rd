@@ -47,7 +47,7 @@ expect_equal(deltaSA, c(0.000167203365230, 0.000268836122231, 0.000665803155705,
 }
 \seealso{
 Other things related to salinity: \code{\link{gsw_C_from_SP}},
-  \code{\link{gsw_SA_from_SP_baltic}},
+  \code{\link{gsw_SA_from_SP_Baltic}},
   \code{\link{gsw_SA_from_SP}},
   \code{\link{gsw_SA_from_Sstar}},
   \code{\link{gsw_SP_from_C}},

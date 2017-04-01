@@ -394,7 +394,7 @@ void wrap_gsw_gibbs_ice(int *nt, int *np, double *t, double *p, int *n, double *
         res[i] = gsw_gibbs_ice(*nt, *np, t[i], p[i]);
 }
 W21(wrap_gsw_grav, gsw_grav, latitude, p, n, rval)
-W21(wrap_gsw_helmholtz_energy_ice, gsw_helmholtz_energy_ice, t, p, n, rval)
+W21(wrap_gsw_Helmholtz_energy_ice, gsw_helmholtz_energy_ice, t, p, n, rval)
 W11(wrap_gsw_hill_ratio_at_sp2, gsw_hill_ratio_at_sp2, t, n, rval)
 W43(wrap_gsw_ice_fraction_to_freeze_seawater, gsw_ice_fraction_to_freeze_seawater, SA, CT, p, t_Ih, n, SA_freeze, CT_freeze, w_Ih)
 W31(wrap_gsw_internal_energy, gsw_internal_energy, SA, CT, p, n, rval)
@@ -466,7 +466,7 @@ W31(wrap_gsw_SA_freezing_from_t, gsw_sa_freezing_from_t, t, p, saturation_fracti
 W31(wrap_gsw_SA_freezing_from_t_poly, gsw_sa_freezing_from_t_poly, t, p, saturation_fraction, n, rval)
 W31(wrap_gsw_SA_from_rho, gsw_sa_from_rho, rho, CT, p, n, rval)
 W41(wrap_gsw_SA_from_SP, gsw_sa_from_sp, CT, p, longitude, latitude, n, rval)
-W31(wrap_gsw_SA_from_SP_baltic, gsw_sa_from_sp_baltic, SP, longitude, latitude, n, rval)
+W31(wrap_gsw_SA_from_SP_Baltic, gsw_sa_from_sp_baltic, SP, longitude, latitude, n, rval)
 W41(wrap_gsw_SA_from_Sstar, gsw_sa_from_sstar, Sstar, p, longitude, latitude, n, rval)
 W53(wrap_gsw_seaice_fraction_to_freeze_seawater, gsw_seaice_fraction_to_freeze_seawater, SA, CT, p, SA_seaice, t_seaice, n, SA_freeze, CT_freeze, w_seaice)
 W11(wrap_gsw_SR_from_SP, gsw_sr_from_sp, SP, n, rval)

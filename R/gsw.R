@@ -2181,18 +2181,18 @@ gsw_gibbs_ice <- function(nt, np, t, p=0)
 #' library(testthat)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' p <- c(      10,       50,      125,      250,       600,     1000)
-#' e <- gsw_helmholtz_energy_ice(t, p)
+#' e <- gsw_Helmholtz_energy_ice(t, p)
 #' expect_equal(e/1e4, c(-1.362572315008330, -1.710375005915343, -1.628083272702224,
 #'                     -1.555573047498573, -1.375469831393882, -1.053585607014677))
 #' @family things related to energy
 ## @family things related to ice
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_helmholtz_energy_ice.html}
-gsw_helmholtz_energy_ice <- function(t, p)
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_Helmholtz_energy_ice.html}
+gsw_Helmholtz_energy_ice <- function(t, p)
 {
     l <- argfix(list(t=t, p=p))
     n <- length(l[[1]])
-    rval <- .C("wrap_gsw_helmholtz_energy_ice",
+    rval <- .C("wrap_gsw_Helmholtz_energy_ice",
                t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n),
                NAOK=TRUE, PACKAGE="gsw")$rval
@@ -4080,13 +4080,13 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
 #' SP <- c( 6.5683, 6.6719, 6.8108, 7.2629, 7.4825, 10.2796)
 #' lon <- c(    20,     20,     20,     20,     20,      20)
 #' lat <- c(    59,     59,     59,     59,     59,      59)
-#' SA <- gsw_SA_from_SP_baltic(SP, lon, lat)
+#' SA <- gsw_SA_from_SP_Baltic(SP, lon, lat)
 #' expect_equal(SA, c(6.669945432342856, 6.773776430742856, 6.912986138057142,
 #'                  7.366094191885713, 7.586183837142856, 10.389520570971428))
 #' @family things related to salinity
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP_baltic.html}
-gsw_SA_from_SP_baltic <- function(SP, longitude, latitude)
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP_Baltic.html}
+gsw_SA_from_SP_Baltic <- function(SP, longitude, latitude)
 {
     if (missing(longitude)) stop("must supply longitude")
     if (missing(latitude)) stop("must supply latitude")
@@ -4101,7 +4101,7 @@ gsw_SA_from_SP_baltic <- function(SP, longitude, latitude)
     }
     l <- argfix(list(SP=SP, longitude=longitude, latitude=latitude))
     n <- length(l[[1]])
-    rval <- .C("wrap_gsw_SA_from_SP_baltic",
+    rval <- .C("wrap_gsw_SA_from_SP_Baltic",
                SP=as.double(l$SP), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     if (is.matrix(SP))
