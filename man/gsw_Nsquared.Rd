@@ -20,7 +20,11 @@ is called \code{lat} in the TEOS-10 Matlab code.)}
 list containing N2 [ 1/s^ ] and mid-point pressure p_mid [ dbar ]
 }
 \description{
-Calculate Brunt Vaisala Frequency squared
+The result is computed based on first-differencing a computed density with
+respect pressure, and this can yield noisy results with CTD data that
+have not been smoothed and decimated. It also yields infinite values,
+for repeated adjacent pressure (e.g. this occurs twice with the \code{ctd}
+dataset provided in the \CRANpkg{oce} package).
 }
 \details{
 The present R function works with a wrapper to a C function contained

@@ -2803,6 +2803,12 @@ gsw_melting_ice_SA_CT_ratio_poly <- function(SA, CT, p, t_Ih)
 }
 
 #' Calculate Brunt Vaisala Frequency squared
+#'
+#' The result is computed based on first-differencing a computed density with
+#' respect pressure, and this can yield noisy results with CTD data that
+#' have not been smoothed and decimated. It also yields infinite values,
+#' for repeated adjacent pressure (e.g. this occurs twice with the \code{ctd}
+#' dataset provided in the \CRANpkg{oce} package).
 #' 
 #' @template teos10template
 #'
