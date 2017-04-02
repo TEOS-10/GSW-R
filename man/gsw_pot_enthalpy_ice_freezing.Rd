@@ -33,7 +33,7 @@ it all, please consult \url{http://www.teos-10.org}.
 1. The C source underlying this function lacks an argument, \code{saturation_fraction},
 which is present in the Matlab source, and so that argument is ignored here.
 
-2. The R code does not reproduce the check values stated at 
+2. The R code does not reproduce the check values stated at
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_ice_freezing.html}. Those
 values are incorporated in the test provided in \dQuote{Examples}, so that test
 is not performed during build tests.  See https://github.com/TEOS-10/GSW-R/issues/27.

@@ -16,7 +16,7 @@ is called \code{lat} in the TEOS-10 Matlab code.)}
 height [ m ]
 }
 \description{
-Computation of height (above sea level) from pressure, using the 75-term equation for 
+Computation of height (above sea level) from pressure, using the 75-term equation for
 specific volume.
 }
 \details{
@@ -32,7 +32,7 @@ it all, please consult \url{http://www.teos-10.org}.
 library(testthat)
 z <- gsw_z_from_p(c(10, 50, 125, 250, 600,1000), 4)
 expect_equal(z/1e2, c(-0.099445834469453, -0.497180897012550, -1.242726219409978,
-                    -2.484700576548589, -5.958253480356214, -9.920919060719987)) 
+                    -2.484700576548589, -5.958253480356214, -9.920919060719987))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_z_from_p.html}

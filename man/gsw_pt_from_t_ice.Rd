@@ -14,7 +14,7 @@ gsw_pt_from_t_ice(t, p, p_ref = 0)
 \item{p_ref}{reference pressure [ dbar ]}
 }
 \value{
-potential temperature [ deg C ]
+potential temperature [ degC ]
 }
 \description{
 Potential Temperature of Ice from in-situ Temperature

@@ -14,7 +14,7 @@ gsw_pt0_from_t(SA, t, p)
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
-potential temperature [ deg C ]
+potential temperature [ degC ]
 }
 \description{
 Potential temperature referenced to the surface

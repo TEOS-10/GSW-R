@@ -12,7 +12,7 @@ gsw_CT_from_pt(SA, pt)
 \item{pt}{potential temperature (ITS-90) [ degC ]}
 }
 \value{
-Conservative Temperature [ deg C ]
+Conservative Temperature [ degC ]
 }
 \description{
 Conservative Temperature from Potential Temperature

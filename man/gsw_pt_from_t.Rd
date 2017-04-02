@@ -16,7 +16,7 @@ gsw_pt_from_t(SA, t, p, p_ref = 0)
 \item{p_ref}{reference pressure [ dbar ]}
 }
 \value{
-potential temperature [ deg C ]
+potential temperature [ degC ]
 }
 \description{
 Potential Temperature from in-situ Temperature
@@ -38,7 +38,7 @@ p <- c(      10,      50,     125,     250,     600,    1000)
 p_ref <- 0
 pt <- gsw_pt_from_t(SA, t, p, p_ref)
 expect_equal(pt, c(28.783196819670632, 28.420983342398962, 22.784930399117108,
-                   10.230523661095731, 6.829230224409661, 4.324510571845719)) 
+                   10.230523661095731, 6.829230224409661, 4.324510571845719))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_t.html}

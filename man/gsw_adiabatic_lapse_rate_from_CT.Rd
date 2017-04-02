@@ -17,7 +17,7 @@ gsw_adiabatic_lapse_rate_from_CT(SA, CT, p)
 adiabatic lapse rate (note unconventional unit) [ K/Pa ]
 }
 \description{
-Note that the unit is degC/Pa; multiply by 1e4 to get the more useful degC/dbar.
+Note that the unit is K/Pa; multiply by 1e4 to get the more useful K/dbar.
 }
 \details{
 The present R function works with a wrapper to a C function contained

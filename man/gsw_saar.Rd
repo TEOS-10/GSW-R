@@ -17,7 +17,7 @@ is called \code{lat} in the TEOS-10 Matlab code.)}
 }
 \value{
 a list containing \code{SAAR}, which is
-the (unitless) Absolute Salinity Anomality Ratio, and \code{in_ocean} 
+the (unitless) Absolute Salinity Anomality Ratio, and \code{in_ocean}
 is set to 1 if \code{SAAR} is nonzero, or to 0 otherwise.
 }
 \description{

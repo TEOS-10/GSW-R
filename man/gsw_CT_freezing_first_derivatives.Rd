@@ -14,7 +14,7 @@ gsw_CT_freezing_first_derivatives(SA, p, saturation_fraction = 1)
 \item{saturation_fraction}{fraction of air in water [unitless]}
 }
 \value{
-A list containing \code{CTfreezing_SA} [ degC/(g/kg) ], the derivative of
+A list containing \code{CTfreezing_SA} [ K/(g/kg) ], the derivative of
 Conservative Temperature with respect to Absolute Salinity at constant
 potential temperature, and \code{CTfreezing_p} [ unitless], the derivative of
 Conservative Temperature with respect to pressure at constant

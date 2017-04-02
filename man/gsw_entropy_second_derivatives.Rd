@@ -12,10 +12,10 @@ gsw_entropy_second_derivatives(SA, CT)
 \item{CT}{Conservative Temperature [ degC ]}
 }
 \value{
-A list containing \code{eta_SA_SA} [ (J/(degC*kg))/(g/kg)^2 ], the second derivative of
-entropy with respect to Absolute Salinity, \code{eta_SA_CT} [ (J/(degC*kg))/(degC*g/kg) ], the derivative of
+A list containing \code{eta_SA_SA} [ (J/(K*kg))/(g/kg)^2 ], the second derivative of
+entropy with respect to Absolute Salinity, \code{eta_SA_CT} [ (J/(K*kg))/(K*g/kg) ], the derivative of
 entropy with respect to Absolute Salinity and Conservative Temperature,
-and \code{eta_CT_CT} [ (J/(degC*kg))/degC^2 ], the second derivative of
+and \code{eta_CT_CT} [ (J/(K*kg))/K^2 ], the second derivative of
 entropy with respect to Conservative Temperature.
 }
 \description{

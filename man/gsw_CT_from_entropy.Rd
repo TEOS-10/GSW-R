@@ -12,7 +12,7 @@ gsw_CT_from_entropy(SA, entropy)
 \item{entropy}{specific entropy [ J/(degC*kg) ]}
 }
 \value{
-Conservative Temperature [ deg C ]
+Conservative Temperature [ degC ]
 }
 \description{
 Conservative Temperature from Entropy

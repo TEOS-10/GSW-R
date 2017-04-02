@@ -12,7 +12,7 @@ gsw_t_from_pt0_ice(pt0_ice, p)
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
-in-situ temperature (ITS-90) [ deg C ]
+in-situ temperature (ITS-90) [ degC ]
 }
 \description{
 In situ Temperature from Potential Temperature at 0dbar

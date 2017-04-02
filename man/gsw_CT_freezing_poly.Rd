@@ -14,7 +14,7 @@ gsw_CT_freezing_poly(SA, p, saturation_fraction = 1)
 \item{saturation_fraction}{saturation fraction of dissolved air in seawater}
 }
 \value{
-Conservative Temperature at freezing of seawater [ deg C ]. That is, the freezing temperature expressed in terms of Conservative Temperature (ITS-90).
+Conservative Temperature at freezing of seawater [ degC ].
 }
 \description{
 Conservative Temperature Freezing Point (Polynomial version)

@@ -15,11 +15,11 @@ gsw_CT_first_derivatives_wrt_t_exact(SA, t, p)
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
-A list containing \code{CT_SA_wrt_t} [ degC/(g/kg) ], the derivative of
+A list containing \code{CT_SA_wrt_t} [ K/(g/kg) ], the derivative of
 Conservative Temperature with respect to Absolute Salinity at constant
 temperature and pressure, \code{CT_t_wrt_t} [ unitless], the derivative of
 Conservative Temperature with respect to temperature at constant
-Absolute Salinity and pressure, and \code{CT_p_wrt_t}, the derivative 
+Absolute Salinity and pressure, and \code{CT_p_wrt_t}, the derivative
 of Conservative Temperature with respect to pressure at constant Absolute
 Salinity and temperature.
 }

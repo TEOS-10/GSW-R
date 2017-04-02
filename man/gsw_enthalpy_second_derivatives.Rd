@@ -15,7 +15,7 @@ gsw_enthalpy_second_derivatives(SA, CT, p)
 }
 \value{
 A list containing \code{h_SA_SA} [ (J/kg)/(g/kg)^2 ], the second derivative of
-enthalpy with respect to Absolute Salinity, \code{h_SA_CT} [ (J/kg)/(degC*g/kg) ], the derivative of
+enthalpy with respect to Absolute Salinity, \code{h_SA_CT} [ (J/kg)/(K*g/kg) ], the derivative of
 enthalpy with respect to Absolute Salinity and Conservative Temperature,
 and \code{h_CT_CT} [ (J/kg)/degC^2 ], the second derivative of
 enthalpy with respect to Conservative Temperature.

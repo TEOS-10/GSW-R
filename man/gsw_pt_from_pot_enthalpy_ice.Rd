@@ -10,7 +10,7 @@ gsw_pt_from_pot_enthalpy_ice(pot_enthalpy_ice)
 \item{pot_enthalpy_ice}{potential enthalpy of ice [ J/kg ]}
 }
 \value{
-potential temperature [ deg C ]
+potential temperature [ degC ]
 }
 \description{
 Potential Temperature from Potential Enthalpy of Ice

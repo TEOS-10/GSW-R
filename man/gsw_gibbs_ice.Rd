@@ -34,7 +34,7 @@ it all, please consult \url{http://www.teos-10.org}.
 }
 \section{Caution}{
 
-The TEOS-10 webpage for \code{gsw_gibbs_ice} does not provide test values, so 
+The TEOS-10 webpage for \code{gsw_gibbs_ice} does not provide test values, so
 the present R version should be considered untested.
 }
 

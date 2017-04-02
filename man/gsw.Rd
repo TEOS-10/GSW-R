@@ -10,13 +10,13 @@ Provides an R interface to the TEOS-10 / GSW (Gibbs Sea Water) library,
 partly for use by the \code{oce} package (see \url{http://dankelley.github.io/oce})
 and partly for general use. It is assumed that users are familiar with
 the science and methodology of GSW, and that the package vignette
-(obtained by typing \code{vignette("gsw")} in an R window) provides 
+(obtained by typing \code{vignette("gsw")} in an R window) provides
 enough orientation to get users started with the \code{gsw} functions.
 }
 \details{
 \code{gsw} was developed using open-source methodologies, on
 the GitHub site (\url{https://github.com/TEOS-10/GSW-R}), which
-is part of a set of sites dedicated to GSW formulations in 
+is part of a set of sites dedicated to GSW formulations in
 various languages.
 
 The \code{gsw} system is to link R functions with the C version of
@@ -33,7 +33,7 @@ on the arguments and return values, relying on links to the
 TEOS-10 webpages for details.
 
 See \url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html}
-for a list of the TEOS-10 functions and 
+for a list of the TEOS-10 functions and
 \url{http://teos-10.github.io/GSW-R/documentation.html} for a list
 of the functions implemented in the present package.
 
@@ -42,12 +42,12 @@ which means that results are guaranteed to match those of
 the equivalent Matlab functions to at least 8 digits.
 
 A significant difference from the Matlab case is in the inspection
-of the dimensions of arguments. The Matlab library has rules 
+of the dimensions of arguments. The Matlab library has rules
 for expanding some arguments to match others. For example,
 if Practical Salinity is a matrix and pressure is a single value,
-then that single pressure is used throughout a calculation of 
+then that single pressure is used throughout a calculation of
 Absolute Salinity. This convenience is only partly mimicked in the
-present package.  Since the underlying C code works on vectors, 
+present package.  Since the underlying C code works on vectors,
 the R functions in \code{gsw} start by transforming the arguments accordingly.
 This involves using \code{\link{rep}} on each argument to get something
 with length matching the first argument, and, after the computation
@@ -55,7 +55,7 @@ is complete, converting the return value into a matrix, if the first
 argument was a matrix. There are some exceptions to this, however.
 For example, \code{\link{gsw_SA_from_SP}} and similar functions
 can handle the case in which the \code{SA} argument is a matrix and
-\code{longitude} and \code{latitude} are vectors sized to match. 
+\code{longitude} and \code{latitude} are vectors sized to match.
 This can be handy with gridded datasets. However, the careful
 analyst will probably prefer to avoid this and other conveniences,
 supplying properly-matched arguments from the outset.

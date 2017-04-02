@@ -29,10 +29,10 @@ as in the C code, i.e. \code{gsw_nx} etc.
 C storage for these variables is allocated as needed,
 and the data are inserted, when \code{gsw} is launched.
 Thus, the existing C library code "knows" about the data
-as local storage, which keeps alterations to the C library to 
+as local storage, which keeps alterations to the C library to
 a minimum.
 
-The \code{saar} dataset was created by the following R code. The 
+The \code{saar} dataset was created by the following R code. The
 netcdf file used in this code comes from the GSW-Fortran
 repository (at commit \code{baa0c09ffc7ed1f74972a1a2902d8754caa5b4cb})
 and its md5 value is \code{dacb3f981e8e710ac2e83477701b3905}.

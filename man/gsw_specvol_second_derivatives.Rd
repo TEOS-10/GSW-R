@@ -21,7 +21,7 @@ specific volume with respect to Absolute Salinity and Conservative Temperature,
 \code{specvol_CT_CT} [ (m^3/kg)/degC^2 ], the second derivative of
 specific volume with respect to Conservative Temperature,
 \code{specvol_SA_p} [ (m^3/kg)/(g/kg)/dbar ], the derivative of specific volume with respect to Absolute
-Salinity and pressure, and \code{specvol_CT_p} [ (m^3/kg)/degC/dbar ], the derivative of specific
+Salinity and pressure, and \code{specvol_CT_p} [ (m^3/kg)/K/dbar ], the derivative of specific
 volume with respect to Conservative Temperature and pressure.
 }
 \description{

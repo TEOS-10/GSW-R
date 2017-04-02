@@ -12,7 +12,7 @@ gsw_CT_first_derivatives(SA, pt)
 \item{pt}{potential temperature (ITS-90) [ degC ]}
 }
 \value{
-A list containing \code{CT_SA} [ degC/(g/kg) ], the derivative of
+A list containing \code{CT_SA} [ K/(g/kg) ], the derivative of
 Conservative Temperature with respect to Absolute Salinity,
 and \code{CT_pt} [ unitless ], the derivative of
 Conservative Temperature with respect to potential temperature.

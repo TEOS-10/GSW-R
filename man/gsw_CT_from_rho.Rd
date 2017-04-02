@@ -15,7 +15,7 @@ gsw_CT_from_rho(rho, SA, p)
 }
 \value{
 A list containing two estimates of Conservative Temperature:
-\code{CT} and \code{CT_multiple}, each in [ deg C ].
+\code{CT} and \code{CT_multiple}, each in [ degC ].
 }
 \description{
 Conservative Temperature from Density, Absolute Salinity and Pressure

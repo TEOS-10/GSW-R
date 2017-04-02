@@ -12,10 +12,10 @@ gsw_CT_second_derivatives(SA, pt)
 \item{pt}{potential temperature (ITS-90) [ degC ]}
 }
 \value{
-A list containing \code{CT_SA_SA} [ degC/(g/kg)^2 ], the second derivative of
+A list containing \code{CT_SA_SA} [ K/(g/kg)^2 ], the second derivative of
 Conservative Temperature with respect to Absolute Salinity at constant
 potential temperature, and \code{CT_SA_pt} [ 1/(g/kg) ], the derivative of
-Conservative Temperature with respect to potential temperature and 
+Conservative Temperature with respect to potential temperature and
 Absolute Salinity, and \code{CT_pt_pt} [ 1/degC ], the second derivative of
 Conservative Temperature with respect to potential temperature.
 }

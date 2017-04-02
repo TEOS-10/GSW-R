@@ -12,7 +12,7 @@ gsw_cp_ice(t, p)
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
-specific heat [ J/(degC*kg) ]
+specific heat [ J/(K*kg) ]
 }
 \description{
 Specific heat of ice

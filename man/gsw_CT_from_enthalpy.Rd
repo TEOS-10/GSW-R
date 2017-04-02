@@ -14,7 +14,7 @@ gsw_CT_from_enthalpy(SA, h, p)
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
-Conservative Temperature [ deg C ]
+Conservative Temperature [ degC ]
 }
 \description{
 Conservative Temperature from Enthalpy

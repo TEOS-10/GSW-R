@@ -12,7 +12,7 @@ gsw_pt_from_entropy(SA, entropy)
 \item{entropy}{specific entropy [ J/(degC*kg) ]}
 }
 \value{
-potential temperature [ deg C ]
+potential temperature [ degC ]
 }
 \description{
 Potential Temperature from Entropy

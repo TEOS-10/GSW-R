@@ -12,7 +12,7 @@ gsw_pt_from_CT(SA, CT)
 \item{CT}{Conservative Temperature [ degC ]}
 }
 \value{
-potential temperature [ deg C ]
+potential temperature [ degC ]
 }
 \description{
 Potential temperature from Conservative Temperature

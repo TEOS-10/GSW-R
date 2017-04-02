@@ -14,12 +14,12 @@ gsw_t_freezing(SA, p, saturation_fraction = 1)
 \item{saturation_fraction}{fraction of air in water [unitless]}
 }
 \value{
-in-situ freezing temperature (ITS-90) [ deg C ]
+in-situ freezing temperature (ITS-90) [ degC ]
 }
 \description{
-This uses the C function named \code{gsw_t_freezing_exact}, because the 
+This uses the C function named \code{gsw_t_freezing_exact}, because the
 C function named \code{gsw_t_freezing} does not produce check values that
-match the Matlab function called \code{gsw_t_freezing} (see references 
+match the Matlab function called \code{gsw_t_freezing} (see references
 for those test values).
 }
 \details{
@@ -38,7 +38,7 @@ p <- c(      10,      50,     125,     250,     600,    1000)
 saturation_fraction <- 1
 tf <- gsw_t_freezing(SA, p, saturation_fraction)
 expect_equal(tf, c(-1.902730710149803, -1.942908619287183, -2.006861069199743,
-                   -2.090985086875259, -2.351293130342102, -2.660498762776720)) 
+                   -2.090985086875259, -2.351293130342102, -2.660498762776720))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing.html}

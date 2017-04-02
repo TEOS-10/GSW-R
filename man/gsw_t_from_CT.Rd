@@ -14,7 +14,7 @@ gsw_t_from_CT(SA, CT, p)
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
-in-situ temperature (ITS-90) [ deg C ]
+in-situ temperature (ITS-90) [ degC ]
 }
 \description{
 In situ temperature from Conservative Temperature

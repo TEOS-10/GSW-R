@@ -12,7 +12,7 @@ gsw_CT_maxdensity(SA, p)
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
-Conservative Temperature [ deg C ]
+Conservative Temperature [ degC ]
 }
 \description{
 Conservative Temperature at Maximum Density

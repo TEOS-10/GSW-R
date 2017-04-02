@@ -40,7 +40,7 @@ longitude <- 188
 latitude <- 4
 SP <- gsw_SP_from_Sstar(Sstar, p, longitude, latitude)
 expect_equal(SP, c(34.548646570969929, 34.727538423586189, 34.860549501859502,
-                   34.681006826476434, 34.568065697992346, 34.560023926979518)) 
+                   34.681006826476434, 34.568065697992346, 34.560023926979518))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_Sstar.html}
