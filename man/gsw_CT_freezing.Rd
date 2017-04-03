@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_CT_freezing}
 \alias{gsw_CT_freezing}
-\title{Conservative Temperature Freezing Point}
+\title{Conservative Temperature of Freezing Seawater}
 \usage{
 gsw_CT_freezing(SA, p, saturation_fraction = 1)
 }
@@ -17,7 +17,7 @@ gsw_CT_freezing(SA, p, saturation_fraction = 1)
 Conservative Temperature at freezing of seawater [ degC ].
 }
 \description{
-Conservative Temperature Freezing Point
+Conservative Temperature of Freezing Seawater
 }
 \details{
 The present R function works with a wrapper to a C function contained
