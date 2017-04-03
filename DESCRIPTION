@@ -1,6 +1,6 @@
 Package: gsw
 Version: 1.0-4
-Date: 2017-04-02
+Date: 2017-04-03
 Title: Gibbs Sea Water Functions
 Authors@R: c(person("Dan", "Kelley", role=c("aut","cre","cph"), email="dan.kelley@dal.ca", comment="C wrapper plus R code, tests, and documentation"), person("Clark", "Richards", role=c("aut","cph"), email="clark.richards@gmail.com", comment="C wrapper plus R code, tests, and documentation"), person("WG127", "SCOR/IAPSO", role=c("aut","cph"), comment="Original 'Matlab' and derived code"))
 Copyright: Original algorithms and 'Matlab'/C library (c) 2015-2017 WG127 SCOR/IAPSO
