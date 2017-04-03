@@ -703,7 +703,7 @@ gsw_CT_first_derivatives_wrt_t_exact <- function(SA, t, p)
     list(CT_SA_wrt_t=r$CT_SA_wrt_t, CT_t_wrt_t=r$CT_t_wrt_t, CT_p_wrt_t=r$CT_p_wrt_t)
 }
 
-#' Conservative Temperature Freezing Point
+#' Conservative Temperature of Freezing Seawater
 #'
 #' @template teos10template
 #'
