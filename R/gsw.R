@@ -191,10 +191,12 @@ gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
     rval <- .C("wrap_gsw_adiabatic_lapse_rate_from_CT",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Adiabatic Lapse Rate of Ice
 #'
@@ -222,10 +224,12 @@ gsw_adiabatic_lapse_rate_ice <- function(t, p)
     rval <- .C("wrap_gsw_adiabatic_lapse_rate_ice",
                t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
 }
+
 
 #' Thermal expansion coefficient with respect to Conservative Temperature
 #'
@@ -256,10 +260,12 @@ gsw_alpha <- function(SA, CT, p)
     rval <- .C("wrap_gsw_alpha",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Thermal expansion coefficient over haline contraction coefficient
 #'
@@ -290,10 +296,12 @@ gsw_alpha_on_beta <- function(SA, CT, p)
     rval <- .C("wrap_gsw_alpha_on_beta",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Thermal expansion coefficient with respect to in-situ temperature
 #'
@@ -323,10 +331,12 @@ gsw_alpha_wrt_t_exact <- function(SA, t, p)
     rval <- .C("wrap_gsw_alpha_wrt_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Ice Thermal Expansion Coefficient with Respect to in-situ Temperature
 #'
@@ -355,10 +365,12 @@ gsw_alpha_wrt_t_ice <- function(t, p)
     rval <- .C("wrap_gsw_alpha_wrt_t_ice",
                t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
 }
+
 
 #' Haline contraction coefficient at constant Conservative Temperature
 #'
@@ -389,10 +401,12 @@ gsw_beta <- function(SA, CT, p)
     rval <- .C("wrap_gsw_beta",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Haline contraction coefficient at constant in-situ temperature
 #'
@@ -422,10 +436,12 @@ gsw_beta_const_t_exact <- function(SA, t, p)
     rval <- .C("wrap_gsw_beta_const_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Cabbeling coefficient
 #'
@@ -454,10 +470,12 @@ gsw_cabbeling <- function(SA, CT, p)
     rval <- .C("wrap_gsw_cabbeling",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Electrical Conductivity from Practical Salinity
 #'
@@ -491,10 +509,12 @@ gsw_C_from_SP <- function(SP, t, p)
     rval <- .C("wrap_gsw_C_from_SP",
                SP=as.double(l$SP), t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(SP))
         dim(rval) <- dim(SP)
     rval
 }
+
 
 #' Chemical Potential of Ice
 #'
@@ -521,10 +541,12 @@ gsw_chem_potential_water_ice <- function(t, p)
     rval <- .C("wrap_gsw_chem_potential_water_ice",
             t=as.double(l$t), p=as.double(l$p), n=as.integer(n),
             rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
 }
+
 
 #' Chemical Potential of Water in Seawater
 #'
@@ -552,10 +574,12 @@ gsw_chem_potential_water_t_exact <- function(SA, t, p)
     rval <- .C("wrap_gsw_chem_potential_water_t_exact",
             SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p), n=as.integer(n),
             rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Specific heat to ice
 #'
@@ -585,10 +609,12 @@ gsw_cp_ice <- function(t, p)
     rval <- .C("wrap_gsw_cp_ice",
                t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
 }
+
 
 #' Isobaric heat capacity
 #'
@@ -615,6 +641,7 @@ gsw_cp_t_exact <- function(SA, t, p)
     rval <- .C("wrap_gsw_cp_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -649,6 +676,8 @@ gsw_CT_first_derivatives <- function(SA, pt)
     r <- .C("wrap_gsw_CT_first_derivatives",
             SA=as.double(l$SA), pt=as.double(l$pt),
             n=as.integer(n), CT_SA=double(n), CT_pt=double(n), NAOK=TRUE, PACKAGE="gsw")
+    r$CT_SA[!is.finite(l$SA) | !is.finite(l$pt)] <- NA
+    r$CT_pt[!is.finite(l$SA) | !is.finite(l$pt)] <- NA
     if (is.matrix(SA)) {
         dim(r$CT_SA) <- dim(SA)
         dim(r$CT_pt) <- dim(SA)
@@ -695,13 +724,18 @@ gsw_CT_first_derivatives_wrt_t_exact <- function(SA, t, p)
             n=as.integer(n),
             CT_SA_wrt_t=double(n), CT_t_wrt_t=double(n), CT_p_wrt_t=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    r$CT_SA_wrt_t[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
+    r$CT_t_wrt_t[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
+    r$CT_p_wrt_t[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(SA)) {
-        dim(r$CT_SA_wrt_t) <- dim(SA)
-        dim(r$CT_t_wrt_t) <- dim(SA)
-        dim(r$CT_p_wrt_t) <- dim(SA)
+        dim <- dim(SA)
+        dim(r$CT_SA_wrt_t) <- dim
+        dim(r$CT_t_wrt_t) <- dim
+        dim(r$CT_p_wrt_t) <- dim
     }
     list(CT_SA_wrt_t=r$CT_SA_wrt_t, CT_t_wrt_t=r$CT_t_wrt_t, CT_p_wrt_t=r$CT_p_wrt_t)
 }
+
 
 #' Conservative Temperature of Freezing Seawater
 #'
@@ -729,13 +763,11 @@ gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
     rval <- .C("wrap_gsw_CT_freezing_exact",
                SA=as.double(l$SA), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$saturation_fraction)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
-
-
-
 
 #' First Derivatives of Conservative Temperature for Freezing Water
 #'
@@ -769,12 +801,16 @@ gsw_CT_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)
     r <- .C("wrap_gsw_CT_freezing_first_derivatives",
             SA=as.double(l$SA), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
             n=as.integer(n), CTfreezing_SA=double(n), CTfreezing_p=double(n), NAOK=TRUE, PACKAGE="gsw")
+    r$CTfreezing_SA[!is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$saturation_fraction)] <- NA
+    r$CTfreezing_p[!is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$saturation_fraction)] <- NA
     if (is.matrix(SA)) {
-        dim(r$CTfreezing_SA) <- dim(SA)
-        dim(r$CTfreezing_p) <- dim(SA)
+        dim <- dim(SA)
+        dim(r$CTfreezing_SA) <- dim
+        dim(r$CTfreezing_p) <- dim
     }
     list(CTfreezing_SA=r$CTfreezing_SA, CTfreezing_p=r$CTfreezing_p)
 }
+
 
 #' First Derivatives of Conservative Temperature for Freezing Water (Polynomial version)
 #'
@@ -808,12 +844,16 @@ gsw_CT_freezing_first_derivatives_poly <- function(SA, p, saturation_fraction=1)
     r <- .C("wrap_gsw_CT_freezing_first_derivatives_poly",
             SA=as.double(l$SA), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
             n=as.integer(n), CTfreezing_SA=double(n), CTfreezing_p=double(n), NAOK=TRUE, PACKAGE="gsw")
+    r$CTfreezing_SA[!is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$saturation_fraction)] <- NA
+    r$CTfreezing_p[!is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$saturation_fraction)] <- NA
     if (is.matrix(SA)) {
-        dim(r$CTfreezing_SA) <- dim(SA)
-        dim(r$CTfreezing_p) <- dim(SA)
+        dim <- dim(SA)
+        dim(r$CTfreezing_SA) <- dim
+        dim(r$CTfreezing_p) <- dim
     }
     list(CTfreezing_SA=r$CTfreezing_SA, CTfreezing_p=r$CTfreezing_p)
 }
+
 
 #' Conservative Temperature Freezing Point (Polynomial version)
 #'
@@ -841,6 +881,7 @@ gsw_CT_freezing_poly <- function(SA, p, saturation_fraction=1)
     rval <- .C("wrap_gsw_CT_freezing_poly",
                SA=as.double(l$SA), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$saturation_fraction)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -874,6 +915,7 @@ gsw_CT_from_enthalpy <- function(SA, h, p)
     rval <- .C("wrap_gsw_CT_from_enthalpy",
                SA=as.double(l$SA), h=as.double(l$h), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$h) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -904,6 +946,7 @@ gsw_CT_from_entropy <- function(SA, entropy)
     rval <- .C("wrap_gsw_CT_from_entropy",
                SA=as.double(l$SA), entropy=as.double(l$entropy),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$entropy)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -933,10 +976,12 @@ gsw_CT_from_pt <- function(SA, pt)
     rval <- .C("wrap_gsw_CT_from_pt",
                SA=as.double(l$SA), pt=as.double(l$pt),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$pt)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Conservative Temperature from Density, Absolute Salinity and Pressure
 #'
@@ -966,15 +1011,19 @@ gsw_CT_from_rho <- function(rho, SA, p)
             rho=as.double(l$rho), SA=as.double(l$SA), p=as.double(l$p),
             n=as.integer(n), CT=double(n), CT_multiple=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    r$CT[!is.finite(l$rho) | !is.finite(l$SA) | !is.finite(l$p)] <- NA
+    r$CT_multiple[!is.finite(l$rho) | !is.finite(l$SA) | !is.finite(l$p)] <- NA
     if (is.matrix(rho)) {
-        dim(r$CT) <- dim(rho)
-        dim(r$CT_multiple) <- dim(rho)
+        dim <- dim(rho)
+        dim(r$CT) <- dim
+        dim(r$CT_multiple) <- dim
     }
     ## NaN is coming out as 9e15 in the doc test case
     r$CT[r$CT > 1e15] <- NA
     r$CT_multiple[r$CT_multiple > 1e15] <- NA
     list(CT=r$CT, CT_multiple=r$CT_multiple)
 }
+
 
 #' Convert from temperature to conservative temperature
 #'
@@ -1007,6 +1056,7 @@ gsw_CT_from_t <- function(SA, t, p)
     rval
 }
 
+
 #' Conservative Temperature at Maximum Density
 #'
 #' @template teos10template
@@ -1031,6 +1081,7 @@ gsw_CT_maxdensity <- function(SA, p)
     rval <- .C("wrap_gsw_CT_maxdensity",
                SA=as.double(l$SA), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -1071,13 +1122,18 @@ gsw_CT_second_derivatives <- function(SA, pt)
             n=as.integer(n),
             CT_SA_SA=double(n), CT_SA_pt=double(n), CT_pt_pt=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    r$CT_SA_SA[!is.finite(l$SA) | !is.finite(l$pt)] <- NA
+    r$CT_SA_pt[!is.finite(l$SA) | !is.finite(l$pt)] <- NA
+    r$CT_pt_pt[!is.finite(l$SA) | !is.finite(l$pt)] <- NA
     if (is.matrix(SA)) {
-        dim(r$CT_SA_SA) <- dim(SA)
-        dim(r$CT_SA_pt) <- dim(SA)
-        dim(r$CT_pt_pt) <- dim(SA)
+        dim <- dim(SA)
+        dim(r$CT_SA_SA) <- dim
+        dim(r$CT_SA_pt) <- dim
+        dim(r$CT_pt_pt) <- dim
     }
     list(CT_SA_SA=r$CT_SA_SA, CT_SA_pt=r$CT_SA_pt, CT_pt_pt=r$CT_pt_pt)
 }
+
 
 #' Absolute Salinity Anomaly from Practical Salinity
 #'
@@ -1112,13 +1168,12 @@ gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
                SP=as.double(l$SP), p=as.double(l$p),
                longitude=as.double(l$longitude), latitude=as.double(l$latitude),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$longitude) | !is.finite(l$latitude)] <- NA
     if (is.matrix(SP))
         dim(rval) <- dim(SP)
     rval
 }
 
-
-##==============
 
 #' Dilution coefficient
 #'
@@ -1145,11 +1200,12 @@ gsw_dilution_coefficient_t_exact <- function(SA, t, p)
     rval <- .C("wrap_gsw_dilution_coefficient_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
-##================
+
 
 #' Dynamic enthalpy of seawater (75-term equation)
 #'
@@ -1177,10 +1233,12 @@ gsw_dynamic_enthalpy <- function(SA, CT, p)
     rval <- .C("wrap_gsw_dynamic_enthalpy",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Specific enthalpy of seawater (75-term equation)
 #'
@@ -1208,10 +1266,12 @@ gsw_enthalpy <- function(SA, CT, p)
     rval <- .C("wrap_gsw_enthalpy",
                SA=as.double(l$SA), t=as.double(l$CT), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Seawater Specific Enthalpy in terms of Conservative Temperature
 #'
@@ -1239,10 +1299,12 @@ gsw_enthalpy_CT_exact <- function(SA, CT, p)
     rval <- .C("wrap_gsw_enthalpy_ct_exact",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Specific Enthalpy Difference with Pressure
 #'
@@ -1277,10 +1339,12 @@ gsw_enthalpy_diff <- function(SA, CT, p_shallow, p_deep)
                SA=as.double(l$SA), CT=as.double(l$CT), p_shallow=as.double(l$p_shallow),
                p_deep=as.double(l$p_deep),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p_shallow) | !is.finite(l$p_deep)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
 }
+
 
 #' First Derivatives of Enthalpy
 #'
@@ -1318,12 +1382,16 @@ gsw_enthalpy_first_derivatives <- function(SA, CT, p)
             n=as.integer(n),
             h_SA=double(n), h_CT=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    r$h_SA[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
+    r$h_CT[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(SA)) {
-        dim(r$h_SA) <- dim(SA)
-        dim(r$h_CT) <- dim(SA)
+        dim <- dim(SA)
+        dim(r$h_SA) <- dim
+        dim(r$h_CT) <- dim
     }
     list(h_SA=r$h_SA, h_CT=r$h_CT)
 }
+
 
 #' First Derivatives of Enthalpy wrt CT
 #'
@@ -1367,9 +1435,13 @@ gsw_enthalpy_first_derivatives_CT_exact <- function(SA, CT, p)
             n=as.integer(n),
             h_SA=double(n), h_CT=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)
+    r$h_SA[bad] <- NA
+    r$h_CT[bad] <- NA
     if (is.matrix(SA)) {
-        dim(r$h_SA) <- dim(SA)
-        dim(r$h_CT) <- dim(SA)
+        dim <- dim(SA)
+        dim(r$h_SA) <- dim
+        dim(r$h_CT) <- dim
     }
     list(h_SA=r$h_SA, h_CT=r$h_CT)
 }
@@ -1404,12 +1476,11 @@ gsw_enthalpy_ice <- function(t, p)
     rval <- .C("wrap_gsw_enthalpy_ice",
                t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
 }
-
-
 
 
 #' Second Derivatives of Enthalpy
@@ -1446,13 +1517,19 @@ gsw_enthalpy_second_derivatives <- function(SA, CT, p)
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
             n=as.integer(n),
             h_SA_SA=double(n), h_SA_CT=double(n), h_CT_CT=double(n))
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)
+    r$h_SA_SA[bad] <- NA
+    r$h_SA_CT[bad] <- NA
+    r$h_CT_CT[bad] <- NA
     if (is.matrix(SA)) {
-        dim(r$h_SA_SA) <- dim(SA)
-        dim(r$h_SA_CT) <- dim(SA)
-        dim(r$h_CT_CT) <- dim(SA)
+        dim <- dim(SA)
+        dim(r$h_SA_SA) <- dim
+        dim(r$h_SA_CT) <- dim
+        dim(r$h_CT_CT) <- dim
     }
     list(h_SA_SA=r$h_SA_SA, h_SA_CT=r$h_SA_CT, h_CT_CT=r$h_CT_CT)
 }
+
 
 #' Second Derivatives of Enthalpy (exact)
 #'
@@ -1488,10 +1565,15 @@ gsw_enthalpy_second_derivatives_CT_exact <- function(SA, CT, p)
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
             n=as.integer(n),
             h_SA_SA=double(n), h_SA_CT=double(n), h_CT_CT=double(n))
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)
+    r$h_SA_SA[bad] <- NA
+    r$h_SA_CT[bad] <- NA
+    r$h_CT_CT[bad] <- NA
     if (is.matrix(SA)) {
-        dim(r$h_SA_SA) <- dim(SA)
-        dim(r$h_SA_CT) <- dim(SA)
-        dim(r$h_CT_CT) <- dim(SA)
+        dim <- dim(SA)
+        dim(r$h_SA_SA) <- dim
+        dim(r$h_SA_CT) <- dim
+        dim(r$h_CT_CT) <- dim
     }
     list(h_SA_SA=r$h_SA_SA, h_SA_CT=r$h_SA_CT, h_CT_CT=r$h_CT_CT)
 }
@@ -1523,10 +1605,12 @@ gsw_enthalpy_t_exact <- function(SA, t, p)
     rval <- .C("wrap_gsw_enthalpy_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' First Derivatives of Entropy
 #'
@@ -1560,12 +1644,17 @@ gsw_entropy_first_derivatives <- function(SA, CT)
             n=as.integer(n),
             eta_SA=double(n), eta_CT=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA) | !is.finite(l$CT)
+    r$eta_SA[bad] <- NA
+    r$eta_CT[bad] <- NA
     if (is.matrix(SA)) {
-        dim(r$eta_SA) <- dim(SA)
-        dim(r$eta_CT) <- dim(SA)
+        dim <- dim(SA)
+        dim(r$eta_SA) <- dim
+        dim(r$eta_CT) <- dim
     }
     list(eta_SA=r$eta_SA, eta_CT=r$eta_CT)
 }
+
 
 #' Specific Entropy ito Absolute Salinity and Potential Temperature
 #'
@@ -1594,10 +1683,12 @@ gsw_entropy_from_pt <- function(SA, pt)
     rval <- .C("wrap_gsw_entropy_from_pt",
                SA=as.double(l$SA), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$pt)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Specific Entropy i.t.o. Absolute Salinity, Temperature, and Pressure
 #'
@@ -1629,9 +1720,10 @@ gsw_entropy_from_t <- function(SA, t, p)
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n),
                rval=double(n))$rval
-     if (is.matrix(SA))
-         dim(rval) <- dim(SA)
-     rval
+    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
 }
 
 
@@ -1669,15 +1761,18 @@ gsw_entropy_second_derivatives <- function(SA, CT)
             SA=as.double(l$SA), CT=as.double(l$CT),
             n=as.integer(n),
             eta_SA_SA=double(n), eta_SA_CT=double(n), eta_CT_CT=double(n))
+    bad <- !is.finite(l$SA) | !is.finite(l$CT)
+    r$h_SA_SA[bad] <- NA
+    r$h_CT_CT[bad] <- NA
+    r$h_CT_CT[bad] <- NA
     if (is.matrix(SA)) {
-        dim(r$eta_SA_SA) <- dim(SA)
-        dim(r$eta_SA_CT) <- dim(SA)
-        dim(r$eta_CT_CT) <- dim(SA)
+        dim <- dim(SA)
+        dim(r$eta_SA_SA) <- dim
+        dim(r$eta_SA_CT) <- dim
+        dim(r$eta_CT_CT) <- dim
     }
     list(eta_SA_SA=r$eta_SA_SA, eta_SA_CT=r$eta_SA_CT, eta_CT_CT=r$eta_CT_CT)
 }
-
-
 
 
 #' Ratio of Absolute to Preformed Salinity, minus 1
@@ -1706,10 +1801,12 @@ gsw_Fdelta <- function(p, longitude, latitude)
                p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
                n=as.integer(n),
                rval=double(n))$rval
+    rval[!is.finite(l$p) | !is.finite(l$longitude) | !is.finite(l$latitude)] <- NA
     if (is.matrix(p))
         dim(rval) <- dim(p)
     rval
 }
+
 
 #' Entropy of ice
 #'
@@ -1736,10 +1833,12 @@ gsw_entropy_ice <- function(t, p)
     rval <- .C("wrap_gsw_entropy_ice",
             t=as.double(l$t), p=as.double(l$p), n=as.integer(n),
             rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
 }
+
 
 #' Properties of Frazil ice
 #'
@@ -1776,6 +1875,10 @@ gsw_frazil_properties <- function(SA_bulk, h_bulk, p)
             n=as.integer(n),
             SA_final=double(n), CT_final=double(n), w_Ih_final=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA_bulk) | !is.finite(l$h_bulk) | !is.finite(l$p)
+    r$SA_final[bad] <- NA
+    r$CT_final[bad] <- NA
+    r$t_Ih_final[bad] <- NA
     if (is.matrix(SA_bulk)) {
         dim <- dim(SA_bulk)
         dim(r$SA_final) <- dim
@@ -1822,6 +1925,10 @@ gsw_frazil_properties_potential <- function(SA_bulk, h_pot_bulk, p)
             n=as.integer(n),
             SA_final=double(n), CT_final=double(n), w_Ih_final=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA_bulk) | !is.finite(l$h_pot_bulk) | !is.finite(l$p)
+    r$SA_final[bad] <- NA
+    r$CT_final[bad] <- NA
+    r$t_Ih_final[bad] <- NA
     if (is.matrix(SA_bulk)) {
         dim <- dim(SA_bulk)
         dim(r$SA_final) <- dim
@@ -1868,6 +1975,10 @@ gsw_frazil_properties_potential_poly <- function(SA_bulk, h_pot_bulk, p)
             n=as.integer(n),
             SA_final=double(n), CT_final=double(n), w_Ih_final=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA_bulk) | !is.finite(l$h_pot_bulk) | !is.finite(l$p)
+    r$SA_final[bad] <- NA
+    r$CT_final[bad] <- NA
+    r$t_Ih_final[bad] <- NA
     if (is.matrix(SA_bulk)) {
         dim <- dim(SA_bulk)
         dim(r$SA_final) <- dim
@@ -1876,9 +1987,6 @@ gsw_frazil_properties_potential_poly <- function(SA_bulk, h_pot_bulk, p)
     }
     list(SA_final=r$SA_final, CT_final=r$CT_final, w_Ih_final=r$w_Ih_final)
 }
-
-
-
 
 
 #' Ratios of SA, CT and p changes when Frazil Ice Forms
@@ -1917,6 +2025,10 @@ gsw_frazil_ratios_adiabatic <- function(SA, p, w_Ih)
             n=as.integer(n),
             dSA_dCT_frazil=double(n), dSA_dP_frazil=double(n), dCT_dP_frazil=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$w_Ih)
+    r$dSA_dCT_frazil[bad] <- NA
+    r$dSA_dP_frazil[bad] <- NA
+    r$dCT_dP_frazil[bad] <- NA
     if (is.matrix(SA)) {
         dim <- dim(SA)
         dim(r$dSA_dCT_frazil) <- dim
@@ -1925,6 +2037,7 @@ gsw_frazil_ratios_adiabatic <- function(SA, p, w_Ih)
     }
     list(dSA_dCT_frazil=r$dSA_dCT_frazil, dSA_dP_frazil=r$dSA_dP_frazil, dCT_dP_frazil=r$dCT_dP_frazil)
 }
+
 
 #' Ratios of SA, CT and p changes when Frazil Ice Forms (polynomial form)
 #'
@@ -1962,6 +2075,10 @@ gsw_frazil_ratios_adiabatic_poly <- function(SA, p, w_Ih)
             n=as.integer(n),
             dSA_dCT_frazil=double(n), dSA_dP_frazil=double(n), dCT_dP_frazil=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$w_Ih)
+    r$dSA_dCT_frazil[bad] <- NA
+    r$dSA_dP_frazil[bad] <- NA
+    r$dCT_dP_frazil[bad] <- NA
     if (is.matrix(SA)) {
         dim <- dim(SA)
         dim(r$dSA_dCT_frazil) <- dim
@@ -1970,6 +2087,7 @@ gsw_frazil_ratios_adiabatic_poly <- function(SA, p, w_Ih)
     }
     list(dSA_dCT_frazil=r$dSA_dCT_frazil, dSA_dP_frazil=r$dSA_dP_frazil, dCT_dP_frazil=r$dCT_dP_frazil)
 }
+
 
 #' Gravitational Acceleration
 #'
@@ -1993,10 +2111,12 @@ gsw_grav <- function(latitude, p=0)
     rval <- .C("wrap_gsw_grav",
                latitude=as.double(l$latitude), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$latitude) | !is.finite(l$p)] <- NA
     if (is.matrix(latitude))
         dim(rval) <- dim(latitude)
     rval
 }
+
 
 #' Geostrophic Dynamic Height Anomaly
 #'
@@ -2121,10 +2241,12 @@ gsw_gibbs <- function(ns, nt, np, SA, t, p=0)
                as.integer(ns[1]), as.integer(nt[1]), as.integer(np[1]),
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$ns) | !is.finite(nt) | !is.finite(np) | !is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Gibbs Energy of Ice, and its Derivatives
 #'
@@ -2166,10 +2288,12 @@ gsw_gibbs_ice <- function(nt, np, t, p=0)
                as.integer(nt[1]), as.integer(np[1]),
                t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$nt) | !is.finite(l$np) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
 }
+
 
 #' Helmholtz Energy of Ice
 #'
@@ -2197,10 +2321,12 @@ gsw_Helmholtz_energy_ice <- function(t, p)
                t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n),
                NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
 }
+
 
 ##> #' Hill Ratio
 ##> #'
@@ -2263,6 +2389,10 @@ gsw_ice_fraction_to_freeze_seawater <- function(SA, CT, p, t_Ih)
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), t_Ih=as.double(l$t_Ih),
             n=as.integer(n), SA_freeze=double(n), CT_freeze=double(n), w_Ih=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p) | !is.finite(l$t_Ih)
+    r$h_SA_freeze[bad] <- NA
+    r$h_CT_freeze[bad] <- NA
+    r$w_Ih[bad] <- NA
     if (is.matrix(SA)) {
         dim <- dim(SA)
         dim(r$SA_freeze) <- dim
@@ -2271,6 +2401,7 @@ gsw_ice_fraction_to_freeze_seawater <- function(SA, CT, p, t_Ih)
     }
     list(SA_freeze=r$SA_freeze, CT_freeze=r$CT_freeze, w_Ih=r$w_Ih)
 }
+
 
 #' Specific Internal Energy of Seawater (75-term equation)
 #'
@@ -2297,10 +2428,12 @@ gsw_internal_energy <- function(SA, CT, p)
     rval <- .C("wrap_gsw_internal_energy",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Specific Internal Energy of Ice (75-term equation)
 #'
@@ -2326,6 +2459,7 @@ gsw_internal_energy_ice <- function(t, p)
     rval <- .C("wrap_gsw_internal_energy_ice",
                t=(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
@@ -2365,10 +2499,14 @@ gsw_IPV_vs_fNsquared_ratio <- function(SA, CT, p, p_ref=0)
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), p_ref=as.double(l$p_ref[1]),
             n=as.integer(n),
             ratio=double(n-1), p_mid=double(n-1), NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p) | !is.finite(l$p_ref)
+    if (any(bad))
+        warning("gsw_IPV_vs_fNsquared_ratio() has some NA inputs ... these are not handled well\n")
     if (is.matrix(SA))
         stop("gsw_IPV_vs_fNsquared_ratio() cannot handle matrix SA")
     list(IPV_vs_fNsquared_ratio=r$ratio, p_mid=r$p_mid)
 }
+
 
 #' Isentropic Compressibility of Seawater (75-term equation)
 #'
@@ -2398,6 +2536,7 @@ gsw_kappa <- function(SA, CT, p)
     rval <- .C("wrap_gsw_kappa",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -2430,6 +2569,7 @@ gsw_kappa_const_t_ice <- function(t, p)
     rval <- .C("wrap_gsw_kappa_const_t_ice",
                t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
@@ -2463,10 +2603,12 @@ gsw_kappa_ice <- function(t, p)
     rval <- .C("wrap_gsw_kappa_ice",
                t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
 }
+
 
 #' Isentropic compressibility of seawater (exact)
 #'
@@ -2494,10 +2636,12 @@ gsw_kappa_t_exact <- function(SA, t, p)
     rval <- .C("wrap_gsw_kappa_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Latent heat of evaporation
 #'
@@ -2523,10 +2667,12 @@ gsw_latentheat_evap_CT <- function(SA, CT)
     rval <- .C("wrap_gsw_latentheat_evap_CT",
                SA=as.double(l$SA), CT=as.double(l$CT),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Latent heat of evaporation
 #'
@@ -2552,10 +2698,12 @@ gsw_latentheat_evap_t <- function(SA, t)
     rval <- .C("wrap_gsw_latentheat_evap_t",
                SA=as.double(l$SA), t=as.double(l$t),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$t)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Latent Heat of Melting
 #'
@@ -2581,10 +2729,12 @@ gsw_latentheat_melting <- function(SA, p)
     rval <- .C("wrap_gsw_latentheat_melting",
                SA=as.double(l$SA), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Calculate properties related to ice melting in seawater
 #'
@@ -2620,6 +2770,10 @@ gsw_melting_ice_into_seawater <- function(SA, CT, p, w_Ih, t_Ih)
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), w_Ih=as.double(l$w_Ih), t_Ih=as.double(l$t_Ih),
             n=as.integer(n), SA_final=double(n), CT_final=double(n), w_Ih_final=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p) | !is.finite(l$w_Ih) | !is.finite(l$t_Ih) 
+    r$SA_final[bad] <- NA
+    r$CT_final[bad] <- NA
+    r$t_Ih_final[bad] <- NA
     if (is.matrix(SA)) {
         dim <- dim(SA)
         dim(r$SA_final) <- dim
@@ -2628,6 +2782,7 @@ gsw_melting_ice_into_seawater <- function(SA, CT, p, w_Ih, t_Ih)
     }
     list(SA_final=r$SA_final, CT_final=r$CT_final, w_Ih_final=r$w_Ih_final)
 }
+
 
 #' Calculate properties related to seaice melting in seawater
 #'
@@ -2665,6 +2820,9 @@ gsw_melting_seaice_into_seawater <- function(SA, CT, p, w_seaice, SA_seaice, t_s
             w_seaice=as.double(l$w_seaice), SA_seaice=as.double(l$SA_seaice), t_seaice=as.double(l$t_seaice),
             n=as.integer(n), SA_final=double(n), CT_final=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p) | !is.finite(l$w_seaice) | !is.finite(l$SA_seaice) | !is.finite(l$t_seaice)
+    r$SA_final[bad] <- NA
+    r$CT_final[bad] <- NA
     if (is.matrix(SA)) {
         dim <- dim(SA)
         dim(r$SA_final) <- dim
@@ -2672,6 +2830,7 @@ gsw_melting_seaice_into_seawater <- function(SA, CT, p, w_seaice, SA_seaice, t_s
     }
     list(SA_final=r$SA_final, CT_final=r$CT_final)
 }
+
 
 #' Calculate d(SA)/d(CT) for Ice Melting in near-freezing Seawater
 #'
@@ -2698,10 +2857,12 @@ gsw_melting_ice_equilibrium_SA_CT_ratio <- function(SA, p)
                SA=as.double(l$SA), p=as.double(l$p),
                n=as.integer(n), rval=double(n),
                NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Calculate d(SA)/d(CT) for Ice Melting in near-freezing Seawater (Polynomial version)
 #'
@@ -2728,6 +2889,7 @@ gsw_melting_ice_equilibrium_SA_CT_ratio_poly <- function(SA, p)
                SA=as.double(l$SA), p=as.double(l$p),
                n=as.integer(n), rval=double(n),
                NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -2763,6 +2925,7 @@ gsw_melting_ice_SA_CT_ratio <- function(SA, CT, p, t_Ih)
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), t_Ih=as.double(l$t_Ih),
                n=as.integer(n), rval=double(n),
                NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p) | !is.finite(l$t_Ih)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -2798,10 +2961,12 @@ gsw_melting_ice_SA_CT_ratio_poly <- function(SA, CT, p, t_Ih)
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), t_Ih=as.double(l$t_Ih),
                n=as.integer(n), rval=double(n),
                NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p) | !is.finite(l$t_Ih)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Calculate Brunt Vaisala Frequency squared
 #'
@@ -2837,10 +3002,14 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
     r <- .C("wrap_gsw_Nsquared",
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), latitude=as.double(l$latitude),
             n=as.integer(n), n2=double(n-1), p_mid=double(n-1), NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p) | !is.finite(l$latitude)
+    if (any(bad))
+        warning("gsw_Nsquared() has some NA inputs ... these are not handled well\n")
     if (is.matrix(SA))
         stop("gsw_Nsquared() cannot handle matrix SA")
     list(N2=r$n2, p_mid=r$p_mid)
 }
+
 
 #' Pressure from height (75-term equation)
 #'
@@ -2872,10 +3041,12 @@ gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height=0, sea_surface_geopote
                geo_strf_dyn_height=as.double(l$geo_strf_dyn_height),
                sea_surface_geopotential=as.double(l$sea_surface_geopotential),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$z) | !is.finite(l$latitude) | !is.finite(l$geo_strf_dyn_height) | !is.finite(l$sea_surface_geopotential)] <- NA
     if (is.matrix(z))
         dim(rval) <- dim(z)
     rval
 }
+
 
 #' Potential Enthalpy of Ice
 #'
@@ -2900,10 +3071,12 @@ gsw_pot_enthalpy_from_pt_ice <- function(pt0_ice)
     rval <- .C("wrap_gsw_pot_enthalpy_from_pt_ice",
                pt0_ice=as.double(l$pt0_ice),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$pt0_ice)] <- NA
     if (is.matrix(pt0_ice))
         dim(rval) <- dim(pt0_ice)
     rval
 }
+
 
 #' Potential Enthalpy of Ice (Polynomial version)
 #'
@@ -2928,10 +3101,12 @@ gsw_pot_enthalpy_from_pt_ice_poly <- function(pt0_ice)
     rval <- .C("wrap_gsw_pot_enthalpy_from_pt_ice_poly",
                pt0_ice=as.double(l$pt0_ice),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$pt0_ice)] <- NA
     if (is.matrix(pt0_ice))
         dim(rval) <- dim(pt0_ice)
     rval
 }
+
 
 #' Potential Enthalpy of Ice at Freezing Point
 #'
@@ -2970,10 +3145,12 @@ gsw_pot_enthalpy_ice_freezing <- function(SA, p, saturation_fraction=1)
     rval <- .C("wrap_gsw_pot_enthalpy_ice_freezing",
                SA=as.double(l$SA), p=as.double(l$p), # saturation_fraction=as.double(l$saturation_fraction),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$saturation_fraction)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Potential Enthalpy of Ice at Freezing Point (Polynomial version)
 #'
@@ -3002,10 +3179,12 @@ gsw_pot_enthalpy_ice_freezing_poly <- function(SA, p, saturation_fraction=1)
     rval <- .C("wrap_gsw_pot_enthalpy_ice_freezing_poly",
                SA=as.double(l$SA), p=as.double(l$p), # saturation_fraction=as.double(l$saturation_fraction),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$saturation_fraction)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' First Derivatives of Potential Enthalpy
 #'
@@ -3039,6 +3218,9 @@ gsw_pot_enthalpy_ice_freezing_first_derivatives <- function(SA, p)
             SA=as.double(l$SA), p=as.double(l$p),
             n=as.integer(n),
             pot_enthalpy_ice_freezing_SA=double(n), pot_enthalpy_ice_freezing_p=double(n))
+    bad <- !is.finite(l$SA) | !is.finite(l$p)
+    r$pot_enthalpy_ice_freezing_SA[bad] <- NA
+    r$pot_enthalpy_ice_freezing_p[bad] <- NA
     if (is.matrix(SA)) {
         dim(r$pot_enthalpy_ice_freezing_SA) <- dim(SA)
         dim(r$pot_enthalpy_ice_freezing_p) <- dim(SA)
@@ -3079,6 +3261,9 @@ gsw_pot_enthalpy_ice_freezing_first_derivatives_poly <- function(SA, p)
             SA=as.double(l$SA), p=as.double(l$p),
             n=as.integer(n),
             pot_enthalpy_ice_freezing_SA=double(n), pot_enthalpy_ice_freezing_p=double(n))
+    bad <- !is.finite(l$SA) | !is.finite(l$p)
+    r$pot_enthalpy_ice_freezing_SA[bad] <- NA
+    r$pot_enthalpy_ice_freezing_p[bad] <- NA
     if (is.matrix(SA)) {
         dim(r$pot_enthalpy_ice_freezing_SA) <- dim(SA)
         dim(r$pot_enthalpy_ice_freezing_p) <- dim(SA)
@@ -3115,10 +3300,12 @@ gsw_pot_rho_t_exact <- function(SA, t, p, p_ref)
     rval <- .C("wrap_gsw_pot_rho_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p), pref=as.double(l$p_ref),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p) | !is.finite(l$p_ref)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Pressure Coefficient for Ice
 #'
@@ -3144,10 +3331,12 @@ gsw_pressure_coefficient_ice <- function(t, p)
     rval <- .C("wrap_gsw_pressure_coefficient_ice",
                t=(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
 }
+
 
 #' Pressure at which Seawater Freezes
 #'
@@ -3176,10 +3365,12 @@ gsw_pressure_freezing_CT <- function(SA, CT, saturation_fraction=1)
                SA=as.double(l$SA), CT=as.double(l$CT), saturation_fraction=as.double(l$saturation_fraction),
                n=as.integer(n),
                rval=double(n))$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$saturation_fraction)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Potential temperature referenced to the surface
 #'
@@ -3206,10 +3397,12 @@ gsw_pt0_from_t <- function(SA, t, p)
     rval <- .C("wrap_gsw_pt0_from_t",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Potential Temperature of Ice Referenced to the Surface
 #'
@@ -3235,10 +3428,12 @@ gsw_pt0_from_t_ice <- function(t, p)
     rval <- .C("wrap_gsw_pt0_from_t_ice",
                t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
 }
+
 
 #' First Derivatives of Potential Temperature
 #'
@@ -3269,12 +3464,16 @@ gsw_pt_first_derivatives <- function(SA, CT)
             SA=as.double(l$SA), CT=as.double(l$CT),
             n=as.integer(n),
             pt_SA=double(n), pt_CT=double(n))
+    bad <- !is.finite(l$SA) | !is.finite(l$CT)
+    r$pt_SA[bad] <- NA
+    r$pt_CT[bad] <- NA
     if (is.matrix(SA)) {
         dim(r$pt_SA) <- dim(SA)
         dim(r$pt_CT) <- dim(SA)
     }
     list(pt_SA=r$pt_SA, pt_CT=r$pt_CT)
 }
+
 
 #' Potential temperature from Conservative Temperature
 #'
@@ -3299,10 +3498,12 @@ gsw_pt_from_CT <- function(SA, CT)
     rval <- .C("wrap_gsw_pt_from_CT",
                SA=as.double(l$SA), t=as.double(l$CT),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Potential Temperature from Entropy
 #'
@@ -3328,10 +3529,12 @@ gsw_pt_from_entropy <- function(SA, entropy)
     rval <- .C("wrap_gsw_pt_from_entropy",
                SA=as.double(l$SA), entropy=as.double(l$entropy),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$entropy)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Potential Temperature from Potential Enthalpy of Ice
 #'
@@ -3356,10 +3559,12 @@ gsw_pt_from_pot_enthalpy_ice <- function(pot_enthalpy_ice)
     rval <- .C("wrap_gsw_pt_from_pot_enthalpy_ice",
                pot_enthalpy_ice=as.double(l$pot_enthalpy_ice),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$pot_enthalpy_ice)] <- NA
     if (is.matrix(pot_enthalpy_ice))
         dim(rval) <- dim(pot_enthalpy_ice)
     rval
 }
+
 
 #' Potential Temperature from in-situ Temperature
 #'
@@ -3388,10 +3593,12 @@ gsw_pt_from_t <- function(SA, t, p, p_ref=0)
     rval <- .C("wrap_gsw_pt_from_t",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p), p_ref=as.double(l$p_ref),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p) | !is.finite(l$p_ref)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Potential Temperature from Potential Enthalpy of Ice (Polynomial version)
 #'
@@ -3416,10 +3623,12 @@ gsw_pt_from_pot_enthalpy_ice_poly <- function(pot_enthalpy_ice)
     rval <- .C("wrap_gsw_pt_from_pot_enthalpy_ice_poly",
                pot_enthalpy_ice=as.double(l$pot_enthalpy_ice),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$pot_enthalpy_ice)] <- NA
     if (is.matrix(pot_enthalpy_ice))
         dim(rval) <- dim(pot_enthalpy_ice)
     rval
 }
+
 
 #' Potential Temperature of Ice from in-situ Temperature
 #'
@@ -3447,10 +3656,12 @@ gsw_pt_from_t_ice <- function(t, p, p_ref=0)
     rval <- .C("wrap_gsw_pt_from_t_ice",
                t=as.double(l$t), p=as.double(l$p), p_ref=as.double(l$p_ref),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$t) | !is.finite(l$p) | !is.finite(l$p_ref)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
 }
+
 
 #' Second Derivatives of Potential Temperature
 #'
@@ -3486,6 +3697,10 @@ gsw_pt_second_derivatives <- function(SA, CT)
             n=as.integer(n),
             pt_SA_SA=double(n), pt_SA_CT=double(n), pt_CT_CT=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA) | !is.finite(l$CT)
+    r$pt_SA_SA[bad] <- NA
+    r$pt_SA_CT[bad] <- NA
+    r$pt_pt_CT[bad] <- NA
     if (is.matrix(SA)) {
         dim(r$pt_SA_SA) <- dim(SA)
         dim(r$pt_SA_CT) <- dim(SA)
@@ -3493,6 +3708,7 @@ gsw_pt_second_derivatives <- function(SA, CT)
     }
     list(pt_SA_SA=r$pt_SA_SA, pt_SA_CT=r$pt_SA_CT, pt_CT_CT=r$pt_CT_CT)
 }
+
 
 #' In-situ density
 #'
@@ -3522,10 +3738,12 @@ gsw_rho <- function(SA, CT, p)
     rval <- .C("wrap_gsw_rho",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' In-situ density, thermal expansion coefficient and haline contraction coefficient (75-term equation)
 #'
@@ -3563,13 +3781,18 @@ gsw_rho_alpha_beta <- function(SA, CT, p)
     r <- .C("wrap_gsw_rho_alpha_beta",
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
             n=as.integer(n), rho=double(n), alpha=double(n), beta=double(n), NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)
+    r$rho[bad] <- NA
+    r$alpha[bad] <- NA
+    r$beta[bad] <- NA
     if (is.matrix(SA)) {
-        dim(r$rho) <- dim(SA)
-        dim(r$alpha) <- dim(SA)
-        dim(r$beta) <- dim(SA)
+        dim <- dim(SA)
+        dim(r$alpha) <- dim
+        dim(r$beta) <- dim
     }
     list(rho=r$rho, alpha=r$alpha, beta=r$beta)
 }
+
 
 #' Density First Derivatives wrt SA, CT and p (75-term equation)
 #'
@@ -3598,14 +3821,16 @@ gsw_rho_first_derivatives <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
     n <- length(l[[1]])
-    rval <- .C("wrap_gsw_rho_first_derivatives",
-               SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
-               n=as.integer(n), drho_dSA=double(n), drho_dCT=double(n), drho_dp=double(n),
-               NAOK=TRUE, PACKAGE="gsw")
+    r <- .C("wrap_gsw_rho_first_derivatives",
+            SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+            n=as.integer(n), drho_dSA=double(n), drho_dCT=double(n), drho_dp=double(n),
+            NAOK=TRUE, PACKAGE="gsw")
+    r[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         stop("gsw_rho_first_derivatives() cannot handle matrix SA")
-    list(drho_dSA=rval$drho_dSA, drho_dCT=rval$drho_dCT, drho_dp=rval$drho_dp)
+    list(drho_dSA=r$drho_dSA, drho_dCT=r$drho_dCT, drho_dp=r$drho_dp)
 }
+
 
 #' Density First Derivatives wrt enthalpy (75-term equation)
 #'
@@ -3638,9 +3863,13 @@ gsw_rho_first_derivatives_wrt_enthalpy <- function(SA, CT, p)
             n=as.integer(n),
             rho_SA_wrt_h=double(n), rho_h=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)
+    r$rho_SA_wrt_h[bad] <- NA
+    r$rho_h[bad] <- NA
     if (is.matrix(SA)) {
-        dim(r$rho_SA_wrt_h)  <- dim(SA)
-        dim(r$rho_h)  <- dim(SA)
+        dim  <- dim(SA)
+        dim(r$rho_SA_wrt_h)  <- dim
+        dim(r$rho_h)  <- dim
     }
     list(rho_SA_wrt_h=r$rho_SA_wrt_h, rho_h=r$rho_h)
 }
@@ -3675,6 +3904,7 @@ gsw_rho_ice <- function(t, p)
     rval <- .C("wrap_gsw_rho_ice",
                t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
@@ -3720,6 +3950,12 @@ gsw_rho_second_derivatives <- function(SA, CT, p)
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
             n=as.integer(n),
             rho_SA_SA=double(n), rho_SA_CT=double(n), rho_CT_CT=double(n), rho_SA_p=double(n), rho_CT_p=double(n))
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)
+    r$rho_SA_SA[bad] <- NA
+    r$rho_SA_CT[bad] <- NA
+    r$rho_CT_CT[bad] <- NA
+    r$rho_SA_p[bad] <- NA
+    r$rho_CT_p[bad] <- NA
     if (is.matrix(SA)) {
         dim <- dim(SA)
         dim(r$rho_SA_SA) <- dim
@@ -3730,6 +3966,7 @@ gsw_rho_second_derivatives <- function(SA, CT, p)
     }
     list(rho_SA_SA=r$rho_SA_SA, rho_SA_CT=r$rho_SA_CT, rho_CT_CT=r$rho_CT_CT, rho_SA_p=r$rho_SA_p, rho_CT_p=r$rho_CT_p)
 }
+
 
 #' Second Derivatives of Density wrt Enthalpy
 #'
@@ -3768,6 +4005,10 @@ gsw_rho_second_derivatives_wrt_enthalpy <- function(SA, CT, p)
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
             n=as.integer(n),
             rho_SA_SA=double(n), rho_SA_h=double(n), rho_h_h=double(n))
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)
+    r$rho_SA_SA[bad] <- NA
+    r$rho_SA_h[bad] <- NA
+    r$rho_h_h[bad] <- NA
     if (is.matrix(SA)) {
         dim <- dim(SA)
         dim(r$rho_SA_SA) <- dim
@@ -3776,6 +4017,7 @@ gsw_rho_second_derivatives_wrt_enthalpy <- function(SA, CT, p)
     }
     list(rho_SA_SA=r$rho_SA_SA, rho_SA_h=r$rho_SA_h, rho_h_h=r$rho_h_h)
 }
+
 
 #' In-situ Density of Seawater
 #'
@@ -3803,10 +4045,12 @@ gsw_rho_t_exact <- function(SA, t, p)
     rval <- .C("wrap_gsw_rho_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Absolute Salinity Anomaly Ratio
 #'
@@ -3851,6 +4095,9 @@ gsw_SAAR <- function(p, longitude, latitude)
     r<- .C("wrap_gsw_SAAR",
            p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
            n=as.integer(n), SAAR=double(n), inocean=integer(n), NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$p) | !is.finite(l$longitude) | !is.finite(l$latitude)
+    r$SAAR[bad] <- NA
+    r$inocean[bad] <- NA
     if (is.matrix(p)) {
         dim(r$SAAR) <- dim(p)
         dim(r$inocean) <- dim(p)
@@ -3858,6 +4105,7 @@ gsw_SAAR <- function(p, longitude, latitude)
     r$in_ocean <- ifelse(r$SAAR == 0, 0, 1)
     list(SAAR=r$SAAR, in_ocean=r$in_ocean)
 }
+
 
 #' Compute Absolute Salinity at Freezing Conservative Temperature
 #'
@@ -3885,10 +4133,12 @@ gsw_SA_freezing_from_CT <- function(CT, p, saturation_fraction=1)
                CT=as.double(l$CT), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
                n=as.integer(n),
                rval=double(n))$rval
+    rval[!is.finite(l$CT) | !is.finite(l$p) | !is.finite(l$saturation_fraction)] <- NA
     if (is.matrix(CT))
         dim(rval) <- dim(CT)
     rval
 }
+
 
 #' Compute Absolute Salinity at Freezing Point (Polynomial version)
 #'
@@ -3916,10 +4166,12 @@ gsw_SA_freezing_from_CT_poly <- function(CT, p, saturation_fraction=1)
                CT=as.double(l$CT), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
                n=as.integer(n),
                rval=double(n))$rval
+    rval[!is.finite(l$CT) | !is.finite(l$p) | !is.finite(l$saturation_fraction)] <- NA
     if (is.matrix(CT))
         dim(rval) <- dim(CT)
     rval
 }
+
 
 #' Compute Absolute Salinity at Freezing in-situ Temperature
 #'
@@ -3947,10 +4199,12 @@ gsw_SA_freezing_from_t <- function(t, p, saturation_fraction=1)
                t=as.double(l$t), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
                n=as.integer(n),
                rval=double(n))$rval
+    rval[!is.finite(l$t) | !is.finite(l$p) | !is.finite(l$saturation_fraction)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
 }
+
 
 #' Compute Absolute Salinity at Freezing in-situ Temperature (Polynomial version)
 #'
@@ -3978,6 +4232,7 @@ gsw_SA_freezing_from_t_poly <- function(t, p, saturation_fraction=1)
                t=as.double(l$t), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
                n=as.integer(n),
                rval=double(n))$rval
+    rval[!is.finite(l$t) | !is.finite(l$p) | !is.finite(l$saturation_fraction)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
@@ -4010,10 +4265,12 @@ gsw_SA_from_rho <- function(rho, CT, p)
     rval <- .C("wrap_gsw_SA_from_rho",
                SA=as.double(l$rho), CT=as.double(l$CT), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$rho) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(rho))
         dim(rval) <- dim(rho)
     rval
 }
+
 
 #' Convert from Practical Salinity to Absolute Salinity
 #'
@@ -4062,10 +4319,12 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
                SP=as.double(l$SP), p=as.double(l$p),
                longitude=as.double(l$longitude), latitude=as.double(l$latitude),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SP) | !is.finite(l$p) | !is.finite(l$longitude) | !is.finite(l$latitude)] <- NA
     if (is.matrix(SP))
         dim(rval) <- dim(SP)
     rval
 }
+
 
 #' Convert from Practical Salinity to Absolute Salinity (Baltic)
 #'
@@ -4111,10 +4370,12 @@ gsw_SA_from_SP_Baltic <- function(SP, longitude, latitude)
     rval <- .C("wrap_gsw_SA_from_SP_Baltic",
                SP=as.double(l$SP), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SP) | !is.finite(l$longitude) | !is.finite(l$latitude)] <- NA
     if (is.matrix(SP))
         dim(rval) <- dim(SP)
     rval
 }
+
 
 #' Absolute Salinity from Preformed Salinity
 #'
@@ -4163,10 +4424,12 @@ gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
                Sstar=as.double(l$Sstar), p=as.double(l$p),
                longitude=as.double(l$longitude), latitude=as.double(l$latitude),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$Sstar) | !is.finite(l$p) | !is.finite(l$longitude) | !is.finite(l$latitude)] <- NA
     if (is.matrix(Sstar))
         dim(rval) <- dim(Sstar)
     rval
 }
+
 
 #' Potential density anomaly referenced to 0 dbar
 #'
@@ -4196,10 +4459,12 @@ gsw_sigma0 <- function(SA, CT)
     rval <- .C("wrap_gsw_sigma0",
                SA=as.double(l$SA), CT=as.double(l$CT),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Potential density anomaly referenced to 1000 dbar
 #'
@@ -4229,10 +4494,12 @@ gsw_sigma1 <- function(SA, CT)
     rval <- .C("wrap_gsw_sigma1",
                SA=as.double(l$SA), CT=as.double(l$CT),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Potential density anomaly referenced to 2000 dbar
 #'
@@ -4262,10 +4529,12 @@ gsw_sigma2 <- function(SA, CT)
     rval <- .C("wrap_gsw_sigma2",
                SA=as.double(l$SA), CT=as.double(l$CT),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Potential density anomaly referenced to 3000 dbar
 #'
@@ -4295,10 +4564,12 @@ gsw_sigma3 <- function(SA, CT)
     rval <- .C("wrap_gsw_sigma3",
                SA=as.double(l$SA), CT=as.double(l$CT),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Potential density anomaly referenced to 4000 dbar
 #'
@@ -4328,10 +4599,12 @@ gsw_sigma4 <- function(SA, CT)
     rval <- .C("wrap_gsw_sigma4",
                SA=as.double(l$SA), CT=as.double(l$CT),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Sound speed
 #'
@@ -4361,10 +4634,12 @@ gsw_sound_speed <- function(SA, CT, p)
     rval <- .C("wrap_gsw_sound_speed",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Sound speed in ice
 #'
@@ -4393,12 +4668,11 @@ gsw_sound_speed_ice <- function(t, p)
     rval <- .C("wrap_gsw_sound_speed_ice",
                t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
 }
-
-
 
 
 #' Sound Speed in Seawater
@@ -4427,10 +4701,12 @@ gsw_sound_speed_t_exact <- function(SA, t, p)
     rval <- .C("wrap_gsw_sound_speed_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Specific Volume of Seawater
 #'
@@ -4491,14 +4767,18 @@ gsw_specvol_alpha_beta  <- function(SA, CT, p)
             n=as.integer(n),
             specvol=double(n), alpha=double(n), beta=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)
+    r$specvol[bad] <- NA
+    r$alpha[bad] <- NA
+    r$beta[bad] <- NA
     if (is.matrix(CT)) {
-        dim(r$specvol) <- dim(CT)
-        dim(r$alpha) <- dim(CT)
-        dim(r$beta) <- dim(CT)
+        dim <- dim(CT)
+        dim(r$specvol) <- dim
+        dim(r$alpha) <- dim
+        dim(r$beta) <- dim
     }
     list(specvol=r$specvol, alpha=r$alpha, beta=r$beta)
 }
-##====
 
 
 #' Specific volume anomaly [standard] (75-term equation)
@@ -4530,6 +4810,7 @@ gsw_specvol_anom_standard <- function(SA, CT, p)
     rval <- .C("wrap_gsw_specvol_anom_standard", # FIXME: why the "standard" in name?
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
@@ -4571,13 +4852,19 @@ gsw_specvol_first_derivatives <- function(SA, CT, p)
     r <- .C("wrap_gsw_specvol_first_derivatives", NAOK=TRUE, PACKAGE="gsw",
             SA=as.double(l$SA), CT=as.double(CT), p=as.double(l$p), n=as.integer(n),
             v_SA=double(n), v_CT=double(n), v_p=double(n))
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)
+    r$v_SA[bad] <- NA
+    r$v_CT[bad] <- NA
+    r$v_p[bad] <- NA
     if (is.matrix(SA)) {
-        dim(r$v_SA) <- dim(SA)
-        dim(r$v_CT) <- dim(SA)
-        dim(r$v_p) <- dim(SA)
+        dim <- dim(SA)
+        dim(r$v_SA) <- dim
+        dim(r$v_CT) <- dim
+        dim(r$v_p) <- dim
     }
     list(v_SA=r$v_SA, v_CT=r$v_CT, v_p=r$v_p)
 }
+
 
 #' First Derivatives of Specific Volume wrt Enthalpy
 #'
@@ -4615,9 +4902,13 @@ gsw_specvol_first_derivatives_wrt_enthalpy <- function(SA, CT, p)
     r <- .C("wrap_gsw_specvol_first_derivatives_wrt_enthalpy", NAOK=TRUE, PACKAGE="gsw",
             SA=as.double(l$SA), CT=as.double(CT), p=as.double(l$p), n=as.integer(n),
             v_SA_wrt_h=double(n), v_h=double(n))
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)
+    r$v_SA_wrt_h[bad] <- NA
+    r$v_CT_h[bad] <- NA
     if (is.matrix(SA)) {
-        dim(r$v_SA_wrt_h) <- dim(SA)
-        dim(r$v_h) <- dim(SA)
+        dim <- dim(SA)
+        dim(r$v_SA_wrt_h) <- dim
+        dim(r$v_h) <- dim
     }
     list(v_SA_wrt_h=r$v_SA_wrt_h, v_h=r$v_h)
 }
@@ -4648,6 +4939,7 @@ gsw_specvol_ice  <- function(t, p)
     rval <- .C("wrap_gsw_specvol_ice",
                t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(t))
         dim(rval) <- dim(t)
     rval
@@ -4696,6 +4988,12 @@ gsw_specvol_second_derivatives <- function(SA, CT, p)
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
             n=as.integer(n),
             specvol_SA_SA=double(n), specvol_SA_CT=double(n), specvol_CT_CT=double(n), specvol_SA_p=double(n), specvol_CT_p=double(n))
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)
+    r$specvol_SA_SA[bad] <- NA
+    r$specvol_SA_CT[bad] <- NA
+    r$specvol_CT_CT[bad] <- NA
+    r$specvol_SA_p[bad] <- NA
+    r$specvol_CT_p[bad] <- NA
     if (is.matrix(SA)) {
         dim <- dim(SA)
         dim(r$specvol_SA_SA) <- dim
@@ -4706,6 +5004,7 @@ gsw_specvol_second_derivatives <- function(SA, CT, p)
     }
     list(specvol_SA_SA=r$specvol_SA_SA, specvol_SA_CT=r$specvol_SA_CT, specvol_CT_CT=r$specvol_CT_CT, specvol_SA_p=r$specvol_SA_p, specvol_CT_p=r$specvol_CT_p)
 }
+
 
 #' Second Derivatives of Specific Volume wrt Enthalpy
 #'
@@ -4744,6 +5043,10 @@ gsw_specvol_second_derivatives_wrt_enthalpy <- function(SA, CT, p)
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
             n=as.integer(n),
             specvol_SA_SA=double(n), specvol_SA_h=double(n), specvol_h_h=double(n))
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)
+    r$specvol_SA_SA[bad] <- NA
+    r$specvol_SA_h[bad] <- NA
+    r$specvol_h_h[bad] <- NA
     if (is.matrix(SA)) {
         dim <- dim(SA)
         dim(r$specvol_SA_SA) <- dim
@@ -4780,10 +5083,12 @@ gsw_specvol_t_exact  <- function(SA, t, p)
     rval <- .C("wrap_gsw_specvol_t_exact",
                SA=as.double(l$SA), CT=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Convert from Electrical Conductivity to Practical Salinity
 #'
@@ -4812,10 +5117,12 @@ gsw_SP_from_C <- function(C, t, p)
     rval <- .C("wrap_gsw_SP_from_C",
                C=as.double(l$C), t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$C) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(C))
         dim(rval) <- dim(C)
     rval
 }
+
 
 #' Convert from Absolute Salinity to Practical Salinity
 #'
@@ -4866,10 +5173,12 @@ gsw_SP_from_SA <- function(SA, p, longitude, latitude)
     rval <- .C("wrap_gsw_SP_from_SA",
                SA=as.double(l$SA), p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
                n=as.integer(n), SP=double(n), NAOK=TRUE, PACKAGE="gsw")$SP
+    rval[!is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$longitude) | !is.finite(l$longitude)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Calculate Practical Salinity from Knudsen Salinity
 #'
@@ -4953,10 +5262,12 @@ gsw_SP_from_Sstar <- function(Sstar, p, longitude, latitude)
     rval <- .C("wrap_gsw_SP_from_Sstar",
                Sstar=as.double(l$Sstar), p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$Sstar) | !is.finite(l$p) | !is.finite(l$longitude) | !is.finite(l$latitude)] <- NA
     if (is.matrix(Sstar))
         dim(rval) <- dim(Sstar)
     rval
 }
+
 
 #' Sea ice Fraction to Cool Seawater to Freezing
 #'
@@ -4992,6 +5303,10 @@ gsw_seaice_fraction_to_freeze_seawater <- function(SA, CT, p, SA_seaice, t_seaic
     r <- .C("wrap_gsw_seaice_fraction_to_freeze_seawater", NAOK=TRUE, PACKAGE="gsw",
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), SA_seiace=as.double(l$SA_seaice), t_seaice=as.double(l$t_seaice),
             n=as.integer(n), SA_freeze=double(n), CT_freeze=double(n), w_seaice=double(n))
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p) | !is.finite(l$SA_seaice) | !is.finite(l$t_seaice)
+    r$SA_freeze[bad] <- NA
+    r$CT_freeze[bad] <- NA
+    r$w_freeze[bad] <- NA
     if (is.matrix(SA)) {
         dim <- dim(SA)
         dim(r$SA_freeze) <- dim
@@ -5000,7 +5315,6 @@ gsw_seaice_fraction_to_freeze_seawater <- function(SA, CT, p, SA_seaice, t_seaic
     }
     list(SA_freeze=r$SA_freeze, CT_freeze=r$CT_freeze, w_seaice=r$w_seaice)
 }
-
 
 
 #' Calculate Reference Salinity from Practical Salinity
@@ -5058,10 +5372,12 @@ gsw_spiciness0 <- function(SA, CT)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_spiciness0",
                SA=as.double(l$SA), CT=as.double(l$CT), n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Seawater Spiciness at p=1000 dbar
 #'
@@ -5090,10 +5406,12 @@ gsw_spiciness1 <- function(SA, CT)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_spiciness1",
                SA=as.double(l$SA), CT=as.double(l$CT), n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Seawater Spiciness at p=2000 dbar
 #'
@@ -5122,11 +5440,11 @@ gsw_spiciness2 <- function(SA, CT)
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_spiciness2",
                SA=as.double(l$SA), CT=as.double(l$CT), n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
-
 
 
 #' Convert from Absolute Salinity to Preformed Salinity
@@ -5177,10 +5495,12 @@ gsw_Sstar_from_SA <- function(SA, p, longitude, latitude)
     rval <- .C("wrap_gsw_Sstar_from_SA",
                SA=as.double(l$SA), p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$longitude) | !is.finite(l$latitude)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Convert from Practical Salinity to Preformed Salinity
 #'
@@ -5230,13 +5550,12 @@ gsw_Sstar_from_SP <- function(SP, p, longitude, latitude)
     rval <- .C("wrap_gsw_Sstar_from_SP",
                SP=as.double(l$SP), p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SP) | !is.finite(l$p) | !is.finite(l$longitude) | !is.finite(l$latitude)] <- NA
     if (is.matrix(SP))
         dim(rval) <- dim(SP)
     rval
 }
 
-
-####
 
 #' Derivative of Chemical Potential of Water in Seawater wrt Temperature
 #'
@@ -5263,12 +5582,11 @@ gsw_t_deriv_chem_potential_water_t_exact <- function(SA, t, p)
     rval <- .C("wrap_gsw_t_deriv_chem_potential_water_t_exact",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
-####
-
 
 
 #' Freezing Temperature of Seawater
@@ -5302,10 +5620,12 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
     rval <- .C("wrap_gsw_t_freezing",
                SA=as.double(l$SA), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$saturation_fraction)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Derivatives of Freezing Water Properties
 #'
@@ -5340,12 +5660,16 @@ gsw_t_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)
             SA=as.double(l$SA), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
             n=as.integer(n), tfreezing_SA=double(n), tfreezing_p=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$saturation_fraction)
+    r$tfreezing_SA[bad] <- NA
+    r$tfreezing_p[bad] <- NA
     if (is.matrix(SA)) {
         dim(r$tfreezing_SA) <- dim(SA)
         dim(r$tfreezing_p) <- dim(SA)
     }
     list(tfreezing_SA=r$tfreezing_SA, tfreezing_p=r$tfreezing_p)
 }
+
 
 #' Derivatives of Freezing Water Properties (Polynomial version)
 #'
@@ -5380,15 +5704,16 @@ gsw_t_freezing_first_derivatives_poly <- function(SA, p, saturation_fraction=1)
             SA=as.double(l$SA), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
             n=as.integer(n), tfreezing_SA=double(n), tfreezing_p=double(n),
             NAOK=TRUE, PACKAGE="gsw")
+    bad <- !is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$saturation_fraction)
+    r$tfreezing_SA[bad] <- NA
+    r$tfreezing_p[bad] <- NA
     if (is.matrix(SA)) {
         dim(r$tfreezing_SA) <- dim(SA)
         dim(r$tfreezing_p) <- dim(SA)
     }
     list(tfreezing_SA=r$tfreezing_SA, tfreezing_p=r$tfreezing_p)
 }
-#
 
-####
 
 #' In situ temperature from Conservative Temperature
 #'
@@ -5415,10 +5740,12 @@ gsw_t_from_CT <- function(SA, CT, p)
     rval <- .C("wrap_gsw_t_from_CT",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' In situ Temperature from Potential Temperature at 0dbar
 #'
@@ -5444,6 +5771,7 @@ gsw_t_from_pt0_ice <- function(pt0_ice, p)
     rval <- .C("wrap_gsw_t_from_pt0_ice",
                pt0_ice=as.double(l$pt0_ice), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$pt0_ice) | !is.finite(l$p)] <- NA
     if (is.matrix(pt0_ice))
         dim(rval) <- dim(pt0_ice)
     rval
@@ -5475,10 +5803,12 @@ gsw_thermobaric <- function(SA, CT, p)
     rval <- .C("wrap_gsw_thermobaric",
                SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
 }
+
 
 #' Turner Angle and Density Ratio
 #'
@@ -5511,17 +5841,18 @@ gsw_Turner_Rsubrho <- function(SA, CT, p)
     r <- .C("wrap_gsw_Turner_Rsubrho",
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
             n=as.integer(n), Tu=double(n-1), Rsubrho=double(n-1), p_mid=double(n-1))
+    bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p)
+    if (any(bad))
+        warning("gsw_Turner_Rsubrho() has some NA inputs ... these are not handled well\n")
     Tu <- r$Tu
     Rsubrho <- r$Rsubrho
     p_mid <- r$p_mid
     if (is.matrix(SA)) {
         stop("gsw_Turner_Rsubrho() cannot handle matrix SA")
-        ## dim(Tu) <- dim(SA)
-        ## dim(Rsubrho) <- dim(SA)
-        ## dim(p_mid) <- dim(SA)
     }
     list(Tu=Tu, Rsubrho=Rsubrho, p_mid=p_mid)
 }
+
 
 #' Height from Pressure
 #'
@@ -5548,6 +5879,7 @@ gsw_z_from_p <- function(p, latitude)
     rval <- .C("wrap_gsw_z_from_p",
                p=as.double(l$p), lat=as.double(l$latitude),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$p) | !is.finite(l$latitude)] <- NA
     if (is.matrix(p))
         dim(rval) <- dim(p)
     rval
