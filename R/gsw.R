@@ -1001,6 +1001,7 @@ gsw_CT_from_t <- function(SA, t, p)
     rval <- .C("wrap_gsw_CT_from_t",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
