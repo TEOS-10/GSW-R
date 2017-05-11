@@ -1050,7 +1050,14 @@ gsw_CT_from_t <- function(SA, t, p)
     rval <- .C("wrap_gsw_CT_from_t",
                SA=as.double(l$SA), t=as.double(l$t), p=as.double(l$p),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
-    rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
+    ##>   rval[!is.finite(l$SA) | !is.finite(l$t) | !is.finite(l$p)] <- NA
+
+    ## FIXME: May-11 on my work machine...I don't think this is actually
+    ## needed, since W31 catches the NA value. But how, then, did I get the
+    ## error reported at https://github.com/TEOS-10/GSW-R/issues/37?
+    ## I found that problem on my home machine ... is there a difference? (The
+    ## CPUs are definitely different.)
+
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval

@@ -115,8 +115,13 @@ void clear_gsw_data()
 #define W11(wname, cname, arg1, n, rval) \
 void (wname)(double *(arg1), int *(n), double *(rval))\
 {\
+    int warnings = 10;\
     for (int i=0; i < *(n); i++) {\
         if (isnan((arg1)[i])) {\
+            if (warnings > 0) {\
+                Rprintf("W11: at i=%d, the arg is NA, so returning NA (warning shown at most 10 times)\n", i);\
+                warnings--;\
+            }\
             (rval)[i] = NA_REAL;\
         } else {\
             (rval)[i] = (cname)((arg1)[i]);\
@@ -131,8 +136,13 @@ void (wname)(double *(arg1), int *(n), double *(rval))\
 #define W21(wname, cname, arg1, arg2, n, rval) \
 void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval))\
 {\
+    int warnings = 10;\
     for (int i=0; i < *(n); i++) {\
         if (isnan((arg1)[i]) || isnan((arg2)[i])) {\
+            if (warnings > 0) {\
+                Rprintf("W21: at i=%d, one or more args is NA, so returning NA (warning shown at most 10 times)\n", i);\
+                warnings--;\
+            }\
             (rval)[i] = NA_REAL;\
         } else {\
             (rval)[i] = (cname)((arg1)[i], (arg2)[i]);\
@@ -147,8 +157,13 @@ void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval))\
 #define W22(wname, cname, arg1, arg2, n, rval1, rval2) \
 void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval1), double *(rval2))\
 {\
+    int warnings = 10;\
     for (int i = 0; i < *(n); i++) {\
         if (isnan((arg1)[i]) || isnan((arg2)[i])) {\
+            if (warnings > 0) {\
+                Rprintf("W22: at i=%d, one or more args is NA, so returning NA (warning shown at most 10 times)\n", i);\
+                warnings--;\
+            }\
             (rval1)[i] = NA_REAL;\
             (rval2)[i] = NA_REAL;\
         } else {\
@@ -163,8 +178,13 @@ void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval1), double *
 #define W23(wname, cname, arg1, arg2, n, rval1, rval2, rval3) \
 void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval1), double *(rval2), double *(rval3))\
 {\
+    int warnings = 10;\
     for (int i = 0; i < *(n); i++) {\
         if (isnan((arg1)[i]) || isnan((arg2)[i])) {\
+            if (warnings > 0) {\
+                Rprintf("W23: at i=%d, one or more args is NA, so returning NA (warning shown at most 10 times)\n", i);\
+                warnings--;\
+            }\
             (rval1)[i] = NA_REAL;\
             (rval2)[i] = NA_REAL;\
             (rval3)[i] = NA_REAL;\
@@ -182,8 +202,13 @@ void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval1), double *
 #define W31(wname, cname, arg1, arg2, arg3, n, rval) \
 void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(rval))\
 {\
+    int warnings = 10;\
     for (int i=0; i < *(n); i++) {\
         if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i])) {\
+            if (warnings > 0) {\
+                Rprintf("W31: at i=%d, one or more args is NA, so returning NA (warning shown at most 10 times)\n", i);\
+                warnings--;\
+            }\
             (rval)[i] = NA_REAL;\
         } else {\
             (rval)[i] = (cname)((arg1)[i], (arg2)[i], (arg3)[i]);\
@@ -198,8 +223,13 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(
 #define W32(wname, cname, arg1, arg2, arg3, n, rval1, rval2) \
 void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(rval1), double *(rval2))\
 {\
+    int warnings = 10;\
     for (int i = 0; i < *(n); i++) {\
         if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i])) {\
+            if (warnings > 0) {\
+                Rprintf("W32: at i=%d, one or more args is NA, so returning NA (warning shown at most 10 times)\n", i);\
+                warnings--;\
+            }\
             (rval1)[i] = NA_REAL;\
             (rval2)[i] = NA_REAL;\
         } else {\
@@ -214,8 +244,13 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(
 #define W33(wname, cname, arg1, arg2, arg3, n, rval1, rval2, rval3) \
 void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(rval1), double *(rval2), double *(rval3))\
 {\
+    int warnings = 10;\
     for (int i = 0; i < *(n); i++) {\
         if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i])) {\
+            if (warnings > 0) {\
+                Rprintf("W33: at i=%d, one or more args is NA, so returning NA (warning shown at most 10 times)\n", i);\
+                warnings--;\
+            }\
             (rval1)[i] = NA_REAL;\
             (rval2)[i] = NA_REAL;\
             (rval3)[i] = NA_REAL;\
@@ -232,8 +267,13 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(
 #define W35(wname, cname, arg1, arg2, arg3, n, rval1, rval2, rval3, rval4, rval5) \
 void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(rval1), double *(rval2), double *(rval3), double *(rval4), double *(rval5))\
 {\
+    int warnings = 10;\
     for (int i = 0; i < *(n); i++) {\
         if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i])) {\
+            if (warnings > 0) {\
+                Rprintf("W35: at i=%d, one or more args is NA, so returning NA (warning shown at most 10 times)\n", i);\
+                warnings--;\
+            }\
             (rval1)[i] = NA_REAL;\
             (rval2)[i] = NA_REAL;\
             (rval3)[i] = NA_REAL;\
@@ -255,8 +295,13 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), int *(n), double *(
 #define W41(wname, cname, arg1, arg2, arg3, arg4, n, rval) \
 void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), int *(n), double *(rval))\
 {\
+    int warnings = 10;\
     for (int i = 0; i < *(n); i++) {\
         if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i]) || isnan((arg4)[i])) {\
+            if (warnings > 0) {\
+                Rprintf("W41: at i=%d, the arg is NA, so returning NA (warning shown at most 10 times)\n", i);\
+                warnings--;\
+            }\
             (rval)[i] = NA_REAL;\
         } else {\
             (rval)[i] = (cname)((arg1)[i], (arg2)[i], (arg3)[i], (arg4)[i]);\
@@ -271,8 +316,13 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), int
 #define W43(wname, cname, arg1, arg2, arg3, arg4, n, rval1, rval2, rval3) \
 void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), int *(n), double *(rval1), double *(rval2), double *(rval3))\
 {\
+    int warnings = 10;\
     for (int i = 0; i < *(n); i++) {\
         if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i]) || isnan((arg4)[i])) {\
+            if (warnings > 0) {\
+                Rprintf("W43: at i=%d, one or more args is NA, so returning NA (warning shown at most 10 times)\n", i);\
+                warnings--;\
+            }\
             (rval1)[i] = NA_REAL;\
             (rval2)[i] = NA_REAL;\
             (rval3)[i] = NA_REAL;\
@@ -289,8 +339,13 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), int
 #define W53(wname, cname, arg1, arg2, arg3, arg4, arg5, n, rval1, rval2, rval3) \
 void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), double *(arg5), int *(n), double *(rval1), double *(rval2), double *(rval3))\
 {\
+    int warnings = 10;\
     for (int i = 0; i < *(n); i++) {\
         if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i]) || isnan((arg4)[i]) || isnan((arg5)[i])) {\
+            if (warnings > 0) {\
+                Rprintf("W53: at i=%d, one or more args is NA, so returning NA (warning shown at most 10 times)\n", i);\
+                warnings--;\
+            }\
             (rval1)[i] = NA_REAL;\
             (rval2)[i] = NA_REAL;\
             (rval3)[i] = NA_REAL;\
@@ -307,8 +362,13 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), dou
 #define W63(wname, cname, arg1, arg2, arg3, arg4, arg5, arg6, n, rval1, rval2) \
 void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), double *(arg5), double *(arg6), int *(n), double *(rval1), double *(rval2))\
 {\
+    int warnings = 10;\
     for (int i = 0; i < *(n); i++) {\
         if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i]) || isnan((arg4)[i]) || isnan((arg5)[i]) || isnan((arg6)[i])) {\
+            if (warnings > 0) {\
+                Rprintf("W63: at i=%d, one or more args is NA, so returning NA (warning shown at most 10 times)\n", i);\
+                warnings--;\
+            }\
             (rval1)[i] = NA_REAL;\
             (rval2)[i] = NA_REAL;\
         } else {\
