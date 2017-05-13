@@ -1,7 +1,7 @@
 1.0-4
 - update to GSW version 3.05
 - handle NaN values better
-- add many more functions
+- add dozens of new GSW functions
 
 1.0-3
 - first version, using GSW version 3.03
