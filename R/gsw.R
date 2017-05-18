@@ -4309,6 +4309,8 @@ gsw_SA_from_rho <- function(rho, CT, p)
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
 gsw_SA_from_SP <- function(SP, p, longitude, latitude)
 {
+    if (missing(SP)) stop("must supply SP")
+    if (missing(p)) stop("must supply p")
     if (missing(longitude)) stop("must supply longitude")
     if (missing(latitude)) stop("must supply latitude")
     ## check for special case that SP is a matrix defined on lon and lat
@@ -4361,6 +4363,7 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP_Baltic.html}
 gsw_SA_from_SP_Baltic <- function(SP, longitude, latitude)
 {
+    if (missing(SP)) stop("must supply SP")
     if (missing(longitude)) stop("must supply longitude")
     if (missing(latitude)) stop("must supply latitude")
     ## check for special case that SP is a matrix defined on lon and lat
@@ -4414,6 +4417,8 @@ gsw_SA_from_SP_Baltic <- function(SP, longitude, latitude)
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_Sstar.html}
 gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
 {
+    if (missing(Sstar)) stop("must supply Sstar")
+    if (missing(p)) stop("must supply p")
     if (missing(longitude)) stop("must supply longitude")
     if (missing(latitude)) stop("must supply latitude")
     ## check for special case that Sstar is a matrix defined on lon and lat
@@ -5164,6 +5169,8 @@ gsw_SP_from_C <- function(C, t, p)
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SA.html}
 gsw_SP_from_SA <- function(SA, p, longitude, latitude)
 {
+    if (missing(SA)) stop("must supply SA")
+    if (missing(p)) stop("must supply p")
     if (missing(longitude)) stop("must supply longitude")
     if (missing(latitude)) stop("must supply latitude")
     ## check for special case that SP is a matrix defined on lon and lat
