@@ -42,7 +42,6 @@ website become available, the present comment will be revised or deleted.
 }
 
 \examples{
-library(testthat)
 SA <- c(               34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 p <- c(                     10,      50,     125,     250,     600,    1000)
 saturation_fraction <- c(    1,     0.8,     0.6,     0.5,     0.4,       0)

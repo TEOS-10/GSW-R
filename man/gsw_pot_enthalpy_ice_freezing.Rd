@@ -40,7 +40,6 @@ is not performed during build tests.  See https://github.com/TEOS-10/GSW-R/issue
 }
 
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 p <- c(      10,      50,     125,     250,     600,    1000)
 saturation_fraction = 1

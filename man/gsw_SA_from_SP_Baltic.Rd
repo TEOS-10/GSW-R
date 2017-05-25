@@ -36,7 +36,6 @@ To learn more about these software systems, their authorships, and the science b
 it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
-library(testthat)
 SP <- c( 6.5683, 6.6719, 6.8108, 7.2629, 7.4825, 10.2796)
 lon <- c(    20,     20,     20,     20,     20,      20)
 lat <- c(    59,     59,     59,     59,     59,      59)

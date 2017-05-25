@@ -27,7 +27,6 @@ To learn more about these software systems, their authorships, and the science b
 it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
-library(testthat)
 SA <- c(      34.7118,  34.8915,  35.0256,  34.8472, 34.7366, 34.7324)
 entropy <- c(400.3892, 395.4378, 319.8668, 146.7910, 98.6471, 62.7919)
 pt <- gsw_pt_from_entropy(SA, entropy)

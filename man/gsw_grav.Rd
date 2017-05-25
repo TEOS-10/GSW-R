@@ -28,7 +28,6 @@ To learn more about these software systems, their authorships, and the science b
 it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
-library(testthat)
 lat <- c(-90, -60, -30, 0)
 grav <- gsw_grav(lat)
 expect_equal(grav, c(9.832186205884799, 9.819178859991149,

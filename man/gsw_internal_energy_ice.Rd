@@ -27,7 +27,6 @@ To learn more about these software systems, their authorships, and the science b
 it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
-library(testthat)
 t_Ih <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 p <-  c(     10,      50,     125,     250,     600,    1000)
 e <- gsw_internal_energy_ice(t_Ih, p)

@@ -16,7 +16,6 @@ Practical Salinity (PSS-78) [ unitless ]
 Calculate Practical Salinity from Knudsen Salinity
 }
 \examples{
-library(testthat)
 SK <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
 SP <- gsw_SP_from_SK(SK)
 expect_equal(SP, c(34.548342096952908, 34.727295637119113, 34.860409847645435,

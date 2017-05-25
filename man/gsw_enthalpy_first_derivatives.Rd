@@ -42,7 +42,6 @@ website become available, the present comment will be revised or deleted.
 }
 
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 p <-  c(     10,      50,     125,     250,     600,    1000)

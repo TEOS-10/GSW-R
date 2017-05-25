@@ -29,7 +29,6 @@ To learn more about these software systems, their authorships, and the science b
 it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
-library(testthat)
 rho <- c(1021.8482, 1022.2647, 1024.4207, 1027.7841, 1029.8287, 1031.9916)
 CT <-c(    28.7856,   28.4329,   22.8103,   10.2600,    6.8863,    4.4036)
 p <- c(         10,        50,       125,       250,       600,      1000)

@@ -25,7 +25,6 @@ To learn more about these software systems, their authorships, and the science b
 it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
-library(testthat)
 SR <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
 SP <- gsw_SP_from_SR(SR)
 expect_equal(SP, c(34.386552667080714, 34.564513505458834, 34.696889296869848,

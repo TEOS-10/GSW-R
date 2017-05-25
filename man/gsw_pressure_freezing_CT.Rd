@@ -29,7 +29,6 @@ To learn more about these software systems, their authorships, and the science b
 it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
-library(testthat)
 SA <- c(                 34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(                 -1.8996, -1.9407, -2.0062, -2.0923, -2.3593, -2.6771)
 saturation_fraction <- c(       1,    0.8,     0.6,     0.5,     0.4,       0)

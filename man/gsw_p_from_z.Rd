@@ -33,7 +33,6 @@ To learn more about these software systems, their authorships, and the science b
 it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
-library(testthat)
 z <- -c(10, 50, 125, 250, 600, 1000)
 latitude <- 4
 p <- gsw_p_from_z(z, latitude)

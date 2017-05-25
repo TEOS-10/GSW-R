@@ -30,7 +30,6 @@ To learn more about these software systems, their authorships, and the science b
 it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
-library(testthat)
 rho <- c(1021.8484, 1022.2647, 1024.4207, 1027.7841, 1029.8287, 1031.9916)
 SA <- c(   34.7118,   34.8915,   35.0256,   34.8472,   34.7366,   34.7324)
 p <- c(         10,        50,       125,       250,       600,      1000)

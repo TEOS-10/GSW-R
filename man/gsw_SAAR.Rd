@@ -49,7 +49,6 @@ improve things.
 }
 
 \examples{
-library(testthat)
 p <- c(10, 50, 125, 250, 600, 1000)
 longitude <- c(188, 188, 188, 188, 188, 188)
 latitude <- c(4, 4, 4, 4, 4, 4)

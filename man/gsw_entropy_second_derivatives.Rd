@@ -42,7 +42,6 @@ website become available, the present comment will be revised or deleted.
 }
 
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 r <- gsw_entropy_second_derivatives(SA, CT)

@@ -31,7 +31,6 @@ To learn more about these software systems, their authorships, and the science b
 it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
-library(testthat)
 SA <- c(   34.7118,  34.8915,  35.0256,  34.8472,  34.7366, 34.7324)
 CT <- c(    3.7856,   3.4329,   2.8103,   1.2600,   0.6886,  0.4403)
 p <- c(         10,       50,      125,      250,      600,    1000)

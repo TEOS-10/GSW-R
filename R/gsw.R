@@ -175,7 +175,6 @@ argfix <- function(list)
 #' @template ptemplate
 #' @return adiabatic lapse rate (note unconventional unit) [ K/Pa ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -208,7 +207,6 @@ gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
 #' @template ptemplate
 #' @return adiabatic lapse rate (note unconventional unit) [ K/Pa ]
 #' @examples
-#' library(testthat)
 #' t  <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' p <- c(       10,       50,      125,      250,      600,    1000)
 #' lr <- gsw_adiabatic_lapse_rate_ice(t, p)
@@ -243,7 +241,6 @@ gsw_adiabatic_lapse_rate_ice <- function(t, p)
 #' @template ptemplate
 #' @return thermal expansion coefficient with respect to Conservative Temperature [ 1/K ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -279,7 +276,6 @@ gsw_alpha <- function(SA, CT, p)
 #' @template ptemplate
 #' @return ratio of thermal expansion coefficient to haline contraction coefficient [ (g/kg)/K ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -314,7 +310,6 @@ gsw_alpha_on_beta <- function(SA, CT, p)
 #' @template ptemplate
 #' @return thermal expansion coefficient with respect to in-situ temperature [ 1/K ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' t <-  c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -348,7 +343,6 @@ gsw_alpha_wrt_t_exact <- function(SA, t, p)
 #' @template ptemplate
 #' @return thermal expansion coefficient with respect to in-situ temperature [ 1/K ]
 #' @examples
-#' library(testthat)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' p <-  c(     10,       50,      125,      250,      600,    1000)
 #' alpha <- gsw_alpha_wrt_t_ice(t, p)
@@ -384,7 +378,6 @@ gsw_alpha_wrt_t_ice <- function(t, p)
 #' @template ptemplate
 #' @return Haline contraction coefficient at constant Conservative Temperature [ kg/g ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -419,7 +412,6 @@ gsw_beta <- function(SA, CT, p)
 #' @template ptemplate
 #' @return Haline contraction coefficient at constant in-situ temperature [ kg/g ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -454,7 +446,6 @@ gsw_beta_const_t_exact <- function(SA, t, p)
 #' @template ptemplate
 #' @return Cabbeling coefficient with respect to Conservative Temperature [ 1/(K^2) ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -491,7 +482,6 @@ gsw_cabbeling <- function(SA, CT, p)
 #' @template ptemplate
 #' @return electrical conductivity [ mS/cm ]
 #' @examples
-#' library(testthat)
 #' SP <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -524,7 +514,6 @@ gsw_C_from_SP <- function(SP, t, p)
 #' @template ptemplate
 #' @return chemical potential [ J/kg ]
 #' @examples
-#' library(testthat)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' p <- c(      10,       50,      125,      250,      600,      1000)
 #' pot <- gsw_chem_potential_water_ice(t, p)
@@ -557,7 +546,6 @@ gsw_chem_potential_water_ice <- function(t, p)
 #' @template ptemplate
 #' @return chemical potential [ J/kg ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' t <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,       50,      125,      250,      600,      1000)
@@ -594,7 +582,6 @@ gsw_chem_potential_water_t_exact <- function(SA, t, p)
 #'
 ## @family things related to ice
 #' @examples
-#' library(testthat)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' cp <- gsw_cp_ice(t, p)
@@ -625,7 +612,6 @@ gsw_cp_ice <- function(t, p)
 #' @template ptemplate
 #' @return heat capacity [ J/(kg*K) ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' t <-  c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -659,7 +645,6 @@ gsw_cp_t_exact <- function(SA, t, p)
 #' and \code{CT_pt} [ unitless ], the derivative of
 #' Conservative Temperature with respect to potential temperature.
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' pt <- c(28.7832, 28.4209, 22.7850, 10.2305,  6.8292,  4.3245)
 #' r <- gsw_CT_first_derivatives(SA, pt)
@@ -702,7 +687,6 @@ gsw_CT_first_derivatives <- function(SA, pt)
 #' of Conservative Temperature with respect to pressure at constant Absolute
 #' Salinity and temperature.
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -746,7 +730,6 @@ gsw_CT_first_derivatives_wrt_t_exact <- function(SA, t, p)
 #' @param saturation_fraction saturation fraction of dissolved air in seawater
 #' @return Conservative Temperature at freezing of seawater [ degC ].
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' saturation_fraction <- 1
@@ -782,7 +765,6 @@ gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
 #' Conservative Temperature with respect to pressure at constant
 #' Absolute Salinity.
 #' @examples
-#' library(testthat)
 #' SA <- c(                 34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <- c(                       10,      50,     125,     250,     600,    1000)
 #' saturation_fraction <- c(      1,     0.8,     0.6,     0.5,     0.4,       0)
@@ -825,7 +807,6 @@ gsw_CT_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)
 #' Conservative Temperature with respect to pressure at constant
 #' Absolute Salinity.
 #' @examples
-#' library(testthat)
 #' SA <- c(                 34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <- c(                       10,      50,     125,     250,     600,    1000)
 #' saturation_fraction <- c(      1,     0.8,     0.6,     0.5,     0.4,       0)
@@ -864,7 +845,6 @@ gsw_CT_freezing_first_derivatives_poly <- function(SA, p, saturation_fraction=1)
 #' @param saturation_fraction saturation fraction of dissolved air in seawater
 #' @return Conservative Temperature at freezing of seawater [ degC ].
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' saturation_fraction <- 1
@@ -897,7 +877,6 @@ gsw_CT_freezing_poly <- function(SA, p, saturation_fraction=1)
 #' @template ptemplate
 #' @return Conservative Temperature [ degC ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' h <- c(1.15103e5, 1.14014e5, 0.92180e5, 0.43255e5, 0.33087e5, 0.26970e5)
 #' p <- c(       10,        50,       125,       250,       600,      1000)
@@ -930,7 +909,6 @@ gsw_CT_from_enthalpy <- function(SA, h, p)
 #' @template entropytemplate
 #' @return Conservative Temperature [ degC ]
 #' @examples
-#' library(testthat)
 #' SA <- c(      34.7118,  34.8915,  35.0256,  34.8472, 34.7366, 34.7324)
 #' entropy <- c(400.3892, 395.4378, 319.8668, 146.7910, 98.6471, 62.7919)
 #' CT <- gsw_CT_from_entropy(SA, entropy)
@@ -961,7 +939,6 @@ gsw_CT_from_entropy <- function(SA, entropy)
 #' @template pttemplate
 #' @return Conservative Temperature [ degC ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' pt <- c(28.7832, 28.4209, 22.7850, 10.2305,  6.8292,  4.3245)
 #' CT <- gsw_CT_from_pt(SA, pt)
@@ -993,7 +970,6 @@ gsw_CT_from_pt <- function(SA, pt)
 #' @return A list containing two estimates of Conservative Temperature:
 #' \code{CT} and \code{CT_multiple}, each in [ degC ].
 #' @examples
-#' library(testthat)
 #' rho <- c(1021.8484, 1022.2647, 1024.4207, 1027.7841, 1029.8287, 1031.9916)
 #' SA <- c(   34.7118,   34.8915,   35.0256,   34.8472,   34.7366,   34.7324)
 #' p <- c(         10,        50,       125,       250,       600,      1000)
@@ -1034,7 +1010,6 @@ gsw_CT_from_rho <- function(rho, SA, p)
 #' @template ptemplate
 #' @return Conservative Temperature [ degC ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' t <-  c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -1072,7 +1047,6 @@ gsw_CT_from_t <- function(SA, t, p)
 #' @template ptemplate
 #' @return Conservative Temperature [ degC ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' CT <- gsw_CT_maxdensity(SA, p)
@@ -1108,7 +1082,6 @@ gsw_CT_maxdensity <- function(SA, p)
 #' Absolute Salinity, and \code{CT_pt_pt} [ 1/degC ], the second derivative of
 #' Conservative Temperature with respect to potential temperature.
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' pt <- c(28.7832, 28.4209, 22.7850, 10.2305,  6.8292,  4.3245)
 #' r <- gsw_CT_second_derivatives(SA, pt)
@@ -1152,7 +1125,6 @@ gsw_CT_second_derivatives <- function(SA, pt)
 #' @template latitudetemplate
 #' @return deltaSA Absolute Salinity Anomaly  [ g/kg ]
 #' @examples
-#' library(testthat)
 #' SP =   c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p =    c(     10,      50,     125,     250,     600,    1000)
 #' lat =  c(      4,       4,       4,       4,       4,       4)
@@ -1191,7 +1163,6 @@ gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
 #' @template ptemplate
 #' @return dilution coefficient [ (J/kg)(kg/g) ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -1223,7 +1194,6 @@ gsw_dilution_coefficient_t_exact <- function(SA, t, p)
 #' @template ptemplate
 #' @return dynamic enthalpy [ J/kg ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <-c( 28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -1256,7 +1226,6 @@ gsw_dynamic_enthalpy <- function(SA, CT, p)
 #' @template ptemplate
 #' @return specific enthalpy [ J/kg ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <-c( 28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -1289,7 +1258,6 @@ gsw_enthalpy <- function(SA, CT, p)
 #' @template ptemplate
 #' @return specific enthalpy [ J/kg ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -1328,7 +1296,6 @@ gsw_enthalpy_CT_exact <- function(SA, CT, p)
 #'
 #' @family things related to enthalpy
 #' @examples
-#' library(testthat)
 #' SA <- c(  34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(  28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p_shallow <- c(10,      50,     125,     250,     600,    1000)
@@ -1367,7 +1334,6 @@ gsw_enthalpy_diff <- function(SA, CT, p_shallow, p_deep)
 #'
 #' @family things related to enthalpy
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -1422,7 +1388,6 @@ gsw_enthalpy_first_derivatives <- function(SA, CT, p)
 #'
 #' @family things related to enthalpy
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -1468,7 +1433,6 @@ gsw_enthalpy_first_derivatives_CT_exact <- function(SA, CT, p)
 #' @family things related to enthalpy
 ## @family things related to ice
 #' @examples
-#' library(testthat)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' se <- gsw_enthalpy_ice(t, p)
@@ -1503,7 +1467,6 @@ gsw_enthalpy_ice <- function(t, p)
 #' and \code{h_CT_CT} [ (J/kg)/degC^2 ], the second derivative of
 #' enthalpy with respect to Conservative Temperature.
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -1551,7 +1514,6 @@ gsw_enthalpy_second_derivatives <- function(SA, CT, p)
 #' and \code{h_CT_CT} [ (J/kg)/degC^2 ], the second derivative of
 #' enthalpy with respect to Conservative Temperature.
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -1595,7 +1557,6 @@ gsw_enthalpy_second_derivatives_CT_exact <- function(SA, CT, p)
 #' @template ptemplate
 #' @return specific enthalpy [ J/kg ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -1632,7 +1593,6 @@ gsw_enthalpy_t_exact <- function(SA, t, p)
 #'
 #' @family things related to entropy
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' d <- gsw_entropy_first_derivatives(SA, CT)
@@ -1674,7 +1634,6 @@ gsw_entropy_first_derivatives <- function(SA, CT)
 #' @template pttemplate
 #' @return specific entropy [ J/(kg*degC) ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' pt <- c(28.7832, 28.4210, 22.7850, 10.2305,  6.8292,  4.3245)
 #' e <- gsw_entropy_from_pt(SA, pt)
@@ -1709,7 +1668,6 @@ gsw_entropy_from_pt <- function(SA, pt)
 #' @template ptemplate
 #' @return specific entropy [ J/(kg*K) ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -1746,7 +1704,6 @@ gsw_entropy_from_t <- function(SA, t, p)
 #' and \code{eta_CT_CT} [ (J/(K*kg))/K^2 ], the second derivative of
 #' entropy with respect to Conservative Temperature.
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' r <- gsw_entropy_second_derivatives(SA, CT)
@@ -1791,7 +1748,6 @@ gsw_entropy_second_derivatives <- function(SA, CT)
 #' @template latitudetemplate
 #' @return (S/SStar)-1 [ unitless ]
 #' @examples
-#' library(testthat)
 #' p <- c(         10,   50,  125,  250,  600, 1000)
 #' latitude <- c(   4,    4,    4,    4,    4,    4)
 #' longitude <- c(188,  188,  188,  188,  188,  188)
@@ -1823,7 +1779,6 @@ gsw_Fdelta <- function(p, longitude, latitude)
 #' @template ptemplate
 #' @return entropy [ J/(kg*degC) ]
 #' @examples
-#' library(testthat)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' p <- c(      10,       50,      125,      250,      600,      1000)
 #' e <- gsw_entropy_ice(t, p)
@@ -1859,7 +1814,6 @@ gsw_entropy_ice <- function(t, p)
 #' @template ptemplate
 #' @return a list containing \code{SA_final}, \code{h_final} and \code{w_Ih_final}.
 #' @examples
-#' library(testthat)
 #' SA_bulk <- c(  34.7118,   34.8915,   35.0256,   34.8472,   34.7366,   34.7324)
 #' h_bulk <- c( -4.5544e4, -4.6033e4, -4.5830e4, -4.5589e4, -4.4948e4, -4.4027e4)
 #' p <- c(             10,        50,       125,       250,       600,      1000)
@@ -1908,7 +1862,6 @@ gsw_frazil_properties <- function(SA_bulk, h_bulk, p)
 #' @template ptemplate
 #' @return a list containing \code{SA_final}, \code{h_final} and \code{w_Ih_final}.
 #' @examples
-#' library(testthat)
 #' SA_bulk <- c(     34.7118,   34.8915,   35.0256,   34.8472,   34.7366,   34.7324)
 #' h_pot_bulk <- c(-4.5544e4, -4.6033e4, -4.5830e4, -4.5589e4, -4.4948e4, -4.4027e4)
 #' p <- c(                 10,        50,       125,       250,       600,      1000)
@@ -1958,7 +1911,6 @@ gsw_frazil_properties_potential <- function(SA_bulk, h_pot_bulk, p)
 #' @template ptemplate
 #' @return a list containing \code{SA_final}, \code{h_final} and \code{w_Ih_final}.
 #' @examples
-#' library(testthat)
 #' SA_bulk <- c(     34.7118,   34.8915,   35.0256,   34.8472,   34.7366,   34.7324)
 #' h_pot_bulk <- c(-4.5544e4, -4.6033e4, -4.5830e4, -4.5589e4, -4.4948e4, -4.4027e4)
 #' p <- c(                10,        50,       125,       250,       600,      1000)
@@ -2009,7 +1961,6 @@ gsw_frazil_properties_potential_poly <- function(SA_bulk, h_pot_bulk, p)
 #' @template w_Ihtemplate
 #' @return a list containing \code{dSA_dCT_frazil}, \code{dSA_dP_frazil} and \code{dCT_dP_frazil}.
 #' @examples
-#' library(testthat)
 #' SA <- c(  34.7118,   34.8915,   35.0256,   34.8472,   34.7366,   34.7324)
 #' p <- c(        10,        50,       125,       250,       600,      1000)
 #' w_Ih <- c(    0.9,      0.84,       0.4,      0.25,      0.05,      0.01)
@@ -2059,7 +2010,6 @@ gsw_frazil_ratios_adiabatic <- function(SA, p, w_Ih)
 #' @template w_Ihtemplate
 #' @return a list containing \code{dSA_dCT_frazil}, \code{dSA_dP_frazil} and \code{dCT_dP_frazil}.
 #' @examples
-#' library(testthat)
 #' SA <- c(  34.7118,   34.8915,   35.0256,   34.8472,   34.7366,   34.7324)
 #' p <- c(        10,        50,       125,       250,       600,      1000)
 #' w_Ih <- c(    0.9,      0.84,       0.4,      0.25,      0.05,      0.01)
@@ -2104,7 +2054,6 @@ gsw_frazil_ratios_adiabatic_poly <- function(SA, p, w_Ih)
 #' @template ptemplate
 #' @return gravitational acceleration [ m/s^2 ]
 #' @examples
-#' library(testthat)
 #' lat <- c(-90, -60, -30, 0)
 #' grav <- gsw_grav(lat)
 #' expect_equal(grav, c(9.832186205884799, 9.819178859991149,
@@ -2138,7 +2087,6 @@ gsw_grav <- function(latitude, p=0)
 #' (see e.g. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition.
 #' Elsevier).
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -2177,7 +2125,6 @@ gsw_geo_strf_dyn_height <- function(SA, CT, p, p_ref=0)
 #' (see e.g. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition.
 #' Elsevier).
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' delta_p <- c(10,      40,      75,     125,     350,     400)
@@ -2310,7 +2257,6 @@ gsw_gibbs_ice <- function(nt, np, t, p=0)
 #' @template ptemplate
 #' @return Helmholtz energy if ice [ J/kg ]
 #' @examples
-#' library(testthat)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' p <- c(      10,       50,      125,      250,       600,     1000)
 #' e <- gsw_Helmholtz_energy_ice(t, p)
@@ -2342,7 +2288,6 @@ gsw_Helmholtz_energy_ice <- function(t, p)
 ##> #' @template ttemplate
 ##> #' @return Hill ratio [ unitless ]
 ##> #' @examples
-##> #' library(testthat)
 ##> #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 ##> #' r <- gsw_hill_ratio_at_SP2(t)
 ##> #' expect_equal(r4, c(-1.362572315008330, -1.710375005915343, -1.628083272702224,
@@ -2373,7 +2318,6 @@ gsw_Helmholtz_energy_ice <- function(t, p)
 #' @template t_Ihtemplate
 #' @return a list containing \code{SA_freeze}, \code{CT_freeze} and \code{w_Ih}.
 #' @examples
-#' library(testthat)
 #' SA <- c(   34.7118,  34.8915,  35.0256,  34.8472,  34.7366, 34.7324)
 #' CT <- c(   28.7856,  28.4329,  22.8103,  10.2600,   6.8863,  4.4036)
 #' p <- c(         10,       50,      125,      250,      600,    1000)
@@ -2419,7 +2363,6 @@ gsw_ice_fraction_to_freeze_seawater <- function(SA, CT, p, t_Ih)
 #' @template ptemplate
 #' @return specific internal energy [ J/kg ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -2450,7 +2393,6 @@ gsw_internal_energy <- function(SA, CT, p)
 #' @template ptemplate
 #' @return specific internal energy [ J/kg ]
 #' @examples
-#' library(testthat)
 #' t_Ih <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' e <- gsw_internal_energy_ice(t_Ih, p)
@@ -2486,7 +2428,6 @@ gsw_internal_energy_ice <- function(t, p)
 #' @param p_ref reference pressure [ dbar ]
 #' @return list containing IPV_vs_fNsquared_ratio [ unitless ] and mid-point pressure p_mid [ dbar ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -2526,7 +2467,6 @@ gsw_IPV_vs_fNsquared_ratio <- function(SA, CT, p, p_ref=0)
 #' @template ptemplate
 #' @return isentropic compressibility [ 1/Pa ] (not 1/dbar)
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <-c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -2559,7 +2499,6 @@ gsw_kappa <- function(SA, CT, p)
 #' @template ptemplate
 #' @return isothermal compressibility of ice [ 1/Pa ] (not 1/dbar)
 #' @examples
-#' library(testthat)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' p <- c(      10,       50,      125,      250,       600,     1000)
 #' kappa <- gsw_kappa_const_t_ice(t, p)
@@ -2593,7 +2532,6 @@ gsw_kappa_const_t_ice <- function(t, p)
 #' @template ptemplate
 #' @return isentropic compressibility of ice [ 1/Pa ] (not 1/dbar)
 #' @examples
-#' library(testthat)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' p <- c(      10,       50,      125,      250,       600,     1000)
 #' kappa <- gsw_kappa_ice(t, p)
@@ -2626,7 +2564,6 @@ gsw_kappa_ice <- function(t, p)
 #' @template ptemplate
 #' @return isentropic compressibility [ 1/Pa ] (not 1/dbar)
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <-c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -2658,7 +2595,6 @@ gsw_kappa_t_exact <- function(SA, t, p)
 #' @template CTtemplate
 #' @return latent heat of evaporation [ J/kg ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' lh  <- gsw_latentheat_evap_CT(SA, CT)
@@ -2689,7 +2625,6 @@ gsw_latentheat_evap_CT <- function(SA, CT)
 #' @template ttemplate
 #' @return latent heat of evaporation [ J/kg ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' lh = gsw_latentheat_evap_t(SA, t)
@@ -2720,7 +2655,6 @@ gsw_latentheat_evap_t <- function(SA, t)
 #' @template ptemplate
 #' @return latent heat of freezing [ J/kg ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' lh <- gsw_latentheat_melting(SA, p)
@@ -2754,7 +2688,6 @@ gsw_latentheat_melting <- function(SA, p)
 #' @template t_Ihtemplate
 #' @return a list containing \code{SA_final}, \code{CT_final} and \code{w_Ih_final}.
 #' @examples
-#' library(testthat)
 #' SA <- c(  34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(   4.7856,  2.4329,  1.8103,  1.2600,  0.6886,  0.4403)
 #' p <- c(        10,      50,     125,     250,     600,    1000)
@@ -2803,7 +2736,6 @@ gsw_melting_ice_into_seawater <- function(SA, CT, p, w_Ih, t_Ih)
 #' @param t_seaice temperature of seaice
 #' @return a list containing \code{SA_final} and \code{CT_final}.
 #' @examples
-#' library(testthat)
 #' SA <- c(      34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(       4.7856,  2.4329,  1.8103,  1.2600,  0.6886,  0.4403)
 #' p <- c(            10,      50,     125,     250,     600,    1000)
@@ -2847,7 +2779,6 @@ gsw_melting_seaice_into_seawater <- function(SA, CT, p, w_seaice, SA_seaice, t_s
 #' @template ptemplate
 #' @return ratio of change in \code{SA} to change in \code{CT} [ g/kg/degC ].
 #' @examples
-#' library(testthat)
 #' SA <- c(   34.7118,  34.8915,  35.0256,  34.8472,  34.7366, 34.7324)
 #' p <- c(         10,       50,      125,      250,      600,    1000)
 #' r <- gsw_melting_ice_equilibrium_SA_CT_ratio(SA, p)
@@ -2879,7 +2810,6 @@ gsw_melting_ice_equilibrium_SA_CT_ratio <- function(SA, p)
 #' @template ptemplate
 #' @return ratio of change in \code{SA} to change in \code{CT} [ g/kg/degC ].
 #' @examples
-#' library(testthat)
 #' SA <- c(   34.7118,  34.8915,  35.0256,  34.8472,  34.7366, 34.7324)
 #' p <- c(         10,       50,      125,      250,      600,    1000)
 #' r <- gsw_melting_ice_equilibrium_SA_CT_ratio_poly(SA, p)
@@ -2913,7 +2843,6 @@ gsw_melting_ice_equilibrium_SA_CT_ratio_poly <- function(SA, p)
 #' @template t_Ihtemplate
 #' @return ratio of change in \code{SA} to change in \code{CT} [ g/kg/degC ].
 #' @examples
-#' library(testthat)
 #' SA <- c(   34.7118,  34.8915,  35.0256,  34.8472,  34.7366, 34.7324)
 #' CT <- c(    3.7856,   3.4329,   2.8103,   1.2600,   0.6886,  0.4403)
 #' p <- c(         10,       50,      125,      250,      600,    1000)
@@ -2949,7 +2878,6 @@ gsw_melting_ice_SA_CT_ratio <- function(SA, CT, p, t_Ih)
 #' @template t_Ihtemplate
 #' @return ratio of change in \code{SA} to change in \code{CT} [ g/kg/degC ].
 #' @examples
-#' library(testthat)
 #' SA <- c(   34.7118,  34.8915,  35.0256,  34.8472,  34.7366, 34.7324)
 #' CT <- c(    3.7856,   3.4329,   2.8103,   1.2600,   0.6886,  0.4403)
 #' p <- c(         10,       50,      125,      250,      600,    1000)
@@ -2991,7 +2919,6 @@ gsw_melting_ice_SA_CT_ratio_poly <- function(SA, CT, p, t_Ih)
 #' @template latitudetemplate
 #' @return list containing N2 [ 1/s^ ] and mid-point pressure p_mid [ dbar ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -3028,7 +2955,6 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
 #' @param sea_surface_geopotential geopotential at zero sea pressure [ m^2/s^2 ]
 #' @return sea pressure [ dbar ]
 #' @examples
-#' library(testthat)
 #' z <- -c(10, 50, 125, 250, 600, 1000)
 #' latitude <- 4
 #' p <- gsw_p_from_z(z, latitude)
@@ -3062,7 +2988,6 @@ gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height=0, sea_surface_geopote
 #' @template pt0_icetemplate
 #' @return potential enthalpy [ J/kg ]
 #' @examples
-#' library(testthat)
 #' pt0_ice <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' e <- gsw_pot_enthalpy_from_pt_ice(pt0_ice)
 #' expect_equal(e/1e5, c(-3.555459449611868, -3.608607069998877, -3.596153890859193,
@@ -3092,7 +3017,6 @@ gsw_pot_enthalpy_from_pt_ice <- function(pt0_ice)
 #' @template pt0_icetemplate
 #' @return potential enthalpy [ J/kg ]
 #' @examples
-#' library(testthat)
 #' pt0_ice <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' e <- gsw_pot_enthalpy_from_pt_ice_poly(pt0_ice)
 #' expect_equal(e/1e5, c(-3.555459482216265, -3.608607100959428, -3.596153924697033,
@@ -3124,7 +3048,6 @@ gsw_pot_enthalpy_from_pt_ice_poly <- function(pt0_ice)
 #' @template saturation_fractiontemplate
 #' @return potential enthalpy [ J/kg ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' saturation_fraction = 1
@@ -3168,7 +3091,6 @@ gsw_pot_enthalpy_ice_freezing <- function(SA, p, saturation_fraction=1)
 #' @template saturation_fractiontemplate
 #' @return potential enthalpy [ J/kg ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' saturation_fraction = 1
@@ -3205,7 +3127,6 @@ gsw_pot_enthalpy_ice_freezing_poly <- function(SA, p, saturation_fraction=1)
 #' Conservative Temperature with respect to potential temperature. (Note that the second
 #' quantity is denoted \code{pot_enthalpy_ice_freezing_P} in the documentation for the Matlab function.)
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_pot_enthalpy_ice_freezing_first_derivatives(SA, p)
@@ -3248,7 +3169,6 @@ gsw_pot_enthalpy_ice_freezing_first_derivatives <- function(SA, p)
 #' Conservative Temperature with respect to potential temperature. (Note that the second
 #' quantity is denoted \code{pot_enthalpy_ice_freezing_P} in the documentation for the Matlab function.)
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_pot_enthalpy_ice_freezing_first_derivatives_poly(SA, p)
@@ -3289,7 +3209,6 @@ gsw_pot_enthalpy_ice_freezing_first_derivatives_poly <- function(SA, p)
 #' @param p_ref reference pressure [ dbar ]
 #' @return potential density [ kg/m^3 ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -3322,7 +3241,6 @@ gsw_pot_rho_t_exact <- function(SA, t, p, p_ref)
 #' @template ptemplate
 #' @return specific internal energy [ Pa/degC ]
 #' @examples
-#' library(testthat)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' pc <- gsw_pressure_coefficient_ice(t, p)
@@ -3354,7 +3272,6 @@ gsw_pressure_coefficient_ice <- function(t, p)
 #' @template saturation_fractiontemplate
 #' @return pressure at which freezing will occur [ dbar ]
 #' @examples
-#' library(testthat)
 #' SA <- c(                 34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(                 -1.8996, -1.9407, -2.0062, -2.0923, -2.3593, -2.6771)
 #' saturation_fraction <- c(       1,    0.8,     0.6,     0.5,     0.4,       0)
@@ -3388,7 +3305,6 @@ gsw_pressure_freezing_CT <- function(SA, CT, saturation_fraction=1)
 #' @template ptemplate
 #' @return potential temperature [ degC ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -3419,7 +3335,6 @@ gsw_pt0_from_t <- function(SA, t, p)
 #' @template ptemplate
 #' @return potential temperature [ degC ]
 #' @examples
-#' library(testthat)
 #' t  <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' p <- c(       10,       50,      125,      250,      600,    1000)
 #' pt0 <- gsw_pt0_from_t_ice(t, p)
@@ -3453,7 +3368,6 @@ gsw_pt0_from_t_ice <- function(t, p)
 #' and \code{pt_CT} [ unitless ], the derivative of potential temperature
 #' with respect to Conservative Temperature.
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' r <- gsw_pt_first_derivatives(SA, CT)
@@ -3490,7 +3404,6 @@ gsw_pt_first_derivatives <- function(SA, CT)
 #' @template CTtemplate
 #' @return potential temperature [ degC ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' pt <- gsw_pt_from_CT(SA, CT)
@@ -3520,7 +3433,6 @@ gsw_pt_from_CT <- function(SA, CT)
 #' @template entropytemplate
 #' @return potential temperature [ degC ]
 #' @examples
-#' library(testthat)
 #' SA <- c(      34.7118,  34.8915,  35.0256,  34.8472, 34.7366, 34.7324)
 #' entropy <- c(400.3892, 395.4378, 319.8668, 146.7910, 98.6471, 62.7919)
 #' pt <- gsw_pt_from_entropy(SA, entropy)
@@ -3550,7 +3462,6 @@ gsw_pt_from_entropy <- function(SA, entropy)
 #' @template pot_enthalpy_icetemplate
 #' @return potential temperature [ degC ]
 #' @examples
-#' library(testthat)
 #' pot_enthalpy_ice <- c(-3.5544e5, -3.6033e5, -3.5830e5, -3.5589e5, -3.4948e5, -3.4027e5)
 #' pt <- gsw_pt_from_pot_enthalpy_ice(pot_enthalpy_ice)
 #' expect_equal(pt, c(-10.733087588125384, -13.167397822300588, -12.154205899172704,
@@ -3583,7 +3494,6 @@ gsw_pt_from_pot_enthalpy_ice <- function(pot_enthalpy_ice)
 #' @param p_ref reference pressure [ dbar ]
 #' @return potential temperature [ degC ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -3614,7 +3524,6 @@ gsw_pt_from_t <- function(SA, t, p, p_ref=0)
 #' @template pot_enthalpy_icetemplate
 #' @return potential temperature [ degC ]
 #' @examples
-#' library(testthat)
 #' pot_enthalpy_ice <- c(-3.5544e5, -3.6033e5, -3.5830e5, -3.5589e5, -3.4948e5, -3.4027e5)
 #' pt <- gsw_pt_from_pot_enthalpy_ice_poly(pot_enthalpy_ice)
 #' expect_equal(pt, c(-10.733085986035007, -13.167396204945987, -12.154204137867396,
@@ -3646,7 +3555,6 @@ gsw_pt_from_pot_enthalpy_ice_poly <- function(pot_enthalpy_ice)
 #' @param p_ref reference pressure [ dbar ]
 #' @return potential temperature [ degC ]
 #' @examples
-#' library(testthat)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' p <- c(      10,       50,      125,      250,      600,    1000)
 #' p_ref <- 0 # not actually needed, since 0 is the default
@@ -3683,7 +3591,6 @@ gsw_pt_from_t_ice <- function(t, p, p_ref=0)
 #' Absolute Salinity, and \code{pt_pt_pt} [ 1/degC ], the second derivative of
 #' potential temperature with respect to Conservative Temperature.
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' r <- gsw_pt_second_derivatives(SA, CT)
@@ -3729,7 +3636,6 @@ gsw_pt_second_derivatives <- function(SA, CT)
 #' @return in-situ density [ kg/m^3 ]
 #' @family things related to density
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -3767,7 +3673,6 @@ gsw_rho <- function(SA, CT, p)
 #' coefficient \code{alpha} [ 1/degC ], and haline contraction coefficient
 #' \code{beta} [ kg/g ].
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -3810,7 +3715,6 @@ gsw_rho_alpha_beta <- function(SA, CT, p)
 #' @template ptemplate
 #' @return list containing drho_dSA [ kg^2/(g m^3) ], drho_dCT [ kg/(K m^3) ] and drho_dp [ kg/(Pa m^3) ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -3849,7 +3753,6 @@ gsw_rho_first_derivatives <- function(SA, CT, p)
 #' @return A list containing \code{rho_SA_wrt_h} [ (kg/m^3)/(g/kg)/(J/kg) ]
 #' and \code{rho_h} [ (kg/m^3)/(J/kg) ].
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -3894,7 +3797,6 @@ gsw_rho_first_derivatives_wrt_enthalpy <- function(SA, CT, p)
 #' @return in-situ density [ kg/m^3 ]
 #'
 #' @examples
-#' library(testthat)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' rho <- gsw_rho_ice(t, p)
@@ -3932,7 +3834,6 @@ gsw_rho_ice <- function(t, p)
 #' and \code{rho_CT_CT} [ (kg/m^3)/degC^2 ], the second derivative of
 #' density with respect to Conservative Temperature.
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -3989,7 +3890,6 @@ gsw_rho_second_derivatives <- function(SA, CT, p)
 #' and \code{rho_h_h} [ (kg/m^3)/(J/kg)^2 ], the second derivative of
 #' density with respect to enthalpy.
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -4035,7 +3935,6 @@ gsw_rho_second_derivatives_wrt_enthalpy <- function(SA, CT, p)
 #' @template ptemplate
 #' @return in-situ density [ kg/m^3 ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' t <-  c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -4085,7 +3984,6 @@ gsw_rho_t_exact <- function(SA, t, p)
 #' improve things.
 #'
 #' @examples
-#' library(testthat)
 #' p <- c(10, 50, 125, 250, 600, 1000)
 #' longitude <- c(188, 188, 188, 188, 188, 188)
 #' latitude <- c(4, 4, 4, 4, 4, 4)
@@ -4123,7 +4021,6 @@ gsw_SAAR <- function(p, longitude, latitude)
 #' @template saturation_fractiontemplate
 #' @return Absolute Salinity [ g/kg ]
 #' @examples
-#' library(testthat)
 #' CT <- c(-0.11901, -0.15608, -0.72138, -1.97738, -2.31728, -2.56764)
 #' p <- c(       10,       50,      125,      250,      600,     1000)
 #' saturation_fraction <- 1
@@ -4156,7 +4053,6 @@ gsw_SA_freezing_from_CT <- function(CT, p, saturation_fraction=1)
 #' @template saturation_fractiontemplate
 #' @return Absolute Salinity [ g/kg ]
 #' @examples
-#' library(testthat)
 #' CT <- c(-0.11901, -0.15608, -0.72138, -1.97738, -2.31728, -2.56764)
 #' p <- c(       10,       50,      125,      250,      600,     1000)
 #' saturation_fraction <- 1
@@ -4189,7 +4085,6 @@ gsw_SA_freezing_from_CT_poly <- function(CT, p, saturation_fraction=1)
 #' @template saturation_fractiontemplate
 #' @return Absolute Salinity [ g/kg ]
 #' @examples
-#' library(testthat)
 #' t <- c(-0.11901, -0.15608, -0.72138, -1.97738, -2.31728, -2.56764)
 #' p <- c(      10,       50,      125,      250,      600,     1000)
 #' saturation_fraction <- 1
@@ -4222,7 +4117,6 @@ gsw_SA_freezing_from_t <- function(t, p, saturation_fraction=1)
 #' @template saturation_fractiontemplate
 #' @return Absolute Salinity [ g/kg ]
 #' @examples
-#' library(testthat)
 #' t <- c(-0.11901, -0.15608, -0.72138, -1.97738, -2.31728, -2.56764)
 #' p <- c(      10,       50,      125,      250,      600,     1000)
 #' saturation_fraction <- 1
@@ -4255,7 +4149,6 @@ gsw_SA_freezing_from_t_poly <- function(t, p, saturation_fraction=1)
 #' @template ptemplate
 #' @return Absolute Salinity [ g/kg ]
 #' @examples
-#' library(testthat)
 #' rho <- c(1021.8482, 1022.2647, 1024.4207, 1027.7841, 1029.8287, 1031.9916)
 #' CT <-c(    28.7856,   28.4329,   22.8103,   10.2600,    6.8863,    4.4036)
 #' p <- c(         10,        50,       125,       250,       600,      1000)
@@ -4296,7 +4189,6 @@ gsw_SA_from_rho <- function(rho, CT, p)
 #' @template latitudetemplate
 #' @return Absolute Salinity [ g/kg ]
 #' @examples
-#' library(testthat)
 #' SP <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' lat <- c(     4,       4,       4,       4,       4,       4)
@@ -4351,7 +4243,6 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
 #' @template latitudetemplate
 #' @return Absolute Salinity [ g/kg ]
 #' @examples
-#' library(testthat)
 #' SP <- c( 6.5683, 6.6719, 6.8108, 7.2629, 7.4825, 10.2796)
 #' lon <- c(    20,     20,     20,     20,     20,      20)
 #' lat <- c(    59,     59,     59,     59,     59,      59)
@@ -4404,7 +4295,6 @@ gsw_SA_from_SP_Baltic <- function(SP, longitude, latitude)
 #' @template latitudetemplate
 #' @return Absolute Salinity [ g/kg ]
 #' @examples
-#' library(testthat)
 #' SP <- c(34.7115, 34.8912, 35.0247, 34.8436, 34.7291, 34.7197)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' lat <- c(     4,       4,       4,       4,       4,       4)
@@ -4455,7 +4345,6 @@ gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
 #' @template CTtemplate
 #' @return potential density anomaly [ kg/m^3 ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' sigma0 <- gsw_sigma0(SA,CT)
@@ -4490,7 +4379,6 @@ gsw_sigma0 <- function(SA, CT)
 #' @template CTtemplate
 #' @return potential density anomaly [ kg/m^3 ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' sigma1 <- gsw_sigma1(SA,CT)
@@ -4525,7 +4413,6 @@ gsw_sigma1 <- function(SA, CT)
 #' @template CTtemplate
 #' @return potential density anomaly [ kg/m^3 ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' sigma2 <- gsw_sigma2(SA,CT)
@@ -4560,7 +4447,6 @@ gsw_sigma2 <- function(SA, CT)
 #' @template CTtemplate
 #' @return potential density anomaly with reference pressure 3000 dbar [ kg/m^3 ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' sigma3 <- gsw_sigma3(SA,CT)
@@ -4595,7 +4481,6 @@ gsw_sigma3 <- function(SA, CT)
 #' @template CTtemplate
 #' @return potential density anomaly with reference pressure 4000 dbar [ kg/m^3 ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' sigma4 <- gsw_sigma4(SA,CT)
@@ -4629,7 +4514,6 @@ gsw_sigma4 <- function(SA, CT)
 #' @template ptemplate
 #' @return sound speed [ m/s ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -4663,7 +4547,6 @@ gsw_sound_speed <- function(SA, CT, p)
 #' @template ptemplate
 #' @return sound speed [ m/s ]
 #' @examples
-#' library(testthat)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' p <- c(      10,       50,      125,      250,      600,    1000)
 #' speed <- gsw_sound_speed_ice(t, p)
@@ -4696,7 +4579,6 @@ gsw_sound_speed_ice <- function(t, p)
 #' @template ptemplate
 #' @return sound speed [ m/s ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -4729,7 +4611,6 @@ gsw_sound_speed_t_exact <- function(SA, t, p)
 #' @template ptemplate
 #' @return Specific volume (1/density)
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -4756,7 +4637,6 @@ gsw_specvol  <- function(SA, CT, p)
 #' the thermal expansion coefficient [ 1/degC ], and \code{beta}, the haline contraction
 #' coefficient [ kg/g ].
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -4804,7 +4684,6 @@ gsw_specvol_alpha_beta  <- function(SA, CT, p)
 #' @template CTtemplate
 #' @template ptemplate
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -4843,7 +4722,6 @@ gsw_specvol_anom_standard <- function(SA, CT, p)
 #' to pressure. (Note that the last quantity is denoted \code{v_P} in the
 #' documentation for the Matlab function.)
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -4887,7 +4765,6 @@ gsw_specvol_first_derivatives <- function(SA, CT, p)
 #' @template ptemplate
 #' @return A list containing \code{v_SA_wrt_h} and \code{v_h}.
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -4934,7 +4811,6 @@ gsw_specvol_first_derivatives_wrt_enthalpy <- function(SA, CT, p)
 #' @template ptemplate
 #' @return Specific volume [ m^3/kg ]
 #' @examples
-#' library(testthat)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' p <- c(      10,       50,      125,      250,       600,     1000)
 #' v <- gsw_specvol_ice(t, p)
@@ -4975,7 +4851,6 @@ gsw_specvol_ice  <- function(t, p)
 #' Salinity and pressure, and \code{specvol_CT_p} [ (m^3/kg)/K/dbar ], the derivative of specific
 #' volume with respect to Conservative Temperature and pressure.
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -5032,7 +4907,6 @@ gsw_specvol_second_derivatives <- function(SA, CT, p)
 #' and \code{specvol_h_h} [ (m^3/kg)/(J/kg)^2 ], the second derivative of
 #' specific volume with respect to enthalpy.
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -5078,7 +4952,6 @@ gsw_specvol_second_derivatives_wrt_enthalpy <- function(SA, CT, p)
 #' @template ptemplate
 #' @return Specific volume [ m^3/kg ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -5111,7 +4984,6 @@ gsw_specvol_t_exact  <- function(SA, t, p)
 #' @template ptemplate
 #' @return Practical Salinity (PSS-78) [ unitless ]
 #' @examples
-#' library(testthat)
 #' C <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
 #' t <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(     10,      50,     125,     250,     600,    1000)
@@ -5156,7 +5028,6 @@ gsw_SP_from_C <- function(C, t, p)
 #' @template latitudetemplate
 #' @return Practical Salinity (PSS-78) [ unitless ]
 #' @examples
-#' library(testthat)
 #' SA <-   c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <-    c(     10,      50,     125,     250,     600,    1000)
 #' lat <-  c(      4,       4,       4,       4,       4,       4)
@@ -5199,7 +5070,6 @@ gsw_SP_from_SA <- function(SA, p, longitude, latitude)
 #' @param SK Knudsen Salinity [ parts per thousand, ppt ]
 #' @return Practical Salinity (PSS-78) [ unitless ]
 #' @examples
-#' library(testthat)
 #' SK <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
 #' SP <- gsw_SP_from_SK(SK)
 #' expect_equal(SP, c(34.548342096952908, 34.727295637119113, 34.860409847645435,
@@ -5225,7 +5095,6 @@ gsw_SP_from_SK <- function(SK)
 #' @template SRtemplate
 #' @return Practical Salinity (PSS-78) [ unitless ]
 #' @examples
-#' library(testthat)
 #' SR <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
 #' SP <- gsw_SP_from_SR(SR)
 #' expect_equal(SP, c(34.386552667080714, 34.564513505458834, 34.696889296869848,
@@ -5254,7 +5123,6 @@ gsw_SP_from_SR <- function(SR)
 #' @template latitudetemplate
 #' @return Practical Salinity (PSS-78) [ unitless ]
 #' @examples
-#' library(testthat)
 #' Sstar <- c(34.7115, 34.8912, 35.0247, 34.8436, 34.7291, 34.7197)
 #' p <- c(         10,      50,     125,     250,     600,    1000)
 #' longitude <- 188
@@ -5294,7 +5162,6 @@ gsw_SP_from_Sstar <- function(Sstar, p, longitude, latitude)
 #' @template t_seaicetemplate
 #' @return a list containing \code{SA_freeze}, \code{CT_freeze} and \code{w_Ih}.
 #' @examples
-#' library(testthat)
 #' SA <- c(      34.7118, 34.8915, 35.0256, 34.8472, 34.7366,  34.7324)
 #' CT <- c(      -1.7856, -1.4329, -1.8103, -1.2600, -0.6886,   0.4403)
 #' p <- c(            10,      50,     125,     250,     600,     1000)
@@ -5338,7 +5205,6 @@ gsw_seaice_fraction_to_freeze_seawater <- function(SA, CT, p, SA_seaice, t_seaic
 #' @template SPtemplate
 #' @return Reference Salinity [ g/kg ]
 #' @examples
-#' library(testthat)
 #' SP <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
 #' SR <- gsw_SR_from_SP(SP)
 #' expect_equal(SR, c(34.711611927085727, 34.891255045714303, 35.024882197714305,
@@ -5368,7 +5234,6 @@ gsw_SR_from_SP <- function(SP)
 #' @template CTtemplate
 #' @return spiciness [ kg/m^3 ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' spiciness <- gsw_spiciness0(SA, CT)
@@ -5403,7 +5268,6 @@ gsw_spiciness0 <- function(SA, CT)
 #' @template CTtemplate
 #' @return spiciness [ kg/m^3 ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' spiciness <- gsw_spiciness1(SA, CT)
@@ -5437,7 +5301,6 @@ gsw_spiciness1 <- function(SA, CT)
 #' @template CTtemplate
 #' @return spiciness [ kg/m^3 ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' spiciness <- gsw_spiciness2(SA, CT)
@@ -5478,7 +5341,6 @@ gsw_spiciness2 <- function(SA, CT)
 #' @template latitudetemplate
 #' @return Preformed Salinity [ g/kg ]
 #' @examples
-#' library(testthat)
 #' SA <-   c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <-    c(     10,      50,     125,     250,     600,    1000)
 #' lat <-  c(      4,       4,       4,       4,       4,       4)
@@ -5533,7 +5395,6 @@ gsw_Sstar_from_SA <- function(SA, p, longitude, latitude)
 #' @template latitudetemplate
 #' @return Preformed Salinity [ g/kg ]
 #' @examples
-#' library(testthat)
 #' SP <-   c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
 #' p <-    c(     10,      50,     125,     250,     600,    1000)
 #' lat <-  c(      4,       4,       4,       4,       4,       4)
@@ -5580,7 +5441,6 @@ gsw_Sstar_from_SP <- function(SP, p, longitude, latitude)
 #' @template ptemplate
 #' @return derivative [ J/(g*degC) ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
@@ -5617,7 +5477,6 @@ gsw_t_deriv_chem_potential_water_t_exact <- function(SA, t, p)
 #' @template saturation_fractiontemplate
 #' @return in-situ freezing temperature (ITS-90) [ degC ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' saturation_fraction <- 1
@@ -5652,7 +5511,6 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
 #' temperature with Absolute Salinity and
 #' \code{tfreezing_p} [ K/dbar ], the derivative with respect to pressure.
 #' @examples
-#' library(testthat)
 #' SA <- c(               34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <- c(                     10,      50,     125,     250,     600,    1000)
 #' saturation_fraction <- c(    1,     0.8,     0.6,     0.5,     0.4,       0)
@@ -5696,7 +5554,6 @@ gsw_t_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)
 #' temperature with Absolute Salinity and
 #' \code{tfreezing_p} [ K/dbar ], the derivative with respect to pressure.
 #' @examples
-#' library(testthat)
 #' SA <- c(               34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <- c(                     10,      50,     125,     250,     600,    1000)
 #' saturation_fraction <- c(    1,     0.8,     0.6,     0.5,     0.4,       0)
@@ -5738,7 +5595,6 @@ gsw_t_freezing_first_derivatives_poly <- function(SA, p, saturation_fraction=1)
 #' @template ptemplate
 #' @return in-situ temperature (ITS-90) [ degC ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -5769,7 +5625,6 @@ gsw_t_from_CT <- function(SA, CT, p)
 #' @template ptemplate
 #' @return in-situ temperature (ITS-90) [ degC ]
 #' @examples
-#' library(testthat)
 #' pt0_ice  <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' t <- gsw_t_from_pt0_ice(pt0_ice, p)
@@ -5801,7 +5656,6 @@ gsw_t_from_pt0_ice <- function(pt0_ice, p)
 #' @template ptemplate
 #' @return thermobaric coefficient wrt Conservative Temperature [ 1/(K Pa) ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -5836,7 +5690,6 @@ gsw_thermobaric <- function(SA, CT, p)
 #' @template ptemplate
 #' @return List containing \code{Tu} [ degrees ], \code{Rsubrho} [ unitless ], and \code{p_mid} [ dbar ]
 #' @examples
-#' library(testthat)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -5879,7 +5732,6 @@ gsw_Turner_Rsubrho <- function(SA, CT, p)
 #' @template latitudetemplate
 #' @return height [ m ]
 #' @examples
-#' library(testthat)
 #' z <- gsw_z_from_p(c(10, 50, 125, 250, 600,1000), 4)
 #' expect_equal(z/1e2, c(-0.099445834469453, -0.497180897012550, -1.242726219409978,
 #'                     -2.484700576548589, -5.958253480356214, -9.920919060719987))
