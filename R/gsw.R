@@ -743,7 +743,7 @@ gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
 {
     l <- argfix(list(SA=SA, p=p, saturation_fraction=saturation_fraction))
     n <- length(l[[1]])
-    rval <- .C("wrap_gsw_CT_freezing_exact",
+    rval <- .C("wrap_gsw_CT_freezing",
                SA=as.double(l$SA), p=as.double(l$p), saturation_fraction=as.double(l$saturation_fraction),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     ##37 rval[!is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$saturation_fraction)] <- NA
@@ -2951,8 +2951,6 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
 #'
 #' @param z height, zero at surface (but note last 2 args) and positive upwards [ m ]
 #' @template latitudetemplate
-#' @param geo_strf_dyn_height dynamic height anomaly [ m^2/s^2 ]
-#' @param sea_surface_geopotential geopotential at zero sea pressure [ m^2/s^2 ]
 #' @return sea pressure [ dbar ]
 #' @examples
 #' z <- -c(10, 50, 125, 250, 600, 1000)
@@ -2963,16 +2961,12 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
 #' @family things related to depth
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_p_from_z.html}
-gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height=0, sea_surface_geopotential=0)
+gsw_p_from_z <- function(z, latitude)
 {
-    l <- argfix(list(z=z, latitude=latitude,
-                     geo_strf_dyn_height=geo_strf_dyn_height,
-                     sea_surface_geopotential=sea_surface_geopotential))
+    l <- argfix(list(z=z, latitude=latitude))
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_p_from_z",
                z=as.double(l$z), latitude=as.double(l$latitude),
-               geo_strf_dyn_height=as.double(l$geo_strf_dyn_height),
-               sea_surface_geopotential=as.double(l$sea_surface_geopotential),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     ##37 rval[!is.finite(l$z) | !is.finite(l$latitude) | !is.finite(l$geo_strf_dyn_height) | !is.finite(l$sea_surface_geopotential)] <- NA
     if (is.matrix(z))

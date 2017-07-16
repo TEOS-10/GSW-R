@@ -337,7 +337,7 @@ W31(wrap_gsw_cp_t_exact, gsw_cp_t_exact, SA, t, p, n, rval)
 W22(wrap_gsw_CT_first_derivatives, gsw_ct_first_derivatives, SA, pt, n, CT_SA, CT_pt)
 W33(wrap_gsw_CT_first_derivatives_wrt_t_exact, gsw_ct_first_derivatives_wrt_t_exact, SA, t, p, n, CT_SA_wrt_t, CT_t_wrt_t, CT_p_wrt_t)
 W31(wrap_gsw_CT_freezing, gsw_ct_freezing, SA, p, saturation_fraction, n, rval)
-W31(wrap_gsw_CT_freezing_exact, gsw_ct_freezing_exact, SA, p, saturation_fraction, n, rval)
+//W31(wrap_gsw_CT_freezing_exact, gsw_ct_freezing_exact, SA, p, saturation_fraction, n, rval)
 W32(wrap_gsw_CT_freezing_first_derivatives, gsw_ct_freezing_first_derivatives, SA, p, saturation_fraction, n, CTfreezing_SA, CTfreezing_p)
 W32(wrap_gsw_CT_freezing_first_derivatives_poly,gsw_ct_freezing_first_derivatives_poly,SA,p,saturation_fraction,n,CTfreezing_SA,CTfreezing_p)
 W31(wrap_gsw_CT_from_enthalpy, gsw_ct_from_enthalpy, SA, h, p, n, rval)
@@ -432,8 +432,8 @@ W22(wrap_gsw_pot_enthalpy_ice_freezing_first_derivatives_poly, gsw_pot_enthalpy_
 W21(wrap_gsw_pressure_coefficient_ice, gsw_pressure_coefficient_ice, t, p, n, rval)
 W31(wrap_gsw_pressure_freezing_CT, gsw_pressure_freezing_ct, SA, CT, saturation_fraction, n, rval)
 // The next line is necessary because gsw_p_from_z() is not in the TEOS-10 C library yet.
-extern double gsw_p_from_z(double z, double latitude, double geo_strf_dyn_height, double sea_surface_geopotential);
-W41(wrap_gsw_p_from_z, gsw_p_from_z, z, latitude, geo_strf_dyn_height, sea_surface_geopotential, n, rval)
+extern double gsw_p_from_z(double z, double latitude);
+W21(wrap_gsw_p_from_z, gsw_p_from_z, z, latitude, n, rval)
 W41(wrap_gsw_pot_rho_t_exact, gsw_pot_rho_t_exact, SA, t, p, p_ref, n, rval)
 W31(wrap_gsw_pt0_from_t, gsw_pt0_from_t, SA, t, p, n, rval)
 W21(wrap_gsw_pt0_from_t_ice, gsw_pt0_from_t_ice, t, p, n, rval)
@@ -500,7 +500,7 @@ W41(wrap_gsw_SP_from_Sstar, gsw_sp_from_sstar, Sstar, p, longitude, latitude, n,
 W41(wrap_gsw_Sstar_from_SA, gsw_sstar_from_sa, SA, p, longitude, latitude, n, rval)
 W41(wrap_gsw_Sstar_from_SP, gsw_sstar_from_sp, SP, p, longitude, latitude, n, rval)
 W31(wrap_gsw_t_deriv_chem_potential_water_t_exact, gsw_t_deriv_chem_potential_water_t_exact, SA, t, p, n, rval)
-W31(wrap_gsw_t_freezing, gsw_t_freezing_exact, SA, p, saturation_fraction, n, rval)
+W31(wrap_gsw_t_freezing, gsw_t_freezing, SA, p, saturation_fraction, n, rval)
 W32(wrap_gsw_t_freezing_first_derivatives, gsw_t_freezing_first_derivatives, SA, p, saturation_fraction, n, tfreezing_SA, tfreezing_p)
 W32(wrap_gsw_t_freezing_first_derivatives_poly, gsw_t_freezing_first_derivatives_poly, SA, p, saturation_fraction, n, tfreezing_SA, tfreezing_p)
 W31(wrap_gsw_t_from_CT, gsw_t_from_ct, SA, CT, p, n, rval)

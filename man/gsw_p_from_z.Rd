@@ -4,18 +4,13 @@
 \alias{gsw_p_from_z}
 \title{Pressure from height (75-term equation)}
 \usage{
-gsw_p_from_z(z, latitude, geo_strf_dyn_height = 0,
-  sea_surface_geopotential = 0)
+gsw_p_from_z(z, latitude)
 }
 \arguments{
 \item{z}{height, zero at surface (but note last 2 args) and positive upwards [ m ]}
 
 \item{latitude}{latitude in decimal degrees, positive to the north of the equator. (This
 is called \code{lat} in the TEOS-10 Matlab code.)}
-
-\item{geo_strf_dyn_height}{dynamic height anomaly [ m^2/s^2 ]}
-
-\item{sea_surface_geopotential}{geopotential at zero sea pressure [ m^2/s^2 ]}
 }
 \value{
 sea pressure [ dbar ]
