@@ -7810,7 +7810,7 @@ gsw_rr68_interp_sa_ct(double *sa, double *ct, double *p, int mp, double *p_i,
 	*/
 	for (i=0; i<mp_i; i++) {
 	    for (j=0; j<mp; j++) {
-	        if (p_i[i] == p[j]) {
+	        if (fabs(p_i[i] - p[j]) < 0.001) {
 	            sa_i[i] = sa[j];
 	            ct_i[i] = ct[j];
 	        }
