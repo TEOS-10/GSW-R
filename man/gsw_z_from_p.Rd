@@ -2,40 +2,40 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_z_from_p}
 \alias{gsw_z_from_p}
-\title{Height from pressure}
+\title{Height from Pressure}
 \usage{
 gsw_z_from_p(p, latitude)
 }
 \arguments{
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
-\item{latitude}{latitude in decimal degrees north [ -90 ... +90 ]}
+\item{latitude}{latitude in decimal degrees, positive to the north of the equator. (This
+is called \code{lat} in the TEOS-10 Matlab code.)}
 }
 \value{
 height [ m ]
 }
 \description{
-Computation of height (above sea level) from pressure, using the 75-term equation for 
+Computation of height (above sea level) from pressure, using the 75-term equation for
 specific volume.
 }
 \details{
-The present function works with a wrapper to a C function contained
-within the GSW-C system (with sourcecode at
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (with source code at
 \url{https://github.com/TEOS-10/GSW-C}), which
 in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
 which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
-To learn more about these software systems, and about the science behind
-it all, consult \url{http://www.teos-10.org}.
+To learn more about these software systems, their authorships, and the science behind
+it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
-library(testthat)
 z <- gsw_z_from_p(c(10, 50, 125, 250, 600,1000), 4)
-expect_equal(z, 1e2*c(-0.099445834469453, -0.497180897012550, -1.242726219409978,
-                      -2.484700576548589, -5.958253480356214, -9.920919060719987)) 
+expect_equal(z/1e2, c(-0.099445834469453, -0.497180897012550, -1.242726219409978,
+                    -2.484700576548589, -5.958253480356214, -9.920919060719987))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_z_from_p.html}
 }
 \seealso{
-This is (almost) the reverse of \code{\link{gsw_p_from_z}}
+Other things related to depth: \code{\link{gsw_p_from_z}}
 }

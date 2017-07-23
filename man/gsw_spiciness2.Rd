@@ -9,7 +9,7 @@ gsw_spiciness2(SA, CT)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 }
 \value{
 spiciness [ kg/m^3 ]
@@ -18,16 +18,15 @@ spiciness [ kg/m^3 ]
 Calculate seawater spiciness referenced to 2000 dbar.
 }
 \details{
-The present function works with a wrapper to a C function contained
-within the GSW-C system (with sourcecode at
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (with source code at
 \url{https://github.com/TEOS-10/GSW-C}), which
 in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
 which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
-To learn more about these software systems, and about the science behind
-it all, consult \url{http://www.teos-10.org}.
+To learn more about these software systems, their authorships, and the science behind
+it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 spiciness <- gsw_spiciness2(SA, CT)
@@ -38,6 +37,5 @@ expect_equal(spiciness, c(6.874671751873180, 6.884616399155135, 5.15445889238708
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_spiciness2.html}
 }
 \seealso{
-\code{\link{gsw_spiciness0}} and \code{\link{gsw_spiciness1}} for calculations
-at 0 dbar and 1000 dbar.
+Other things related to spiciness: \code{\link{gsw_spiciness1}}
 }

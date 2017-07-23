@@ -48,8 +48,6 @@ extern void   gsw_ct_first_derivatives_wrt_t_exact(double sa, double t,
 		double p, double *ct_sa_wrt_t, double *ct_t_wrt_t,
 		double *ct_p_wrt_t);
 extern double gsw_ct_freezing(double sa, double p, double saturation_fraction);
-extern double gsw_ct_freezing_exact(double sa, double p,
-		double saturation_fraction);
 extern void   gsw_ct_freezing_first_derivatives(double sa, double p,
 		double saturation_fraction, double *ctfreezing_sa,
 		double *ctfreezing_p);
@@ -89,6 +87,7 @@ extern double gsw_enthalpy_sso_0(double p);
 extern double gsw_enthalpy_t_exact(double sa, double t, double p);
 extern void   gsw_entropy_first_derivatives(double sa, double ct,
 		double *eta_sa, double *eta_ct);
+extern double gsw_entropy_from_ct(double sa, double ct);
 extern double gsw_entropy_from_pt(double sa, double pt);
 extern double gsw_entropy_from_t(double sa, double t, double p);
 extern double gsw_entropy_ice(double t, double p);
@@ -265,8 +264,6 @@ extern double gsw_sstar_from_sp(double sp, double p, double lon, double lat);
 extern double gsw_t_deriv_chem_potential_water_t_exact(double sa, double t,
 		double p);
 extern double gsw_t_freezing(double sa, double p, double saturation_fraction);
-extern double gsw_t_freezing_exact(double sa, double p,
-		double saturation_fraction);
 extern void   gsw_t_freezing_first_derivatives_poly(double sa, double p,
 		double saturation_fraction, double *tfreezing_sa,
 		double *tfreezing_p);
@@ -274,7 +271,7 @@ extern void   gsw_t_freezing_first_derivatives(double sa, double p,
 		double saturation_fraction, double *tfreezing_sa,
 		double *tfreezing_p);
 extern double gsw_t_freezing_poly(double sa, double p,
-		double saturation_fraction, int polynomial);
+		double saturation_fraction);
 extern double gsw_t_from_ct(double sa, double ct, double p);
 extern double gsw_t_from_pt0_ice(double pt0_ice, double p);
 extern double gsw_thermobaric(double sa, double ct, double p);
@@ -288,6 +285,7 @@ extern double *gsw_util_linear_interp(int nx, double *x, int ny, double *y,
 extern void   gsw_util_sort_real(double *rarray, int nx, int *iarray);
 extern double gsw_util_xinterp1(double *x, double *y, int n, double x0);
 extern double gsw_z_from_p(double p, double lat);
+extern double gsw_p_from_z(double z, double lat);
 
 #ifdef __cplusplus
 }

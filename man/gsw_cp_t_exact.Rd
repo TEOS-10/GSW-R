@@ -9,9 +9,9 @@ gsw_cp_t_exact(SA, t, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{t}{in-situ temperature (ITS-90) [ deg C ]}
+\item{t}{in-situ temperature (ITS-90) [ degC ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 heat capacity [ J/(kg*K) ]
@@ -19,15 +19,22 @@ heat capacity [ J/(kg*K) ]
 \description{
 Isobaric heat capacity
 }
+\details{
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (with source code at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, their authorships, and the science behind
+it all, please consult \url{http://www.teos-10.org}.
+}
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 t <-  c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 p <-  c(     10,      50,     125,     250,     600,    1000)
 cp_t_exact <- gsw_cp_t_exact(SA, t, p)
-expect_equal(cp_t_exact, 1e3*c(4.002888003958537, 4.000980283927373, 3.995546468894633,
-                               3.985076769021370, 3.973593843482723, 3.960184084786622))
-
+expect_equal(cp_t_exact/1e3, c(4.002888003958537, 4.000980283927373, 3.995546468894633,
+                             3.985076769021370, 3.973593843482723, 3.960184084786622))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_cp_t_exact.html}

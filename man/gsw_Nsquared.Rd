@@ -9,30 +9,41 @@ gsw_Nsquared(SA, CT, p, latitude = 0)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
-\item{latitude}{latitude in decimal degrees [ -90 to 90 ]}
+\item{latitude}{latitude in decimal degrees, positive to the north of the equator. (This
+is called \code{lat} in the TEOS-10 Matlab code.)}
 }
 \value{
 list containing N2 [ 1/s^ ] and mid-point pressure p_mid [ dbar ]
 }
 \description{
-Calculate Brunt Vaisala Frequency squared
+The result is computed based on first-differencing a computed density with
+respect pressure, and this can yield noisy results with CTD data that
+have not been smoothed and decimated. It also yields infinite values,
+for repeated adjacent pressure (e.g. this occurs twice with the \code{ctd}
+dataset provided in the \CRANpkg{oce} package).
+}
+\details{
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (with source code at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, their authorships, and the science behind
+it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 p <- c(      10,      50,     125,     250,     600,    1000)
 latitude <- 4
-r <- gsw_Nsquared(SA, CT, p, latitude)
-N2 <- r$N2
-p_mid <- r$p_mid
-expect_equal(N2, 1e-3*c(0.060843209693499, 0.235723066151305, 0.216599928330380,
-                        0.012941204313372, 0.008434782795209))
-expect_equal(p_mid, c(30, 87.5, 187.5, 425, 800))
+r <- gsw_Nsquared(SA, CT, p, latitude=4)
+expect_equal(r$N2*1e3, c(0.060843209693499, 0.235723066151305, 0.216599928330380,
+                       0.012941204313372, 0.008434782795209))
+expect_equal(r$p_mid, c(30, 87.5, 187.5, 425, 800))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_Nsquared.html}

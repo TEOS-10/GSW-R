@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{argfix}
 \alias{argfix}
-\title{Reshape list elements to match the shape of the first element.}
+\title{Reshape list elements to match that of the first element}
 \usage{
 argfix(list)
 }
@@ -14,7 +14,7 @@ A list with all elements of same shape (length or dimension).
 }
 \description{
 This is mainly used within gsw, to ensure that arguments sent
-to the C functions are of equal length.  This is a convenience, 
+to the C functions are of equal length.  This is a convenience,
 for processing data that often have this condition. For example, a
 CTD profile is likely to have many values for SP, t, and p,
 but just a single value for each of longitude and latitude.

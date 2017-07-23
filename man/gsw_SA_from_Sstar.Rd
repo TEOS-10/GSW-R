@@ -9,11 +9,13 @@ gsw_SA_from_Sstar(Sstar, p, longitude, latitude)
 \arguments{
 \item{Sstar}{Preformed Salinity [ g/kg ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
-\item{longitude}{longitude in decimal degrees [ 0 to 360 or -180 to 180]}
+\item{longitude}{longitude in decimal degrees, positive to the east of Greenwich. (This
+is called \code{long} in the TEOS-10 Matlab code.)}
 
-\item{latitude}{latitude in decimal degrees [ -90 to 90 ]}
+\item{latitude}{latitude in decimal degrees, positive to the north of the equator. (This
+is called \code{lat} in the TEOS-10 Matlab code.)}
 }
 \value{
 Absolute Salinity [ g/kg ]
@@ -26,9 +28,16 @@ longitude, and latitude.
 If Sstar is a matrix and if its dimensions correspond to the
 lengths of longitude and latitude, then the latter are
 converted to analogous matrices with \code{\link{expand.grid}}.
+
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (with source code at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, their authorships, and the science behind
+it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
-library(testthat)
 SP <- c(34.7115, 34.8912, 35.0247, 34.8436, 34.7291, 34.7197)
 p <- c(      10,      50,     125,     250,     600,    1000)
 lat <- c(     4,       4,       4,       4,       4,       4)
@@ -41,5 +50,16 @@ expect_equal(SA, c(34.711724663585905, 34.891561223296009, 35.025594598699882,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_Sstar.html}
 }
 \seealso{
-\code{\link{gsw_Sstar_from_SA}} does the reverse.
+Other things related to salinity: \code{\link{gsw_C_from_SP}},
+  \code{\link{gsw_SA_from_SP_Baltic}},
+  \code{\link{gsw_SA_from_SP}},
+  \code{\link{gsw_SP_from_C}},
+  \code{\link{gsw_SP_from_SA}},
+  \code{\link{gsw_SP_from_SK}},
+  \code{\link{gsw_SP_from_SR}},
+  \code{\link{gsw_SP_from_Sstar}},
+  \code{\link{gsw_SR_from_SP}},
+  \code{\link{gsw_Sstar_from_SA}},
+  \code{\link{gsw_Sstar_from_SP}},
+  \code{\link{gsw_deltaSA_from_SP}}
 }

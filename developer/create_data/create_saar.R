@@ -1,9 +1,5 @@
-## NOTE: this file is for use by developers only. It is not incorporated into
-## the R package, although its output ("../data/saar.rda") is incorporated,
-## by a "cp" command (see last line of this file).
-
 library(ncdf4)
-nc <- nc_open("~/src/GSW-Fortran/test/gsw_data_v3_0.nc")
+nc <- nc_open("~/git/GSW-Fortran/test/gsw_data_v3_0.nc")
 ## Use as.vector() since these will all get handed into C, which does not understand matrices.
 p_ref <- as.vector(ncvar_get(nc, "p_ref"))
 lats_ref <- as.vector(ncvar_get(nc, "lats_ref"))

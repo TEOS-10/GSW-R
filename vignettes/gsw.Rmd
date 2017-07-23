@@ -5,32 +5,35 @@ date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     toc: true
+    number_sections: true
     fig_caption: yes
     fig_width: 5
     fig_height: 5
+    dpi: 72
     dev.args: list(pointsize=11)
 vignette: >
   %\VignetteIndexEntry{gsw}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-<!-- edit vignettes/gsw.Rmd then run with -->
-<!-- devtools::build_vignettes() -->
-<!-- in the console. -->
-
-```{r echo=FALSE}
-# Developer notes (in R because Rmarkdown lacks comments!)
-# 1. Run
-#     devtools::build_vignettes()
-# before doing the build. And note that this fails if using `rmarkdown::render` as the engine,
-# as I was doing on the advise of TravisCI (DK 2016-02-06).
-```
+<!-- There is a problem in running this vignette in the normal way, because ``oce'' is -->
+<!-- used to create the figures, but oce depends on gsw! There is no way to break the circle -->
+<!-- for building on CRAN, but the developer can handle this easily because he has both oce -->
+<!-- and gsw on his machine. The steps are as follows. ->
+<!-- 1. Edit this file-->
+<!-- 2. In a console centred in this directory, do -->
+<!--     knitr::purl("gsw.Rmd") -->
+<!-- to create a new gsw.R file -->
+<!-- 3. Run this gsw.R file to update the figures.-->
+<!-- 4. Return here, open a console, and do-->
+<!--     devtools::build_vignettes() -->
+<!-- to update the vignette. -->
 
 **Abstract.** The `gsw` package provides an R implementation of the Gibbs
 SeaWater toolbox for the calculation of seawater properties (version 3.05).
 This vignette outlines how to use `gsw` alone or as part of the `oce` package.
 
-## Introduction
+# Introduction
 
 In recent years, thermodynamic considerations have led to improved formulae for
 the calculation of seawater properties (IOC, 2010; Millero et al 2010), an
@@ -66,9 +69,9 @@ including expansive white papers and pointers to the growing peer-reviewed
 literature (Wright et al.  2011; McDougall et al. 2012; Graham et al. 2013)
 
 
-## Using gsw independent of oce
+# Using gsw independent of oce
 
-```{r results="hide"}
+```{r echo=FALSE, results="hide"}
 options(keep.source=TRUE, width=60, prompt=' ', continue=' ', oceEOS="unesco")
 ```
 
@@ -96,7 +99,7 @@ GSW will recognize the function and argument names, and are likely to find the
 other functions needed for their work among the roughly sixty functions that
 `gsw` provides.
 
-## Using gsw within oce
+# Using gsw within oce
 
 ![**Figure 1.** TS diagram with UNESCO formulation](TS_unesco.png)
 
@@ -110,7 +113,7 @@ sequence of CTD casts in the North Atlantic.  Individual casts may be selected
 by index, so a TS diagram of the station at index 100 (south of Cape Cod in 4000
 m of water) can be plotted as follows (Figure 1).
 
-```{r eval=FALSE, echo=FALSE}
+```{r  eval=FALSE, echo=FALSE}
 png("TS_unesco.png", width=353, height=353, pointsize=12)
 ```
 
@@ -133,7 +136,7 @@ For comparison, it helps to plot a `gsw` equivalent with the same plot limits (F
 plotTS(ctd, Slim=Slim, Tlim=Tlim, eos="gsw")
 ```
 
-```{r eval=FALSE, echo=FALSE}
+```{r  eval=FALSE, echo=FALSE}
 dev.off()
 png("TS_gsw.png", width=353, height=353, pointsize=12)
 ```
@@ -153,7 +156,8 @@ par(mar=c(3.2, 3, 1, 1/2), mgp=c(2, 0.85, 0))
 ```
 
 ```{r eval=FALSE}
-hist(section[["theta"]] / section[["CT"]], main="")
+f <- (section[["CT"]] - section[["theta"]]) / section[["CT"]]
+hist(f, main="", xlab="(CT-theta)/CT")
 ```
 
 A salinity comparison (Figure 4) is constructed with
@@ -165,7 +169,8 @@ par(mar=c(3.2, 3, 1, 1/2), mgp=c(2, 0.85, 0))
 ```
 
 ```{r eval=FALSE}
-hist(section[["salinity"]] / section[["SA"]], main="")
+f <- (section[["SA"]] - section[["salinity"]]) / section[["SA"]]
+hist(f, main="", xlab="(SA-SP)/SA")
 ```
 
 ![**Figure 3.** Comparison of GSW Conservative Temperature and UNESCO potential temperature for the `section` dataset, spanning the mid-latitude North Atlantic.](temperature_comparison.png)
@@ -173,11 +178,12 @@ hist(section[["salinity"]] / section[["SA"]], main="")
 ![**Figure 4.** Comparison of Absolute Salinity and Practical salinity for the `section` dataset.](salinity_comparison.png)
 
 
-```{r eval=FALSE, echo=FALSE}
+```{r  eval=FALSE, echo=FALSE}
+dev.off()
 png("SSS_2.png", width=588, height=336)
 ```
 
-An examination of spatial patterns is also informative. Figure 5, for example,
+An examination of worldwide spatial patterns is also informative. Figure 5, for example,
 is produced as follows.
 
 ```{r eval=FALSE}
@@ -204,7 +210,7 @@ which would otherwise be controlled by isolated low-saline waters, yielding
 little to see in the wider expanses of the world ocean; a broader context has
 been detailed in the literature (McDougall et al. 2012).
 
-## References
+# References
 
 Graham, F. S. and T. J. McDougall, 2012.  Quantifying the Nonconservative
 Production of Conservative Temperature, Potential Temperature, and Entropy.
@@ -243,4 +249,7 @@ Wright, D. G., R. Pawlowicz, T. J. McDougall, R. Feistel and G. M.  Marion,
    Ocean Science, 7:1-26.
    [http://www.ocean-sci.net/7/1/2011/os-7-1-2011.pdf](http://www.ocean-sci.net/7/1/2011/os-7-1-2011.pdf)
 
+```{r results="hide", echo=FALSE}
+options(prompt='> ', continue='+ ', oceEOS="unesco")
+```
 

@@ -1,5 +1,5 @@
 /*
-**  $Id: gsw_oceanographic_toolbox.c,v 9248219e2c8d 2016/08/29 23:43:19 fdelahoyde $
+**  $Id: gsw_oceanographic_toolbox-head,v c61271a7810d 2016/08/19 20:04:03 fdelahoyde $
 **  Version: 3.05.0-3
 **
 **  This is a translation of the original f90 source code into C
@@ -11,7 +11,7 @@
  Gibbs SeaWater (GSW) Oceanographic Toolbox of TEOS-10 (Fortran)
 ==========================================================================
 
- This is a subset of functions contained in the Gibbs SeaWater (GSW) 
+ This is a subset of functions contained in the Gibbs SeaWater (GSW)
  Oceanographic Toolbox of TEOS-10.
 
  Version 1.0 written by David Jackett
@@ -1034,66 +1034,35 @@ gsw_ct_first_derivatives_wrt_t_exact(double sa, double t, double p,
 	    *ct_p_wrt_t = -(gsw_t0+pt0)*gsw_gibbs(0,1,1,sa,t,p)/gsw_cp0;
 }
 /*
-!--------------------------------------------------------------------------
-! freezing temperatures
-!--------------------------------------------------------------------------
-
 !==========================================================================
-function gsw_ct_freezing(sa,p,saturation_fraction)  
-!==========================================================================
-
-!  Calculates the Conservative Temperature at which seawater freezes.
-!  The error of this fit ranges between -5e-4 K and 6e-4 K when compared
-!  with the Conservative Temperature calculated from the exact in-situ
-!  freezing temperature which is found by a Newton-Raphson iteration of the
-!  equality of the chemical potentials of water in seawater and in ice.
-!  Note that the Conservative temperature freezing temperature can be found
-!  by this exact method using the function gsw_ct_freezing_exact.
-!
-! sa     : Absolute Salinity                                 [g/kg]
-! p      : sea pressure                                      [dbar]
-! saturation_fraction : saturation fraction of dissolved air in
-|                       seawater
-!
-! ct_freezing : Conservative Temperature at freezing point   [deg C]
-!                That is, the freezing temperature expressed in
-!                terms of Conservative Temperature (ITS-90).
-*/
-double
-gsw_ct_freezing(double sa, double p, double saturation_fraction)
-{
-	return (gsw_ct_freezing_poly(sa, p, saturation_fraction));
-}
-/*
-!==========================================================================
-elemental function gsw_ct_freezing_exact (sa, p, saturation_fraction)
+elemental function gsw_ct_freezing (sa, p, saturation_fraction)
 !==========================================================================
 !
-!  Calculates the Conservative Temperature at which seawater freezes.  The 
-!  Conservative Temperature freezing point is calculated from the exact 
+!  Calculates the Conservative Temperature at which seawater freezes.  The
+!  Conservative Temperature freezing point is calculated from the exact
 !  in-situ freezing temperature which is found by a modified Newton-Raphson
-!  iteration (McDougall and Wotherspoon, 2013) of the equality of the 
+!  iteration (McDougall and Wotherspoon, 2013) of the equality of the
 !  chemical potentials of water in seawater and in ice.
 !
-!  An alternative GSW function, gsw_CT_freezing_poly, it is based on a 
-!  computationally-efficient polynomial, and is accurate to within -5e-4 K 
+!  An alternative GSW function, gsw_CT_freezing_poly, it is based on a
+!  computationally-efficient polynomial, and is accurate to within -5e-4 K
 !  and 6e-4 K, when compared with this function.
 !
 !  SA  =  Absolute Salinity                                        [ g/kg ]
 !  p   =  sea pressure                                             [ dbar ]
-!         ( i.e. absolute pressure - 10.1325 dbar ) 
-!  saturation_fraction = the saturation fraction of dissolved air in 
+!         ( i.e. absolute pressure - 10.1325 dbar )
+!  saturation_fraction = the saturation fraction of dissolved air in
 !                        seawater
 !
 !  CT_freezing = Conservative Temperature at freezing of seawater [ deg C ]
 !--------------------------------------------------------------------------
 */
 double
-gsw_ct_freezing_exact(double sa, double p, double saturation_fraction)
+gsw_ct_freezing(double sa, double p, double saturation_fraction)
 {
 	double	t_freezing;
 
-	t_freezing = gsw_t_freezing_exact(sa,p,saturation_fraction);
+	t_freezing = gsw_t_freezing(sa,p,saturation_fraction);
 	return (gsw_ct_from_t(sa,t_freezing,p));
 }
 /*
@@ -1127,7 +1096,7 @@ gsw_ct_freezing_first_derivatives(double sa, double p,
 {
 	double	tf_sa, tf_p, ct_sa_wrt_t, ct_t_wrt_t, ct_p_wrt_t, tf;
 
-	tf = gsw_t_freezing_exact(sa,p,saturation_fraction);
+	tf = gsw_t_freezing(sa,p,saturation_fraction);
 
 	if (ctfreezing_sa != NULL && ctfreezing_p != NULL) {
 
@@ -1354,7 +1323,7 @@ gsw_ct_from_enthalpy_exact(double sa, double h, double p)
 	double	ct, ct_freezing, ct_mean, ct_old, f, h_freezing, h_ct, h_40,
 		ct_40 = 40.0;
 
-	ct_freezing = gsw_ct_freezing_exact(sa,p,0.0);
+	ct_freezing = gsw_ct_freezing(sa,p,0.0);
 
 	h_freezing = gsw_enthalpy_ct_exact(sa,ct_freezing,p);
 	if (h < (h_freezing - gsw_cp0)) {
@@ -2510,6 +2479,27 @@ gsw_entropy_first_derivatives(double sa, double ct, double *eta_sa,
 	    *eta_ct = gsw_cp0/(gsw_t0 + pt);
 }
 /*
+!=========================================================================
+elemental function gsw_entropy_from_ct (sa, ct)
+!=========================================================================
+!
+!  Calculates specific entropy of seawater from Conservative Temperature.
+!
+!  SA  =  Absolute Salinity                                        [ g/kg ]
+!  CT  =  Conservative Temperature (ITS-90)                       [ deg C ]
+!
+!  entropy  =  specific entropy                                   [ deg C ]
+!--------------------------------------------------------------------------
+*/
+double
+gsw_entropy_from_ct(double sa, double ct)
+{
+	double	pt0;
+
+	pt0 = gsw_pt_from_ct(sa, ct);
+	return (-gsw_gibbs(0,1,0,sa,pt0,0));
+}
+/*
 !==========================================================================
 elemental function gsw_entropy_from_pt (sa, pt)
 !==========================================================================
@@ -2821,7 +2811,7 @@ gsw_frazil_properties(double sa_bulk, double h_bulk, double p,
 	! Finding func0
 	!--------------
 	*/
-	ctf = gsw_ct_freezing_exact(sa_bulk,p,saturation_fraction);
+	ctf = gsw_ct_freezing(sa_bulk,p,saturation_fraction);
 	func0 = h_bulk - gsw_enthalpy_ct_exact(sa_bulk,ctf,p);
 	/*
 	!-----------------------------------------------------------------------
@@ -2867,9 +2857,9 @@ gsw_frazil_properties(double sa_bulk, double h_bulk, double p,
 	! fed into the iterative Newton's Method.
 	!-----------------------------------------------------------------------
 	*/
-	ctf = gsw_ct_freezing_exact(sa,p,saturation_fraction);
+	ctf = gsw_ct_freezing(sa,p,saturation_fraction);
 	hf = gsw_enthalpy_ct_exact(sa,ctf,p);
-	tf = gsw_t_freezing_exact(sa,p,saturation_fraction);
+	tf = gsw_t_freezing(sa,p,saturation_fraction);
 	h_ihf = gsw_enthalpy_ice(tf,p);
 	cp_ih = gsw_cp_ice(tf,p);
 	gsw_enthalpy_first_derivatives_ct_exact(sa,ctf,p,
@@ -2892,9 +2882,9 @@ gsw_frazil_properties(double sa_bulk, double h_bulk, double p,
 
 	    if (number_of_iterations > 1) {
 	        /* on the first iteration these values are already known */
-	        ctf = gsw_ct_freezing_exact(sa,p,saturation_fraction);
+	        ctf = gsw_ct_freezing(sa,p,saturation_fraction);
 	        hf = gsw_enthalpy_ct_exact(sa,ctf,p);
-	        tf = gsw_t_freezing_exact(sa,p,saturation_fraction);
+	        tf = gsw_t_freezing(sa,p,saturation_fraction);
 	        h_ihf = gsw_enthalpy_ice(tf,p);
 	    }
 
@@ -2913,9 +2903,9 @@ gsw_frazil_properties(double sa_bulk, double h_bulk, double p,
 	    }
 
 	    sa = sa_bulk/(1.0 - w_ih_mean);
-	    ctf = gsw_ct_freezing_exact(sa,p,saturation_fraction);
+	    ctf = gsw_ct_freezing(sa,p,saturation_fraction);
 	    hf = gsw_enthalpy_ct_exact(sa,ctf,p);
-	    tf = gsw_t_freezing_exact(sa,p,saturation_fraction);
+	    tf = gsw_t_freezing(sa,p,saturation_fraction);
 	    h_ihf = gsw_enthalpy_ice(tf,p);
 	    cp_ih = gsw_cp_ice(tf,p);
 	    gsw_enthalpy_first_derivatives_ct_exact(sa,ctf,p,
@@ -2943,7 +2933,7 @@ gsw_frazil_properties(double sa_bulk, double h_bulk, double p,
 	}
 
 	*sa_final = sa;
-	*ct_final = gsw_ct_freezing_exact(sa,p,saturation_fraction);
+	*ct_final = gsw_ct_freezing(sa,p,saturation_fraction);
 	*w_ih_final = w_ih;
 
 	if (*w_ih_final < 0.0) {
@@ -3088,7 +3078,7 @@ gsw_frazil_properties_potential(double sa_bulk, double h_pot_bulk, double p,
 	!-----------------------------------------------------------------------
 	*/
 	func0 = h_pot_bulk - gsw_cp0
-		*gsw_ct_freezing_exact(sa_bulk,p,saturation_fraction);
+		*gsw_ct_freezing(sa_bulk,p,saturation_fraction);
 	/*
 	!-----------------------------------------------------------------------
 	! Setting the three outputs for data points that have func0 non-negative
@@ -3147,7 +3137,7 @@ gsw_frazil_properties_potential(double sa_bulk, double h_pot_bulk, double p,
 	! Doing a Newton step with a separate polynomial estimate of the mean
 	! derivative dfunc_dw_Ih_mean_poly.
 	!-----------------------------------------------------------------------'	*/
-	ctf = gsw_ct_freezing_exact(sa,p,saturation_fraction);
+	ctf = gsw_ct_freezing(sa,p,saturation_fraction);
 	h_pot_ihf = gsw_pot_enthalpy_ice_freezing(sa,p);
 	func = h_pot_bulk - (1.0 - w_ih)*gsw_cp0*ctf - w_ih*h_pot_ihf;
 
@@ -3170,7 +3160,7 @@ gsw_frazil_properties_potential(double sa_bulk, double h_pot_bulk, double p,
 	! fed into Newton's Method.
 	!-----------------------------------------------------------------------
 	*/
-	ctf = gsw_ct_freezing_exact(sa,p,saturation_fraction);
+	ctf = gsw_ct_freezing(sa,p,saturation_fraction);
 
 	h_pot_ihf = gsw_pot_enthalpy_ice_freezing(sa,p);
 
@@ -3196,7 +3186,7 @@ gsw_frazil_properties_potential(double sa_bulk, double h_pot_bulk, double p,
 
 	    if (iterations > 1) {
 	        /*On the first iteration ctf and h_pot_ihf are both known*/
-	        ctf = gsw_ct_freezing_exact(sa,p,saturation_fraction);
+	        ctf = gsw_ct_freezing(sa,p,saturation_fraction);
 	        h_pot_ihf = gsw_pot_enthalpy_ice_freezing(sa,p);
 	    }
 
@@ -3223,7 +3213,7 @@ gsw_frazil_properties_potential(double sa_bulk, double h_pot_bulk, double p,
 	    *w_ih_final = 0.0;
 	} else {
 	    *sa_final = sa;
-	    *ct_final = gsw_ct_freezing_exact(sa,p,saturation_fraction);
+	    *ct_final = gsw_ct_freezing(sa,p,saturation_fraction);
 	    *w_ih_final = w_ih;
 	}
 }
@@ -3541,8 +3531,8 @@ gsw_frazil_ratios_adiabatic (double sa, double p, double w_ih,
 		ctf, ctf_sa, ctf_p;
 	double	saturation_fraction = 0.0;
 
-	ctf = gsw_ct_freezing_exact(sa,p,saturation_fraction);
-	tf = gsw_t_freezing_exact(sa,p,saturation_fraction);
+	ctf = gsw_ct_freezing(sa,p,saturation_fraction);
+	tf = gsw_t_freezing(sa,p,saturation_fraction);
 	h = gsw_enthalpy_ct_exact(sa,ctf,p);
 	h_ih = gsw_enthalpy_ice(tf,p);
 	cp_ih = gsw_cp_ice(tf,p);
@@ -3571,28 +3561,28 @@ elemental subroutine gsw_frazil_ratios_adiabatic_poly (sa, p, w_ih, &
 !==========================================================================
 !
 !  Calculates the ratios of SA, CT and P changes when frazil ice forms or
-!  melts in response to an adiabatic change in pressure of a mixture of 
-!  seawater and frazil ice crystals.  
+!  melts in response to an adiabatic change in pressure of a mixture of
+!  seawater and frazil ice crystals.
 !
-!  Note that the first output, dSA_dCT_frazil, is dSA/dCT rather than 
-!  dCT/dSA.  This is done so that when SA = 0, the output, dSA/dCT, is zero 
-!  whereas dCT/dSA would then be infinite. 
+!  Note that the first output, dSA_dCT_frazil, is dSA/dCT rather than
+!  dCT/dSA.  This is done so that when SA = 0, the output, dSA/dCT, is zero
+!  whereas dCT/dSA would then be infinite.
 !
 !  Also note that both dSA_dP_frazil and dCT_dP_frazil are the pressure
-!  derivatives with the pressure measured in Pa not dbar.  
+!  derivatives with the pressure measured in Pa not dbar.
 !
 !  SA  =  Absolute Salinity of seawater                            [ g/kg ]
 !  p   =  sea pressure of seawater at which melting occurs         [ dbar ]
-!         ( i.e. absolute pressure - 10.1325d0 dbar ) 
-!  w_Ih  =  mass fraction of ice, that is the mass of ice divided by the 
+!         ( i.e. absolute pressure - 10.1325d0 dbar )
+!  w_Ih  =  mass fraction of ice, that is the mass of ice divided by the
 !           sum of the masses of ice and seawater.  That is, the mass of
-!           ice divided by the mass of the final mixed fluid.  
+!           ice divided by the mass of the final mixed fluid.
 !           w_Ih must be between 0 and 1.                      [ unitless ]
 !
-!  dSA_dCT_frazil =  the ratio of the changes in Absolute Salinity 
-!                    to that of Conservative Temperature       [ g/(kg K) ] 
-!  dSA_dP_frazil  =  the ratio of the changes in Absolute Salinity 
-!                    to that of pressure (in Pa)              [ g/(kg Pa) ] 
+!  dSA_dCT_frazil =  the ratio of the changes in Absolute Salinity
+!                    to that of Conservative Temperature       [ g/(kg K) ]
+!  dSA_dP_frazil  =  the ratio of the changes in Absolute Salinity
+!                    to that of pressure (in Pa)              [ g/(kg Pa) ]
 !  dCT_dP_frazil  =  the ratio of the changes in Conservative Temperature
 !                    to that of pressure (in Pa)                   [ K/Pa ]
 !--------------------------------------------------------------------------
@@ -3606,7 +3596,7 @@ gsw_frazil_ratios_adiabatic_poly(double sa, double p, double w_ih,
 		ctf, ctf_sa, ctf_p;
 	double	saturation_fraction = 0.0;
 
-	tf = gsw_t_freezing_poly(sa,p,saturation_fraction,0);
+	tf = gsw_t_freezing_poly(sa,p,saturation_fraction);
 	ctf = gsw_ct_freezing_poly(sa,p,saturation_fraction);
 	h = gsw_enthalpy(sa,ctf,p);
 	h_ih = gsw_enthalpy_ice(tf,p);
@@ -3640,21 +3630,21 @@ pure function gsw_geo_strf_dyn_height (sa, ct, p, p_ref)
 !  p_ref.
 !
 !  Hence, geo_strf_dyn_height is the dynamic height anomaly with respect
-!  to a given reference pressure.  This is the geostrophic streamfunction 
-!  for the difference between the horizontal velocity at the pressure 
-!  concerned, p, and the horizontal velocity at p_ref.  Dynamic height 
-!  anomaly is the geostrophic streamfunction in an isobaric surface.  The 
-!  reference values used for the specific volume anomaly are 
-!  SSO = 35.16504 g/kg and CT = 0 deg C.  This function calculates 
-!  specific volume anomaly using the computationally efficient 
-!  expression for specific volume of Roquet et al. (2015). 
+!  to a given reference pressure.  This is the geostrophic streamfunction
+!  for the difference between the horizontal velocity at the pressure
+!  concerned, p, and the horizontal velocity at p_ref.  Dynamic height
+!  anomaly is the geostrophic streamfunction in an isobaric surface.  The
+!  reference values used for the specific volume anomaly are
+!  SSO = 35.16504 g/kg and CT = 0 deg C.  This function calculates
+!  specific volume anomaly using the computationally efficient
+!  expression for specific volume of Roquet et al. (2015).
 !
-!  This function evaluates the pressure integral of specific volume using 
-!  SA and CT interpolated with respect to pressure using the method of 
-!  Reiniger and Ross (1968).  It uses a weighted mean of (i) values 
-!  obtained from linear interpolation of the two nearest data points, and 
-!  (ii) a linear extrapolation of the pairs of data above and below.  This 
-!  "curve fitting" method resembles the use of cubic splines.  
+!  This function evaluates the pressure integral of specific volume using
+!  SA and CT interpolated with respect to pressure using the method of
+!  Reiniger and Ross (1968).  It uses a weighted mean of (i) values
+!  obtained from linear interpolation of the two nearest data points, and
+!  (ii) a linear extrapolation of the pairs of data above and below.  This
+!  "curve fitting" method resembles the use of cubic splines.
 !
 !  SA    =  Absolute Salinity                                      [ g/kg ]
 !  CT    =  Conservative Temperature (ITS-90)                     [ deg C ]
@@ -3664,8 +3654,8 @@ pure function gsw_geo_strf_dyn_height (sa, ct, p, p_ref)
 !           ( i.e. reference absolute pressure - 10.1325 dbar )
 !
 !  geo_strf_dyn_height  =  dynamic height anomaly               [ m^2/s^2 ]
-!   Note. If p_ref exceeds the pressure of the deepest bottle on a 
-!     vertical profile, the dynamic height anomaly for each bottle 
+!   Note. If p_ref exceeds the pressure of the deepest bottle on a
+!     vertical profile, the dynamic height anomaly for each bottle
 !     on the whole vertical profile is returned as NaN.
 !--------------------------------------------------------------------------
 */
@@ -3681,7 +3671,7 @@ gsw_geo_strf_dyn_height(double *sa, double *ct, double *p, double p_ref,
 		p_cnt, top_pad, i, nz, ibottle, ipref, np_max, np, ibpr=0,
 		*iidata;
 	double	dp_min, dp_max, p_min, p_max, max_dp_i,
-		*b, *b_av, *dp, *dp_i, *sa_i=NULL, *ct_i, *p_i,
+		*b, *b_av, *dp, *dp_i, *sa_i=NULL, *ct_i, *p_i=NULL,
 		*geo_strf_dyn_height0;
 
 /*
@@ -3769,8 +3759,10 @@ gsw_geo_strf_dyn_height(double *sa, double *ct, double *p, double p_ref,
 	    ! Vertical resolution is already good (no larger than max_dp_i), and
 	    ! there is a "bottle" at exactly p_ref.
 	    */
-		sa_i = malloc(3*(nz+1)*sizeof (double));
-		ct_i = sa_i+nz+1; p_i = ct_i+nz+1;
+		sa_i = malloc(2*(nz+1)*sizeof (double));
+		ct_i = sa_i+nz+1;
+		p_i = malloc((nz+1)*sizeof (double));;
+
 	        if (p_min > 0.0) {
 		/*
 	        ! resolution is fine and there is a bottle at p_ref, but
@@ -3808,6 +3800,7 @@ gsw_geo_strf_dyn_height(double *sa, double *ct, double *p, double p_ref,
 	    */
 		np_max = 2*rint(p[nz-1]/max_dp_i+0.5);
 		p_i = malloc(np_max*sizeof (double));
+		/* sa_i is allocated below, when its size is known */
 
 	        if (p_min > 0.0) {
 		/*
@@ -3819,7 +3812,8 @@ gsw_geo_strf_dyn_height(double *sa, double *ct, double *p, double p_ref,
 		    */
 			p_i[0] = 0.0;
 			p_sequence(p_i[0],p_ref,max_dp_i, p_i+1,&np);
-			ibpr = p_cnt = np; p_cnt++;
+			ibpr = p_cnt = np;
+			p_cnt++;
 			p_sequence(p_ref,p_min,max_dp_i, p_i+p_cnt,&np);
 	                p_cnt += np;
 	                top_pad = p_cnt;
@@ -3852,7 +3846,8 @@ gsw_geo_strf_dyn_height(double *sa, double *ct, double *p, double p_ref,
 	            ! need to include p_ref as an interpolated pressure.
 		    */
 	                p_sequence(p[ibottle],p_ref,max_dp_i, p_i+p_cnt,&np);
-	                p_cnt += np; ibpr = p_cnt-1;
+	                p_cnt += np;
+			ibpr = p_cnt-1;
 	                p_sequence(p_ref,p[ibottle+1],max_dp_i,p_i+p_cnt,&np);
 	                p_cnt += np;
 	            } else {
@@ -3872,9 +3867,10 @@ gsw_geo_strf_dyn_height(double *sa, double *ct, double *p, double p_ref,
 		sa_i = malloc(2*p_cnt*sizeof (double));
 		ct_i = sa_i+p_cnt;
 
-		if (top_pad > 1)
+		if (top_pad > 1) {
 	            gsw_linear_interp_sa_ct(sa,ct,p,nz,
 			p_i,top_pad-1,sa_i,ct_i);
+		}
 	        gsw_rr68_interp_sa_ct(sa,ct,p,nz,p_i+top_pad-1,p_cnt-top_pad+1,
 		                      sa_i+top_pad-1,ct_i+top_pad-1);
 	    }
@@ -3903,9 +3899,13 @@ gsw_geo_strf_dyn_height(double *sa, double *ct, double *p, double p_ref,
 		dyn_height[i] = (geo_strf_dyn_height0[iidata[i]]
 				- geo_strf_dyn_height0[ibpr])*db2pa;
 
-	    free(b); free(iidata);
+	    free(b);
+	    free(iidata);
 	    if (sa_i != NULL)
 		free(sa_i);
+	    if (p_i != NULL)
+		free(p_i);
+
 	}
 	free(dp);
 	return (dyn_height);
@@ -3968,7 +3968,7 @@ gsw_geo_strf_dyn_height_pc(double *sa, double *ct, double *delta_p, int n_levels
 {
 	int	i, np;
 	double	*delta_h, delta_h_half, dyn_height_deep=0.0,
-		prv_dyn_height_deep, *p_deep, *p_shallow;
+		*p_deep, *p_shallow;
 
 	for (i=0; i<n_levels; i++)
 	    if (delta_p[i] < 0.0)
@@ -3985,8 +3985,7 @@ gsw_geo_strf_dyn_height_pc(double *sa, double *ct, double *delta_p, int n_levels
 	}
 
 	for (i=0; i<np; i++) {
-	    prv_dyn_height_deep = (i==0)? -delta_h[0]: dyn_height_deep;
-	    dyn_height_deep = prv_dyn_height_deep - delta_h[i];
+	    dyn_height_deep = dyn_height_deep - delta_h[i];
 		/* This is Phi minus Phi_0 of Eqn. (3.32.2) of IOC et al. (2010).*/
 	    p_mid[i] = 0.5*(p_shallow[i]  + p_deep[i]);
 	    delta_h_half = gsw_enthalpy_diff(sa[i],ct[i],p_mid[i],p_deep[i]);
@@ -4851,7 +4850,7 @@ gsw_ice_fraction_to_freeze_seawater(double sa, double ct, double p, double t_ih,
 		saf, saf_mean, saf_old, tf, h_hat_sa, h_hat_ct, ctf_sa;
 	double	sa0 = 0.0, saturation_fraction = 0.0;
 
-	ctf = gsw_ct_freezing_exact(sa,p,saturation_fraction);
+	ctf = gsw_ct_freezing(sa,p,saturation_fraction);
 	if (ct < ctf) {
 	    /*The seawater ct input is below the freezing temp*/
 	    *sa_freeze = GSW_INVALID_VALUE;
@@ -4860,7 +4859,7 @@ gsw_ice_fraction_to_freeze_seawater(double sa, double ct, double p, double t_ih,
 	    return;
 	}
 
-	tf = gsw_t_freezing_exact(sa0,p,saturation_fraction);
+	tf = gsw_t_freezing(sa0,p,saturation_fraction);
 	if (t_ih > tf) {
 	    /*The input, t_Ih, exceeds the freezing temperature at sa = 0*/
 	    *sa_freeze = GSW_INVALID_VALUE;
@@ -4872,15 +4871,15 @@ gsw_ice_fraction_to_freeze_seawater(double sa, double ct, double p, double t_ih,
 	h = gsw_enthalpy_ct_exact(sa,ct,p);
 	h_ih = gsw_enthalpy_ice(t_ih,p);
 
-	ctf_zero = gsw_ct_freezing_exact(sa0,p,saturation_fraction);
+	ctf_zero = gsw_ct_freezing(sa0,p,saturation_fraction);
 	func_zero = sa*(gsw_enthalpy_ct_exact(sa0,ctf_zero,p) - h_ih);
 
-	ctf_plus1 = gsw_ct_freezing_exact(sa+1.0,p,saturation_fraction);
+	ctf_plus1 = gsw_ct_freezing(sa+1.0,p,saturation_fraction);
 	func_plus1 = sa*(gsw_enthalpy_ct_exact(sa+1.0,ctf_plus1,p) - h)
 			- (h - h_ih);
 
 	saf = -(sa+1.0)*func_zero/(func_plus1 - func_zero);   /*initial guess*/
-	ctf = gsw_ct_freezing_exact(saf,p,saturation_fraction);
+	ctf = gsw_ct_freezing(saf,p,saturation_fraction);
 	gsw_enthalpy_first_derivatives_ct_exact(saf,ctf,p,&h_hat_sa,&h_hat_ct);
 	gsw_ct_freezing_first_derivatives(saf,p,1.0,&ctf_sa,NULL);
 
@@ -4893,14 +4892,14 @@ gsw_ice_fraction_to_freeze_seawater(double sa, double ct, double p, double t_ih,
 	           - (saf_old - sa)*(h - h_ih);
 	    saf = saf_old - func/dfunc_dsaf;
 	    saf_mean = 0.5*(saf + saf_old);
-	    ctf_mean = gsw_ct_freezing_exact(saf_mean,p,saturation_fraction);
+	    ctf_mean = gsw_ct_freezing(saf_mean,p,saturation_fraction);
 	    gsw_enthalpy_first_derivatives_ct_exact(saf_mean,ctf_mean,p,
 			&h_hat_sa, &h_hat_ct);
 	    gsw_ct_freezing_first_derivatives(saf_mean,p,saturation_fraction,
 	                &ctf_sa, NULL);
 	    dfunc_dsaf = sa*(h_hat_sa + h_hat_ct*ctf_sa) - (h - h_ih);
 	    saf = saf_old - func/dfunc_dsaf;
-	    ctf = gsw_ct_freezing_exact(saf,p,saturation_fraction);
+	    ctf = gsw_ct_freezing(saf,p,saturation_fraction);
 	}
 	/*
 	! After these 2 iterations of this modified Newton-Raphson method, the
@@ -5230,7 +5229,7 @@ double
 gsw_latentheat_melting(double sa, double p)
 {
 	GSW_TEOS10_CONSTANTS;
-	double	tf = gsw_t_freezing_exact(sa,p,0.0);
+	double	tf = gsw_t_freezing(sa,p,0.0);
 
 	return (1000.0*(gsw_chem_potential_water_t_exact(sa,tf,p)
            - (gsw_t0 + tf)*gsw_t_deriv_chem_potential_water_t_exact(sa,tf,p))
@@ -5360,8 +5359,8 @@ gsw_melting_ice_equilibrium_sa_ct_ratio(double sa, double p)
 	double	ctf, h, h_ih, t_seaice, h_hat_sa, h_hat_ct;
 	double	saturation_fraction = 0.0;
 
-	ctf = gsw_ct_freezing_exact(sa,p,saturation_fraction);
-	t_seaice = gsw_t_freezing_exact(sa,p,saturation_fraction);
+	ctf = gsw_ct_freezing(sa,p,saturation_fraction);
+	t_seaice = gsw_t_freezing(sa,p,saturation_fraction);
 
 	h = gsw_enthalpy_ct_exact(sa,ctf,p);
 	h_ih = gsw_enthalpy_ice(t_seaice,p);
@@ -5377,26 +5376,26 @@ elemental function gsw_melting_ice_equilibrium_sa_ct_ratio_poly (sa, p)
 !
 !  Calculates the ratio of SA to CT changes when ice melts into seawater
 !  with both the seawater and the seaice temperatures being almost equal to
-!  the equilibrium freezing temperature.  It is assumed that a small mass 
-!  of ice melts into an infinite mass of seawater.  If indeed the 
+!  the equilibrium freezing temperature.  It is assumed that a small mass
+!  of ice melts into an infinite mass of seawater.  If indeed the
 !  temperature of the seawater and the ice were both equal to the freezing
-!  temperature, then no melting or freezing would occur an imbalance 
+!  temperature, then no melting or freezing would occur an imbalance
 !  between these three temperatures is needed for freezing or melting to
-!  occur (the three temperatures being (1) the seawater temperature, 
-!  (2) the ice temperature, and (3) the freezing temperature.  
+!  occur (the three temperatures being (1) the seawater temperature,
+!  (2) the ice temperature, and (3) the freezing temperature.
 !
-!  The output, melting_ice_equilibrium_SA_CT_ratio, is dSA/dCT rather than 
+!  The output, melting_ice_equilibrium_SA_CT_ratio, is dSA/dCT rather than
 !  dCT/dSA.  This is done so that when SA = 0, the output, dSA/dCT is zero
-!  whereas dCT/dSA would be infinite. 
+!  whereas dCT/dSA would be infinite.
 !
 !  SA  =  Absolute Salinity of seawater                            [ g/kg ]
 !  p   =  sea pressure at which the melting occurs                 [ dbar ]
-!         ( i.e. absolute pressure - 10.1325d0 dbar ) 
+!         ( i.e. absolute pressure - 10.1325d0 dbar )
 !
-!  melting_ice_equilibrium_SA_CT_ratio = the ratio dSA/dCT of SA to CT  
-!                                changes when ice melts into seawater, with   
-!                                the seawater and seaice being close to the  
-!                                freezing temperature.         [ g/(kg K) ] 
+!  melting_ice_equilibrium_SA_CT_ratio = the ratio dSA/dCT of SA to CT
+!                                changes when ice melts into seawater, with
+!                                the seawater and seaice being close to the
+!                                freezing temperature.         [ g/(kg K) ]
 !--------------------------------------------------------------------------
 */
 double
@@ -5406,7 +5405,7 @@ gsw_melting_ice_equilibrium_sa_ct_ratio_poly(double sa, double p)
 	double	saturation_fraction = 0.0;
 
 	ctf = gsw_ct_freezing_poly(sa,p,saturation_fraction);
-	t_seaice = gsw_t_freezing_poly(sa,p,saturation_fraction,0);
+	t_seaice = gsw_t_freezing_poly(sa,p,saturation_fraction);
 
 	h = gsw_enthalpy(sa,ctf,p);
 	h_ih = gsw_enthalpy_ice(t_seaice,p);
@@ -5465,7 +5464,7 @@ gsw_melting_ice_into_seawater(double sa, double ct, double p, double w_ih,
 	double	ctf, h_bulk, sa_bulk, tf_ih;
 	double	saturation_fraction = 0.0;
 
-	ctf = gsw_ct_freezing_exact(sa,p,saturation_fraction);
+	ctf = gsw_ct_freezing(sa,p,saturation_fraction);
 	if (ct < ctf) {
 	    /*The seawater ct input is below the freezing temp*/
 	    *sa_final = GSW_INVALID_VALUE;
@@ -5474,7 +5473,7 @@ gsw_melting_ice_into_seawater(double sa, double ct, double p, double w_ih,
 	    return;
 	}
 
-	tf_ih = gsw_t_freezing_exact(0.0,p,saturation_fraction) - 1e-6;
+	tf_ih = gsw_t_freezing(0.0,p,saturation_fraction) - 1e-6;
 	if (t_ih > tf_ih) {
 	    /*
 	    ! t_ih input exceeds the freezing temp.
@@ -5556,21 +5555,21 @@ elemental function gsw_melting_ice_sa_ct_ratio_poly (sa, ct, p, t_ih)
 !  Calculates the ratio of SA to CT changes when ice melts into seawater.
 !  It is assumed that a small mass of ice melts into an infinite mass of
 !  seawater.  Because of the infinite mass of seawater, the ice will always
-!  melt.   
+!  melt.
 !
-!  The output, melting_seaice_SA_CT_ratio, is dSA/dCT rather than dCT/dSA. 
-!  This is done so that when SA = 0, the output, dSA/dCT is zero whereas 
-!  dCT/dSA would be infinite. 
+!  The output, melting_seaice_SA_CT_ratio, is dSA/dCT rather than dCT/dSA.
+!  This is done so that when SA = 0, the output, dSA/dCT is zero whereas
+!  dCT/dSA would be infinite.
 !
 !  SA   =  Absolute Salinity of seawater                           [ g/kg ]
 !  CT   =  Conservative Temperature of seawater (ITS-90)          [ deg C ]
 !  p    =  sea pressure at which the melting occurs                [ dbar ]
-!         ( i.e. absolute pressure - 10.1325d0 dbar ) 
+!         ( i.e. absolute pressure - 10.1325d0 dbar )
 !  t_Ih =  the in-situ temperature of the ice (ITS-90)            [ deg C ]
 !
 !  melting_ice_SA_CT_ratio = the ratio of SA to CT changes when ice melts
-!                            into a large mass of seawater 
-!                                                          [ g kg^-1 K^-1 ] 
+!                            into a large mass of seawater
+!                                                          [ g kg^-1 K^-1 ]
 !--------------------------------------------------------------------------
 */
 double
@@ -5585,7 +5584,7 @@ gsw_melting_ice_sa_ct_ratio_poly(double sa, double ct, double p, double t_ih)
 	    return (GSW_INVALID_VALUE);
 	}
 
-	tf = gsw_t_freezing_poly(0.0,p,saturation_fraction,0);
+	tf = gsw_t_freezing_poly(0.0,p,saturation_fraction);
 	if (t_ih > tf) {
 	    /*t_ih exceeds the freezing temperature at sa = 0*/
 	    return (GSW_INVALID_VALUE);
@@ -5639,8 +5638,8 @@ gsw_melting_seaice_equilibrium_sa_ct_ratio(double sa, double p)
 	double	ctf, h, h_ih, t_seaice, h_hat_sa, h_hat_ct;
 	double	saturation_fraction = 0.0;
 
-	ctf = gsw_ct_freezing_exact(sa,p,saturation_fraction);
-	t_seaice = gsw_t_freezing_exact(sa,p,saturation_fraction);
+	ctf = gsw_ct_freezing(sa,p,saturation_fraction);
+	t_seaice = gsw_t_freezing(sa,p,saturation_fraction);
 
 	h = gsw_enthalpy_ct_exact(sa,ctf,p);
 	h_ih = gsw_enthalpy_ice(t_seaice,p);
@@ -5653,34 +5652,34 @@ gsw_melting_seaice_equilibrium_sa_ct_ratio(double sa, double p)
 elemental function gsw_melting_seaice_equilibrium_sa_ct_ratio_poly (sa, p)
 !==========================================================================
 !
-!  Calculates the ratio of SA to CT changes when sea ice melts into 
-!  seawater with both the seawater and the sea ice temperatures being  
-!  almost equal to the equilibrium freezing temperature.  It is assumed  
-!  that a small mass of seaice melts into an infinite mass of seawater.  If 
-!  indeed the temperature of the seawater and the sea ice were both equal  
-!  to the freezing temperature, then no melting or freezing would occur; an  
-!  imbalance between these three temperatures is needed for freezing or 
-!  melting to occur (the three temperatures being (1) the seawater 
-!  temperature, (2) the sea ice temperature, and (3) the freezing 
-!  temperature.  
+!  Calculates the ratio of SA to CT changes when sea ice melts into
+!  seawater with both the seawater and the sea ice temperatures being
+!  almost equal to the equilibrium freezing temperature.  It is assumed
+!  that a small mass of seaice melts into an infinite mass of seawater.  If
+!  indeed the temperature of the seawater and the sea ice were both equal
+!  to the freezing temperature, then no melting or freezing would occur; an
+!  imbalance between these three temperatures is needed for freezing or
+!  melting to occur (the three temperatures being (1) the seawater
+!  temperature, (2) the sea ice temperature, and (3) the freezing
+!  temperature.
 !
-!  Note that the output of this function, dSA/dCT is independent of the 
-!  sea ice salinity, SA_seaice.  That is, the output applies equally to  
-!  pure ice Ih and to sea ice with seaice salinity, SA_seaice.  This result 
-!  is proven in the manuscript, McDougall et al. (2013).  
+!  Note that the output of this function, dSA/dCT is independent of the
+!  sea ice salinity, SA_seaice.  That is, the output applies equally to
+!  pure ice Ih and to sea ice with seaice salinity, SA_seaice.  This result
+!  is proven in the manuscript, McDougall et al. (2013).
 !
-!  The output, melting_seaice_equilibrium_SA_CT_ratio, is dSA/dCT rather  
-!  than dCT/dSA.  This is done so that when SA = 0, the output, dSA/dCT is 
-!  zero whereas dCT/dSA would be infinite. 
+!  The output, melting_seaice_equilibrium_SA_CT_ratio, is dSA/dCT rather
+!  than dCT/dSA.  This is done so that when SA = 0, the output, dSA/dCT is
+!  zero whereas dCT/dSA would be infinite.
 !
 !  SA  =  Absolute Salinity of seawater                            [ g/kg ]
 !  p   =  sea pressure at which the melting occurs                 [ dbar ]
-!         ( i.e. absolute pressure - 10.1325 dbar ) 
+!         ( i.e. absolute pressure - 10.1325 dbar )
 !
-!  melting_seaice_equilibrium_SA_CT_ratio = the ratio dSA/dCT of SA to CT  
-!                            changes when sea ice melts into seawater, with   
-!                            the seawater and sea ice being close to the  
-!                            freezing temperature.             [ g/(kg K) ] 
+!  melting_seaice_equilibrium_SA_CT_ratio = the ratio dSA/dCT of SA to CT
+!                            changes when sea ice melts into seawater, with
+!                            the seawater and sea ice being close to the
+!                            freezing temperature.             [ g/(kg K) ]
 !--------------------------------------------------------------------------
 */
 double
@@ -5690,7 +5689,7 @@ gsw_melting_seaice_equilibrium_sa_ct_ratio_poly(double sa, double p)
 	double	saturation_fraction = 0.0;
 
 	ctf = gsw_ct_freezing_poly(sa,p,saturation_fraction);
-	t_seaice = gsw_t_freezing_poly(sa,p,saturation_fraction,0);
+	t_seaice = gsw_t_freezing_poly(sa,p,saturation_fraction);
 
 	h = gsw_enthalpy(sa,ctf,p);
 	h_ih = gsw_enthalpy_ice(t_seaice,p);
@@ -5755,7 +5754,7 @@ gsw_melting_seaice_into_seawater(double sa, double ct, double p,
 	double	ctf, h, h_brine, h_final, h_ih, sa_brine, tf_sa_seaice;
 	double	saturation_fraction = 0.0;
 
-	ctf = gsw_ct_freezing_exact(sa,p,saturation_fraction);
+	ctf = gsw_ct_freezing(sa,p,saturation_fraction);
 	if (ct < ctf) {
 	    /*The seawater ct input is below the freezing temp*/
 	    *sa_final = GSW_INVALID_VALUE;
@@ -5763,7 +5762,7 @@ gsw_melting_seaice_into_seawater(double sa, double ct, double p,
 	    return;
 	}
 
-	tf_sa_seaice = gsw_t_freezing_exact(sa_seaice,p,saturation_fraction)
+	tf_sa_seaice = gsw_t_freezing(sa_seaice,p,saturation_fraction)
 			- 1e-6;
 	if (t_seaice > tf_sa_seaice) {
 	/*
@@ -5792,7 +5791,7 @@ gsw_melting_seaice_into_seawater(double sa, double ct, double p,
 
 	*sa_final = sa - w_seaice*(sa - sa_seaice);
 	/*
-	!ctf = gsw_ct_freezing_exact(sa_final,p,saturation_fraction)
+	!ctf = gsw_ct_freezing(sa_final,p,saturation_fraction)
 	!
 	!if (h_final .lt. gsw_enthalpy_ct_exact(sa_final,ctf,p)) then
 	!    ! Melting this much seaice is not possible as it would result in
@@ -5901,34 +5900,34 @@ elemental function gsw_melting_seaice_sa_ct_ratio_poly (sa, ct, p, &
 !
 ! Calculates the ratio of SA to CT changes when sea ice melts into seawater.
 ! It is assumed that a small mass of sea ice melts into an infinite mass of
-! seawater.  Because of the infinite mass of seawater, the sea ice will 
-! always melt.   
+! seawater.  Because of the infinite mass of seawater, the sea ice will
+! always melt.
 !
 ! Ice formed at the sea surface (sea ice) typically contains between 2 g/kg
-! and 12 g/kg of salt (defined as the mass of salt divided by the mass of 
-! ice Ih plus brine) and this programme returns NaN's if the input 
-! SA_seaice is greater than 15 g/kg.  If the SA_seaice input is not zero, 
-! usually this would imply that the pressure p should be zero, as sea ice 
-! only occurs near the sea surface.  The code does not impose that p = 0 if 
-! SA_seaice is non-zero.  Rather, this is left to the user.  
+! and 12 g/kg of salt (defined as the mass of salt divided by the mass of
+! ice Ih plus brine) and this programme returns NaN's if the input
+! SA_seaice is greater than 15 g/kg.  If the SA_seaice input is not zero,
+! usually this would imply that the pressure p should be zero, as sea ice
+! only occurs near the sea surface.  The code does not impose that p = 0 if
+! SA_seaice is non-zero.  Rather, this is left to the user.
 !
-! The Absolute Salinity, SA_brine, of the brine trapped in little pockets 
+! The Absolute Salinity, SA_brine, of the brine trapped in little pockets
 ! in the sea ice, is in thermodynamic equilibrium with the ice Ih that
-! surrounds these pockets.  As the seaice temperature, t_seaice, may be 
+! surrounds these pockets.  As the seaice temperature, t_seaice, may be
 ! less than the freezing temperature, SA_brine is usually greater than the
-! Absolute Salinity of the seawater at the time and place when and where 
-! the sea ice was formed.  So usually SA_brine will be larger than SA.  
+! Absolute Salinity of the seawater at the time and place when and where
+! the sea ice was formed.  So usually SA_brine will be larger than SA.
 !
-! The output, melting_seaice_SA_CT_ratio, is dSA/dCT rather than dCT/dSA. 
-! This is done so that when (SA - seaice_SA) = 0, the output, dSA/dCT is 
-! zero whereas dCT/dSA would be infinite. 
+! The output, melting_seaice_SA_CT_ratio, is dSA/dCT rather than dCT/dSA.
+! This is done so that when (SA - seaice_SA) = 0, the output, dSA/dCT is
+! zero whereas dCT/dSA would be infinite.
 !
 !  SA  =  Absolute Salinity of seawater                            [ g/kg ]
 !  CT  =  Conservative Temperature of seawater (ITS-90)           [ deg C ]
 !  p   =  sea pressure at which the melting occurs                 [ dbar ]
-!         ( i.e. absolute pressure - 10.1325 dbar ) 
-!  SA_seaice  =  Absolute Salinity of sea ice, that is, the mass fraction 
-!                of salt in sea ice expressed in g of salt per kg of 
+!         ( i.e. absolute pressure - 10.1325 dbar )
+!  SA_seaice  =  Absolute Salinity of sea ice, that is, the mass fraction
+!                of salt in sea ice expressed in g of salt per kg of
 !                sea ice                                           [ g/kg ]
 !  t_seaice = the in-situ temperature of the sea ice (ITS-90)     [ deg C ]
 !
@@ -5953,7 +5952,7 @@ gsw_melting_seaice_sa_ct_ratio_poly(double sa, double ct, double p,
 	    return (GSW_INVALID_VALUE);
 	}
 
-	tf_sa_seaice = gsw_t_freezing_poly(sa_seaice,p,saturation_fraction,0)
+	tf_sa_seaice = gsw_t_freezing_poly(sa_seaice,p,saturation_fraction)
 			- 1e-6;
 	if (t_seaice > tf_sa_seaice) {   /*t_seaice exceeds the freezing sa*/
 	    return (GSW_INVALID_VALUE);
@@ -6038,6 +6037,47 @@ gsw_nsquared(double *sa, double *ct, double *p, double *lat, int nz,
 			  (beta_mid*dsa - alpha_mid*dct);
 	    p_grav	= n_grav;
 	}
+}
+/*
+!==========================================================================
+function gsw_p_from_z(z,lat)
+!==========================================================================
+
+! Calculates the pressure p from height z
+!
+! z      : height                                          [m]
+! lat    : latitude                                        [deg]
+!
+! gsw_p_from_z : pressure                                  [dbar]
+*/
+double
+gsw_p_from_z(double z, double lat)
+{
+    GSW_TEOS10_CONSTANTS;
+    double sinlat, sin2, gs, c1, p, df_dp, f, p_old, p_mid;
+
+    if (z > 5) return GSW_INVALID_VALUE;
+
+    sinlat = sin(lat*deg2rad);
+    sin2 = sinlat*sinlat;
+    gs = 9.780327*(1.0 + (5.2792e-3 + (2.32e-5*sin2))*sin2);
+
+    /* get the first estimate of p from Saunders (1981) */
+    c1 =  5.25e-3*sin2 + 5.92e-3;
+    p  = -2.0*z/((1-c1) + sqrt((1-c1)*(1-c1) + 8.84e-6*z)) ;
+    /* end of the first estimate from Saunders (1981) */
+
+    df_dp = db2pa*gsw_specvol_sso_0(p); /* initial value of the derivative of f */
+
+    f = gsw_enthalpy_sso_0(p) + gs*(z - 0.5*gamma*(z*z));
+             /*   - (geo_strf_dyn_height + sea_surface_geopotental); */
+    p_old = p;
+    p = p_old - f/df_dp;
+    p_mid = 0.5*(p + p_old);
+    df_dp = db2pa*gsw_specvol_sso_0(p_mid);
+    p = p_old - f/df_dp;
+
+    return p;
 }
 /*
 !==========================================================================
@@ -6143,7 +6183,7 @@ gsw_pot_enthalpy_ice_freezing(double sa, double p)
 {
 	double	pt0_ice, t_freezing;
 
-	t_freezing = gsw_t_freezing_exact(sa,p,0.0) ;
+	t_freezing = gsw_t_freezing(sa,p,0.0) ;
 
 	pt0_ice = gsw_pt0_from_t_ice(t_freezing,p);
 
@@ -6180,7 +6220,7 @@ gsw_pot_enthalpy_ice_freezing_first_derivatives(double sa, double p,
 	double	cp_ihf, pt_icef, ratio_temp, tf, tf_p, tf_sa;
 	double	saturation_fraction = 0.0;
 
-	tf = gsw_t_freezing_exact(sa,p,saturation_fraction);
+	tf = gsw_t_freezing(sa,p,saturation_fraction);
 	pt_icef = gsw_pt0_from_t_ice(tf,p);
 	ratio_temp = (gsw_t0 + pt_icef)/(gsw_t0 + tf);
 
@@ -6424,7 +6464,7 @@ gsw_pressure_freezing_ct(double sa, double ct, double saturation_fraction)
 	! Find CT > CT_freezing_p0.  If this is the case, the input CT value
 	! represent seawater that will not be frozen at any positive p.
 	*/
-	ct_freezing_p0 = gsw_ct_freezing_exact(sa,0.0,saturation_fraction);
+	ct_freezing_p0 = gsw_ct_freezing(sa,0.0,saturation_fraction);
 	if (ct > ct_freezing_p0) {
 	    return (GSW_INVALID_VALUE);
 	}
@@ -6432,7 +6472,7 @@ gsw_pressure_freezing_ct(double sa, double ct, double saturation_fraction)
 	! Find CT < CT_freezing_p10000.  If this is the case, the input CT value
 	! represent seawater that is frozen even at p = 10,000 dbar.
 	*/
-	ct_freezing_p10000 = gsw_ct_freezing_exact(sa,1e4,saturation_fraction);
+	ct_freezing_p10000 = gsw_ct_freezing(sa,1e4,saturation_fraction);
 	if (ct < ct_freezing_p10000) {
 	    return (GSW_INVALID_VALUE);
 	}
@@ -6452,7 +6492,7 @@ gsw_pressure_freezing_ct(double sa, double ct, double saturation_fraction)
 	    */
 	for (i_iter = 1; i_iter <= number_of_iterations; i_iter++) {
 	    pf_old = pf;
-	    f = gsw_ct_freezing_exact(sa,pf_old,saturation_fraction) - ct;
+	    f = gsw_ct_freezing(sa,pf_old,saturation_fraction) - ct;
 	    pf = pf_old - f/dctf_dp;
 	    pfm = 0.5*(pf + pf_old);
 	    gsw_ct_freezing_first_derivatives(sa,pfm,saturation_fraction,
@@ -7770,7 +7810,7 @@ gsw_rr68_interp_sa_ct(double *sa, double *ct, double *p, int mp, double *p_i,
 	*/
 	for (i=0; i<mp_i; i++) {
 	    for (j=0; j<mp; j++) {
-	        if (p_i[i] == p[j]) {
+	        if (fabs(p_i[i] - p[j]) < 0.001) {
 	            sa_i[i] = sa[j];
 	            ct_i[i] = ct[j];
 	        }
@@ -8101,7 +8141,7 @@ gsw_sa_freezing_from_ct(double ct, double p, double saturation_fraction)
 	! Find CT > CT_freezing_zero_SA.  If this is the case, the input values
 	! represent seawater that is not frozen (for any positive SA). 
 	*/
-	ct_freezing_zero_sa = gsw_ct_freezing_exact(0.0,p,saturation_fraction);
+	ct_freezing_zero_sa = gsw_ct_freezing(0.0,p,saturation_fraction);
 	if (ct > ct_freezing_zero_sa)
 	    return (GSW_INVALID_VALUE);
 
@@ -8130,7 +8170,7 @@ gsw_sa_freezing_from_ct(double ct, double p, double saturation_fraction)
 	*/
 	for (i_iter = 1; i_iter <= number_of_iterations; i_iter++) {
 	    sa_old = sa;
-	    f = gsw_ct_freezing_exact(sa,p,saturation_fraction) - ct;
+	    f = gsw_ct_freezing(sa,p,saturation_fraction) - ct;
 	    sa = sa_old - f/ctfreezing_sa;
 	    sa_mean = 0.5*(sa + sa_old);
 	    gsw_ct_freezing_first_derivatives(sa_mean,p,saturation_fraction,
@@ -8259,7 +8299,7 @@ gsw_sa_freezing_from_t(double t, double p, double saturation_fraction)
 	! Find t > t_freezing_zero_SA.  If this is the case, the input values
 	! represent seawater that is not frozen (at any positive SA).
 	*/
-	t_freezing_zero_sa = gsw_t_freezing_exact(0.0,p,saturation_fraction);
+	t_freezing_zero_sa = gsw_t_freezing(0.0,p,saturation_fraction);
 	if (t > t_freezing_zero_sa)
 	    return (GSW_INVALID_VALUE);
 	/*
@@ -8290,7 +8330,7 @@ gsw_sa_freezing_from_t(double t, double p, double saturation_fraction)
 	*/
 	for (i_iter = 1; i_iter <= number_of_iterations; i_iter++) {
 	    sa_old = sa;
-	    f = gsw_t_freezing_exact(sa_old,p,saturation_fraction) - t;
+	    f = gsw_t_freezing(sa_old,p,saturation_fraction) - t;
 	    sa = sa_old - f/tfreezing_sa;
 	    sa_mean = 0.5*(sa + sa_old);
 	    gsw_t_freezing_first_derivatives(sa_mean,p,saturation_fraction,
@@ -8307,21 +8347,21 @@ gsw_sa_freezing_from_t(double t, double p, double saturation_fraction)
 elemental function gsw_sa_freezing_from_t_poly (t, p, saturation_fraction)
 !==========================================================================
 !
-!  Calculates the Absolute Salinity of seawater at the freezing temperature.  
-!  That is, the output is the Absolute Salinity of seawater, with the 
-!  fraction saturation_fraction of dissolved air, that is in equilibrium 
-!  with ice at in-situ temperature t and pressure p.  If the input values 
-!  are such that there is no positive value of Absolute Salinity for which 
-!  seawater is frozen, the output is put equal to Nan.  
+!  Calculates the Absolute Salinity of seawater at the freezing temperature.
+!  That is, the output is the Absolute Salinity of seawater, with the
+!  fraction saturation_fraction of dissolved air, that is in equilibrium
+!  with ice at in-situ temperature t and pressure p.  If the input values
+!  are such that there is no positive value of Absolute Salinity for which
+!  seawater is frozen, the output is put equal to Nan.
 !
 !  t  =  in-situ Temperature (ITS-90)                             [ deg C ]
 !  p  =  sea pressure                                              [ dbar ]
-!        ( i.e. absolute pressure - 10.1325 dbar ) 
-!  saturation_fraction = the saturation fraction of dissolved air in 
+!        ( i.e. absolute pressure - 10.1325 dbar )
+!  saturation_fraction = the saturation fraction of dissolved air in
 !                        seawater
 !
 !  sa_freezing_from_t_poly  =  Absolute Salinity of seawater when it freezes,
-!                for given input values of in situ temperature, pressure and 
+!                for given input values of in situ temperature, pressure and
 !                air saturation fraction.                          [ g/kg ]
 !--------------------------------------------------------------------------
 */
@@ -8332,14 +8372,14 @@ gsw_sa_freezing_from_t_poly(double t, double p, double saturation_fraction)
 	double	dt_dsa, sa, sa_old, sa_mean, t_freezing, t_freezing_zero_sa;
 	/*
 	! This is the band of sa within +- 2.5 g/kg of sa = 0, which we treat
-	! differently in calculating the initial values of both SA and dCT_dSA. 
+	! differently in calculating the initial values of both SA and dCT_dSA.
 	*/
 	double	sa_cut_off = 2.5;
 	/*
 	! Find t > t_freezing_zero_SA.  If this is the case, the input values
 	! represent seawater that is not frozen (at any positive SA).
 	*/
-	t_freezing_zero_sa = gsw_t_freezing_poly(0.0,p,saturation_fraction,0);
+	t_freezing_zero_sa = gsw_t_freezing_poly(0.0,p,saturation_fraction);
 	if (t > t_freezing_zero_sa)
 	    return (GSW_INVALID_VALUE);
 	/*
@@ -8370,7 +8410,7 @@ gsw_sa_freezing_from_t_poly(double t, double p, double saturation_fraction)
 	*/
 	for (i_iter = 1; i_iter <= number_of_iterations; i_iter++) {
 	    sa_old = sa;
-	    t_freezing = gsw_t_freezing_poly(sa_old,p,saturation_fraction,0);
+	    t_freezing = gsw_t_freezing_poly(sa_old,p,saturation_fraction);
 	    sa = sa_old - (t_freezing - t)/dt_dsa;
 	    sa_mean = 0.5*(sa + sa_old);
 	    gsw_t_freezing_first_derivatives_poly(sa_mean,p,saturation_fraction,
@@ -8590,14 +8630,14 @@ gsw_seaice_fraction_to_freeze_seawater(double sa, double ct, double p,
 		salt_ratio, tf_sa_seaice, h_hat_sa, h_hat_ct, ctf_sa,
 		sa0 = 0.0, saturation_fraction = 0.0;
 
-	ctf = gsw_ct_freezing_exact(sa,p,saturation_fraction);
+	ctf = gsw_ct_freezing(sa,p,saturation_fraction);
 	if (ct < ctf) {
 	    /*The seawater ct input is below the freezing temp*/
 	    *sa_freeze = *ct_freeze = *w_seaice = GSW_INVALID_VALUE;
 	    return;
 	}
 
-	tf_sa_seaice = gsw_t_freezing_exact(sa_seaice,p,saturation_fraction)
+	tf_sa_seaice = gsw_t_freezing(sa_seaice,p,saturation_fraction)
 						- 1e-6;
 	if (t_seaice > tf_sa_seaice) {
 	/*
@@ -8621,19 +8661,19 @@ gsw_seaice_fraction_to_freeze_seawater(double sa, double ct, double p,
 	h = gsw_enthalpy_ct_exact(sa,ct,p);
 	h_ih = gsw_enthalpy_ice(t_seaice,p);
 
-	ctf_plus1 = gsw_ct_freezing_exact(sa+1.0,p,saturation_fraction);
+	ctf_plus1 = gsw_ct_freezing(sa+1.0,p,saturation_fraction);
 	func_plus1 = (sa - sa_seaice)
 			*(gsw_enthalpy_ct_exact(sa+1.0,ctf_plus1,p)
 	                - h) - (h - h_ih) + salt_ratio*(h_brine - h_ih);
 
-	ctf_zero = gsw_ct_freezing_exact(sa0,p,saturation_fraction);
+	ctf_zero = gsw_ct_freezing(sa0,p,saturation_fraction);
 	func_zero = (sa - sa_seaice)
 			*(gsw_enthalpy_ct_exact(sa0,ctf_zero,p) - h)
 			+ sa*((h - h_ih) - salt_ratio*(h_brine - h_ih));
 
 	saf = -(sa+1.0)*func_zero/(func_plus1 - func_zero);
 		/*initial guess of saf*/
-	ctf = gsw_ct_freezing_exact(saf,p,saturation_fraction);
+	ctf = gsw_ct_freezing(saf,p,saturation_fraction);
 	gsw_enthalpy_first_derivatives_ct_exact(saf,ctf,p,&h_hat_sa,&h_hat_ct);
 	gsw_ct_freezing_first_derivatives(saf,p,saturation_fraction,
 	                                       &ctf_sa, NULL);
@@ -8650,7 +8690,7 @@ gsw_seaice_fraction_to_freeze_seawater(double sa, double ct, double p,
 		- (saf_old - sa)*((h - h_ih) - salt_ratio*(h_brine - h_ih));
 	    saf = saf_old - func/dfunc_dsaf;
 	    saf_mean = 0.5*(saf + saf_old);
-	    ctf_mean = gsw_ct_freezing_exact(saf_mean,p,saturation_fraction);
+	    ctf_mean = gsw_ct_freezing(saf_mean,p,saturation_fraction);
 	    gsw_enthalpy_first_derivatives_ct_exact(saf_mean,ctf_mean,p,
 	                                                 &h_hat_sa,&h_hat_ct);
 	    gsw_ct_freezing_first_derivatives(saf_mean,p,saturation_fraction,
@@ -8658,7 +8698,7 @@ gsw_seaice_fraction_to_freeze_seawater(double sa, double ct, double p,
 	    dfunc_dsaf = (sa - sa_seaice)*(h_hat_sa + h_hat_ct*ctf_sa)
 	    		- (h - h_ih) + salt_ratio*(h_brine - h_ih);
 	    saf = saf_old - func/dfunc_dsaf;
-	    ctf = gsw_ct_freezing_exact(saf,p,saturation_fraction);
+	    ctf = gsw_ct_freezing(saf,p,saturation_fraction);
 	}
 /*
 ! After these 4 iterations of this modified Newton-Raphson method, the
@@ -9998,10 +10038,10 @@ gsw_t_deriv_chem_potential_water_t_exact(double sa, double t, double p)
 }
 /*
 !==========================================================================
-function gsw_t_freezing(sa,p,saturation_fraction)  
+function gsw_t_freezing(sa,p,saturation_fraction)
 !==========================================================================
 
-! Calculates the in-situ temperature at which seawater freezes 
+! Calculates the in-situ temperature at which seawater freezes
 !
 ! sa     : Absolute Salinity                                 [g/kg]
 ! p      : sea pressure                                      [dbar]
@@ -10014,49 +10054,32 @@ function gsw_t_freezing(sa,p,saturation_fraction)
 double
 gsw_t_freezing(double sa, double p, double saturation_fraction)
 {
-	return (gsw_t_freezing_poly(sa,p,saturation_fraction,0));
-}
-/*
-!==========================================================================
-elemental function gsw_t_freezing_exact (sa, p, saturation_fraction)
-!==========================================================================
-!
-!  Calculates the in-situ temperature at which seawater freezes. The 
-!  in-situ temperature freezing point is calculated from the exact 
-!  in-situ freezing temperature which is found by a modified Newton-Raphson
-!  iteration (McDougall and Wotherspoon, 2013) of the equality of the 
-!  chemical potentials of water in seawater and in ice.
-!
-!  An alternative GSW function, gsw_t_freezing_poly, it is based on a 
-!  computationally-efficient polynomial, and is accurate to within -5e-4 K 
-!  and 6e-4 K, when compared with this function.
-!
-!  SA  =  Absolute Salinity                                        [ g/kg ]
-!  p   =  sea pressure                                             [ dbar ]
-!         ( i.e. absolute pressure - 10.1325 dbar ) 
-!  saturation_fraction = the saturation fraction of dissolved air in 
-!                        seawater
-!  (i.e., saturation_fraction must be between 0 and 1, and the default 
-!    is 1, completely saturated) 
-!
-!  t_freezing = in-situ temperature at which seawater freezes.    [ deg C ]
-!--------------------------------------------------------------------------
-*/
-double
-gsw_t_freezing_exact (double sa, double p, double saturation_fraction)
-{
 	GSW_TEOS10_CONSTANTS;
+	GSW_FREEZING_POLY_COEFFICIENTS;
+	double sa_r, x, p_r;
 	double	df_dt, tf, tfm, tf_old, f, return_value;
-	int	polynomial=1;
 
 	/* The initial value of t_freezing_exact (for air-free seawater) */
-	tf = gsw_t_freezing_poly(sa,p,saturation_fraction,polynomial);
+	sa_r = sa*1e-2;
+	x = sqrt(sa_r);
+	p_r = p*1e-4;
+
+	tf = t0
+	+ sa_r*(t1 + x*(t2 + x*(t3 + x*(t4 + x*(t5 + t6*x)))))
+	+ p_r*(t7 + p_r*(t8 + t9*p_r))
+	+ sa_r*p_r*(t10 + p_r*(t12 + p_r*(t15 + t21*sa_r))
+	+ sa_r*(t13 + t17*p_r + t19*sa_r)
+	+ x*(t11 + p_r*(t14 + t18*p_r) + sa_r*(t16 + t20*p_r
+	+ t22*sa_r)));
+
+	/* Adjust for the effects of dissolved air */
+	tf -= saturation_fraction*(1e-3)*(2.4 - sa/(2.0*gsw_sso));
 
 	df_dt = 1e3*gsw_t_deriv_chem_potential_water_t_exact(sa,tf,p) -
 		gsw_gibbs_ice(1,0,tf,p);
 /*
 ! df_dt here is the initial value of the derivative of the function f whose
-! zero (f = 0) we are finding (see Eqn. (3.33.2) of IOC et al (2010)).  
+! zero (f = 0) we are finding (see Eqn. (3.33.2) of IOC et al (2010)).
 */
 
 	tf_old = tf;
@@ -10112,7 +10135,7 @@ gsw_t_freezing_first_derivatives(double sa, double p,
 	GSW_TEOS10_CONSTANTS;
 	double	rec_denom, tf, g_per_kg = 1000.0;
 
-	tf = gsw_t_freezing_exact(sa,p,saturation_fraction);
+	tf = gsw_t_freezing(sa,p,saturation_fraction);
 	rec_denom = 1.0/
 		(g_per_kg*gsw_t_deriv_chem_potential_water_t_exact(sa,tf,p)
 	        + gsw_entropy_ice(tf,p));
@@ -10188,53 +10211,30 @@ gsw_t_freezing_first_derivatives_poly(double sa, double p,
 }
 /*
 !==========================================================================
-elemental function gsw_t_freezing_poly (sa, p, saturation_fraction, polynomial)
+elemental function gsw_t_freezing_poly (sa, p, saturation_fraction)
 !==========================================================================
 !
-!  Calculates the in-situ temperature at which seawater freezes from a 
+!  Calculates the in-situ temperature at which seawater freezes from a
 !  computationally efficient polynomial.
 !
 !  SA  =  Absolute Salinity                                        [ g/kg ]
 !  p   =  sea pressure                                             [ dbar ]
-!         ( i.e. absolute pressure - 10.1325 dbar ) 
-!  saturation_fraction = the saturation fraction of dissolved air in 
+!         ( i.e. absolute pressure - 10.1325 dbar )
+!  saturation_fraction = the saturation fraction of dissolved air in
 !                        seawater
 !
 !  t_freezing = in-situ temperature at which seawater freezes.    [ deg C ]
-!               (ITS-90)                
+!               (ITS-90)
 !--------------------------------------------------------------------------
 */
 double
-gsw_t_freezing_poly(double sa, double p, double saturation_fraction,
-			int polynomial)
+gsw_t_freezing_poly(double sa, double p, double saturation_fraction)
 {
 	GSW_TEOS10_CONSTANTS;
-	GSW_FREEZING_POLY_COEFFICIENTS;
-	double	p_r, sa_r, x, ctf, sfrac, return_value;
-	int	direct_poly=polynomial;
+	double ctf, return_value;
 
-	if (! direct_poly) {
-	    sfrac = saturation_fraction;
-	    ctf = gsw_ct_freezing_poly(sa,p,sfrac);
-	    return_value = gsw_t_from_ct(sa,ctf,p);
-	} else {
-	    /* Alternative calculation ... */
-	    sa_r = sa*1e-2;
-	    x = sqrt(sa_r);
-	    p_r = p*1e-4;
-
-	    return_value = t0
-		+ sa_r*(t1 + x*(t2 + x*(t3 + x*(t4 + x*(t5 + t6*x)))))
-		+ p_r*(t7 + p_r*(t8 + t9*p_r))
-		+ sa_r*p_r*(t10 + p_r*(t12 + p_r*(t15 + t21*sa_r))
-		+ sa_r*(t13 + t17*p_r + t19*sa_r)
-		+ x*(t11 + p_r*(t14 + t18*p_r) + sa_r*(t16 + t20*p_r
-		+ t22*sa_r)));
-
-	    /* Adjust for the effects of dissolved air */
-	    return_value = return_value -
-                  saturation_fraction*(1e-3)*(2.4 - sa/(2.0*gsw_sso));
-	}
+    ctf = gsw_ct_freezing_poly(sa,p,saturation_fraction);
+    return_value = gsw_t_from_ct(sa,ctf,p);
 	return (return_value);
 }
 /*

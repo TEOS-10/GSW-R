@@ -2,38 +2,43 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_t_freezing}
 \alias{gsw_t_freezing}
-\title{Freezing temperature}
+\title{Freezing Temperature of Seawater}
 \usage{
 gsw_t_freezing(SA, p, saturation_fraction = 1)
 }
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
-\item{saturation_fraction}{saturation fraction of dissolved air in seawater}
+\item{saturation_fraction}{fraction of air in water [unitless]}
 }
 \value{
-in-situ freezing temperature (ITS-90) [ deg C ]
+in-situ freezing temperature (ITS-90) [ degC ]
 }
 \description{
-This uses the C function named \code{gsw_t_freezing_exact}, because the 
+This uses the C function named \code{gsw_t_freezing_exact}, because the
 C function named \code{gsw_t_freezing} does not produce check values that
-match the Matlab function called \code{gsw_t_freezing} (see references 
+match the Matlab function called \code{gsw_t_freezing} (see references
 for those test values).
 }
+\details{
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (with source code at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, their authorships, and the science behind
+it all, please consult \url{http://www.teos-10.org}.
+}
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 p <- c(      10,      50,     125,     250,     600,    1000)
 saturation_fraction <- 1
 tf <- gsw_t_freezing(SA, p, saturation_fraction)
 expect_equal(tf, c(-1.902730710149803, -1.942908619287183, -2.006861069199743,
-                   -2.090985086875259, -2.351293130342102, -2.660498762776720)) 
+                   -2.090985086875259, -2.351293130342102, -2.660498762776720))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing.html}
-}
-\seealso{
-\code{\link{gsw_CT_freezing}} is the analogue for Conservative Temperature.
 }

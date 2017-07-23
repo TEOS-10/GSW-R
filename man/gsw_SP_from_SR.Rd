@@ -15,8 +15,16 @@ Practical Salinity (PSS-78) [ unitless ]
 \description{
 Calculate Practical Salinity from Reference Salinity
 }
+\details{
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (with source code at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, their authorships, and the science behind
+it all, please consult \url{http://www.teos-10.org}.
+}
 \examples{
-library(testthat)
 SR <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
 SP <- gsw_SP_from_SR(SR)
 expect_equal(SP, c(34.386552667080714, 34.564513505458834, 34.696889296869848,
@@ -26,5 +34,16 @@ expect_equal(SP, c(34.386552667080714, 34.564513505458834, 34.696889296869848,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SR.html}
 }
 \seealso{
-The reverse is \code{\link{gsw_SR_from_SP}}; also related are \code{\link{gsw_SP_from_SA}}, \code{\link{gsw_SP_from_SK}} and \code{\link{gsw_SP_from_Sstar}}.
+Other things related to salinity: \code{\link{gsw_C_from_SP}},
+  \code{\link{gsw_SA_from_SP_Baltic}},
+  \code{\link{gsw_SA_from_SP}},
+  \code{\link{gsw_SA_from_Sstar}},
+  \code{\link{gsw_SP_from_C}},
+  \code{\link{gsw_SP_from_SA}},
+  \code{\link{gsw_SP_from_SK}},
+  \code{\link{gsw_SP_from_Sstar}},
+  \code{\link{gsw_SR_from_SP}},
+  \code{\link{gsw_Sstar_from_SA}},
+  \code{\link{gsw_Sstar_from_SP}},
+  \code{\link{gsw_deltaSA_from_SP}}
 }

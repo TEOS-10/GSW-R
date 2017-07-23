@@ -2,35 +2,62 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_specvol_t_exact}
 \alias{gsw_specvol_t_exact}
-\title{Specific volume}
+\title{Specific Volume of Seawater}
 \usage{
 gsw_specvol_t_exact(SA, t, p)
 }
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{t}{in-situ temperature (ITS-90)  [ deg C ]}
+\item{t}{in-situ temperature (ITS-90) [ degC ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 Specific volume [ m^3/kg ]
 }
 \description{
-Specific volume
+Specific Volume of Seawater
+}
+\details{
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (with source code at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, their authorships, and the science behind
+it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 p <- c(      10,      50,     125,     250,     600,    1000)
 v <- gsw_specvol_t_exact(SA, t, p)
-expect_equal(v, 1e-3 * c(0.978626625025472, 0.978222143734527, 0.976154768597586,
-                         0.972961211575438, 0.971026779948624, 0.968989990731808))
+expect_equal(v*1e3, c(0.978626625025472, 0.978222143734527, 0.976154768597586,
+                    0.972961211575438, 0.971026779948624, 0.968989990731808))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_t_exact.html}
 }
 \seealso{
-With Conservative Temperature, use \code{\link{gsw_specvol}}; \code{\link{gsw_specvol_anom_standard}} gives specific volume anomaly.
+Other things related to density: \code{\link{gsw_CT_from_rho}},
+  \code{\link{gsw_CT_maxdensity}},
+  \code{\link{gsw_SA_from_rho}},
+  \code{\link{gsw_alpha_on_beta}},
+  \code{\link{gsw_alpha_wrt_t_exact}},
+  \code{\link{gsw_alpha_wrt_t_ice}},
+  \code{\link{gsw_alpha}},
+  \code{\link{gsw_beta_const_t_exact}},
+  \code{\link{gsw_beta}},
+  \code{\link{gsw_pot_rho_t_exact}},
+  \code{\link{gsw_rho_alpha_beta}},
+  \code{\link{gsw_rho_first_derivatives_wrt_enthalpy}},
+  \code{\link{gsw_rho_first_derivatives}},
+  \code{\link{gsw_rho_ice}}, \code{\link{gsw_rho_t_exact}},
+  \code{\link{gsw_rho}}, \code{\link{gsw_sigma0}},
+  \code{\link{gsw_sigma1}}, \code{\link{gsw_sigma2}},
+  \code{\link{gsw_sigma3}}, \code{\link{gsw_sigma4}},
+  \code{\link{gsw_specvol_alpha_beta}},
+  \code{\link{gsw_specvol_anom_standard}},
+  \code{\link{gsw_specvol_ice}}, \code{\link{gsw_specvol}}
 }

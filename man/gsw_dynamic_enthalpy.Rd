@@ -9,9 +9,9 @@ gsw_dynamic_enthalpy(SA, CT, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 dynamic enthalpy [ J/kg ]
@@ -19,18 +19,43 @@ dynamic enthalpy [ J/kg ]
 \description{
 Dynamic enthalpy of seawater (75-term equation)
 }
+\details{
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (with source code at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, their authorships, and the science behind
+it all, please consult \url{http://www.teos-10.org}.
+}
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <-c( 28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 p <- c(      10,      50,     125,     250,     600,    1000)
 de <- gsw_dynamic_enthalpy(SA, CT, p)
-expect_equal(de, 1e3*c(0.097864698087770, 0.489161476686235, 1.220512192086506,
-                       2.433731199531144, 5.833880057399701, 9.711443860944032))
+expect_equal(de/1000, c(0.097864698087770, 0.489161476686235, 1.220512192086506,
+                      2.433731199531144, 5.833880057399701, 9.711443860944032))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
 }
 \seealso{
-\code{\link{gsw_enthalpy}} and \code{\link{gsw_enthalpy_t_exact}}
+Other things related to enthalpy: \code{\link{gsw_CT_from_enthalpy}},
+  \code{\link{gsw_enthalpy_CT_exact}},
+  \code{\link{gsw_enthalpy_diff}},
+  \code{\link{gsw_enthalpy_first_derivatives_CT_exact}},
+  \code{\link{gsw_enthalpy_first_derivatives}},
+  \code{\link{gsw_enthalpy_ice}},
+  \code{\link{gsw_enthalpy_t_exact}},
+  \code{\link{gsw_enthalpy}},
+  \code{\link{gsw_frazil_properties_potential_poly}},
+  \code{\link{gsw_frazil_properties_potential}},
+  \code{\link{gsw_pot_enthalpy_from_pt_ice_poly}},
+  \code{\link{gsw_pot_enthalpy_from_pt_ice}},
+  \code{\link{gsw_pot_enthalpy_ice_freezing_poly}},
+  \code{\link{gsw_pot_enthalpy_ice_freezing}},
+  \code{\link{gsw_pt_from_pot_enthalpy_ice_poly}},
+  \code{\link{gsw_pt_from_pot_enthalpy_ice}},
+  \code{\link{gsw_specvol_first_derivatives_wrt_enthalpy}},
+  \code{\link{gsw_specvol_first_derivatives}}
 }

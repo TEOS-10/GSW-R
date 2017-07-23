@@ -1,11 +1,4 @@
-## ----echo=FALSE----------------------------------------------------------
-# Developer notes (in R because Rmarkdown lacks comments!)
-# 1. Run
-#     devtools::build_vignettes()
-# before doing the build. And note that this fails if using `rmarkdown::render` as the engine,
-# as I was doing on the advise of TravisCI (DK 2016-02-06).
-
-## ----results="hide"---------------------------------------
+## ----echo=FALSE, results="hide"---------------------------
 options(keep.source=TRUE, width=60, prompt=' ', continue=' ', oceEOS="unesco")
 
 ## ---------------------------------------------------------
@@ -42,7 +35,8 @@ CT <- gsw_CT_from_t(SA=SA, t=10, p=100)
 #  par(mar=c(3.2, 3, 1, 1/2), mgp=c(2, 0.85, 0))
 
 ## ----eval=FALSE-------------------------------------------
-#  hist(section[["theta"]] / section[["CT"]], main="")
+#  f <- (section[["CT"]] - section[["theta"]]) / section[["CT"]]
+#  hist(f, main="", xlab="(CT-theta)/CT")
 
 ## ----eval=FALSE, echo=FALSE-------------------------------
 #  dev.off()
@@ -50,9 +44,11 @@ CT <- gsw_CT_from_t(SA=SA, t=10, p=100)
 #  par(mar=c(3.2, 3, 1, 1/2), mgp=c(2, 0.85, 0))
 
 ## ----eval=FALSE-------------------------------------------
-#  hist(section[["salinity"]] / section[["SA"]], main="")
+#  f <- (section[["SA"]] - section[["salinity"]]) / section[["SA"]]
+#  hist(f, main="", xlab="(SA-SP)/SA")
 
 ## ----eval=FALSE, echo=FALSE-------------------------------
+#  dev.off()
 #  png("SSS_2.png", width=588, height=336)
 
 ## ----eval=FALSE-------------------------------------------
@@ -69,4 +65,7 @@ CT <- gsw_CT_from_t(SA=SA, t=10, p=100)
 
 ## ----eval=FALSE, echo=FALSE-------------------------------
 #  dev.off()
+
+## ----results="hide", echo=FALSE---------------------------
+options(prompt='> ', continue='+ ', oceEOS="unesco")
 

@@ -2,35 +2,40 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_CT_freezing}
 \alias{gsw_CT_freezing}
-\title{Conservative temperature freezing point}
+\title{Conservative Temperature of Freezing Seawater}
 \usage{
 gsw_CT_freezing(SA, p, saturation_fraction = 1)
 }
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
 \item{saturation_fraction}{saturation fraction of dissolved air in seawater}
 }
 \value{
-Conservative Temperature at freezing of seawater [ deg C ]. That is, the freezing temperature expressed in terms of Conservative Temperature (ITS-90).
+Conservative Temperature at freezing of seawater [ degC ].
 }
 \description{
-Conservative temperature freezing point
+Conservative Temperature of Freezing Seawater
+}
+\details{
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (with source code at
+\url{https://github.com/TEOS-10/GSW-C}), which
+in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
+To learn more about these software systems, their authorships, and the science behind
+it all, please consult \url{http://www.teos-10.org}.
 }
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 p <-  c(     10,      50,     125,     250,     600,    1000)
 saturation_fraction <- 1
-CT_freezing <- gsw_CT_freezing(SA, p, saturation_fraction)
-expect_equal(CT_freezing, c(-1.899683776424096, -1.940791867869104, -2.006240664432488,
-                            -2.092357761318778, -2.359300831770506, -2.677162675412748))
+CT <- gsw_CT_freezing(SA, p, saturation_fraction)
+expect_equal(CT, c(-1.899683776424096, -1.940791867869104, -2.006240664432488,
+                 -2.092357761318778, -2.359300831770506, -2.677162675412748))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing.html}
-}
-\seealso{
-\code{\link{gsw_t_freezing}} is the analogue for in-situ temperature.
 }
