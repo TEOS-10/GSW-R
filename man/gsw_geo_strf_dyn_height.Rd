@@ -16,15 +16,23 @@ gsw_geo_strf_dyn_height(SA, CT, p, p_ref = 0)
 \item{p_ref}{reference pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
-Dynamic height anomaly [ m^2/s^2 ]. Note that this unit, sometimes called
-a "dynamical meter", corresponds to approximately 1.02 metres of sealevel height
-(see e.g. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition.
-Elsevier).
+A vector containing dynamic height anomaly [ m^2/s^2 ] for each
+level.  For more on the units, see [2].
 }
 \description{
-Geostrophic Dynamic Height Anomaly
+See the TEOS-10 page [1] and similar references for details on
+what this calculates.
 }
 \details{
+Because of the scheme used in the underlying C code, the 
+pressures must be in order, and must not have any repeats.
+Also, there must be at least 4 pressure values.
+
+To get the column-integrated value in meters, take the first
+value of the returned vector and divide by local gravity,
+or perhaps by some constant value of gravity; the 
+TEOS-10 docs are not very clear.
+
 The present R function works with a wrapper to a C function contained
 within the GSW-C system (with source code at
 \url{https://github.com/TEOS-10/GSW-C}), which
@@ -43,5 +51,7 @@ expect_equal(dh, c(17.039204557769487, 14.665853784722286, 10.912861136923812,
                  7.567928838774945, 3.393524055565328, 0))
 }
 \references{
-\url{http://www.teos-10.org/pubs/gsw/html/gsw_geo_strf_dyn_height.html}
+1. \url{http://www.teos-10.org/pubs/gsw/html/gsw_geo_strf_dyn_height.html}
+
+2. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition, Elsevier.
 }

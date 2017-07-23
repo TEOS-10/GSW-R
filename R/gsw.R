@@ -2076,16 +2076,30 @@ gsw_grav <- function(latitude, p=0)
 
 #' Geostrophic Dynamic Height Anomaly
 #'
+#' @description
+#' See the TEOS-10 page [1] and similar references for details on
+#' what this calculates.
+#'
+#' @details
+#'
+#' Because of the scheme used in the underlying C code, the 
+#' pressures must be in order, and must not have any repeats.
+#' Also, there must be at least 4 pressure values.
+#' 
+#' To get the column-integrated value in meters, take the first
+#' value of the returned vector and divide by local gravity,
+#' or perhaps by some constant value of gravity; the 
+#' TEOS-10 docs are not very clear.
+#'
 #' @template teos10template
 #'
 #' @template SAtemplate
 #' @template CTtemplate
 #' @template ptemplate
 #' @template p_reftemplate
-#' @return Dynamic height anomaly [ m^2/s^2 ]. Note that this unit, sometimes called
-#' a "dynamical meter", corresponds to approximately 1.02 metres of sealevel height
-#' (see e.g. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition.
-#' Elsevier).
+#' @return A vector containing dynamic height anomaly [ m^2/s^2 ] for each
+#' level.  For more on the units, see [2].
+#'
 #' @examples
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
@@ -2095,7 +2109,9 @@ gsw_grav <- function(latitude, p=0)
 #' expect_equal(dh, c(17.039204557769487, 14.665853784722286, 10.912861136923812,
 #'                  7.567928838774945, 3.393524055565328, 0))
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_geo_strf_dyn_height.html}
+#' 1. \url{http://www.teos-10.org/pubs/gsw/html/gsw_geo_strf_dyn_height.html}
+#'
+#' 2. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition, Elsevier.
 gsw_geo_strf_dyn_height <- function(SA, CT, p, p_ref=0)
 {
     if (missing(SA) || missing(CT) || missing(p)) stop("must supply SA, CT, and p")
@@ -2105,6 +2121,12 @@ gsw_geo_strf_dyn_height <- function(SA, CT, p, p_ref=0)
     if (length(SA) != length(CT)) stop("SA and CT must be of the same length")
     if (length(CT) != length(p)) stop("CT and p must be of the same length")
     n <- length(SA)
+    if (n < 4L)
+        stop("must have at least 4 levels")
+    if (any(diff(order(p)) != 1L))
+        stop("pressures must be in order")
+    if (any(diff(p) == 0))
+        stop("repeated pressures are not permitted")
     rval <- .C("wrap_gsw_geo_strf_dyn_height", NAOK=TRUE, PACKAGE="gsw",
                SA=as.double(SA), CT=as.double(CT), p=as.double(p), p_ref=as.double(p_ref[1]),
                n=as.integer(n), rval=double(n))$rval
