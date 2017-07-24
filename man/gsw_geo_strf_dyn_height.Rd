@@ -16,22 +16,26 @@ gsw_geo_strf_dyn_height(SA, CT, p, p_ref = 0)
 \item{p_ref}{reference pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
-A vector containing dynamic height anomaly [ m^2/s^2 ] for each
-level.  For more on the units, see [2].
+A vector containing geopotential anomaly in
+\eqn{m^2/s^2}{m^2/s^2} for each level. For more on the units, see [2].
 }
 \description{
-See the TEOS-10 page [1] and similar references for details on
-what this calculates.
+This calculates a geopotential anomaly, called either the
+dynamic height anomaly or the geostrophic streamfunction
+in the TEOS-10 document listed as [1] below; users should
+read that and the references therein for more details on
+the definition and its calculation here.
+
+To get the column-integrated value in meters, take the first
+value of the returned vector and divide by
+9.7963\eqn{m/s^2}{m/s^2}. Note that this yields an integral
+with the top measured pressure (not zero) as an upper limit.
 }
 \details{
 Because of the scheme used in the underlying C code, the 
 pressures must be in order, and must not have any repeats.
-Also, there must be at least 4 pressure values.
-
-To get the column-integrated value in meters, take the first
-value of the returned vector and divide by local gravity,
-or perhaps by some constant value of gravity; the 
-TEOS-10 docs are not very clear.
+Also, there must be at least 4 pressure values. Violating
+any of these three restrictions yields an error.
 
 The present R function works with a wrapper to a C function contained
 within the GSW-C system (with source code at

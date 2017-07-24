@@ -2077,19 +2077,23 @@ gsw_grav <- function(latitude, p=0)
 #' Geostrophic Dynamic Height Anomaly
 #'
 #' @description
-#' See the TEOS-10 page [1] and similar references for details on
-#' what this calculates.
+#' This calculates a geopotential anomaly, called either the
+#' dynamic height anomaly or the geostrophic streamfunction
+#' in the TEOS-10 document listed as [1] below; users should
+#' read that and the references therein for more details on
+#' the definition and its calculation here.
+#' 
+#' To get the column-integrated value in meters, take the first
+#' value of the returned vector and divide by
+#' 9.7963\eqn{m/s^2}{m/s^2}. Note that this yields an integral
+#' with the top measured pressure (not zero) as an upper limit.
 #'
 #' @details
 #'
 #' Because of the scheme used in the underlying C code, the 
 #' pressures must be in order, and must not have any repeats.
-#' Also, there must be at least 4 pressure values.
-#' 
-#' To get the column-integrated value in meters, take the first
-#' value of the returned vector and divide by local gravity,
-#' or perhaps by some constant value of gravity; the 
-#' TEOS-10 docs are not very clear.
+#' Also, there must be at least 4 pressure values. Violating
+#' any of these three restrictions yields an error.
 #'
 #' @template teos10template
 #'
@@ -2097,8 +2101,8 @@ gsw_grav <- function(latitude, p=0)
 #' @template CTtemplate
 #' @template ptemplate
 #' @template p_reftemplate
-#' @return A vector containing dynamic height anomaly [ m^2/s^2 ] for each
-#' level.  For more on the units, see [2].
+#' @return A vector containing geopotential anomaly in
+#' \eqn{m^2/s^2}{m^2/s^2} for each level. For more on the units, see [2].
 #'
 #' @examples
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
