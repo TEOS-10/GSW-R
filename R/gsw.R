@@ -2095,6 +2095,9 @@ gsw_grav <- function(latitude, p=0)
 #' Also, there must be at least 4 pressure values. Violating
 #' any of these three restrictions yields an error.
 #'
+#' If \code{p_ref} exceeds the largest \code{p} value, a vector
+#' of zeros is returned, in accordance with the underlying C code.
+#'
 #' @template teos10template
 #'
 #' @template SAtemplate

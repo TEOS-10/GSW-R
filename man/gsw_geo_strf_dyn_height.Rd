@@ -37,6 +37,9 @@ pressures must be in order, and must not have any repeats.
 Also, there must be at least 4 pressure values. Violating
 any of these three restrictions yields an error.
 
+If \code{p_ref} exceeds the largest \code{p} value, a vector
+of zeros is returned, in accordance with the underlying C code.
+
 The present R function works with a wrapper to a C function contained
 within the GSW-C system (with source code at
 \url{https://github.com/TEOS-10/GSW-C}), which
