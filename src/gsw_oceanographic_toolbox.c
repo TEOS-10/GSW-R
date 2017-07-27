@@ -10614,6 +10614,11 @@ gsw_util_linear_interp(int nx, double *x, int ny, double *y, int nxi,
 pure function gsw_util_sort_real (rarray) result(iarray)
 */
 
+#if (defined _WIN32 || defined _WIN64 || defined __WINDOWS__)
+extern errno_t qsort_s(void *, rsize_t, rsize_t, int (*)(const void *, const void *,
+            void *), void *);
+#endif
+
 #if (defined __APPLE__ || defined __MACH__ || defined __DARWIN__ || \
          defined __FREEBSD__ || defined __BSD__ || \
 	 defined _WIN32 || defined _WIN64 || defined __WINDOWS__)
