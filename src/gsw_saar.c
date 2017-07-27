@@ -6,6 +6,20 @@
 */
 #include "gswteos-10.h"
 #include "gsw_internal_const.h"
+#if 1
+// This block is needed for GSW-R, because CRAN policies
+// mediate against storing large datasets in code.
+int gsw_nx=0;
+int gsw_ny=0;
+int gsw_nz=0;
+double *longs_ref=NULL;
+double *lats_ref=NULL;
+double *p_ref=NULL;
+double *ndepth_ref=NULL;
+double *saar_ref=NULL;
+double *delta_sa_ref=NULL;
+GSW_SAAR_DATA;
+#else
 #include "gsw_saar_data.c"
 
 #ifdef _MSC_VER
@@ -13,6 +27,7 @@
 #   if _MSC_VER < 1900
 #       define isnan(x) _isnan(x)
 #   endif
+#endif
 #endif
 
 static double
