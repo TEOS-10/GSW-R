@@ -28,17 +28,6 @@ which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10
 To learn more about these software systems, their authorships, and the science behind
 it all, please consult \url{http://www.teos-10.org}.
 }
-\section{Bugs}{
-
-The Matlab and C sources vary in the names of the returned values; the names used
-here correspond to the Matlab documentation. The units listed in the Matlab documentation
-(see \dQuote{References}) do not seem to make sense. A first derivative of specific volume
-wrt SA should have unit (m^3/kg)/(g/kg) but the unit is listed as (m^3/kg)(g/kg)^(-1)(J/kg)^(-1)
-in the Matlab documentation. And the sentence describing \code{v_h} is a bit confusing, since
-it talks of a first derivative with respect to two items.
-See https://github.com/TEOS-10/GSW-R/issues/30
-}
-
 \examples{
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
