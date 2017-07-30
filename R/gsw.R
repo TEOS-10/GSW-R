@@ -5541,8 +5541,6 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
 #' expect_equal(derivs$tfreezing_p/1e-7, c(-0.748468312442338, -0.749793159537290, -0.752225023995510,
 #'                                       -0.756170965034610, -0.767279572670040, -0.779936552091913))
 ## @family things related to ice
-#' @template broken-test-values
-#' @template broken-test-values-family
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_first_derivatives.html}
 gsw_t_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)

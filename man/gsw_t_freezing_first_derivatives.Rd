@@ -30,17 +30,6 @@ which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10
 To learn more about these software systems, their authorships, and the science behind
 it all, please consult \url{http://www.teos-10.org}.
 }
-\section{Bugs}{
-
-
-As of March 27, 2017, the test values listed in \dQuote{Examples} do not match
-values provided at the TEOS-10 website listed in \dQuote{References},
-but they match with values given by the Matlab code that is
-provided on the TEOS-10 website. It is expected that the
-TEOS-10 website will be updated by May 2017. As those updates to the TEOS-10
-website become available, the present comment will be revised or deleted.
-}
-
 \examples{
 SA <- c(               34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 p <- c(                     10,      50,     125,     250,     600,    1000)
@@ -53,10 +42,4 @@ expect_equal(derivs$tfreezing_p/1e-7, c(-0.748468312442338, -0.749793159537290, 
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_first_derivatives.html}
-}
-\seealso{
-Other functions with suspicious test values on the TEOS-10 website: \code{\link{gsw_entropy_second_derivatives}},
-  \code{\link{gsw_rho_second_derivatives_wrt_enthalpy}},
-  \code{\link{gsw_specvol_second_derivatives_wrt_enthalpy}},
-  \code{\link{gsw_t_freezing_first_derivatives_poly}}
 }
