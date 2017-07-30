@@ -1342,8 +1342,6 @@ gsw_enthalpy_diff <- function(SA, CT, p_shallow, p_deep)
 #'                      -1.829602387915694, -4.423463748270238, -7.405100077558673))
 #' expect_equal(d$h_CT/1e3, c(3.991899705530481, 3.992025640520101, 3.992210365030743,
 #'                          3.992284150250490, 3.992685389122658, 3.993014168534175))
-#' @template broken-test-values
-#' @template broken-test-values-family
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_first_derivatives.html}
 gsw_enthalpy_first_derivatives <- function(SA, CT, p)

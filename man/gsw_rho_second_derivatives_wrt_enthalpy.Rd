@@ -60,8 +60,7 @@ expect_equal(r$rho_h_h/1e-9, c(-0.454213854637790, -0.455984900239309, -0.499870
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_second_derivatives_wrt_enthalpy.html}
 }
 \seealso{
-Other functions with suspicious test values on the TEOS-10 website: \code{\link{gsw_enthalpy_first_derivatives}},
-  \code{\link{gsw_entropy_second_derivatives}},
+Other functions with suspicious test values on the TEOS-10 website: \code{\link{gsw_entropy_second_derivatives}},
   \code{\link{gsw_specvol_second_derivatives_wrt_enthalpy}},
   \code{\link{gsw_t_freezing_first_derivatives_poly}},
   \code{\link{gsw_t_freezing_first_derivatives}}
