@@ -56,8 +56,7 @@ expect_equal(r$eta_CT_CT, c(-0.043665023731109, -0.043781336189326, -0.045506114
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_second_derivatives.html}
 }
 \seealso{
-Other functions with suspicious test values on the TEOS-10 website: \code{\link{gsw_enthalpy_first_derivatives}},
-  \code{\link{gsw_rho_second_derivatives_wrt_enthalpy}},
+Other functions with suspicious test values on the TEOS-10 website: \code{\link{gsw_rho_second_derivatives_wrt_enthalpy}},
   \code{\link{gsw_specvol_second_derivatives_wrt_enthalpy}},
   \code{\link{gsw_t_freezing_first_derivatives_poly}},
   \code{\link{gsw_t_freezing_first_derivatives}}

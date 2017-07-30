@@ -55,8 +55,7 @@ expect_equal(derivs$tfreezing_p/1e-7, c(-0.748987354878138, -0.750288853857513, 
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_first_derivatives.html}
 }
 \seealso{
-Other functions with suspicious test values on the TEOS-10 website: \code{\link{gsw_enthalpy_first_derivatives}},
-  \code{\link{gsw_entropy_second_derivatives}},
+Other functions with suspicious test values on the TEOS-10 website: \code{\link{gsw_entropy_second_derivatives}},
   \code{\link{gsw_rho_second_derivatives_wrt_enthalpy}},
   \code{\link{gsw_specvol_second_derivatives_wrt_enthalpy}},
   \code{\link{gsw_t_freezing_first_derivatives}}
