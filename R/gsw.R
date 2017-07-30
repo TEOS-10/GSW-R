@@ -4794,14 +4794,6 @@ gsw_specvol_first_derivatives <- function(SA, CT, p)
 #'                                 -0.730130919555592, -0.733018321892082, -0.733342002723321))
 #' expect_equal(r$v_h/1e-10, c(0.795862623587769, 0.790648383268264, 0.687443468257647,
 #'                           0.422105846942233, 0.355778874334799, 0.314053366403993))
-#' @section Bugs:
-#' The Matlab and C sources vary in the names of the returned values; the names used
-#' here correspond to the Matlab documentation. The units listed in the Matlab documentation
-#' (see \dQuote{References}) do not seem to make sense. A first derivative of specific volume
-#' wrt SA should have unit (m^3/kg)/(g/kg) but the unit is listed as (m^3/kg)(g/kg)^(-1)(J/kg)^(-1)
-#' in the Matlab documentation. And the sentence describing \code{v_h} is a bit confusing, since
-#' it talks of a first derivative with respect to two items.
-#' See https://github.com/TEOS-10/GSW-R/issues/30
 #' @family things related to enthalpy
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_first_derivatives_wrt_enthalpy.html}
