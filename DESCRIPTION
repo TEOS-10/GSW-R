@@ -15,7 +15,7 @@ Suggests:
     knitr,
 BugReports: https://github.com/TEOS-10/GSW-R/issues
 Description: Provides an interface to the Gibbs 'SeaWater' ('TEOS-10') C
-    library, version 3.05 (commit 13ab33cea0e9059d3b3f3dfef78e9591c94af9f8,
+    library, version 3.05 (commit '13ab33cea0e9059d3b3f3dfef78e9591c94af9f8', dated 2017-07-27,
     available at <https://github.com/TEOS-10/GSW-C>, which stems from
     'Matlab' and other code written by members of Working Group 127 of
     'SCOR'/'IAPSO' (Scientific Committee on Oceanic Research /
