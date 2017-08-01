@@ -13,3 +13,4 @@ developer
 
 man-roxygen
 issues
+^cran-comments\.md$
