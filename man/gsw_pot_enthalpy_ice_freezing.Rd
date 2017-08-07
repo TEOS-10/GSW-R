@@ -21,9 +21,9 @@ Potential Enthalpy of Ice at Freezing Point
 }
 \details{
 The present R function works with a wrapper to a C function contained
-within the GSW-C system (Version 3.05 dated 2017-07-27, available at
+within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
 \url{https://github.com/TEOS-10/GSW-C},
-as git commit '13ab33cea0e9059d3b3f3dfef78e9591c94af9f8'), which
+as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
 stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
 which in turn stems from the GSW-Matlab system
 (\url{https://github.com/TEOS-10/GSW-Matlab}).
