@@ -19,9 +19,10 @@ vignette: >
 <!-- There is a problem in running this vignette in the normal way, because ``oce'' is -->
 <!-- used to create the figures, but oce depends on gsw! There is no way to break the circle -->
 <!-- for building on CRAN, but the developer can handle this easily because he has both oce -->
-<!-- and gsw on his machine. The steps are as follows (2 and 3) being most important. ->
+<!-- and gsw on his machine. His steps in updating the vignette (which is done infrequently) -->
+<!-- are as follows, 2 and 3 being most important. ->
 <!-- 1. Edit this file to update the content -->
-<!-- 2. Edit this file to set 'eval' to TRUE in line 79 -->
+<!-- 2. Edit this file with '%s/ eval=FALSE/ eval=TRUE/gc' in vim (keep this line and line 33, through) -->
 <!-- 3. In a console centred in this directory, do -->
 <!--     knitr::purl("gsw.Rmd") -->
 <!-- to create a new gsw.R file -->
@@ -29,7 +30,7 @@ vignette: >
 <!-- 5. Return here, open a console, and do-->
 <!--     devtools::build_vignettes() -->
 <!-- to update the vignette. -->
-<!-- 6. Edit this file to set 'eval' to FALSE -->
+<!-- 6. Edit this file with '%s/ eval=TRUE/ eval=FALSE/gc' in vim (keep this line and line 25, though) -->
 <!-- 7. Build package in normal way -->
 
 **Abstract.** The `gsw` package provides an R implementation of the Gibbs
@@ -76,7 +77,6 @@ literature (Wright et al.  2011; McDougall et al. 2012; Graham et al. 2013)
 
 ```{r echo=FALSE, results="hide"}
 options(keep.source=TRUE, width=60, prompt=' ', continue=' ', oceEOS="unesco")
-eval <- FALSE
 ```
 
 Suppose a water sample taken at pressure (For practical reasons, `gsw`
@@ -117,11 +117,11 @@ sequence of CTD casts in the North Atlantic.  Individual casts may be selected
 by index, so a TS diagram of the station at index 100 (south of Cape Cod in 4000
 m of water) can be plotted as follows (Figure 1).
 
-```{r  eval=eval, echo=FALSE}
+```{r eval=FALSE, echo=FALSE}
 png("TS_unesco.png", width=353, height=353, pointsize=12)
 ```
 
-```{r eval=eval}
+```{r eval=FALSE}
 library(oce)
 data(section)
 ctd <- section[["station", 100]]
@@ -130,17 +130,17 @@ Tlim <- c(0, 25)
 plotTS(ctd, Slim=Slim, Tlim=Tlim, eos="unesco")
 ```
 
-```{r eval=eval, echo=FALSE}
+```{r eval=FALSE, echo=FALSE}
 dev.off()
 png("TS_gsw.png", width=353, height=353, pointsize=12)
 ```
 
 For comparison, it helps to plot a `gsw` equivalent with the same plot limits (Figure 2).
-```{r eval=eval}
+```{r eval=FALSE}
 plotTS(ctd, Slim=Slim, Tlim=Tlim, eos="gsw")
 ```
 
-```{r  eval=eval, echo=FALSE}
+```{r eval=FALSE, echo=FALSE}
 dev.off()
 png("TS_gsw.png", width=353, height=353, pointsize=12)
 ```
@@ -154,25 +154,25 @@ For example, the ratio of Conservative Temperature to `UNESCO`-formulated
 potential temperature $\theta$ for all the CTD profiles in `section` is
 constructed as Figure 3 with
 
-```{r eval=eval, echo=FALSE}
+```{r eval=FALSE, echo=FALSE}
 png('temperature_comparison.png', width=353, height=252, pointsize=12)
 par(mar=c(3.2, 3, 1, 1/2), mgp=c(2, 0.85, 0))
 ```
 
-```{r eval=eval}
+```{r eval=FALSE}
 f <- (section[["CT"]] - section[["theta"]]) / section[["CT"]]
 hist(f, main="", xlab="(CT-theta)/CT")
 ```
 
 A salinity comparison (Figure 4) is constructed with
 
-```{r eval=eval, echo=FALSE}
+```{r eval=FALSE, echo=FALSE}
 dev.off()
 png('salinity_comparison.png', width=353, height=252, pointsize=12)
 par(mar=c(3.2, 3, 1, 1/2), mgp=c(2, 0.85, 0))
 ```
 
-```{r eval=eval}
+```{r eval=FALSE}
 f <- (section[["SA"]] - section[["salinity"]]) / section[["SA"]]
 hist(f, main="", xlab="(SA-SP)/SA")
 ```
@@ -182,7 +182,7 @@ hist(f, main="", xlab="(SA-SP)/SA")
 ![**Figure 4.** Comparison of Absolute Salinity and Practical salinity for the `section` dataset.](salinity_comparison.png)
 
 
-```{r  eval=eval, echo=FALSE}
+```{r eval=FALSE, echo=FALSE}
 dev.off()
 png("SSS_2.png", width=588, height=336)
 ```
@@ -190,7 +190,7 @@ png("SSS_2.png", width=588, height=336)
 An examination of worldwide spatial patterns is also informative. Figure 5, for example,
 is produced as follows.
 
-```{r eval=eval}
+```{r eval=FALSE}
 library(oce)
 data("levitus", package="ocedata")
 SSS <- levitus$SSS
@@ -203,7 +203,7 @@ imagep(levitus$longitude, levitus$latitude, per, col=oceColorsJet,
 title(expression("Percent difference between " * S[A] * " and " * S[P]))
 ```
 
-```{r eval=eval, echo=FALSE}
+```{r eval=FALSE, echo=FALSE}
 dev.off()
 ```
 
