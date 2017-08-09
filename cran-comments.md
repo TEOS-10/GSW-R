@@ -15,7 +15,7 @@ This is a new release, so there are no reverse dependencies.
 
 ---
 
-* I have run R CMD check on the NUMBER downstream dependencies.
+* I have run R CMD check on the 2 downstream dependencies.
   
 * FAILURE SUMMARY
 
