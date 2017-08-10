@@ -1,3 +1,6 @@
+1.0-6
+- *no changes yet*
+
 1.0-5
 - use GSW-C version 3.05-4
 - make internal sort routines be machine-independent
