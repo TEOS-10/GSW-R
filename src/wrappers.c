@@ -378,9 +378,9 @@ void wrap_gsw_geo_strf_dyn_height(double *SA, double *CT, double *p, double *p_r
     gsw_geo_strf_dyn_height(SA, CT, p, *p_ref, *n, dyn_height);
 }
 
-void wrap_gsw_geo_strf_dyn_height_1(double *SA, double *CT, double *p, double *p_ref, int *n, double *dyn_height)
+void wrap_gsw_geo_strf_dyn_height_1(double *SA, double *CT, double *p, double *p_ref, int *n, double *dyn_height, double max_dp_i, int interp_method)
 {
-    gsw_geo_strf_dyn_height_1(SA, CT, p, *p_ref, *n, dyn_height);
+    gsw_geo_strf_dyn_height_1(SA, CT, p, *p_ref, *n, dyn_height, max_dp_i, interp_method);
 }
 
 void wrap_gsw_geo_strf_dyn_height_pc(double *SA, double *CT, double *delta_p, int *n, double *dyn_height, double *p_mid)
