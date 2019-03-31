@@ -13,7 +13,7 @@ output:
     dev.args: list(pointsize=11)
 vignette: >
   %\VignetteIndexEntry{gsw}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\VignetteEncoding{UTF-8}
 ---
 <!-- There is a problem in running this vignette in the normal way, because ``oce'' is -->
