@@ -12,7 +12,6 @@ vignettes/gsw.R
 vignettes/gsw.bbl
 .RData
 .Rhistory
-inst/doc
 .DS_Store
 .Rapp.history
 vignettes/*.md
