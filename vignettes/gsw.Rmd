@@ -14,7 +14,7 @@ output:
 vignette: >
   %\VignetteIndexEntry{gsw}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+  \usepackage[utf8]{inputenc}
 ---
 
 **Abstract.** The `gsw` package provides an R implementation of the Gibbs
