@@ -105,21 +105,14 @@ other functions needed for their work among the roughly sixty functions that
 
 # Using gsw within oce
 
-![**Figure 1.** TS diagram with UNESCO formulation](TS_unesco.png)
-
-![**Figure 2.** TS diagram with GSW formulation](TS_gsw.png)
-
-
 Many `oce` plotting functions have an argument named `eos` that can be set to
 the string `"unesco"` to get the older seawater formulation, or to `"gsw"` to
 get the newer one. For example, the `section` dataset provided by `oce` holds a
 sequence of CTD casts in the North Atlantic.  Individual casts may be selected
 by index, so a TS diagram of the station at index 100 (south of Cape Cod in 4000
-m of water) can be plotted as follows (Figure 1).
-
-```{r eval=FALSE, echo=FALSE}
-png("TS_unesco.png", width=353, height=353, pointsize=12)
-```
+m of water) can be plotted as follows (the figure is not included here, because
+the oce package depends on the gsw package, so automated build systems
+will not be able to build the figure).
 
 ```{r eval=FALSE}
 library(oce)
@@ -130,21 +123,10 @@ Tlim <- c(0, 25)
 plotTS(ctd, Slim=Slim, Tlim=Tlim, eos="unesco")
 ```
 
-```{r eval=FALSE, echo=FALSE}
-dev.off()
-png("TS_gsw.png", width=353, height=353, pointsize=12)
-```
-
-For comparison, it helps to plot a `gsw` equivalent with the same plot limits (Figure 2).
+For comparison, it helps to plot a `gsw` equivalent with the same plot limits.
 ```{r eval=FALSE}
 plotTS(ctd, Slim=Slim, Tlim=Tlim, eos="gsw")
 ```
-
-```{r eval=FALSE, echo=FALSE}
-dev.off()
-png("TS_gsw.png", width=353, height=353, pointsize=12)
-```
-
 
 Most hydrography-related functions of `oce` provide this `eos` argument for
 selecting the seawater formulation. This includes functions for plotting and
@@ -152,43 +134,22 @@ for calculating.  In addition, most of the objects within `oce` have accessors
 that can return temperature and salinity in either the `UNESCO` or GSW scheme.
 For example, the ratio of Conservative Temperature to `UNESCO`-formulated
 potential temperature $\theta$ for all the CTD profiles in `section` is
-constructed as Figure 3 with
-
-```{r eval=FALSE, echo=FALSE}
-png('temperature_comparison.png', width=353, height=252, pointsize=12)
-par(mar=c(3.2, 3, 1, 1/2), mgp=c(2, 0.85, 0))
-```
+constructed with
 
 ```{r eval=FALSE}
 f <- (section[["CT"]] - section[["theta"]]) / section[["CT"]]
 hist(f, main="", xlab="(CT-theta)/CT")
 ```
 
-A salinity comparison (Figure 4) is constructed with
-
-```{r eval=FALSE, echo=FALSE}
-dev.off()
-png('salinity_comparison.png', width=353, height=252, pointsize=12)
-par(mar=c(3.2, 3, 1, 1/2), mgp=c(2, 0.85, 0))
-```
+A salinity comparison is constructed with
 
 ```{r eval=FALSE}
 f <- (section[["SA"]] - section[["salinity"]]) / section[["SA"]]
 hist(f, main="", xlab="(SA-SP)/SA")
 ```
 
-![**Figure 3.** Comparison of GSW Conservative Temperature and UNESCO potential temperature for the `section` dataset, spanning the mid-latitude North Atlantic.](temperature_comparison.png)
-
-![**Figure 4.** Comparison of Absolute Salinity and Practical salinity for the `section` dataset.](salinity_comparison.png)
-
-
-```{r eval=FALSE, echo=FALSE}
-dev.off()
-png("SSS_2.png", width=588, height=336)
-```
-
-An examination of worldwide spatial patterns is also informative. Figure 5, for example,
-is produced as follows.
+An examination of worldwide spatial patterns is also informative, with the
+following producing such a graph.
 
 ```{r eval=FALSE}
 library(oce)
@@ -202,13 +163,6 @@ imagep(levitus$longitude, levitus$latitude, per, col=oceColorsJet,
        zlim=quantile(per, c(0.001, 0.999), na.rm=TRUE))
 title(expression("Percent difference between " * S[A] * " and " * S[P]))
 ```
-
-```{r eval=FALSE, echo=FALSE}
-dev.off()
-```
-
-![**Figure 5.** Percent difference between surface Absolute Salinity and Practical Salinity, for Levitus dataset.](SSS_2.png)
-
 Note the use of quantile-specified scales for the images, the colour mappings of
 which would otherwise be controlled by isolated low-saline waters, yielding
 little to see in the wider expanses of the world ocean; a broader context has
