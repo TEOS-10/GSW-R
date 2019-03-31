@@ -26,4 +26,5 @@ LazyData: no
 Packaged: Dan Kelley
 Encoding: UTF-8
 RoxygenNote: 6.1.1
+BuildVignettes: true
 VignetteBuilder: knitr
