@@ -46,3 +46,4 @@ expect_equal(kappa*1e9, c(0.411343648791300, 0.411105416128094, 0.41656623602661
 Other things related to compressibility: \code{\link{gsw_kappa_const_t_ice}},
   \code{\link{gsw_kappa_ice}}, \code{\link{gsw_kappa}}
 }
+\concept{things related to compressibility}

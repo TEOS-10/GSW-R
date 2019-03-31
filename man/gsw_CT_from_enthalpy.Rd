@@ -63,3 +63,4 @@ Other things related to enthalpy: \code{\link{gsw_dynamic_enthalpy}},
   \code{\link{gsw_specvol_first_derivatives_wrt_enthalpy}},
   \code{\link{gsw_specvol_first_derivatives}}
 }
+\concept{things related to enthalpy}

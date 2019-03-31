@@ -43,3 +43,4 @@ expect_equal(p/1e3, c(0.010055726724518, 0.050283543374874, 0.125731858435610,
 \seealso{
 Other things related to depth: \code{\link{gsw_z_from_p}}
 }
+\concept{things related to depth}

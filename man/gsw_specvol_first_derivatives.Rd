@@ -71,3 +71,4 @@ Other things related to enthalpy: \code{\link{gsw_CT_from_enthalpy}},
   \code{\link{gsw_pt_from_pot_enthalpy_ice}},
   \code{\link{gsw_specvol_first_derivatives_wrt_enthalpy}}
 }
+\concept{things related to enthalpy}

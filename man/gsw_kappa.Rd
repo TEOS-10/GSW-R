@@ -47,3 +47,4 @@ Other things related to compressibility: \code{\link{gsw_kappa_const_t_ice}},
   \code{\link{gsw_kappa_ice}},
   \code{\link{gsw_kappa_t_exact}}
 }
+\concept{things related to compressibility}

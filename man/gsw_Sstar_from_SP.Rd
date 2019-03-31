@@ -66,3 +66,4 @@ Other things related to salinity: \code{\link{gsw_C_from_SP}},
   \code{\link{gsw_Sstar_from_SA}},
   \code{\link{gsw_deltaSA_from_SP}}
 }
+\concept{things related to salinity}

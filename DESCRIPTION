@@ -5,7 +5,7 @@ Authors@R: c(person("Dan", "Kelley", role=c("aut","cre","cph"), email="dan.kelle
 Copyright: Original algorithms and 'Matlab'/C library (c) 2015-2017 WG127 SCOR/IAPSO
     (Scientific Committee on Oceanic Research / International Association for the
     Physical Sciences of the Oceans, Working Group 127); C wrapper code and R code
-    (c) 2015-2017 Dan Kelley and Clark Richards
+    (c) 2015-2019 Dan Kelley and Clark Richards
 Maintainer: Dan Kelley <dan.kelley@dal.ca>
 Depends:
     R (>= 2.15),
@@ -25,5 +25,5 @@ LazyLoad: yes
 LazyData: no
 Packaged: Dan Kelley
 Encoding: UTF-8
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr
