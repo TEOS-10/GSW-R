@@ -39,3 +39,4 @@ expect_equal(e/1e4, c(-1.362572315008330, -1.710375005915343, -1.628083272702224
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_Helmholtz_energy_ice.html}
 }
+\concept{things related to energy}

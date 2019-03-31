@@ -58,3 +58,5 @@ Other things related to salinity: \code{\link{gsw_C_from_SP}},
 
 Other things related to conductivity: \code{\link{gsw_C_from_SP}}
 }
+\concept{things related to conductivity}
+\concept{things related to salinity}

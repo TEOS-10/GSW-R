@@ -2138,6 +2138,79 @@ gsw_geo_strf_dyn_height <- function(SA, CT, p, p_ref=0)
     rval
 }
 
+#' Geostrophic Dynamic Height Anomaly [TEST VERSION]
+#'
+#' @description
+#' This calculates a geopotential anomaly, called either the
+#' dynamic height anomaly or the geostrophic streamfunction
+#' in the TEOS-10 document listed as [1] below; users should
+#' read that and the references therein for more details on
+#' the definition and its calculation here.
+#' 
+#' To get the column-integrated value in meters, take the first
+#' value of the returned vector and divide by
+#' 9.7963\eqn{m/s^2}{m/s^2}. Note that this yields an integral
+#' with the top measured pressure (not zero) as an upper limit.
+#'
+#' @details
+#'
+#' Because of the scheme used in the underlying C code, the 
+#' pressures must be in order, and must not have any repeats.
+#' Also, there must be at least 4 pressure values. Violating
+#' any of these three restrictions yields an error.
+#'
+#' If \code{p_ref} exceeds the largest \code{p} value, a vector
+#' of zeros is returned, in accordance with the underlying C code.
+#'
+#' @template teos10template
+#'
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#' @template p_reftemplate
+#' @param max_dp numeric value indicating the maximum tolerated pressure
+#' separation between levels. If any pressure step exceeds \code{max_dp}, then
+#' a uniform grid is constructed with \code{max_dp} as the interval.
+#' @param interp_method integer specifying interpolation scheme (1 for linear, 2 for pchip)
+#' @return A vector containing geopotential anomaly in
+#' \eqn{m^2/s^2}{m^2/s^2} for each level. For more on the units, see [2].
+#'
+#' @examples
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' p_ref <- 1000
+#' dh <- gsw_geo_strf_dyn_height_1(SA, CT, p, p_ref, 1, 2)
+#' ## FIXME: The following test values fail.
+#' ## expect_equal(dh, c(17.039204557769487, 14.665853784722286, 10.912861136923812,
+#' ##                 7.567928838774945, 3.393524055565328, 0))
+#' @references
+#' 1. \url{http://www.teos-10.org/pubs/gsw/html/gsw_geo_strf_dyn_height.html}
+#'
+#' 2. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition, Elsevier.
+gsw_geo_strf_dyn_height_1 <- function(SA, CT, p, p_ref=0, max_dp=1, interp_method=2)
+{
+    if (missing(SA) || missing(CT) || missing(p)) stop("must supply SA, CT, and p")
+    if (!is.vector(SA)) stop("SA must be a vector")
+    if (!is.vector(CT)) stop("CT must be a vector")
+    if (!is.vector(p)) stop("p must be a vector")
+    if (length(SA) != length(CT)) stop("SA and CT must be of the same length")
+    if (length(CT) != length(p)) stop("CT and p must be of the same length")
+    n <- length(SA)
+    if (n < 4L)
+        stop("must have at least 4 levels")
+    if (any(diff(order(p)) != 1L))
+        stop("pressures must be in order")
+    if (any(diff(p) == 0))
+        stop("repeated pressures are not permitted")
+    rval <- .C("wrap_gsw_geo_strf_dyn_height_1", NAOK=TRUE, PACKAGE="gsw",
+               SA=as.double(SA), CT=as.double(CT), p=as.double(p), p_ref=as.double(p_ref[1]),
+               max_dp=as.double(max_dp), interp_method=as.integer(interp_method),
+               n=as.integer(n), rval=double(n))$rval
+    rval
+}
+
+
 
 #' Geostrophic Dynamic Height Anomaly (Piecewise-Constant Profile)
 #'
@@ -4316,11 +4389,11 @@ gsw_SA_from_SP_Baltic <- function(SP, longitude, latitude)
 #' @template latitudetemplate
 #' @return Absolute Salinity [ g/kg ]
 #' @examples
-#' SP <- c(34.7115, 34.8912, 35.0247, 34.8436, 34.7291, 34.7197)
+#' Sstar <- c(34.7115, 34.8912, 35.0247, 34.8436, 34.7291, 34.7197)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' lat <- c(     4,       4,       4,       4,       4,       4)
 #' long <- c(  188,     188,     188,     188,     188,     188)
-#' SA <- gsw_SA_from_Sstar(SP, p, long, lat)
+#' SA <- gsw_SA_from_Sstar(Sstar, p, long, lat)
 #' expect_equal(SA, c(34.711724663585905, 34.891561223296009, 35.025594598699882,
 #'                    34.847235885385913, 34.736694493054166, 34.732387111902753))
 #' @family things related to salinity
@@ -4646,7 +4719,6 @@ gsw_specvol  <- function(SA, CT, p)
     1 / gsw_rho(SA, CT, p)
 }
 
-##====
 #' Specific Volume, alpha, and beta
 #'
 #' @template teos10template

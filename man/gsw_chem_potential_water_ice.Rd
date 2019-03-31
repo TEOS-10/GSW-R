@@ -42,3 +42,4 @@ expect_equal(pot/1e4, c(-1.340648365149857, -1.644921413491445, -1.4809916788903
 \seealso{
 Other things related to chemical potential: \code{\link{gsw_chem_potential_water_t_exact}}
 }
+\concept{things related to chemical potential}

@@ -46,3 +46,4 @@ expect_equal(sound_speed/1e3, c(1.542615803587414, 1.542703534065789, 1.53084497
 Other things related to sound: \code{\link{gsw_sound_speed_ice}},
   \code{\link{gsw_sound_speed}}
 }
+\concept{things related to sound}
