@@ -90,8 +90,8 @@ library(gsw)
 SA <- gsw_SA_from_SP(SP=35, p=100, longitude=188, latitude=4)
 ```
 
-This yields 
-`SA`=`r SA` [g/kg], which can then be used to 
+This yields
+`SA`=`r SA` [g/kg], which can then be used to
 calculate Conservative Temperature as follows.
 
 ```{r}
