@@ -9,7 +9,7 @@ gsw_latentheat_evap_t(SA, t)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{t}{in-situ temperature (ITS-90) [ deg C ]}
+\item{t}{in-situ temperature (ITS-90) [ degC ]}
 }
 \value{
 latent heat of evaporation [ J/kg ]
@@ -17,17 +17,30 @@ latent heat of evaporation [ J/kg ]
 \description{
 Latent heat of evaporation
 }
+\details{
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
+\url{https://github.com/TEOS-10/GSW-C},
+as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
+stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn stems from the GSW-Matlab system
+(\url{https://github.com/TEOS-10/GSW-Matlab}).
+Consult \url{http://www.teos-10.org} to learn more about
+these software systems, their authorships, and the science behind
+it all.
+}
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 lh = gsw_latentheat_evap_t(SA, t)
-expect_equal(lh, 1e6*c(2.429882982734836, 2.430730236218543, 2.444217294049004,
-                       2.474137411322517, 2.482156276375029, 2.488054617630297))
+expect_equal(lh/1e6, c(2.429882982734836, 2.430730236218543, 2.444217294049004,
+                     2.474137411322517, 2.482156276375029, 2.488054617630297))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_evap_t.html}
 }
 \seealso{
-\code{\link{gsw_latentheat_evap_CT}} is an analogue in terms of Conservative Temperature. For melting, see \code{\link{gsw_latentheat_melting}}.
+Other things related to latent heat: \code{\link{gsw_latentheat_evap_CT}},
+  \code{\link{gsw_latentheat_melting}}
 }
+\concept{things related to latent heat}

@@ -4,11 +4,11 @@
 **
 **  GSW TEOS-10 V3.05
 */
-
-// GSW-R { modifications needed for (a) path and (b) different data source
 #include "gswteos-10.h"
 #include "gsw_internal_const.h"
-//#include "gsw_saar_data.c"
+#if 1
+// This block is needed for GSW-R, because CRAN policies
+// mediate against storing large datasets in code.
 int gsw_nx=0;
 int gsw_ny=0;
 int gsw_nz=0;
@@ -19,7 +19,16 @@ double *ndepth_ref=NULL;
 double *saar_ref=NULL;
 double *delta_sa_ref=NULL;
 GSW_SAAR_DATA;
-// } GSW-R
+#else
+#include "gsw_saar_data.c"
+
+#ifdef _MSC_VER
+#   include <float.h>
+#   if _MSC_VER < 1900
+#       define isnan(x) _isnan(x)
+#   endif
+#endif
+#endif
 
 static double
 gsw_sum(double *x, int n)
@@ -39,10 +48,10 @@ gsw_sum(double *x, int n)
 function gsw_saar(p,long,lat)
 !==========================================================================
 
-! Calculates the Absolute Salinity Anomaly Ratio, SAAR.
+! Calculates the Absolute Salinity Anomaly Ratio, SAAR at a geographic point.
 !
 ! p      : sea pressure                                    [dbar]
-! long   : longitude                                       [deg E]     
+! long   : longitude                                       [deg E]
 ! lat    : latitude                                        [deg N]
 !
 ! gsw_saar : Absolute Salinity Anomaly Ratio               [unitless]
@@ -59,6 +68,9 @@ gsw_saar(double p, double lon, double lat)
 
 
 	return_value	 = GSW_INVALID_VALUE;
+
+    if (isnan(lat) || isnan(lon) || isnan(p))
+        return (return_value);
 
 	if (lat  <  -86.0  ||  lat  >  90.0)
 	    return (return_value);
@@ -78,21 +90,31 @@ gsw_saar(double p, double lon, double lat)
 		    lats_ref[0]));
 	if(indy0 == ny-1)
 	    indy0	= ny-2;
-
+/*
+! Look for the maximum valid "ndepth_ref" value around our point.
+! Note: invalid "ndepth_ref" values are NaNs (a hangover from the codes
+! Matlab origins), but we have replaced the NaNs with a value of "9e90",
+! hence we need an additional upper-limit check in the code below so they
+! will not be recognised as valid values.
+*/
 	ndepth_max	= -1.0;
 	for (k=0; k < 4; k++) {
 	    ndepth_index	= indy0+delj[k]+(indx0+deli[k])*ny;
-	    if (ndepth_ref[ndepth_index] > 0.0)
+	    if (ndepth_ref[ndepth_index] > 0.0 &&
+	        ndepth_ref[ndepth_index] < 1e90)
 		ndepth_max = max(ndepth_max, ndepth_ref[ndepth_index]);
 	}
-
+/*
+! If we are a long way from the ocean then there will be no valid "ndepth_ref"
+! values near the point (ie. surrounded by NaNs) - so just return SAAR = 0.0
+*/
 	if (ndepth_max == -1.0)
 	    return (0.0);
 
 	if (p > p_ref[(int)(ndepth_max)-1])
 	    p	= p_ref[(int)(ndepth_max)-1];
 	indz0	= gsw_util_indx(p_ref,nz,p);
-    
+
 	r1	= (lon-longs_ref[indx0])/(longs_ref[indx0+1]-longs_ref[indx0]);
 	s1	= (lat-lats_ref[indy0])/(lats_ref[indy0+1]-lats_ref[indy0]);
 	t1	= (p-p_ref[indz0])/(p_ref[indz0+1]-p_ref[indz0]);
@@ -147,7 +169,7 @@ function gsw_deltasa_atlas(p,lon,lat)
 ! Calculates the Absolute Salinity Anomaly atlas value, delta_SA_atlas.
 !
 ! p      : sea pressure                                    [dbar]
-! lon    : longiture                                       [deg E]     
+! lon    : longiture                                       [deg E]
 ! lat    : latitude                                        [deg N]
 !
 ! deltasa_atlas : Absolute Salinity Anomaly atlas value    [g/kg]
@@ -164,6 +186,9 @@ gsw_deltasa_atlas(double p, double lon, double lat)
 	double	r1, s1, t1, ndepth_max;
 
 	return_value	= GSW_INVALID_VALUE;
+
+    if (isnan(lat) || isnan(lon) || isnan(p))
+        return (return_value);
 
 	if (lat < -86.0  ||  lat  >  90.0)
 	    return (return_value);
@@ -183,21 +208,31 @@ gsw_deltasa_atlas(double p, double lon, double lat)
 			(lats_ref[ny-1]-lats_ref[0]));
 	if (indy0 == ny-1)
 	    indy0	= ny-2;
-
+/*
+! Look for the maximum valid "ndepth_ref" value around our point.
+! Note: invalid "ndepth_ref" values are NaNs (a hangover from the codes
+! Matlab origins), but we have replaced the NaNs with a value of "9e90",
+! hence we need an additional upper-limit check in the code below so they
+! will not be recognised as valid values.
+*/
 	ndepth_max	= -1;
 	for (k=0; k<4; k++) {
 	    ndepth_index	= indy0+delj[k]+(indx0+deli[k])*ny;
-	    if (ndepth_ref[ndepth_index] > 0.0)
+	    if (ndepth_ref[ndepth_index] > 0.0 &&
+	        ndepth_ref[ndepth_index] < 1e90)
 		ndepth_max	= max(ndepth_max, ndepth_ref[ndepth_index]);
 	}
-
+/*
+! If we are a long way from the ocean then there will be no valid "ndepth_ref"
+! values near the point (ie. surrounded by NaNs) - so deltasa_atlas = 0.0
+*/
 	if (ndepth_max == -1.0)
 	    return (0.0);
 
 	if (p > p_ref[(int)(ndepth_max)-1])
 	    p	= p_ref[(int)(ndepth_max)-1];
 	indz0	= gsw_util_indx(p_ref,nz,p);
-    
+
 	r1	= (lon-longs_ref[indx0])/
 			(longs_ref[indx0+1]-longs_ref[indx0]);
 	s1	= (lat-lats_ref[indy0])/

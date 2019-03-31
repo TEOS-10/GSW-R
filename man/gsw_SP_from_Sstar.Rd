@@ -9,11 +9,13 @@ gsw_SP_from_Sstar(Sstar, p, longitude, latitude)
 \arguments{
 \item{Sstar}{Preformed Salinity [ g/kg ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
-\item{longitude}{longitude in decimal degrees [ 0 ... +360 ] or [ -180 ... +180 ]}
+\item{longitude}{longitude in decimal degrees, positive to the east of Greenwich. (This
+is called \code{long} in the TEOS-10 Matlab code.)}
 
-\item{latitude}{latitude in decimal degrees north [ -90 ... +90 ]}
+\item{latitude}{latitude in decimal degrees, positive to the north of the equator. (This
+is called \code{lat} in the TEOS-10 Matlab code.)}
 }
 \value{
 Practical Salinity (PSS-78) [ unitless ]
@@ -21,19 +23,42 @@ Practical Salinity (PSS-78) [ unitless ]
 \description{
 Practical Salinity from Preformed Salinity
 }
+\details{
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
+\url{https://github.com/TEOS-10/GSW-C},
+as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
+stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn stems from the GSW-Matlab system
+(\url{https://github.com/TEOS-10/GSW-Matlab}).
+Consult \url{http://www.teos-10.org} to learn more about
+these software systems, their authorships, and the science behind
+it all.
+}
 \examples{
-library(testthat)
 Sstar <- c(34.7115, 34.8912, 35.0247, 34.8436, 34.7291, 34.7197)
 p <- c(         10,      50,     125,     250,     600,    1000)
 longitude <- 188
 latitude <- 4
 SP <- gsw_SP_from_Sstar(Sstar, p, longitude, latitude)
 expect_equal(SP, c(34.548646570969929, 34.727538423586189, 34.860549501859502,
-                   34.681006826476434, 34.568065697992346, 34.560023926979518)) 
+                   34.681006826476434, 34.568065697992346, 34.560023926979518))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_Sstar.html}
 }
 \seealso{
-\code{\link{gsw_Sstar_from_SP}} does the reverse; \code{\link{gsw_SA_from_Sstar}} is similar.
+Other things related to salinity: \code{\link{gsw_C_from_SP}},
+  \code{\link{gsw_SA_from_SP_Baltic}},
+  \code{\link{gsw_SA_from_SP}},
+  \code{\link{gsw_SA_from_Sstar}},
+  \code{\link{gsw_SP_from_C}},
+  \code{\link{gsw_SP_from_SA}},
+  \code{\link{gsw_SP_from_SK}},
+  \code{\link{gsw_SP_from_SR}},
+  \code{\link{gsw_SR_from_SP}},
+  \code{\link{gsw_Sstar_from_SA}},
+  \code{\link{gsw_Sstar_from_SP}},
+  \code{\link{gsw_deltaSA_from_SP}}
 }
+\concept{things related to salinity}

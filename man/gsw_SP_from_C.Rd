@@ -2,25 +2,36 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_SP_from_C}
 \alias{gsw_SP_from_C}
-\title{Convert from electrical conductivity to practical salinity}
+\title{Convert from Electrical Conductivity to Practical Salinity}
 \usage{
 gsw_SP_from_C(C, t, p)
 }
 \arguments{
 \item{C}{conductivity [ mS/cm ]}
 
-\item{t}{in-situ temperature (ITS-90) [ deg C ]}
+\item{t}{in-situ temperature (ITS-90) [ degC ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 Practical Salinity (PSS-78) [ unitless ]
 }
 \description{
-Convert from electrical conductivity to practical salinity
+Convert from Electrical Conductivity to Practical Salinity
+}
+\details{
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
+\url{https://github.com/TEOS-10/GSW-C},
+as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
+stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn stems from the GSW-Matlab system
+(\url{https://github.com/TEOS-10/GSW-Matlab}).
+Consult \url{http://www.teos-10.org} to learn more about
+these software systems, their authorships, and the science behind
+it all.
 }
 \examples{
-library(testthat)
 C <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
 t <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 p <- c(     10,      50,     125,     250,     600,    1000)
@@ -32,5 +43,20 @@ expect_equal(SP,  c(20.009869599086951, 20.265511864874270, 22.981513062527689,
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_C.html}
 }
 \seealso{
-\code{\link{gsw_C_from_SP}} does the reverse.
+Other things related to salinity: \code{\link{gsw_C_from_SP}},
+  \code{\link{gsw_SA_from_SP_Baltic}},
+  \code{\link{gsw_SA_from_SP}},
+  \code{\link{gsw_SA_from_Sstar}},
+  \code{\link{gsw_SP_from_SA}},
+  \code{\link{gsw_SP_from_SK}},
+  \code{\link{gsw_SP_from_SR}},
+  \code{\link{gsw_SP_from_Sstar}},
+  \code{\link{gsw_SR_from_SP}},
+  \code{\link{gsw_Sstar_from_SA}},
+  \code{\link{gsw_Sstar_from_SP}},
+  \code{\link{gsw_deltaSA_from_SP}}
+
+Other things related to conductivity: \code{\link{gsw_C_from_SP}}
 }
+\concept{things related to conductivity}
+\concept{things related to salinity}

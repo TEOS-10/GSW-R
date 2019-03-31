@@ -9,9 +9,9 @@ gsw_alpha_on_beta(SA, CT, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 ratio of thermal expansion coefficient to haline contraction coefficient [ (g/kg)/K ]
@@ -21,16 +21,18 @@ Thermal expansion coefficient over haline contraction coefficient,
 using the 75-term equation for specific volume.
 }
 \details{
-The present function works with a wrapper to a C function contained
-within the GSW-C system (with sourcecode at
-\url{https://github.com/TEOS-10/GSW-C}), which
-in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
-To learn more about these software systems, and about the science behind
-it all, consult \url{http://www.teos-10.org}.
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
+\url{https://github.com/TEOS-10/GSW-C},
+as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
+stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn stems from the GSW-Matlab system
+(\url{https://github.com/TEOS-10/GSW-Matlab}).
+Consult \url{http://www.teos-10.org} to learn more about
+these software systems, their authorships, and the science behind
+it all.
 }
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 p <-  c(     10,      50,     125,     250,     600,    1000)
@@ -42,5 +44,26 @@ expect_equal(alpha_on_beta, c(0.452468543022009, 0.449601695030057, 0.3871402030
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha_on_beta.html}
 }
 \seealso{
-This yields the ratio of the return values from \code{\link{gsw_alpha}} and \code{\link{gsw_beta}}, to within computational precision.
+Other things related to density: \code{\link{gsw_CT_from_rho}},
+  \code{\link{gsw_CT_maxdensity}},
+  \code{\link{gsw_SA_from_rho}},
+  \code{\link{gsw_alpha_wrt_t_exact}},
+  \code{\link{gsw_alpha_wrt_t_ice}},
+  \code{\link{gsw_alpha}},
+  \code{\link{gsw_beta_const_t_exact}},
+  \code{\link{gsw_beta}},
+  \code{\link{gsw_pot_rho_t_exact}},
+  \code{\link{gsw_rho_alpha_beta}},
+  \code{\link{gsw_rho_first_derivatives_wrt_enthalpy}},
+  \code{\link{gsw_rho_first_derivatives}},
+  \code{\link{gsw_rho_ice}}, \code{\link{gsw_rho_t_exact}},
+  \code{\link{gsw_rho}}, \code{\link{gsw_sigma0}},
+  \code{\link{gsw_sigma1}}, \code{\link{gsw_sigma2}},
+  \code{\link{gsw_sigma3}}, \code{\link{gsw_sigma4}},
+  \code{\link{gsw_specvol_alpha_beta}},
+  \code{\link{gsw_specvol_anom_standard}},
+  \code{\link{gsw_specvol_ice}},
+  \code{\link{gsw_specvol_t_exact}},
+  \code{\link{gsw_specvol}}
 }
+\concept{things related to density}

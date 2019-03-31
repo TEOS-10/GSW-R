@@ -2,32 +2,35 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_grav}
 \alias{gsw_grav}
-\title{Gravitational acceleration}
+\title{Gravitational Acceleration}
 \usage{
 gsw_grav(latitude, p = 0)
 }
 \arguments{
-\item{latitude}{latitude in decimal degress north [ -90 ... +90 ]}
+\item{latitude}{latitude in decimal degrees, positive to the north of the equator. (This
+is called \code{lat} in the TEOS-10 Matlab code.)}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 gravitational acceleration [ m/s^2 ]
 }
 \description{
-Gravitational acceleration
+Gravitational Acceleration
 }
 \details{
-The present function works with a wrapper to a C function contained
-within the GSW-C system (with sourcecode at
-\url{https://github.com/TEOS-10/GSW-C}), which
-in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
-To learn more about these software systems, and about the science behind
-it all, consult \url{http://www.teos-10.org}.
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
+\url{https://github.com/TEOS-10/GSW-C},
+as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
+stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn stems from the GSW-Matlab system
+(\url{https://github.com/TEOS-10/GSW-Matlab}).
+Consult \url{http://www.teos-10.org} to learn more about
+these software systems, their authorships, and the science behind
+it all.
 }
 \examples{
-library(testthat)
 lat <- c(-90, -60, -30, 0)
 grav <- gsw_grav(lat)
 expect_equal(grav, c(9.832186205884799, 9.819178859991149,

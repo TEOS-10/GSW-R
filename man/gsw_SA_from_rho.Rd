@@ -2,25 +2,36 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_SA_from_rho}
 \alias{gsw_SA_from_rho}
-\title{Convert from density to absolute salinity}
+\title{Compute Absolute Salinity from Density, etc}
 \usage{
 gsw_SA_from_rho(rho, CT, p)
 }
 \arguments{
 \item{rho}{seawater density [ kg/m^3 ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 Absolute Salinity [ g/kg ]
 }
 \description{
-Convert from density to absolute salinity
+Compute Absolute Salinity from Density, etc
+}
+\details{
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
+\url{https://github.com/TEOS-10/GSW-C},
+as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
+stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn stems from the GSW-Matlab system
+(\url{https://github.com/TEOS-10/GSW-Matlab}).
+Consult \url{http://www.teos-10.org} to learn more about
+these software systems, their authorships, and the science behind
+it all.
 }
 \examples{
-library(testthat)
 rho <- c(1021.8482, 1022.2647, 1024.4207, 1027.7841, 1029.8287, 1031.9916)
 CT <-c(    28.7856,   28.4329,   22.8103,   10.2600,    6.8863,    4.4036)
 p <- c(         10,        50,       125,       250,       600,      1000)
@@ -31,3 +42,27 @@ expect_equal(SA, c(34.712080120418108, 34.891723808488869, 35.026202257609505,
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_rho.html}
 }
+\seealso{
+Other things related to density: \code{\link{gsw_CT_from_rho}},
+  \code{\link{gsw_CT_maxdensity}},
+  \code{\link{gsw_alpha_on_beta}},
+  \code{\link{gsw_alpha_wrt_t_exact}},
+  \code{\link{gsw_alpha_wrt_t_ice}},
+  \code{\link{gsw_alpha}},
+  \code{\link{gsw_beta_const_t_exact}},
+  \code{\link{gsw_beta}},
+  \code{\link{gsw_pot_rho_t_exact}},
+  \code{\link{gsw_rho_alpha_beta}},
+  \code{\link{gsw_rho_first_derivatives_wrt_enthalpy}},
+  \code{\link{gsw_rho_first_derivatives}},
+  \code{\link{gsw_rho_ice}}, \code{\link{gsw_rho_t_exact}},
+  \code{\link{gsw_rho}}, \code{\link{gsw_sigma0}},
+  \code{\link{gsw_sigma1}}, \code{\link{gsw_sigma2}},
+  \code{\link{gsw_sigma3}}, \code{\link{gsw_sigma4}},
+  \code{\link{gsw_specvol_alpha_beta}},
+  \code{\link{gsw_specvol_anom_standard}},
+  \code{\link{gsw_specvol_ice}},
+  \code{\link{gsw_specvol_t_exact}},
+  \code{\link{gsw_specvol}}
+}
+\concept{things related to density}

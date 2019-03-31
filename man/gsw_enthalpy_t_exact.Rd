@@ -2,35 +2,64 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_enthalpy_t_exact}
 \alias{gsw_enthalpy_t_exact}
-\title{Specific enthalpy of seawater}
+\title{Seawater Specific Enthalpy in terms of in-situ Temperature}
 \usage{
 gsw_enthalpy_t_exact(SA, t, p)
 }
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{t}{in-situ temperature (ITS-90)  [ deg C ]}
+\item{t}{in-situ temperature (ITS-90) [ degC ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 specific enthalpy [ J/kg ]
 }
 \description{
-Specific enthalpy of seawater
+Seawater Specific Enthalpy in terms of in-situ Temperature
+}
+\details{
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
+\url{https://github.com/TEOS-10/GSW-C},
+as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
+stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn stems from the GSW-Matlab system
+(\url{https://github.com/TEOS-10/GSW-Matlab}).
+Consult \url{http://www.teos-10.org} to learn more about
+these software systems, their authorships, and the science behind
+it all.
 }
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 p <- c(      10,      50,     125,     250,     600,    1000)
 e <- gsw_enthalpy_t_exact(SA, t, p)
-expect_equal(e, 1e5*c(1.151032604783763, 1.140148036012021, 0.921799209310966,
-                      0.432553283808897, 0.330872159700175, 0.269705880448018))
+expect_equal(e/1e5, c(1.151032604783763, 1.140148036012021, 0.921799209310966,
+                    0.432553283808897, 0.330872159700175, 0.269705880448018))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_t_exact.html}
 }
 \seealso{
-\code{\link{gsw_enthalpy}} and \code{\link{gsw_dynamic_enthalpy}}
+Other things related to enthalpy: \code{\link{gsw_CT_from_enthalpy}},
+  \code{\link{gsw_dynamic_enthalpy}},
+  \code{\link{gsw_enthalpy_CT_exact}},
+  \code{\link{gsw_enthalpy_diff}},
+  \code{\link{gsw_enthalpy_first_derivatives_CT_exact}},
+  \code{\link{gsw_enthalpy_first_derivatives}},
+  \code{\link{gsw_enthalpy_ice}},
+  \code{\link{gsw_enthalpy}},
+  \code{\link{gsw_frazil_properties_potential_poly}},
+  \code{\link{gsw_frazil_properties_potential}},
+  \code{\link{gsw_pot_enthalpy_from_pt_ice_poly}},
+  \code{\link{gsw_pot_enthalpy_from_pt_ice}},
+  \code{\link{gsw_pot_enthalpy_ice_freezing_poly}},
+  \code{\link{gsw_pot_enthalpy_ice_freezing}},
+  \code{\link{gsw_pt_from_pot_enthalpy_ice_poly}},
+  \code{\link{gsw_pt_from_pot_enthalpy_ice}},
+  \code{\link{gsw_specvol_first_derivatives_wrt_enthalpy}},
+  \code{\link{gsw_specvol_first_derivatives}}
 }
+\concept{things related to enthalpy}

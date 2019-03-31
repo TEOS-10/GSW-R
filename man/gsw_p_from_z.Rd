@@ -4,17 +4,13 @@
 \alias{gsw_p_from_z}
 \title{Pressure from height (75-term equation)}
 \usage{
-gsw_p_from_z(z, latitude, geo_strf_dyn_height = 0,
-  sea_surface_geopotential = 0)
+gsw_p_from_z(z, latitude)
 }
 \arguments{
 \item{z}{height, zero at surface (but note last 2 args) and positive upwards [ m ]}
 
-\item{latitude}{latitude in decimal degrees north [ -90 ... +90 ]}
-
-\item{geo_strf_dyn_height}{dynamic height anomaly [ m^2/s^2 ]}
-
-\item{sea_surface_geopotential}{geopotential at zero sea pressure [ m^2/s^2 ]}
+\item{latitude}{latitude in decimal degrees, positive to the north of the equator. (This
+is called \code{lat} in the TEOS-10 Matlab code.)}
 }
 \value{
 sea pressure [ dbar ]
@@ -22,17 +18,29 @@ sea pressure [ dbar ]
 \description{
 Pressure from height (75-term equation)
 }
+\details{
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
+\url{https://github.com/TEOS-10/GSW-C},
+as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
+stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn stems from the GSW-Matlab system
+(\url{https://github.com/TEOS-10/GSW-Matlab}).
+Consult \url{http://www.teos-10.org} to learn more about
+these software systems, their authorships, and the science behind
+it all.
+}
 \examples{
-library(testthat)
 z <- -c(10, 50, 125, 250, 600, 1000)
 latitude <- 4
 p <- gsw_p_from_z(z, latitude)
-expect_equal(p, 1e3*c(0.010055726724518, 0.050283543374874, 0.125731858435610,
-                      0.251540299593468, 0.604210012340727, 1.007990337692001))
+expect_equal(p/1e3, c(0.010055726724518, 0.050283543374874, 0.125731858435610,
+                    0.251540299593468, 0.604210012340727, 1.007990337692001))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_p_from_z.html}
 }
 \seealso{
-This is (almost) the reverse of \code{\link{gsw_z_from_p}}, apart from the last two arguments.
+Other things related to depth: \code{\link{gsw_z_from_p}}
 }
+\concept{things related to depth}

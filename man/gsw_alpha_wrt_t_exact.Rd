@@ -9,9 +9,9 @@ gsw_alpha_wrt_t_exact(SA, t, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{t}{in-situ temperature (ITS-90)  [ deg C ]}
+\item{t}{in-situ temperature (ITS-90) [ degC ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 thermal expansion coefficient with respect to in-situ temperature [ 1/K ]
@@ -20,27 +20,49 @@ thermal expansion coefficient with respect to in-situ temperature [ 1/K ]
 Thermal expansion coefficient with respect to in-situ temperature.
 }
 \details{
-The present function works with a wrapper to a C function contained
-within the GSW-C system (with sourcecode at
-\url{https://github.com/TEOS-10/GSW-C}), which
-in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
-To learn more about these software systems, and about the science behind
-it all, consult \url{http://www.teos-10.org}.
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
+\url{https://github.com/TEOS-10/GSW-C},
+as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
+stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn stems from the GSW-Matlab system
+(\url{https://github.com/TEOS-10/GSW-Matlab}).
+Consult \url{http://www.teos-10.org} to learn more about
+these software systems, their authorships, and the science behind
+it all.
 }
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 t <-  c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 p <-  c(     10,      50,     125,     250,     600,    1000)
 alpha_wrt_t_exact <- gsw_alpha_wrt_t_exact(SA,t,p)
-expect_equal(alpha_wrt_t_exact, 1e-3*c(0.325601747227247, 0.323448083851267, 0.281413883319329,
-                                       0.172825692975230, 0.145569941503599, 0.128362986933288))
-
+expect_equal(alpha_wrt_t_exact*1e3, c(0.325601747227247, 0.323448083851267, 0.281413883319329,
+                                    0.172825692975230, 0.145569941503599, 0.128362986933288))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha_wrt_t_exact.html}
 }
 \seealso{
-\code{\link{gsw_alpha}}, \code{\link{gsw_beta}} and \code{\link{gsw_alpha_on_beta}}
+Other things related to density: \code{\link{gsw_CT_from_rho}},
+  \code{\link{gsw_CT_maxdensity}},
+  \code{\link{gsw_SA_from_rho}},
+  \code{\link{gsw_alpha_on_beta}},
+  \code{\link{gsw_alpha_wrt_t_ice}},
+  \code{\link{gsw_alpha}},
+  \code{\link{gsw_beta_const_t_exact}},
+  \code{\link{gsw_beta}},
+  \code{\link{gsw_pot_rho_t_exact}},
+  \code{\link{gsw_rho_alpha_beta}},
+  \code{\link{gsw_rho_first_derivatives_wrt_enthalpy}},
+  \code{\link{gsw_rho_first_derivatives}},
+  \code{\link{gsw_rho_ice}}, \code{\link{gsw_rho_t_exact}},
+  \code{\link{gsw_rho}}, \code{\link{gsw_sigma0}},
+  \code{\link{gsw_sigma1}}, \code{\link{gsw_sigma2}},
+  \code{\link{gsw_sigma3}}, \code{\link{gsw_sigma4}},
+  \code{\link{gsw_specvol_alpha_beta}},
+  \code{\link{gsw_specvol_anom_standard}},
+  \code{\link{gsw_specvol_ice}},
+  \code{\link{gsw_specvol_t_exact}},
+  \code{\link{gsw_specvol}}
 }
+\concept{things related to density}

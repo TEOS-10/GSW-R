@@ -9,9 +9,9 @@ gsw_sound_speed(SA, CT, p)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 sound speed [ m/s ]
@@ -20,26 +20,30 @@ sound speed [ m/s ]
 Speed of sound in seawater, using the 75-term equation for specific volume.
 }
 \details{
-The present function works with a wrapper to a C function contained
-within the GSW-C system (with sourcecode at
-\url{https://github.com/TEOS-10/GSW-C}), which
-in turn is based on the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn is based on the GSW-Matlab system (\url{https://github.com/TEOS-10/GSW-Matlab}).
-To learn more about these software systems, and about the science behind
-it all, consult \url{http://www.teos-10.org}.
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
+\url{https://github.com/TEOS-10/GSW-C},
+as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
+stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn stems from the GSW-Matlab system
+(\url{https://github.com/TEOS-10/GSW-Matlab}).
+Consult \url{http://www.teos-10.org} to learn more about
+these software systems, their authorships, and the science behind
+it all.
 }
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 p <- c(      10,      50,     125,     250,     600,    1000)
-sound_speed <- gsw_sound_speed(SA,CT,p)
-expect_equal(sound_speed, 1e3*c(1.542426412426373, 1.542558891663385, 1.530801535436184,
-                                1.494551099295314, 1.487622786765276, 1.484271672296205))
+speed <- gsw_sound_speed(SA,CT,p)
+expect_equal(speed/1e3, c(1.542426412426373, 1.542558891663385, 1.530801535436184,
+                        1.494551099295314, 1.487622786765276, 1.484271672296205))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed.html}
 }
 \seealso{
-\code{\link{gsw_sound_speed_t_exact}} for a precise formula using in-situ temperature
+Other things related to sound: \code{\link{gsw_sound_speed_ice}},
+  \code{\link{gsw_sound_speed_t_exact}}
 }
+\concept{things related to sound}

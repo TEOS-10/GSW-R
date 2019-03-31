@@ -3,7 +3,7 @@
 
 ## We do a step-by-step dismantingly of the strings, because might make
 ## it easier to change the method, if the C function format changes.
-source <- "~/src/GSW-C/gswteos-10.h"
+source <- "~/git/GSW-C/gswteos-10.h"
 C <- readLines(source)
 C2 <- C[grep("extern", C)]
 C3 <- C2[grep('extern "C" \\{', C2, invert=TRUE)]

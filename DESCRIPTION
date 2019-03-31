@@ -1,28 +1,30 @@
 Package: gsw
-Version: 1.0-4
-Date: 2017-03-07
+Version: 1.0-6
 Title: Gibbs Sea Water Functions
 Authors@R: c(person("Dan", "Kelley", role=c("aut","cre","cph"), email="dan.kelley@dal.ca", comment="C wrapper plus R code, tests, and documentation"), person("Clark", "Richards", role=c("aut","cph"), email="clark.richards@gmail.com", comment="C wrapper plus R code, tests, and documentation"), person("WG127", "SCOR/IAPSO", role=c("aut","cph"), comment="Original 'Matlab' and derived code"))
-Copyright: Original algorithms and 'Matlab'/C library (c) 2014 WG127 SCOR/IAPSO
+Copyright: Original algorithms and 'Matlab'/C library (c) 2015-2017 WG127 SCOR/IAPSO
     (Scientific Committee on Oceanic Research / International Association for the
     Physical Sciences of the Oceans, Working Group 127); C wrapper code and R code
-    (c) 2015-2017 Dan Kelley and Clark Richards
+    (c) 2015-2019 Dan Kelley and Clark Richards
 Maintainer: Dan Kelley <dan.kelley@dal.ca>
 Depends:
-    R (>= 2.15)
-Suggests: 
-    knitr,
+    R (>= 2.15),
     testthat
+Suggests:
+    knitr,
 BugReports: https://github.com/TEOS-10/GSW-R/issues
-Description: Provides an interface to the Gibbs 'SeaWater' ('TEOS-10') C library, version 3.05,
-    which derives from 'Matlab' and other code written by Working Group 127 of
-    'SCOR'/'IAPSO' (Scientific Committee on Oceanic Research / International Association
-    for the Physical Sciences of the Oceans).
+Description: Provides an interface to the Gibbs 'SeaWater' ('TEOS-10') C
+    library, version 3.05-4 (commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec', dated 2017-08-07,
+    available at <https://github.com/TEOS-10/GSW-C>, which stems from
+    'Matlab' and other code written by members of Working Group 127 of
+    'SCOR'/'IAPSO' (Scientific Committee on Oceanic Research /
+    International Association for the Physical Sciences of the Oceans).
 URL: http://teos-10.github.io/GSW-R/index.html
 License: GPL (>= 2) | file LICENSE
 LazyLoad: yes
 LazyData: no
 Packaged: Dan Kelley
 Encoding: UTF-8
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
+BuildVignettes: true
 VignetteBuilder: knitr

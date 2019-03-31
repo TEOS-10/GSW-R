@@ -9,11 +9,13 @@ gsw_Sstar_from_SP(SP, p, longitude, latitude)
 \arguments{
 \item{SP}{Practical Salinity (PSS-78) [ unitless ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
-\item{longitude}{longitude in decimal degrees [ 0 to 360 or -180 to 180]}
+\item{longitude}{longitude in decimal degrees, positive to the east of Greenwich. (This
+is called \code{long} in the TEOS-10 Matlab code.)}
 
-\item{latitude}{latitude in decimal degrees [ -90 to 90 ]}
+\item{latitude}{latitude in decimal degrees, positive to the north of the equator. (This
+is called \code{lat} in the TEOS-10 Matlab code.)}
 }
 \value{
 Preformed Salinity [ g/kg ]
@@ -26,20 +28,42 @@ longitude, and latitude.
 If SP is a matrix and if its dimensions correspond to the
 lengths of longitude and latitude, then the latter are
 converted to analogous matrices with \code{\link{expand.grid}}.
+
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
+\url{https://github.com/TEOS-10/GSW-C},
+as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
+stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn stems from the GSW-Matlab system
+(\url{https://github.com/TEOS-10/GSW-Matlab}).
+Consult \url{http://www.teos-10.org} to learn more about
+these software systems, their authorships, and the science behind
+it all.
 }
 \examples{
-library(testthat)
 SP <-   c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
 p <-    c(     10,      50,     125,     250,     600,    1000)
 lat <-  c(      4,       4,       4,       4,       4,       4)
 long <- c(    188,     188,     188,     188,     188,     188)
 Sstar <- gsw_Sstar_from_SP(SP,p,long,lat)
 expect_equal(Sstar, c(34.711553680880769, 34.891161395333754, 35.024650265047370,
-                      34.843593141519356, 34.729033995955525, 34.719675962471783))   
+                      34.843593141519356, 34.729033995955525, 34.719675962471783))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_Sstar_from_SP.html}
 }
 \seealso{
-\code{\link{gsw_SP_from_Sstar}} does the reverse; \code{\link{gsw_Sstar_from_SA}} is similar.
+Other things related to salinity: \code{\link{gsw_C_from_SP}},
+  \code{\link{gsw_SA_from_SP_Baltic}},
+  \code{\link{gsw_SA_from_SP}},
+  \code{\link{gsw_SA_from_Sstar}},
+  \code{\link{gsw_SP_from_C}},
+  \code{\link{gsw_SP_from_SA}},
+  \code{\link{gsw_SP_from_SK}},
+  \code{\link{gsw_SP_from_SR}},
+  \code{\link{gsw_SP_from_Sstar}},
+  \code{\link{gsw_SR_from_SP}},
+  \code{\link{gsw_Sstar_from_SA}},
+  \code{\link{gsw_deltaSA_from_SP}}
 }
+\concept{things related to salinity}

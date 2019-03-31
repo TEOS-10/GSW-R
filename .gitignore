@@ -1,3 +1,5 @@
+Meta
+doc
 .build.timestamp
 GSW-R.Rproj
 *.swp
@@ -8,9 +10,8 @@ src/*.rds
 .Rproj.user
 vignettes/gsw.R
 vignettes/gsw.bbl
-<<<<<<< HEAD
 .RData
 .Rhistory
-=======
->>>>>>> 305
-inst/doc
+.DS_Store
+.Rapp.history
+vignettes/*.md

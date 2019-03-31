@@ -1,3 +1,5 @@
+^Meta$
+^doc$
 .travis.yml
 create_data
 README_developer.md
@@ -12,3 +14,5 @@ src/*.o$
 developer
 
 man-roxygen
+issues
+^cran-comments\.md$

@@ -9,22 +9,33 @@ gsw_melting_ice_into_seawater(SA, CT, p, w_Ih, t_Ih)
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{CT}{Conservative Temperature [ deg C ]}
+\item{CT}{Conservative Temperature [ degC ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
 \item{w_Ih}{initial mass fraction (ice) / (water + ice)}
 
-\item{t_Ih}{initial temperature of ice [ deg C ]}
+\item{t_Ih}{initial temperature of ice [ degC ]}
 }
 \value{
-list containing SA_final, CT_final and w_Ih_final
+a list containing \code{SA_final}, \code{CT_final} and \code{w_Ih_final}.
 }
 \description{
 Calculate properties related to ice melting in seawater
 }
+\details{
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
+\url{https://github.com/TEOS-10/GSW-C},
+as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
+stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn stems from the GSW-Matlab system
+(\url{https://github.com/TEOS-10/GSW-Matlab}).
+Consult \url{http://www.teos-10.org} to learn more about
+these software systems, their authorships, and the science behind
+it all.
+}
 \examples{
-library(testthat)
 SA <- c(  34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(   4.7856,  2.4329,  1.8103,  1.2600,  0.6886,  0.4403)
 p <- c(        10,      50,     125,     250,     600,    1000)
@@ -39,8 +50,4 @@ expect_equal(r$w_Ih_final, rep(0, 6))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_into_seawater.html}
-}
-\seealso{
-Other things related to ice: \code{\link{gsw_cp_ice}},
-  \code{\link{gsw_enthalpy_ice}}, \code{\link{gsw_rho_ice}}
 }

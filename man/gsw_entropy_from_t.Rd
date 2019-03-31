@@ -2,38 +2,52 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_entropy_from_t}
 \alias{gsw_entropy_from_t}
-\title{Specific entropy as a function of in-situ temperature and pressure}
+\title{Specific Entropy i.t.o. Absolute Salinity, Temperature, and Pressure}
 \usage{
 gsw_entropy_from_t(SA, t, p)
 }
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{t}{in-situ temperature (ITS-90) [ deg C ]}
+\item{t}{in-situ temperature (ITS-90) [ degC ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 specific entropy [ J/(kg*K) ]
 }
 \description{
-Calculates specific entropy given Absolute Salinity, in-situ
+Calculates specific entropy in terms of Absolute Salinity, in-situ
 temperature and pressure.
 }
 \details{
-The related function gsw_entropy_from_CT() is not provided
-in the C library, although it is available in the (later-
-versioned) Matlab library.
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
+\url{https://github.com/TEOS-10/GSW-C},
+as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
+stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn stems from the GSW-Matlab system
+(\url{https://github.com/TEOS-10/GSW-Matlab}).
+Consult \url{http://www.teos-10.org} to learn more about
+these software systems, their authorships, and the science behind
+it all.
 }
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 p <- c(      10,      50,     125,     250,     600,    1000)
 e <- gsw_entropy_from_t(SA, t, p)
-expect_equal(e, 100*c(4.003894252787245, 3.954381784340642, 3.198664981986740,
-                      1.467908815899072, 0.986473408657975, 0.627915087346090))
+expect_equal(e/1e2, c(4.003894252787245, 3.954381784340642, 3.198664981986740,
+                    1.467908815899072, 0.986473408657975, 0.627915087346090))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_from_t.html}
 }
+\seealso{
+Other things related to entropy: \code{\link{gsw_CT_from_entropy}},
+  \code{\link{gsw_entropy_first_derivatives}},
+  \code{\link{gsw_entropy_from_pt}},
+  \code{\link{gsw_entropy_ice}},
+  \code{\link{gsw_pt_from_entropy}}
+}
+\concept{things related to entropy}

@@ -2,23 +2,34 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_CT_from_pt}
 \alias{gsw_CT_from_pt}
-\title{Conservative Temperature from potential temperature}
+\title{Conservative Temperature from Potential Temperature}
 \usage{
 gsw_CT_from_pt(SA, pt)
 }
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{pt}{potential temperature (ITS-90) [ deg C ]}
+\item{pt}{potential temperature (ITS-90) [ degC ]}
 }
 \value{
-Conservative Temperature [ deg C ]
+Conservative Temperature [ degC ]
 }
 \description{
-Conservative Temperature from potential temperature
+Conservative Temperature from Potential Temperature
+}
+\details{
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
+\url{https://github.com/TEOS-10/GSW-C},
+as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
+stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn stems from the GSW-Matlab system
+(\url{https://github.com/TEOS-10/GSW-Matlab}).
+Consult \url{http://www.teos-10.org} to learn more about
+these software systems, their authorships, and the science behind
+it all.
 }
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 pt <- c(28.7832, 28.4209, 22.7850, 10.2305,  6.8292,  4.3245)
 CT <- gsw_CT_from_pt(SA, pt)
@@ -27,7 +38,4 @@ expect_equal(CT, c(28.809923015982083, 28.439144260767169, 22.786246608464264,
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_pt.html}
-}
-\seealso{
-\code{\link{gsw_CT_from_t}} calculates Conservative Temperature from in-situ temperature
 }

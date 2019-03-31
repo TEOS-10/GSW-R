@@ -2,32 +2,45 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_latentheat_melting}
 \alias{gsw_latentheat_melting}
-\title{Latent heat of melting}
+\title{Latent Heat of Melting}
 \usage{
 gsw_latentheat_melting(SA, p)
 }
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
 
-\item{p}{sea pressure [ dbar ]}
+\item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
 \value{
 latent heat of freezing [ J/kg ]
 }
 \description{
-Latent heat of melting
+Latent Heat of Melting
+}
+\details{
+The present R function works with a wrapper to a C function contained
+within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
+\url{https://github.com/TEOS-10/GSW-C},
+as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
+stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
+which in turn stems from the GSW-Matlab system
+(\url{https://github.com/TEOS-10/GSW-Matlab}).
+Consult \url{http://www.teos-10.org} to learn more about
+these software systems, their authorships, and the science behind
+it all.
 }
 \examples{
-library(testthat)
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 p <- c(      10,      50,     125,     250,     600,    1000)
 lh <- gsw_latentheat_melting(SA, p)
-expect_equal(lh, 1e5*c(3.299496680271213, 3.298613352397986, 3.297125622834541,
-                       3.294973895330757, 3.288480445559747, 3.280715862416388))
+expect_equal(lh/1e5, c(3.299496680271213, 3.298613352397986, 3.297125622834541,
+                     3.294973895330757, 3.288480445559747, 3.280715862416388))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_melting.html}
 }
 \seealso{
-\code{\link{gsw_latentheat_evap_CT}} and \code{\link{gsw_latentheat_evap_t}} are analogues for evaporation.
+Other things related to latent heat: \code{\link{gsw_latentheat_evap_CT}},
+  \code{\link{gsw_latentheat_evap_t}}
 }
+\concept{things related to latent heat}
