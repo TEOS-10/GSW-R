@@ -43,3 +43,4 @@ expect_equal(lh/1e6, c(2.429947107462561, 2.430774073049213, 2.444220372158452,
 Other things related to latent heat: \code{\link{gsw_latentheat_evap_t}},
   \code{\link{gsw_latentheat_melting}}
 }
+\concept{things related to latent heat}

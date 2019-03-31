@@ -39,3 +39,5 @@ expect_equal(spiciness, c(5.728998558542941, 5.749940496782486, 4.16354711267111
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_spiciness0.html}
 }
+\concept{things related to spiciness
+and 2000 dbar.}

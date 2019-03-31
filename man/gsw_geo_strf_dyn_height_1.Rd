@@ -4,7 +4,8 @@
 \alias{gsw_geo_strf_dyn_height_1}
 \title{Geostrophic Dynamic Height Anomaly [TEST VERSION]}
 \usage{
-gsw_geo_strf_dyn_height_1(SA, CT, p, p_ref = 0)
+gsw_geo_strf_dyn_height_1(SA, CT, p, p_ref = 0, max_dp = 1,
+  interp_method = 2)
 }
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
@@ -14,6 +15,12 @@ gsw_geo_strf_dyn_height_1(SA, CT, p, p_ref = 0)
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
 \item{p_ref}{reference pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
+
+\item{max_dp}{numeric value indicating the maximum tolerated pressure
+separation between levels. If any pressure step exceeds \code{max_dp}, then
+a uniform grid is constructed with \code{max_dp} as the interval.}
+
+\item{interp_method}{integer specifying interpolation scheme (1 for linear, 2 for pchip)}
 }
 \value{
 A vector containing geopotential anomaly in
@@ -56,7 +63,7 @@ SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 p <- c(      10,      50,     125,     250,     600,    1000)
 p_ref <- 1000
-dh <- gsw_geo_strf_dyn_height_1(SA, CT, p, p_ref)
+dh <- gsw_geo_strf_dyn_height_1(SA, CT, p, p_ref, 1, 2)
 ## FIXME: The following test values fail.
 ## expect_equal(dh, c(17.039204557769487, 14.665853784722286, 10.912861136923812,
 ##                 7.567928838774945, 3.393524055565328, 0))

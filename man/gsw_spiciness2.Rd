@@ -42,3 +42,4 @@ expect_equal(spiciness, c(6.874671751873180, 6.884616399155135, 5.15445889238708
 \seealso{
 Other things related to spiciness: \code{\link{gsw_spiciness1}}
 }
+\concept{things related to spiciness}

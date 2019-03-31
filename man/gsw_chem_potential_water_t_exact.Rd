@@ -45,3 +45,4 @@ expect_equal(pot, c(-8.545561146284534, -8.008085548342105, -5.103980139874876,
 \seealso{
 Other things related to chemical potential: \code{\link{gsw_chem_potential_water_ice}}
 }
+\concept{things related to chemical potential}

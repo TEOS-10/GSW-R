@@ -2168,6 +2168,10 @@ gsw_geo_strf_dyn_height <- function(SA, CT, p, p_ref=0)
 #' @template CTtemplate
 #' @template ptemplate
 #' @template p_reftemplate
+#' @param max_dp numeric value indicating the maximum tolerated pressure
+#' separation between levels. If any pressure step exceeds \code{max_dp}, then
+#' a uniform grid is constructed with \code{max_dp} as the interval.
+#' @param interp_method integer specifying interpolation scheme (1 for linear, 2 for pchip)
 #' @return A vector containing geopotential anomaly in
 #' \eqn{m^2/s^2}{m^2/s^2} for each level. For more on the units, see [2].
 #'
@@ -2176,7 +2180,7 @@ gsw_geo_strf_dyn_height <- function(SA, CT, p, p_ref=0)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' p_ref <- 1000
-#' dh <- gsw_geo_strf_dyn_height_1(SA, CT, p, p_ref)
+#' dh <- gsw_geo_strf_dyn_height_1(SA, CT, p, p_ref, 1, 2)
 #' ## FIXME: The following test values fail.
 #' ## expect_equal(dh, c(17.039204557769487, 14.665853784722286, 10.912861136923812,
 #' ##                 7.567928838774945, 3.393524055565328, 0))
@@ -2184,7 +2188,7 @@ gsw_geo_strf_dyn_height <- function(SA, CT, p, p_ref=0)
 #' 1. \url{http://www.teos-10.org/pubs/gsw/html/gsw_geo_strf_dyn_height.html}
 #'
 #' 2. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition, Elsevier.
-gsw_geo_strf_dyn_height_1 <- function(SA, CT, p, p_ref=0)
+gsw_geo_strf_dyn_height_1 <- function(SA, CT, p, p_ref=0, max_dp=1, interp_method=2)
 {
     if (missing(SA) || missing(CT) || missing(p)) stop("must supply SA, CT, and p")
     if (!is.vector(SA)) stop("SA must be a vector")
@@ -2201,6 +2205,7 @@ gsw_geo_strf_dyn_height_1 <- function(SA, CT, p, p_ref=0)
         stop("repeated pressures are not permitted")
     rval <- .C("wrap_gsw_geo_strf_dyn_height_1", NAOK=TRUE, PACKAGE="gsw",
                SA=as.double(SA), CT=as.double(CT), p=as.double(p), p_ref=as.double(p_ref[1]),
+               max_dp=as.double(max_dp), interp_method=as.integer(interp_method),
                n=as.integer(n), rval=double(n))$rval
     rval
 }
@@ -4384,11 +4389,11 @@ gsw_SA_from_SP_Baltic <- function(SP, longitude, latitude)
 #' @template latitudetemplate
 #' @return Absolute Salinity [ g/kg ]
 #' @examples
-#' SP <- c(34.7115, 34.8912, 35.0247, 34.8436, 34.7291, 34.7197)
+#' Sstar <- c(34.7115, 34.8912, 35.0247, 34.8436, 34.7291, 34.7197)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' lat <- c(     4,       4,       4,       4,       4,       4)
 #' long <- c(  188,     188,     188,     188,     188,     188)
-#' SA <- gsw_SA_from_Sstar(SP, p, long, lat)
+#' SA <- gsw_SA_from_Sstar(Sstar, p, long, lat)
 #' expect_equal(SA, c(34.711724663585905, 34.891561223296009, 35.025594598699882,
 #'                    34.847235885385913, 34.736694493054166, 34.732387111902753))
 #' @family things related to salinity
@@ -4714,7 +4719,6 @@ gsw_specvol  <- function(SA, CT, p)
     1 / gsw_rho(SA, CT, p)
 }
 
-##====
 #' Specific Volume, alpha, and beta
 #'
 #' @template teos10template

@@ -46,3 +46,4 @@ Other things related to entropy: \code{\link{gsw_entropy_first_derivatives}},
   \code{\link{gsw_entropy_ice}},
   \code{\link{gsw_pt_from_entropy}}
 }
+\concept{things related to entropy}
