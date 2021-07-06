@@ -22,14 +22,23 @@ ratio of change in \code{SA} to change in \code{CT} [ g/kg/degC ].
 Calculate d(SA)/d(CT) for Ice Melting in Seawater (Polynomial version)
 }
 \details{
-The present R function works with a wrapper to a C function contained
-within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
-\url{https://github.com/TEOS-10/GSW-C},
-as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
-stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn stems from the GSW-Matlab system
-(\url{https://github.com/TEOS-10/GSW-Matlab}).
-Consult \url{http://www.teos-10.org} to learn more about
+This R function uses a wrapper to a C function
+contained within the GSW-C system as updated 2021-mar-27
+at \url{https://github.com/TEOS-10/GSW-C}
+with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+In turn, that C function uses data from the
+\code{library/gsw_data_v3_0.mat}
+file provided in the GSW-Matlab source code, version 3.06-11.
+Unfortunately, this version is no longer displayed on the
+teos-10.org website. Therefore, in the interests of making
+GSW-R be self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
+on 2021-jul-06, the .mat file was stored in
+the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
+used in GSW-R was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about
 these software systems, their authorships, and the science behind
 it all.
 }
@@ -39,8 +48,8 @@ CT <- c(    3.7856,   3.4329,   2.8103,   1.2600,   0.6886,  0.4403)
 p <- c(         10,       50,      125,      250,      600,    1000)
 t_Ih <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 r <- gsw_melting_ice_SA_CT_ratio_poly(SA, CT, p, t_Ih)
-expect_equal(r, c(0.373840908629278, 0.371878512745054, 0.377104658031030,
-                0.382777681212224, 0.387133812279563, 0.393947267481204))
+stopifnot(all.equal(r, c(0.373840908629278, 0.371878512745054, 0.377104658031030,
+                         0.382777681212224, 0.387133812279563, 0.393947267481204)))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_SA_CT_ratio_poly.html}

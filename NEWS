@@ -1,5 +1,7 @@
 1.0-6
-- *no changes yet*
+- remove dependence on the 'testthat' package
+- gsw_z_from_p() and gsw_p_from_z() both gain parameters geo_strf_dyn_height
+  and sea_surface_geopotential.
 
 1.0-5
 - use GSW-C version 3.05-4

@@ -26,14 +26,23 @@ Elsevier).
 Geostrophic Dynamic Height Anomaly (Piecewise-Constant Profile)
 }
 \details{
-The present R function works with a wrapper to a C function contained
-within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
-\url{https://github.com/TEOS-10/GSW-C},
-as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
-stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn stems from the GSW-Matlab system
-(\url{https://github.com/TEOS-10/GSW-Matlab}).
-Consult \url{http://www.teos-10.org} to learn more about
+This R function uses a wrapper to a C function
+contained within the GSW-C system as updated 2021-mar-27
+at \url{https://github.com/TEOS-10/GSW-C}
+with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+In turn, that C function uses data from the
+\code{library/gsw_data_v3_0.mat}
+file provided in the GSW-Matlab source code, version 3.06-11.
+Unfortunately, this version is no longer displayed on the
+teos-10.org website. Therefore, in the interests of making
+GSW-R be self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
+on 2021-jul-06, the .mat file was stored in
+the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
+used in GSW-R was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about
 these software systems, their authorships, and the science behind
 it all.
 }
@@ -42,10 +51,10 @@ SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 delta_p <- c(10,      40,      75,     125,     350,     400)
 r <- gsw_geo_strf_dyn_height_pc(SA, CT, delta_p)
-expect_equal(r$dyn_height, c(-0.300346215853487, -1.755165998114308, -4.423531083131365,
-                           -6.816659136254657, -9.453175257818430, -12.721009624991439))
-expect_equal(r$p_mid/1e2, c(0.050000000000000, 0.300000000000000, 0.875000000000000,
-                          1.875000000000000, 4.250000000000000, 8.000000000000000))
+stopifnot(all.equal(r$dyn_height, c(-0.300346215853487, -1.755165998114308, -4.423531083131365,
+                                    -6.816659136254657, -9.453175257818430, -12.721009624991439)))
+stopifnot(all.equal(r$p_mid/1e2, c(0.050000000000000, 0.300000000000000, 0.875000000000000,
+                                   1.875000000000000, 4.250000000000000, 8.000000000000000)))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_geo_strf_dyn_height.html}

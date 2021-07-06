@@ -32,7 +32,7 @@ value of the returned vector and divide by
 with the top measured pressure (not zero) as an upper limit.
 }
 \details{
-Because of the scheme used in the underlying C code, the 
+Because of the scheme used in the underlying C code, the
 pressures must be in order, and must not have any repeats.
 Also, there must be at least 4 pressure values. Violating
 any of these three restrictions yields an error.
@@ -40,14 +40,29 @@ any of these three restrictions yields an error.
 If \code{p_ref} exceeds the largest \code{p} value, a vector
 of zeros is returned, in accordance with the underlying C code.
 
-The present R function works with a wrapper to a C function contained
-within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
-\url{https://github.com/TEOS-10/GSW-C},
-as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
-stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn stems from the GSW-Matlab system
-(\url{https://github.com/TEOS-10/GSW-Matlab}).
-Consult \url{http://www.teos-10.org} to learn more about
+Note the alteration of the test-value tolerance from a much smaller
+default. This is required because the test values derive from the
+GSW-Matlab code, which uses a different interpolation scheme than
+the GSW-C code, upon which GSW-R relies.  See References 2 and 3 for
+more on this topic.
+
+This R function uses a wrapper to a C function
+contained within the GSW-C system as updated 2021-mar-27
+at \url{https://github.com/TEOS-10/GSW-C}
+with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+In turn, that C function uses data from the
+\code{library/gsw_data_v3_0.mat}
+file provided in the GSW-Matlab source code, version 3.06-11.
+Unfortunately, this version is no longer displayed on the
+teos-10.org website. Therefore, in the interests of making
+GSW-R be self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
+on 2021-jul-06, the .mat file was stored in
+the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
+used in GSW-R was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about
 these software systems, their authorships, and the science behind
 it all.
 }
@@ -55,13 +70,20 @@ it all.
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 p <- c(      10,      50,     125,     250,     600,    1000)
-p_ref <- 1000
+p_ref <- 500
 dh <- gsw_geo_strf_dyn_height(SA, CT, p, p_ref)
-expect_equal(dh, c(17.039204557769487, 14.665853784722286, 10.912861136923812,
-                 7.567928838774945, 3.393524055565328, 0))
+# NOTE: see Details for the reason for the coarse tolerance.
+stopifnot(all.equal(dh,
+    c(12.172172845782585, 9.797739925848624, 6.070940749148281,
+      3.042891445395256, -1.078872239804912, -4.656953829254061),
+    tolerance=0.02))
+
 }
 \references{
 1. \url{http://www.teos-10.org/pubs/gsw/html/gsw_geo_strf_dyn_height.html}
-
-2. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition, Elsevier.
+2. \url{https://github.com/TEOS-10/GSW-R/issues/47}
+3. Barker, Paul M., and Trevor J. McDougall.
+"Two Interpolation Methods Using Multiply-Rotated Piecewise Cubic Hermite Interpolating Polynomials."
+Journal of Atmospheric and Oceanic Technology 37, no. 4 (April 2020): 605–19.
+\url{https://doi.org/10.1175/JTECH-D-19-0211.1}.
 }

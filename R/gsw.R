@@ -8,7 +8,7 @@
 #'
 #' @description
 #' Provides an R interface to the TEOS-10 / GSW (Gibbs Sea Water) library,
-#' partly for use by the \code{oce} package (see \url{http://dankelley.github.io/oce})
+#' partly for use by the \code{oce} package (see \url{https://dankelley.github.io/oce})
 #' and partly for general use. It is assumed that users are familiar with
 #' the science and methodology of GSW, and that the package vignette
 #' (obtained by typing \code{vignette("gsw")} in an R window) provides
@@ -179,8 +179,8 @@ argfix <- function(list)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' lr <- gsw_adiabatic_lapse_rate_from_CT(SA, CT, p)
-#' expect_equal(lr*1e7, c(0.240199646230069, 0.238457486976761, 0.203635157319712,
-#'                      0.119829566859790, 0.100052760967308, 0.087773070307283))
+#' stopifnot(all.equal(lr*1e7, c(0.240199646230069, 0.238457486976761, 0.203635157319712,
+#'                               0.119829566859790, 0.100052760967308, 0.087773070307283)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_from_CT.html}
 gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
@@ -210,8 +210,8 @@ gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
 #' t  <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' p <- c(       10,       50,      125,      250,      600,    1000)
 #' lr <- gsw_adiabatic_lapse_rate_ice(t, p)
-#' expect_equal(lr*1e7, c(0.218777853913651, 0.216559115188599, 0.216867659957613,
-#'                      0.216988337914416, 0.217182707402780, 0.218100558740840))
+#' stopifnot(all.equal(lr*1e7, c(0.218777853913651, 0.216559115188599, 0.216867659957613,
+#'                               0.216988337914416, 0.217182707402780, 0.218100558740840)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_ice.html}
@@ -245,8 +245,8 @@ gsw_adiabatic_lapse_rate_ice <- function(t, p)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' alpha <- gsw_alpha(SA,CT,p)
-#' expect_equal(alpha*1e3, c( 0.324464211877393, 0.322610094680523, 0.281335030247435,
-#'                         0.173529986885424, 0.146898108553385, 0.130265123640082))
+#' stopifnot(all.equal(alpha*1e3, c(0.324464211877393, 0.322610094680523, 0.281335030247435,
+#'                                  0.173529986885424, 0.146898108553385, 0.130265123640082)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha.html}
@@ -280,8 +280,8 @@ gsw_alpha <- function(SA, CT, p)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' alpha_on_beta <- gsw_alpha_on_beta(SA,CT,p)
-#' expect_equal(alpha_on_beta, c(0.452468543022009, 0.449601695030057, 0.387140203094424,
-#'                               0.230778871228268, 0.193747796234162, 0.170946048860385))
+#' stopifnot(all.equal(alpha_on_beta, c(0.452468543022009, 0.449601695030057, 0.387140203094424,
+#'                                      0.230778871228268, 0.193747796234162, 0.170946048860385)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha_on_beta.html}
@@ -314,8 +314,9 @@ gsw_alpha_on_beta <- function(SA, CT, p)
 #' t <-  c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' alpha_wrt_t_exact <- gsw_alpha_wrt_t_exact(SA,t,p)
-#' expect_equal(alpha_wrt_t_exact*1e3, c(0.325601747227247, 0.323448083851267, 0.281413883319329,
-#'                                     0.172825692975230, 0.145569941503599, 0.128362986933288))
+#' stopifnot(all.equal(alpha_wrt_t_exact*1e3,
+#'     c(0.325601747227247, 0.323448083851267, 0.281413883319329,
+#'     0.172825692975230, 0.145569941503599, 0.128362986933288)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_alpha_wrt_t_exact.html}
@@ -346,8 +347,8 @@ gsw_alpha_wrt_t_exact <- function(SA, t, p)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' p <-  c(     10,       50,      125,      250,      600,    1000)
 #' alpha <- gsw_alpha_wrt_t_ice(t, p)
-#' expect_equal(alpha*1e3, c(0.154472408751279, 0.153041866100900, 0.153232698269327,
-#'                         0.153297634665747, 0.153387461617896, 0.153938395452558))
+#' stopifnot(all.equal(alpha*1e3, c(0.154472408751279, 0.153041866100900, 0.153232698269327,
+#'                                  0.153297634665747, 0.153387461617896, 0.153938395452558)))
 #' @family things related to density
 ## @family things related to ice
 #' @references
@@ -382,8 +383,8 @@ gsw_alpha_wrt_t_ice <- function(t, p)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' beta <- gsw_beta(SA,CT,p)
-#' expect_equal(beta, 1e-3*c(0.717521909550091, 0.717657376442386, 0.726169785748549,
-#'                           0.750420924314564, 0.754903052075032, 0.756841573481865))
+#' stopifnot(all.equal(beta, 1e-3*c(0.717521909550091, 0.717657376442386, 0.726169785748549,
+#'                                  0.750420924314564, 0.754903052075032, 0.756841573481865)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta.html}
@@ -416,8 +417,8 @@ gsw_beta <- function(SA, CT, p)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' b <- gsw_beta_const_t_exact(SA, t, p)
-#' expect_equal(b*1e3, c(0.731120837010429, 0.731071779078011, 0.736019128913071,
-#'                     0.753810501711847, 0.757259405338257, 0.758649268096996))
+#' stopifnot(all.equal(b*1e3, c(0.731120837010429, 0.731071779078011, 0.736019128913071,
+#'                              0.753810501711847, 0.757259405338257, 0.758649268096996)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_beta_const_t_exact.html}
@@ -450,8 +451,8 @@ gsw_beta_const_t_exact <- function(SA, t, p)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' cabbeling <- gsw_cabbeling(SA,CT,p)
-#' expect_equal(cabbeling*1e4, c(0.086645721047423, 0.086837829466794, 0.092525582052438,
-#'                             0.108884336975401, 0.112971197222338, 0.115483896148927))
+#' stopifnot(all.equal(cabbeling*1e4, c(0.086645721047423, 0.086837829466794, 0.092525582052438,
+#'                                      0.108884336975401, 0.112971197222338, 0.115483896148927)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_cabbeling.html}
 gsw_cabbeling <- function(SA, CT, p)
@@ -486,8 +487,8 @@ gsw_cabbeling <- function(SA, CT, p)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' C <- gsw_C_from_SP(SP, t, p)
-#' expect_equal(C, c(56.412599581571186, 56.316185602699953, 50.670369333973944,
-#'                   38.134518936104350, 35.056577637635257, 32.986550607990118))
+#' stopifnot(all.equal(C, c(56.412599581571186, 56.316185602699953, 50.670369333973944,
+#'                          38.134518936104350, 35.056577637635257, 32.986550607990118)))
 #' @family things related to salinity
 #' @family things related to conductivity
 #' @references
@@ -517,8 +518,8 @@ gsw_C_from_SP <- function(SP, t, p)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' p <- c(      10,       50,      125,      250,      600,      1000)
 #' pot <- gsw_chem_potential_water_ice(t, p)
-#' expect_equal(pot/1e4, c(-1.340648365149857, -1.644921413491445, -1.480991678890353,
-#'                       -1.272436055728805, -0.711509477199393, 0.045575390357792))
+#' stopifnot(all.equal(pot/1e4, c(-1.340648365149857, -1.644921413491445, -1.480991678890353,
+#'                                -1.272436055728805, -0.711509477199393, 0.045575390357792)))
 #' @family things related to chemical potential
 ## @family things related to ice
 #' @references
@@ -550,8 +551,8 @@ gsw_chem_potential_water_ice <- function(t, p)
 #' t <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,       50,      125,      250,      600,      1000)
 #' pot <- gsw_chem_potential_water_t_exact(SA, t, p)
-#' expect_equal(pot, c(-8.545561146284534, -8.008085548342105, -5.103980139874876,
-#'                   -0.634067782745442, 3.335566803473286, 7.555434445971858))
+#' stopifnot(all.equal(pot, c(-8.545561146284534, -8.008085548342105, -5.103980139874876,
+#'                            -0.634067782745442, 3.335566803473286, 7.555434445971858)))
 #' @family things related to chemical potential
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_chem_potential_water_t_exact.html}
@@ -585,8 +586,8 @@ gsw_chem_potential_water_t_exact <- function(SA, t, p)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' cp <- gsw_cp_ice(t, p)
-#' expect_equal(cp, c(2017.314262094657, 1997.830122682709, 2002.281331375396,
-#'                  2006.127319545421, 2015.676303959609, 2033.308170371559))
+#' stopifnot(all.equal(cp, c(2017.314262094657, 1997.830122682709, 2002.281331375396,
+#'                           2006.127319545421, 2015.676303959609, 2033.308170371559)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_cp_ice.html}
 gsw_cp_ice <- function(t, p)
@@ -616,8 +617,8 @@ gsw_cp_ice <- function(t, p)
 #' t <-  c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' cp_t_exact <- gsw_cp_t_exact(SA, t, p)
-#' expect_equal(cp_t_exact/1e3, c(4.002888003958537, 4.000980283927373, 3.995546468894633,
-#'                              3.985076769021370, 3.973593843482723, 3.960184084786622))
+#' stopifnot(all.equal(cp_t_exact/1e3, c(4.002888003958537, 4.000980283927373, 3.995546468894633,
+#'                                       3.985076769021370, 3.973593843482723, 3.960184084786622)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_cp_t_exact.html}
 gsw_cp_t_exact <- function(SA, t, p)
@@ -648,10 +649,12 @@ gsw_cp_t_exact <- function(SA, t, p)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' pt <- c(28.7832, 28.4209, 22.7850, 10.2305,  6.8292,  4.3245)
 #' r <- gsw_CT_first_derivatives(SA, pt)
-#' expect_equal(r$CT_SA, c(-0.041981092877806, -0.041558140199508, -0.034739209004865,
-#'                       -0.018711103772892, -0.014075941811725, -0.010571716552295))
-#' expect_equal(r$CT_pt, c(1.002814937296636, 1.002554817053239, 1.001645140295163,
-#'                       1.000003771100520, 0.999716359504731, 0.999474326580093))
+#' stopifnot(all.equal(r$CT_SA,
+#'     c(-0.041981092877806, -0.041558140199508, -0.034739209004865,
+#'       -0.018711103772892, -0.014075941811725, -0.010571716552295)))
+#' stopifnot(all.equal(r$CT_pt,
+#'     c(1.002814937296636, 1.002554817053239, 1.001645140295163,
+#'       1.000003771100520, 0.999716359504731, 0.999474326580093)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_first_derivatives.html}
 gsw_CT_first_derivatives <- function(SA, pt)
@@ -691,12 +694,15 @@ gsw_CT_first_derivatives <- function(SA, pt)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_CT_first_derivatives_wrt_t_exact(SA, t, p)
-#' expect_equal(r$CT_SA_wrt_t, c(-0.041988694538987, -0.041596549088952, -0.034853545749326,
-#'                             -0.019067140454607, -0.015016439826591, -0.012233725491373))
-#' expect_equal(r$CT_t_wrt_t, c(1.002752642867571, 1.002243118597902, 1.000835702767227,
-#'                            0.998194915250648, 0.995219303532390, 0.991780205482695))
-#' expect_equal(r$CT_p_wrt_t/1e-7, c(-0.241011880838437, -0.239031676279078, -0.203649928441505,
-#'                                 -0.119370679226136, -0.099140832825342, -0.086458168643579))
+#' stopifnot(all.equal(r$CT_SA_wrt_t,
+#'     c(-0.041988694538987, -0.041596549088952, -0.034853545749326,
+#'       -0.019067140454607, -0.015016439826591, -0.012233725491373)))
+#' stopifnot(all.equal(r$CT_t_wrt_t,
+#'     c(1.002752642867571, 1.002243118597902, 1.000835702767227,
+#'       0.998194915250648, 0.995219303532390, 0.991780205482695)))
+#' stopifnot(all.equal(r$CT_p_wrt_t/1e-7,
+#'     c(-0.241011880838437, -0.239031676279078, -0.203649928441505,
+#'       -0.119370679226136, -0.099140832825342, -0.086458168643579)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_first_derivatives_wrt_t_exact.html}
 gsw_CT_first_derivatives_wrt_t_exact <- function(SA, t, p)
@@ -734,8 +740,8 @@ gsw_CT_first_derivatives_wrt_t_exact <- function(SA, t, p)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' saturation_fraction <- 1
 #' CT <- gsw_CT_freezing(SA, p, saturation_fraction)
-#' expect_equal(CT, c(-1.899683776424096, -1.940791867869104, -2.006240664432488,
-#'                  -2.092357761318778, -2.359300831770506, -2.677162675412748))
+#' stopifnot(all.equal(CT, c(-1.899683776424096, -1.940791867869104, -2.006240664432488,
+#'                           -2.092357761318778, -2.359300831770506, -2.677162675412748)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing.html}
@@ -769,10 +775,12 @@ gsw_CT_freezing <- function(SA, p, saturation_fraction=1)
 #' p <- c(                       10,      50,     125,     250,     600,    1000)
 #' saturation_fraction <- c(      1,     0.8,     0.6,     0.5,     0.4,       0)
 #' r <- gsw_CT_freezing_first_derivatives(SA, p, saturation_fraction)
-#' expect_equal(r$CTfreezing_SA, c(-0.058193253897272, -0.058265158334170, -0.058345661671901,
-#'                               -0.058373842446463, -0.058534544740846, -0.058730846361252))
-#' expect_equal(r$CTfreezing_p/1e-7, c(-0.765300390432684, -0.766942996466485, -0.769892679988284,
-#'                                   -0.774561011527902, -0.787769143040504, -0.802771548245855))
+#' stopifnot(all.equal(r$CTfreezing_SA,
+#'     c(-0.058193253897272, -0.058265158334170, -0.058345661671901,
+#'      -0.058373842446463, -0.058534544740846, -0.058730846361252)))
+#' stopifnot(all.equal(r$CTfreezing_p/1e-7,
+#'     c(-0.765300390432684, -0.766942996466485, -0.769892679988284,
+#'       -0.774561011527902, -0.787769143040504, -0.802771548245855)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing_first_derivatives.html}
@@ -811,10 +819,12 @@ gsw_CT_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)
 #' p <- c(                       10,      50,     125,     250,     600,    1000)
 #' saturation_fraction <- c(      1,     0.8,     0.6,     0.5,     0.4,       0)
 #' r <- gsw_CT_freezing_first_derivatives_poly(SA, p, saturation_fraction)
-#' expect_equal(r$CTfreezing_SA, c(-0.058191181082769, -0.058263310660779, -0.058343573188907,
-#'                               -0.058370514075271, -0.058528023214462, -0.058722959729433))
-#' expect_equal(r$CTfreezing_p/1e-7, c(-0.765690732336706, -0.767310677213890, -0.770224214219328,
-#'                                   -0.774843488962665, -0.787930403016584, -0.802821704643775))
+#' stopifnot(all.equal(r$CTfreezing_SA,
+#'     c(-0.058191181082769, -0.058263310660779, -0.058343573188907,
+#'      -0.058370514075271, -0.058528023214462, -0.058722959729433)))
+#' stopifnot(all.equal(r$CTfreezing_p/1e-7,
+#'     c(-0.765690732336706, -0.767310677213890, -0.770224214219328,
+#'      -0.774843488962665, -0.787930403016584, -0.802821704643775)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing_first_derivatives_poly.html}
@@ -849,8 +859,8 @@ gsw_CT_freezing_first_derivatives_poly <- function(SA, p, saturation_fraction=1)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' saturation_fraction <- 1
 #' CT_freezing <- gsw_CT_freezing(SA, p, saturation_fraction)
-#' expect_equal(CT_freezing, c(-1.899683776424096, -1.940791867869104, -2.006240664432488,
-#'                             -2.092357761318778, -2.359300831770506, -2.677162675412748))
+#' stopifnot(all.equal(CT_freezing, c(-1.899683776424096, -1.940791867869104, -2.006240664432488,
+#'                                    -2.092357761318778, -2.359300831770506, -2.677162675412748)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_freezing_poly.html}
@@ -882,8 +892,8 @@ gsw_CT_freezing_poly <- function(SA, p, saturation_fraction=1)
 #' p <- c(       10,        50,       125,       250,       600,      1000)
 #' pt <- c(28.7832, 28.4209, 22.7850, 10.2305,  6.8292,  4.3245)
 #' CT <- gsw_CT_from_enthalpy(SA, h, p)
-#' expect_equal(CT, c(28.809854569021972, 28.439026483379287, 22.786196534098817,
-#'   10.226106994920777, 6.827159682675204, 4.323428660306681))
+#' stopifnot(all.equal(CT, c(28.809854569021972, 28.439026483379287, 22.786196534098817,
+#'                           10.226106994920777, 6.827159682675204, 4.323428660306681)))
 #' @family things related to enthalpy
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_enthalpy.html}
@@ -912,8 +922,8 @@ gsw_CT_from_enthalpy <- function(SA, h, p)
 #' SA <- c(      34.7118,  34.8915,  35.0256,  34.8472, 34.7366, 34.7324)
 #' entropy <- c(400.3892, 395.4378, 319.8668, 146.7910, 98.6471, 62.7919)
 #' CT <- gsw_CT_from_entropy(SA, entropy)
-#' expect_equal(CT, c(28.809902787278070, 28.439199226786918, 22.786199266954270,
-#'                  10.226197672488652, 6.827196739780282, 4.323602945446461))
+#' stopifnot(all.equal(CT, c(28.809902787278070, 28.439199226786918, 22.786199266954270,
+#'                           10.226197672488652, 6.827196739780282, 4.323602945446461)))
 #' @family things related to entropy
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_entropy.html}
@@ -942,8 +952,8 @@ gsw_CT_from_entropy <- function(SA, entropy)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' pt <- c(28.7832, 28.4209, 22.7850, 10.2305,  6.8292,  4.3245)
 #' CT <- gsw_CT_from_pt(SA, pt)
-#' expect_equal(CT, c(28.809923015982083, 28.439144260767169, 22.786246608464264,
-#'                    10.226165605435785, 6.827183417643142,  4.323565182322069))
+#' stopifnot(all.equal(CT, c(28.809923015982083, 28.439144260767169, 22.786246608464264,
+#'                           10.226165605435785, 6.827183417643142,  4.323565182322069)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_pt.html}
 gsw_CT_from_pt <- function(SA, pt)
@@ -974,8 +984,8 @@ gsw_CT_from_pt <- function(SA, pt)
 #' SA <- c(   34.7118,   34.8915,   35.0256,   34.8472,   34.7366,   34.7324)
 #' p <- c(         10,        50,       125,       250,       600,      1000)
 #' r <- gsw_CT_from_rho(rho, SA, p)
-#' expect_equal(r$CT, c(28.784377302226968, 28.432402127485858, 22.808745445250068,
-#'                    10.260169334807866, 6.887336649146716, 4.404594162282834))
+#' stopifnot(all.equal(r$CT, c(28.784377302226968, 28.432402127485858, 22.808745445250068,
+#'                             10.260169334807866, 6.887336649146716, 4.404594162282834)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_rho.html}
@@ -1014,8 +1024,8 @@ gsw_CT_from_rho <- function(rho, SA, p)
 #' t <-  c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' CT <- gsw_CT_from_t(SA, t, p)
-#' expect_equal(CT, c(28.809919826700281, 28.439227816091140, 22.786176893078498,
-#'                    10.226189266620782, 6.827213633479988, 4.323575748610455))
+#' stopifnot(all.equal(CT, c(28.809919826700281, 28.439227816091140, 22.786176893078498,
+#'                           10.226189266620782, 6.827213633479988, 4.323575748610455)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_from_t.html}
 gsw_CT_from_t <- function(SA, t, p)
@@ -1050,8 +1060,8 @@ gsw_CT_from_t <- function(SA, t, p)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' CT <- gsw_CT_maxdensity(SA, p)
-#' expect_equal(CT, c(-3.731407240089855, -3.861137427731664, -4.060390602245942,
-#'                  -4.306222571955388, -5.089240667106197, -6.028034316992341))
+#' stopifnot(all.equal(CT, c(-3.731407240089855, -3.861137427731664, -4.060390602245942,
+#'                           -4.306222571955388, -5.089240667106197, -6.028034316992341)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_maxdensity.html}
@@ -1085,12 +1095,12 @@ gsw_CT_maxdensity <- function(SA, p)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' pt <- c(28.7832, 28.4209, 22.7850, 10.2305,  6.8292,  4.3245)
 #' r <- gsw_CT_second_derivatives(SA, pt)
-#' expect_equal(r$CT_SA_SA/1e-3, c(-0.060718502077064, -0.062065324400873, -0.084017055354742,
-#'                               -0.148436050120131, -0.171270386500246, -0.189920754900116))
-#' expect_equal(r$CT_SA_pt, c(-0.001197415000869, -0.001198309530139, -0.001226523296082,
-#'                          -0.001335896286481, -0.001380492698572, -0.001417751669135))
-#' expect_equal(r$CT_pt_pt/1e-3, c(0.123012754427146, 0.124662008871271, 0.140829458783443,
-#'                               0.140646803448166, 0.113684095615077, 0.082286843477998))
+#' stopifnot(all.equal(r$CT_SA_SA/1e-3, c(-0.060718502077064, -0.062065324400873, -0.084017055354742,
+#'                                        -0.148436050120131, -0.171270386500246, -0.189920754900116)))
+#' stopifnot(all.equal(r$CT_SA_pt, c(-0.001197415000869, -0.001198309530139, -0.001226523296082,
+#'                                   -0.001335896286481, -0.001380492698572, -0.001417751669135)))
+#' stopifnot(all.equal(r$CT_pt_pt/1e-3, c(0.123012754427146, 0.124662008871271, 0.140829458783443,
+#'                                        0.140646803448166, 0.113684095615077, 0.082286843477998)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_CT_second_derivatives.html}
 gsw_CT_second_derivatives <- function(SA, pt)
@@ -1130,8 +1140,8 @@ gsw_CT_second_derivatives <- function(SA, pt)
 #' lat =  c(      4,       4,       4,       4,       4,       4)
 #' long = c(    188,     188,     188,     188,     188,     188)
 #' deltaSA = gsw_deltaSA_from_SP(SP,p,long,lat)
-#' expect_equal(deltaSA, c(0.000167203365230, 0.000268836122231, 0.000665803155705,
-#'                         0.002706154619403, 0.005652977406832,  0.009444734661606))
+#' stopifnot(all.equal(deltaSA, c(0.000167203365230, 0.000268836122231, 0.000665803155705,
+#'                                0.002706154619403, 0.005652977406832,  0.009444734661606)))
 #' @family things related to salinity
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_deltaSA_from_SP.html}
@@ -1167,8 +1177,8 @@ gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' dc <- gsw_dilution_coefficient_t_exact(SA, t, p)
-#' expect_equal(dc, c(79.140034211532040, 79.104983526833820, 77.503312016847389,
-#'                  73.535062653715272, 72.483378545466564, 71.760667498673087))
+#' stopifnot(all.equal(dc, c(79.140034211532040, 79.104983526833820, 77.503312016847389,
+#'                           73.535062653715272, 72.483378545466564, 71.760667498673087)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_dilution_coefficient_t_exact.html}
 gsw_dilution_coefficient_t_exact <- function(SA, t, p)
@@ -1198,8 +1208,8 @@ gsw_dilution_coefficient_t_exact <- function(SA, t, p)
 #' CT <-c( 28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' de <- gsw_dynamic_enthalpy(SA, CT, p)
-#' expect_equal(de/1000, c(0.097864698087770, 0.489161476686235, 1.220512192086506,
-#'                       2.433731199531144, 5.833880057399701, 9.711443860944032))
+#' stopifnot(all.equal(de/1000, c(0.097864698087770, 0.489161476686235, 1.220512192086506,
+#'                                2.433731199531144, 5.833880057399701, 9.711443860944032)))
 #' @family things related to enthalpy
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
@@ -1230,8 +1240,8 @@ gsw_dynamic_enthalpy <- function(SA, CT, p)
 #' CT <-c( 28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' e <- gsw_enthalpy(SA, CT, p)
-#' expect_equal(e/1e5, c(1.151031813559086, 1.140146926828028, 0.921800138366058,
-#'                     0.432553713026279, 0.330871609742468, 0.269706841603465))
+#' stopifnot(all.equal(e/1e5, c(1.151031813559086, 1.140146926828028, 0.921800138366058,
+#'                              0.432553713026279, 0.330871609742468, 0.269706841603465)))
 #' @family things related to enthalpy
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy.html}
@@ -1262,11 +1272,11 @@ gsw_enthalpy <- function(SA, CT, p)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' e <- gsw_enthalpy_CT_exact(SA, CT, p)
-#' expect_equal(e/1e5, c(1.151031813321767, 1.140146925586514, 0.921800131787836,
-#'                     0.432553712315790, 0.330871615358722, 0.269706848807403))
+#' stopifnot(all.equal(e/1e5, c(1.151031813321767, 1.140146925586514, 0.921800131787836,
+#'                              0.432553712315790, 0.330871615358722, 0.269706848807403)))
 #' @family things related to enthalpy
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_ct_exact.html}
+#' \url{https://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_ct_exact.html}
 gsw_enthalpy_CT_exact <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -1301,8 +1311,8 @@ gsw_enthalpy_CT_exact <- function(SA, CT, p)
 #' p_shallow <- c(10,      50,     125,     250,     600,    1000)
 #' p_deep <- c(  110,     150,     225,     350,     700,    1100)
 #' ed <- gsw_enthalpy_diff(SA, CT, p_shallow, p_deep)
-#' expect_equal(ed/1e2, c(9.784180644568052, 9.780195056105020, 9.759587700515114,
-#'                        9.727552719534447, 9.708223170174454, 9.687871289079633))
+#' stopifnot(all.equal(ed/1e2, c(9.784180644568052, 9.780195056105020, 9.759587700515114,
+#'                               9.727552719534447, 9.708223170174454, 9.687871289079633)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_diff.html}
 gsw_enthalpy_diff <- function(SA, CT, p_shallow, p_deep)
@@ -1338,10 +1348,10 @@ gsw_enthalpy_diff <- function(SA, CT, p_shallow, p_deep)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' d <- gsw_enthalpy_first_derivatives(SA, CT, p)
-#' expect_equal(d$h_SA, c(-0.070223912348929, -0.351159768365102, -0.887025065692568,
-#'                      -1.829602387915694, -4.423463748270238, -7.405100077558673))
-#' expect_equal(d$h_CT/1e3, c(3.991899705530481, 3.992025640520101, 3.992210365030743,
-#'                          3.992284150250490, 3.992685389122658, 3.993014168534175))
+#' stopifnot(all.equal(d$h_SA, c(-0.070223912348929, -0.351159768365102, -0.887025065692568,
+#'                               -1.829602387915694, -4.423463748270238, -7.405100077558673)))
+#' stopifnot(all.equal(d$h_CT/1e3, c(3.991899705530481, 3.992025640520101, 3.992210365030743,
+#'                                   3.992284150250490, 3.992685389122658, 3.993014168534175)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_first_derivatives.html}
 gsw_enthalpy_first_derivatives <- function(SA, CT, p)
@@ -1390,10 +1400,10 @@ gsw_enthalpy_first_derivatives <- function(SA, CT, p)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' d <- gsw_enthalpy_first_derivatives_CT_exact(SA, CT, p)
-#' expect_equal(d$h_SA, c(-0.070224183838619, -0.351159869043798, -0.887036550157504,
-#'                      -1.829626251448858, -4.423522691827955, -7.405211691293971))
-#' expect_equal(d$h_CT/1e3, c(3.991899712269790, 3.992025674159605, 3.992210402650973,
-#'                          3.992283991748418, 3.992685275917238, 3.993014370250710))
+#' stopifnot(all.equal(d$h_SA, c(-0.070224183838619, -0.351159869043798, -0.887036550157504,
+#'                               -1.829626251448858, -4.423522691827955, -7.405211691293971)))
+#' stopifnot(all.equal(d$h_CT/1e3, c(3.991899712269790, 3.992025674159605, 3.992210402650973,
+#'                                   3.992283991748418, 3.992685275917238, 3.993014370250710)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_first_derivatives_CT_exact.html}
 gsw_enthalpy_first_derivatives_CT_exact <- function(SA, CT, p)
@@ -1434,8 +1444,8 @@ gsw_enthalpy_first_derivatives_CT_exact <- function(SA, CT, p)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' se <- gsw_enthalpy_ice(t, p)
-#' expect_equal(se/1e5, c(-3.554414597446597, -3.603380857687490, -3.583089884253586,
-#'                      -3.558998379233944, -3.494811024956881, -3.402784319238127))
+#' stopifnot(all.equal(se/1e5, c(-3.554414597446597, -3.603380857687490, -3.583089884253586,
+#'                               -3.558998379233944, -3.494811024956881, -3.402784319238127)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_ice.html}
 gsw_enthalpy_ice <- function(t, p)
@@ -1469,12 +1479,12 @@ gsw_enthalpy_ice <- function(t, p)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_enthalpy_second_derivatives(SA, CT, p)
-#' expect_equal(r$h_SA_SA, c(0.000080922482023, 0.000404963500641, 0.001059800046742,
-#'                         0.002431088963823, 0.006019611828423, 0.010225411250217))
-#' expect_equal(r$h_SA_CT, c(0.000130004715129, 0.000653614489248, 0.001877220817849,
-#'                         0.005470392103793, 0.014314756132297, 0.025195603327700))
-#' expect_equal(r$h_CT_CT, c(0.000714303909834, 0.003584401249266, 0.009718730753139,
-#'                         0.024064471995224, 0.061547884081343, 0.107493969308119))
+#' stopifnot(all.equal(r$h_SA_SA, c(0.000080922482023, 0.000404963500641, 0.001059800046742,
+#'                                  0.002431088963823, 0.006019611828423, 0.010225411250217)))
+#' stopifnot(all.equal(r$h_SA_CT, c(0.000130004715129, 0.000653614489248, 0.001877220817849,
+#'                                  0.005470392103793, 0.014314756132297, 0.025195603327700)))
+#' stopifnot(all.equal(r$h_CT_CT, c(0.000714303909834, 0.003584401249266, 0.009718730753139,
+#'                                  0.024064471995224, 0.061547884081343, 0.107493969308119)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_second_derivatives.html}
 gsw_enthalpy_second_derivatives <- function(SA, CT, p)
@@ -1516,12 +1526,12 @@ gsw_enthalpy_second_derivatives <- function(SA, CT, p)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_enthalpy_second_derivatives_CT_exact(SA, CT, p)
-#' expect_equal(r$h_SA_SA, c(0.000082767011576, 0.000414469343141, 0.001089580017293,
-#'                         0.002472193425998, 0.006103171596320, 0.010377465312463))
-#' expect_equal(r$h_SA_CT, c(0.000130320164426, 0.000655016236924, 0.001879127443985,
-#'                         0.005468695168037, 0.014315709000526, 0.025192691262061))
-#' expect_equal(r$h_CT_CT, c(0.000714365642428, 0.003584965089168, 0.009733337653703,
-#'                         0.024044402143825, 0.061449390733344, 0.107333638394904))
+#' stopifnot(all.equal(r$h_SA_SA, c(0.000082767011576, 0.000414469343141, 0.001089580017293,
+#'                                  0.002472193425998, 0.006103171596320, 0.010377465312463)))
+#' stopifnot(all.equal(r$h_SA_CT, c(0.000130320164426, 0.000655016236924, 0.001879127443985,
+#'                                  0.005468695168037, 0.014315709000526, 0.025192691262061)))
+#' stopifnot(all.equal(r$h_CT_CT, c(0.000714365642428, 0.003584965089168, 0.009733337653703,
+#'                                  0.024044402143825, 0.061449390733344, 0.107333638394904)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_second_derivatives_CT_exact.html}
 gsw_enthalpy_second_derivatives_CT_exact <- function(SA, CT, p)
@@ -1559,8 +1569,8 @@ gsw_enthalpy_second_derivatives_CT_exact <- function(SA, CT, p)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' e <- gsw_enthalpy_t_exact(SA, t, p)
-#' expect_equal(e/1e5, c(1.151032604783763, 1.140148036012021, 0.921799209310966,
-#'                     0.432553283808897, 0.330872159700175, 0.269705880448018))
+#' stopifnot(all.equal(e/1e5, c(1.151032604783763, 1.140148036012021, 0.921799209310966,
+#'                              0.432553283808897, 0.330872159700175, 0.269705880448018)))
 #' @family things related to enthalpy
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_t_exact.html}
@@ -1594,10 +1604,10 @@ gsw_enthalpy_t_exact <- function(SA, t, p)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' d <- gsw_entropy_first_derivatives(SA, CT)
-#' expect_equal(d$eta_SA, c(-0.263286800711655, -0.263977276574528, -0.255367497912925,
-#'                        -0.238066586439561, -0.234438260606436, -0.232820684341694))
-#' expect_equal(d$eta_CT, c(13.221031210083824, 13.236911191313675, 13.489004628681361,
-#'                        14.086599016583795, 14.257729576432077, 14.386429945649411))
+#' stopifnot(all.equal(d$eta_SA, c(-0.263286800711655, -0.263977276574528, -0.255367497912925,
+#'                                 -0.238066586439561, -0.234438260606436, -0.232820684341694)))
+#' stopifnot(all.equal(d$eta_CT, c(13.221031210083824, 13.236911191313675, 13.489004628681361,
+#'                                 14.086599016583795, 14.257729576432077, 14.386429945649411)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_first_derivatives.html}
 gsw_entropy_first_derivatives <- function(SA, CT)
@@ -1635,8 +1645,8 @@ gsw_entropy_first_derivatives <- function(SA, CT)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' pt <- c(28.7832, 28.4210, 22.7850, 10.2305,  6.8292,  4.3245)
 #' e <- gsw_entropy_from_pt(SA, pt)
-#' expect_equal(e/1e2, c(4.003894674443156, 3.954383994925507, 3.198674385897981,
-#'                     1.467905482842553, 0.986469100565646, 0.627913567234252))
+#' stopifnot(all.equal(e/1e2, c(4.003894674443156, 3.954383994925507, 3.198674385897981,
+#'                              1.467905482842553, 0.986469100565646, 0.627913567234252)))
 #' @family things related to entropy
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_from_pt.html}
@@ -1670,8 +1680,8 @@ gsw_entropy_from_pt <- function(SA, pt)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' e <- gsw_entropy_from_t(SA, t, p)
-#' expect_equal(e/1e2, c(4.003894252787245, 3.954381784340642, 3.198664981986740,
-#'                     1.467908815899072, 0.986473408657975, 0.627915087346090))
+#' stopifnot(all.equal(e/1e2, c(4.003894252787245, 3.954381784340642, 3.198664981986740,
+#'                              1.467908815899072, 0.986473408657975, 0.627915087346090)))
 #' @family things related to entropy
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_from_t.html}
@@ -1705,12 +1715,12 @@ gsw_entropy_from_t <- function(SA, t, p)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' r <- gsw_entropy_second_derivatives(SA, CT)
-#' expect_equal(r$eta_SA_SA, c(-0.007627718929669, -0.007591969960708, -0.007528186784540,
-#'                           -0.007455177590576, -0.007441108287466, -0.007414368396280))
-#' expect_equal(r$eta_SA_CT, c(-0.001833104216751, -0.001819473824306, -0.001580843823414,
-#'                           -0.000930111408561, -0.000717011215195, -0.000548410546830))
-#' expect_equal(r$eta_CT_CT, c(-0.043665023731109, -0.043781336189326, -0.045506114440888,
-#'                           -0.049708939454018, -0.050938690879443, -0.051875017843472))
+#' stopifnot(all.equal(r$eta_SA_SA, c(-0.007627718929669, -0.007591969960708, -0.007528186784540,
+#'                                    -0.007455177590576, -0.007441108287466, -0.007414368396280)))
+#' stopifnot(all.equal(r$eta_SA_CT, c(-0.001833104216751, -0.001819473824306, -0.001580843823414,
+#'                                    -0.000930111408561, -0.000717011215195, -0.000548410546830)))
+#' stopifnot(all.equal(r$eta_CT_CT, c(-0.043665023731109, -0.043781336189326, -0.045506114440888,
+#'                                    -0.049708939454018, -0.050938690879443, -0.051875017843472)))
 #' @template broken-test-values
 #' @template broken-test-values-family
 #' @references
@@ -1750,8 +1760,8 @@ gsw_entropy_second_derivatives <- function(SA, CT)
 #' latitude <- c(   4,    4,    4,    4,    4,    4)
 #' longitude <- c(188,  188,  188,  188,  188,  188)
 #' r <- gsw_Fdelta(p, longitude, latitude)
-#' expect_equal(r/1e-3, c(0.006472309923452, 0.010352848168433, 0.025541937543450,
-#'                      0.104348729347986, 0.218678084205081, 0.365415366571266))
+#' stopifnot(all.equal(r/1e-3, c(0.006472309923452, 0.010352848168433, 0.025541937543450,
+#'                               0.104348729347986, 0.218678084205081, 0.365415366571266)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_Fdelta.html}
 gsw_Fdelta <- function(p, longitude, latitude)
@@ -1780,8 +1790,8 @@ gsw_Fdelta <- function(p, longitude, latitude)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' p <- c(      10,       50,      125,      250,      600,      1000)
 #' e <- gsw_entropy_ice(t, p)
-#' expect_equal(e/1e3, c(-1.303663820598987, -1.324090218294577, -1.319426394193644,
-#'                     -1.315402956671801, -1.305426590579231, -1.287021035328113))
+#' stopifnot(all.equal(e/1e3, c(-1.303663820598987, -1.324090218294577, -1.319426394193644,
+#'                              -1.315402956671801, -1.305426590579231, -1.287021035328113)))
 #' @family things related to entropy
 ## @family things related to ice
 #' @references
@@ -1816,12 +1826,12 @@ gsw_entropy_ice <- function(t, p)
 #' h_bulk <- c( -4.5544e4, -4.6033e4, -4.5830e4, -4.5589e4, -4.4948e4, -4.4027e4)
 #' p <- c(             10,        50,       125,       250,       600,      1000)
 #' r <- gsw_frazil_properties(SA_bulk, h_bulk, p)
-#' expect_equal(r$SA_final, c(39.111030663000442, 39.407625769681573, 39.595789974885108,
-#'                          39.481230045372889, 39.591177095552503, 39.826467709177123))
-#' expect_equal(r$CT_final, c(-2.156311126114311, -2.204672298963783, -2.273689262333450,
-#'                          -2.363714136353600, -2.644541000680772, -2.977651291726651))
-#' expect_equal(r$w_Ih_final, c(0.112480560814322, 0.114600300867556, 0.115421108602301,
-#'                            0.117372990660305, 0.122617649983886, 0.127906590822347))
+#' stopifnot(all.equal(r$SA_final, c(39.111030663000442, 39.407625769681573, 39.595789974885108,
+#'                                   39.481230045372889, 39.591177095552503, 39.826467709177123)))
+#' stopifnot(all.equal(r$CT_final, c(-2.156311126114311, -2.204672298963783, -2.273689262333450,
+#'                                   -2.363714136353600, -2.644541000680772, -2.977651291726651)))
+#' stopifnot(all.equal(r$w_Ih_final, c(0.112480560814322, 0.114600300867556, 0.115421108602301,
+#'                                     0.117372990660305, 0.122617649983886, 0.127906590822347)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_frazil_properties.html}
@@ -1864,12 +1874,12 @@ gsw_frazil_properties <- function(SA_bulk, h_bulk, p)
 #' h_pot_bulk <- c(-4.5544e4, -4.6033e4, -4.5830e4, -4.5589e4, -4.4948e4, -4.4027e4)
 #' p <- c(                 10,        50,       125,       250,       600,      1000)
 #' r <- gsw_frazil_properties_potential(SA_bulk, h_pot_bulk, p)
-#' expect_equal(r$SA_final, c(39.098258701462051, 39.343217598625756, 39.434254585716296,
-#'                          39.159536295126657, 38.820511558004590, 38.542322667924459))
-#' expect_equal(r$CT_final, c(-2.155553336670014, -2.200844802695826, -2.264077329325076,
-#'                          -2.344567015865174, -2.598559540430464, -2.900814843304696))
-#' expect_equal(r$w_Ih_final, c(0.112190640891586, 0.113150826758543, 0.111797588975174,
-#'                            0.110122251260246, 0.105199838799201, 0.098850365110330))
+#' stopifnot(all.equal(r$SA_final, c(39.098258701462051, 39.343217598625756, 39.434254585716296,
+#'                                   39.159536295126657, 38.820511558004590, 38.542322667924459)))
+#' stopifnot(all.equal(r$CT_final, c(-2.155553336670014, -2.200844802695826, -2.264077329325076,
+#'                                   -2.344567015865174, -2.598559540430464, -2.900814843304696)))
+#' stopifnot(all.equal(r$w_Ih_final, c(0.112190640891586, 0.113150826758543, 0.111797588975174,
+#'                                     0.110122251260246, 0.105199838799201, 0.098850365110330)))
 #' @family things related to enthalpy
 ## @family things related to ice
 #' @references
@@ -1913,12 +1923,12 @@ gsw_frazil_properties_potential <- function(SA_bulk, h_pot_bulk, p)
 #' h_pot_bulk <- c(-4.5544e4, -4.6033e4, -4.5830e4, -4.5589e4, -4.4948e4, -4.4027e4)
 #' p <- c(                10,        50,       125,       250,       600,      1000)
 #' r <- gsw_frazil_properties_potential_poly(SA_bulk, h_pot_bulk, p)
-#' expect_equal(r$SA_final, c(39.098264696022831, 39.343217436835218, 39.434244243586633,
-#'                          39.159511498029801, 38.820458704205542, 38.542256756176229))
-#' expect_equal(r$CT_final, c(-2.155537691991377, -2.200841508940901, -2.264094318382661,
-#'                          -2.344613208230164, -2.598663953454472, -2.900948531145453))
-#' expect_equal(r$w_Ih_final, c(0.112190777010854, 0.113150823111566, 0.111797356032850,
-#'                            0.110121687760246, 0.105198620534670, 0.098848824039493))
+#' stopifnot(all.equal(r$SA_final, c(39.098264696022831, 39.343217436835218, 39.434244243586633,
+#'                                   39.159511498029801, 38.820458704205542, 38.542256756176229)))
+#' stopifnot(all.equal(r$CT_final, c(-2.155537691991377, -2.200841508940901, -2.264094318382661,
+#'                                   -2.344613208230164, -2.598663953454472, -2.900948531145453)))
+#' stopifnot(all.equal(r$w_Ih_final, c(0.112190777010854, 0.113150823111566, 0.111797356032850,
+#'                                     0.110121687760246, 0.105198620534670, 0.098848824039493)))
 #' @family things related to enthalpy
 ## @family things related to ice
 #' @references
@@ -1963,12 +1973,15 @@ gsw_frazil_properties_potential_poly <- function(SA_bulk, h_pot_bulk, p)
 #' p <- c(        10,        50,       125,       250,       600,      1000)
 #' w_Ih <- c(    0.9,      0.84,       0.4,      0.25,      0.05,      0.01)
 #' r <- gsw_frazil_ratios_adiabatic(SA, p, w_Ih)
-#' expect_equal(r$dSA_dCT_frazil, c(3.035152370800401, 1.932548405396193, 0.613212115809003,
-#'                                0.516103092738565, 0.436656742034200, 0.425827266533876))
-#' expect_equal(r$dSA_dP_frazil/1e-6, c(-0.197406834470366, -0.133213926580032, -0.045580136143659,
-#'                               -0.038806356507548, -0.033541272953744, -0.033350141194082))
-#' expect_equal(r$dCT_dP_frazil/1e-7, c(-0.650401727338347, -0.689317412221414, -0.743301297684333,
-#'                                    -0.751910946738026, -0.768138213038669, -0.783184728059898))
+#' stopifnot(all.equal(r$dSA_dCT_frazil,
+#'     c(3.035152370800401, 1.932548405396193, 0.613212115809003,
+#'      0.516103092738565, 0.436656742034200, 0.425827266533876)))
+#' stopifnot(all.equal(r$dSA_dP_frazil/1e-6,
+#'     c(-0.197406834470366, -0.133213926580032, -0.045580136143659,
+#'      -0.038806356507548, -0.033541272953744, -0.033350141194082)))
+#' stopifnot(all.equal(r$dCT_dP_frazil/1e-7,
+#'     c(-0.650401727338347, -0.689317412221414, -0.743301297684333,
+#'      -0.751910946738026, -0.768138213038669, -0.783184728059898)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_frazil_ratios_adiabatic.html}
@@ -2012,12 +2025,15 @@ gsw_frazil_ratios_adiabatic <- function(SA, p, w_Ih)
 #' p <- c(        10,        50,       125,       250,       600,      1000)
 #' w_Ih <- c(    0.9,      0.84,       0.4,      0.25,      0.05,      0.01)
 #' r <- gsw_frazil_ratios_adiabatic_poly(SA, p, w_Ih)
-#' expect_equal(r$dSA_dCT_frazil, c(3.035308957896530, 1.932631198810934, 0.613220785586734,
-#'                                0.516106221687200, 0.436657158542033, 0.425827675768018))
-#' expect_equal(r$dSA_dP_frazil/1e-6, c(-0.197512213108610, -0.133280971893621, -0.045599951957139,
-#'                                    -0.038820466574251, -0.033548047632788, -0.033352365425407))
-#' expect_equal(r$dCT_dP_frazil/1e-7, c(-0.650715350062703, -0.689634794137768, -0.743613932027895,
-#'                                    -0.752179782823459, -0.768292629045686, -0.783236208526200))
+#' stopifnot(all.equal(r$dSA_dCT_frazil,
+#'     c(3.035308957896530, 1.932631198810934, 0.613220785586734,
+#'      0.516106221687200, 0.436657158542033, 0.425827675768018)))
+#' stopifnot(all.equal(r$dSA_dP_frazil/1e-6,
+#'     c(-0.197512213108610, -0.133280971893621, -0.045599951957139,
+#'       -0.038820466574251, -0.033548047632788, -0.033352365425407)))
+#' stopifnot(all.equal(r$dCT_dP_frazil/1e-7,
+#'     c(-0.650715350062703, -0.689634794137768, -0.743613932027895,
+#'      -0.752179782823459, -0.768292629045686, -0.783236208526200)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_frazil_ratios_adiabatic_poly.html}
@@ -2054,8 +2070,8 @@ gsw_frazil_ratios_adiabatic_poly <- function(SA, p, w_Ih)
 #' @examples
 #' lat <- c(-90, -60, -30, 0)
 #' grav <- gsw_grav(lat)
-#' expect_equal(grav, c(9.832186205884799, 9.819178859991149,
-#'                      9.793249257048750, 9.780327000000000))
+#' stopifnot(all.equal(grav, c(9.832186205884799, 9.819178859991149,
+#'                             9.793249257048750, 9.780327000000000)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_grav.html}
 gsw_grav <- function(latitude, p=0)
@@ -2080,7 +2096,7 @@ gsw_grav <- function(latitude, p=0)
 #' in the TEOS-10 document listed as [1] below; users should
 #' read that and the references therein for more details on
 #' the definition and its calculation here.
-#' 
+#'
 #' To get the column-integrated value in meters, take the first
 #' value of the returned vector and divide by
 #' 9.7963\eqn{m/s^2}{m/s^2}. Note that this yields an integral
@@ -2088,13 +2104,19 @@ gsw_grav <- function(latitude, p=0)
 #'
 #' @details
 #'
-#' Because of the scheme used in the underlying C code, the 
+#' Because of the scheme used in the underlying C code, the
 #' pressures must be in order, and must not have any repeats.
 #' Also, there must be at least 4 pressure values. Violating
 #' any of these three restrictions yields an error.
 #'
 #' If \code{p_ref} exceeds the largest \code{p} value, a vector
 #' of zeros is returned, in accordance with the underlying C code.
+#'
+#' Note the alteration of the test-value tolerance from a much smaller
+#' default. This is required because the test values derive from the
+#' GSW-Matlab code, which uses a different interpolation scheme than
+#' the GSW-C code, upon which GSW-R relies.  See References 2 and 3 for
+#' more on this topic.
 #'
 #' @template teos10template
 #'
@@ -2109,14 +2131,21 @@ gsw_grav <- function(latitude, p=0)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
-#' p_ref <- 1000
+#' p_ref <- 500
 #' dh <- gsw_geo_strf_dyn_height(SA, CT, p, p_ref)
-#' expect_equal(dh, c(17.039204557769487, 14.665853784722286, 10.912861136923812,
-#'                  7.567928838774945, 3.393524055565328, 0))
+#' # NOTE: see Details for the reason for the coarse tolerance.
+#' stopifnot(all.equal(dh,
+#'     c(12.172172845782585, 9.797739925848624, 6.070940749148281,
+#'       3.042891445395256, -1.078872239804912, -4.656953829254061),
+#'     tolerance=0.02))
+#'
 #' @references
 #' 1. \url{http://www.teos-10.org/pubs/gsw/html/gsw_geo_strf_dyn_height.html}
-#'
-#' 2. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition, Elsevier.
+#' 2. \url{https://github.com/TEOS-10/GSW-R/issues/47}
+#' 3. Barker, Paul M., and Trevor J. McDougall.
+#' "Two Interpolation Methods Using Multiply-Rotated Piecewise Cubic Hermite Interpolating Polynomials."
+#' Journal of Atmospheric and Oceanic Technology 37, no. 4 (April 2020): 605–19.
+#' \url{https://doi.org/10.1175/JTECH-D-19-0211.1}.
 gsw_geo_strf_dyn_height <- function(SA, CT, p, p_ref=0)
 {
     if (missing(SA) || missing(CT) || missing(p)) stop("must supply SA, CT, and p")
@@ -2182,7 +2211,7 @@ gsw_geo_strf_dyn_height <- function(SA, CT, p, p_ref=0)
 #' p_ref <- 1000
 #' dh <- gsw_geo_strf_dyn_height_1(SA, CT, p, p_ref, 1, 2)
 #' ## FIXME: The following test values fail.
-#' ## expect_equal(dh, c(17.039204557769487, 14.665853784722286, 10.912861136923812,
+#' ## all.equal(dh, c(17.039204557769487, 14.665853784722286, 10.912861136923812,
 #' ##                 7.567928838774945, 3.393524055565328, 0))
 #' @references
 #' 1. \url{http://www.teos-10.org/pubs/gsw/html/gsw_geo_strf_dyn_height.html}
@@ -2229,10 +2258,10 @@ gsw_geo_strf_dyn_height_1 <- function(SA, CT, p, p_ref=0, max_dp=1, interp_metho
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' delta_p <- c(10,      40,      75,     125,     350,     400)
 #' r <- gsw_geo_strf_dyn_height_pc(SA, CT, delta_p)
-#' expect_equal(r$dyn_height, c(-0.300346215853487, -1.755165998114308, -4.423531083131365,
-#'                            -6.816659136254657, -9.453175257818430, -12.721009624991439))
-#' expect_equal(r$p_mid/1e2, c(0.050000000000000, 0.300000000000000, 0.875000000000000,
-#'                           1.875000000000000, 4.250000000000000, 8.000000000000000))
+#' stopifnot(all.equal(r$dyn_height, c(-0.300346215853487, -1.755165998114308, -4.423531083131365,
+#'                                     -6.816659136254657, -9.453175257818430, -12.721009624991439)))
+#' stopifnot(all.equal(r$p_mid/1e2, c(0.050000000000000, 0.300000000000000, 0.875000000000000,
+#'                                    1.875000000000000, 4.250000000000000, 8.000000000000000)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_geo_strf_dyn_height.html}
 gsw_geo_strf_dyn_height_pc <- function(SA, CT, delta_p)
@@ -2360,8 +2389,8 @@ gsw_gibbs_ice <- function(nt, np, t, p=0)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' p <- c(      10,       50,      125,      250,       600,     1000)
 #' e <- gsw_Helmholtz_energy_ice(t, p)
-#' expect_equal(e/1e4, c(-1.362572315008330, -1.710375005915343, -1.628083272702224,
-#'                     -1.555573047498573, -1.375469831393882, -1.053585607014677))
+#' stopifnot(all.equal(e/1e4, c(-1.362572315008330, -1.710375005915343, -1.628083272702224,
+#'                              -1.555573047498573, -1.375469831393882, -1.053585607014677)))
 #' @family things related to energy
 ## @family things related to ice
 #' @references
@@ -2390,8 +2419,8 @@ gsw_Helmholtz_energy_ice <- function(t, p)
 ##> #' @examples
 ##> #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 ##> #' r <- gsw_hill_ratio_at_SP2(t)
-##> #' expect_equal(r4, c(-1.362572315008330, -1.710375005915343, -1.628083272702224,
-##> #'                     -1.555573047498573, -1.375469831393882, -1.053585607014677))
+##> #' all.equal(r4, c(-1.362572315008330, -1.710375005915343, -1.628083272702224,
+##> #'                 -1.555573047498573, -1.375469831393882, -1.053585607014677))
 ##> #' @references
 ##> #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_hill_ratio_at_sp2.html}
 ##> gsw_hill_ratio_at_SP2 <- function(t)
@@ -2423,12 +2452,12 @@ gsw_Helmholtz_energy_ice <- function(t, p)
 #' p <- c(         10,       50,      125,      250,      600,    1000)
 #' t_Ih <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' r <- gsw_ice_fraction_to_freeze_seawater(SA, CT, p, t_Ih)
-#' expect_equal(r$SA_freeze, c(25.823952352620722, 26.120495895535438, 27.460572941868072,
-#'                           30.629978769577168, 31.458222332943784, 32.121170316796444))
-#' expect_equal(r$CT_freeze, c(-1.389936216242376, -1.437013334134283, -1.569815847128818,
-#'                           -1.846419165657020, -2.166786673735941, -2.522730879078756))
-#' expect_equal(r$w_Ih, c(0.256046867272203, 0.251379393389925, 0.215985652155336,
-#'                      0.121020375537284, 0.094378196687535, 0.075181377710828))
+#' stopifnot(all.equal(r$SA_freeze, c(25.823952352620722, 26.120495895535438, 27.460572941868072,
+#'                                    30.629978769577168, 31.458222332943784, 32.121170316796444)))
+#' stopifnot(all.equal(r$CT_freeze, c(-1.389936216242376, -1.437013334134283, -1.569815847128818,
+#'                                    -1.846419165657020, -2.166786673735941, -2.522730879078756)))
+#' stopifnot(all.equal(r$w_Ih, c(0.256046867272203, 0.251379393389925, 0.215985652155336,
+#'                               0.121020375537284, 0.094378196687535, 0.075181377710828)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_ice_fraction_to_freeze_seawater.html}
@@ -2467,8 +2496,8 @@ gsw_ice_fraction_to_freeze_seawater <- function(SA, CT, p, t_Ih)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' e <- gsw_internal_energy(SA, CT, p)
-#' expect_equal(e/1e5, c(1.148091576956162, 1.134013145527675, 0.909571141498779,
-#'                     0.408593072177020, 0.273985276460357, 0.175019409258405))
+#' stopifnot(all.equal(e/1e5, c(1.148091576956162, 1.134013145527675, 0.909571141498779,
+#'                              0.408593072177020, 0.273985276460357, 0.175019409258405)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_internal_energy.html}
 gsw_internal_energy <- function(SA, CT, p)
@@ -2496,8 +2525,8 @@ gsw_internal_energy <- function(SA, CT, p)
 #' t_Ih <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' e <- gsw_internal_energy_ice(t_Ih, p)
-#' expect_equal(e/1e5, c(-3.556606992432442, -3.609926216929878, -3.597799043634774,
-#'                     -3.587312078410920, -3.561207060376329, -3.512700418975375))
+#' stopifnot(all.equal(e/1e5, c(-3.556606992432442, -3.609926216929878, -3.597799043634774,
+#'                              -3.587312078410920, -3.561207060376329, -3.512700418975375)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_internal_energy_ice.html}
@@ -2533,9 +2562,10 @@ gsw_internal_energy_ice <- function(t, p)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' p_ref <- 0
 #' r <- gsw_IPV_vs_fNsquared_ratio(SA, CT, p, p_ref)
-#' expect_equal(r$IPV_vs_fNsquared_ratio, c(0.999742244888022, 0.996939883468178, 0.986141997098021,
-#'                                          0.931595598713477, 0.861224354872028))
-#' expect_equal(r$p_mid, c(30, 87.5, 187.5, 425, 800))
+#' stopifnot(all.equal(r$IPV_vs_fNsquared_ratio,
+#'     c(0.999742244888022, 0.996939883468178, 0.986141997098021,
+#'       0.931595598713477, 0.861224354872028)))
+#' stopifnot(all.equal(r$p_mid, c(30, 87.5, 187.5, 425, 800)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_IPV_vs_fNsquared_ratio.html}
 gsw_IPV_vs_fNsquared_ratio <- function(SA, CT, p, p_ref=0)
@@ -2571,8 +2601,8 @@ gsw_IPV_vs_fNsquared_ratio <- function(SA, CT, p, p_ref=0)
 #' CT <-c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' kappa <- gsw_kappa(SA, CT, p)
-#' expect_equal(kappa*1e9, c(0.411343648791300, 0.411105416128094, 0.416566236026610,
-#'                         0.435588650838751, 0.438782500588955, 0.439842289994702))
+#' stopifnot(all.equal(kappa*1e9, c(0.411343648791300, 0.411105416128094, 0.416566236026610,
+#'                                  0.435588650838751, 0.438782500588955, 0.439842289994702)))
 #' @family things related to compressibility
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_kappa.html}
@@ -2602,8 +2632,8 @@ gsw_kappa <- function(SA, CT, p)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' p <- c(      10,       50,      125,      250,       600,     1000)
 #' kappa <- gsw_kappa_const_t_ice(t, p)
-#' expect_equal(kappa*1e9, c(0.115874753261484, 0.115384948953145, 0.115442212717850,
-#'                         0.115452884634531, 0.115454824232421, 0.115619994536961))
+#' stopifnot(all.equal(kappa*1e9, c(0.115874753261484, 0.115384948953145, 0.115442212717850,
+#'                                  0.115452884634531, 0.115454824232421, 0.115619994536961)))
 #' @family things related to compressibility
 ## @family things related to ice
 #' @references
@@ -2635,8 +2665,8 @@ gsw_kappa_const_t_ice <- function(t, p)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' p <- c(      10,       50,      125,      250,       600,     1000)
 #' kappa <- gsw_kappa_ice(t, p)
-#' expect_equal(kappa*1e9, c(0.112495239053936, 0.112070687842183, 0.112119091047584,
-#'                         0.112126504739297, 0.112123513812840, 0.112262589530974))
+#' stopifnot(all.equal(kappa*1e9, c(0.112495239053936, 0.112070687842183, 0.112119091047584,
+#'                                  0.112126504739297, 0.112123513812840, 0.112262589530974)))
 #' @family things related to compressibility
 ## @family things related to ice
 #' @references
@@ -2668,8 +2698,9 @@ gsw_kappa_ice <- function(t, p)
 #' CT <-c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' kappa <- gsw_kappa(SA, CT, p)
-#' expect_equal(kappa*1e9, c(0.411343648791300, 0.411105416128094, 0.416566236026610,
-#'                         0.435588650838751, 0.438782500588955, 0.439842289994702))
+#' stopifnot(all.equal(kappa*1e9,
+#'     c(0.411343648791300, 0.411105416128094, 0.416566236026610,
+#'      0.435588650838751, 0.438782500588955, 0.439842289994702)))
 #' @family things related to compressibility
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_kappa_t_exact.html}
@@ -2698,8 +2729,8 @@ gsw_kappa_t_exact <- function(SA, t, p)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' lh  <- gsw_latentheat_evap_CT(SA, CT)
-#' expect_equal(lh/1e6, c(2.429947107462561, 2.430774073049213, 2.444220372158452,
-#'                      2.474127109232524, 2.482151446148560, 2.488052297193594))
+#' stopifnot(all.equal(lh/1e6, c(2.429947107462561, 2.430774073049213, 2.444220372158452,
+#'                               2.474127109232524, 2.482151446148560, 2.488052297193594)))
 #' @family things related to latent heat
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_evap_CT.html}
@@ -2728,8 +2759,8 @@ gsw_latentheat_evap_CT <- function(SA, CT)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' lh = gsw_latentheat_evap_t(SA, t)
-#' expect_equal(lh/1e6, c(2.429882982734836, 2.430730236218543, 2.444217294049004,
-#'                      2.474137411322517, 2.482156276375029, 2.488054617630297))
+#' stopifnot(all.equal(lh/1e6, c(2.429882982734836, 2.430730236218543, 2.444217294049004,
+#'                               2.474137411322517, 2.482156276375029, 2.488054617630297)))
 #' @family things related to latent heat
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_evap_t.html}
@@ -2758,8 +2789,8 @@ gsw_latentheat_evap_t <- function(SA, t)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' lh <- gsw_latentheat_melting(SA, p)
-#' expect_equal(lh/1e5, c(3.299496680271213, 3.298613352397986, 3.297125622834541,
-#'                      3.294973895330757, 3.288480445559747, 3.280715862416388))
+#' stopifnot(all.equal(lh/1e5, c(3.299496680271213, 3.298613352397986, 3.297125622834541,
+#'                               3.294973895330757, 3.288480445559747, 3.280715862416388)))
 #' @family things related to latent heat
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_latentheat_melting.html}
@@ -2794,11 +2825,11 @@ gsw_latentheat_melting <- function(SA, p)
 #' w_Ih <- c( 0.0560, 0.02513, 0.02159, 0.01210, 0.00943, 0.00751)
 #' t_Ih <- c(-4.7856, -4.4329, -3.8103, -4.2600, -3.8863, -3.4036)
 #' r <- gsw_melting_ice_into_seawater(SA, CT, p, w_Ih, t_Ih)
-#' expect_equal(r$SA_final, c(32.767939199999994, 34.014676604999998, 34.269397295999994,
-#'                            34.425548880000001, 34.409033862000001, 34.471559675999998))
-#' expect_equal(r$CT_final, c(-0.298448911022612, 0.215263001418312, -0.074341719211557,
-#'                            0.207796293045473, -0.123785388299875, -0.202531182809225))
-#' expect_equal(r$w_Ih_final, rep(0, 6))
+#' stopifnot(all.equal(r$SA_final, c(32.767939199999994, 34.014676604999998, 34.269397295999994,
+#'                                   34.425548880000001, 34.409033862000001, 34.471559675999998)))
+#' stopifnot(all.equal(r$CT_final, c(-0.298448911022612, 0.215263001418312, -0.074341719211557,
+#'                                   0.207796293045473, -0.123785388299875, -0.202531182809225)))
+#' stopifnot(all.equal(r$w_Ih_final, rep(0, 6)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_into_seawater.html}
@@ -2843,10 +2874,10 @@ gsw_melting_ice_into_seawater <- function(SA, CT, p, w_Ih, t_Ih)
 #' SA_seaice <- c(     5,     4.8,     3.5,     2.5,       1,     0.4)
 #' t_seaice <- c(-4.7856, -4.4329, -3.8103, -4.2600, -3.8863, -3.4036)
 #' r <- gsw_melting_seaice_into_seawater(SA, CT, p, w_seaice, SA_seaice, t_seaice)
-#' expect_equal(r$SA_final, c(33.047939199999995, 34.135300604999998, 34.344962295999999,
-#'                          34.455798880000003, 34.418463862000003, 34.474563675999995))
-#' expect_equal(r$CT_final, c(-0.018822367305381, 0.345095540241769, 0.020418581143151,
-#'                          0.242672380976922, -0.111078380121959, -0.197363471215418))
+#' stopifnot(all.equal(r$SA_final, c(33.047939199999995, 34.135300604999998, 34.344962295999999,
+#'                                   34.455798880000003, 34.418463862000003, 34.474563675999995)))
+#' stopifnot(all.equal(r$CT_final, c(-0.018822367305381, 0.345095540241769, 0.020418581143151,
+#'                                   0.242672380976922, -0.111078380121959, -0.197363471215418)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_seaice_into_seawater.html}
@@ -2882,8 +2913,8 @@ gsw_melting_seaice_into_seawater <- function(SA, CT, p, w_seaice, SA_seaice, t_s
 #' SA <- c(   34.7118,  34.8915,  35.0256,  34.8472,  34.7366, 34.7324)
 #' p <- c(         10,       50,      125,      250,      600,    1000)
 #' r <- gsw_melting_ice_equilibrium_SA_CT_ratio(SA, p)
-#' expect_equal(r, c(0.420209509196985, 0.422511693121631, 0.424345503216433,
-#'                 0.422475836091426, 0.422023427778221, 0.423037622331042))
+#' stopifnot(all.equal(r, c(0.420209509196985, 0.422511693121631, 0.424345503216433,
+#'                          0.422475836091426, 0.422023427778221, 0.423037622331042)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_equilibrium_SA_CT_ratio.html}
@@ -2913,8 +2944,8 @@ gsw_melting_ice_equilibrium_SA_CT_ratio <- function(SA, p)
 #' SA <- c(   34.7118,  34.8915,  35.0256,  34.8472,  34.7366, 34.7324)
 #' p <- c(         10,       50,      125,      250,      600,    1000)
 #' r <- gsw_melting_ice_equilibrium_SA_CT_ratio_poly(SA, p)
-#' expect_equal(r, c(0.420209444587263, 0.422511664682796, 0.424345538275708,
-#'                 0.422475965003649, 0.422023755182266, 0.423038080717229))
+#' stopifnot(all.equal(r, c(0.420209444587263, 0.422511664682796, 0.424345538275708,
+#'                          0.422475965003649, 0.422023755182266, 0.423038080717229)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_equilibrium_SA_CT_ratio_poly.html}
@@ -2948,8 +2979,8 @@ gsw_melting_ice_equilibrium_SA_CT_ratio_poly <- function(SA, p)
 #' p <- c(         10,       50,      125,      250,      600,    1000)
 #' t_Ih <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' r <- gsw_melting_ice_SA_CT_ratio(SA, CT, p, t_Ih)
-#' expect_equal(r, c(0.373840909022490, 0.371878514972099, 0.377104664622191,
-#'                 0.382777696796156, 0.387133845152000, 0.393947316026914))
+#' stopifnot(all.equal(r, c(0.373840909022490, 0.371878514972099, 0.377104664622191,
+#'                          0.382777696796156, 0.387133845152000, 0.393947316026914)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_SA_CT_ratio.html}
@@ -2983,8 +3014,8 @@ gsw_melting_ice_SA_CT_ratio <- function(SA, CT, p, t_Ih)
 #' p <- c(         10,       50,      125,      250,      600,    1000)
 #' t_Ih <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' r <- gsw_melting_ice_SA_CT_ratio_poly(SA, CT, p, t_Ih)
-#' expect_equal(r, c(0.373840908629278, 0.371878512745054, 0.377104658031030,
-#'                 0.382777681212224, 0.387133812279563, 0.393947267481204))
+#' stopifnot(all.equal(r, c(0.373840908629278, 0.371878512745054, 0.377104658031030,
+#'                          0.382777681212224, 0.387133812279563, 0.393947267481204)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_SA_CT_ratio_poly.html}
@@ -3024,9 +3055,9 @@ gsw_melting_ice_SA_CT_ratio_poly <- function(SA, CT, p, t_Ih)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' latitude <- 4
 #' r <- gsw_Nsquared(SA, CT, p, latitude=4)
-#' expect_equal(r$N2*1e3, c(0.060843209693499, 0.235723066151305, 0.216599928330380,
-#'                        0.012941204313372, 0.008434782795209))
-#' expect_equal(r$p_mid, c(30, 87.5, 187.5, 425, 800))
+#' stopifnot(all.equal(r$N2*1e3, c(0.060843209693499, 0.235723066151305, 0.216599928330380,
+#'                                 0.012941204313372, 0.008434782795209)))
+#' stopifnot(all.equal(r$p_mid, c(30, 87.5, 187.5, 425, 800)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_Nsquared.html}
 gsw_Nsquared <- function(SA, CT, p, latitude=0)
@@ -3052,21 +3083,43 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
 #' @param z height, zero at surface (but note last 2 args) and positive upwards [ m ]
 #' @template latitudetemplate
 #' @return sea pressure [ dbar ]
+#' @param geo_strf_dyn_height vector of same length as \code{z} and \code{latitude},
+#' indicating dynamic height [ m^2/s^2 ].
+#' If not supplied, this defaults to a vector of 0 values, with length matching that
+#' of \code{z}.
+#' @param sea_surface_geopotential vector of same length as \code{z} and \code{latitude},
+#' indicating geopotential at zero sea pressure [ m^2/s^2 ].
+#' If not supplied, this defaults to a vector of 0 values, with length matching that
+#' of \code{z}.
 #' @examples
 #' z <- -c(10, 50, 125, 250, 600, 1000)
 #' latitude <- 4
 #' p <- gsw_p_from_z(z, latitude)
-#' expect_equal(p/1e3, c(0.010055726724518, 0.050283543374874, 0.125731858435610,
-#'                     0.251540299593468, 0.604210012340727, 1.007990337692001))
+#' stopifnot(all.equal(p/1e3, c(0.010055726724518, 0.050283543374874, 0.125731858435610,
+#'                              0.251540299593468, 0.604210012340727, 1.007990337692001)))
 #' @family things related to depth
+#'
+#' @section Historical Note:
+#' The \code{geo_strf_dyn_height} and \code{sea_surface_geopotential}
+#' parameters were added in GSW-R version 1.0-6.
+#'
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_p_from_z.html}
-gsw_p_from_z <- function(z, latitude)
+gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height, sea_surface_geopotential)
 {
-    l <- argfix(list(z=z, latitude=latitude))
+    if (missing(geo_strf_dyn_height))
+        geo_strf_dyn_height <- rep(0.0, length(z))
+    if (missing(sea_surface_geopotential))
+        sea_surface_geopotential <- rep(0.0, length(z))
+    l <- argfix(list(z=z,
+                     latitude=latitude,
+                     geo_strf_dyn_height=geo_strf_dyn_height,
+                     sea_surface_geopotential=sea_surface_geopotential))
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_p_from_z",
                z=as.double(l$z), latitude=as.double(l$latitude),
+               geo_strf_dyn_height=as.double(l$geo_strf_dyn_height),
+               sea_surface_geopotential=as.double(l$sea_surface_geopotential),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     ##37 rval[!is.finite(l$z) | !is.finite(l$latitude) | !is.finite(l$geo_strf_dyn_height) | !is.finite(l$sea_surface_geopotential)] <- NA
     if (is.matrix(z))
@@ -3084,8 +3137,8 @@ gsw_p_from_z <- function(z, latitude)
 #' @examples
 #' pt0_ice <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' e <- gsw_pot_enthalpy_from_pt_ice(pt0_ice)
-#' expect_equal(e/1e5, c(-3.555459449611868, -3.608607069998877, -3.596153890859193,
-#'                     -3.585123178806596, -3.557490528226009, -3.507198313847837))
+#' stopifnot(all.equal(e/1e5, c(-3.555459449611868, -3.608607069998877, -3.596153890859193,
+#'                              -3.585123178806596, -3.557490528226009, -3.507198313847837)))
 #' @family things related to enthalpy
 ## @family things related to ice
 #' @references
@@ -3113,8 +3166,8 @@ gsw_pot_enthalpy_from_pt_ice <- function(pt0_ice)
 #' @examples
 #' pt0_ice <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' e <- gsw_pot_enthalpy_from_pt_ice_poly(pt0_ice)
-#' expect_equal(e/1e5, c(-3.555459482216265, -3.608607100959428, -3.596153924697033,
-#'                     -3.585123214031169, -3.557490561327994, -3.507198320793373))
+#' stopifnot(all.equal(e/1e5, c(-3.555459482216265, -3.608607100959428, -3.596153924697033,
+#'                              -3.585123214031169, -3.557490561327994, -3.507198320793373)))
 #' @family things related to enthalpy
 ## @family things related to ice
 #' @references
@@ -3147,8 +3200,8 @@ gsw_pot_enthalpy_from_pt_ice_poly <- function(pt0_ice)
 #' saturation_fraction = 1
 #' e <- gsw_pot_enthalpy_ice_freezing(SA, p, saturation_fraction)
 #' \dontrun{
-#' expect_equal(e/1e5, c(-3.373409558967978, -3.374434164002012, -3.376117536928847,
-#'                     -3.378453698871986, -3.385497832886802, -3.393768587631489))
+#' stopifnot(all.equal(e/1e5, c(-3.373409558967978, -3.374434164002012, -3.376117536928847,
+#'                              -3.378453698871986, -3.385497832886802, -3.393768587631489)))
 #'}
 #' @section Bugs:
 #' 1. The C source underlying this function lacks an argument, \code{saturation_fraction},
@@ -3189,8 +3242,8 @@ gsw_pot_enthalpy_ice_freezing <- function(SA, p, saturation_fraction=1)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' saturation_fraction = 1
 #' e <- gsw_pot_enthalpy_ice_freezing_poly(SA, p, saturation_fraction)
-#' expect_equal(e/1e5, c(-3.373370858777002, -3.374395733068549, -3.376079507278181,
-#'                     -3.378416106344322, -3.385460970578123, -3.393731732645173))
+#' stopifnot(all.equal(e/1e5, c(-3.373370858777002, -3.374395733068549, -3.376079507278181,
+#'                              -3.378416106344322, -3.385460970578123, -3.393731732645173)))
 #' @family things related to enthalpy
 ## @family things related to ice
 #' @references
@@ -3224,12 +3277,12 @@ gsw_pot_enthalpy_ice_freezing_poly <- function(SA, p, saturation_fraction=1)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_pot_enthalpy_ice_freezing_first_derivatives(SA, p)
-#' expect_equal(r$pot_enthalpy_ice_freezing_SA/1e2,
+#' stopifnot(all.equal(r$pot_enthalpy_ice_freezing_SA/1e2,
 #'       c(-1.183484968590718, -1.184125268891200, -1.184619267864844,
-#'       -1.184026131143674, -1.183727706650925, -1.183814873741961))
-#' expect_equal(r$pot_enthalpy_ice_freezing_p/1e-3,
+#'       -1.184026131143674, -1.183727706650925, -1.183814873741961)))
+#' stopifnot(all.equal(r$pot_enthalpy_ice_freezing_p/1e-3,
 #'       c(-0.202880939983260, -0.203087335312542, -0.203473018454630,
-#'       -0.204112435106666, -0.205889571619502, -0.207895691215823))
+#'       -0.204112435106666, -0.205889571619502, -0.207895691215823)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_ice_freezing_first_derivatives.html}
 gsw_pot_enthalpy_ice_freezing_first_derivatives <- function(SA, p)
@@ -3266,12 +3319,12 @@ gsw_pot_enthalpy_ice_freezing_first_derivatives <- function(SA, p)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_pot_enthalpy_ice_freezing_first_derivatives_poly(SA, p)
-#' expect_equal(r$pot_enthalpy_ice_freezing_SA/1e2,
+#' stopifnot(all.equal(r$pot_enthalpy_ice_freezing_SA/1e2,
 #'       c(-1.183498006918154, -1.184135169530602, -1.184626138334419,
-#'       -1.184032656542549, -1.183727371435808, -1.183805326863513))
-#' expect_equal(r$pot_enthalpy_ice_freezing_p/1e-3,
+#'       -1.184032656542549, -1.183727371435808, -1.183805326863513)))
+#' stopifnot(all.equal(r$pot_enthalpy_ice_freezing_p/1e-3,
 #'       c(-0.202934280214689, -0.203136950111241, -0.203515960539503,
-#'       -0.204145112153220, -0.205898365024147, -0.207885289186464))
+#'       -0.204145112153220, -0.205898365024147, -0.207885289186464)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_ice_freezing_first_derivatives_poly.html}
 gsw_pot_enthalpy_ice_freezing_first_derivatives_poly <- function(SA, p)
@@ -3308,8 +3361,8 @@ gsw_pot_enthalpy_ice_freezing_first_derivatives_poly <- function(SA, p)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' p_ref  <- 0
 #' prho <- gsw_pot_rho_t_exact(SA,t,p,p_ref)
-#' expect_equal(prho/1e3, c(1.021798145811089, 1.022052484416980, 1.023893583651958,
-#'                        1.026667621124443, 1.027107230868492, 1.027409631264134))
+#' stopifnot(all.equal(prho/1e3, c(1.021798145811089, 1.022052484416980, 1.023893583651958,
+#'                                 1.026667621124443, 1.027107230868492, 1.027409631264134)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_rho_t_exact.html}
@@ -3338,8 +3391,8 @@ gsw_pot_rho_t_exact <- function(SA, t, p, p_ref)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' pc <- gsw_pressure_coefficient_ice(t, p)
-#' expect_equal(pc/1e6, c(1.333098059787838, 1.326359005133730, 1.327354133828322,
-#'                      1.327793888831923, 1.328549609231685, 1.331416733490227))
+#' stopifnot(all.equal(pc/1e6, c(1.333098059787838, 1.326359005133730, 1.327354133828322,
+#'                               1.327793888831923, 1.328549609231685, 1.331416733490227)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pressure_coefficient_ice.html}
@@ -3370,8 +3423,8 @@ gsw_pressure_coefficient_ice <- function(t, p)
 #' CT <- c(                 -1.8996, -1.9407, -2.0062, -2.0923, -2.3593, -2.6771)
 #' saturation_fraction <- c(       1,    0.8,     0.6,     0.5,     0.4,       0)
 #' p <- gsw_pressure_freezing_CT(SA, CT, saturation_fraction)
-#' expect_equal(p/1e3, c(0.009890530270710, 0.050376026585933, 0.125933117050624,
-#'                     0.251150973076077, 0.601441775836021, 1.002273338145043))
+#' stopifnot(all.equal(p/1e3, c(0.009890530270710, 0.050376026585933, 0.125933117050624,
+#'                              0.251150973076077, 0.601441775836021, 1.002273338145043)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pressure_freezing_CT.html}
@@ -3403,8 +3456,8 @@ gsw_pressure_freezing_CT <- function(SA, CT, saturation_fraction=1)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' pt0 <- gsw_pt0_from_t(SA, t, p)
-#' expect_equal(pt0, c(28.783196819670632, 28.420983342398962, 22.784930399117108,
-#'                     10.230523661095731, 6.829230224409661, 4.324510571845719))
+#' stopifnot(all.equal(pt0, c(28.783196819670632, 28.420983342398962, 22.784930399117108,
+#'                            10.230523661095731, 6.829230224409661, 4.324510571845719)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt0_from_t.html}
 gsw_pt0_from_t <- function(SA, t, p)
@@ -3432,8 +3485,8 @@ gsw_pt0_from_t <- function(SA, t, p)
 #' t  <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' p <- c(       10,       50,      125,      250,      600,    1000)
 #' pt0 <- gsw_pt0_from_t_ice(t, p)
-#' expect_equal(pt0, c(-10.787787898205298, -13.443730926050607, -12.837427056999708,
-#'                   -12.314321615760905, -11.017040858094250, -8.622907355083088))
+#' stopifnot(all.equal(pt0, c(-10.787787898205298, -13.443730926050607, -12.837427056999708,
+#'                            -12.314321615760905, -11.017040858094250, -8.622907355083088)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt0_from_t_ice.html}
@@ -3465,10 +3518,10 @@ gsw_pt0_from_t_ice <- function(t, p)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' r <- gsw_pt_first_derivatives(SA, CT)
-#' expect_equal(r$pt_SA, c(0.041863223165431, 0.041452303483011, 0.034682095247246,
-#'                       0.018711079068408, 0.014079958329844, 0.010577326129948))
-#' expect_equal(r$pt_CT, c(0.997192967140242, 0.997451686508335, 0.998357568277750,
-#'                       0.999996224076267, 1.000283719083268, 1.000525947028218))
+#' stopifnot(all.equal(r$pt_SA, c(0.041863223165431, 0.041452303483011, 0.034682095247246,
+#'                                0.018711079068408, 0.014079958329844, 0.010577326129948)))
+#' stopifnot(all.equal(r$pt_CT, c(0.997192967140242, 0.997451686508335, 0.998357568277750,
+#'                                0.999996224076267, 1.000283719083268, 1.000525947028218)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_first_derivatives.html}
 gsw_pt_first_derivatives <- function(SA, CT)
@@ -3501,8 +3554,8 @@ gsw_pt_first_derivatives <- function(SA, CT)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' pt <- gsw_pt_from_CT(SA, CT)
-#' expect_equal(pt, c(28.783177048624573, 28.420955597191984, 22.784953468087107,
-#'                    10.230534394434429, 6.829216587061605, 4.324534835990236))
+#' stopifnot(all.equal(pt, c(28.783177048624573, 28.420955597191984, 22.784953468087107,
+#'                           10.230534394434429, 6.829216587061605, 4.324534835990236)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_CT.html}
 gsw_pt_from_CT <- function(SA, CT)
@@ -3530,8 +3583,8 @@ gsw_pt_from_CT <- function(SA, CT)
 #' SA <- c(      34.7118,  34.8915,  35.0256,  34.8472, 34.7366, 34.7324)
 #' entropy <- c(400.3892, 395.4378, 319.8668, 146.7910, 98.6471, 62.7919)
 #' pt <- gsw_pt_from_entropy(SA, entropy)
-#' expect_equal(pt, c(28.783179828078666, 28.420954825949291, 22.784952736245351,
-#'                  10.230532066931868, 6.829213325916900, 4.324537782985845))
+#' stopifnot(all.equal(pt, c(28.783179828078666, 28.420954825949291, 22.784952736245351,
+#'                           10.230532066931868, 6.829213325916900, 4.324537782985845)))
 #' @family things related to entropy
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_entropy.html}
@@ -3558,8 +3611,8 @@ gsw_pt_from_entropy <- function(SA, entropy)
 #' @examples
 #' pot_enthalpy_ice <- c(-3.5544e5, -3.6033e5, -3.5830e5, -3.5589e5, -3.4948e5, -3.4027e5)
 #' pt <- gsw_pt_from_pot_enthalpy_ice(pot_enthalpy_ice)
-#' expect_equal(pt, c(-10.733087588125384, -13.167397822300588, -12.154205899172704,
-#'                  -10.956202704066083, -7.794963180206421, -3.314905214262531))
+#' stopifnot(all.equal(pt, c(-10.733087588125384, -13.167397822300588, -12.154205899172704,
+#'                           -10.956202704066083, -7.794963180206421, -3.314905214262531)))
 #' @family things related to enthalpy
 ## @family things related to ice
 #' @references
@@ -3593,8 +3646,8 @@ gsw_pt_from_pot_enthalpy_ice <- function(pot_enthalpy_ice)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' p_ref <- 0
 #' pt <- gsw_pt_from_t(SA, t, p, p_ref)
-#' expect_equal(pt, c(28.783196819670632, 28.420983342398962, 22.784930399117108,
-#'                    10.230523661095731, 6.829230224409661, 4.324510571845719))
+#' stopifnot(all.equal(pt, c(28.783196819670632, 28.420983342398962, 22.784930399117108,
+#'                           10.230523661095731, 6.829230224409661, 4.324510571845719)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_t.html}
 gsw_pt_from_t <- function(SA, t, p, p_ref=0)
@@ -3620,8 +3673,8 @@ gsw_pt_from_t <- function(SA, t, p, p_ref=0)
 #' @examples
 #' pot_enthalpy_ice <- c(-3.5544e5, -3.6033e5, -3.5830e5, -3.5589e5, -3.4948e5, -3.4027e5)
 #' pt <- gsw_pt_from_pot_enthalpy_ice_poly(pot_enthalpy_ice)
-#' expect_equal(pt, c(-10.733085986035007, -13.167396204945987, -12.154204137867396,
-#'                  -10.956201046447006, -7.794963341294590, -3.314907552013722))
+#' stopifnot(all.equal(pt, c(-10.733085986035007, -13.167396204945987, -12.154204137867396,
+#'                           -10.956201046447006, -7.794963341294590, -3.314907552013722)))
 #' @family things related to enthalpy
 ## @family things related to ice
 #' @references
@@ -3653,8 +3706,8 @@ gsw_pt_from_pot_enthalpy_ice_poly <- function(pot_enthalpy_ice)
 #' p <- c(      10,       50,      125,      250,      600,    1000)
 #' p_ref <- 0 # not actually needed, since 0 is the default
 #' pt <- gsw_pt_from_t_ice(t, p, p_ref)
-#' expect_equal(pt, c(-10.787787898205272, -13.443730926050661, -12.837427056999676,
-#'                  -12.314321615760921, -11.017040858094234, -8.622907355083147))
+#' stopifnot(all.equal(pt, c(-10.787787898205272, -13.443730926050661, -12.837427056999676,
+#'                           -12.314321615760921, -11.017040858094234, -8.622907355083147)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_from_t_ice.html}
@@ -3688,12 +3741,15 @@ gsw_pt_from_t_ice <- function(t, p, p_ref=0)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' r <- gsw_pt_second_derivatives(SA, CT)
-#' expect_equal(r$pt_SA_SA/1e-3, c(0.160307058371208, 0.160785497957769, 0.168647220588324,
-#'                               0.198377949876584, 0.210181899321236, 0.220018966513329))
-#' expect_equal(r$pt_SA_CT, c(0.001185581323691, 0.001187068518686, 0.001217629686266,
-#'                          0.001333254154015, 0.001379674342678, 0.001418371539325))
-#' expect_equal(r$pt_CT_CT/1e-3, c(-0.121979811279463, -0.123711264754503, -0.140136818504977,
-#'                               -0.140645384127949, -0.113781055410824, -0.082417269009484))
+#' stopifnot(all.equal(r$pt_SA_SA/1e-3,
+#'     c(0.160307058371208, 0.160785497957769, 0.168647220588324,
+#'       0.198377949876584, 0.210181899321236, 0.220018966513329)))
+#' stopifnot(all.equal(r$pt_SA_CT,
+#'     c(0.001185581323691, 0.001187068518686, 0.001217629686266,
+#'       0.001333254154015, 0.001379674342678, 0.001418371539325)))
+#' stopifnot(all.equal(r$pt_CT_CT/1e-3,
+#'     c(-0.121979811279463, -0.123711264754503, -0.140136818504977,
+#'       -0.140645384127949, -0.113781055410824, -0.082417269009484)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt_second_derivatives.html}
 gsw_pt_second_derivatives <- function(SA, CT)
@@ -3734,8 +3790,8 @@ gsw_pt_second_derivatives <- function(SA, CT)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' rho <- gsw_rho(SA,CT,p)
-#' expect_equal(rho/1e3, c(1.021839935738108, 1.022262457966867, 1.024427195413316,
-#'                       1.027790152759127, 1.029837779000189, 1.032002453224572))
+#' stopifnot(all.equal(rho/1e3, c(1.021839935738108, 1.022262457966867, 1.024427195413316,
+#'                                1.027790152759127, 1.029837779000189, 1.032002453224572)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho.html}
 gsw_rho <- function(SA, CT, p)
@@ -3771,12 +3827,12 @@ gsw_rho <- function(SA, CT, p)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' r <- gsw_rho_alpha_beta(SA, CT, p)
-#' expect_equal(r$rho/1000, c(1.021839935738108, 1.022262457966867, 1.024427195413316,
-#'                          1.027790152759127, 1.029837779000189, 1.032002453224572))
-#' expect_equal(r$alpha*1000, c(0.324638934509245, 0.322655537959731, 0.281145723210171,
-#'                            0.173199716344780, 0.146289673594824, 0.129414845334599))
-#' expect_equal(r$beta*1000, c(0.717483987596135, 0.717647512290095, 0.726211643644768,
-#'                           0.750500751749777, 0.755052064788492, 0.757050813384370))
+#' stopifnot(all.equal(r$rho/1000, c(1.021839935738108, 1.022262457966867, 1.024427195413316,
+#'                                   1.027790152759127, 1.029837779000189, 1.032002453224572)))
+#' stopifnot(all.equal(r$alpha*1000, c(0.324638934509245, 0.322655537959731, 0.281145723210171,
+#'                                     0.173199716344780, 0.146289673594824, 0.129414845334599)))
+#' stopifnot(all.equal(r$beta*1000, c(0.717483987596135, 0.717647512290095, 0.726211643644768,
+#'                                    0.750500751749777, 0.755052064788492, 0.757050813384370)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_alpha_beta.html}
@@ -3813,12 +3869,12 @@ gsw_rho_alpha_beta <- function(SA, CT, p)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_rho_first_derivatives(SA, CT, p)
-#' expect_equal(r$drho_dSA, c(0.733153791778356, 0.733624109867480, 0.743950957375504,
-#'                            0.771357282286743, 0.777581141431288, 0.781278296628328))
-#' expect_equal(r$drho_dCT, c(-0.331729027977015, -0.329838643311336, -0.288013324730644,
-#'                            -0.178012962919839, -0.150654632545556, -0.133556437868984))
-#' expect_equal(r$drho_dp, 1e-6*c(0.420302360738476, 0.420251070273888, 0.426773054953941,
-#'                                0.447763615252861, 0.452011501791479, 0.454118117103094))
+#' stopifnot(all.equal(r$drho_dSA, c(0.733153791778356, 0.733624109867480, 0.743950957375504,
+#'                                   0.771357282286743, 0.777581141431288, 0.781278296628328)))
+#' stopifnot(all.equal(r$drho_dCT, c(-0.331729027977015, -0.329838643311336, -0.288013324730644,
+#'                                   -0.178012962919839, -0.150654632545556, -0.133556437868984)))
+#' stopifnot(all.equal(r$drho_dp, 1e-6*c(0.420302360738476, 0.420251070273888, 0.426773054953941,
+#'                                       0.447763615252861, 0.452011501791479, 0.454118117103094)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_first_derivatives.html}
@@ -3851,10 +3907,12 @@ gsw_rho_first_derivatives <- function(SA, CT, p)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_rho_first_derivatives_wrt_enthalpy(SA, CT, p)
-#' expect_equal(r$rho_SA_wrt_h, c(0.733147960400929, 0.733595114830609, 0.743886977148835,
-#'                               0.771275693831993, 0.777414200397148, 0.781030546357425))
-#' expect_equal(r$rho_h*1e4, c(-0.831005413475887, -0.826243794873652, -0.721438289309903,
-#'                           -0.445892608094272, -0.377326924646647, -0.334475962698187))
+#' stopifnot(all.equal(r$rho_SA_wrt_h,
+#'     c(0.733147960400929, 0.733595114830609, 0.743886977148835,
+#'      0.771275693831993, 0.777414200397148, 0.781030546357425)))
+#' stopifnot(all.equal(r$rho_h*1e4,
+#'     c(-0.831005413475887, -0.826243794873652, -0.721438289309903,
+#'      -0.445892608094272, -0.377326924646647, -0.334475962698187)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_first_derivatives_wrt_enthalpy.html}
@@ -3894,8 +3952,8 @@ gsw_rho_first_derivatives_wrt_enthalpy <- function(SA, CT, p)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' rho <- gsw_rho_ice(t, p)
-#' expect_equal(rho, c(918.2879969148962, 918.7043487325120, 918.6962796312690,
-#'              918.7513732275766, 918.9291139833307, 919.0032237449378))
+#' stopifnot(all.equal(rho, c(918.2879969148962, 918.7043487325120, 918.6962796312690,
+#'                            918.7513732275766, 918.9291139833307, 919.0032237449378)))
 #' @family things related to density
 ## @family things related to ice
 #' @references
@@ -3932,16 +3990,16 @@ gsw_rho_ice <- function(t, p)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_rho_second_derivatives(SA, CT, p)
-#' expect_equal(r$rho_SA_SA/1e-3, c(0.207364734477357, 0.207415414547223, 0.192903197286004,
-#'                                0.135809142211237, 0.122627562106076, 0.114042431905783))
-#' expect_equal(r$rho_SA_CT, c(-0.001832856561477, -0.001837354806146, -0.001988065808078,
-#'                           -0.002560181494807, -0.002708939446458, -0.002798484050141))
-#' expect_equal(r$rho_CT_CT, c(-0.007241243828334, -0.007267807914635, -0.007964270843331,
-#'                           -0.010008164822017, -0.010572200761984, -0.010939294762200))
-#' expect_equal(r$rho_SA_p/1e-8, c(-0.087202931942412, -0.087558612009845, -0.092549696987409,
-#'                               -0.106661486272630, -0.110022261844240, -0.112287954816717))
-#' expect_equal(r$rho_CT_p/1e-8, c(-0.116597992537549, -0.117744271236102, -0.141712549466964,
-#'                               -0.214414626736539, -0.237704139801551, -0.255296606034074))
+#' stopifnot(all.equal(r$rho_SA_SA/1e-3, c(0.207364734477357, 0.207415414547223, 0.192903197286004,
+#'                                         0.135809142211237, 0.122627562106076, 0.114042431905783)))
+#' stopifnot(all.equal(r$rho_SA_CT, c(-0.001832856561477, -0.001837354806146, -0.001988065808078,
+#'                                    -0.002560181494807, -0.002708939446458, -0.002798484050141)))
+#' stopifnot(all.equal(r$rho_CT_CT, c(-0.007241243828334, -0.007267807914635, -0.007964270843331,
+#'                                    -0.010008164822017, -0.010572200761984, -0.010939294762200)))
+#' stopifnot(all.equal(r$rho_SA_p/1e-8, c(-0.087202931942412, -0.087558612009845, -0.092549696987409,
+#'                                        -0.106661486272630, -0.110022261844240, -0.112287954816717)))
+#' stopifnot(all.equal(r$rho_CT_p/1e-8, c(-0.116597992537549, -0.117744271236102, -0.141712549466964,
+#'                                        -0.214414626736539, -0.237704139801551, -0.255296606034074)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_second_derivatives.html}
 gsw_rho_second_derivatives <- function(SA, CT, p)
@@ -3988,14 +4046,12 @@ gsw_rho_second_derivatives <- function(SA, CT, p)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_rho_second_derivatives_wrt_enthalpy(SA, CT, p)
-#' expect_equal(r$rho_SA_SA/1e-3, c(0.207312267114544, 0.207065033523473, 0.191848346945039,
-#'                                0.133182862881598, 0.116049034622904, 0.102745309429078))
-#' expect_equal(r$rho_SA_h/1e-6, c(-0.459053080088382, -0.460370569872258, -0.498605615416296,
-#'                               -0.642833108550133, -0.682091962941161, -0.706793055445909))
-#' expect_equal(r$rho_h_h/1e-9, c(-0.454213854637790, -0.455984900239309, -0.499870030989387,
-#'                              -0.628337767293403, -0.664021595759308, -0.687367088752173))
-#' @template broken-test-values
-#' @template broken-test-values-family
+#' stopifnot(all.equal(r$rho_SA_SA/1e-3, c(0.207312267114544, 0.207065033523473, 0.191848346945039,
+#'                                         0.133182862881598, 0.116049034622904, 0.102745309429078)))
+#' stopifnot(all.equal(r$rho_SA_h/1e-6, c(-0.459053080088382, -0.460370569872258, -0.498605615416296,
+#'                                        -0.642833108550133, -0.682091962941161, -0.706793055445909)))
+#' stopifnot(all.equal(r$rho_h_h/1e-9, c(-0.454213854637790, -0.455984900239309, -0.499870030989387,
+#'                                       -0.628337767293403, -0.664021595759308, -0.687367088752173)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_second_derivatives_wrt_enthalpy.html}
 gsw_rho_second_derivatives_wrt_enthalpy <- function(SA, CT, p)
@@ -4033,8 +4089,8 @@ gsw_rho_second_derivatives_wrt_enthalpy <- function(SA, CT, p)
 #' t <-  c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' rho <- gsw_rho_t_exact(SA, t, p)
-#' expect_equal(rho/1e3, c(1.021840173185531, 1.022262689926782, 1.024427715941676,
-#'                       1.027790201811623, 1.029837714725961, 1.032002404116447))
+#' stopifnot(all.equal(rho/1e3, c(1.021840173185531, 1.022262689926782, 1.024427715941676,
+#'                                1.027790201811623, 1.029837714725961, 1.032002404116447)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_t_exact.html}
@@ -4082,11 +4138,11 @@ gsw_rho_t_exact <- function(SA, t, p)
 #' longitude <- c(188, 188, 188, 188, 188, 188)
 #' latitude <- c(4, 4, 4, 4, 4, 4)
 #' SAAR <- gsw_SAAR(p, longitude, latitude)
-#' expect_equal(1e3*SAAR$SAAR, c(0.004794295602143, 0.007668755837570, 0.018919828449091,
-#'                               0.077293264028981, 0.161974583039298, 0.270652408428964))
-#' expect_equal(SAAR$in_ocean, rep(1, 6))
+#' stopifnot(all.equal(1e3*SAAR$SAAR, c(0.004794295602143, 0.007668755837570, 0.018919828449091,
+#'                                      0.077293264028981, 0.161974583039298, 0.270652408428964)))
+#' stopifnot(all.equal(SAAR$in_ocean, rep(1, 6)))
 #' @references
-#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_saar.html}
+#' \url{https://www.teos-10.org/pubs/gsw/html/gsw_saar.html}
 gsw_SAAR <- function(p, longitude, latitude)
 {
     l <- argfix(list(p=p, longitude=longitude, latitude=latitude))
@@ -4119,8 +4175,8 @@ gsw_SAAR <- function(p, longitude, latitude)
 #' p <- c(       10,       50,      125,      250,      600,     1000)
 #' saturation_fraction <- 1
 #' SA <- gsw_SA_freezing_from_CT(CT, p, saturation_fraction)
-#' expect_equal(SA, c(2.280500648179144, 2.416867651098550, 11.973503162175106,
-#'                  32.868973869711390, 34.017513292374431, 32.859871943514150))
+#' stopifnot(all.equal(SA, c(2.280500648179144, 2.416867651098550, 11.973503162175106,
+#'                           32.868973869711390, 34.017513292374431, 32.859871943514150)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_freezing_from_CT.html}
 gsw_SA_freezing_from_CT <- function(CT, p, saturation_fraction=1)
@@ -4151,8 +4207,8 @@ gsw_SA_freezing_from_CT <- function(CT, p, saturation_fraction=1)
 #' p <- c(       10,       50,      125,      250,      600,     1000)
 #' saturation_fraction <- 1
 #' SA <- gsw_SA_freezing_from_CT_poly(CT, p, saturation_fraction)
-#' expect_equal(SA, c(2.281810267792954, 2.418134292641376, 11.971996354752958,
-#'                  32.867931280363138, 34.015087798162732, 32.856434894818825))
+#' stopifnot(all.equal(SA, c(2.281810267792954, 2.418134292641376, 11.971996354752958,
+#'                           32.867931280363138, 34.015087798162732, 32.856434894818825)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_freezing_from_CT_poly.html}
 gsw_SA_freezing_from_CT_poly <- function(CT, p, saturation_fraction=1)
@@ -4183,8 +4239,8 @@ gsw_SA_freezing_from_CT_poly <- function(CT, p, saturation_fraction=1)
 #' p <- c(      10,       50,      125,      250,      600,     1000)
 #' saturation_fraction <- 1
 #' SA <- gsw_SA_freezing_from_t(t, p, saturation_fraction)
-#' expect_equal(SA, c(2.015798440008186, 2.150742019102164, 11.679080083422074,
-#'                  32.844196564019278, 34.138949682974413, 33.100945437175568))
+#' stopifnot(all.equal(SA, c(2.015798440008186, 2.150742019102164, 11.679080083422074,
+#'                           32.844196564019278, 34.138949682974413, 33.100945437175568)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_freezing_from_t.html}
 gsw_SA_freezing_from_t <- function(t, p, saturation_fraction=1)
@@ -4215,8 +4271,8 @@ gsw_SA_freezing_from_t <- function(t, p, saturation_fraction=1)
 #' p <- c(      10,       50,      125,      250,      600,     1000)
 #' saturation_fraction <- 1
 #' SA <- gsw_SA_freezing_from_t_poly(t, p, saturation_fraction)
-#' expect_equal(SA, c(2.017072489768256, 2.151989342038462, 11.677649626115608,
-#'                  32.843128114999026, 34.136459306273451, 33.097427522625182))
+#' stopifnot(all.equal(SA, c(2.017072489768256, 2.151989342038462, 11.677649626115608,
+#'                           32.843128114999026, 34.136459306273451, 33.097427522625182)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_freezing_from_t_poly.html}
 gsw_SA_freezing_from_t_poly <- function(t, p, saturation_fraction=1)
@@ -4247,8 +4303,8 @@ gsw_SA_freezing_from_t_poly <- function(t, p, saturation_fraction=1)
 #' CT <-c(    28.7856,   28.4329,   22.8103,   10.2600,    6.8863,    4.4036)
 #' p <- c(         10,        50,       125,       250,       600,      1000)
 #' SA <- gsw_SA_from_rho(rho, CT, p)
-#' expect_equal(SA, c(34.712080120418108, 34.891723808488869, 35.026202257609505,
-#'                    34.847160842234572, 34.736398269039945, 34.732228881079742))
+#' stopifnot(all.equal(SA, c(34.712080120418108, 34.891723808488869, 35.026202257609505,
+#'                           34.847160842234572, 34.736398269039945, 34.732228881079742)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_rho.html}
@@ -4288,8 +4344,8 @@ gsw_SA_from_rho <- function(rho, CT, p)
 #' lat <- c(     4,       4,       4,       4,       4,       4)
 #' long <- c(  188,     188,     188,     188,     188,     188)
 #' SA <- gsw_SA_from_SP(SP, p, long, lat)
-#' expect_equal(SA, c(34.711778344814114, 34.891522618230098, 35.025544862476920,
-#'                    34.847229026189588, 34.736628474576051, 34.732363065590846))
+#' stopifnot(all.equal(SA, c(34.711778344814114, 34.891522618230098, 35.025544862476920,
+#'                           34.847229026189588, 34.736628474576051, 34.732363065590846)))
 #' @family things related to salinity
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP.html}
@@ -4341,8 +4397,8 @@ gsw_SA_from_SP <- function(SP, p, longitude, latitude)
 #' lon <- c(    20,     20,     20,     20,     20,      20)
 #' lat <- c(    59,     59,     59,     59,     59,      59)
 #' SA <- gsw_SA_from_SP_Baltic(SP, lon, lat)
-#' expect_equal(SA, c(6.669945432342856, 6.773776430742856, 6.912986138057142,
-#'                  7.366094191885713, 7.586183837142856, 10.389520570971428))
+#' stopifnot(all.equal(SA, c(6.669945432342856, 6.773776430742856, 6.912986138057142,
+#'                           7.366094191885713, 7.586183837142856, 10.389520570971428)))
 #' @family things related to salinity
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_SP_Baltic.html}
@@ -4394,8 +4450,8 @@ gsw_SA_from_SP_Baltic <- function(SP, longitude, latitude)
 #' lat <- c(     4,       4,       4,       4,       4,       4)
 #' long <- c(  188,     188,     188,     188,     188,     188)
 #' SA <- gsw_SA_from_Sstar(Sstar, p, long, lat)
-#' expect_equal(SA, c(34.711724663585905, 34.891561223296009, 35.025594598699882,
-#'                    34.847235885385913, 34.736694493054166, 34.732387111902753))
+#' stopifnot(all.equal(SA, c(34.711724663585905, 34.891561223296009, 35.025594598699882,
+#'                           34.847235885385913, 34.736694493054166, 34.732387111902753)))
 #' @family things related to salinity
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SA_from_Sstar.html}
@@ -4442,8 +4498,8 @@ gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' sigma0 <- gsw_sigma0(SA,CT)
-#' expect_equal(sigma0, c(21.797900819337656, 22.052215404397316, 23.892985307893923,
-#'                        26.667608665972011, 27.107380455119710, 27.409748977090885))
+#' stopifnot(all.equal(sigma0, c(21.797900819337656, 22.052215404397316, 23.892985307893923,
+#'                               26.667608665972011, 27.107380455119710, 27.409748977090885)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma0.html}
@@ -4476,8 +4532,8 @@ gsw_sigma0 <- function(SA, CT)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' sigma1 <- gsw_sigma1(SA,CT)
-#' expect_equal(sigma1, c(25.955618850310202, 26.213131422420247, 28.125423775188438,
-#'                        31.120360038882382, 31.637724222733368, 32.002453224572037))
+#' stopifnot(all.equal(sigma1, c(25.955618850310202, 26.213131422420247, 28.125423775188438,
+#'                               31.120360038882382, 31.637724222733368, 32.002453224572037)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma1.html}
@@ -4510,8 +4566,8 @@ gsw_sigma1 <- function(SA, CT)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' sigma2 <- gsw_sigma2(SA,CT)
-#' expect_equal(sigma2, c(30.023152223799116, 30.283783336283477, 32.265556840289719,
-#'                        35.474550881051073, 36.067289438047737, 36.492606494879510))
+#' stopifnot(all.equal(sigma2, c(30.023152223799116, 30.283783336283477, 32.265556840289719,
+#'                               35.474550881051073, 36.067289438047737, 36.492606494879510)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma2.html}
@@ -4544,8 +4600,8 @@ gsw_sigma2 <- function(SA, CT)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' sigma3 <- gsw_sigma3(SA,CT)
-#' expect_equal(sigma3, c(34.003747849903675, 34.267409891564057, 36.316415829697917,
-#'                        39.732367693977039, 40.397934186745033, 40.881795690566832))
+#' stopifnot(all.equal(sigma3, c(34.003747849903675, 34.267409891564057, 36.316415829697917,
+#'                               39.732367693977039, 40.397934186745033, 40.881795690566832)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma3.html}
@@ -4578,8 +4634,8 @@ gsw_sigma3 <- function(SA, CT)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' sigma4 <- gsw_sigma4(SA,CT)
-#' expect_equal(sigma4, c(37.900374609834898, 38.166979617032439, 40.280876075282549,
-#'                        43.896091033421953, 44.631677245327637, 45.171817312020039))
+#' stopifnot(all.equal(sigma4, c(37.900374609834898, 38.166979617032439, 40.280876075282549,
+#'                               43.896091033421953, 44.631677245327637, 45.171817312020039)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sigma4.html}
@@ -4612,8 +4668,8 @@ gsw_sigma4 <- function(SA, CT)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' speed <- gsw_sound_speed(SA,CT,p)
-#' expect_equal(speed/1e3, c(1.542426412426373, 1.542558891663385, 1.530801535436184,
-#'                         1.494551099295314, 1.487622786765276, 1.484271672296205))
+#' stopifnot(all.equal(speed/1e3, c(1.542426412426373, 1.542558891663385, 1.530801535436184,
+#'                                  1.494551099295314, 1.487622786765276, 1.484271672296205)))
 #' @family things related to sound
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed.html}
@@ -4644,8 +4700,8 @@ gsw_sound_speed <- function(SA, CT, p)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' p <- c(      10,       50,      125,      250,      600,    1000)
 #' speed <- gsw_sound_speed_ice(t, p)
-#' expect_equal(speed/1e3, c(3.111311360346254, 3.116492565497544, 3.115833462003452,
-#'                          3.115637032488204, 3.115377253092692, 3.113321384499191))
+#' stopifnot(all.equal(speed/1e3, c(3.111311360346254, 3.116492565497544, 3.115833462003452,
+#'                                  3.115637032488204, 3.115377253092692, 3.113321384499191)))
 ## @family things related to ice
 #' @family things related to sound
 #' @references
@@ -4677,8 +4733,8 @@ gsw_sound_speed_ice <- function(t, p)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' sound_speed <- gsw_sound_speed_t_exact(SA,CT,p)
-#' expect_equal(sound_speed/1e3, c(1.542615803587414, 1.542703534065789, 1.530844979136360,
-#'                               1.494409996920661, 1.487377102518027, 1.483934609078705))
+#' stopifnot(all.equal(sound_speed/1e3, c(1.542615803587414, 1.542703534065789, 1.530844979136360,
+#'                                        1.494409996920661, 1.487377102518027, 1.483934609078705)))
 #' @family things related to sound
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_sound_speed_t_exact.html}
@@ -4709,8 +4765,9 @@ gsw_sound_speed_t_exact <- function(SA, t, p)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' specvol <- gsw_specvol(SA, CT, p)
-#' expect_equal(specvol*1e3, c(0.978626852431313, 0.978222365701325, 0.976155264597929,
-#'                           0.972961258011157, 0.971026719344908, 0.968989944622149))
+#' stopifnot(all.equal(specvol*1e3,
+#'     c(0.978626852431313, 0.978222365701325, 0.976155264597929,
+#'       0.972961258011157, 0.971026719344908, 0.968989944622149)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol.html}
@@ -4734,12 +4791,12 @@ gsw_specvol  <- function(SA, CT, p)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_specvol_alpha_beta(SA, CT, p)
-#' expect_equal(r$specvol/1e-3, c(0.978626852431313, 0.978222365701325, 0.976155264597929,
-#'                              0.972961258011157, 0.971026719344908, 0.968989944622149))
-#' expect_equal(r$alpha/1e-3, c(0.324638934509245, 0.322655537959731, 0.281145723210171,
-#'                            0.173199716344780, 0.146289673594824, 0.129414845334599))
-#' expect_equal(r$beta/1e-3, c(0.717483987596135, 0.717647512290095, 0.726211643644768,
-#'                           0.750500751749777, 0.755052064788492, 0.757050813384370))
+#' stopifnot(all.equal(r$specvol/1e-3, c(0.978626852431313, 0.978222365701325, 0.976155264597929,
+#'                                       0.972961258011157, 0.971026719344908, 0.968989944622149)))
+#' stopifnot(all.equal(r$alpha/1e-3, c(0.324638934509245, 0.322655537959731, 0.281145723210171,
+#'                                     0.173199716344780, 0.146289673594824, 0.129414845334599)))
+#' stopifnot(all.equal(r$beta/1e-3, c(0.717483987596135, 0.717647512290095, 0.726211643644768,
+#'                                    0.750500751749777, 0.755052064788492, 0.757050813384370)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_alpha_beta.html}
@@ -4781,8 +4838,8 @@ gsw_specvol_alpha_beta  <- function(SA, CT, p)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' a <- gsw_specvol_anom_standard(SA, CT, p)
-#' expect_equal(a*1e5, c(0.601051894897400, 0.578609769250563, 0.405600538950092,
-#'                     0.142190453761838, 0.104335535578967, 0.076383389577725))
+#' stopifnot(all.equal(a*1e5, c(0.601051894897400, 0.578609769250563, 0.405600538950092,
+#'                              0.142190453761838, 0.104335535578967, 0.076383389577725)))
 #' @return Specific volume anomaly [ m^3/kg ]
 #' @family things related to density
 #' @references
@@ -4819,12 +4876,15 @@ gsw_specvol_anom_standard <- function(SA, CT, p)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_specvol_first_derivatives(SA, CT, p)
-#' expect_equal(r$v_SA/1e-6, c(-0.702149096451073, -0.702018847212088, -0.708895319156155,
-#'                           -0.730208155560782, -0.733175729406169, -0.733574625737474))
-#' expect_equal(r$v_CT/1e-6, c(0.317700378655437, 0.315628863649601, 0.274441877830800,
-#'                           0.168516613901993, 0.142051181824820, 0.125401683814057))
-#' expect_equal(r$v_p/1e-12, c(-0.402527990904794, -0.402146232553089, -0.406663124765787,
-#'                           -0.423877042622481, -0.426198431093548, -0.426390351853055))
+#' stopifnot(all.equal(r$v_SA/1e-6,
+#'     c(-0.702149096451073, -0.702018847212088, -0.708895319156155,
+#'       -0.730208155560782, -0.733175729406169, -0.733574625737474)))
+#' stopifnot(all.equal(r$v_CT/1e-6,
+#'     c(0.317700378655437, 0.315628863649601, 0.274441877830800,
+#'       0.168516613901993, 0.142051181824820, 0.125401683814057)))
+#' stopifnot(all.equal(r$v_p/1e-12,
+#'     c(-0.402527990904794, -0.402146232553089, -0.406663124765787,
+#'      -0.423877042622481, -0.426198431093548, -0.426390351853055)))
 #' @family things related to enthalpy
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_first_derivatives.html}
@@ -4862,10 +4922,12 @@ gsw_specvol_first_derivatives <- function(SA, CT, p)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_specvol_first_derivatives_wrt_enthalpy(SA, CT, p)
-#' expect_equal(r$v_SA_wrt_h/1e-6, c(-0.702143511679586, -0.701991101310494, -0.708834353735310,
-#'                                 -0.730130919555592, -0.733018321892082, -0.733342002723321))
-#' expect_equal(r$v_h/1e-10, c(0.795862623587769, 0.790648383268264, 0.687443468257647,
-#'                           0.422105846942233, 0.355778874334799, 0.314053366403993))
+#' stopifnot(all.equal(r$v_SA_wrt_h/1e-6,
+#'     c(-0.702143511679586, -0.701991101310494, -0.708834353735310,
+#'       -0.730130919555592, -0.733018321892082, -0.733342002723321)))
+#' stopifnot(all.equal(r$v_h/1e-10,
+#'     c(0.795862623587769, 0.790648383268264, 0.687443468257647,
+#'       0.422105846942233, 0.355778874334799, 0.314053366403993)))
 #' @family things related to enthalpy
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_first_derivatives_wrt_enthalpy.html}
@@ -4899,8 +4961,8 @@ gsw_specvol_first_derivatives_wrt_enthalpy <- function(SA, CT, p)
 #' t <- c(-10.7856, -13.4329, -12.8103, -12.2600,  -10.8863,  -8.4036)
 #' p <- c(      10,       50,      125,      250,       600,     1000)
 #' v <- gsw_specvol_ice(t, p)
-#' expect_equal(v, c(0.001088982980677, 0.001088489459509, 0.001088499019939,
-#'                 0.001088433747301, 0.001088223220685, 0.001088135464776))
+#' stopifnot(all.equal(v, c(0.001088982980677, 0.001088489459509, 0.001088499019939,
+#'                          0.001088433747301, 0.001088223220685, 0.001088135464776)))
 #' @family things related to density
 ## @family things related to ice
 #' @references
@@ -4940,16 +5002,21 @@ gsw_specvol_ice  <- function(t, p)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_specvol_second_derivatives(SA, CT, p)
-#' expect_equal(r$specvol_SA_SA/1e-8, c(0.080906777599140, 0.080915086639384, 0.084568844270812,
-#'                                    0.096725108896007, 0.099111765836648, 0.100302277946072))
-#' expect_equal(r$specvol_SA_CT/1e-8, c(0.129965332117084, 0.130523053162130, 0.149555815430615,
-#'                                    0.217023290441810, 0.233892039070486, 0.243659989480325))
-#' expect_equal(r$specvol_CT_CT/1e-7, c(0.071409582006642, 0.071582962051991, 0.077436153664104,
-#'                                    0.095329736274850, 0.100105336953738, 0.103044572835472))
-#' expect_equal(r$specvol_SA_p/1e-14, c(0.141281359467752, 0.141507584673426, 0.147247234588907,
-#'                                    0.164580347761218, 0.168069801298412, 0.169948275518754))
-#' expect_equal(r$specvol_CT_p/1e-14, c(0.085542828707964, 0.086723632576213, 0.112156562396990,
-#'                                    0.188269893599500, 0.211615556759369, 0.228609575049911))
+#' stopifnot(all.equal(r$specvol_SA_SA/1e-8,
+#'     c(0.080906777599140, 0.080915086639384, 0.084568844270812,
+#'       0.096725108896007, 0.099111765836648, 0.100302277946072)))
+#' stopifnot(all.equal(r$specvol_SA_CT/1e-8,
+#'     c(0.129965332117084, 0.130523053162130, 0.149555815430615,
+#'       0.217023290441810, 0.233892039070486, 0.243659989480325)))
+#' stopifnot(all.equal(r$specvol_CT_CT/1e-7,
+#'     c(0.071409582006642, 0.071582962051991, 0.077436153664104,
+#'      0.095329736274850, 0.100105336953738, 0.103044572835472)))
+#' stopifnot(all.equal(r$specvol_SA_p/1e-14,
+#'     c(0.141281359467752, 0.141507584673426, 0.147247234588907,
+#'       0.164580347761218, 0.168069801298412, 0.169948275518754)))
+#' stopifnot(all.equal(r$specvol_CT_p/1e-14,
+#'     c(0.085542828707964, 0.086723632576213, 0.112156562396990,
+#'       0.188269893599500, 0.211615556759369, 0.228609575049911)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_second_derivatives.html}
 gsw_specvol_second_derivatives <- function(SA, CT, p)
@@ -4996,12 +5063,15 @@ gsw_specvol_second_derivatives <- function(SA, CT, p)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_specvol_second_derivatives_wrt_enthalpy(SA, CT, p)
-#' expect_equal(r$specvol_SA_SA/1e-8, c(0.080900028996264, 0.080937999675000, 0.084663065647101,
-#'                                    0.096973364985384, 0.099727453432293, 0.101353037979356))
-#' expect_equal(r$specvol_SA_h/1e-12, c(0.325437133570796, 0.327060462851431, 0.375273569184178,
-#'                                    0.545188833073084, 0.589424881889351, 0.616101548209175))
-#' expect_equal(r$specvol_h_h/1e-15, c(0.447949998681476, 0.449121446914278, 0.485998151346315,
-#'                                   0.598480711660961, 0.628708349875318, 0.647433212216398))
+#' stopifnot(all.equal(r$specvol_SA_SA/1e-8,
+#'     c(0.080900028996264, 0.080937999675000, 0.084663065647101,
+#'       0.096973364985384, 0.099727453432293, 0.101353037979356)))
+#' stopifnot(all.equal(r$specvol_SA_h/1e-12,
+#'     c(0.325437133570796, 0.327060462851431, 0.375273569184178,
+#'       0.545188833073084, 0.589424881889351, 0.616101548209175)))
+#' stopifnot(all.equal(r$specvol_h_h/1e-15,
+#'     c(0.447949998681476, 0.449121446914278, 0.485998151346315,
+#'       0.598480711660961, 0.628708349875318, 0.647433212216398)))
 #' @template broken-test-values
 #' @template broken-test-values-family
 #' @references
@@ -5041,8 +5111,8 @@ gsw_specvol_second_derivatives_wrt_enthalpy <- function(SA, CT, p)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' v <- gsw_specvol_t_exact(SA, t, p)
-#' expect_equal(v*1e3, c(0.978626625025472, 0.978222143734527, 0.976154768597586,
-#'                     0.972961211575438, 0.971026779948624, 0.968989990731808))
+#' stopifnot(all.equal(v*1e3, c(0.978626625025472, 0.978222143734527, 0.976154768597586,
+#'                              0.972961211575438, 0.971026779948624, 0.968989990731808)))
 #' @family things related to density
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_t_exact.html}
@@ -5073,8 +5143,8 @@ gsw_specvol_t_exact  <- function(SA, t, p)
 #' t <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(     10,      50,     125,     250,     600,    1000)
 #' SP <- gsw_SP_from_C(C,t,p)
-#' expect_equal(SP,  c(20.009869599086951, 20.265511864874270, 22.981513062527689,
-#'                     31.204503263727982, 34.032315787432829, 36.400308494388170))
+#' stopifnot(all.equal(SP,  c(20.009869599086951, 20.265511864874270, 22.981513062527689,
+#'                            31.204503263727982, 34.032315787432829, 36.400308494388170)))
 #' @family things related to salinity
 #' @family things related to conductivity
 #' @references
@@ -5118,8 +5188,8 @@ gsw_SP_from_C <- function(C, t, p)
 #' lat <-  c(      4,       4,       4,       4,       4,       4)
 #' long <- c(    188,     188,     188,     188,     188,     188)
 #' SP <- gsw_SP_from_SA(SA,p,long,lat)
-#' expect_equal(SP, c(34.548721553448317, 34.727477488096639, 34.860554877708005,
-#'                    34.680971112271791, 34.567971663653388, 34.560036751118204))
+#' stopifnot(all.equal(SP, c(34.548721553448317, 34.727477488096639, 34.860554877708005,
+#'                           34.680971112271791, 34.567971663653388, 34.560036751118204)))
 #' @family things related to salinity
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SA.html}
@@ -5157,8 +5227,8 @@ gsw_SP_from_SA <- function(SA, p, longitude, latitude)
 #' @examples
 #' SK <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
 #' SP <- gsw_SP_from_SK(SK)
-#' expect_equal(SP, c(34.548342096952908, 34.727295637119113, 34.860409847645435,
-#'                    34.680755706371187, 34.567658670360110, 34.559651800554022))
+#' stopifnot(all.equal(SP, c(34.548342096952908, 34.727295637119113, 34.860409847645435,
+#'                           34.680755706371187, 34.567658670360110, 34.559651800554022)))
 #' @family things related to salinity
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SK.html}
@@ -5182,8 +5252,8 @@ gsw_SP_from_SK <- function(SK)
 #' @examples
 #' SR <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
 #' SP <- gsw_SP_from_SR(SR)
-#' expect_equal(SP, c(34.386552667080714, 34.564513505458834, 34.696889296869848,
-#'                    34.518231743800094, 34.405762086435850, 34.397799632817147))
+#' stopifnot(all.equal(SP, c(34.386552667080714, 34.564513505458834, 34.696889296869848,
+#'                           34.518231743800094, 34.405762086435850, 34.397799632817147)))
 #' @family things related to salinity
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_SR.html}
@@ -5213,8 +5283,8 @@ gsw_SP_from_SR <- function(SR)
 #' longitude <- 188
 #' latitude <- 4
 #' SP <- gsw_SP_from_Sstar(Sstar, p, longitude, latitude)
-#' expect_equal(SP, c(34.548646570969929, 34.727538423586189, 34.860549501859502,
-#'                    34.681006826476434, 34.568065697992346, 34.560023926979518))
+#' stopifnot(all.equal(SP, c(34.548646570969929, 34.727538423586189, 34.860549501859502,
+#'                           34.681006826476434, 34.568065697992346, 34.560023926979518)))
 #' @family things related to salinity
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_from_Sstar.html}
@@ -5253,12 +5323,12 @@ gsw_SP_from_Sstar <- function(Sstar, p, longitude, latitude)
 #' SA_seaice <- c(     5,     4.8,     3.5,     2.5,       1,      0.4)
 #' t_seaice <- c(-5.7856, -4.4329, -3.8103, -4.2600, -3.8863,  -3.4036)
 #' r <- gsw_seaice_fraction_to_freeze_seawater(SA, CT, p, SA_seaice, t_seaice)
-#' expect_equal(r$SA_freeze, c(34.671271207148074, 34.703449677481224, 34.950192062047861,
-#'                           34.525277379661880, 34.077349518029997, 33.501836583274191))
-#' expect_equal(r$CT_freeze, c(-1.895419711000293, -1.927935638317893, -1.999943183939312,
-#'                           -2.071677444370745, -2.318866154643864, -2.603185031462614))
-#' expect_equal(r$w_seaice, c(0.001364063868629, 0.006249283768465, 0.002391958850970,
-#'                          0.009952101583387, 0.019541106156815, 0.035842627277027))
+#' stopifnot(all.equal(r$SA_freeze, c(34.671271207148074, 34.703449677481224, 34.950192062047861,
+#'                                    34.525277379661880, 34.077349518029997, 33.501836583274191)))
+#' stopifnot(all.equal(r$CT_freeze, c(-1.895419711000293, -1.927935638317893, -1.999943183939312,
+#'                                    -2.071677444370745, -2.318866154643864, -2.603185031462614)))
+#' stopifnot(all.equal(r$w_seaice, c(0.001364063868629, 0.006249283768465, 0.002391958850970,
+#'                                   0.009952101583387, 0.019541106156815, 0.035842627277027)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_seaice_fraction_to_freeze_seawater.html}
@@ -5292,8 +5362,8 @@ gsw_seaice_fraction_to_freeze_seawater <- function(SA, CT, p, SA_seaice, t_seaic
 #' @examples
 #' SP <- c(34.5487, 34.7275, 34.8605, 34.6810, 34.5680, 34.5600)
 #' SR <- gsw_SR_from_SP(SP)
-#' expect_equal(SR, c(34.711611927085727, 34.891255045714303, 35.024882197714305,
-#'                    34.844535778285724, 34.731002934857159, 34.722965211428587))
+#' stopifnot(all.equal(SR, c(34.711611927085727, 34.891255045714303, 35.024882197714305,
+#'                           34.844535778285724, 34.731002934857159, 34.722965211428587)))
 #' @family things related to salinity
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SR_from_SP.html}
@@ -5322,10 +5392,9 @@ gsw_SR_from_SP <- function(SP)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' spiciness <- gsw_spiciness0(SA, CT)
-#' expect_equal(spiciness, c(5.728998558542941, 5.749940496782486, 4.163547112671111,
-#'                           1.069362556641764, 0.426428274444305, 0.089725188494086))
+#' stopifnot(all.equal(spiciness, c(5.728998558542941, 5.749940496782486, 4.163547112671111,
+#'                                  1.069362556641764, 0.426428274444305, 0.089725188494086)))
 #' @family things related to spiciness
-#' and 2000 dbar.
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_spiciness0.html}
 gsw_spiciness0 <- function(SA, CT)
@@ -5356,8 +5425,8 @@ gsw_spiciness0 <- function(SA, CT)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' spiciness <- gsw_spiciness1(SA, CT)
-#' expect_equal(spiciness, c(6.311038322123224, 6.326411175472160, 4.667218659743284,
-#'                           1.351722468726905, 0.628494082166029, 0.224779784908478))
+#' stopifnot(all.equal(spiciness, c(6.311038322123224, 6.326411175472160, 4.667218659743284,
+#'                                  1.351722468726905, 0.628494082166029, 0.224779784908478)))
 #' @family things related to spiciness
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_spiciness1.html}
@@ -5389,8 +5458,8 @@ gsw_spiciness1 <- function(SA, CT)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' spiciness <- gsw_spiciness2(SA, CT)
-#' expect_equal(spiciness, c(6.874671751873180, 6.884616399155135, 5.154458892387083,
-#'                           1.624327800598636, 0.823490797424952, 0.355069307641827))
+#' stopifnot(all.equal(spiciness, c(6.874671751873180, 6.884616399155135, 5.154458892387083,
+#'                                  1.624327800598636, 0.823490797424952, 0.355069307641827)))
 #' @family things related to spiciness
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_spiciness2.html}
@@ -5431,8 +5500,8 @@ gsw_spiciness2 <- function(SA, CT)
 #' lat <-  c(      4,       4,       4,       4,       4,       4)
 #' long <- c(    188,     188,     188,     188,     188,     188)
 #' Sstar <- gsw_Sstar_from_SA(SA,p,long,lat)
-#' expect_equal(Sstar, c(34.711575335926490, 34.891138777337822, 35.024705401162166,
-#'                       34.843564118358302, 34.729005527604883, 34.719712883389462))
+#' stopifnot(all.equal(Sstar, c(34.711575335926490, 34.891138777337822, 35.024705401162166,
+#'                              34.843564118358302, 34.729005527604883, 34.719712883389462)))
 #' @family things related to salinity
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_Sstar_from_SA.html}
@@ -5485,8 +5554,8 @@ gsw_Sstar_from_SA <- function(SA, p, longitude, latitude)
 #' lat <-  c(      4,       4,       4,       4,       4,       4)
 #' long <- c(    188,     188,     188,     188,     188,     188)
 #' Sstar <- gsw_Sstar_from_SP(SP,p,long,lat)
-#' expect_equal(Sstar, c(34.711553680880769, 34.891161395333754, 35.024650265047370,
-#'                       34.843593141519356, 34.729033995955525, 34.719675962471783))
+#' stopifnot(all.equal(Sstar, c(34.711553680880769, 34.891161395333754, 35.024650265047370,
+#'                              34.843593141519356, 34.729033995955525, 34.719675962471783)))
 #' @family things related to salinity
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_Sstar_from_SP.html}
@@ -5530,8 +5599,8 @@ gsw_Sstar_from_SP <- function(SP, p, longitude, latitude)
 #' t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' d <- gsw_t_deriv_chem_potential_water_t_exact(SA, t, p)
-#' expect_equal(d, c(-0.428798278908442, -0.423860344327343, -0.345277821010421,
-#'                 -0.164446485487145, -0.114228046736087, -0.076990819658255))
+#' stopifnot(all.equal(d, c(-0.428798278908442, -0.423860344327343, -0.345277821010421,
+#'                          -0.164446485487145, -0.114228046736087, -0.076990819658255)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_deriv_chem_potential_water_t_exact.html}
 gsw_t_deriv_chem_potential_water_t_exact <- function(SA, t, p)
@@ -5566,8 +5635,8 @@ gsw_t_deriv_chem_potential_water_t_exact <- function(SA, t, p)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' saturation_fraction <- 1
 #' tf <- gsw_t_freezing(SA, p, saturation_fraction)
-#' expect_equal(tf, c(-1.902730710149803, -1.942908619287183, -2.006861069199743,
-#'                    -2.090985086875259, -2.351293130342102, -2.660498762776720))
+#' stopifnot(all.equal(tf, c(-1.902730710149803, -1.942908619287183, -2.006861069199743,
+#'                           -2.090985086875259, -2.351293130342102, -2.660498762776720)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing.html}
@@ -5600,10 +5669,12 @@ gsw_t_freezing <- function(SA, p, saturation_fraction=1)
 #' p <- c(                     10,      50,     125,     250,     600,    1000)
 #' saturation_fraction <- c(    1,     0.8,     0.6,     0.5,     0.4,       0)
 #' derivs <- gsw_t_freezing_first_derivatives(SA, p, saturation_fraction)
-#' expect_equal(derivs$tfreezing_SA, c(-0.056811800705787, -0.056856999671114, -0.056903079789292,
-#'                                   -0.056904020028541, -0.056974588411844, -0.057082363270642))
-#' expect_equal(derivs$tfreezing_p/1e-7, c(-0.748468312442338, -0.749793159537290, -0.752225023995510,
-#'                                       -0.756170965034610, -0.767279572670040, -0.779936552091913))
+#' stopifnot(all.equal(derivs$tfreezing_SA,
+#'     c(-0.056811800705787, -0.056856999671114, -0.056903079789292,
+#'       -0.056904020028541, -0.056974588411844, -0.057082363270642)))
+#' stopifnot(all.equal(derivs$tfreezing_p/1e-7,
+#'     c(-0.748468312442338, -0.749793159537290, -0.752225023995510,
+#'      -0.756170965034610, -0.767279572670040, -0.779936552091913)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_first_derivatives.html}
@@ -5641,10 +5712,12 @@ gsw_t_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)
 #' p <- c(                     10,      50,     125,     250,     600,    1000)
 #' saturation_fraction <- c(    1,     0.8,     0.6,     0.5,     0.4,       0)
 #' derivs <- gsw_t_freezing_first_derivatives_poly(SA, p, saturation_fraction)
-#' expect_equal(derivs$tfreezing_SA, c(-0.056810211094078, -0.056855567524973, -0.056901968693345,
-#'                                   -0.056903498206432, -0.056975157476629, -0.057083526206200))
-#' expect_equal(derivs$tfreezing_p/1e-7, c(-0.748987354878138, -0.750288853857513, -0.752676389629787,
-#'                                       -0.756549680608529, -0.767482625710990, -0.779985619685683))
+#' stopifnot(all.equal(derivs$tfreezing_SA,
+#'     c(-0.056810211094078, -0.056855567524973, -0.056901968693345,
+#'       -0.056903498206432, -0.056975157476629, -0.057083526206200)))
+#' stopifnot(all.equal(derivs$tfreezing_p/1e-7,
+#'     c(-0.748987354878138, -0.750288853857513, -0.752676389629787,
+#'       -0.756549680608529, -0.767482625710990, -0.779985619685683)))
 #' @template broken-test-values
 #' @template broken-test-values-family
 ## @family things related to ice
@@ -5682,8 +5755,8 @@ gsw_t_freezing_first_derivatives_poly <- function(SA, p, saturation_fraction=1)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' t <- gsw_t_from_CT(SA, CT, p)
-#' expect_equal(t, c(28.785580227725703, 28.432872246163946, 22.810323087627076,
-#'                   10.260010752788906, 6.886286301029376, 4.403624452383043))
+#' stopifnot(all.equal(t, c(28.785580227725703, 28.432872246163946, 22.810323087627076,
+#'                          10.260010752788906, 6.886286301029376, 4.403624452383043)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_from_CT.html}
 gsw_t_from_CT <- function(SA, CT, p)
@@ -5711,8 +5784,8 @@ gsw_t_from_CT <- function(SA, CT, p)
 #' pt0_ice  <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' t <- gsw_t_from_pt0_ice(pt0_ice, p)
-#' expect_equal(t, c(-10.783412084414074, -13.422068638139141, -12.783170223330448,
-#'                 -12.205667526492039, -10.755496924674144, -8.184121042593350))
+#' stopifnot(all.equal(t, c(-10.783412084414074, -13.422068638139141, -12.783170223330448,
+#'                          -12.205667526492039, -10.755496924674144, -8.184121042593350)))
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_from_pt0_ice.html}
@@ -5743,8 +5816,8 @@ gsw_t_from_pt0_ice <- function(pt0_ice, p)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' tb <- gsw_thermobaric(SA, CT, p)
-#' expect_equal(tb*1e11, c(0.152618598186650, 0.153662896162852, 0.173429325875738,
-#'                       0.232810160208414, 0.251984724005424, 0.266660342289558))
+#' stopifnot(all.equal(tb*1e11, c(0.152618598186650, 0.153662896162852, 0.173429325875738,
+#'                                0.232810160208414, 0.251984724005424, 0.266660342289558)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_thermobaric.html}
 gsw_thermobaric <- function(SA, CT, p)
@@ -5777,11 +5850,11 @@ gsw_thermobaric <- function(SA, CT, p)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
 #' r <- gsw_Turner_Rsubrho(SA, CT, p)
-#' expect_equal(r$Tu, c(-2.063858905281147, 41.758435216784427, 47.606966981687535,
-#'                      53.710351151706369, 45.527063858211527))
-#' expect_equal(r$Rsubrho, 100*c(-0.009304335069039, -0.176564834348709, 0.219627771740757,
-#'                               0.065271424662002, 1.087044054679743))
-#' expect_equal(r$p_mid, 100*c(0.300, 0.875, 1.875, 4.250, 8.000))
+#' stopifnot(all.equal(r$Tu, c(-2.063858905281147, 41.758435216784427, 47.606966981687535,
+#'                             53.710351151706369, 45.527063858211527)))
+#' stopifnot(all.equal(r$Rsubrho, 100*c(-0.009304335069039, -0.176564834348709, 0.219627771740757,
+#'                                      0.065271424662002, 1.087044054679743)))
+#' stopifnot(all.equal(r$p_mid, 100*c(0.300, 0.875, 1.875, 4.250, 8.000)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_Turner_Rsubrho.html}
 gsw_Turner_Rsubrho <- function(SA, CT, p)
@@ -5813,20 +5886,44 @@ gsw_Turner_Rsubrho <- function(SA, CT, p)
 #'
 #' @template ptemplate
 #' @template latitudetemplate
+#' @param geo_strf_dyn_height vector of same length as \code{p} and \code{latitude},
+#' indicating dynamic height [ m^2/s^2 ].
+#' If not supplied, this defaults to a vector of 0 values, with length matching that
+#' of \code{p}.
+#' @param sea_surface_geopotential vector of same length as \code{p} and \code{latitude},
+#' indicating geopotential at zero sea pressure [ m^2/s^2 ].
+#' If not supplied, this defaults to a vector of 0 values, with length matching that
+#' of \code{p}.
+#'
 #' @return height [ m ]
+#'
 #' @examples
 #' z <- gsw_z_from_p(c(10, 50, 125, 250, 600,1000), 4)
-#' expect_equal(z/1e2, c(-0.099445834469453, -0.497180897012550, -1.242726219409978,
-#'                     -2.484700576548589, -5.958253480356214, -9.920919060719987))
+#' stopifnot(all.equal(z/1e2, c(-0.099445834469453, -0.497180897012550, -1.242726219409978,
+#'                              -2.484700576548589, -5.958253480356214, -9.920919060719987)))
 #' @family things related to depth
+#'
+#' @section Historical Note:
+#' The \code{geo_strf_dyn_height} and \code{sea_surface_geopotential}
+#' parameters were added in GSW-R version 1.0-6.
+#'
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_z_from_p.html}
-gsw_z_from_p <- function(p, latitude)
+gsw_z_from_p <- function(p, latitude, geo_strf_dyn_height, sea_surface_geopotential)
 {
-    l <- argfix(list(p=p, latitude=latitude))
+    if (missing(geo_strf_dyn_height))
+        geo_strf_dyn_height <- rep(0.0, length(p))
+    if (missing(sea_surface_geopotential))
+        sea_surface_geopotential <- rep(0.0, length(p))
+    l <- argfix(list(p=p,
+                     latitude=latitude,
+                     geo_strf_dyn_height=geo_strf_dyn_height,
+                     sea_surface_geopotential=sea_surface_geopotential))
     n <- length(l[[1]])
     rval <- .C("wrap_gsw_z_from_p",
                p=as.double(l$p), lat=as.double(l$latitude),
+               geo_strf_dyn_height=as.double(l$geo_strf_dyn_height),
+               sea_surface_geopotential=as.double(l$sea_surface_geopotential),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
     ##37 rval[!is.finite(l$p) | !is.finite(l$latitude)] <- NA
     if (is.matrix(p))

@@ -22,14 +22,23 @@ when frazil ice forms due to changes in pressure upon
 the mixture of seawater and ice.
 }
 \details{
-The present R function works with a wrapper to a C function contained
-within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
-\url{https://github.com/TEOS-10/GSW-C},
-as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
-stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn stems from the GSW-Matlab system
-(\url{https://github.com/TEOS-10/GSW-Matlab}).
-Consult \url{http://www.teos-10.org} to learn more about
+This R function uses a wrapper to a C function
+contained within the GSW-C system as updated 2021-mar-27
+at \url{https://github.com/TEOS-10/GSW-C}
+with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+In turn, that C function uses data from the
+\code{library/gsw_data_v3_0.mat}
+file provided in the GSW-Matlab source code, version 3.06-11.
+Unfortunately, this version is no longer displayed on the
+teos-10.org website. Therefore, in the interests of making
+GSW-R be self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
+on 2021-jul-06, the .mat file was stored in
+the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
+used in GSW-R was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about
 these software systems, their authorships, and the science behind
 it all.
 }
@@ -38,12 +47,15 @@ SA <- c(  34.7118,   34.8915,   35.0256,   34.8472,   34.7366,   34.7324)
 p <- c(        10,        50,       125,       250,       600,      1000)
 w_Ih <- c(    0.9,      0.84,       0.4,      0.25,      0.05,      0.01)
 r <- gsw_frazil_ratios_adiabatic_poly(SA, p, w_Ih)
-expect_equal(r$dSA_dCT_frazil, c(3.035308957896530, 1.932631198810934, 0.613220785586734,
-                               0.516106221687200, 0.436657158542033, 0.425827675768018))
-expect_equal(r$dSA_dP_frazil/1e-6, c(-0.197512213108610, -0.133280971893621, -0.045599951957139,
-                                   -0.038820466574251, -0.033548047632788, -0.033352365425407))
-expect_equal(r$dCT_dP_frazil/1e-7, c(-0.650715350062703, -0.689634794137768, -0.743613932027895,
-                                   -0.752179782823459, -0.768292629045686, -0.783236208526200))
+stopifnot(all.equal(r$dSA_dCT_frazil,
+    c(3.035308957896530, 1.932631198810934, 0.613220785586734,
+     0.516106221687200, 0.436657158542033, 0.425827675768018)))
+stopifnot(all.equal(r$dSA_dP_frazil/1e-6,
+    c(-0.197512213108610, -0.133280971893621, -0.045599951957139,
+      -0.038820466574251, -0.033548047632788, -0.033352365425407)))
+stopifnot(all.equal(r$dCT_dP_frazil/1e-7,
+    c(-0.650715350062703, -0.689634794137768, -0.743613932027895,
+     -0.752179782823459, -0.768292629045686, -0.783236208526200)))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_frazil_ratios_adiabatic_poly.html}

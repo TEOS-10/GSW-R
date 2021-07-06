@@ -24,14 +24,23 @@ a list containing \code{SA_final}, \code{CT_final} and \code{w_Ih_final}.
 Calculate properties related to ice melting in seawater
 }
 \details{
-The present R function works with a wrapper to a C function contained
-within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
-\url{https://github.com/TEOS-10/GSW-C},
-as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
-stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn stems from the GSW-Matlab system
-(\url{https://github.com/TEOS-10/GSW-Matlab}).
-Consult \url{http://www.teos-10.org} to learn more about
+This R function uses a wrapper to a C function
+contained within the GSW-C system as updated 2021-mar-27
+at \url{https://github.com/TEOS-10/GSW-C}
+with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+In turn, that C function uses data from the
+\code{library/gsw_data_v3_0.mat}
+file provided in the GSW-Matlab source code, version 3.06-11.
+Unfortunately, this version is no longer displayed on the
+teos-10.org website. Therefore, in the interests of making
+GSW-R be self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
+on 2021-jul-06, the .mat file was stored in
+the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
+used in GSW-R was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about
 these software systems, their authorships, and the science behind
 it all.
 }
@@ -42,11 +51,11 @@ p <- c(        10,      50,     125,     250,     600,    1000)
 w_Ih <- c( 0.0560, 0.02513, 0.02159, 0.01210, 0.00943, 0.00751)
 t_Ih <- c(-4.7856, -4.4329, -3.8103, -4.2600, -3.8863, -3.4036)
 r <- gsw_melting_ice_into_seawater(SA, CT, p, w_Ih, t_Ih)
-expect_equal(r$SA_final, c(32.767939199999994, 34.014676604999998, 34.269397295999994,
-                           34.425548880000001, 34.409033862000001, 34.471559675999998))
-expect_equal(r$CT_final, c(-0.298448911022612, 0.215263001418312, -0.074341719211557,
-                           0.207796293045473, -0.123785388299875, -0.202531182809225))
-expect_equal(r$w_Ih_final, rep(0, 6))
+stopifnot(all.equal(r$SA_final, c(32.767939199999994, 34.014676604999998, 34.269397295999994,
+                                  34.425548880000001, 34.409033862000001, 34.471559675999998)))
+stopifnot(all.equal(r$CT_final, c(-0.298448911022612, 0.215263001418312, -0.074341719211557,
+                                  0.207796293045473, -0.123785388299875, -0.202531182809225)))
+stopifnot(all.equal(r$w_Ih_final, rep(0, 6)))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_ice_into_seawater.html}
