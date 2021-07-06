@@ -25,46 +25,38 @@ density with respect to enthalpy.
 Second Derivatives of Density wrt Enthalpy
 }
 \details{
-The present R function works with a wrapper to a C function contained
-within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
-\url{https://github.com/TEOS-10/GSW-C},
-as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
-stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn stems from the GSW-Matlab system
-(\url{https://github.com/TEOS-10/GSW-Matlab}).
-Consult \url{http://www.teos-10.org} to learn more about
+This R function uses a wrapper to a C function
+contained within the GSW-C system as updated 2021-mar-27
+at \url{https://github.com/TEOS-10/GSW-C}
+with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+In turn, that C function uses data from the
+\code{library/gsw_data_v3_0.mat}
+file provided in the GSW-Matlab source code, version 3.06-11.
+Unfortunately, this version is no longer displayed on the
+teos-10.org website. Therefore, in the interests of making
+GSW-R be self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
+on 2021-jul-06, the .mat file was stored in
+the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
+used in GSW-R was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about
 these software systems, their authorships, and the science behind
 it all.
 }
-\section{Bugs}{
-
-
-As of March 27, 2017, the test values listed in \dQuote{Examples} do not match
-values provided at the TEOS-10 website listed in \dQuote{References},
-but they match with values given by the Matlab code that is
-provided on the TEOS-10 website. It is expected that the
-TEOS-10 website will be updated by May 2017. As those updates to the TEOS-10
-website become available, the present comment will be revised or deleted.
-}
-
 \examples{
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 p <- c(      10,      50,     125,     250,     600,    1000)
 r <- gsw_rho_second_derivatives_wrt_enthalpy(SA, CT, p)
-expect_equal(r$rho_SA_SA/1e-3, c(0.207312267114544, 0.207065033523473, 0.191848346945039,
-                               0.133182862881598, 0.116049034622904, 0.102745309429078))
-expect_equal(r$rho_SA_h/1e-6, c(-0.459053080088382, -0.460370569872258, -0.498605615416296,
-                              -0.642833108550133, -0.682091962941161, -0.706793055445909))
-expect_equal(r$rho_h_h/1e-9, c(-0.454213854637790, -0.455984900239309, -0.499870030989387,
-                             -0.628337767293403, -0.664021595759308, -0.687367088752173))
+stopifnot(all.equal(r$rho_SA_SA/1e-3, c(0.207312267114544, 0.207065033523473, 0.191848346945039,
+                                        0.133182862881598, 0.116049034622904, 0.102745309429078)))
+stopifnot(all.equal(r$rho_SA_h/1e-6, c(-0.459053080088382, -0.460370569872258, -0.498605615416296,
+                                       -0.642833108550133, -0.682091962941161, -0.706793055445909)))
+stopifnot(all.equal(r$rho_h_h/1e-9, c(-0.454213854637790, -0.455984900239309, -0.499870030989387,
+                                      -0.628337767293403, -0.664021595759308, -0.687367088752173)))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_second_derivatives_wrt_enthalpy.html}
 }
-\seealso{
-Other functions with suspicious test values on the TEOS-10 website: \code{\link{gsw_entropy_second_derivatives}},
-  \code{\link{gsw_specvol_second_derivatives_wrt_enthalpy}},
-  \code{\link{gsw_t_freezing_first_derivatives_poly}}
-}
-\concept{functions with suspicious test values on the TEOS-10 website}

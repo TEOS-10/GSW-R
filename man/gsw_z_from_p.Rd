@@ -4,13 +4,23 @@
 \alias{gsw_z_from_p}
 \title{Height from Pressure}
 \usage{
-gsw_z_from_p(p, latitude)
+gsw_z_from_p(p, latitude, geo_strf_dyn_height, sea_surface_geopotential)
 }
 \arguments{
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
 \item{latitude}{latitude in decimal degrees, positive to the north of the equator. (This
 is called \code{lat} in the TEOS-10 Matlab code.)}
+
+\item{geo_strf_dyn_height}{vector of same length as \code{p} and \code{latitude},
+indicating dynamic height [ m^2/s^2 ].
+If not supplied, this defaults to a vector of 0 values, with length matching that
+of \code{p}.}
+
+\item{sea_surface_geopotential}{vector of same length as \code{p} and \code{latitude},
+indicating geopotential at zero sea pressure [ m^2/s^2 ].
+If not supplied, this defaults to a vector of 0 values, with length matching that
+of \code{p}.}
 }
 \value{
 height [ m ]
@@ -20,26 +30,42 @@ Computation of height (above sea level) from pressure, using the 75-term equatio
 specific volume.
 }
 \details{
-The present R function works with a wrapper to a C function contained
-within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
-\url{https://github.com/TEOS-10/GSW-C},
-as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
-stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn stems from the GSW-Matlab system
-(\url{https://github.com/TEOS-10/GSW-Matlab}).
-Consult \url{http://www.teos-10.org} to learn more about
+This R function uses a wrapper to a C function
+contained within the GSW-C system as updated 2021-mar-27
+at \url{https://github.com/TEOS-10/GSW-C}
+with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+In turn, that C function uses data from the
+\code{library/gsw_data_v3_0.mat}
+file provided in the GSW-Matlab source code, version 3.06-11.
+Unfortunately, this version is no longer displayed on the
+teos-10.org website. Therefore, in the interests of making
+GSW-R be self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
+on 2021-jul-06, the .mat file was stored in
+the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
+used in GSW-R was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about
 these software systems, their authorships, and the science behind
 it all.
 }
+\section{Historical Note}{
+
+The \code{geo_strf_dyn_height} and \code{sea_surface_geopotential}
+parameters were added in GSW-R version 1.0-6.
+}
+
 \examples{
 z <- gsw_z_from_p(c(10, 50, 125, 250, 600,1000), 4)
-expect_equal(z/1e2, c(-0.099445834469453, -0.497180897012550, -1.242726219409978,
-                    -2.484700576548589, -5.958253480356214, -9.920919060719987))
+stopifnot(all.equal(z/1e2, c(-0.099445834469453, -0.497180897012550, -1.242726219409978,
+                             -2.484700576548589, -5.958253480356214, -9.920919060719987)))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_z_from_p.html}
 }
 \seealso{
-Other things related to depth: \code{\link{gsw_p_from_z}}
+Other things related to depth: 
+\code{\link{gsw_p_from_z}()}
 }
 \concept{things related to depth}

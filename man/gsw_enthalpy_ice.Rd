@@ -18,14 +18,23 @@ specific enthalpy [ J/kg ]
 Specific enthalpy of ice [ J/kg ]. Note that this is a negative quantity.
 }
 \details{
-The present R function works with a wrapper to a C function contained
-within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
-\url{https://github.com/TEOS-10/GSW-C},
-as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
-stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn stems from the GSW-Matlab system
-(\url{https://github.com/TEOS-10/GSW-Matlab}).
-Consult \url{http://www.teos-10.org} to learn more about
+This R function uses a wrapper to a C function
+contained within the GSW-C system as updated 2021-mar-27
+at \url{https://github.com/TEOS-10/GSW-C}
+with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+In turn, that C function uses data from the
+\code{library/gsw_data_v3_0.mat}
+file provided in the GSW-Matlab source code, version 3.06-11.
+Unfortunately, this version is no longer displayed on the
+teos-10.org website. Therefore, in the interests of making
+GSW-R be self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
+on 2021-jul-06, the .mat file was stored in
+the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
+used in GSW-R was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about
 these software systems, their authorships, and the science behind
 it all.
 }
@@ -33,30 +42,31 @@ it all.
 t <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 p <-  c(     10,      50,     125,     250,     600,    1000)
 se <- gsw_enthalpy_ice(t, p)
-expect_equal(se/1e5, c(-3.554414597446597, -3.603380857687490, -3.583089884253586,
-                     -3.558998379233944, -3.494811024956881, -3.402784319238127))
+stopifnot(all.equal(se/1e5, c(-3.554414597446597, -3.603380857687490, -3.583089884253586,
+                              -3.558998379233944, -3.494811024956881, -3.402784319238127)))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_ice.html}
 }
 \seealso{
-Other things related to enthalpy: \code{\link{gsw_CT_from_enthalpy}},
-  \code{\link{gsw_dynamic_enthalpy}},
-  \code{\link{gsw_enthalpy_CT_exact}},
-  \code{\link{gsw_enthalpy_diff}},
-  \code{\link{gsw_enthalpy_first_derivatives_CT_exact}},
-  \code{\link{gsw_enthalpy_first_derivatives}},
-  \code{\link{gsw_enthalpy_t_exact}},
-  \code{\link{gsw_enthalpy}},
-  \code{\link{gsw_frazil_properties_potential_poly}},
-  \code{\link{gsw_frazil_properties_potential}},
-  \code{\link{gsw_pot_enthalpy_from_pt_ice_poly}},
-  \code{\link{gsw_pot_enthalpy_from_pt_ice}},
-  \code{\link{gsw_pot_enthalpy_ice_freezing_poly}},
-  \code{\link{gsw_pot_enthalpy_ice_freezing}},
-  \code{\link{gsw_pt_from_pot_enthalpy_ice_poly}},
-  \code{\link{gsw_pt_from_pot_enthalpy_ice}},
-  \code{\link{gsw_specvol_first_derivatives_wrt_enthalpy}},
-  \code{\link{gsw_specvol_first_derivatives}}
+Other things related to enthalpy: 
+\code{\link{gsw_CT_from_enthalpy}()},
+\code{\link{gsw_dynamic_enthalpy}()},
+\code{\link{gsw_enthalpy_CT_exact}()},
+\code{\link{gsw_enthalpy_diff}()},
+\code{\link{gsw_enthalpy_first_derivatives_CT_exact}()},
+\code{\link{gsw_enthalpy_first_derivatives}()},
+\code{\link{gsw_enthalpy_t_exact}()},
+\code{\link{gsw_enthalpy}()},
+\code{\link{gsw_frazil_properties_potential_poly}()},
+\code{\link{gsw_frazil_properties_potential}()},
+\code{\link{gsw_pot_enthalpy_from_pt_ice_poly}()},
+\code{\link{gsw_pot_enthalpy_from_pt_ice}()},
+\code{\link{gsw_pot_enthalpy_ice_freezing_poly}()},
+\code{\link{gsw_pot_enthalpy_ice_freezing}()},
+\code{\link{gsw_pt_from_pot_enthalpy_ice_poly}()},
+\code{\link{gsw_pt_from_pot_enthalpy_ice}()},
+\code{\link{gsw_specvol_first_derivatives_wrt_enthalpy}()},
+\code{\link{gsw_specvol_first_derivatives}()}
 }
 \concept{things related to enthalpy}

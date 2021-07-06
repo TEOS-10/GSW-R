@@ -48,7 +48,7 @@ taken to achieve reliability.
 By design, the documentation of `gsw` functions is spare, amounting mainly to an
 explanation of function arguments and return values, with most other details
 being provided through hyperlinks to the GSW reference documentation. The idea
-is to avoid duplication and to encourage users to consult the technical 
+is to avoid duplication and to encourage users to consult the technical
 materials linked to the GSW functions mimicked in `gsw`.  The GSW system is
 somewhat complex, and analysts owe it to themselves to learn how it works, and
 also to develop an appreciation for its scientific context by consulting
@@ -163,22 +163,22 @@ IOC and SCOR and IAPSO, 2010.  Intergovernmental Oceanographic Commission,
 Manuals and Guide, 56, UNESCO.
 [http://www.teos-10.org/pubs/TEOS-10_Manual.pdf](http://www.teos-10.org/pubs/TEOS-10_Manual.pdf)
 
-Kelley, D. and C. Richards, 2016.  oce: Analysis of Oceanographic data, R
-package version 0.9-18.  Comprehensive R Archive Network.
-[http://dankelley.github.com/oce](http://dankelley.github.com/oce)
+Kelley, D., C. Richards and C. Layton, 2021.  oce: Analysis of Oceanographic
+data, R package version 1.4-0.  Comprehensive R Archive Network.
+[https://CRAN.R-project.org/package=oce](https://CRAN.R-project.org/package=oce)
 
 McDougall, T. J. and P. M. Barker,2011.  Getting started with TEOS-10 and the
 Gibbs Seawater (GSW) Oceanographic Toolbox.  SCOR/IAPSO WG127.
 978-0-646-55621-5.
 
-McDougall, T. J., D. R. Jackett, F. J. Millero, R. Pawlowicz and P. M.  Barker, 
+McDougall, T. J., D. R. Jackett, F. J. Millero, R. Pawlowicz and P. M.  Barker,
 2012.  A global algorithm for estimating Absolute Salinity.  Ocean Science,
        8:1123-1134.
        [http://www.ocean-sci.net/8/1123/2012/os-8-1123-2012.pdf](http://www.ocean-sci.net/8/1123/2012/os-8-1123-2012.pdf)
 
 Millero, F. J. 2010.  History of the equation of state of seawater.
 Oceanography, 23:18-33.
-[http://www.tos.org/oceanography/article/history-of-the-equation-of-state-of-seawater](http://www.tos.org/oceanography/article/history-of-the-equation-of-state-of-seawater)
+[https://www.tos.org/oceanography/article/history-of-the-equation-of-state-of-seawater](https://www.tos.org/oceanography/article/history-of-the-equation-of-state-of-seawater)
 
 Pawlowicz, R., T. McDougall, R. Feistel and R. Tailleux, 2012.  Preface ``An
 historical perspective on the development of the Thermodynamic Equation of

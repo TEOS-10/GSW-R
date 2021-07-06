@@ -4,8 +4,7 @@
 \alias{gsw_geo_strf_dyn_height_1}
 \title{Geostrophic Dynamic Height Anomaly [TEST VERSION]}
 \usage{
-gsw_geo_strf_dyn_height_1(SA, CT, p, p_ref = 0, max_dp = 1,
-  interp_method = 2)
+gsw_geo_strf_dyn_height_1(SA, CT, p, p_ref = 0, max_dp = 1, interp_method = 2)
 }
 \arguments{
 \item{SA}{Absolute Salinity [ g/kg ]}
@@ -47,14 +46,23 @@ any of these three restrictions yields an error.
 If \code{p_ref} exceeds the largest \code{p} value, a vector
 of zeros is returned, in accordance with the underlying C code.
 
-The present R function works with a wrapper to a C function contained
-within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
-\url{https://github.com/TEOS-10/GSW-C},
-as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
-stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn stems from the GSW-Matlab system
-(\url{https://github.com/TEOS-10/GSW-Matlab}).
-Consult \url{http://www.teos-10.org} to learn more about
+This R function uses a wrapper to a C function
+contained within the GSW-C system as updated 2021-mar-27
+at \url{https://github.com/TEOS-10/GSW-C}
+with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+In turn, that C function uses data from the
+\code{library/gsw_data_v3_0.mat}
+file provided in the GSW-Matlab source code, version 3.06-11.
+Unfortunately, this version is no longer displayed on the
+teos-10.org website. Therefore, in the interests of making
+GSW-R be self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
+on 2021-jul-06, the .mat file was stored in
+the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
+used in GSW-R was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about
 these software systems, their authorships, and the science behind
 it all.
 }
@@ -65,7 +73,7 @@ p <- c(      10,      50,     125,     250,     600,    1000)
 p_ref <- 1000
 dh <- gsw_geo_strf_dyn_height_1(SA, CT, p, p_ref, 1, 2)
 ## FIXME: The following test values fail.
-## expect_equal(dh, c(17.039204557769487, 14.665853784722286, 10.912861136923812,
+## all.equal(dh, c(17.039204557769487, 14.665853784722286, 10.912861136923812,
 ##                 7.567928838774945, 3.393524055565328, 0))
 }
 \references{

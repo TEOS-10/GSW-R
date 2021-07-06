@@ -20,14 +20,23 @@ potential temperature [ degC ]
 Potential temperature referenced to the surface
 }
 \details{
-The present R function works with a wrapper to a C function contained
-within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
-\url{https://github.com/TEOS-10/GSW-C},
-as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
-stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn stems from the GSW-Matlab system
-(\url{https://github.com/TEOS-10/GSW-Matlab}).
-Consult \url{http://www.teos-10.org} to learn more about
+This R function uses a wrapper to a C function
+contained within the GSW-C system as updated 2021-mar-27
+at \url{https://github.com/TEOS-10/GSW-C}
+with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+In turn, that C function uses data from the
+\code{library/gsw_data_v3_0.mat}
+file provided in the GSW-Matlab source code, version 3.06-11.
+Unfortunately, this version is no longer displayed on the
+teos-10.org website. Therefore, in the interests of making
+GSW-R be self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
+on 2021-jul-06, the .mat file was stored in
+the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
+used in GSW-R was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about
 these software systems, their authorships, and the science behind
 it all.
 }
@@ -36,8 +45,8 @@ SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 t <- c( 28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 p <- c(      10,      50,     125,     250,     600,    1000)
 pt0 <- gsw_pt0_from_t(SA, t, p)
-expect_equal(pt0, c(28.783196819670632, 28.420983342398962, 22.784930399117108,
-                    10.230523661095731, 6.829230224409661, 4.324510571845719))
+stopifnot(all.equal(pt0, c(28.783196819670632, 28.420983342398962, 22.784930399117108,
+                           10.230523661095731, 6.829230224409661, 4.324510571845719)))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_pt0_from_t.html}

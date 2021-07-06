@@ -28,14 +28,23 @@ volume with respect to Conservative Temperature and pressure.
 Second Derivatives of Specific Volume
 }
 \details{
-The present R function works with a wrapper to a C function contained
-within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
-\url{https://github.com/TEOS-10/GSW-C},
-as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
-stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn stems from the GSW-Matlab system
-(\url{https://github.com/TEOS-10/GSW-Matlab}).
-Consult \url{http://www.teos-10.org} to learn more about
+This R function uses a wrapper to a C function
+contained within the GSW-C system as updated 2021-mar-27
+at \url{https://github.com/TEOS-10/GSW-C}
+with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+In turn, that C function uses data from the
+\code{library/gsw_data_v3_0.mat}
+file provided in the GSW-Matlab source code, version 3.06-11.
+Unfortunately, this version is no longer displayed on the
+teos-10.org website. Therefore, in the interests of making
+GSW-R be self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
+on 2021-jul-06, the .mat file was stored in
+the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
+used in GSW-R was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about
 these software systems, their authorships, and the science behind
 it all.
 }
@@ -44,16 +53,21 @@ SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 p <- c(      10,      50,     125,     250,     600,    1000)
 r <- gsw_specvol_second_derivatives(SA, CT, p)
-expect_equal(r$specvol_SA_SA/1e-8, c(0.080906777599140, 0.080915086639384, 0.084568844270812,
-                                   0.096725108896007, 0.099111765836648, 0.100302277946072))
-expect_equal(r$specvol_SA_CT/1e-8, c(0.129965332117084, 0.130523053162130, 0.149555815430615,
-                                   0.217023290441810, 0.233892039070486, 0.243659989480325))
-expect_equal(r$specvol_CT_CT/1e-7, c(0.071409582006642, 0.071582962051991, 0.077436153664104,
-                                   0.095329736274850, 0.100105336953738, 0.103044572835472))
-expect_equal(r$specvol_SA_p/1e-14, c(0.141281359467752, 0.141507584673426, 0.147247234588907,
-                                   0.164580347761218, 0.168069801298412, 0.169948275518754))
-expect_equal(r$specvol_CT_p/1e-14, c(0.085542828707964, 0.086723632576213, 0.112156562396990,
-                                   0.188269893599500, 0.211615556759369, 0.228609575049911))
+stopifnot(all.equal(r$specvol_SA_SA/1e-8,
+    c(0.080906777599140, 0.080915086639384, 0.084568844270812,
+      0.096725108896007, 0.099111765836648, 0.100302277946072)))
+stopifnot(all.equal(r$specvol_SA_CT/1e-8,
+    c(0.129965332117084, 0.130523053162130, 0.149555815430615,
+      0.217023290441810, 0.233892039070486, 0.243659989480325)))
+stopifnot(all.equal(r$specvol_CT_CT/1e-7,
+    c(0.071409582006642, 0.071582962051991, 0.077436153664104,
+     0.095329736274850, 0.100105336953738, 0.103044572835472)))
+stopifnot(all.equal(r$specvol_SA_p/1e-14,
+    c(0.141281359467752, 0.141507584673426, 0.147247234588907,
+      0.164580347761218, 0.168069801298412, 0.169948275518754)))
+stopifnot(all.equal(r$specvol_CT_p/1e-14,
+    c(0.085542828707964, 0.086723632576213, 0.112156562396990,
+      0.188269893599500, 0.211615556759369, 0.228609575049911)))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_second_derivatives.html}

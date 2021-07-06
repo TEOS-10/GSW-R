@@ -12,7 +12,6 @@ css
 src/*.o$
 ^\.Rproj\.user$
 developer
-
 man-roxygen
 issues
 ^cran-comments\.md$

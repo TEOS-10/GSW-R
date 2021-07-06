@@ -3,11 +3,10 @@
 \docType{package}
 \name{gsw}
 \alias{gsw}
-\alias{gsw-package}
 \title{R implementation of Thermodynamic Equation Of Seawater - 2010 (TEOS-10)}
 \description{
 Provides an R interface to the TEOS-10 / GSW (Gibbs Sea Water) library,
-partly for use by the \code{oce} package (see \url{http://dankelley.github.io/oce})
+partly for use by the \code{oce} package (see \url{https://dankelley.github.io/oce})
 and partly for general use. It is assumed that users are familiar with
 the science and methodology of GSW, and that the package vignette
 (obtained by typing \code{vignette("gsw")} in an R window) provides

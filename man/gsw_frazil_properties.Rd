@@ -21,14 +21,23 @@ Calculation of Absolute Salinity, Conservative Temperature, and ice mass fractio
 based on bulk Absolute Salinity, bulk enthalpy, and pressure
 }
 \details{
-The present R function works with a wrapper to a C function contained
-within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
-\url{https://github.com/TEOS-10/GSW-C},
-as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
-stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn stems from the GSW-Matlab system
-(\url{https://github.com/TEOS-10/GSW-Matlab}).
-Consult \url{http://www.teos-10.org} to learn more about
+This R function uses a wrapper to a C function
+contained within the GSW-C system as updated 2021-mar-27
+at \url{https://github.com/TEOS-10/GSW-C}
+with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+In turn, that C function uses data from the
+\code{library/gsw_data_v3_0.mat}
+file provided in the GSW-Matlab source code, version 3.06-11.
+Unfortunately, this version is no longer displayed on the
+teos-10.org website. Therefore, in the interests of making
+GSW-R be self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
+on 2021-jul-06, the .mat file was stored in
+the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
+used in GSW-R was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about
 these software systems, their authorships, and the science behind
 it all.
 }
@@ -37,12 +46,12 @@ SA_bulk <- c(  34.7118,   34.8915,   35.0256,   34.8472,   34.7366,   34.7324)
 h_bulk <- c( -4.5544e4, -4.6033e4, -4.5830e4, -4.5589e4, -4.4948e4, -4.4027e4)
 p <- c(             10,        50,       125,       250,       600,      1000)
 r <- gsw_frazil_properties(SA_bulk, h_bulk, p)
-expect_equal(r$SA_final, c(39.111030663000442, 39.407625769681573, 39.595789974885108,
-                         39.481230045372889, 39.591177095552503, 39.826467709177123))
-expect_equal(r$CT_final, c(-2.156311126114311, -2.204672298963783, -2.273689262333450,
-                         -2.363714136353600, -2.644541000680772, -2.977651291726651))
-expect_equal(r$w_Ih_final, c(0.112480560814322, 0.114600300867556, 0.115421108602301,
-                           0.117372990660305, 0.122617649983886, 0.127906590822347))
+stopifnot(all.equal(r$SA_final, c(39.111030663000442, 39.407625769681573, 39.595789974885108,
+                                  39.481230045372889, 39.591177095552503, 39.826467709177123)))
+stopifnot(all.equal(r$CT_final, c(-2.156311126114311, -2.204672298963783, -2.273689262333450,
+                                  -2.363714136353600, -2.644541000680772, -2.977651291726651)))
+stopifnot(all.equal(r$w_Ih_final, c(0.112480560814322, 0.114600300867556, 0.115421108602301,
+                                    0.117372990660305, 0.122617649983886, 0.127906590822347)))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_frazil_properties.html}

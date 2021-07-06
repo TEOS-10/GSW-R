@@ -22,14 +22,23 @@ a list containing \code{SA_freeze}, \code{CT_freeze} and \code{w_Ih}.
 Ice Fraction to Cool Seawater to Freezing
 }
 \details{
-The present R function works with a wrapper to a C function contained
-within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
-\url{https://github.com/TEOS-10/GSW-C},
-as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
-stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn stems from the GSW-Matlab system
-(\url{https://github.com/TEOS-10/GSW-Matlab}).
-Consult \url{http://www.teos-10.org} to learn more about
+This R function uses a wrapper to a C function
+contained within the GSW-C system as updated 2021-mar-27
+at \url{https://github.com/TEOS-10/GSW-C}
+with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+In turn, that C function uses data from the
+\code{library/gsw_data_v3_0.mat}
+file provided in the GSW-Matlab source code, version 3.06-11.
+Unfortunately, this version is no longer displayed on the
+teos-10.org website. Therefore, in the interests of making
+GSW-R be self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
+on 2021-jul-06, the .mat file was stored in
+the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
+used in GSW-R was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about
 these software systems, their authorships, and the science behind
 it all.
 }
@@ -39,12 +48,12 @@ CT <- c(   28.7856,  28.4329,  22.8103,  10.2600,   6.8863,  4.4036)
 p <- c(         10,       50,      125,      250,      600,    1000)
 t_Ih <- c(-10.7856, -13.4329, -12.8103, -12.2600, -10.8863, -8.4036)
 r <- gsw_ice_fraction_to_freeze_seawater(SA, CT, p, t_Ih)
-expect_equal(r$SA_freeze, c(25.823952352620722, 26.120495895535438, 27.460572941868072,
-                          30.629978769577168, 31.458222332943784, 32.121170316796444))
-expect_equal(r$CT_freeze, c(-1.389936216242376, -1.437013334134283, -1.569815847128818,
-                          -1.846419165657020, -2.166786673735941, -2.522730879078756))
-expect_equal(r$w_Ih, c(0.256046867272203, 0.251379393389925, 0.215985652155336,
-                     0.121020375537284, 0.094378196687535, 0.075181377710828))
+stopifnot(all.equal(r$SA_freeze, c(25.823952352620722, 26.120495895535438, 27.460572941868072,
+                                   30.629978769577168, 31.458222332943784, 32.121170316796444)))
+stopifnot(all.equal(r$CT_freeze, c(-1.389936216242376, -1.437013334134283, -1.569815847128818,
+                                   -1.846419165657020, -2.166786673735941, -2.522730879078756)))
+stopifnot(all.equal(r$w_Ih, c(0.256046867272203, 0.251379393389925, 0.215985652155336,
+                              0.121020375537284, 0.094378196687535, 0.075181377710828)))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_ice_fraction_to_freeze_seawater.html}

@@ -22,14 +22,23 @@ quantity is denoted \code{pot_enthalpy_ice_freezing_P} in the documentation for 
 First Derivatives of Potential Enthalpy
 }
 \details{
-The present R function works with a wrapper to a C function contained
-within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
-\url{https://github.com/TEOS-10/GSW-C},
-as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
-stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn stems from the GSW-Matlab system
-(\url{https://github.com/TEOS-10/GSW-Matlab}).
-Consult \url{http://www.teos-10.org} to learn more about
+This R function uses a wrapper to a C function
+contained within the GSW-C system as updated 2021-mar-27
+at \url{https://github.com/TEOS-10/GSW-C}
+with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+In turn, that C function uses data from the
+\code{library/gsw_data_v3_0.mat}
+file provided in the GSW-Matlab source code, version 3.06-11.
+Unfortunately, this version is no longer displayed on the
+teos-10.org website. Therefore, in the interests of making
+GSW-R be self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
+on 2021-jul-06, the .mat file was stored in
+the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
+used in GSW-R was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about
 these software systems, their authorships, and the science behind
 it all.
 }
@@ -37,12 +46,12 @@ it all.
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 p <- c(      10,      50,     125,     250,     600,    1000)
 r <- gsw_pot_enthalpy_ice_freezing_first_derivatives(SA, p)
-expect_equal(r$pot_enthalpy_ice_freezing_SA/1e2,
+stopifnot(all.equal(r$pot_enthalpy_ice_freezing_SA/1e2,
       c(-1.183484968590718, -1.184125268891200, -1.184619267864844,
-      -1.184026131143674, -1.183727706650925, -1.183814873741961))
-expect_equal(r$pot_enthalpy_ice_freezing_p/1e-3,
+      -1.184026131143674, -1.183727706650925, -1.183814873741961)))
+stopifnot(all.equal(r$pot_enthalpy_ice_freezing_p/1e-3,
       c(-0.202880939983260, -0.203087335312542, -0.203473018454630,
-      -0.204112435106666, -0.205889571619502, -0.207895691215823))
+      -0.204112435106666, -0.205889571619502, -0.207895691215823)))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_ice_freezing_first_derivatives.html}

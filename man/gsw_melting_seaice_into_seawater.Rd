@@ -26,14 +26,23 @@ a list containing \code{SA_final} and \code{CT_final}.
 Calculate properties related to seaice melting in seawater
 }
 \details{
-The present R function works with a wrapper to a C function contained
-within the GSW-C system (Version 3.05-4 dated 2017-08-07, available at
-\url{https://github.com/TEOS-10/GSW-C},
-as git commit '5b4d959e54031f9e972f3e863f63e67fa4f5bfec'), which
-stems from the GSW-Fortran system (\url{https://github.com/TEOS-10/GSW-Fortran})
-which in turn stems from the GSW-Matlab system
-(\url{https://github.com/TEOS-10/GSW-Matlab}).
-Consult \url{http://www.teos-10.org} to learn more about
+This R function uses a wrapper to a C function
+contained within the GSW-C system as updated 2021-mar-27
+at \url{https://github.com/TEOS-10/GSW-C}
+with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+In turn, that C function uses data from the
+\code{library/gsw_data_v3_0.mat}
+file provided in the GSW-Matlab source code, version 3.06-11.
+Unfortunately, this version is no longer displayed on the
+teos-10.org website. Therefore, in the interests of making
+GSW-R be self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
+on 2021-jul-06, the .mat file was stored in
+the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
+used in GSW-R was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about
 these software systems, their authorships, and the science behind
 it all.
 }
@@ -45,10 +54,10 @@ w_seaice <- c( 0.0560, 0.02513, 0.02159, 0.01210, 0.00943, 0.00751)
 SA_seaice <- c(     5,     4.8,     3.5,     2.5,       1,     0.4)
 t_seaice <- c(-4.7856, -4.4329, -3.8103, -4.2600, -3.8863, -3.4036)
 r <- gsw_melting_seaice_into_seawater(SA, CT, p, w_seaice, SA_seaice, t_seaice)
-expect_equal(r$SA_final, c(33.047939199999995, 34.135300604999998, 34.344962295999999,
-                         34.455798880000003, 34.418463862000003, 34.474563675999995))
-expect_equal(r$CT_final, c(-0.018822367305381, 0.345095540241769, 0.020418581143151,
-                         0.242672380976922, -0.111078380121959, -0.197363471215418))
+stopifnot(all.equal(r$SA_final, c(33.047939199999995, 34.135300604999998, 34.344962295999999,
+                                  34.455798880000003, 34.418463862000003, 34.474563675999995)))
+stopifnot(all.equal(r$CT_final, c(-0.018822367305381, 0.345095540241769, 0.020418581143151,
+                                  0.242672380976922, -0.111078380121959, -0.197363471215418)))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_melting_seaice_into_seawater.html}
