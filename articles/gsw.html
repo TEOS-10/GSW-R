@@ -124,21 +124,21 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ctd</span><span class="op">[[</span><span class="st">"CT"</span><span class="op">]</span><span class="op">]</span> <span class="op">-</span> <span class="va">ctd</span><span class="op">[[</span><span class="st">"theta"</span><span class="op">]</span><span class="op">]</span>, <span class="va">ctd</span><span class="op">[[</span><span class="st">"z"</span><span class="op">]</span><span class="op">]</span>,
      xlab<span class="op">=</span><span class="st">"Conservative Temp. - Potential Temp."</span>, ylab<span class="op">=</span><span class="st">"Depth [m]"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
-<img src="fig01.png" alt=""><p class="caption">Comparison of UNESCO and GSW equations of state, for bottle sampling at 36.3N and 69.4W in 1993. Top left: TS diagram with UNESCO equation of state, showing Potential Temperature versus Practical Salinity. Bottom left: TS diagram with GSW equation of state, showing Conservative Temperature versus Absolute Salinity. Top right: Absolute Salinity minus Practical Salinity, as a function of depth. Bottom right: Conservative Temperature minus Potential Temperature, as a function of depth.</p>
+<img src="fig01.png" alt=""><p class="caption"><strong>Comparison of UNESCO and GSW equations of state, for bottle sampling at 36.3N and 69.4W in 1993. Top left: TS diagram with UNESCO equation of state, showing Potential Temperature versus Practical Salinity. Bottom left: TS diagram with GSW equation of state, showing Conservative Temperature versus Absolute Salinity. Top right: Absolute Salinity minus Practical Salinity, as a function of depth. Bottom right: Conservative Temperature minus Potential Temperature, as a function of depth.</strong></p>
 </div>
 <p>Most hydrography-related functions of <code>oce</code> provide this <code>eos</code> argument for selecting the seawater formulation. This includes functions for plotting and for calculating. In addition, most of the objects within <code>oce</code> have accessors that can return temperature and salinity in either the <code>UNESCO</code> or GSW scheme. For example, the ratio of Conservative Temperature to <code>UNESCO</code>-formulated potential temperature <span class="math inline">\(\theta\)</span> for all the CTD profiles in <code>section</code> is constructed with</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">section</span><span class="op">[[</span><span class="st">"CT"</span><span class="op">]</span><span class="op">]</span> <span class="op">-</span> <span class="va">section</span><span class="op">[[</span><span class="st">"theta"</span><span class="op">]</span><span class="op">]</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">f</span>, main<span class="op">=</span><span class="st">""</span>, breaks<span class="op">=</span><span class="fl">100</span>, xlab<span class="op">=</span><span class="st">"CT-theta"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
-<img src="fig02.png" alt=""><p class="caption">Histogram of difference between Conservative Temperature and Potential temperature for the 124 stations of a cross-Atlantic cruise at approximately 36N.</p>
+<img src="fig02.png" alt=""><p class="caption"><strong>Histogram of difference between Conservative Temperature and Potential temperature for the 124 stations of a cross-Atlantic cruise at approximately 36N.</strong></p>
 </div>
 <p>A salinity comparison is constructed with</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">section</span><span class="op">[[</span><span class="st">"SA"</span><span class="op">]</span><span class="op">]</span> <span class="op">-</span> <span class="va">section</span><span class="op">[[</span><span class="st">"salinity"</span><span class="op">]</span><span class="op">]</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">f</span>, main<span class="op">=</span><span class="st">""</span>, breaks<span class="op">=</span><span class="fl">100</span>, xlab<span class="op">=</span><span class="st">"Absolute Salinity - Practical Salinity"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
-<img src="fig03.png" alt=""><p class="caption">Histogram of difference between Absolute Salinity and Practical Salinity for the 124 stations of a cross-Atlantic cruise at approximately 36N.</p>
+<img src="fig03.png" alt=""><p class="caption"><strong>Histogram of difference between Absolute Salinity and Practical Salinity for the 124 stations of a cross-Atlantic cruise at approximately 36N.</strong></p>
 </div>
 <p>An examination of worldwide spatial patterns is also informative, with the following producing such a graph.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -154,7 +154,7 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="st">"Percent difference between "</span> <span class="op">*</span> <span class="va">S</span><span class="op">[</span><span class="va">A</span><span class="op">]</span> <span class="op">*</span> <span class="st">" and "</span> <span class="op">*</span> <span class="va">S</span><span class="op">[</span><span class="va">P</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Note the use of quantile-specified scales for the images, the colour mappings of which would otherwise be controlled by isolated low-saline waters, yielding little to see in the wider expanses of the world ocean; for a broader context, see e.g. <span class="citation">McDougall and Barker (2020)</span>.</p>
 <div class="figure">
-<img src="fig04.png" alt=""><p class="caption">Map of the relative difference between Absolute Salinity and Practical Salinity at the sea surface.</p>
+<img src="fig04.png" alt=""><p class="caption"><strong>Map of the relative difference between Absolute Salinity and Practical Salinity at the sea surface.</strong></p>
 </div>
 </div>
 <div id="references" class="section level1 unnumbered">
