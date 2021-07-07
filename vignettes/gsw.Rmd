@@ -116,7 +116,7 @@ plot(ctd[["CT"]] - ctd[["theta"]], ctd[["z"]],
      xlab="Conservative Temp. - Potential Temp.", ylab="Depth [m]")
 ```
 
-![Comparison of UNESCO and GSW equations of state, for bottle sampling at 36.3N and 69.4W in 1993. Top left: TS diagram with UNESCO equation of state, showing Potential Temperature versus Practical Salinity. Bottom left: TS diagram with GSW equation of state, showing Conservative Temperature versus Absolute Salinity. Top right: Absolute Salinity minus Practical Salinity, as a function of depth. Bottom right: Conservative Temperature minus Potential Temperature, as a function of depth.](fig01.png)
+![**Comparison of UNESCO and GSW equations of state, for bottle sampling at 36.3N and 69.4W in 1993. Top left: TS diagram with UNESCO equation of state, showing Potential Temperature versus Practical Salinity. Bottom left: TS diagram with GSW equation of state, showing Conservative Temperature versus Absolute Salinity. Top right: Absolute Salinity minus Practical Salinity, as a function of depth. Bottom right: Conservative Temperature minus Potential Temperature, as a function of depth.**](fig01.png)
 
 Most hydrography-related functions of `oce` provide this `eos` argument for
 selecting the seawater formulation. This includes functions for plotting and
@@ -131,9 +131,9 @@ f <- section[["CT"]] - section[["theta"]]
 hist(f, main="", breaks=100, xlab="CT-theta")
 ```
 
-![Histogram of difference between Conservative Temperature and Potential
+![**Histogram of difference between Conservative Temperature and Potential
 temperature for the 124 stations of a cross-Atlantic cruise at approximately
-36N.](fig02.png)
+36N.**](fig02.png)
 
 A salinity comparison is constructed with
 
@@ -142,8 +142,8 @@ f <- section[["SA"]] - section[["salinity"]]
 hist(f, main="", breaks=100, xlab="Absolute Salinity - Practical Salinity")
 ```
 
-![Histogram of difference between Absolute Salinity and Practical Salinity for
-the 124 stations of a cross-Atlantic cruise at approximately 36N.](fig03.png)
+![**Histogram of difference between Absolute Salinity and Practical Salinity for
+the 124 stations of a cross-Atlantic cruise at approximately 36N.**](fig03.png)
 
 An examination of worldwide spatial patterns is also informative, with the
 following producing such a graph.
@@ -165,7 +165,7 @@ of which would otherwise be controlled by isolated low-saline waters, yielding
 little to see in the wider expanses of the world ocean; for a broader context,
 see e.g. @mcdougall_getting_2020.
 
-![Map of the relative difference between Absolute Salinity and Practical Salinity at the sea surface.](fig04.png)
+![**Map of the relative difference between Absolute Salinity and Practical Salinity at the sea surface.**](fig04.png)
 
 
 ```{r results="hide", echo=FALSE}
