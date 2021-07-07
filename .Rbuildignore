@@ -16,3 +16,7 @@ developer
 man-roxygen
 issues
 ^cran-comments\.md$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
