@@ -70,5 +70,5 @@ stopifnot(all.equal(1e3*SAAR$SAAR, c(0.004794295602143, 0.007668755837570, 0.018
 stopifnot(all.equal(SAAR$in_ocean, rep(1, 6)))
 }
 \references{
-\url{https://www.teos-10.org/pubs/gsw/html/gsw_saar.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_SAAR.html}
 }

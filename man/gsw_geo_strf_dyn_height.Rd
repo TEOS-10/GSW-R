@@ -86,5 +86,4 @@ stopifnot(all.equal(dh,
 3. Barker, Paul M., and Trevor J. McDougall.
 "Two Interpolation Methods Using Multiply-Rotated Piecewise Cubic Hermite Interpolating Polynomials."
 Journal of Atmospheric and Oceanic Technology 37, no. 4 (April 2020): 605–19.
-\url{https://doi.org/10.1175/JTECH-D-19-0211.1}.
 }

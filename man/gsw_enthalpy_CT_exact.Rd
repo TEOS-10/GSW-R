@@ -49,7 +49,7 @@ stopifnot(all.equal(e/1e5, c(1.151031813321767, 1.140146925586514, 0.92180013178
                              0.432553712315790, 0.330871615358722, 0.269706848807403)))
 }
 \references{
-\url{https://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_ct_exact.html}
+\url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_CT_exact.html}
 }
 \seealso{
 Other things related to enthalpy: 

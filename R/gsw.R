@@ -35,8 +35,8 @@
 #'
 #' See \url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html}
 #' for a list of the TEOS-10 functions and
-#' \url{http://teos-10.github.io/GSW-R/documentation.html} for a list
-#' of the functions implemented in the present package.
+#' \url{https://teos-10.github.io/GSW-R/reference/index.html}
+#' for a list of the functions implemented in the present package.
 #'
 #' Each function is tested during the building of the package,
 #' which means that results are guaranteed to match those of
@@ -1276,7 +1276,7 @@ gsw_enthalpy <- function(SA, CT, p)
 #'                              0.432553712315790, 0.330871615358722, 0.269706848807403)))
 #' @family things related to enthalpy
 #' @references
-#' \url{https://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_ct_exact.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_CT_exact.html}
 gsw_enthalpy_CT_exact <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -2145,7 +2145,6 @@ gsw_grav <- function(latitude, p=0)
 #' 3. Barker, Paul M., and Trevor J. McDougall.
 #' "Two Interpolation Methods Using Multiply-Rotated Piecewise Cubic Hermite Interpolating Polynomials."
 #' Journal of Atmospheric and Oceanic Technology 37, no. 4 (April 2020): 605–19.
-#' \url{https://doi.org/10.1175/JTECH-D-19-0211.1}.
 gsw_geo_strf_dyn_height <- function(SA, CT, p, p_ref=0)
 {
     if (missing(SA) || missing(CT) || missing(p)) stop("must supply SA, CT, and p")
@@ -4142,7 +4141,7 @@ gsw_rho_t_exact <- function(SA, t, p)
 #'                                      0.077293264028981, 0.161974583039298, 0.270652408428964)))
 #' stopifnot(all.equal(SAAR$in_ocean, rep(1, 6)))
 #' @references
-#' \url{https://www.teos-10.org/pubs/gsw/html/gsw_saar.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SAAR.html}
 gsw_SAAR <- function(p, longitude, latitude)
 {
     l <- argfix(list(p=p, longitude=longitude, latitude=latitude))
