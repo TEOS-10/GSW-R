@@ -152,7 +152,7 @@
 <p>This R function uses a wrapper to a C function
 contained within the GSW-C system as updated 2021-03-27
 at <a href='https://github.com/TEOS-10/GSW-C'>https://github.com/TEOS-10/GSW-C</a>
-with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+with git commit `f7bfebf44f686034636facb09852f1d5760c27f5`.
 In turn, that C function uses data from the
 <code>library/gsw_data_v3_0.mat</code>
 file provided in the GSW-Matlab source code, version 3.06-11.
@@ -175,8 +175,9 @@ the various TEOS-10 software systems.</p>
 <span class='va'>CT</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>28.7856</span>, <span class='fl'>28.4329</span>, <span class='fl'>22.8103</span>, <span class='fl'>10.2600</span>,  <span class='fl'>6.8863</span>,  <span class='fl'>4.4036</span><span class='op'>)</span>
 <span class='va'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>      <span class='fl'>10</span>,      <span class='fl'>50</span>,     <span class='fl'>125</span>,     <span class='fl'>250</span>,     <span class='fl'>600</span>,    <span class='fl'>1000</span><span class='op'>)</span>
 <span class='va'>lr</span> <span class='op'>&lt;-</span> <span class='fu'>gsw_adiabatic_lapse_rate_from_CT</span><span class='op'>(</span><span class='va'>SA</span>, <span class='va'>CT</span>, <span class='va'>p</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/stopifnot.html'>stopifnot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span><span class='op'>(</span><span class='va'>lr</span><span class='op'>*</span><span class='fl'>1e7</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.240199646230069</span>, <span class='fl'>0.238457486976761</span>, <span class='fl'>0.203635157319712</span>,
-                              <span class='fl'>0.119829566859790</span>, <span class='fl'>0.100052760967308</span>, <span class='fl'>0.087773070307283</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/stopifnot.html'>stopifnot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/all.equal.html'>all.equal</a></span><span class='op'>(</span><span class='va'>lr</span><span class='op'>*</span><span class='fl'>1e7</span>,
+    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.240199646230069</span>, <span class='fl'>0.238457486976761</span>, <span class='fl'>0.203635157319712</span>,
+      <span class='fl'>0.119829566859790</span>, <span class='fl'>0.100052760967308</span>, <span class='fl'>0.087773070307283</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

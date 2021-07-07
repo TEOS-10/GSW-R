@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Geostrophic Dynamic Height Anomaly [TEST VERSION] — gsw_geo_strf_dyn_height_1 • gsw</title>
+<title>Geostrophic Dynamic Height Anomaly (provisional version) — gsw_geo_strf_dyn_height_1 • gsw</title>
 
 
 <!-- jquery -->
@@ -39,12 +39,10 @@
 
 
 
-<meta property="og:title" content="Geostrophic Dynamic Height Anomaly [TEST VERSION] — gsw_geo_strf_dyn_height_1" />
+<meta property="og:title" content="Geostrophic Dynamic Height Anomaly (provisional version) — gsw_geo_strf_dyn_height_1" />
 <meta property="og:description" content="This calculates a geopotential anomaly, called either the
 dynamic height anomaly or the geostrophic streamfunction
-in the TEOS-10 document listed as [1] below; users should
-read that and the references therein for more details on
-the definition and its calculation here.
+in the TEOS-10 document listed as [1] below.
 To get the column-integrated value in meters, take the first
 value of the returned vector and divide by
 9.7963\(m/s^2\). Note that this yields an integral
@@ -122,7 +120,7 @@ with the top measured pressure (not zero) as an upper limit." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Geostrophic Dynamic Height Anomaly [TEST VERSION]</h1>
+    <h1>Geostrophic Dynamic Height Anomaly (provisional version)</h1>
     <small class="dont-index">Source: <a href='https://github.com/TEOS-10/GSW-R/blob/master/R/gsw.R'><code>R/gsw.R</code></a></small>
     <div class="hidden name"><code>gsw_geo_strf_dyn_height_1.Rd</code></div>
     </div>
@@ -130,9 +128,7 @@ with the top measured pressure (not zero) as an upper limit." />
     <div class="ref-description">
     <p>This calculates a geopotential anomaly, called either the
 dynamic height anomaly or the geostrophic streamfunction
-in the TEOS-10 document listed as [1] below; users should
-read that and the references therein for more details on
-the definition and its calculation here.</p>
+in the TEOS-10 document listed as [1] below.</p>
 <p>To get the column-integrated value in meters, take the first
 value of the returned vector and divide by
 9.7963\(m/s^2\). Note that this yields an integral
@@ -178,10 +174,10 @@ a uniform grid is constructed with <code>max_dp</code> as the interval.</p></td>
 \(m^2/s^2\) for each level. For more on the units, see [2].</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Because of the scheme used in the underlying C code, the 
+    <p>Because of the scheme used in the underlying C code, the
 pressures must be in order, and must not have any repeats.
 Also, there must be at least 4 pressure values. Violating
-any of these three restrictions yields an error.</p>
+any of these restrictions yields an error.</p>
 <p>If <code>p_ref</code> exceeds the largest <code>p</code> value, a vector
 of zeros is returned, in accordance with the underlying C code.</p>
     <h2 class="hasAnchor" id="implementation-note"><a class="anchor" href="#implementation-note"></a>Implementation Note</h2>
@@ -191,7 +187,7 @@ of zeros is returned, in accordance with the underlying C code.</p>
 <p>This R function uses a wrapper to a C function
 contained within the GSW-C system as updated 2021-03-27
 at <a href='https://github.com/TEOS-10/GSW-C'>https://github.com/TEOS-10/GSW-C</a>
-with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+with git commit `f7bfebf44f686034636facb09852f1d5760c27f5`.
 In turn, that C function uses data from the
 <code>library/gsw_data_v3_0.mat</code>
 file provided in the GSW-Matlab source code, version 3.06-11.
@@ -208,7 +204,7 @@ the various TEOS-10 software systems.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>1. <a href='http://www.teos-10.org/pubs/gsw/html/gsw_geo_strf_dyn_height.html'>http://www.teos-10.org/pubs/gsw/html/gsw_geo_strf_dyn_height.html</a></p>
-<p>2. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition, Elsevier.</p>
+<p>2. Talley et al., 2011. Descriptive Physical Oceanography, Edition 6, Elsevier.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>SA</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>34.7118</span>, <span class='fl'>34.8915</span>, <span class='fl'>35.0256</span>, <span class='fl'>34.8472</span>, <span class='fl'>34.7366</span>, <span class='fl'>34.7324</span><span class='op'>)</span>
