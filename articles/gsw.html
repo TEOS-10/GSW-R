@@ -99,7 +99,7 @@
 <a href="#using-gsw-independent-of-oce" class="anchor"></a>Using gsw independent of oce</h1>
 <p>Suppose a water sample taken at pressure (For practical reasons, <code>gsw</code> goes beyond SI to incorporate oceanographic units, such as decibars for pressure.) 100 dbar, longitude 188E and latitude 4N, reveals Practical Salinity 35 and in-situ temperature 10<span class="math inline">\(^\circ\)</span>C (ITS-90). Then the Absolute Salinity may be calculated as follows.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://teos-10.github.io/GSW-R">gsw</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://teos-10.github.io/GSW-R/">gsw</a></span><span class="op">)</span>
 <span class="va">SA</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gsw_SA_from_SP.html">gsw_SA_from_SP</a></span><span class="op">(</span>SP<span class="op">=</span><span class="fl">35</span>, p<span class="op">=</span><span class="fl">100</span>, longitude<span class="op">=</span><span class="fl">188</span>, latitude<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
 <p>This yields <code>SA</code>=35.1655491 [g/kg], which can then be used to calculate Conservative Temperature as follows.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
