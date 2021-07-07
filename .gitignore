@@ -16,3 +16,4 @@ vignettes/gsw.bbl
 .DS_Store
 .Rapp.history
 vignettes/*.md
+docs
