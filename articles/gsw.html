@@ -85,14 +85,14 @@
 
     
     
-<p><strong>Abstract.</strong> The <code>gsw</code> package provides an R implementation of the Gibbs SeaWater toolbox for the calculation of seawater properties (version 3.05). This vignette outlines how to use <code>gsw</code> alone or as part of the <code>oce</code> package.</p>
+<p><strong>Abstract.</strong> The <code>gsw</code> package provides an R implementation of the Gibbs SeaWater toolbox for the calculation of seawater properties, based on the GSW-C framework<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. This vignette outlines how to use <code>gsw</code> alone or as part of the <code>oce</code> package <span class="citation">(Kelley, Richards, and Layton 2021)</span>.</p>
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>In recent years, thermodynamic considerations have led to improved formulae for the calculation of seawater properties (IOC, 2010; Millero et al 2010), an important component of which is the Gibbs-SeaWater (GSW) toolbox (McDougall 2011; Pawlowicz et al 2012). The <code>gsw</code> package is an R version of GSW, which may be used independently or within the more general <code>oce</code> package (Kelley and Richards 2016).</p>
+<p>In recent years, thermodynamic considerations have led to improved formulae for the calculation of seawater properties <span class="citation">(IOC, SCOR, and IAPSO 2010; Millero 2010; Pawlowicz et al. 2012)</span>, an important component of which is the Gibbs-SeaWater (GSW) toolbox <span class="citation">(McDougall and Barker 2020)</span>. The <code>gsw</code> package is an R version of GSW, which may be used independently or within the more general <code>oce</code> package <span class="citation">(Kelley, Richards, and Layton 2021)</span>.</p>
 <p>This vignette sketches how to use <code>gsw</code>. Readers are assumed to be familiar with oceanographic processing, and at least somewhat familiar with GSW. A good resource for learning more about GSW is <a href="http://www.teos-10.org">http://www.teos-10.org</a>, which provides technical manuals for the Matlab version of GSW <a href="http://www.teos-10.org/pubs/gsw/html/gsw_contents.html">http://www.teos-10.org/pubs/gsw/html/gsw_contents.html</a>, along with white papers and links to the growing peer-reviewed literature on the topic.</p>
-<p>The <code>gsw</code> framework involves a series of wrappers that connect R with the C version of the Gibbs Seawater library. This yields high processing speed and the minimization of transliteration errors increases reliability. The incorporation of GSW check values into the package-building process is an additional measure taken to achieve reliability.</p>
-<p>By design, the documentation of <code>gsw</code> functions is spare, amounting mainly to an explanation of function arguments and return values, with most other details being provided through hyperlinks to the GSW reference documentation. The idea is to avoid duplication and to encourage users to consult the technical materials linked to the GSW functions mimicked in <code>gsw</code>. The GSW system is somewhat complex, and analysts owe it to themselves to learn how it works, and also to develop an appreciation for its scientific context by consulting various documents at <a href="http://www.teos-10.org">http://www.teos-10.org</a>, including expansive white papers and pointers to the growing peer-reviewed literature (Wright et al. 2011; McDougall et al. 2012; Graham et al. 2013)</p>
+<p>The <code>gsw</code> framework uses function wrappers that connect R with the C version of the Gibbs Seawater library. This yields high processing speed. By minimizing transliteration errors, it also increases reliability. In a further effort to increase reliability, GSW-R makes tests against the check values provided on the webpages that document GSW-Matlab.</p>
+<p>By design, the documentation of <code>gsw</code> functions is spare, amounting mainly to an explanation of function arguments and return values, with most other details being provided through hyperlinks to the GSW reference documentation. The idea is to avoid duplication and to encourage users to consult the technical materials linked to the GSW functions mimicked in <code>gsw</code>. The GSW system is somewhat complex, and analysts owe it to themselves to learn how it works, and also to develop an appreciation for its scientific context by consulting various documents at <a href="http://www.teos-10.org">http://www.teos-10.org</a>, including expansive white papers and pointers to the growing peer-reviewed literature <span class="citation">(Wright et al. 2011; McDougall and Barker 2020; Graham and McDougall 2012)</span>.</p>
 </div>
 <div id="using-gsw-independent-of-oce" class="section level1">
 <h1 class="hasAnchor">
@@ -109,27 +109,39 @@
 <div id="using-gsw-within-oce" class="section level1">
 <h1 class="hasAnchor">
 <a href="#using-gsw-within-oce" class="anchor"></a>Using gsw within oce</h1>
-<p>Many <code>oce</code> plotting functions have an argument named <code>eos</code> that can be set to the string <code>"unesco"</code> to get the older seawater formulation, or to <code>"gsw"</code> to get the newer one. For example, the <code>section</code> dataset provided by <code>oce</code> holds a sequence of CTD casts in the North Atlantic. Individual casts may be selected by index, so a TS diagram of the station at index 100 (south of Cape Cod in 4000 m of water) can be plotted as follows (the figure is not included here, because the oce package depends on the gsw package, so automated build systems will not be able to build the figure).</p>
+<p>Many <code>oce</code> plotting functions have an argument named <code>eos</code> that can be set to the string <code>"unesco"</code> to get the older seawater formulation, or to <code>"gsw"</code> to get the newer one. For example, the <code>section</code> dataset provided by <code>oce</code> holds a sequence of CTD casts in the North Atlantic. Individual casts may be selected by index, so a TS diagram of the station at index 100 (south of Cape Cod in 4000 m of water) can be plotted as follows.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">oce</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">section</span><span class="op">)</span>
 <span class="va">ctd</span> <span class="op">&lt;-</span> <span class="va">section</span><span class="op">[[</span><span class="st">"station"</span>, <span class="fl">100</span><span class="op">]</span><span class="op">]</span>
 <span class="va">Slim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">34.8</span>, <span class="fl">37.0</span><span class="op">)</span>
 <span class="va">Tlim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">25</span><span class="op">)</span>
-<span class="fu">plotTS</span><span class="op">(</span><span class="va">ctd</span>, Slim<span class="op">=</span><span class="va">Slim</span>, Tlim<span class="op">=</span><span class="va">Tlim</span>, eos<span class="op">=</span><span class="st">"unesco"</span><span class="op">)</span></code></pre></div>
-<p>For comparison, it helps to plot a <code>gsw</code> equivalent with the same plot limits.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">plotTS</span><span class="op">(</span><span class="va">ctd</span>, Slim<span class="op">=</span><span class="va">Slim</span>, Tlim<span class="op">=</span><span class="va">Tlim</span>, eos<span class="op">=</span><span class="st">"gsw"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfcol<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="fu">plotTS</span><span class="op">(</span><span class="va">ctd</span>, Slim<span class="op">=</span><span class="va">Slim</span>, Tlim<span class="op">=</span><span class="va">Tlim</span>, eos<span class="op">=</span><span class="st">"unesco"</span><span class="op">)</span>
+<span class="fu">plotTS</span><span class="op">(</span><span class="va">ctd</span>, Slim<span class="op">=</span><span class="va">Slim</span>, Tlim<span class="op">=</span><span class="va">Tlim</span>, eos<span class="op">=</span><span class="st">"gsw"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ctd</span><span class="op">[[</span><span class="st">"SA"</span><span class="op">]</span><span class="op">]</span> <span class="op">-</span> <span class="va">ctd</span><span class="op">[[</span><span class="st">"salinity"</span><span class="op">]</span><span class="op">]</span>, <span class="va">ctd</span><span class="op">[[</span><span class="st">"z"</span><span class="op">]</span><span class="op">]</span>,
+     xlab<span class="op">=</span><span class="st">"Practical Salinity - Absolute Salinity"</span>, ylab<span class="op">=</span><span class="st">"Depth [m]"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ctd</span><span class="op">[[</span><span class="st">"CT"</span><span class="op">]</span><span class="op">]</span> <span class="op">-</span> <span class="va">ctd</span><span class="op">[[</span><span class="st">"theta"</span><span class="op">]</span><span class="op">]</span>, <span class="va">ctd</span><span class="op">[[</span><span class="st">"z"</span><span class="op">]</span><span class="op">]</span>,
+     xlab<span class="op">=</span><span class="st">"Conservative Temp. - Potential Temp."</span>, ylab<span class="op">=</span><span class="st">"Depth [m]"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<img src="fig01.png" alt=""><p class="caption">Comparison of UNESCO and GSW equations of state, for bottle sampling at 36.3N and 69.4W in 1993. Top left: TS diagram with UNESCO equation of state, showing Potential Temperature versus Practical Salinity. Bottom left: TS diagram with GSW equation of state, showing Conservative Temperature versus Absolute Salinity. Top right: Absolute Salinity minus Practical Salinity, as a function of depth. Bottom right: Conservative Temperature minus Potential Temperature, as a function of depth.</p>
+</div>
 <p>Most hydrography-related functions of <code>oce</code> provide this <code>eos</code> argument for selecting the seawater formulation. This includes functions for plotting and for calculating. In addition, most of the objects within <code>oce</code> have accessors that can return temperature and salinity in either the <code>UNESCO</code> or GSW scheme. For example, the ratio of Conservative Temperature to <code>UNESCO</code>-formulated potential temperature <span class="math inline">\(\theta\)</span> for all the CTD profiles in <code>section</code> is constructed with</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">f</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">section</span><span class="op">[[</span><span class="st">"CT"</span><span class="op">]</span><span class="op">]</span> <span class="op">-</span> <span class="va">section</span><span class="op">[[</span><span class="st">"theta"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">/</span> <span class="va">section</span><span class="op">[[</span><span class="st">"CT"</span><span class="op">]</span><span class="op">]</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">f</span>, main<span class="op">=</span><span class="st">""</span>, xlab<span class="op">=</span><span class="st">"(CT-theta)/CT"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">section</span><span class="op">[[</span><span class="st">"CT"</span><span class="op">]</span><span class="op">]</span> <span class="op">-</span> <span class="va">section</span><span class="op">[[</span><span class="st">"theta"</span><span class="op">]</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">f</span>, main<span class="op">=</span><span class="st">""</span>, breaks<span class="op">=</span><span class="fl">100</span>, xlab<span class="op">=</span><span class="st">"CT-theta"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<img src="fig02.png" alt=""><p class="caption">Histogram of difference between Conservative Temperature and Potential temperature for the 124 stations of a cross-Atlantic cruise at approximately 36N.</p>
+</div>
 <p>A salinity comparison is constructed with</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">f</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">section</span><span class="op">[[</span><span class="st">"SA"</span><span class="op">]</span><span class="op">]</span> <span class="op">-</span> <span class="va">section</span><span class="op">[[</span><span class="st">"salinity"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op">/</span> <span class="va">section</span><span class="op">[[</span><span class="st">"SA"</span><span class="op">]</span><span class="op">]</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">f</span>, main<span class="op">=</span><span class="st">""</span>, xlab<span class="op">=</span><span class="st">"(SA-SP)/SA"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">f</span> <span class="op">&lt;-</span> <span class="va">section</span><span class="op">[[</span><span class="st">"SA"</span><span class="op">]</span><span class="op">]</span> <span class="op">-</span> <span class="va">section</span><span class="op">[[</span><span class="st">"salinity"</span><span class="op">]</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">f</span>, main<span class="op">=</span><span class="st">""</span>, breaks<span class="op">=</span><span class="fl">100</span>, xlab<span class="op">=</span><span class="st">"Absolute Salinity - Practical Salinity"</span><span class="op">)</span></code></pre></div>
+<div class="figure">
+<img src="fig03.png" alt=""><p class="caption">Histogram of difference between Absolute Salinity and Practical Salinity for the 124 stations of a cross-Atlantic cruise at approximately 36N.</p>
+</div>
 <p>An examination of worldwide spatial patterns is also informative, with the following producing such a graph.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">oce</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"levitus"</span>, package<span class="op">=</span><span class="st">"ocedata"</span><span class="op">)</span>
 <span class="va">SSS</span> <span class="op">&lt;-</span> <span class="va">levitus</span><span class="op">$</span><span class="va">SSS</span>
@@ -140,19 +152,43 @@
 <span class="fu">imagep</span><span class="op">(</span><span class="va">levitus</span><span class="op">$</span><span class="va">longitude</span>, <span class="va">levitus</span><span class="op">$</span><span class="va">latitude</span>, <span class="va">per</span>, col<span class="op">=</span><span class="va">oceColorsJet</span>,
        zlim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">per</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.001</span>, <span class="fl">0.999</span><span class="op">)</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="st">"Percent difference between "</span> <span class="op">*</span> <span class="va">S</span><span class="op">[</span><span class="va">A</span><span class="op">]</span> <span class="op">*</span> <span class="st">" and "</span> <span class="op">*</span> <span class="va">S</span><span class="op">[</span><span class="va">P</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>Note the use of quantile-specified scales for the images, the colour mappings of which would otherwise be controlled by isolated low-saline waters, yielding little to see in the wider expanses of the world ocean; a broader context has been detailed in the literature (McDougall et al. 2012).</p>
+<p>Note the use of quantile-specified scales for the images, the colour mappings of which would otherwise be controlled by isolated low-saline waters, yielding little to see in the wider expanses of the world ocean; for a broader context, see e.g. <span class="citation">McDougall and Barker (2020)</span>.</p>
+<div class="figure">
+<img src="fig04.png" alt=""><p class="caption">Map of the relative difference between Absolute Salinity and Practical Salinity at the sea surface.</p>
 </div>
-<div id="references" class="section level1">
+</div>
+<div id="references" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h1>
-<p>Graham, F. S. and T. J. McDougall, 2012. Quantifying the Nonconservative Production of Conservative Temperature, Potential Temperature, and Entropy. Journal of Physical Oceanography, 43(5):838-862. <a href="http://dx.doi.org/10.1175/JPO-D-11-0188.1">http://dx.doi.org/10.1175/JPO-D-11-0188.1</a></p>
-<p>IOC and SCOR and IAPSO, 2010. Intergovernmental Oceanographic Commission, Manuals and Guide, 56, UNESCO. <a href="http://www.teos-10.org/pubs/TEOS-10_Manual.pdf">http://www.teos-10.org/pubs/TEOS-10_Manual.pdf</a></p>
-<p>Kelley, D., C. Richards and C. Layton, 2021. oce: Analysis of Oceanographic data, R package version 1.4-0. Comprehensive R Archive Network. <a href="https://CRAN.R-project.org/package=oce">https://CRAN.R-project.org/package=oce</a></p>
-<p>McDougall, T. J. and P. M. Barker,2011. Getting started with TEOS-10 and the Gibbs Seawater (GSW) Oceanographic Toolbox. SCOR/IAPSO WG127. 978-0-646-55621-5.</p>
-<p>McDougall, T. J., D. R. Jackett, F. J. Millero, R. Pawlowicz and P. M. Barker, 2012. A global algorithm for estimating Absolute Salinity. Ocean Science, 8:1123-1134. <a href="http://www.ocean-sci.net/8/1123/2012/os-8-1123-2012.pdf">http://www.ocean-sci.net/8/1123/2012/os-8-1123-2012.pdf</a></p>
-<p>Millero, F. J. 2010. History of the equation of state of seawater. Oceanography, 23:18-33. <a href="https://www.tos.org/oceanography/article/history-of-the-equation-of-state-of-seawater">https://www.tos.org/oceanography/article/history-of-the-equation-of-state-of-seawater</a></p>
-<p>Pawlowicz, R., T. McDougall, R. Feistel and R. Tailleux, 2012. Preface ``An historical perspective on the development of the Thermodynamic Equation of Seawater–2010’’}. Ocean Science, 8:161-174. <a href="http://www.ocean-sci.net/8/161/2012/os-8-161-2012.pdf">http://www.ocean-sci.net/8/161/2012/os-8-161-2012.pdf</a></p>
-<p>Wright, D. G., R. Pawlowicz, T. J. McDougall, R. Feistel and G. M. Marion, 2011. Absolute Salinity, Density Salinity and the Reference-Composition Salinity Scale: present and future use in the seawater standard TEOS-10. Ocean Science, 7:1-26. <a href="http://www.ocean-sci.net/7/1/2011/os-7-1-2011.pdf">http://www.ocean-sci.net/7/1/2011/os-7-1-2011.pdf</a></p>
+<div id="refs" class="references">
+<div id="ref-graham_quantifying_2012">
+<p>Graham, Felicity S, and Trevor J McDougall. 2012. “Quantifying the Nonconservative Production of Conservative Temperature, Potential Temperature, and Entropy.” <em>Journal of Physical Oceanography</em> 43 (5): 838–62. <a href="https://doi.org/10.1175/JPO-D-11-0188.1">https://doi.org/10.1175/JPO-D-11-0188.1</a>.</p>
+</div>
+<div id="ref-ioc_international_2010">
+<p>IOC, SCOR, and IAPSO. 2010. “The International Thermodynamic Equation of Seawater–2010: Calculation and Use of Thermodynamic Properties.” 56. UNESCO.</p>
+</div>
+<div id="ref-kelley_oce_2021">
+<p>Kelley, Dan, Clark Richards, and Chantelle Layton. 2021. “Oce: Analysis of Oceanographic Data.” <a href="https://CRAN.R-project.org/package=oce">https://CRAN.R-project.org/package=oce</a>.</p>
+</div>
+<div id="ref-mcdougall_getting_2020">
+<p>McDougall, Trevor J., and Paul M. Barker. 2020. <em>Getting Started with TEOS-10 and the Gibbs Seawater (GSW) Oceanographic Toolbox Version 3.06.12</em>. SCOR/IAPSO WG127. <a href="http://www.teos-10.org/pubs/Getting_Started.pdf">http://www.teos-10.org/pubs/Getting_Started.pdf</a>.</p>
+</div>
+<div id="ref-millero_history_2010">
+<p>Millero, Frank. 2010. “History of the Equation of State of Seawater.” <em>Oceanography</em> 23 (3): 18–33. <a href="https://doi.org/10.5670/oceanog.2010.21">https://doi.org/10.5670/oceanog.2010.21</a>.</p>
+</div>
+<div id="ref-pawlowicz_preface_2012">
+<p>Pawlowicz, R., T. McDougall, R. Feistel, and R. Tailleux. 2012. “Preface ’an Historical Perspective on the Development of the Thermodynamic Equation of Seawater – 2010’.” <em>Ocean Science</em> 8 (2): 161–74. <a href="https://doi.org/10.5194/os-8-161-2012">https://doi.org/10.5194/os-8-161-2012</a>.</p>
+</div>
+<div id="ref-wright_absolute_2011">
+<p>Wright, D. G., R. Pawlowicz, T. J. McDougall, R. Feistel, and G. M. Marion. 2011. “Absolute Salinity, ‘Density Salinity’ and the Reference-Composition Salinity Scale: Present and Future Use in the Seawater Standard TEOS-10.” <em>Ocean Science</em> 7: 1–26. <a href="http://www.ocean-sci.net/7/1/2011/os-7-1-2011.pdf">http://www.ocean-sci.net/7/1/2011/os-7-1-2011.pdf</a>.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr>
+<ol>
+<li id="fn1"><p>This version of GSW-R is based on GSW-C as it existed on 2021-07-06 in github commit 9c10670e89fce906da2cebce3399d73c054e769e; see <a href="https://github.com/TEOS-10/GSW-C" class="uri">https://github.com/TEOS-10/GSW-C</a>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
   </div>
 
