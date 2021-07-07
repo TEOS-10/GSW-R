@@ -17,7 +17,7 @@ is called \code{lat} in the TEOS-10 Matlab code.)}
 }
 \value{
 a list containing \code{SAAR}, which is
-the (unitless) Absolute Salinity Anomality Ratio, and \code{in_ocean}
+the (unitless) Absolute Salinity Anomaly Ratio, and \code{in_ocean}
 is set to 1 if \code{SAAR} is nonzero, or to 0 otherwise.
 }
 \description{
@@ -28,7 +28,7 @@ Absolute Salinity Anomaly Ratio
 This R function uses a wrapper to a C function
 contained within the GSW-C system as updated 2021-03-27
 at \url{https://github.com/TEOS-10/GSW-C}
-with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+with git commit `f7bfebf44f686034636facb09852f1d5760c27f5`.
 In turn, that C function uses data from the
 \code{library/gsw_data_v3_0.mat}
 file provided in the GSW-Matlab source code, version 3.06-11.
@@ -51,7 +51,7 @@ The definition of \code{in_ocean} is incorrect, because the C function named
 \code{in_ocean}, as the base Matlab function named \code{gsw_SAAR} does. However,
 examination of the Matlab code shows that \code{in_ocean} is set to 0 along
 with \code{SAAR}, whenever the original estimate of the latter is nonfinite.
-Thus, points that would be siganlled as being on the land by the Matlab code
+Thus, points that would be signalled as being on the land by the Matlab code
 are indicated in the same way with the present R function. However, other points
 may also be indicated as being on land, if \code{SAAR} is simply zero in the
 first calculation. Whether this poses a problem in practice is an open question,

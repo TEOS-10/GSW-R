@@ -22,7 +22,7 @@ Latent heat of evaporation
 This R function uses a wrapper to a C function
 contained within the GSW-C system as updated 2021-03-27
 at \url{https://github.com/TEOS-10/GSW-C}
-with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+with git commit `f7bfebf44f686034636facb09852f1d5760c27f5`.
 In turn, that C function uses data from the
 \code{library/gsw_data_v3_0.mat}
 file provided in the GSW-Matlab source code, version 3.06-11.

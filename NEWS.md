@@ -1,6 +1,6 @@
 1.0-6
 - Update to GSW-C as of 2021-07-06, github commit
-  9c10670e89fce906da2cebce3399d73c054e769e.
+  `9c10670e89fce906da2cebce3399d73c054e769e`.
 - Remove dependency on the 'testthat' package.
 - gsw_z_from_p() and gsw_p_from_z() gain parameters geo_strf_dyn_height and
   sea_surface_geopotential.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_geo_strf_dyn_height_1}
 \alias{gsw_geo_strf_dyn_height_1}
-\title{Geostrophic Dynamic Height Anomaly [TEST VERSION]}
+\title{Geostrophic Dynamic Height Anomaly (provisional version)}
 \usage{
 gsw_geo_strf_dyn_height_1(SA, CT, p, p_ref = 0, max_dp = 1, interp_method = 2)
 }
@@ -28,9 +28,7 @@ A vector containing geopotential anomaly in
 \description{
 This calculates a geopotential anomaly, called either the
 dynamic height anomaly or the geostrophic streamfunction
-in the TEOS-10 document listed as [1] below; users should
-read that and the references therein for more details on
-the definition and its calculation here.
+in the TEOS-10 document listed as [1] below.
 
 To get the column-integrated value in meters, take the first
 value of the returned vector and divide by
@@ -38,10 +36,10 @@ value of the returned vector and divide by
 with the top measured pressure (not zero) as an upper limit.
 }
 \details{
-Because of the scheme used in the underlying C code, the 
+Because of the scheme used in the underlying C code, the
 pressures must be in order, and must not have any repeats.
 Also, there must be at least 4 pressure values. Violating
-any of these three restrictions yields an error.
+any of these restrictions yields an error.
 
 If \code{p_ref} exceeds the largest \code{p} value, a vector
 of zeros is returned, in accordance with the underlying C code.
@@ -51,7 +49,7 @@ of zeros is returned, in accordance with the underlying C code.
 This R function uses a wrapper to a C function
 contained within the GSW-C system as updated 2021-03-27
 at \url{https://github.com/TEOS-10/GSW-C}
-with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+with git commit `f7bfebf44f686034636facb09852f1d5760c27f5`.
 In turn, that C function uses data from the
 \code{library/gsw_data_v3_0.mat}
 file provided in the GSW-Matlab source code, version 3.06-11.
@@ -80,5 +78,5 @@ dh <- gsw_geo_strf_dyn_height_1(SA, CT, p, p_ref, 1, 2)
 \references{
 1. \url{http://www.teos-10.org/pubs/gsw/html/gsw_geo_strf_dyn_height.html}
 
-2. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition, Elsevier.
+2. Talley et al., 2011. Descriptive Physical Oceanography, Edition 6, Elsevier.
 }

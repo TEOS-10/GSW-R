@@ -19,7 +19,7 @@ assumed to be constant. Note that \code{delta_p} must be positive.}
 A list containing \code{dyn_height}, the dynamic height anomaly [ m^2/s^2 ], and
 \code{p_mid} [ dbar ], the pressures at the layer centres. Note that the dynamic height
 anomaly unit, also known as a "dynamic meter", corresponds to approximately 1.02 metres of sealevel height
-(see e.g. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition.
+(see e.g. Talley et al., 2011. Descriptive Physical Oceanography, Edition 6.
 Elsevier).
 }
 \description{
@@ -30,7 +30,7 @@ Geostrophic Dynamic Height Anomaly (Piecewise-Constant Profile)
 This R function uses a wrapper to a C function
 contained within the GSW-C system as updated 2021-03-27
 at \url{https://github.com/TEOS-10/GSW-C}
-with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+with git commit `f7bfebf44f686034636facb09852f1d5760c27f5`.
 In turn, that C function uses data from the
 \code{library/gsw_data_v3_0.mat}
 file provided in the GSW-Matlab source code, version 3.06-11.

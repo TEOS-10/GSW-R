@@ -24,7 +24,7 @@ Note that the unit is K/Pa; multiply by 1e4 to get the more useful K/dbar.
 This R function uses a wrapper to a C function
 contained within the GSW-C system as updated 2021-03-27
 at \url{https://github.com/TEOS-10/GSW-C}
-with git commit f7bfebf44f686034636facb09852f1d5760c27f5.
+with git commit `f7bfebf44f686034636facb09852f1d5760c27f5`.
 In turn, that C function uses data from the
 \code{library/gsw_data_v3_0.mat}
 file provided in the GSW-Matlab source code, version 3.06-11.
@@ -45,8 +45,9 @@ SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 p <- c(      10,      50,     125,     250,     600,    1000)
 lr <- gsw_adiabatic_lapse_rate_from_CT(SA, CT, p)
-stopifnot(all.equal(lr*1e7, c(0.240199646230069, 0.238457486976761, 0.203635157319712,
-                              0.119829566859790, 0.100052760967308, 0.087773070307283)))
+stopifnot(all.equal(lr*1e7,
+    c(0.240199646230069, 0.238457486976761, 0.203635157319712,
+      0.119829566859790, 0.100052760967308, 0.087773070307283)))
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_from_CT.html}
