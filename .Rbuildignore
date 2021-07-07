@@ -21,3 +21,4 @@ issues
 ^docs$
 ^pkgdown$
 ^\.github$
+^CRAN-RELEASE$
