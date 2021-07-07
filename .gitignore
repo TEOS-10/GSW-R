@@ -1,0 +1,9 @@
+*~
+.Rproj.user/
+.github/
+R/
+data/
+developer/
+man-roxygen/
+src/
+vignettes/
