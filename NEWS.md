@@ -1,3 +1,6 @@
+1.0-7
+- No changes yet.
+
 1.0-6
 - Update to GSW-C as of 2021-07-06, github commit
   `9c10670e89fce906da2cebce3399d73c054e769e`.
