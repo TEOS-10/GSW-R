@@ -1,3 +1,4 @@
+revdep
 .github
 ^Meta$
 ^doc$
@@ -20,3 +21,4 @@ issues
 ^docs$
 ^pkgdown$
 ^\.github$
+^CRAN-RELEASE$

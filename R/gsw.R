@@ -8,7 +8,7 @@
 #'
 #' @description
 #' Provides an R interface to the TEOS-10 / GSW (Gibbs Sea Water) library,
-#' partly for use by the \code{oce} package (see \url{https://dankelley.github.io/oce})
+#' partly for use by the \code{oce} package (see \url{https://dankelley.github.io/oce/})
 #' and partly for general use. It is assumed that users are familiar with
 #' the science and methodology of GSW, and that the package vignette
 #' (obtained by typing \code{vignette("gsw")} in an R window) provides
@@ -35,8 +35,8 @@
 #'
 #' See \url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html}
 #' for a list of the TEOS-10 functions and
-#' \url{http://teos-10.github.io/GSW-R/documentation.html} for a list
-#' of the functions implemented in the present package.
+#' \url{https://teos-10.github.io/GSW-R/reference/index.html}
+#' for a list of the functions implemented in the present package.
 #'
 #' Each function is tested during the building of the package,
 #' which means that results are guaranteed to match those of
@@ -179,8 +179,9 @@ argfix <- function(list)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' lr <- gsw_adiabatic_lapse_rate_from_CT(SA, CT, p)
-#' stopifnot(all.equal(lr*1e7, c(0.240199646230069, 0.238457486976761, 0.203635157319712,
-#'                               0.119829566859790, 0.100052760967308, 0.087773070307283)))
+#' stopifnot(all.equal(lr*1e7,
+#'     c(0.240199646230069, 0.238457486976761, 0.203635157319712,
+#'       0.119829566859790, 0.100052760967308, 0.087773070307283)))
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_adiabatic_lapse_rate_from_CT.html}
 gsw_adiabatic_lapse_rate_from_CT <- function(SA, CT, p)
@@ -1276,7 +1277,7 @@ gsw_enthalpy <- function(SA, CT, p)
 #'                              0.432553712315790, 0.330871615358722, 0.269706848807403)))
 #' @family things related to enthalpy
 #' @references
-#' \url{https://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_ct_exact.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_enthalpy_CT_exact.html}
 gsw_enthalpy_CT_exact <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))
@@ -1754,7 +1755,7 @@ gsw_entropy_second_derivatives <- function(SA, CT)
 #' @template ptemplate
 #' @template longitudetemplate
 #' @template latitudetemplate
-#' @return (S/SStar)-1 [ unitless ]
+#' @return (S/Sstar)-1 [ unitless ]
 #' @examples
 #' p <- c(         10,   50,  125,  250,  600, 1000)
 #' latitude <- c(   4,    4,    4,    4,    4,    4)
@@ -2145,7 +2146,6 @@ gsw_grav <- function(latitude, p=0)
 #' 3. Barker, Paul M., and Trevor J. McDougall.
 #' "Two Interpolation Methods Using Multiply-Rotated Piecewise Cubic Hermite Interpolating Polynomials."
 #' Journal of Atmospheric and Oceanic Technology 37, no. 4 (April 2020): 605–19.
-#' \url{https://doi.org/10.1175/JTECH-D-19-0211.1}.
 gsw_geo_strf_dyn_height <- function(SA, CT, p, p_ref=0)
 {
     if (missing(SA) || missing(CT) || missing(p)) stop("must supply SA, CT, and p")
@@ -2167,15 +2167,13 @@ gsw_geo_strf_dyn_height <- function(SA, CT, p, p_ref=0)
     rval
 }
 
-#' Geostrophic Dynamic Height Anomaly [TEST VERSION]
+#' Geostrophic Dynamic Height Anomaly (provisional version)
 #'
 #' @description
 #' This calculates a geopotential anomaly, called either the
 #' dynamic height anomaly or the geostrophic streamfunction
-#' in the TEOS-10 document listed as [1] below; users should
-#' read that and the references therein for more details on
-#' the definition and its calculation here.
-#' 
+#' in the TEOS-10 document listed as [1] below.
+#'
 #' To get the column-integrated value in meters, take the first
 #' value of the returned vector and divide by
 #' 9.7963\eqn{m/s^2}{m/s^2}. Note that this yields an integral
@@ -2183,10 +2181,10 @@ gsw_geo_strf_dyn_height <- function(SA, CT, p, p_ref=0)
 #'
 #' @details
 #'
-#' Because of the scheme used in the underlying C code, the 
+#' Because of the scheme used in the underlying C code, the
 #' pressures must be in order, and must not have any repeats.
 #' Also, there must be at least 4 pressure values. Violating
-#' any of these three restrictions yields an error.
+#' any of these restrictions yields an error.
 #'
 #' If \code{p_ref} exceeds the largest \code{p} value, a vector
 #' of zeros is returned, in accordance with the underlying C code.
@@ -2216,7 +2214,7 @@ gsw_geo_strf_dyn_height <- function(SA, CT, p, p_ref=0)
 #' @references
 #' 1. \url{http://www.teos-10.org/pubs/gsw/html/gsw_geo_strf_dyn_height.html}
 #'
-#' 2. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition, Elsevier.
+#' 2. Talley et al., 2011. Descriptive Physical Oceanography, Edition 6, Elsevier.
 gsw_geo_strf_dyn_height_1 <- function(SA, CT, p, p_ref=0, max_dp=1, interp_method=2)
 {
     if (missing(SA) || missing(CT) || missing(p)) stop("must supply SA, CT, and p")
@@ -2251,7 +2249,7 @@ gsw_geo_strf_dyn_height_1 <- function(SA, CT, p, p_ref=0, max_dp=1, interp_metho
 #' @return A list containing \code{dyn_height}, the dynamic height anomaly [ m^2/s^2 ], and
 #' \code{p_mid} [ dbar ], the pressures at the layer centres. Note that the dynamic height
 #' anomaly unit, also known as a "dynamic meter", corresponds to approximately 1.02 metres of sealevel height
-#' (see e.g. Talley et al., 2011. Descriptive Physical Oceanography, 6th edition.
+#' (see e.g. Talley et al., 2011. Descriptive Physical Oceanography, Edition 6.
 #' Elsevier).
 #' @examples
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -2841,7 +2839,7 @@ gsw_melting_ice_into_seawater <- function(SA, CT, p, w_Ih, t_Ih)
             SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p), w_Ih=as.double(l$w_Ih), t_Ih=as.double(l$t_Ih),
             n=as.integer(n), SA_final=double(n), CT_final=double(n), w_Ih_final=double(n),
             NAOK=TRUE, PACKAGE="gsw")
-    ##37 bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p) | !is.finite(l$w_Ih) | !is.finite(l$t_Ih) 
+    ##37 bad <- !is.finite(l$SA) | !is.finite(l$CT) | !is.finite(l$p) | !is.finite(l$w_Ih) | !is.finite(l$t_Ih)
     ##37 r$SA_final[bad] <- NA
     ##37 r$CT_final[bad] <- NA
     ##37 r$t_Ih_final[bad] <- NA
@@ -4116,7 +4114,7 @@ gsw_rho_t_exact <- function(SA, t, p)
 #' @template longitudetemplate
 #' @template latitudetemplate
 #' @return a list containing \code{SAAR}, which is
-#' the (unitless) Absolute Salinity Anomality Ratio, and \code{in_ocean}
+#' the (unitless) Absolute Salinity Anomaly Ratio, and \code{in_ocean}
 #' is set to 1 if \code{SAAR} is nonzero, or to 0 otherwise.
 #'
 #' @section Bugs:
@@ -4125,7 +4123,7 @@ gsw_rho_t_exact <- function(SA, t, p)
 #' \code{in_ocean}, as the base Matlab function named \code{gsw_SAAR} does. However,
 #' examination of the Matlab code shows that \code{in_ocean} is set to 0 along
 #' with \code{SAAR}, whenever the original estimate of the latter is nonfinite.
-#' Thus, points that would be siganlled as being on the land by the Matlab code
+#' Thus, points that would be signalled as being on the land by the Matlab code
 #' are indicated in the same way with the present R function. However, other points
 #' may also be indicated as being on land, if \code{SAAR} is simply zero in the
 #' first calculation. Whether this poses a problem in practice is an open question,
@@ -4142,7 +4140,7 @@ gsw_rho_t_exact <- function(SA, t, p)
 #'                                      0.077293264028981, 0.161974583039298, 0.270652408428964)))
 #' stopifnot(all.equal(SAAR$in_ocean, rep(1, 6)))
 #' @references
-#' \url{https://www.teos-10.org/pubs/gsw/html/gsw_saar.html}
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SAAR.html}
 gsw_SAAR <- function(p, longitude, latitude)
 {
     l <- argfix(list(p=p, longitude=longitude, latitude=latitude))

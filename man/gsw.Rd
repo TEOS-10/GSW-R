@@ -6,7 +6,7 @@
 \title{R implementation of Thermodynamic Equation Of Seawater - 2010 (TEOS-10)}
 \description{
 Provides an R interface to the TEOS-10 / GSW (Gibbs Sea Water) library,
-partly for use by the \code{oce} package (see \url{https://dankelley.github.io/oce})
+partly for use by the \code{oce} package (see \url{https://dankelley.github.io/oce/})
 and partly for general use. It is assumed that users are familiar with
 the science and methodology of GSW, and that the package vignette
 (obtained by typing \code{vignette("gsw")} in an R window) provides
@@ -33,8 +33,8 @@ TEOS-10 webpages for details.
 
 See \url{http://www.teos-10.org/pubs/gsw/html/gsw_contents.html}
 for a list of the TEOS-10 functions and
-\url{http://teos-10.github.io/GSW-R/documentation.html} for a list
-of the functions implemented in the present package.
+\url{https://teos-10.github.io/GSW-R/reference/index.html}
+for a list of the functions implemented in the present package.
 
 Each function is tested during the building of the package,
 which means that results are guaranteed to match those of
