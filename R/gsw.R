@@ -1,3 +1,5 @@
+# vim:textwidth=80:expandtab:shiftwidth=4:softtabstop=4
+
 ## Please see ../README_developer.md for the scheme used in adding functions
 ## here. Generally the functions will be added to Part 4.
 
@@ -1158,7 +1160,6 @@ gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
                SP=as.double(l$SP), p=as.double(l$p),
                longitude=as.double(l$longitude), latitude=as.double(l$latitude),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
-    ##37 rval[!is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$longitude) | !is.finite(l$latitude)] <- NA
     if (is.matrix(SP))
         dim(rval) <- dim(SP)
     rval
@@ -3073,6 +3074,95 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
     list(N2=r$n2, p_mid=r$p_mid)
 }
 
+#' Oxygen Solubility in Seawater (GSW variables)
+#'
+#' Computes oxygen concentration for seawater that is equilibrium with
+#' vapour-saturated air at standard atmospheric pressure (101.325 kPa,
+#' i.e. for sea pressure of 0dbar).  The formula, not created by the SCOR/IAPSO
+#' Working Group 127 nor approved by the IOC, is stated in the TEOS-10
+#' documentation to be from Benson and Krause (1984), as fitted by
+#' Garcia and Gordon (1992, 1993). That formulation is framed in UNESCO-era
+#' water properties, so longitude and latitude are needed here, to convert
+#' to these quantities from Absolute Salinity and Conservative Temperature;
+#' see also \code{\link{gsw_O2sol_SP_pt}}, which is formulated in UNESCO
+#' terms.
+#'
+#' @template teos10template
+#'
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#' @template longitudetemplate
+#' @template latitudetemplate
+#' @return Oxygen solubility in micro-moles per kg.
+#' @examples
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' latitude <- c(4,       4,       4,       4,       4,       4)
+#' longitude <- c(188,  188,     188,     188,     188,     188)
+#' O2sol <- gsw_O2sol(SA,CT,p,longitude,latitude)
+#' stopifnot(all.equal(O2sol/100, c(1.949651126384804, 1.958728907684003,
+#'             2.148922307892045, 2.738656506758550, 2.955109771828408,
+#'             3.133584919106894)))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_O2sol.html}
+gsw_O2sol <- function(SA, CT, p, longitude, latitude)
+{
+    if (missing(SA)) stop("must supply SA")
+    if (missing(CT)) stop("must supply CT")
+    if (missing(p)) stop("must supply p")
+    if (missing(longitude)) stop("must supply longitude")
+    if (missing(latitude)) stop("must supply latitude")
+    l <- argfix(list(SA=SA, CT=CT, p=p, longitude=longitude, latitude=latitude))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_o2sol",
+        SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+        longitude=as.double(l$longitude), latitude=as.double(l$latitude),
+        n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' Oxygen Solubility in Seawater (UNESCO variables)
+#'
+#' Computes oxygen concentration for seawater that is equilibrium with
+#' vapour-saturated air at standard atmospheric pressure (101.325 kPa,
+#' i.e. for sea pressure of 0dbar).  The formula, not created by the SCOR/IAPSO
+#' Working Group 127 nor approved by the IOC, is stated in the TEOS-10
+#' documentation to be from Benson and Krause (1984), as fitted by
+#' Garcia and Gordon (1992, 1993). That formulation is framed in UNESCO-era
+#' water properties; see \code{\link{gsw_O2sol}} for the corresponding
+#' computation in GSW variables.
+#'
+#' @template teos10template
+#'
+#' @template SPtemplate
+#' @template pttemplate
+#' @return Oxygen solubility in micro-moles per kg.
+#' @examples
+#' SP <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' pt <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' O2sol <- gsw_O2sol_SP_pt(SP, pt)
+#' stopifnot(all.equal(O2sol/100, c(1.946825431692940, 1.956135062814438,
+#'             2.146559360234014, 2.735652832698713, 2.951580761415903,
+#'             3.129598716631408)))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_O2sol_SP_pt.html}
+gsw_O2sol_SP_pt <- function(SP, pt)
+{
+    if (missing(SP)) stop("must supply SP")
+    if (missing(pt)) stop("must supply pt")
+    l <- argfix(list(SP=SP, pt=pt))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_o2sol_SP_pt",
+        SP=as.double(l$SP), pt=as.double(l$pt),
+        n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SP))
+        dim(rval) <- dim(SP)
+    rval
+}
 
 #' Pressure from height (75-term equation)
 #'
@@ -3119,7 +3209,6 @@ gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height, sea_surface_geopotent
                geo_strf_dyn_height=as.double(l$geo_strf_dyn_height),
                sea_surface_geopotential=as.double(l$sea_surface_geopotential),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
-    ##37 rval[!is.finite(l$z) | !is.finite(l$latitude) | !is.finite(l$geo_strf_dyn_height) | !is.finite(l$sea_surface_geopotential)] <- NA
     if (is.matrix(z))
         dim(rval) <- dim(z)
     rval
@@ -4145,9 +4234,9 @@ gsw_SAAR <- function(p, longitude, latitude)
 {
     l <- argfix(list(p=p, longitude=longitude, latitude=latitude))
     n <- length(l[[1]])
-    r<- .C("wrap_gsw_SAAR",
-           p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
-           n=as.integer(n), SAAR=double(n), inocean=integer(n), NAOK=TRUE, PACKAGE="gsw")
+    r <- .C("wrap_gsw_SAAR",
+        p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
+        n=as.integer(n), SAAR=double(n), inocean=integer(n), NAOK=TRUE, PACKAGE="gsw")
     ##37 bad <- !is.finite(l$p) | !is.finite(l$longitude) | !is.finite(l$latitude)
     ##37 r$SAAR[bad] <- NA
     ##37 r$inocean[bad] <- NA

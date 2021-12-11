@@ -20,9 +20,9 @@ Potential Temperature from Entropy
 \section{Implementation Note}{
 
 This R function uses a wrapper to a C function
-contained within the GSW-C system as updated 2021-03-27
+contained within the GSW-C system as updated 2021-07-14
 at \url{https://github.com/TEOS-10/GSW-C}
-with git commit `f7bfebf44f686034636facb09852f1d5760c27f5`.
+with git commit `bad2c9e4e154597ce563aaaf3ce09b1c52a2ab46`.
 In turn, that C function uses data from the
 \code{library/gsw_data_v3_0.mat}
 file provided in the GSW-Matlab source code, version 3.06-11.

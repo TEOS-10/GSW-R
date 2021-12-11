@@ -2,7 +2,7 @@
 - Update to GSW-C as of 2021-07-14, github commit
   `bad2c9e4e154597ce563aaaf3ce09b1c52a2ab46`. This does not change any
   existing functions in GSW-R.
-- Add gsw_o2sol() and gsw_o2sol_sp_pt() for computing oxygen saturation.
+- Add gsw_o2sol() and gsw_o2sol_SP_pt() for computing oxygen solubility.
 
 1.0-6
 - Update to GSW-C as of 2021-07-06, github commit

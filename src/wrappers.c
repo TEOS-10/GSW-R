@@ -107,10 +107,9 @@ void clear_gsw_data()
 // GSW_INVALID_VALUE.
 //
 // 5. Macro names reflect the number of input and output values. The first
-// digit after "W" is the number of input values (not counting "n", which
-// is the vector length of each of these input values) and the second digit
-// is the number of output values. Thus, for example, W32 takes three input
-// values (plus "n") and returns 2 output values.
+// digit after "W" is the number of input values and the second digit
+// is the number of output values. Thus, for example, W21 takes 2 input
+// values (plus "n" and "rval") and returns 1 output value (stored in rval).
 
 #define W11(wname, cname, arg1, n, rval) \
 void (wname)(double *(arg1), int *(n), double *(rval))\
@@ -285,6 +284,23 @@ void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), int
     }\
 }
 
+// 5 input parameters, 1 output value
+#define W51(wname, cname, arg1, arg2, arg3, arg4, arg5, n, rval) \
+void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), double *(arg5), int *(n), double *(rval))\
+{\
+    for (int i = 0; i < *(n); i++) {\
+        if (isnan((arg1)[i]) || isnan((arg2)[i]) || isnan((arg3)[i]) || isnan((arg4)[i]) || isnan((arg5)[i])) {\
+            (rval)[i] = NA_REAL;\
+        } else {\
+            (rval)[i] = (cname)((arg1)[i], (arg2)[i], (arg3)[i], (arg4)[i], (arg5)[i]);\
+            if ((rval)[i] == GSW_INVALID_VALUE) {\
+                (rval)[i] = NA_REAL;\
+            }\
+        }\
+    }\
+}
+
+
 // 5 input parameters, 3 output values
 #define W53(wname, cname, arg1, arg2, arg3, arg4, arg5, n, rval1, rval2, rval3) \
 void (wname)(double *(arg1), double *(arg2), double *(arg3), double *(arg4), double *(arg5), int *(n), double *(rval1), double *(rval2), double *(rval3))\
@@ -428,6 +444,8 @@ void wrap_gsw_Nsquared(double *SA, double *CT, double *p, double *latitude, int 
     extern void gsw_nsquared(double *sa, double *ct, double *p, double *latitude, int nz, double *n2, double *p_mid);
     gsw_nsquared(SA, CT, p, latitude, *n, n2, p_mid);
 }
+W51(wrap_gsw_o2sol, gsw_o2sol, SA, CT, p, longitude, latitude, n, rval)
+W21(wrap_gsw_o2sol_SP_pt, gsw_o2sol_sp_pt, SP, pt, n, rval)
 W11(wrap_gsw_pot_enthalpy_from_pt_ice, gsw_pot_enthalpy_from_pt_ice, pt_ice, n, rval)
 W11(wrap_gsw_pot_enthalpy_from_pt_ice_poly, gsw_pot_enthalpy_from_pt_ice_poly, pt_ice, n, rval)
 //W31(wrap_gsw_pot_enthalpy_ice_freezing, gsw_pot_enthalpy_ice_freezing, SA, p, saturaion_fraction, n, rval)
