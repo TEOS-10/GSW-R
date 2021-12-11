@@ -3105,6 +3105,7 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
 #' stopifnot(all.equal(O2sol/100, c(1.949651126384804, 1.958728907684003,
 #'             2.148922307892045, 2.738656506758550, 2.955109771828408,
 #'             3.133584919106894)))
+#' @family things related to oxygen
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_O2sol.html}
 gsw_O2sol <- function(SA, CT, p, longitude, latitude)
@@ -3148,6 +3149,7 @@ gsw_O2sol <- function(SA, CT, p, longitude, latitude)
 #' stopifnot(all.equal(O2sol/100, c(1.946825431692940, 1.956135062814438,
 #'             2.146559360234014, 2.735652832698713, 2.951580761415903,
 #'             3.129598716631408)))
+#' @family things related to oxygen
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_O2sol_SP_pt.html}
 gsw_O2sol_SP_pt <- function(SP, pt)
@@ -4569,6 +4571,40 @@ gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
     rval
 }
 
+#' Practical Salinity from Salinimeter Reading
+#'
+#' Calculate Practical Salinity from salinometer readings
+#' of conductivity ratio and bath temperature.
+#'
+#' @template teos10template
+#'
+#' @param ratio Conductivity ratio [ unitless ].
+#' (This is called \code{Rt} in the GSW documentation.)
+#' @param temperature Bath temperature [ degC ].
+#' (This is called \code{t} in the GSW documentation.)
+#' @return Practical salinity on the PSS-77 scale [ unitless ]
+#' @examples
+#' ratio <- c( 0.9345,  0.95123,  0.91807,  0.8886, 0.8169, 0.6687)
+#' temperature <-  c(28.7856, 28.4329, 22.8103, 10.2600, 6.8863, 4.4036)
+#' SP <- gsw_SP_salinometer(ratio, temperature)
+#' stopifnot(all.equal(SP,
+#'         c(32.431728787558541, 33.085035719966307, 31.800791917322833,
+#'             30.692490757036179, 27.979281308696116, 22.474597460508491)))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_salinometer.html}
+gsw_SP_salinometer <- function(ratio, temperature)
+{
+    if (missing(ratio)) stop("must provide ratio")
+    if (missing(temperature)) stop("must provide temperature")
+    l <- argfix(list(ratio=ratio, temperature=temperature))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_SP_salinometer",
+        ratio=as.double(l$ratio), temperature=as.double(l$temperature),
+        n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(ratio))
+        dim(rval) <- dim(ratio)
+    rval
+}
 
 #' Potential density anomaly referenced to 0 dbar
 #'

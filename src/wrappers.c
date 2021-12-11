@@ -176,6 +176,22 @@ void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval1), double *
     }\
 }
 
+// 2 input values, 1 output value
+#define W21(wname, cname, arg1, arg2, n, rval) \
+void (wname)(double *(arg1), double *(arg2), int *(n), double *(rval))\
+{\
+    for (int i=0; i < *(n); i++) {\
+        if (isnan((arg1)[i]) || isnan((arg2)[i])) {\
+            (rval)[i] = NA_REAL;\
+        } else {\
+            (rval)[i] = (cname)((arg1)[i], (arg2)[i]);\
+            if ((rval)[i] == GSW_INVALID_VALUE) {\
+                (rval)[i] = NA_REAL;\
+            }\
+        }\
+    }\
+}
+
 
 // 3 input values, 1 output value
 #define W31(wname, cname, arg1, arg2, arg3, n, rval) \
@@ -494,6 +510,7 @@ W31(wrap_gsw_SA_from_rho, gsw_sa_from_rho, rho, CT, p, n, rval)
 W41(wrap_gsw_SA_from_SP, gsw_sa_from_sp, CT, p, longitude, latitude, n, rval)
 W31(wrap_gsw_SA_from_SP_Baltic, gsw_sa_from_sp_baltic, SP, longitude, latitude, n, rval)
 W41(wrap_gsw_SA_from_Sstar, gsw_sa_from_sstar, Sstar, p, longitude, latitude, n, rval)
+W21(wrap_gsw_SP_salinometer, gsw_sp_salinometer, ratio, temperature, n, rval)
 W53(wrap_gsw_seaice_fraction_to_freeze_seawater, gsw_seaice_fraction_to_freeze_seawater, SA, CT, p, SA_seaice, t_seaice, n, SA_freeze, CT_freeze, w_seaice)
 W11(wrap_gsw_SR_from_SP, gsw_sr_from_sp, SP, n, rval)
 W21(wrap_gsw_sigma0, gsw_sigma0, SA, CT, n, rval)

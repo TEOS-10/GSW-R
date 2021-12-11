@@ -56,3 +56,8 @@ stopifnot(all.equal(O2sol/100, c(1.946825431692940, 1.956135062814438,
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_O2sol_SP_pt.html}
 }
+\seealso{
+Other things related to oxygen: 
+\code{\link{gsw_O2sol}()}
+}
+\concept{things related to oxygen}
