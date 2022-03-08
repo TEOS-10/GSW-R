@@ -3047,7 +3047,7 @@ gsw_melting_ice_SA_CT_ratio_poly <- function(SA, CT, p, t_Ih)
 #' @template CTtemplate
 #' @template ptemplate
 #' @template latitudetemplate
-#' @return list containing N2 [ 1/s^ ] and mid-point pressure p_mid [ dbar ]
+#' @return list containing N2 [ 1/s^2 ] and mid-point pressure p_mid [ dbar ]
 #' @examples
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)

@@ -17,7 +17,7 @@ gsw_Nsquared(SA, CT, p, latitude = 0)
 is called \code{lat} in the TEOS-10 Matlab code.)}
 }
 \value{
-list containing N2 [ 1/s^ ] and mid-point pressure p_mid [ dbar ]
+list containing N2 [ 1/s^2 ] and mid-point pressure p_mid [ dbar ]
 }
 \description{
 The result is computed based on first-differencing a computed density with
