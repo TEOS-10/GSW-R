@@ -1,5 +1,9 @@
 # gsw
 
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/gsw)](https://cran.r-project.org/package=gsw)
 [![R-CMD-check](https://github.com/TEOS-10/GSW-R/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/TEOS-10/GSW-R/actions/workflows/R-CMD-check.yaml)
 ![RStudio CRAN mirror downloads](http://cranlogs.r-pkg.org/badges/last-month/gsw)
 ![RStudio CRAN mirror downloads](http://cranlogs.r-pkg.org/badges/last-week/gsw)
