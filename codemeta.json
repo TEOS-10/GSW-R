@@ -119,9 +119,10 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "5226.031KB",
+  "fileSize": "5242.063KB",
   "releaseNotes": "https://github.com/TEOS-10/GSW-R/blob/master/NEWS.md",
   "readme": "https://github.com/TEOS-10/GSW-R/blob/master/README.md",
   "contIntegration": "https://github.com/TEOS-10/GSW-R/actions/workflows/R-CMD-check.yaml",
+  "developmentStatus": "https://www.repostatus.org/",
   "keywords": ["seawater", "gibbs", "teos-10", "oceanography"]
 }
