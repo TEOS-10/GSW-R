@@ -1,3 +1,4 @@
+
 CMD
 CTD
 Compressibility
@@ -7,8 +8,10 @@ Frazil
 Geostrophic
 Haline
 IAPSO
+IOC
 IPV
 Isothermal
+Krause
 McDougall
 NaN
 PSS
@@ -18,16 +21,19 @@ SCOR
 SCORE
 SCORE
 SStar
+Salinometer
 SeaWater
 Sstar
 TEOS
 Thermobaric
 Vaisala
+aaaf
 al
 argfix
 args
 bfebf
 cabbeling
+ce
 cebce
 centres
 circ
@@ -63,6 +69,7 @@ hydrography
 isentropic
 isothermal
 ito
+kPa
 mS
 matlab
 md
@@ -75,6 +82,7 @@ oce
 pchip
 pppt
 ppt
+salinometer
 seaice
 sealevel
 signalled
@@ -85,4 +93,5 @@ teos
 testthat
 thermobaric
 unitless
+vapour
 www

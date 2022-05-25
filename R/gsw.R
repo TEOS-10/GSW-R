@@ -4571,7 +4571,7 @@ gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
     rval
 }
 
-#' Practical Salinity from Salinimeter Reading
+#' Practical Salinity from Salinometer Reading
 #'
 #' Calculate Practical Salinity from salinometer readings
 #' of conductivity ratio and bath temperature.

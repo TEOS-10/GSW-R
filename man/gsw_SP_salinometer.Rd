@@ -2,7 +2,7 @@
 % Please edit documentation in R/gsw.R
 \name{gsw_SP_salinometer}
 \alias{gsw_SP_salinometer}
-\title{Practical Salinity from Salinimeter Reading}
+\title{Practical Salinity from Salinometer Reading}
 \usage{
 gsw_SP_salinometer(ratio, temperature)
 }
