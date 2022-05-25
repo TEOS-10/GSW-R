@@ -17,3 +17,4 @@ vignettes/gsw.bbl
 .Rapp.history
 vignettes/*.md
 docs
+revdep

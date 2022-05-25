@@ -3989,7 +3989,7 @@ gsw_rho_first_derivatives <- function(SA, CT, p)
 #' @template SAtemplate
 #' @template CTtemplate
 #' @template ptemplate
-#' @return A list containing \code{rho_SA_wrt_h} [ (kg/m^3)/(g/kg)/(J/kg) ]
+#' @return A list containing \code{rho_SA_wrt_h} [ (kg/m^3)/(g/kg) ]
 #' and \code{rho_h} [ (kg/m^3)/(J/kg) ].
 #' @examples
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -5039,7 +5039,7 @@ gsw_specvol_first_derivatives <- function(SA, CT, p)
 #' @template SAtemplate
 #' @template CTtemplate
 #' @template ptemplate
-#' @return A list containing \code{v_SA_wrt_h} and \code{v_h}.
+#' @return A list containing \code{v_SA_wrt_h} [ (m^3/kg)/(g/kg) ] and \code{v_h}.
 #' @examples
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
@@ -5117,7 +5117,7 @@ gsw_specvol_ice  <- function(t, p)
 #' specific volume with respect to Absolute Salinity and Conservative Temperature,
 #' \code{specvol_CT_CT} [ (m^3/kg)/degC^2 ], the second derivative of
 #' specific volume with respect to Conservative Temperature,
-#' \code{specvol_SA_p} [ (m^3/kg)/(g/kg)/dbar ], the derivative of specific volume with respect to Absolute
+#' \code{specvol_SA_p} [ (m^3/kg)/(g/kg)/Pa ], the derivative of specific volume with respect to Absolute
 #' Salinity and pressure, and \code{specvol_CT_p} [ (m^3/kg)/K/dbar ], the derivative of specific
 #' volume with respect to Conservative Temperature and pressure.
 #' @examples

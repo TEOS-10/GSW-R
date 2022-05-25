@@ -16,7 +16,7 @@ Authors@R: c(
             family="SCOR/IAPSO",
             role=c("aut","cph"),
             comment="Original 'Matlab' and derived code"))
-Copyright: Original algorithms and 'Matlab'/C library (c) 2015-2021 WG127 SCOR/IAPSO (Scientific Committee on Oceanic Research / International Association for the Physical Sciences of the Oceans, Working Group 127); C wrapper code and R code (c) 2015-2021 Dan Kelley and Clark Richards
+Copyright: Original algorithms and 'Matlab'/C library (c) 2015-2022 WG127 SCOR/IAPSO (Scientific Committee on Oceanic Research / International Association for the Physical Sciences of the Oceans, Working Group 127); C wrapper code and R code (c) 2015-2021 Dan Kelley and Clark Richards
 Maintainer: Dan Kelley <dan.kelley@dal.ca>
 Depends:
     R (>= 3.5.0),
