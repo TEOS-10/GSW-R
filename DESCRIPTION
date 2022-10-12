@@ -1,5 +1,5 @@
 Package: gsw
-Version: 1.0-7
+Version: 1.1-0
 Title: Gibbs Sea Water Functions
 Authors@R: c(
         person(given="Dan",
@@ -25,13 +25,13 @@ Suggests:
     rmarkdown,
     testthat
 BugReports: https://github.com/TEOS-10/GSW-R/issues
-Description: Provides an interface to the Gibbs 'SeaWater' ('TEOS-10') C library, version 3.05 (commit 'bad2c9e4e154597ce563aaaf3ce09b1c52a2ab46', dated 2021-07-14, available at <https://github.com/TEOS-10/GSW-C>, which stems from 'Matlab' and other code written by members of Working Group 127 of 'SCOR'/'IAPSO' (Scientific Committee on Oceanic Research / International Association for the Physical Sciences of the Oceans).
-URL: http://teos-10.github.io/GSW-R/, https://teos-10.github.io/GSW-R/index.html
+Description: Provides an interface to the Gibbs 'SeaWater' ('TEOS-10') C library, version 3.06-16-0 (commit '657216dd4f5ea079b5f0e021a4163e2d26893371', dated 2022-10-11, available at <https://github.com/TEOS-10/GSW-C>, which stems from 'Matlab' and other code written by members of Working Group 127 of 'SCOR'/'IAPSO' (Scientific Committee on Oceanic Research / International Association for the Physical Sciences of the Oceans).
+URL: http://teos-10.github.io/GSW-R/
 License: GPL (>= 2) | file LICENSE
 LazyLoad: yes
 LazyData: no
 Packaged: Dan Kelley
 Encoding: UTF-8
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 BuildVignettes: true
 VignetteBuilder: knitr

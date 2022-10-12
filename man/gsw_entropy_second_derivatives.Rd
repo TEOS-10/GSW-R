@@ -42,17 +42,6 @@ Please consult \url{http://www.teos-10.org} to learn more about the various
 TEOS-10 software systems.
 }
 
-\section{Bugs}{
-
-
-As of March 27, 2017, the test values listed in \dQuote{Examples} do not match
-values provided at the TEOS-10 website listed in \dQuote{References},
-but they match with values given by the Matlab code that is
-provided on the TEOS-10 website. It is expected that the
-TEOS-10 website will be updated by May 2017. As those updates to the TEOS-10
-website become available, the present comment will be revised or deleted.
-}
-
 \examples{
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
@@ -63,13 +52,8 @@ stopifnot(all.equal(r$eta_SA_CT, c(-0.001833104216751, -0.001819473824306, -0.00
                                    -0.000930111408561, -0.000717011215195, -0.000548410546830)))
 stopifnot(all.equal(r$eta_CT_CT, c(-0.043665023731109, -0.043781336189326, -0.045506114440888,
                                    -0.049708939454018, -0.050938690879443, -0.051875017843472)))
+
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_second_derivatives.html}
 }
-\seealso{
-Other functions with suspicious test values on the TEOS-10 website: 
-\code{\link{gsw_specvol_second_derivatives_wrt_enthalpy}()},
-\code{\link{gsw_t_freezing_first_derivatives_poly}()}
-}
-\concept{functions with suspicious test values on the TEOS-10 website}
