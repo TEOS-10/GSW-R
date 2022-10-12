@@ -1,12 +1,13 @@
 # # GSW-R 1.1-0
 
-* This October 12, 2022 update is based on C code from
+* This 2022-10-12 update is based on C code from
   https://github.com/TEOS-10/GSW-C (release v3.06-16-0, commit
   657216dd4f5ea079b5f0e021a4163e2d26893371) and the .mat data file from
   https://github.com/TEOS-10/GSW-Matlab (commit
-  38c9635d6fd93e74c2648e4ee23cec49c1f58530). Changed had to made in the
-  within-documentation test suite, as listed below.  The sometimes-listed MRD
-  value is the mean relative difference between old and new versions.
+  38c9635d6fd93e74c2648e4ee23cec49c1f58530). It was necessary to make some
+  changes to the within-documentation test suite, as listed below.  In this
+  listing, MRD stands for mean relative difference from the values in the
+  previous CRAN release of `gsw`.
 
     * `gsw_rho_second_derivatives()$rho_SA_p`: MRD 0.4
     * `gsw_rho_second_derivatives_wrt_enthalpy()$rho_SA_SA`: MRD 1e-3
