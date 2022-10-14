@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://teos-10.github.io/GSW-R/404.html</loc>
+  </url>
+  <url>
+    <loc>http://teos-10.github.io/GSW-R/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>http://teos-10.github.io/GSW-R/README_developer.html</loc>
+  </url>
+  <url>
+    <loc>http://teos-10.github.io/GSW-R/articles/gsw.html</loc>
+  </url>
+  <url>
+    <loc>http://teos-10.github.io/GSW-R/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>http://teos-10.github.io/GSW-R/authors.html</loc>
+  </url>
+  <url>
     <loc>http://teos-10.github.io/GSW-R/index.html</loc>
+  </url>
+  <url>
+    <loc>http://teos-10.github.io/GSW-R/news/index.html</loc>
   </url>
   <url>
     <loc>http://teos-10.github.io/GSW-R/reference/argfix.html</loc>
@@ -64,6 +85,12 @@
     <loc>http://teos-10.github.io/GSW-R/reference/gsw_Nsquared.html</loc>
   </url>
   <url>
+    <loc>http://teos-10.github.io/GSW-R/reference/gsw_O2sol.html</loc>
+  </url>
+  <url>
+    <loc>http://teos-10.github.io/GSW-R/reference/gsw_O2sol_SP_pt.html</loc>
+  </url>
+  <url>
     <loc>http://teos-10.github.io/GSW-R/reference/gsw_SAAR.html</loc>
   </url>
   <url>
@@ -104,6 +131,9 @@
   </url>
   <url>
     <loc>http://teos-10.github.io/GSW-R/reference/gsw_SP_from_Sstar.html</loc>
+  </url>
+  <url>
+    <loc>http://teos-10.github.io/GSW-R/reference/gsw_SP_salinometer.html</loc>
   </url>
   <url>
     <loc>http://teos-10.github.io/GSW-R/reference/gsw_SR_from_SP.html</loc>
@@ -460,9 +490,9 @@
     <loc>http://teos-10.github.io/GSW-R/reference/gsw_z_from_p.html</loc>
   </url>
   <url>
-    <loc>http://teos-10.github.io/GSW-R/reference/saar.html</loc>
+    <loc>http://teos-10.github.io/GSW-R/reference/index.html</loc>
   </url>
   <url>
-    <loc>http://teos-10.github.io/GSW-R/articles/gsw.html</loc>
+    <loc>http://teos-10.github.io/GSW-R/reference/saar.html</loc>
   </url>
 </urlset>
