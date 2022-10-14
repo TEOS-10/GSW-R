@@ -26,57 +26,43 @@ Second Derivatives of Specific Volume wrt Enthalpy
 }
 \section{Implementation Note}{
 
-This R function uses a wrapper to a C function
-contained within the GSW-C system as updated 2021-03-27
-at \url{https://github.com/TEOS-10/GSW-C}
-with git commit `f7bfebf44f686034636facb09852f1d5760c27f5`.
-In turn, that C function uses data from the
-\code{library/gsw_data_v3_0.mat}
+
+This R function uses a wrapper to a C function contained within the GSW-C
+system as updated 2021-12-28 at \url{https://github.com/TEOS-10/GSW-C} with
+git commit `98f0fd40dd9ceb0ba82c9d47ac750e935a7d0459`.
+
+The C function uses data from the \code{library/gsw_data_v3_0.mat}
 file provided in the GSW-Matlab source code, version 3.06-11.
-Unfortunately, this version is no longer displayed on the
-TEOS-10.org website. Therefore, in the interests of making
-GSW-R be self-contained, a copy was downloaded from
-\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
-on 2021-0706, the .mat file was stored in
-the developer/create_data directory of
-\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
-used in GSW-R was created based on that .mat file.
-Please consult \url{http://www.teos-10.org} to learn more about
-the various TEOS-10 software systems.
-}
+Unfortunately, this version of the mat file is no longer displayed on the
+TEOS-10.org website.  Therefore, in the interests of making GSW-R be
+self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip} on 2022-05-25,
+the .mat file was stored in the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset used in GSW-R
+was created based on that .mat file.
 
-\section{Bugs}{
-
-
-As of March 27, 2017, the test values listed in \dQuote{Examples} do not match
-values provided at the TEOS-10 website listed in \dQuote{References},
-but they match with values given by the Matlab code that is
-provided on the TEOS-10 website. It is expected that the
-TEOS-10 website will be updated by May 2017. As those updates to the TEOS-10
-website become available, the present comment will be revised or deleted.
+Please consult \url{http://www.teos-10.org} to learn more about the various
+TEOS-10 software systems.
 }
 
 \examples{
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 p <- c(      10,      50,     125,     250,     600,    1000)
+
 r <- gsw_specvol_second_derivatives_wrt_enthalpy(SA, CT, p)
-stopifnot(all.equal(r$specvol_SA_SA/1e-8,
-    c(0.080900028996264, 0.080937999675000, 0.084663065647101,
-      0.096973364985384, 0.099727453432293, 0.101353037979356)))
-stopifnot(all.equal(r$specvol_SA_h/1e-12,
-    c(0.325437133570796, 0.327060462851431, 0.375273569184178,
-      0.545188833073084, 0.589424881889351, 0.616101548209175)))
-stopifnot(all.equal(r$specvol_h_h/1e-15,
-    c(0.447949998681476, 0.449121446914278, 0.485998151346315,
-      0.598480711660961, 0.628708349875318, 0.647433212216398)))
+
+stopifnot(all.equal(r$specvol_SA_SA/1e-8, c(0.080898741086877,
+            0.080931595349498, 0.084648485333225, 0.096952812049233,
+            0.099684475381589, 0.101288447077547)))
+stopifnot(all.equal(r$specvol_SA_h/1e-12, c(0.325437133570796,
+            0.327060462851431, 0.375273569184178, 0.545188833073084,
+            0.589424881889351, 0.616101548209175)))
+stopifnot(all.equal(r$specvol_h_h/1e-15, c(0.447949998681476, 0.449121446914278,
+            0.485998151346315, 0.598480711660961, 0.628708349875318,
+            0.647433212216398)))
+
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_second_derivatives_wrt_enthalpy.html}
 }
-\seealso{
-Other functions with suspicious test values on the TEOS-10 website: 
-\code{\link{gsw_entropy_second_derivatives}()},
-\code{\link{gsw_t_freezing_first_derivatives_poly}()}
-}
-\concept{functions with suspicious test values on the TEOS-10 website}

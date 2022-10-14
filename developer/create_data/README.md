@@ -9,7 +9,8 @@ available at http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip as of
 have downloaded this source zipfile, expanded it, and copied the relevant
 matlab file to this directory, using
 
-    cp /Users/kelley/src/gsw_matlab_v3_06_11/library/gsw_data_v3_0.mat .
+    # OLD cp /Users/kelley/src/gsw_matlab_v3_06_11/library/gsw_data_v3_0.mat .
+    cp /Users/kelley/git/GSW-Matlab/Toolbox/library/gsw_data_v3_0.mat .
 
 and this is what I'll use to build up the .rda file.
 

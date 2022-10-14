@@ -1,5 +1,5 @@
 Package: gsw
-Version: 1.0-6
+Version: 1.1-0
 Title: Gibbs Sea Water Functions
 Authors@R: c(
         person(given="Dan",
@@ -16,7 +16,7 @@ Authors@R: c(
             family="SCOR/IAPSO",
             role=c("aut","cph"),
             comment="Original 'Matlab' and derived code"))
-Copyright: Original algorithms and 'Matlab'/C library (c) 2015-2021 WG127 SCOR/IAPSO (Scientific Committee on Oceanic Research / International Association for the Physical Sciences of the Oceans, Working Group 127); C wrapper code and R code (c) 2015-2021 Dan Kelley and Clark Richards
+Copyright: Original algorithms and 'Matlab'/C library (c) 2015-2022 WG127 SCOR/IAPSO (Scientific Committee on Oceanic Research / International Association for the Physical Sciences of the Oceans, Working Group 127); C wrapper code and R code (c) 2015-2021 Dan Kelley and Clark Richards
 Maintainer: Dan Kelley <dan.kelley@dal.ca>
 Depends:
     R (>= 3.5.0),
@@ -25,13 +25,13 @@ Suggests:
     rmarkdown,
     testthat
 BugReports: https://github.com/TEOS-10/GSW-R/issues
-Description: Provides an interface to the Gibbs 'SeaWater' ('TEOS-10') C library, version 3.05 (commit 'f7bfebf44f686034636facb09852f1d5760c27f5', dated 2021-03-27, available at <https://github.com/TEOS-10/GSW-C>, which stems from 'Matlab' and other code written by members of Working Group 127 of 'SCOR'/'IAPSO' (Scientific Committee on Oceanic Research / International Association for the Physical Sciences of the Oceans).
-URL: http://teos-10.github.io/GSW-R/, https://teos-10.github.io/GSW-R/index.html
+Description: Provides an interface to the Gibbs 'SeaWater' ('TEOS-10') C library, version 3.06-16-0 (commit '657216dd4f5ea079b5f0e021a4163e2d26893371', dated 2022-10-11, available at <https://github.com/TEOS-10/GSW-C>, which stems from 'Matlab' and other code written by members of Working Group 127 of 'SCOR'/'IAPSO' (Scientific Committee on Oceanic Research / International Association for the Physical Sciences of the Oceans).
+URL: http://teos-10.github.io/GSW-R/
 License: GPL (>= 2) | file LICENSE
 LazyLoad: yes
 LazyData: no
 Packaged: Dan Kelley
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
 BuildVignettes: true
 VignetteBuilder: knitr

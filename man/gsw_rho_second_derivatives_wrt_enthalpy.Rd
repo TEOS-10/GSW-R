@@ -26,23 +26,23 @@ Second Derivatives of Density wrt Enthalpy
 }
 \section{Implementation Note}{
 
-This R function uses a wrapper to a C function
-contained within the GSW-C system as updated 2021-03-27
-at \url{https://github.com/TEOS-10/GSW-C}
-with git commit `f7bfebf44f686034636facb09852f1d5760c27f5`.
-In turn, that C function uses data from the
-\code{library/gsw_data_v3_0.mat}
+
+This R function uses a wrapper to a C function contained within the GSW-C
+system as updated 2021-12-28 at \url{https://github.com/TEOS-10/GSW-C} with
+git commit `98f0fd40dd9ceb0ba82c9d47ac750e935a7d0459`.
+
+The C function uses data from the \code{library/gsw_data_v3_0.mat}
 file provided in the GSW-Matlab source code, version 3.06-11.
-Unfortunately, this version is no longer displayed on the
-TEOS-10.org website. Therefore, in the interests of making
-GSW-R be self-contained, a copy was downloaded from
-\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
-on 2021-0706, the .mat file was stored in
-the developer/create_data directory of
-\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
-used in GSW-R was created based on that .mat file.
-Please consult \url{http://www.teos-10.org} to learn more about
-the various TEOS-10 software systems.
+Unfortunately, this version of the mat file is no longer displayed on the
+TEOS-10.org website.  Therefore, in the interests of making GSW-R be
+self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip} on 2022-05-25,
+the .mat file was stored in the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset used in GSW-R
+was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about the various
+TEOS-10 software systems.
 }
 
 \examples{
@@ -50,12 +50,19 @@ SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 p <- c(      10,      50,     125,     250,     600,    1000)
 r <- gsw_rho_second_derivatives_wrt_enthalpy(SA, CT, p)
-stopifnot(all.equal(r$rho_SA_SA/1e-3, c(0.207312267114544, 0.207065033523473, 0.191848346945039,
-                                        0.133182862881598, 0.116049034622904, 0.102745309429078)))
-stopifnot(all.equal(r$rho_SA_h/1e-6, c(-0.459053080088382, -0.460370569872258, -0.498605615416296,
-                                       -0.642833108550133, -0.682091962941161, -0.706793055445909)))
-stopifnot(all.equal(r$rho_h_h/1e-9, c(-0.454213854637790, -0.455984900239309, -0.499870030989387,
-                                      -0.628337767293403, -0.664021595759308, -0.687367088752173)))
+
+stopifnot(all.equal(r$rho_SA_SA/1e-3, c(0.207325714908677, 0.207131960039965,
+            0.192001360206293, 0.133399974356615, 0.116504845152129,
+            0.103433221305694)))
+
+stopifnot(all.equal(r$rho_SA_h/1e-6, c(-0.459053080088382, -0.460370569872258,
+            -0.498605615416296, -0.642833108550133, -0.682091962941161,
+            -0.706793055445909)))
+
+stopifnot(all.equal(r$rho_h_h/1e-9, c(-0.454213854637790, -0.455984900239309,
+            -0.499870030989387, -0.628337767293403, -0.664021595759308,
+            -0.687367088752173)))
+
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_second_derivatives_wrt_enthalpy.html}

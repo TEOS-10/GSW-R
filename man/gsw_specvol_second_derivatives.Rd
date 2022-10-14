@@ -20,7 +20,7 @@ specific volume with respect to Absolute Salinity,
 specific volume with respect to Absolute Salinity and Conservative Temperature,
 \code{specvol_CT_CT} [ (m^3/kg)/degC^2 ], the second derivative of
 specific volume with respect to Conservative Temperature,
-\code{specvol_SA_p} [ (m^3/kg)/(g/kg)/dbar ], the derivative of specific volume with respect to Absolute
+\code{specvol_SA_p} [ (m^3/kg)/(g/kg)/Pa ], the derivative of specific volume with respect to Absolute
 Salinity and pressure, and \code{specvol_CT_p} [ (m^3/kg)/K/dbar ], the derivative of specific
 volume with respect to Conservative Temperature and pressure.
 }
@@ -29,45 +29,52 @@ Second Derivatives of Specific Volume
 }
 \section{Implementation Note}{
 
-This R function uses a wrapper to a C function
-contained within the GSW-C system as updated 2021-03-27
-at \url{https://github.com/TEOS-10/GSW-C}
-with git commit `f7bfebf44f686034636facb09852f1d5760c27f5`.
-In turn, that C function uses data from the
-\code{library/gsw_data_v3_0.mat}
+
+This R function uses a wrapper to a C function contained within the GSW-C
+system as updated 2021-12-28 at \url{https://github.com/TEOS-10/GSW-C} with
+git commit `98f0fd40dd9ceb0ba82c9d47ac750e935a7d0459`.
+
+The C function uses data from the \code{library/gsw_data_v3_0.mat}
 file provided in the GSW-Matlab source code, version 3.06-11.
-Unfortunately, this version is no longer displayed on the
-TEOS-10.org website. Therefore, in the interests of making
-GSW-R be self-contained, a copy was downloaded from
-\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
-on 2021-0706, the .mat file was stored in
-the developer/create_data directory of
-\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
-used in GSW-R was created based on that .mat file.
-Please consult \url{http://www.teos-10.org} to learn more about
-the various TEOS-10 software systems.
+Unfortunately, this version of the mat file is no longer displayed on the
+TEOS-10.org website.  Therefore, in the interests of making GSW-R be
+self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip} on 2022-05-25,
+the .mat file was stored in the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset used in GSW-R
+was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about the various
+TEOS-10 software systems.
 }
 
 \examples{
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 p <- c(      10,      50,     125,     250,     600,    1000)
+
 r <- gsw_specvol_second_derivatives(SA, CT, p)
-stopifnot(all.equal(r$specvol_SA_SA/1e-8,
-    c(0.080906777599140, 0.080915086639384, 0.084568844270812,
-      0.096725108896007, 0.099111765836648, 0.100302277946072)))
-stopifnot(all.equal(r$specvol_SA_CT/1e-8,
-    c(0.129965332117084, 0.130523053162130, 0.149555815430615,
-      0.217023290441810, 0.233892039070486, 0.243659989480325)))
-stopifnot(all.equal(r$specvol_CT_CT/1e-7,
-    c(0.071409582006642, 0.071582962051991, 0.077436153664104,
-     0.095329736274850, 0.100105336953738, 0.103044572835472)))
-stopifnot(all.equal(r$specvol_SA_p/1e-14,
-    c(0.141281359467752, 0.141507584673426, 0.147247234588907,
-      0.164580347761218, 0.168069801298412, 0.169948275518754)))
-stopifnot(all.equal(r$specvol_CT_p/1e-14,
-    c(0.085542828707964, 0.086723632576213, 0.112156562396990,
-      0.188269893599500, 0.211615556759369, 0.228609575049911)))
+
+stopifnot(all.equal(r$specvol_SA_SA/1e-8, c(0.080906777599140,
+            0.080915086639384, 0.084568844270812, 0.096725108896007,
+            0.099111765836648, 0.100302277946072)))
+
+stopifnot(all.equal(r$specvol_SA_CT/1e-8, c(0.129965332117084,
+            0.130523053162130, 0.149555815430615, 0.217023290441810,
+            0.233892039070486, 0.243659989480325)))
+
+stopifnot(all.equal(r$specvol_CT_CT/1e-7, c(0.071409582006642,
+            0.071582962051991, 0.077436153664104, 0.095329736274850,
+            0.100105336953738, 0.103044572835472)))
+
+stopifnot(all.equal(r$specvol_SA_p/1e-14, c(0.116889015000936,
+            0.116897424150385, 0.121500614193893, 0.136008673596132,
+            0.139023051292893, 0.140581903529772)))
+
+stopifnot(all.equal(r$specvol_CT_p/1e-14, c(0.085542828707964,
+            0.086723632576213, 0.112156562396990, 0.188269893599500,
+            0.211615556759369, 0.228609575049911)))
+
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_second_derivatives.html}

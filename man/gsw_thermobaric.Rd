@@ -21,32 +21,36 @@ Thermobaric coefficient (75-term equation)
 }
 \section{Implementation Note}{
 
-This R function uses a wrapper to a C function
-contained within the GSW-C system as updated 2021-03-27
-at \url{https://github.com/TEOS-10/GSW-C}
-with git commit `f7bfebf44f686034636facb09852f1d5760c27f5`.
-In turn, that C function uses data from the
-\code{library/gsw_data_v3_0.mat}
+
+This R function uses a wrapper to a C function contained within the GSW-C
+system as updated 2021-12-28 at \url{https://github.com/TEOS-10/GSW-C} with
+git commit `98f0fd40dd9ceb0ba82c9d47ac750e935a7d0459`.
+
+The C function uses data from the \code{library/gsw_data_v3_0.mat}
 file provided in the GSW-Matlab source code, version 3.06-11.
-Unfortunately, this version is no longer displayed on the
-TEOS-10.org website. Therefore, in the interests of making
-GSW-R be self-contained, a copy was downloaded from
-\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
-on 2021-0706, the .mat file was stored in
-the developer/create_data directory of
-\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
-used in GSW-R was created based on that .mat file.
-Please consult \url{http://www.teos-10.org} to learn more about
-the various TEOS-10 software systems.
+Unfortunately, this version of the mat file is no longer displayed on the
+TEOS-10.org website.  Therefore, in the interests of making GSW-R be
+self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip} on 2022-05-25,
+the .mat file was stored in the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset used in GSW-R
+was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about the various
+TEOS-10 software systems.
 }
 
 \examples{
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 p <-  c(     10,      50,     125,     250,     600,    1000)
+
 tb <- gsw_thermobaric(SA, CT, p)
-stopifnot(all.equal(tb*1e11, c(0.152618598186650, 0.153662896162852, 0.173429325875738,
-                               0.232810160208414, 0.251984724005424, 0.266660342289558)))
+
+stopifnot(all.equal(tb*1e11,
+        c(0.141342632944971, 0.142352284525832, 0.163216280125501,
+            0.226030772122855, 0.246185239871747, 0.261474794884197)))
+
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_thermobaric.html}

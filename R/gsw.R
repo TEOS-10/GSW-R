@@ -1,3 +1,5 @@
+# vim:textwidth=80:expandtab:shiftwidth=4:softtabstop=4
+
 ## Please see ../README_developer.md for the scheme used in adding functions
 ## here. Generally the functions will be added to Part 4.
 
@@ -1158,7 +1160,6 @@ gsw_deltaSA_from_SP <- function(SP, p, longitude, latitude)
                SP=as.double(l$SP), p=as.double(l$p),
                longitude=as.double(l$longitude), latitude=as.double(l$latitude),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
-    ##37 rval[!is.finite(l$SA) | !is.finite(l$p) | !is.finite(l$longitude) | !is.finite(l$latitude)] <- NA
     if (is.matrix(SP))
         dim(rval) <- dim(SP)
     rval
@@ -1722,8 +1723,7 @@ gsw_entropy_from_t <- function(SA, t, p)
 #'                                    -0.000930111408561, -0.000717011215195, -0.000548410546830)))
 #' stopifnot(all.equal(r$eta_CT_CT, c(-0.043665023731109, -0.043781336189326, -0.045506114440888,
 #'                                    -0.049708939454018, -0.050938690879443, -0.051875017843472)))
-#' @template broken-test-values
-#' @template broken-test-values-family
+#'
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_entropy_second_derivatives.html}
 gsw_entropy_second_derivatives <- function(SA, CT)
@@ -3046,7 +3046,7 @@ gsw_melting_ice_SA_CT_ratio_poly <- function(SA, CT, p, t_Ih)
 #' @template CTtemplate
 #' @template ptemplate
 #' @template latitudetemplate
-#' @return list containing N2 [ 1/s^ ] and mid-point pressure p_mid [ dbar ]
+#' @return list containing N2 [ 1/s^2 ] and mid-point pressure p_mid [ dbar ]
 #' @examples
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
@@ -3073,6 +3073,97 @@ gsw_Nsquared <- function(SA, CT, p, latitude=0)
     list(N2=r$n2, p_mid=r$p_mid)
 }
 
+#' Oxygen Solubility in Seawater (GSW variables)
+#'
+#' Computes oxygen concentration for seawater that is equilibrium with
+#' vapour-saturated air at standard atmospheric pressure (101.325 kPa,
+#' i.e. for sea pressure of 0dbar).  The formula, not created by the SCOR/IAPSO
+#' Working Group 127 nor approved by the IOC, is stated in the TEOS-10
+#' documentation to be from Benson and Krause (1984), as fitted by
+#' Garcia and Gordon (1992, 1993). That formulation is framed in UNESCO-era
+#' water properties, so longitude and latitude are needed here, to convert
+#' to these quantities from Absolute Salinity and Conservative Temperature;
+#' see also \code{\link{gsw_O2sol_SP_pt}}, which is formulated in UNESCO
+#' terms.
+#'
+#' @template teos10template
+#'
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#' @template longitudetemplate
+#' @template latitudetemplate
+#' @return Oxygen solubility in micro-moles per kg.
+#' @examples
+#' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' p <- c(      10,      50,     125,     250,     600,    1000)
+#' latitude <- c(4,       4,       4,       4,       4,       4)
+#' longitude <- c(188,  188,     188,     188,     188,     188)
+#' O2sol <- gsw_O2sol(SA,CT,p,longitude,latitude)
+#' stopifnot(all.equal(O2sol/100, c(1.949651126384804, 1.958728907684003,
+#'             2.148922307892045, 2.738656506758550, 2.955109771828408,
+#'             3.133584919106894)))
+#' @family things related to oxygen
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_O2sol.html}
+gsw_O2sol <- function(SA, CT, p, longitude, latitude)
+{
+    if (missing(SA)) stop("must supply SA")
+    if (missing(CT)) stop("must supply CT")
+    if (missing(p)) stop("must supply p")
+    if (missing(longitude)) stop("must supply longitude")
+    if (missing(latitude)) stop("must supply latitude")
+    l <- argfix(list(SA=SA, CT=CT, p=p, longitude=longitude, latitude=latitude))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_o2sol",
+        SA=as.double(l$SA), CT=as.double(l$CT), p=as.double(l$p),
+        longitude=as.double(l$longitude), latitude=as.double(l$latitude),
+        n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+}
+
+#' Oxygen Solubility in Seawater (UNESCO variables)
+#'
+#' Computes oxygen concentration for seawater that is equilibrium with
+#' vapour-saturated air at standard atmospheric pressure (101.325 kPa,
+#' i.e. for sea pressure of 0dbar).  The formula, not created by the SCOR/IAPSO
+#' Working Group 127 nor approved by the IOC, is stated in the TEOS-10
+#' documentation to be from Benson and Krause (1984), as fitted by
+#' Garcia and Gordon (1992, 1993). That formulation is framed in UNESCO-era
+#' water properties; see \code{\link{gsw_O2sol}} for the corresponding
+#' computation in GSW variables.
+#'
+#' @template teos10template
+#'
+#' @template SPtemplate
+#' @template pttemplate
+#' @return Oxygen solubility in micro-moles per kg.
+#' @examples
+#' SP <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
+#' pt <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
+#' O2sol <- gsw_O2sol_SP_pt(SP, pt)
+#' stopifnot(all.equal(O2sol/100, c(1.946825431692940, 1.956135062814438,
+#'             2.146559360234014, 2.735652832698713, 2.951580761415903,
+#'             3.129598716631408)))
+#' @family things related to oxygen
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_O2sol_SP_pt.html}
+gsw_O2sol_SP_pt <- function(SP, pt)
+{
+    if (missing(SP)) stop("must supply SP")
+    if (missing(pt)) stop("must supply pt")
+    l <- argfix(list(SP=SP, pt=pt))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_o2sol_SP_pt",
+        SP=as.double(l$SP), pt=as.double(l$pt),
+        n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(SP))
+        dim(rval) <- dim(SP)
+    rval
+}
 
 #' Pressure from height (75-term equation)
 #'
@@ -3119,7 +3210,6 @@ gsw_p_from_z <- function(z, latitude, geo_strf_dyn_height, sea_surface_geopotent
                geo_strf_dyn_height=as.double(l$geo_strf_dyn_height),
                sea_surface_geopotential=as.double(l$sea_surface_geopotential),
                n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
-    ##37 rval[!is.finite(l$z) | !is.finite(l$latitude) | !is.finite(l$geo_strf_dyn_height) | !is.finite(l$sea_surface_geopotential)] <- NA
     if (is.matrix(z))
         dim(rval) <- dim(z)
     rval
@@ -3898,7 +3988,7 @@ gsw_rho_first_derivatives <- function(SA, CT, p)
 #' @template SAtemplate
 #' @template CTtemplate
 #' @template ptemplate
-#' @return A list containing \code{rho_SA_wrt_h} [ (kg/m^3)/(g/kg)/(J/kg) ]
+#' @return A list containing \code{rho_SA_wrt_h} [ (kg/m^3)/(g/kg) ]
 #' and \code{rho_h} [ (kg/m^3)/(J/kg) ].
 #' @examples
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
@@ -3987,17 +4077,29 @@ gsw_rho_ice <- function(t, p)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
+#'
 #' r <- gsw_rho_second_derivatives(SA, CT, p)
-#' stopifnot(all.equal(r$rho_SA_SA/1e-3, c(0.207364734477357, 0.207415414547223, 0.192903197286004,
-#'                                         0.135809142211237, 0.122627562106076, 0.114042431905783)))
-#' stopifnot(all.equal(r$rho_SA_CT, c(-0.001832856561477, -0.001837354806146, -0.001988065808078,
-#'                                    -0.002560181494807, -0.002708939446458, -0.002798484050141)))
-#' stopifnot(all.equal(r$rho_CT_CT, c(-0.007241243828334, -0.007267807914635, -0.007964270843331,
-#'                                    -0.010008164822017, -0.010572200761984, -0.010939294762200)))
-#' stopifnot(all.equal(r$rho_SA_p/1e-8, c(-0.087202931942412, -0.087558612009845, -0.092549696987409,
-#'                                        -0.106661486272630, -0.110022261844240, -0.112287954816717)))
-#' stopifnot(all.equal(r$rho_CT_p/1e-8, c(-0.116597992537549, -0.117744271236102, -0.141712549466964,
-#'                                        -0.214414626736539, -0.237704139801551, -0.255296606034074)))
+#'
+#' stopifnot(all.equal(r$rho_SA_SA/1e-3, c(0.207364734477357, 0.207415414547223,
+#'             0.192903197286004, 0.135809142211237, 0.122627562106076,
+#'             0.114042431905783)))
+#'
+#' stopifnot(all.equal(r$rho_SA_CT, c(-0.001832856561477, -0.001837354806146,
+#'             -0.001988065808078, -0.002560181494807, -0.002708939446458,
+#'             -0.002798484050141)))
+#'
+#'stopifnot(all.equal(r$rho_CT_CT, c(-0.007241243828334, -0.007267807914635,
+#'            -0.007964270843331, -0.010008164822017, -0.010572200761984,
+#'            -0.010939294762200)))
+#'
+#' all.equal(r$rho_SA_p, 1e-9*c(-0.617330965378778, -0.618403843947729,
+#'         -0.655302447133274, -0.764800777480716, -0.792168044875350,
+#'         -0.810125648949170))
+#'
+#' all.equal(r$rho_CT_p, 1e-8*c(-0.116597992537549, -0.117744271236102,
+#'         -0.141712549466964, -0.214414626736539, -0.237704139801551,
+#'         -0.255296606034074))
+#'
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_second_derivatives.html}
 gsw_rho_second_derivatives <- function(SA, CT, p)
@@ -4044,12 +4146,19 @@ gsw_rho_second_derivatives <- function(SA, CT, p)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
 #' r <- gsw_rho_second_derivatives_wrt_enthalpy(SA, CT, p)
-#' stopifnot(all.equal(r$rho_SA_SA/1e-3, c(0.207312267114544, 0.207065033523473, 0.191848346945039,
-#'                                         0.133182862881598, 0.116049034622904, 0.102745309429078)))
-#' stopifnot(all.equal(r$rho_SA_h/1e-6, c(-0.459053080088382, -0.460370569872258, -0.498605615416296,
-#'                                        -0.642833108550133, -0.682091962941161, -0.706793055445909)))
-#' stopifnot(all.equal(r$rho_h_h/1e-9, c(-0.454213854637790, -0.455984900239309, -0.499870030989387,
-#'                                       -0.628337767293403, -0.664021595759308, -0.687367088752173)))
+#'
+#' stopifnot(all.equal(r$rho_SA_SA/1e-3, c(0.207325714908677, 0.207131960039965,
+#'             0.192001360206293, 0.133399974356615, 0.116504845152129,
+#'             0.103433221305694)))
+#'
+#' stopifnot(all.equal(r$rho_SA_h/1e-6, c(-0.459053080088382, -0.460370569872258,
+#'             -0.498605615416296, -0.642833108550133, -0.682091962941161,
+#'             -0.706793055445909)))
+#'
+#' stopifnot(all.equal(r$rho_h_h/1e-9, c(-0.454213854637790, -0.455984900239309,
+#'             -0.499870030989387, -0.628337767293403, -0.664021595759308,
+#'             -0.687367088752173)))
+#'
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_second_derivatives_wrt_enthalpy.html}
 gsw_rho_second_derivatives_wrt_enthalpy <- function(SA, CT, p)
@@ -4145,9 +4254,9 @@ gsw_SAAR <- function(p, longitude, latitude)
 {
     l <- argfix(list(p=p, longitude=longitude, latitude=latitude))
     n <- length(l[[1]])
-    r<- .C("wrap_gsw_SAAR",
-           p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
-           n=as.integer(n), SAAR=double(n), inocean=integer(n), NAOK=TRUE, PACKAGE="gsw")
+    r <- .C("wrap_gsw_SAAR",
+        p=as.double(l$p), longitude=as.double(l$longitude), latitude=as.double(l$latitude),
+        n=as.integer(n), SAAR=double(n), inocean=integer(n), NAOK=TRUE, PACKAGE="gsw")
     ##37 bad <- !is.finite(l$p) | !is.finite(l$longitude) | !is.finite(l$latitude)
     ##37 r$SAAR[bad] <- NA
     ##37 r$inocean[bad] <- NA
@@ -4480,6 +4589,40 @@ gsw_SA_from_Sstar <- function(Sstar, p, longitude, latitude)
     rval
 }
 
+#' Practical Salinity from Salinometer Reading
+#'
+#' Calculate Practical Salinity from salinometer readings
+#' of conductivity ratio and bath temperature.
+#'
+#' @template teos10template
+#'
+#' @param ratio Conductivity ratio [ unitless ].
+#' (This is called \code{Rt} in the GSW documentation.)
+#' @param temperature Bath temperature [ degC ].
+#' (This is called \code{t} in the GSW documentation.)
+#' @return Practical salinity on the PSS-77 scale [ unitless ]
+#' @examples
+#' ratio <- c( 0.9345,  0.95123,  0.91807,  0.8886, 0.8169, 0.6687)
+#' temperature <-  c(28.7856, 28.4329, 22.8103, 10.2600, 6.8863, 4.4036)
+#' SP <- gsw_SP_salinometer(ratio, temperature)
+#' stopifnot(all.equal(SP,
+#'         c(32.431728787558541, 33.085035719966307, 31.800791917322833,
+#'             30.692490757036179, 27.979281308696116, 22.474597460508491)))
+#' @references
+#' \url{http://www.teos-10.org/pubs/gsw/html/gsw_SP_salinometer.html}
+gsw_SP_salinometer <- function(ratio, temperature)
+{
+    if (missing(ratio)) stop("must provide ratio")
+    if (missing(temperature)) stop("must provide temperature")
+    l <- argfix(list(ratio=ratio, temperature=temperature))
+    n <- length(l[[1]])
+    rval <- .C("wrap_gsw_SP_salinometer",
+        ratio=as.double(l$ratio), temperature=as.double(l$temperature),
+        n=as.integer(n), rval=double(n), NAOK=TRUE, PACKAGE="gsw")$rval
+    if (is.matrix(ratio))
+        dim(rval) <- dim(ratio)
+    rval
+}
 
 #' Potential density anomaly referenced to 0 dbar
 #'
@@ -4914,7 +5057,7 @@ gsw_specvol_first_derivatives <- function(SA, CT, p)
 #' @template SAtemplate
 #' @template CTtemplate
 #' @template ptemplate
-#' @return A list containing \code{v_SA_wrt_h} and \code{v_h}.
+#' @return A list containing \code{v_SA_wrt_h} [ (m^3/kg)/(g/kg) ] and \code{v_h}.
 #' @examples
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
@@ -4992,29 +5135,36 @@ gsw_specvol_ice  <- function(t, p)
 #' specific volume with respect to Absolute Salinity and Conservative Temperature,
 #' \code{specvol_CT_CT} [ (m^3/kg)/degC^2 ], the second derivative of
 #' specific volume with respect to Conservative Temperature,
-#' \code{specvol_SA_p} [ (m^3/kg)/(g/kg)/dbar ], the derivative of specific volume with respect to Absolute
+#' \code{specvol_SA_p} [ (m^3/kg)/(g/kg)/Pa ], the derivative of specific volume with respect to Absolute
 #' Salinity and pressure, and \code{specvol_CT_p} [ (m^3/kg)/K/dbar ], the derivative of specific
 #' volume with respect to Conservative Temperature and pressure.
 #' @examples
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
+#'
 #' r <- gsw_specvol_second_derivatives(SA, CT, p)
-#' stopifnot(all.equal(r$specvol_SA_SA/1e-8,
-#'     c(0.080906777599140, 0.080915086639384, 0.084568844270812,
-#'       0.096725108896007, 0.099111765836648, 0.100302277946072)))
-#' stopifnot(all.equal(r$specvol_SA_CT/1e-8,
-#'     c(0.129965332117084, 0.130523053162130, 0.149555815430615,
-#'       0.217023290441810, 0.233892039070486, 0.243659989480325)))
-#' stopifnot(all.equal(r$specvol_CT_CT/1e-7,
-#'     c(0.071409582006642, 0.071582962051991, 0.077436153664104,
-#'      0.095329736274850, 0.100105336953738, 0.103044572835472)))
-#' stopifnot(all.equal(r$specvol_SA_p/1e-14,
-#'     c(0.141281359467752, 0.141507584673426, 0.147247234588907,
-#'       0.164580347761218, 0.168069801298412, 0.169948275518754)))
-#' stopifnot(all.equal(r$specvol_CT_p/1e-14,
-#'     c(0.085542828707964, 0.086723632576213, 0.112156562396990,
-#'       0.188269893599500, 0.211615556759369, 0.228609575049911)))
+#'
+#' stopifnot(all.equal(r$specvol_SA_SA/1e-8, c(0.080906777599140,
+#'             0.080915086639384, 0.084568844270812, 0.096725108896007,
+#'             0.099111765836648, 0.100302277946072)))
+#'
+#' stopifnot(all.equal(r$specvol_SA_CT/1e-8, c(0.129965332117084,
+#'             0.130523053162130, 0.149555815430615, 0.217023290441810,
+#'             0.233892039070486, 0.243659989480325)))
+#'
+#' stopifnot(all.equal(r$specvol_CT_CT/1e-7, c(0.071409582006642,
+#'             0.071582962051991, 0.077436153664104, 0.095329736274850,
+#'             0.100105336953738, 0.103044572835472)))
+#'
+#' stopifnot(all.equal(r$specvol_SA_p/1e-14, c(0.116889015000936,
+#'             0.116897424150385, 0.121500614193893, 0.136008673596132,
+#'             0.139023051292893, 0.140581903529772)))
+#'
+#' stopifnot(all.equal(r$specvol_CT_p/1e-14, c(0.085542828707964,
+#'             0.086723632576213, 0.112156562396990, 0.188269893599500,
+#'             0.211615556759369, 0.228609575049911)))
+#'
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_second_derivatives.html}
 gsw_specvol_second_derivatives <- function(SA, CT, p)
@@ -5060,18 +5210,19 @@ gsw_specvol_second_derivatives <- function(SA, CT, p)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <- c(      10,      50,     125,     250,     600,    1000)
+#'
 #' r <- gsw_specvol_second_derivatives_wrt_enthalpy(SA, CT, p)
-#' stopifnot(all.equal(r$specvol_SA_SA/1e-8,
-#'     c(0.080900028996264, 0.080937999675000, 0.084663065647101,
-#'       0.096973364985384, 0.099727453432293, 0.101353037979356)))
-#' stopifnot(all.equal(r$specvol_SA_h/1e-12,
-#'     c(0.325437133570796, 0.327060462851431, 0.375273569184178,
-#'       0.545188833073084, 0.589424881889351, 0.616101548209175)))
-#' stopifnot(all.equal(r$specvol_h_h/1e-15,
-#'     c(0.447949998681476, 0.449121446914278, 0.485998151346315,
-#'       0.598480711660961, 0.628708349875318, 0.647433212216398)))
-#' @template broken-test-values
-#' @template broken-test-values-family
+#'
+#' stopifnot(all.equal(r$specvol_SA_SA/1e-8, c(0.080898741086877,
+#'             0.080931595349498, 0.084648485333225, 0.096952812049233,
+#'             0.099684475381589, 0.101288447077547)))
+#' stopifnot(all.equal(r$specvol_SA_h/1e-12, c(0.325437133570796,
+#'             0.327060462851431, 0.375273569184178, 0.545188833073084,
+#'             0.589424881889351, 0.616101548209175)))
+#' stopifnot(all.equal(r$specvol_h_h/1e-15, c(0.447949998681476, 0.449121446914278,
+#'             0.485998151346315, 0.598480711660961, 0.628708349875318,
+#'             0.647433212216398)))
+#'
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_specvol_second_derivatives_wrt_enthalpy.html}
 gsw_specvol_second_derivatives_wrt_enthalpy <- function(SA, CT, p)
@@ -5716,8 +5867,6 @@ gsw_t_freezing_first_derivatives <- function(SA, p, saturation_fraction=1)
 #' stopifnot(all.equal(derivs$tfreezing_p/1e-7,
 #'     c(-0.748987354878138, -0.750288853857513, -0.752676389629787,
 #'       -0.756549680608529, -0.767482625710990, -0.779985619685683)))
-#' @template broken-test-values
-#' @template broken-test-values-family
 ## @family things related to ice
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_t_freezing_first_derivatives.html}
@@ -5813,9 +5962,13 @@ gsw_t_from_pt0_ice <- function(pt0_ice, p)
 #' SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 #' CT <- c(28.8099, 28.4392, 22.7862, 10.2262,  6.8272,  4.3236)
 #' p <-  c(     10,      50,     125,     250,     600,    1000)
+#'
 #' tb <- gsw_thermobaric(SA, CT, p)
-#' stopifnot(all.equal(tb*1e11, c(0.152618598186650, 0.153662896162852, 0.173429325875738,
-#'                                0.232810160208414, 0.251984724005424, 0.266660342289558)))
+#'
+#' stopifnot(all.equal(tb*1e11,
+#'         c(0.141342632944971, 0.142352284525832, 0.163216280125501,
+#'             0.226030772122855, 0.246185239871747, 0.261474794884197)))
+#'
 #' @references
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_thermobaric.html}
 gsw_thermobaric <- function(SA, CT, p)

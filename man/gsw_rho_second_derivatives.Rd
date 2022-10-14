@@ -26,40 +26,52 @@ Second Derivatives of Density
 }
 \section{Implementation Note}{
 
-This R function uses a wrapper to a C function
-contained within the GSW-C system as updated 2021-03-27
-at \url{https://github.com/TEOS-10/GSW-C}
-with git commit `f7bfebf44f686034636facb09852f1d5760c27f5`.
-In turn, that C function uses data from the
-\code{library/gsw_data_v3_0.mat}
+
+This R function uses a wrapper to a C function contained within the GSW-C
+system as updated 2021-12-28 at \url{https://github.com/TEOS-10/GSW-C} with
+git commit `98f0fd40dd9ceb0ba82c9d47ac750e935a7d0459`.
+
+The C function uses data from the \code{library/gsw_data_v3_0.mat}
 file provided in the GSW-Matlab source code, version 3.06-11.
-Unfortunately, this version is no longer displayed on the
-TEOS-10.org website. Therefore, in the interests of making
-GSW-R be self-contained, a copy was downloaded from
-\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip}
-on 2021-0706, the .mat file was stored in
-the developer/create_data directory of
-\url{https://github.com/TEOS-10/GSW-R}, and then the dataset
-used in GSW-R was created based on that .mat file.
-Please consult \url{http://www.teos-10.org} to learn more about
-the various TEOS-10 software systems.
+Unfortunately, this version of the mat file is no longer displayed on the
+TEOS-10.org website.  Therefore, in the interests of making GSW-R be
+self-contained, a copy was downloaded from
+\url{http://www.teos-10.org/software/gsw_matlab_v3_06_11.zip} on 2022-05-25,
+the .mat file was stored in the developer/create_data directory of
+\url{https://github.com/TEOS-10/GSW-R}, and then the dataset used in GSW-R
+was created based on that .mat file.
+
+Please consult \url{http://www.teos-10.org} to learn more about the various
+TEOS-10 software systems.
 }
 
 \examples{
 SA <- c(34.7118, 34.8915, 35.0256, 34.8472, 34.7366, 34.7324)
 CT <- c(28.7856, 28.4329, 22.8103, 10.2600,  6.8863,  4.4036)
 p <- c(      10,      50,     125,     250,     600,    1000)
+
 r <- gsw_rho_second_derivatives(SA, CT, p)
-stopifnot(all.equal(r$rho_SA_SA/1e-3, c(0.207364734477357, 0.207415414547223, 0.192903197286004,
-                                        0.135809142211237, 0.122627562106076, 0.114042431905783)))
-stopifnot(all.equal(r$rho_SA_CT, c(-0.001832856561477, -0.001837354806146, -0.001988065808078,
-                                   -0.002560181494807, -0.002708939446458, -0.002798484050141)))
-stopifnot(all.equal(r$rho_CT_CT, c(-0.007241243828334, -0.007267807914635, -0.007964270843331,
-                                   -0.010008164822017, -0.010572200761984, -0.010939294762200)))
-stopifnot(all.equal(r$rho_SA_p/1e-8, c(-0.087202931942412, -0.087558612009845, -0.092549696987409,
-                                       -0.106661486272630, -0.110022261844240, -0.112287954816717)))
-stopifnot(all.equal(r$rho_CT_p/1e-8, c(-0.116597992537549, -0.117744271236102, -0.141712549466964,
-                                       -0.214414626736539, -0.237704139801551, -0.255296606034074)))
+
+stopifnot(all.equal(r$rho_SA_SA/1e-3, c(0.207364734477357, 0.207415414547223,
+            0.192903197286004, 0.135809142211237, 0.122627562106076,
+            0.114042431905783)))
+
+stopifnot(all.equal(r$rho_SA_CT, c(-0.001832856561477, -0.001837354806146,
+            -0.001988065808078, -0.002560181494807, -0.002708939446458,
+            -0.002798484050141)))
+
+stopifnot(all.equal(r$rho_CT_CT, c(-0.007241243828334, -0.007267807914635,
+           -0.007964270843331, -0.010008164822017, -0.010572200761984,
+           -0.010939294762200)))
+
+all.equal(r$rho_SA_p, 1e-9*c(-0.617330965378778, -0.618403843947729,
+        -0.655302447133274, -0.764800777480716, -0.792168044875350,
+        -0.810125648949170))
+
+all.equal(r$rho_CT_p, 1e-8*c(-0.116597992537549, -0.117744271236102,
+        -0.141712549466964, -0.214414626736539, -0.237704139801551,
+        -0.255296606034074))
+
 }
 \references{
 \url{http://www.teos-10.org/pubs/gsw/html/gsw_rho_second_derivatives.html}
