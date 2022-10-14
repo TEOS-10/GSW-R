@@ -118,10 +118,10 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "5191.059KB",
+  "fileSize": "5193.723KB",
   "relatedLink": ["http://teos-10.github.io/GSW-R/", "https://CRAN.R-project.org/package=gsw"],
   "releaseNotes": "https://github.com/TEOS-10/GSW-R/blob/master/NEWS.md",
-  "readme": "https://github.com/TEOS-10/GSW-R/blob/master/README.md",
+  "readme": "https://github.com/TEOS-10/GSW-R/blob/main/README.md",
   "contIntegration": "https://github.com/TEOS-10/GSW-R/actions/workflows/R-CMD-check.yaml",
   "developmentStatus": "https://www.repostatus.org/",
   "keywords": ["seawater", "gibbs", "teos-10", "oceanography"]
