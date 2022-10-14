@@ -3,7 +3,7 @@ pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   gsw: gsw.html
-last_built: 2022-10-14T18:03Z
+last_built: 2022-10-14T18:14Z
 urls:
   reference: http://teos-10.github.io/GSW-R/reference
   article: http://teos-10.github.io/GSW-R/articles
