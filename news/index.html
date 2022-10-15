@@ -50,6 +50,48 @@
       <small>Source: <a href="https://github.com/TEOS-10/GSW-R/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.1-0" id="gsw-11-0">gsw 1.1-0<a class="anchor" aria-label="anchor" href="#gsw-11-0"></a></h2>
+<p>This update is based on C code from <a href="https://github.com/TEOS-10/GSW-C" class="external-link uri">https://github.com/TEOS-10/GSW-C</a> (release v3.06-16-0, commit 657216dd4f5ea079b5f0e021a4163e2d26893371) and the .mat data file from <a href="https://github.com/TEOS-10/GSW-Matlab" class="external-link uri">https://github.com/TEOS-10/GSW-Matlab</a> (commit 38c9635d6fd93e74c2648e4ee23cec49c1f58530). It was necessary to make some changes to the within-documentation test suite, as listed below; MRD stands for Mean Relative Difference from the values in the previous CRAN release of <code>gsw</code>, version 1.0-6 released 2021-07-07.</p>
+<ul><li>
+<code>gsw_rho_second_derivatives()$rho_SA_p</code>: MRD 0.4</li>
+<li>
+<code>gsw_rho_second_derivatives_wrt_enthalpy()$rho_SA_SA</code>: MRD 1e-3</li>
+<li>
+<code>gsw_specvol_second_derivatives()$specvol_SA_p</code>: MRD 0.2</li>
+<li>
+<code>gsw_specvol_second_derivatives_wrt_enthalpy()$specvol_SA_SA</code>: MRD 3e-4</li>
+<li>
+<code>gsw_thermobaric()$rb</code>: MRD 0.04</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0-7" id="gsw-10-7">gsw 1.0-7<a class="anchor" aria-label="anchor" href="#gsw-10-7"></a></h2>
+<ul><li>Update to GSW-C as of 2021-07-14, github commit <code>bad2c9e4e154597ce563aaaf3ce09b1c52a2ab46</code>. This does not change any existing functions in GSW-R.</li>
+<li>Add gsw_SP_salinometer().</li>
+<li>Add gsw_o2sol().</li>
+<li>Add gsw_o2sol_SP_pt().</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0-6" id="gsw-10-6">gsw 1.0-6<small>2021-07-07</small><a class="anchor" aria-label="anchor" href="#gsw-10-6"></a></h2>
+<ul><li>Update to GSW-C as of 2021-07-06, github commit <code>9c10670e89fce906da2cebce3399d73c054e769e</code>.</li>
+<li>Remove dependency on the ‘testthat’ package.</li>
+<li>gsw_z_from_p() and gsw_p_from_z() gain parameters geo_strf_dyn_height and sea_surface_geopotential.</li>
+<li>Relax gsw_geo_strf_dyn_height() test, since values are tied to a new Matlab interpolation scheme that is not incorporated in GSW-C.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0-5" id="gsw-10-5">gsw 1.0-5<small>2017-08-09</small><a class="anchor" aria-label="anchor" href="#gsw-10-5"></a></h2>
+<ul><li>Update to GSW-C 3.05-4.</li>
+<li>Make internal sort routines be machine-independent.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0-4" id="gsw-10-4">gsw 1.0-4<small>2017-08-02</small><a class="anchor" aria-label="anchor" href="#gsw-10-4"></a></h2>
+<ul><li>Update to GSW-C 3.05-3.</li>
+<li>Handle NaN values better.</li>
+<li>Add dozens of new GSW functions.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.0-3" id="gsw-10-3">gsw 1.0-3<small>2015-01-19</small><a class="anchor" aria-label="anchor" href="#gsw-10-3"></a></h2>
+<ul><li>First version, using GSW version 3.03.</li></ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
