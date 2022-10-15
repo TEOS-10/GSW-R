@@ -1,28 +1,21 @@
-# Submission of 1.0-7
+# Submission of 1.1-0
 
-The changes since 1.0-6 are as follows.
-
-- Update to GSW-C as of 2021-07-14, github commit
-  `bad2c9e4e154597ce563aaaf3ce09b1c52a2ab46`. This does not change any
-  existing functions in GSW-R.
-- Add `gsw_SP_salinometer()`.
-- Add `gsw_o2sol()`.
-- Add `gsw_o2sol_SP_pt()`.
-
+This updates to an up-to-date version of the underlying C code and 'SAAR' file.
+Four functions now produce different results from the previous version, and in
+two of those cases the changes are large enough to merit close perusal by
+analysts.
 
 # Tests
 
 ## Local Tests
 
-* local macOS (12.5 beta, intel) with R-4.2.0 (2022-04-22)
-* win-builder (devel and release)
+* No problems on macOS (12.5 beta, intel) with R-4.2.1 (2022-06-23).
 
-## Github R-CMD-check Action Tests
+## Remote tests
 
-* macOS-latest (release)
-* windows-latest (release)
-* ubuntu-latest (devel)
-* ubuntu-latest (release)
-* ubuntu-latest (oldrel-1)
+* No problems on win-builder (devel and release).
+
+# No problems on Github R-CMD-check action tests.
+
 
 
