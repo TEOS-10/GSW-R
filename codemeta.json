@@ -118,7 +118,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "5193.723KB",
+  "fileSize": "5191.652KB",
   "relatedLink": ["http://teos-10.github.io/GSW-R/", "https://CRAN.R-project.org/package=gsw"],
   "releaseNotes": "https://github.com/TEOS-10/GSW-R/blob/master/NEWS.md",
   "readme": "https://github.com/TEOS-10/GSW-R/blob/main/README.md",
