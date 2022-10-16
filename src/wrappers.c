@@ -64,7 +64,7 @@ void set_up_gsw_data(int *gsw_nx_val,
     }
 }
 
-void clear_gsw_data()
+void clear_gsw_data(void)
 {
     extern int gsw_nx, gsw_ny, gsw_nz;
     extern double *longs_ref, *lats_ref, *p_ref, *ndepth_ref, *saar_ref, *delta_sa_ref;

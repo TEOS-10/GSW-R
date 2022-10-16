@@ -1,3 +1,8 @@
+# gsw 1.1-1
+
+* Remove a journal link that fails because of an invalid certificate.
+* Fix a C function declaration that is invalid for some compilers.
+
 # gsw 1.1-0
 
 This update is based on C code from https://github.com/TEOS-10/GSW-C (release

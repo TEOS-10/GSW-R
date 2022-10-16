@@ -1,9 +1,7 @@
-# Submission of 1.1-0
+# Submission of 1.1-1
 
-This updates to an up-to-date version of the underlying C code and 'SAAR' file.
-Four functions now produce different results from the previous version, and in
-two of those cases the changes are large enough to merit close perusal by
-analysts.
+This should fix the NOTE and WARNING that were reported on a Debian test
+machine during the submission of 1.1-0 yesterday.
 
 # Tests
 
