@@ -6105,6 +6105,8 @@ gsw_z_from_p <- function(p, latitude, geo_strf_dyn_height, sea_surface_geopotent
 #'
 #' @references
 #' \url{https://www.teos-10.org/pubs/gsw/html/gsw_infunnel.html}
+#'
+#' @family things related to density
 gsw_infunnel <- function(SA, CT, p)
 {
     l <- argfix(list(SA=SA, CT=CT, p=p))

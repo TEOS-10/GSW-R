@@ -7,9 +7,10 @@
 gsw_infunnel(SA, CT, p)
 }
 \arguments{
-\item{SA}{Absolute Salinity [ g/kg ]}
+\item{SA}{Absolute Salinity [ g/kg ].  The valid range for most `gsw`
+functions is 0 to 42 g/kg.}
 
-\item{CT}{Conservative Temperature [ degC ]}
+\item{CT}{Conservative Temperature [ degC ].}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
@@ -34,3 +35,33 @@ gsw_infunnel(35, -4, 100) # FALSE: below freezing
 \references{
 \url{https://www.teos-10.org/pubs/gsw/html/gsw_infunnel.html}
 }
+\seealso{
+Other things related to density: 
+\code{\link{gsw_CT_from_rho}()},
+\code{\link{gsw_CT_maxdensity}()},
+\code{\link{gsw_SA_from_rho}()},
+\code{\link{gsw_alpha_on_beta}()},
+\code{\link{gsw_alpha_wrt_t_exact}()},
+\code{\link{gsw_alpha_wrt_t_ice}()},
+\code{\link{gsw_alpha}()},
+\code{\link{gsw_beta_const_t_exact}()},
+\code{\link{gsw_beta}()},
+\code{\link{gsw_pot_rho_t_exact}()},
+\code{\link{gsw_rho_alpha_beta}()},
+\code{\link{gsw_rho_first_derivatives_wrt_enthalpy}()},
+\code{\link{gsw_rho_first_derivatives}()},
+\code{\link{gsw_rho_ice}()},
+\code{\link{gsw_rho_t_exact}()},
+\code{\link{gsw_rho}()},
+\code{\link{gsw_sigma0}()},
+\code{\link{gsw_sigma1}()},
+\code{\link{gsw_sigma2}()},
+\code{\link{gsw_sigma3}()},
+\code{\link{gsw_sigma4}()},
+\code{\link{gsw_specvol_alpha_beta}()},
+\code{\link{gsw_specvol_anom_standard}()},
+\code{\link{gsw_specvol_ice}()},
+\code{\link{gsw_specvol_t_exact}()},
+\code{\link{gsw_specvol}()}
+}
+\concept{things related to density}
