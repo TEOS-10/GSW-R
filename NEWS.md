@@ -1,3 +1,7 @@
+# gsw 1.2-0
+
+* add `gsw_infunnel()`
+
 # gsw 1.1-1
 
 * Remove a journal link that fails because of an invalid certificate.

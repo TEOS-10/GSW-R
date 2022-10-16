@@ -1,7 +1,6 @@
-# Submission of 1.1-1
+# Submission of 1.2-0
 
-This should fix the NOTE and WARNING that were reported on a Debian test
-machine during the submission of 1.1-0 yesterday.
+FIXME: add notes here
 
 # Tests
 
