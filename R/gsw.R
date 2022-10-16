@@ -6120,7 +6120,8 @@ gsw_infunnel <- function(SA, CT, p)
         (l$p >= 500.0 & l$CT < gsw_CT_freezing(l$SA, 500.0)) |
         (l$p >= 6500.0 & l$SA < 30) |
         (l$p >= 6500.0 & l$CT > 10.0))
-    rval[is.na(rval)] <- TRUE          # catches e.g. SA=NA values
+    # Catch both NA input values and NA or NaN computed values
+    rval[!is.finite(rval)] <- TRUE
     if (is.matrix(SA))
         dim(rval) <- dim(SA)
     rval
