@@ -20,8 +20,8 @@ vignette: >
 
 **Abstract.** The `gsw` package provides an R implementation of the Gibbs
 SeaWater toolbox for the calculation of seawater properties, based on the GSW-C
-framework^[This version of GSW-R is based on GSW-C as it existed on 2021-07-06
-in github commit 9c10670e89fce906da2cebce3399d73c054e769e; see
+framework^[This version of GSW-R is based on GSW-C release 3.06-16-0, commit
+'657216dd4f5ea079b5f0e021a4163e2d26893371', dated 2022-10-11; see
 <https://github.com/TEOS-10/GSW-C>.].  This vignette outlines how to use `gsw`
 alone or as part of the `oce` package [@kelley_oce_2021].
 
