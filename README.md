@@ -25,7 +25,7 @@ recommended as a replacement for a previous system (called UNESCO-80) at the
 twenty-fifth assembly in the Intergovernmental Oceanographic Commission in
 2009.
 
-The gsw functions reproduce test values in the GSW-Fortran documentation to
+The gsw functions reproduce test values in the GSW-Matlab documentation to
 a tolerance of 1.5e-8, the default for numerical comparison in R working on
 a 64-bit machine.  This offers some assurance that the coding process
 has not introduced errors.
