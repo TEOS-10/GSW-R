@@ -8,6 +8,7 @@ developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.rep
 ![RStudio CRAN mirror downloads](http://cranlogs.r-pkg.org/badges/last-month/gsw)
 ![RStudio CRAN mirror downloads](http://cranlogs.r-pkg.org/badges/last-week/gsw)
 ![RStudio CRAN mirror downloads](http://cranlogs.r-pkg.org/badges/last-day/gsw)
+![RStudio CRAN mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/gsw)
 
 gsw is an R package that provides a connection to software relating to TEOS,
 the Thermodynamic Equation Of Seawater (see http://www.teos-10.org). This
