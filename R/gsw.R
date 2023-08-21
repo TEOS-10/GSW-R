@@ -65,6 +65,8 @@
 #'
 #' @docType package
 #' @name gsw
+#' @keywords internal
+"_PACKAGE"
 NULL
 
 #' Global SA lookup file
