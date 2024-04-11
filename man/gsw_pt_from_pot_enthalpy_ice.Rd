@@ -49,21 +49,21 @@ stopifnot(all.equal(pt, c(-10.733087588125384, -13.167397822300588, -12.15420589
 Other things related to enthalpy: 
 \code{\link{gsw_CT_from_enthalpy}()},
 \code{\link{gsw_dynamic_enthalpy}()},
+\code{\link{gsw_enthalpy}()},
 \code{\link{gsw_enthalpy_CT_exact}()},
 \code{\link{gsw_enthalpy_diff}()},
-\code{\link{gsw_enthalpy_first_derivatives_CT_exact}()},
 \code{\link{gsw_enthalpy_first_derivatives}()},
+\code{\link{gsw_enthalpy_first_derivatives_CT_exact}()},
 \code{\link{gsw_enthalpy_ice}()},
 \code{\link{gsw_enthalpy_t_exact}()},
-\code{\link{gsw_enthalpy}()},
-\code{\link{gsw_frazil_properties_potential_poly}()},
 \code{\link{gsw_frazil_properties_potential}()},
-\code{\link{gsw_pot_enthalpy_from_pt_ice_poly}()},
+\code{\link{gsw_frazil_properties_potential_poly}()},
 \code{\link{gsw_pot_enthalpy_from_pt_ice}()},
-\code{\link{gsw_pot_enthalpy_ice_freezing_poly}()},
+\code{\link{gsw_pot_enthalpy_from_pt_ice_poly}()},
 \code{\link{gsw_pot_enthalpy_ice_freezing}()},
+\code{\link{gsw_pot_enthalpy_ice_freezing_poly}()},
 \code{\link{gsw_pt_from_pot_enthalpy_ice_poly}()},
-\code{\link{gsw_specvol_first_derivatives_wrt_enthalpy}()},
-\code{\link{gsw_specvol_first_derivatives}()}
+\code{\link{gsw_specvol_first_derivatives}()},
+\code{\link{gsw_specvol_first_derivatives_wrt_enthalpy}()}
 }
 \concept{things related to enthalpy}

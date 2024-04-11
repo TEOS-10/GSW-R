@@ -2,8 +2,8 @@
 % Please edit documentation in R/gsw.R
 \docType{package}
 \name{gsw}
-\alias{gsw}
 \alias{gsw-package}
+\alias{gsw}
 \title{R implementation of Thermodynamic Equation Of Seawater - 2010 (TEOS-10)}
 \description{
 Provides an R interface to the TEOS-10 / GSW (Gibbs Sea Water) library,

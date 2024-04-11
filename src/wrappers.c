@@ -60,7 +60,7 @@ void set_up_gsw_data(int *gsw_nx_val,
 
         //Rprintf(" ... done setting up globals\n");
     } else {
-        Rprintf("sarr globals -- already set up\n");
+        //Rprintf("sarr globals -- already set up\n");
     }
 }
 

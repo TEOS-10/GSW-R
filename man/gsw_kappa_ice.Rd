@@ -50,8 +50,8 @@ stopifnot(all.equal(kappa*1e9, c(0.112495239053936, 0.112070687842183, 0.1121190
 }
 \seealso{
 Other things related to compressibility: 
+\code{\link{gsw_kappa}()},
 \code{\link{gsw_kappa_const_t_ice}()},
-\code{\link{gsw_kappa_t_exact}()},
-\code{\link{gsw_kappa}()}
+\code{\link{gsw_kappa_t_exact}()}
 }
 \concept{things related to compressibility}

@@ -59,8 +59,8 @@ stopifnot(all.equal(SP, c(34.548646570969929, 34.727538423586189, 34.86054950185
 \seealso{
 Other things related to salinity: 
 \code{\link{gsw_C_from_SP}()},
-\code{\link{gsw_SA_from_SP_Baltic}()},
 \code{\link{gsw_SA_from_SP}()},
+\code{\link{gsw_SA_from_SP_Baltic}()},
 \code{\link{gsw_SA_from_Sstar}()},
 \code{\link{gsw_SP_from_C}()},
 \code{\link{gsw_SP_from_SA}()},

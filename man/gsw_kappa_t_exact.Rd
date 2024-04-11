@@ -55,8 +55,8 @@ stopifnot(all.equal(kappa*1e9,
 }
 \seealso{
 Other things related to compressibility: 
+\code{\link{gsw_kappa}()},
 \code{\link{gsw_kappa_const_t_ice}()},
-\code{\link{gsw_kappa_ice}()},
-\code{\link{gsw_kappa}()}
+\code{\link{gsw_kappa_ice}()}
 }
 \concept{things related to compressibility}

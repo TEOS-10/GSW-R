@@ -54,7 +54,7 @@ stopifnot(all.equal(sound_speed/1e3, c(1.542615803587414, 1.542703534065789, 1.5
 }
 \seealso{
 Other things related to sound: 
-\code{\link{gsw_sound_speed_ice}()},
-\code{\link{gsw_sound_speed}()}
+\code{\link{gsw_sound_speed}()},
+\code{\link{gsw_sound_speed_ice}()}
 }
 \concept{things related to sound}
