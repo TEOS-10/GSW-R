@@ -1,1 +1,4 @@
-url: http://teos-10.github.io/GSW-R
+url: http://teos-10.github.io/GSW-R/
+template:
+  bootstrap: 5
+
