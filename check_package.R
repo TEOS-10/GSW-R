@@ -17,8 +17,8 @@ devtools::check_win_oldrelease()
 
 # 2024-08-19 DEK: rhub has been replaced by rhub2, so the following no longer
 # work. The new system is complicated, and has the disadvantage that it only
-# works on code that has been pushed to github ... so I will just use a github
-# action instead, I think.
+# works on code that has been pushed to github ... so now we rely on github
+# actions.
 #    rhub::check_for_cran(email = "Dan.Kelley@Dal.Ca", show_status = FALSE)
 #    rhub::check(platform = "debian-clang-devel", show_status = FALSE)
 remotes::install_github("r-lib/revdepcheck")
