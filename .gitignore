@@ -18,3 +18,4 @@ vignettes/gsw.bbl
 vignettes/*.md
 docs
 revdep
+check_package.out
