@@ -5,16 +5,10 @@ state and is being actively
 developed.](http://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/gsw)](https://cran.r-project.org/package=gsw)
 [![R-CMD-check](https://github.com/TEOS-10/GSW-R/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/TEOS-10/GSW-R/actions/workflows/R-CMD-check.yaml)
-<<<<<<< HEAD
-![RStudio CRAN mirror downloads](http://cranlogs.r-pkg.org/badges/last-month/gsw)
-![RStudio CRAN mirror downloads](http://cranlogs.r-pkg.org/badges/last-week/gsw)
-![RStudio CRAN mirror downloads](http://cranlogs.r-pkg.org/badges/last-day/gsw)
-=======
 [![R-hub](https://github.com/dankelley/GSW-R/actions/workflows/rhub.yaml/badge.svg)](https://github.com/dankelley/GSW-R/actions/workflows/rhub.yaml)
 ![RStudio CRAN mirror downloads](https://cranlogs.r-pkg.org/badges/last-month/gsw)
 ![RStudio CRAN mirror downloads](https://cranlogs.r-pkg.org/badges/last-week/gsw)
 ![RStudio CRAN mirror downloads](https://cranlogs.r-pkg.org/badges/last-day/gsw)
->>>>>>> develop
 ![RStudio CRAN mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/gsw)
 
 gsw is an R package that provides a connection to software relating to TEOS,
