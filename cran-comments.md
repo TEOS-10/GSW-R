@@ -1,7 +1,10 @@
 # Submission of 1.2-0
 
 This update was required by 2024-09-20, in order to accommodate the change from
-the Calloc() and Free() macros to R_Calloc() and R_Free().
+the Calloc() and Free() macros to R_Calloc() and R_Free(). The only other
+change from the previous CRAN version is the addition of the function
+`gsw_infunnel()`, and this addition does not affect any previous behaviours of
+the package.
 
 # Tests
 
@@ -18,8 +21,4 @@ package.
 ## Remote tests
 
 * No problems on win-builder (devel and release).
-
-# No problems on Github R-CMD-check action tests.
-
-
-
+* No problems on Github R-CMD-check action tests.
