@@ -1,4 +1,5 @@
 ^check_package.R$
+^check_package.out$
 revdep
 .github
 ^Meta$
