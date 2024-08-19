@@ -1,10 +1,17 @@
 # Submission of 1.2-0
 
-FIXME: add notes here
+This update was required by 2024-09-20, in order to accommodate the change from
+the Calloc() and Free() macros to R_Calloc() and R_Free().
 
 # Tests
 
 ## Local Tests
+
+R 4.4.1 on macOS Beta 15.0 Beta (24A5298h) revealed no ERRORs, no WARNINGs,
+or NOTEs. One NOTE was about the author name and the other about the package
+size (a known issue; see above).  These tests included those in the CRAN test
+suite, along with other tests of datasets that are not provided with the
+package.
 
 * No problems on macOS (12.5 beta, intel) with R-4.2.1 (2022-06-23).
 
