@@ -32,6 +32,6 @@ LazyLoad: yes
 LazyData: no
 Packaged: Dan Kelley
 Encoding: UTF-8
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 BuildVignettes: true
 VignetteBuilder: knitr
