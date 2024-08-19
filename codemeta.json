@@ -7,13 +7,13 @@
   "codeRepository": "https://github.com/TEOS-10/GSW-R",
   "issueTracker": "https://github.com/TEOS-10/GSW-R/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.2.1 (2022-06-23)",
+  "runtimePlatform": "R version 4.4.1 (2024-06-14)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -118,11 +118,11 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "5224.627KB",
+  "fileSize": "5165.753KB",
   "relatedLink": ["http://teos-10.github.io/GSW-R/", "https://CRAN.R-project.org/package=gsw"],
   "releaseNotes": "https://github.com/TEOS-10/GSW-R/blob/master/NEWS.md",
   "readme": "https://github.com/TEOS-10/GSW-R/blob/main/README.md",
-  "contIntegration": "https://github.com/TEOS-10/GSW-R/actions/workflows/R-CMD-check.yaml",
+  "contIntegration": ["https://github.com/TEOS-10/GSW-R/actions/workflows/R-CMD-check.yaml", "https://github.com/dankelley/GSW-R/actions/workflows/rhub.yaml"],
   "developmentStatus": "https://www.repostatus.org/",
   "keywords": ["seawater", "gibbs", "teos-10", "oceanography"]
 }

@@ -7,9 +7,10 @@
 gsw_pt_first_derivatives(SA, CT)
 }
 \arguments{
-\item{SA}{Absolute Salinity [ g/kg ]}
+\item{SA}{Absolute Salinity [ g/kg ].  The valid range for most `gsw`
+functions is 0 to 42 g/kg.}
 
-\item{CT}{Conservative Temperature [ degC ]}
+\item{CT}{Conservative Temperature [ degC ].}
 }
 \value{
 A list containing \code{pt_SA} [ K/(g/kg) ], the derivative of
@@ -24,8 +25,8 @@ First Derivatives of Potential Temperature
 
 
 This R function uses a wrapper to a C function contained within the GSW-C
-system as updated 2021-12-28 at \url{https://github.com/TEOS-10/GSW-C} with
-git commit `98f0fd40dd9ceb0ba82c9d47ac750e935a7d0459`.
+system as updated 2022-10-11 at \url{https://github.com/TEOS-10/GSW-C} with
+git commit `657216dd4f5ea079b5f0e021a4163e2d26893371`.
 
 The C function uses data from the \code{library/gsw_data_v3_0.mat}
 file provided in the GSW-Matlab source code, version 3.06-11.

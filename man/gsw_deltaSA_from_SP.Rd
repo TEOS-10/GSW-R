@@ -7,7 +7,8 @@
 gsw_deltaSA_from_SP(SP, p, longitude, latitude)
 }
 \arguments{
-\item{SP}{Practical Salinity (PSS-78) [ unitless ]}
+\item{SP}{Practical Salinity (PSS-78) [ unitless ]. The valid range for most
+`gsw` functions is from 2 to 42.}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 
@@ -27,8 +28,8 @@ Absolute Salinity Anomaly from Practical Salinity
 
 
 This R function uses a wrapper to a C function contained within the GSW-C
-system as updated 2021-12-28 at \url{https://github.com/TEOS-10/GSW-C} with
-git commit `98f0fd40dd9ceb0ba82c9d47ac750e935a7d0459`.
+system as updated 2022-10-11 at \url{https://github.com/TEOS-10/GSW-C} with
+git commit `657216dd4f5ea079b5f0e021a4163e2d26893371`.
 
 The C function uses data from the \code{library/gsw_data_v3_0.mat}
 file provided in the GSW-Matlab source code, version 3.06-11.
@@ -59,8 +60,8 @@ stopifnot(all.equal(deltaSA, c(0.000167203365230, 0.000268836122231, 0.000665803
 \seealso{
 Other things related to salinity: 
 \code{\link{gsw_C_from_SP}()},
-\code{\link{gsw_SA_from_SP_Baltic}()},
 \code{\link{gsw_SA_from_SP}()},
+\code{\link{gsw_SA_from_SP_Baltic}()},
 \code{\link{gsw_SA_from_Sstar}()},
 \code{\link{gsw_SP_from_C}()},
 \code{\link{gsw_SP_from_SA}()},

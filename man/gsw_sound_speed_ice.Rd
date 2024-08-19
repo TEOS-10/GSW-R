@@ -21,8 +21,8 @@ Speed of sound in ice.
 
 
 This R function uses a wrapper to a C function contained within the GSW-C
-system as updated 2021-12-28 at \url{https://github.com/TEOS-10/GSW-C} with
-git commit `98f0fd40dd9ceb0ba82c9d47ac750e935a7d0459`.
+system as updated 2022-10-11 at \url{https://github.com/TEOS-10/GSW-C} with
+git commit `657216dd4f5ea079b5f0e021a4163e2d26893371`.
 
 The C function uses data from the \code{library/gsw_data_v3_0.mat}
 file provided in the GSW-Matlab source code, version 3.06-11.
@@ -50,7 +50,7 @@ stopifnot(all.equal(speed/1e3, c(3.111311360346254, 3.116492565497544, 3.1158334
 }
 \seealso{
 Other things related to sound: 
-\code{\link{gsw_sound_speed_t_exact}()},
-\code{\link{gsw_sound_speed}()}
+\code{\link{gsw_sound_speed}()},
+\code{\link{gsw_sound_speed_t_exact}()}
 }
 \concept{things related to sound}

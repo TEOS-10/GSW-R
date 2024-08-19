@@ -25,3 +25,4 @@ issues
 ^CRAN-RELEASE$
 ^codemeta\.json$
 ^CRAN-SUBMISSION$
+.markdownlint.yaml

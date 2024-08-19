@@ -1,4 +1,4 @@
-#install.packages("codemetar")
+# install.packages("codemetar")
 requireNamespace(c("codemetar", "devtools", "urlchecker", "rhub", "revdepcheck"))
 # codemeta changes a timestamp, so requiring a commit after every call. That is
 # senseless, so I only run the false part of the following conditional in the
@@ -14,14 +14,13 @@ urlchecker::url_check()
 devtools::check_win_release()
 devtools::check_win_devel()
 devtools::check_win_oldrelease()
-# rhub was broken in 2022 June/July but seen to work again on Aug 16
-rhub::check_for_cran(email="Dan.Kelley@Dal.Ca", show_status=FALSE)
-rhub::check(platform="debian-clang-devel", show_status=FALSE)
-#> rhub::platforms()
-#debian-clang-devel:
-#    Debian Linux, R-devel, clang, ISO-8859-15 locale
-#> rhub::check_rhub()
+
+# 2024-08-19 DEK: rhub has been replaced by rhub2, so the following no longer
+# work. The new system is complicated, and has the disadvantage that it only
+# works on code that has been pushed to github ... so I will just use a github
+# action instead, I think.
+#    rhub::check_for_cran(email = "Dan.Kelley@Dal.Ca", show_status = FALSE)
+#    rhub::check(platform = "debian-clang-devel", show_status = FALSE)
 remotes::install_github("r-lib/revdepcheck")
 revdepcheck::revdep_reset()
-revdepcheck::revdep_check(num_workers=4)
-
+revdepcheck::revdep_check(num_workers = 4)

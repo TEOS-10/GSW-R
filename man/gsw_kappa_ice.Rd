@@ -21,8 +21,8 @@ Calculate isentropic compressibility of ice, in 1/Pa.
 
 
 This R function uses a wrapper to a C function contained within the GSW-C
-system as updated 2021-12-28 at \url{https://github.com/TEOS-10/GSW-C} with
-git commit `98f0fd40dd9ceb0ba82c9d47ac750e935a7d0459`.
+system as updated 2022-10-11 at \url{https://github.com/TEOS-10/GSW-C} with
+git commit `657216dd4f5ea079b5f0e021a4163e2d26893371`.
 
 The C function uses data from the \code{library/gsw_data_v3_0.mat}
 file provided in the GSW-Matlab source code, version 3.06-11.
@@ -50,8 +50,8 @@ stopifnot(all.equal(kappa*1e9, c(0.112495239053936, 0.112070687842183, 0.1121190
 }
 \seealso{
 Other things related to compressibility: 
+\code{\link{gsw_kappa}()},
 \code{\link{gsw_kappa_const_t_ice}()},
-\code{\link{gsw_kappa_t_exact}()},
-\code{\link{gsw_kappa}()}
+\code{\link{gsw_kappa_t_exact}()}
 }
 \concept{things related to compressibility}

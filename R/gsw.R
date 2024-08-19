@@ -65,6 +65,8 @@
 #'
 #' @docType package
 #' @name gsw
+#' @keywords internal
+"_PACKAGE"
 NULL
 
 #' Global SA lookup file
@@ -3297,7 +3299,7 @@ gsw_pot_enthalpy_from_pt_ice_poly <- function(pt0_ice)
 #'
 #' 2. The R code does not reproduce the check values stated at
 #' \url{http://www.teos-10.org/pubs/gsw/html/gsw_pot_enthalpy_ice_freezing.html}. Those
-#' values are incorporated in the test provided in \dQuote{Examples}, so that test
+#' values are incorporated in the test provided in \sQuote{Examples}, so that test
 #' is not performed during build tests.  See https://github.com/TEOS-10/GSW-R/issues/27.
 #' @family things related to enthalpy
 ## @family things related to ice
@@ -6080,5 +6082,63 @@ gsw_z_from_p <- function(p, latitude, geo_strf_dyn_height, sea_surface_geopotent
     if (is.matrix(p))
         dim(rval) <- dim(p)
     rval
+}
+
+#' Determine whether a point is inside the 'funnel' of acceptable values
+#'
+#' This function determines whether a given hydrographic value lies what
+#' the TEOS-10 literature calls a "funnel" of values that lead to acceptably
+#' accurate computation of specific volume.  For more details, consult the
+#' TEOS-10 literature, perhaps starting with the materials referred to in the
+#' webpage cited in the \sQuote{References} section.
+#'
+#' @return a logical value indicating whether the given
+#' point is inside the funnel of acceptable values.
+#'
+#' @template SAtemplate
+#' @template CTtemplate
+#' @template ptemplate
+#'
+#' @examples
+#' library(gsw)
+#' gsw_infunnel(35, 10, 100) # TRUE
+#' gsw_infunnel(45, 10, 100) # FALSE: too salty
+#' gsw_infunnel(35, -4, 100) # FALSE: below freezing
+#'
+#' @references
+#' \url{https://www.teos-10.org/pubs/gsw/html/gsw_infunnel.html}
+#'
+#' @family things related to density
+gsw_infunnel <- function(SA, CT, p)
+{
+    l <- argfix(list(SA=SA, CT=CT, p=p))
+    n <- length(l[[1]])
+    rval <- !((l$p > 8000) |
+        (l$SA < 0.0) |
+        (l$SA > 42.0) |
+        (l$p < 500.0 & l$CT < gsw_CT_freezing(l$SA, l$p)) |
+        (l$p >= 500.0 & l$p < 6500.0 & l$SA < l$p*4e-3 - 2.5) |
+        (l$p > 500.0 & l$p < 6500.0 & l$CT > (31.66666666666667 - l$p*3.333333333333334e-3)) |
+        (l$p >= 500.0 & l$CT < gsw_CT_freezing(l$SA, 500.0)) |
+        (l$p >= 6500.0 & l$SA < 30) |
+        (l$p >= 6500.0 & l$CT > 10.0))
+    # Catch both NA input values and NA or NaN computed values
+    rval[!is.finite(rval)] <- TRUE
+    if (is.matrix(SA))
+        dim(rval) <- dim(SA)
+    rval
+    #in_funnel = ones(size(SA));
+    #
+    #in_funnel(p > 8000 |...
+    #    SA < 0 |...
+    #    SA > 42 |...
+    #    (p < 500 & CT < gsw_CT_freezing(SA,p)) |...
+    #    (p >= 500 & p < 6500 & SA < p*5e-3 - 2.5) |...
+    #    (p > 500 & p < 6500 & CT > (31.66666666666667 - p*3.333333333333334e-3)) | ...
+    #    (p >= 500 & CT < gsw_CT_freezing(SA,500)) |...
+    #    (p >= 6500 & SA < 30) |...
+    #    (p >= 6500 & CT > 10.0)) = 0;
+    #
+    #in_funnel(isnan(SA) | isnan(CT) | isnan(p)) = NaN;
 }
 

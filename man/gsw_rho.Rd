@@ -7,9 +7,10 @@
 gsw_rho(SA, CT, p)
 }
 \arguments{
-\item{SA}{Absolute Salinity [ g/kg ]}
+\item{SA}{Absolute Salinity [ g/kg ].  The valid range for most `gsw`
+functions is 0 to 42 g/kg.}
 
-\item{CT}{Conservative Temperature [ degC ]}
+\item{CT}{Conservative Temperature [ degC ].}
 
 \item{p}{sea pressure [dbar], i.e. absolute pressure [dbar] minus 10.1325 dbar}
 }
@@ -23,8 +24,8 @@ In-situ density, using the 75-term equation for specific volume.
 
 
 This R function uses a wrapper to a C function contained within the GSW-C
-system as updated 2021-12-28 at \url{https://github.com/TEOS-10/GSW-C} with
-git commit `98f0fd40dd9ceb0ba82c9d47ac750e935a7d0459`.
+system as updated 2022-10-11 at \url{https://github.com/TEOS-10/GSW-C} with
+git commit `657216dd4f5ea079b5f0e021a4163e2d26893371`.
 
 The C function uses data from the \code{library/gsw_data_v3_0.mat}
 file provided in the GSW-Matlab source code, version 3.06-11.
@@ -56,16 +57,17 @@ Other things related to density:
 \code{\link{gsw_CT_from_rho}()},
 \code{\link{gsw_CT_maxdensity}()},
 \code{\link{gsw_SA_from_rho}()},
+\code{\link{gsw_alpha}()},
 \code{\link{gsw_alpha_on_beta}()},
 \code{\link{gsw_alpha_wrt_t_exact}()},
 \code{\link{gsw_alpha_wrt_t_ice}()},
-\code{\link{gsw_alpha}()},
-\code{\link{gsw_beta_const_t_exact}()},
 \code{\link{gsw_beta}()},
+\code{\link{gsw_beta_const_t_exact}()},
+\code{\link{gsw_infunnel}()},
 \code{\link{gsw_pot_rho_t_exact}()},
 \code{\link{gsw_rho_alpha_beta}()},
-\code{\link{gsw_rho_first_derivatives_wrt_enthalpy}()},
 \code{\link{gsw_rho_first_derivatives}()},
+\code{\link{gsw_rho_first_derivatives_wrt_enthalpy}()},
 \code{\link{gsw_rho_ice}()},
 \code{\link{gsw_rho_t_exact}()},
 \code{\link{gsw_sigma0}()},
@@ -73,10 +75,10 @@ Other things related to density:
 \code{\link{gsw_sigma2}()},
 \code{\link{gsw_sigma3}()},
 \code{\link{gsw_sigma4}()},
+\code{\link{gsw_specvol}()},
 \code{\link{gsw_specvol_alpha_beta}()},
 \code{\link{gsw_specvol_anom_standard}()},
 \code{\link{gsw_specvol_ice}()},
-\code{\link{gsw_specvol_t_exact}()},
-\code{\link{gsw_specvol}()}
+\code{\link{gsw_specvol_t_exact}()}
 }
 \concept{things related to density}

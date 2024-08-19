@@ -2,6 +2,7 @@
 % Please edit documentation in R/gsw.R
 \docType{package}
 \name{gsw}
+\alias{gsw-package}
 \alias{gsw}
 \title{R implementation of Thermodynamic Equation Of Seawater - 2010 (TEOS-10)}
 \description{
@@ -59,3 +60,22 @@ This can be handy with gridded datasets. However, the careful
 analyst will probably prefer to avoid this and other conveniences,
 supplying properly-matched arguments from the outset.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{http://teos-10.github.io/GSW-R/}
+  \item Report bugs at \url{https://github.com/TEOS-10/GSW-R/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Dan Kelley \email{dan.kelley@dal.ca} (\href{https://orcid.org/0000-0001-7808-5911}{ORCID}) [copyright holder]
+
+Authors:
+\itemize{
+  \item Clark Richards \email{clark.richards@gmail.com} (\href{https://orcid.org/0000-0002-7833-206X}{ORCID}) [copyright holder]
+  \item WG127 SCOR/IAPSO (Original 'Matlab' and derived code) [copyright holder]
+}
+
+}
+\keyword{internal}

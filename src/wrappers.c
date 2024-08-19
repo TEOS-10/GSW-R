@@ -31,36 +31,36 @@ void set_up_gsw_data(int *gsw_nx_val,
         if (!gsw_ny) error("something is wrong with gsw_ny\n");
         if (!gsw_nz) error("something is wrong with gsw_nz\n");
 
-        longs_ref = Calloc(gsw_nx, double);
+        longs_ref = R_Calloc(gsw_nx, double);
         if (!longs_ref) error("cannot allocate memory for GSW internal data item \"longs_ref\"\n");
         for (int i = 0; i < gsw_nx; i++) longs_ref[i] = longs_ref_val[i];;
 
-        lats_ref = Calloc(gsw_ny, double);
+        lats_ref = R_Calloc(gsw_ny, double);
         if (!lats_ref) error("cannot allocate memory for GSW internal data item \"lats_ref\"\n");
         for (int i = 0; i < gsw_ny; i++) lats_ref[i] = lats_ref_val[i];;
 
-        p_ref = Calloc(gsw_nz, double);
+        p_ref = R_Calloc(gsw_nz, double);
         if (!p_ref) error("cannot allocate memory for GSW internal data item \"p_ref\"\n");
         for (int i = 0; i < gsw_nz; i++) p_ref[i] = p_ref_val[i];;
 
         //  ndepth_ref isn't actually used anywhere, so perhaps it should not be saved.
         int nxy = gsw_nx * gsw_ny;
-        ndepth_ref = Calloc(nxy, double);
+        ndepth_ref = R_Calloc(nxy, double);
         if (!ndepth_ref) error("cannot allocate memory for GSW internal data item \"ndepth_ref\"\n");
         for (int i = 0; i < nxy; i++) ndepth_ref[i] = ndepth_ref_val[i];;
 
         int nxyz = gsw_nx * gsw_ny * gsw_nz;
-        saar_ref = Calloc(nxyz, double);
+        saar_ref = R_Calloc(nxyz, double);
         if (!saar_ref) error("cannot allocate memory for GSW internal data item \"saar_ref\"\n");
         for (int i = 0; i < nxyz; i++) saar_ref[i] = saar_ref_val[i];;
 
-        delta_sa_ref = Calloc(nxyz, double);
+        delta_sa_ref = R_Calloc(nxyz, double);
         if (!delta_sa_ref) error("cannot allocate memory for GSW internal data item \"delta_sa_ref\"\n");
         for (int i = 0; i < nxyz; i++) delta_sa_ref[i] = delta_sa_ref_val[i];;
 
         //Rprintf(" ... done setting up globals\n");
     } else {
-        Rprintf("sarr globals -- already set up\n");
+        //Rprintf("sarr globals -- already set up\n");
     }
 }
 
@@ -71,17 +71,17 @@ void clear_gsw_data(void)
     gsw_nx = 0;
     gsw_ny = 0;
     gsw_nz = 0;
-    Free(longs_ref);
+    R_Free(longs_ref);
     longs_ref = NULL;
-    Free(lats_ref);
+    R_Free(lats_ref);
     lats_ref = NULL;
-    Free(p_ref);
+    R_Free(p_ref);
     p_ref = NULL;
-    Free(ndepth_ref);
+    R_Free(ndepth_ref);
     ndepth_ref = NULL;
-    Free(saar_ref);
+    R_Free(saar_ref);
     saar_ref = NULL;
-    Free(delta_sa_ref);
+    R_Free(delta_sa_ref);
     delta_sa_ref = NULL;
 }
 
